@@ -1,0 +1,72 @@
+# Docker Compose Override for Development
+# This file is automatically loaded by docker-compose
+# It extends the base docker-compose.yml with development-specific settings
+
+services:
+  laravel-webapp:
+    # Override build to disable caching for faster rebuilds
+    build:
+      context: ./WebApp
+      dockerfile: dockerfile
+      args:
+        - APP_ENV=local
+    
+    # Enable development mode
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - LOG_LEVEL=debug
+    
+    # Add hot reload for development (optional)
+    # Uncomment if you want to enable hot reload
+    # volumes:
+    #   - ./WebApp:/var/www/html:cached
+
+  predict-service:
+    # Add volume for hot reload in development
+    volumes:
+      - ./predict-service:/app
+      - ./WebApp:/var/www/html:ro
+    
+    # Override command for development with auto-reload
+    command: ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--reload", "--timeout", "120", "run:app"]
+    
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+
+  mysql:
+    # Expose MySQL port for local database tools (e.g., MySQL Workbench)
+    ports:
+      - "3307:3306"
+    
+    # Add MySQL configuration for development
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Optional: Add phpMyAdmin for database management
+  # Uncomment to enable
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: hydrogen-phpmyadmin
+  #   environment:
+  #     - PMA_HOST=mysql
+  #     - PMA_PORT=3306
+  #     - PMA_USER=laravel_user
+  #     - PMA_PASSWORD=LaravelSecurePass2025!
+  #   ports:
+  #     - "8081:80"
+  #   depends_on:
+  #     - mysql
+  #   networks:
+  #     - app-network
+
+  # Optional: Add Mailpit for email testing
+  # Uncomment to enable
+  # mailpit:
+  #   image: axllent/mailpit
+  #   container_name: hydrogen-mailpit
+  #   ports:
+  #     - "8025:8025"  # Web UI
+  #     - "1025:1025"  # SMTP
+  #   networks:
+  #     - app-network

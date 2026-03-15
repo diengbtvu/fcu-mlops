@@ -1,0 +1,49 @@
+/**
+ * Base Authentication Styles
+ * Global styles for authentication pages
+ */
+
+/* Color Variables */
+:root {
+    --primary-color: #17a2b8;
+    --primary-dark: #138496;
+    --background-light: #e9ecef;
+    --background-dark: #d6d8db;
+    --text-muted: #6c757d;
+    --text-dark: #495057;
+    --border-color: #dee2e6;
+    --white: #ffffff;
+    --shadow-light: rgba(0,0,0,0.1);
+    --shadow-medium: rgba(0,0,0,0.15);
+    --shadow-heavy: rgba(0,0,0,0.2);
+}
+
+/* Base Layout */
+html, body {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
+}
+
+/* Transitions */
+.smooth-transition {
+    transition: all 0.3s ease;
+}
+
+/* Typography */
+.system-title {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 0;
+}

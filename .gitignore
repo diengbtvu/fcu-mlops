@@ -1,0 +1,29 @@
+# Security - Never commit these!
+secrets/
+.env
+.env.production
+.env.docker
+*.key
+*.pem
+
+# But keep example files
+!.env.docker.example
+
+# Laravel specific
+/vendor/
+/node_modules/
+/public/storage
+/storage/*.key
+/storage/logs/*.log
+bootstrap/cache/*.php
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

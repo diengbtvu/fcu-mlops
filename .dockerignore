@@ -1,0 +1,7 @@
+.gitignore
+.env.local
+.env.*.local
+.env.example
+.env.*.example
+README.md
+images/

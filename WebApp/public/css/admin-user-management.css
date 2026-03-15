@@ -1,0 +1,66 @@
+/* Admin User Management Styles */
+
+/* Note: Action button styles moved to common-components.css */
+/* Note: Table styles moved to common-components.css */
+
+/* Card Styles with Hover Effects */
+.card.border-secondary, 
+.card.border-danger, 
+.card.border-warning {
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 120px;
+}
+
+.card.border-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card.border-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.2);
+}
+
+.card.border-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+.card-body {
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.card-text {
+    line-height: 1.4;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+.alert {
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+.btn-close-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Responsive modal adjustments */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .card.border-secondary, .card.border-danger {
+        margin-bottom: 10px;
+        min-height: auto;
+    }
+    
+    .modal-title {
+        font-size: 1rem;
+    }
+}

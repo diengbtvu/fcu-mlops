@@ -1,0 +1,24 @@
+FROM python:3.11
+
+# Create non-root user
+RUN groupadd --gid 1000 apigroup \
+    && useradd --uid 1000 --gid apigroup \
+       --shell /bin/bash --create-home apiuser
+
+WORKDIR /app
+
+# Copy requirements and install dependencies as root
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copy application files and set ownership
+COPY --chown=apiuser:apigroup . .
+
+# Switch to non-root user
+USER apiuser
+
+EXPOSE 5000
+
+# Run gunicorn with network binding for container access
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "30", "run:app"]

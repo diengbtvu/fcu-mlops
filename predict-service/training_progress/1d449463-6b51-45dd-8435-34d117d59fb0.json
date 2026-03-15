@@ -1,0 +1,18 @@
+{
+  "session_id": "1d449463-6b51-45dd-8435-34d117d59fb0",
+  "status": "completed",
+  "progress": 100,
+  "total_steps": 100,
+  "current_step": 0,
+  "message": "Training completed! RANDOM_FOREST achieved R²=0.8857",
+  "started_at": "2025-11-26T17:01:57.459980",
+  "updated_at": "2025-11-26T17:03:53.307225",
+  "error": null,
+  "result": {
+    "r2_score": 0.8856711412763127,
+    "rmse": 9.128714724973511,
+    "mae": 5.846984828870044,
+    "mse": 83.3334325299482
+  },
+  "completed_at": "2025-11-26T17:03:53.307225"
+}

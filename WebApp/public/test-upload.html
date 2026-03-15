@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test File Upload</title>
+</head>
+<body>
+    <h1>Test .keras File Upload</h1>
+    <form method="POST" action="/test-upload" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="file" name="test_file" accept=".keras,.h5,.pkl,.json,.pt,.pth,.joblib,.xgb">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,78 @@
+services:
+  laravel-webapp:
+    build: ./WebApp
+    volumes:
+      - ./WebApp:/var/www/html
+      - laravel_storage:/var/www/html/storage
+      - laravel_cache:/var/www/html/bootstrap/cache
+    depends_on:
+      - mysql
+      - predict-service
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=laravel_db
+      - DB_USERNAME=laravel_user
+      - DB_PASSWORD=LaravelSecurePass2025!
+      - PREDICT_SERVICE_URL=http://predict-service:5000
+      - PREDICT_SERVICE_PUBLIC_URL=http://localhost:5000
+      - PREDICTION_SERVICE_URL=http://predict-service:5000
+    networks:
+      - app-network
+    expose:
+      - "9000"
+
+  predict-service:
+    build: ./predict-service
+    env_file:
+      - .env.docker
+    environment:
+      - LARAVEL_API_URL=http://nginx/api
+    volumes:
+        - ./predict-service:/app
+        - ./WebApp:/var/www/html:ro
+        - laravel_storage:/var/www/html/storage
+        - mlflow_runs:/app/app/mlruns
+        - mlflow_models:/app/app/models
+        - training_progress:/app/training_progress
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    restart: always 
+    environment:
+      MYSQL_ROOT_PASSWORD: MySecureRootPass2025!
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: LaravelSecurePass2025!
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./WebApp:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - laravel-webapp
+      - predict-service
+    ports:
+      - "52025:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  laravel_storage:
+  laravel_cache:
+  mlflow_runs:
+  mlflow_models:
+  training_progress:

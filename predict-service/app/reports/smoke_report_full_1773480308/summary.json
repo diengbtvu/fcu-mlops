@@ -1,0 +1,78 @@
+{
+  "model_name": "smoke_report_full_1773480308",
+  "model_type": "xgboost",
+  "model_label": "XGBoost",
+  "created_at": "2026-03-14T09:25:14.863942",
+  "selected_model_metrics": {
+    "r2_score": 0.8383368843539042,
+    "rmse": 0.09677539855039556,
+    "mse": 0.009365477764587904,
+    "mae": 0.06895756613835399
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.8224700113811525,
+      "rmse": 0.10141340367892628,
+      "mse": 0.010284678445744856,
+      "mae": 0.08147653538412535
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.7446648125257986,
+      "rmse": 0.12162275325913273,
+      "mse": 0.014792094110331881,
+      "mae": 0.07465867677859422
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.8750659185809018,
+      "rmse": 0.08507460871466556,
+      "mse": 0.007237689047953449,
+      "mae": 0.06294428971717786
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8369249252208074,
+      "rmse": 0.0971970959943106,
+      "mse": 0.00944727546972723,
+      "mae": 0.06883164030106192
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.8383368843539042,
+      "rmse": 0.09677539855039556,
+      "mse": 0.009365477764587904,
+      "mae": 0.06895756613835399
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "analysis_summary": "analysis_summary_report.txt"
+  }
+}

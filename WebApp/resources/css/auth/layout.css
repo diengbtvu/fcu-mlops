@@ -1,0 +1,114 @@
+/**
+ * Layout Component Styles
+ * Grid layout and responsive design for auth pages
+ */
+
+/* Container and Row Setup */
+.auth-container {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.auth-row {
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Form Column */
+.auth-form-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: rgba(248, 249, 250, 0.3);
+    padding: 1rem;
+}
+
+.auth-form-wrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Image Column */
+.auth-image-column {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.auth-image-section {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.auth-image-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(23, 162, 184, 0.1) 0%, rgba(19, 132, 150, 0.1) 100%);
+    z-index: 1;
+}
+
+.auth-image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: left;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 575.98px) {
+    .auth-form-column {
+        background: transparent;
+    }
+    
+    .auth-form-wrapper {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .login-card {
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .auth-image-column {
+        display: none !important;
+    }
+    
+    .auth-form-column {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .auth-form-column {
+        max-width: 60%;
+        flex: 0 0 60%;
+    }
+    
+    .auth-image-column {
+        max-width: 40%;
+        flex: 0 0 40%;
+    }
+}
+
+@media (min-width: 992px) {
+    .auth-form-column {
+        max-width: 33.333333%;
+        flex: 0 0 33.333333%;
+    }
+    
+    .auth-image-column {
+        max-width: 66.666667%;
+        flex: 0 0 66.666667%;
+    }
+}

@@ -1,0 +1,37 @@
+[flake8]
+# Flake8 configuration for Python code linting
+
+max-line-length = 127
+max-complexity = 10
+
+# Ignore specific errors:
+# E203 - Whitespace before ':'
+# E266 - Too many leading '#' for block comment
+# W503 - Line break before binary operator
+# W504 - Line break after binary operator
+ignore = E203,E266,W503,W504
+
+# Exclude directories
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    env,
+    .venv,
+    build,
+    dist,
+    *.egg-info,
+    .pytest_cache,
+    .mypy_cache,
+    mlruns,
+    training_progress,
+    data
+
+# Count errors
+count = True
+
+# Show statistics
+statistics = True
+
+# Show source code
+show-source = True

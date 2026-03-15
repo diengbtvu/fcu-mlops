@@ -1,0 +1,18 @@
+{
+  "session_id": "e55908f8-18bd-43ac-9c1c-ad00f8e5319a",
+  "status": "completed",
+  "progress": 100,
+  "total_steps": 100,
+  "current_step": 0,
+  "message": "Training completed! XGBOOST achieved R²=0.8627",
+  "started_at": "2025-11-26T15:17:02.252995",
+  "updated_at": "2025-11-26T15:18:54.329118",
+  "error": null,
+  "result": {
+    "r2_score": 0.8626694425246144,
+    "rmse": 10.004958530342542,
+    "mae": 6.888478350513213,
+    "mse": 100.099195193874
+  },
+  "completed_at": "2025-11-26T15:18:54.329118"
+}

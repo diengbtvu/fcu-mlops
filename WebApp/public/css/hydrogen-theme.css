@@ -1,0 +1,283 @@
+:root {
+    --hz-ink: #0b2536;
+    --hz-slate: #3f5f72;
+    --hz-ocean: #0f4c5c;
+    --hz-teal: #149c93;
+    --hz-cyan: #2c8fbf;
+    --hz-sun: #f4b740;
+    --hz-mist: #f2f8fb;
+    --hz-card: #ffffff;
+    --hz-border: #d9e8ef;
+    --hz-shadow: 0 10px 28px rgba(11, 37, 54, 0.08);
+}
+
+body.hydrogen-theme {
+    font-family: "Manrope", "Trebuchet MS", "Segoe UI", sans-serif;
+    color: var(--hz-ink);
+    background: linear-gradient(180deg, #f6fbff 0%, #edf6fb 100%);
+}
+
+body.hydrogen-theme .content-wrapper {
+    background: transparent;
+}
+
+body.hydrogen-theme .main-header.navbar {
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid var(--hz-border);
+    backdrop-filter: blur(8px);
+}
+
+body.hydrogen-theme .main-header .nav-link {
+    color: var(--hz-ocean);
+}
+
+body.hydrogen-theme .main-sidebar {
+    background: linear-gradient(180deg, #072d40 0%, #0e4961 58%, #0d5b66 100%);
+}
+
+body.hydrogen-theme .brand-link {
+    border-bottom: 1px solid #b9d8e6;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    padding: 8px 10px;
+}
+
+body.hydrogen-theme .brand-link .brand-image {
+    float: none;
+    margin: 0 10px 0 0;
+    width: 32px;
+    height: 32px;
+    background: #ffffff;
+    border: 1px solid #c7dce7;
+    border-radius: 9px !important;
+    padding: 3px;
+    box-shadow: 0 4px 10px rgba(11, 37, 54, 0.15);
+}
+
+body.hydrogen-theme .brand-text {
+    color: #0f4c5c !important;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-weight: 700 !important;
+    letter-spacing: 0.2px;
+    font-size: 0.8rem;
+    line-height: 1.15;
+    white-space: normal !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-width: 176px;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link {
+    color: #d9f2ff;
+    margin: 4px 10px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link:hover {
+    background: rgba(20, 156, 147, 0.2);
+    color: #ffffff;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link.active {
+    background: linear-gradient(90deg, #149c93, #2c8fbf);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(10, 64, 81, 0.28);
+}
+
+body.hydrogen-theme .content-header .container-fluid {
+    border: 1px solid var(--hz-border);
+    border-radius: 14px;
+    background: linear-gradient(110deg, #f7fdff 0%, #eaf5fb 100%);
+    padding: 14px 18px;
+    box-shadow: 0 4px 16px rgba(19, 79, 105, 0.06);
+}
+
+body.hydrogen-theme .content-header h1 {
+    color: var(--hz-ocean);
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+body.hydrogen-theme .breadcrumb-item a {
+    color: var(--hz-cyan);
+}
+
+body.hydrogen-theme .breadcrumb-item.active {
+    color: var(--hz-slate);
+}
+
+body.hydrogen-theme .card {
+    border: 1px solid var(--hz-border);
+    border-radius: 14px;
+    box-shadow: var(--hz-shadow);
+    background: var(--hz-card);
+}
+
+body.hydrogen-theme .card-header {
+    border-bottom: 1px solid var(--hz-border);
+    background: linear-gradient(120deg, #f8fdff 0%, #edf7fc 100%);
+    border-radius: 14px 14px 0 0 !important;
+}
+
+body.hydrogen-theme .btn-primary {
+    border: 0;
+    background: linear-gradient(90deg, #149c93, #2c8fbf);
+    box-shadow: 0 8px 18px rgba(44, 143, 191, 0.26);
+}
+
+body.hydrogen-theme .btn-primary:hover {
+    background: linear-gradient(90deg, #108079, #24799f);
+}
+
+body.hydrogen-theme .btn-success {
+    border: 0;
+    background: linear-gradient(90deg, #0f9d6a, #149c93);
+}
+
+body.hydrogen-theme .btn-info {
+    border: 0;
+    background: linear-gradient(90deg, #2c8fbf, #4aa4d0);
+    color: #fff;
+}
+
+body.hydrogen-theme .btn-warning {
+    border: 0;
+    background: linear-gradient(90deg, #f0ab3c, #f4b740);
+    color: #1f2d3d;
+}
+
+body.hydrogen-theme .small-box {
+    border-radius: 14px;
+    box-shadow: var(--hz-shadow);
+    overflow: hidden;
+}
+
+body.hydrogen-theme .small-box .inner h3 {
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-weight: 700;
+}
+
+body.hydrogen-theme .small-box.bg-info {
+    background: linear-gradient(120deg, #1e8ac0 0%, #1ba0c6 100%) !important;
+}
+
+body.hydrogen-theme .small-box.bg-success {
+    background: linear-gradient(120deg, #139d85 0%, #16b37a 100%) !important;
+}
+
+body.hydrogen-theme .small-box.bg-warning {
+    background: linear-gradient(120deg, #f3ba4f 0%, #f0a642 100%) !important;
+    color: #1f2d3d !important;
+}
+
+body.hydrogen-theme .small-box.bg-danger {
+    background: linear-gradient(120deg, #d16f3f 0%, #c45858 100%) !important;
+}
+
+body.hydrogen-theme .small-box .icon > i {
+    top: 12px;
+}
+
+body.hydrogen-theme .table thead th {
+    background: linear-gradient(90deg, #0f4c5c, #146b80);
+    color: #fff;
+    border-color: #0f4c5c;
+    font-weight: 700;
+}
+
+body.hydrogen-theme .table-striped tbody tr:nth-of-type(odd) {
+    background: rgba(15, 76, 92, 0.03);
+}
+
+body.hydrogen-theme .pagination {
+    gap: 4px;
+}
+
+body.hydrogen-theme .pagination .page-link {
+    border-radius: 8px !important;
+    border: 1px solid var(--hz-border);
+    color: var(--hz-ocean);
+}
+
+body.hydrogen-theme .pagination .page-item.active .page-link {
+    border-color: #149c93;
+    background: linear-gradient(90deg, #149c93, #2c8fbf);
+}
+
+body.hydrogen-theme .alert-info {
+    background: linear-gradient(90deg, #eaf8fe, #ddf3fb);
+    border-left-color: #2c8fbf;
+}
+
+body.hydrogen-theme .dashboard-hero {
+    position: relative;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    background:
+        radial-gradient(circle at 85% 18%, rgba(244, 183, 64, 0.25) 0, rgba(244, 183, 64, 0) 40%),
+        radial-gradient(circle at 10% 10%, rgba(20, 156, 147, 0.22) 0, rgba(20, 156, 147, 0) 50%),
+        linear-gradient(120deg, #0f4c5c 0%, #146b80 55%, #1f8697 100%);
+    color: #f2fcff;
+    box-shadow: 0 14px 28px rgba(15, 76, 92, 0.24);
+}
+
+body.hydrogen-theme .dashboard-hero h2 {
+    margin: 6px 0 8px;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+body.hydrogen-theme .dashboard-hero p {
+    margin: 0;
+    color: rgba(242, 252, 255, 0.9);
+    max-width: 800px;
+}
+
+body.hydrogen-theme .dashboard-hero-eyebrow {
+    display: inline-flex;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.hydrogen-theme .dashboard-hero .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    margin-right: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+    body.hydrogen-theme .content-header .container-fluid {
+        padding: 12px;
+    }
+
+    body.hydrogen-theme .dashboard-hero {
+        padding: 18px 16px;
+    }
+
+    body.hydrogen-theme .dashboard-hero h2 {
+        font-size: 1.25rem;
+    }
+}

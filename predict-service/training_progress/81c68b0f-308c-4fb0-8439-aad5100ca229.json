@@ -1,0 +1,18 @@
+{
+  "session_id": "81c68b0f-308c-4fb0-8439-aad5100ca229",
+  "status": "completed",
+  "progress": 100,
+  "total_steps": 100,
+  "current_step": 0,
+  "message": "Training completed! ANN achieved R²=0.4470",
+  "started_at": "2025-11-26T15:19:35.806347",
+  "updated_at": "2025-11-26T15:21:49.313040",
+  "error": null,
+  "result": {
+    "r2_score": 0.4470458675312373,
+    "rmse": 20.075956934525493,
+    "mae": 14.412311165168916,
+    "mse": 403.04404683692223
+  },
+  "completed_at": "2025-11-26T15:21:49.313040"
+}

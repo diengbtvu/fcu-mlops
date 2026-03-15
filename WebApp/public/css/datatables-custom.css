@@ -1,0 +1,300 @@
+/* DataTables custom styles for Hydrogen Production Rate Prediction System */
+
+/* FORCE COMPACT STYLING WITH HIGH SPECIFICITY */
+#admin-history-table_wrapper .dataTables_length,
+#admin-history-table_wrapper .dataTables_filter,
+#admin-history-table_wrapper .dt-buttons {
+    margin-bottom: 0.5rem !important;
+}
+
+#admin-history-table_wrapper .dt-buttons .btn {
+    margin-right: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.7rem !important;
+    border: 1px solid transparent !important;
+}
+
+#admin-history-table thead th {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.7rem !important;
+    background-color: #f8f9fa !important;
+}
+
+#admin-history-table tbody td {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.1 !important;
+}
+
+#admin-history-table_wrapper .dataTables_info,
+#admin-history-table_wrapper .dataTables_paginate {
+    padding-top: 0.4rem !important;
+    font-size: 0.75rem !important;
+}
+
+/* DataTables wrapper styling with tight spacing */
+.dataTables_wrapper {
+    margin-top: 0.5rem;
+}
+
+/* Compact header controls */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 0.5rem !important;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    min-width: 80px;
+    padding: 0.25rem 1.5rem 0.25rem 0.5rem !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 12px 10px;
+    font-size: 0.875rem !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    padding: 0.25rem 0.5rem !important;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+    font-size: 0.875rem !important;
+}
+
+/* Compact DataTables buttons - FIX DOUBLE BORDERS */
+.dt-buttons {
+    margin-bottom: 0.5rem !important;
+}
+
+.dt-buttons .btn {
+    margin-right: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.2rem;
+    border: 1px solid transparent !important; /* Fix double border */
+}
+
+/* Button specific colors without conflicting borders */
+.dt-buttons .btn-secondary {
+    background-color: #6c757d !important;
+    color: white !important;
+}
+
+.dt-buttons .btn-success {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.dt-buttons .btn-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+.dt-buttons .btn-info {
+    background-color: #17a2b8 !important;
+    color: white !important;
+}
+
+/* Compact table styling */
+.dataTable {
+    margin-bottom: 0.5rem !important;
+}
+
+.dataTable thead th {
+    background-color: #f8f9fa !important;
+    border-bottom: 2px solid #dee2e6 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.4rem 0.6rem !important;
+    vertical-align: top !important;
+}
+
+.dataTable tbody td {
+    padding: 0.4rem 0.6rem !important;
+    vertical-align: middle !important;
+    font-size: 0.85rem !important;
+    line-height: 1.2 !important;
+}
+
+.dataTable tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.075);
+}
+
+.dataTable tbody td {
+    vertical-align: middle;
+    padding: 0.75rem;
+}
+
+/* Badge styling in tables */
+.dataTable .badge {
+    font-size: 0.75em;
+    padding: 0.35em 0.65em;
+}
+
+.dataTable .badge-lg {
+    font-size: 0.875em;
+    padding: 0.5em 0.75em;
+    font-weight: 600;
+}
+
+/* Result value styling */
+.dataTable .result-value {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+/* Action buttons in tables */
+.dataTable .action-buttons {
+    white-space: nowrap;
+}
+
+.dataTable .action-buttons .btn {
+    margin: 0.125rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* DataTables info and pagination with reduced spacing */
+.dataTables_wrapper .dataTables_info {
+    padding-top: 0.5rem !important;
+    font-size: 0.8rem !important;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: 0.5rem !important;
+    margin-top: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.3rem 0.5rem !important;
+    margin: 0 0.1rem !important;
+    border: 1px solid #dee2e6;
+    border-radius: 0.2rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.8rem !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+/* Compact processing indicator */
+.dataTables_wrapper .dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: -26px;
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Responsive table adjustments */
+@media (max-width: 768px) {
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .dt-buttons {
+        text-align: center;
+    }
+    
+    .dt-buttons .btn {
+        margin: 0.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .dataTable tbody td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .dataTable .action-buttons .btn {
+        padding: 0.125rem 0.25rem;
+        font-size: 0.75rem;
+        margin: 0.125rem 0;
+    }
+}
+
+/* Custom loading spinner for DataTables */
+.dataTables_wrapper .dataTables_processing::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: datatables-spin 1s linear infinite;
+}
+
+@keyframes datatables-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Empty table styling */
+.dataTables_wrapper .dataTables_empty {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Search highlighting */
+.dataTables_wrapper table.dataTable tbody tr td mark {
+    background-color: #fff3cd;
+    padding: 0.125em 0.25em;
+    border-radius: 0.125rem;
+}
+
+/* Column sorting indicators */
+.dataTable thead th.sorting::before,
+.dataTable thead th.sorting::after,
+.dataTable thead th.sorting_asc::before,
+.dataTable thead th.sorting_asc::after,
+.dataTable thead th.sorting_desc::before,
+.dataTable thead th.sorting_desc::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+/* Admin-specific styling */
+.admin-predictions .dataTable .badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.admin-predictions .dataTable thead th {
+    background-color: #fff5f5;
+    border-bottom-color: #dc3545;
+}

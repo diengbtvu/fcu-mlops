@@ -1,0 +1,96 @@
+/**
+ * Alert Component Styles
+ * Error messages and notifications
+ */
+
+.alert {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: flex-start;
+}
+
+.alert i {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    margin-top: 0.125rem;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* Alert animations */
+.alert {
+    animation: slideInDown 0.3s ease-out;
+}
+
+.alert.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Dismissible alerts */
+.alert-dismissible {
+    position: relative;
+    padding-right: 3rem;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.alert-dismissible .btn-close:hover {
+    opacity: 1;
+}
