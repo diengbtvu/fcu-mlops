@@ -258,6 +258,28 @@
     color: white;
 }
 
+/* ------------------------------------------------------------------
+   Prevent per-character wrapping on wide admin tables
+------------------------------------------------------------------- */
+#users,
+#admin-history-table {
+    table-layout: auto !important;
+}
+
+#users thead th,
+#users tbody td,
+#users_wrapper .dataTables_scrollHead th,
+#users_wrapper .dataTables_scrollBody td,
+#admin-history-table thead th,
+#admin-history-table tbody td,
+#admin-history-table_wrapper .dataTables_scrollHead th,
+#admin-history-table_wrapper .dataTables_scrollBody td {
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+}
+
 .dt-buttons .btn-secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;

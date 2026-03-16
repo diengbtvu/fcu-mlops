@@ -71,7 +71,7 @@ class DatasetController extends Controller
         $request->validate([
             'DatasetName' => 'required|string|max:255',
             'Description' => 'nullable|string',
-            'dataset_file' => 'required|file|mimes:csv,txt,xls,xlsx|max:10240', // Tối đa 10MB
+            'dataset_file' => 'required|file|mimes:csv,xlsx|max:10240', // Tối đa 10MB
         ]);
 
         // Lưu file vào storage/app/datasets

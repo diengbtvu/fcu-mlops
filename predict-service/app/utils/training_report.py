@@ -55,7 +55,10 @@ def _as_1d(values: Any) -> np.ndarray:
 
 def _safe_float(value: Any) -> float:
     try:
-        return float(value)
+        numeric = float(value)
+        if math.isfinite(numeric):
+            return numeric
+        return 0.0
     except Exception:
         return 0.0
 

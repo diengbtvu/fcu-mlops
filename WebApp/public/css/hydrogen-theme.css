@@ -281,3 +281,209 @@ body.hydrogen-theme .dashboard-hero .hero-chip {
         font-size: 1.25rem;
     }
 }
+
+/* ------------------------------------------------------------------
+   Bio Light Theme Override (minimal gradients, soft biological tones)
+------------------------------------------------------------------- */
+body.hydrogen-theme {
+    background: #f8fcf9;
+}
+
+body.hydrogen-theme .content-wrapper,
+body.hydrogen-theme .content,
+body.hydrogen-theme .main-footer {
+    background: #f8fcf9;
+}
+
+body.hydrogen-theme .main-header.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e3ede6;
+    backdrop-filter: none;
+}
+
+body.hydrogen-theme .main-sidebar {
+    background: #ffffff;
+    border-right: 1px solid #e3ede6;
+}
+
+body.hydrogen-theme .brand-link {
+    background: #ffffff;
+    border-bottom: 1px solid #e3ede6;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link {
+    color: #204235;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link:hover {
+    background: #eff7f1;
+    color: #1b3b2f;
+}
+
+body.hydrogen-theme .main-sidebar .nav-sidebar .nav-link.active {
+    background: #e8f4ec;
+    color: #1d573d;
+    box-shadow: none;
+}
+
+body.hydrogen-theme .content-header .container-fluid,
+body.hydrogen-theme .card,
+body.hydrogen-theme .card-header,
+body.hydrogen-theme .modal-content {
+    background: #ffffff;
+    border-color: #e3ede6;
+    box-shadow: none;
+}
+
+body.hydrogen-theme .btn,
+body.hydrogen-theme .btn-predict {
+    box-shadow: none !important;
+    border-radius: 8px;
+}
+
+body.hydrogen-theme .btn-primary,
+body.hydrogen-theme .btn-predict {
+    background: #4e9f72 !important;
+    border-color: #4e9f72 !important;
+    color: #ffffff !important;
+}
+
+body.hydrogen-theme .btn-primary:hover,
+body.hydrogen-theme .btn-predict:hover {
+    background: #428a63 !important;
+    border-color: #428a63 !important;
+}
+
+body.hydrogen-theme .btn-success {
+    background: #61ad7f;
+    border-color: #61ad7f;
+    color: #ffffff;
+}
+
+body.hydrogen-theme .btn-success:hover {
+    background: #4f986c;
+    border-color: #4f986c;
+}
+
+body.hydrogen-theme .btn-info {
+    background: #6ea7b6;
+    border-color: #6ea7b6;
+    color: #ffffff;
+}
+
+body.hydrogen-theme .btn-info:hover {
+    background: #6099a8;
+    border-color: #6099a8;
+}
+
+body.hydrogen-theme .btn-warning {
+    background: #e4be7a;
+    border-color: #e4be7a;
+    color: #3a3427;
+}
+
+body.hydrogen-theme .btn-warning:hover {
+    background: #d6af67;
+    border-color: #d6af67;
+}
+
+body.hydrogen-theme .btn-danger {
+    background: #cf8a8a;
+    border-color: #cf8a8a;
+}
+
+body.hydrogen-theme .btn-danger:hover {
+    background: #c47b7b;
+    border-color: #c47b7b;
+}
+
+body.hydrogen-theme .small-box {
+    background: #ffffff !important;
+    color: #1c3a4b !important;
+    border: 1px solid #e3ede6;
+    box-shadow: none;
+}
+
+body.hydrogen-theme .small-box .small-box-footer {
+    background: #eef5f1;
+    color: #255741;
+}
+
+body.hydrogen-theme .small-box.bg-info {
+    background: #2e8e85 !important;
+    border-color: #287b73;
+    color: #ffffff !important;
+}
+
+body.hydrogen-theme .small-box.bg-success {
+    background: #3f9558 !important;
+    border-color: #357f4b;
+    color: #ffffff !important;
+}
+
+body.hydrogen-theme .small-box.bg-warning {
+    background: #b98a37 !important;
+    border-color: #9e752f;
+    color: #ffffff !important;
+}
+
+body.hydrogen-theme .small-box.bg-danger {
+    background: #b66464 !important;
+    border-color: #9f5555;
+    color: #ffffff !important;
+}
+
+body.hydrogen-theme .small-box.bg-info .small-box-footer,
+body.hydrogen-theme .small-box.bg-success .small-box-footer,
+body.hydrogen-theme .small-box.bg-warning .small-box-footer,
+body.hydrogen-theme .small-box.bg-danger .small-box-footer {
+    background: rgba(0, 0, 0, 0.12);
+    color: #ffffff;
+}
+
+body.hydrogen-theme .small-box.bg-info .icon > i,
+body.hydrogen-theme .small-box.bg-success .icon > i,
+body.hydrogen-theme .small-box.bg-warning .icon > i,
+body.hydrogen-theme .small-box.bg-danger .icon > i {
+    color: rgba(255, 255, 255, 0.32);
+}
+
+body.hydrogen-theme .table thead th {
+    background: #ffffff;
+    color: #1e4336;
+    border-color: #e3ede6;
+    border-bottom: 2px solid #d8e7dd;
+}
+
+body.hydrogen-theme .table-striped tbody tr:nth-of-type(odd) {
+    background: #fbfefc;
+}
+
+body.hydrogen-theme .dashboard-hero {
+    background: #f4fbf6;
+    color: #1f4337;
+    border: 1px solid #dcecdf;
+    box-shadow: none;
+}
+
+body.hydrogen-theme .dashboard-hero p {
+    color: #466e5d;
+}
+
+body.hydrogen-theme .dashboard-hero-eyebrow,
+body.hydrogen-theme .dashboard-hero .hero-chip {
+    background: #ffffff;
+    color: #1f4337;
+    border: 1px solid #d7e7dc;
+}
+
+body.hydrogen-theme .pagination .page-link {
+    border-color: #d7e6dd;
+    color: #2b5a46;
+}
+
+body.hydrogen-theme .pagination .page-item.active .page-link {
+    background: #e9f4ed;
+    color: #20543c;
+    border-color: #c7decf;
+}

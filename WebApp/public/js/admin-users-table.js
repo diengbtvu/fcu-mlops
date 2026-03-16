@@ -3,12 +3,14 @@ $(document).ready(function() {
     console.log('Trying to initialize DataTable for #users');
     
     $('#users').DataTable({
-        responsive: true,
+        responsive: false,
         autoWidth: false,
         lengthChange: true,
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         pageLength: 25,
         order: [[0, 'asc']], // Sort by Full Name ascending
+        scrollX: true,
+        scrollCollapse: true,
         buttons: [
             {
                 extend: 'copy',
@@ -68,6 +70,7 @@ $(document).ready(function() {
             }
         ],
         columnDefs: [
+            { targets: '_all', className: 'text-nowrap' },
             { responsivePriority: 1, targets: 1 }, // Name
             { responsivePriority: 2, targets: 2 }, // Username
             { responsivePriority: 3, targets: 3 }, // Gender

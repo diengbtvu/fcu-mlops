@@ -1,12 +1,19 @@
 $(document).ready(function() {
     $('#admin-history-table').DataTable({
-        responsive: true,
+        responsive: false,
         autoWidth: false,
         lengthChange: true,
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
         pageLength: 25,
         order: [[0, 'desc']],
         scrollX: true,
+        scrollCollapse: true,
+        columnDefs: [
+            {
+                targets: '_all',
+                className: 'text-nowrap'
+            }
+        ],
         buttons: [
             {
                 extend: 'copy',

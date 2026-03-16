@@ -64,7 +64,7 @@ except ImportError:
                 'properties': {
                     'dataset_path': {
                         'type': 'string',
-                        'description': 'Absolute path to the dataset CSV file'
+                        'description': 'Absolute path to the dataset file (.csv or .xlsx)'
                     },
                     'model_name': {
                         'type': 'string',
@@ -166,6 +166,11 @@ def train_model():
         # Check if dataset file exists
         if not os.path.exists(dataset_path):
             return jsonify({'error': f'Dataset file not found: {dataset_path}'}), 404
+
+        if not str(dataset_path).lower().endswith(('.csv', '.xlsx')):
+            return jsonify({
+                'error': 'Unsupported dataset format. Only .csv and .xlsx are allowed.'
+            }), 400
         
         # Get model type and parameters
         model_type = data.get('model_type', 'random_forest')

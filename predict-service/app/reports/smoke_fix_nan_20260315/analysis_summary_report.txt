@@ -1,0 +1,33 @@
+======================================================================
+HYDROGEN PRODUCTION PREDICTION - ANALYSIS SUMMARY REPORT
+======================================================================
+
+1. DATASET OVERVIEW
+--------------------------------------------------
+Total samples: 3
+Number of features: 11
+Target variable: HPR
+
+2. SELECTED MODEL METRICS
+--------------------------------------------------
+R2=0.00000, RMSE=0.01692, MSE=0.000286, MAE=0.01692
+
+3. TOP CORRELATED FEATURES WITH HPR
+--------------------------------------------------
+Sucrose_Degradation: 1.0000
+Ethanol: 0.9997
+pH: 0.9997
+VSS: 0.9961
+Propionate: 0.9961
+
+4. MODEL PERFORMANCE COMPARISON
+--------------------------------------------------
+No benchmark model results available.
+
+5. BEST BENCHMARK MODEL
+--------------------------------------------------
+No valid benchmark metrics available.
+
+======================================================================
+END OF REPORT
+======================================================================

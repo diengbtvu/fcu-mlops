@@ -15,7 +15,7 @@ if __name__ == "__main__":
         '--data',
         type=str,
         required=True,
-        help='Path to dataset file (.csv or .xls/.xlsx)'
+        help='Path to dataset file (.csv or .xlsx)'
     )
     parser.add_argument(
         '--model',

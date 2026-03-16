@@ -578,9 +578,19 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Training response status:', response.status);
             
             if (!response.ok) {
-                const errorData = await response.json();
-                console.error('❌ Training error:', errorData);
-                throw new Error(errorData.error || 'Training request failed');
+                let errorMessage = 'Training request failed';
+                try {
+                    const errorData = await response.json();
+                    console.error('❌ Training error:', errorData);
+                    errorMessage = errorData.error || errorData.message || errorMessage;
+                } catch (parseError) {
+                    const errorText = await response.text();
+                    console.error('❌ Training error (non-JSON):', errorText);
+                    if (errorText && errorText.trim()) {
+                        errorMessage = errorText.trim().slice(0, 500);
+                    }
+                }
+                throw new Error(errorMessage);
             }
             
             const responseData = await response.json();

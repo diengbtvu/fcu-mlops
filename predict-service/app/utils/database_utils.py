@@ -5,6 +5,7 @@ import requests
 import os
 from datetime import datetime
 import json
+import math
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -33,6 +34,16 @@ class DatabaseUtils:
             'Accept': 'application/json',
             'Connection': 'close'
         })
+
+    def _sanitize_for_json(self, value):
+        """Recursively replace non-finite floats with None for strict JSON encoders."""
+        if isinstance(value, float):
+            return value if math.isfinite(value) else None
+        if isinstance(value, dict):
+            return {k: self._sanitize_for_json(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [self._sanitize_for_json(v) for v in value]
+        return value
         
     def test_connection(self):
         """
@@ -127,6 +138,8 @@ class DatabaseUtils:
                     'UpdatedDate': datetime.now().isoformat()
                 }
                 
+                payload = self._sanitize_for_json(payload)
+
                 # Remove None values
                 payload = {k: v for k, v in payload.items() if v is not None}
                 

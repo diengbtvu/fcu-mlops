@@ -414,6 +414,29 @@ class TrainingService
 
             $result = $response->json();
 
+            // Guard against empty or non-JSON responses from predict-service.
+            if (!is_array($result)) {
+                $rawBody = trim((string) $response->body());
+                if ($rawBody !== '') {
+                    $decoded = json_decode($rawBody, true);
+                    if (is_array($decoded)) {
+                        $result = $decoded;
+                    }
+                }
+            }
+
+            if (!is_array($result)) {
+                Log::error('Training API returned invalid response body', [
+                    'status' => $response->status(),
+                    'body_preview' => mb_substr((string) $response->body(), 0, 1000),
+                ]);
+
+                return [
+                    'success' => false,
+                    'error' => 'Training API returned an invalid or empty response.'
+                ];
+            }
+
             // REMOVED: Don't save model metadata here, Python service will save via API
             // if ($result['success'] ?? false) {
             //     $this->saveModelMetadataFromAPI($dataset, $user, $result);
@@ -428,7 +451,7 @@ class TrainingService
 
             return $result;
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Training via API exception', [
                 'dataset_id' => $dataset->DatasetId,
                 'error' => $e->getMessage()

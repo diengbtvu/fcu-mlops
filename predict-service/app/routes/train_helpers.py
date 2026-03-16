@@ -6,6 +6,7 @@ Contains training logic for paper models: RF, XGBoost, SVM, KNN, DT
 import pandas as pd
 import os
 import joblib
+import math
 from sklearn.metrics import mean_absolute_error
 import mlflow
 import mlflow.sklearn
@@ -20,6 +21,17 @@ from src.model_dev import (
 from src.evaluation import R2Score, RMSE
 from src.gra import run_gra
 from app.utils.progress_tracker import TrainingProgressTracker
+
+
+def _finite_metric(value, default=0.0):
+    """Return a JSON-safe finite float for metrics."""
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return float(default)
+    if math.isfinite(numeric):
+        return numeric
+    return float(default)
 
 def train_random_forest(data, dataset_path, model_name, trained_by, dataset_id, session_id=None):
     """Train Random Forest model"""
@@ -192,13 +204,13 @@ def evaluate_model(model, X_test, y_test, model_type):
     
     # Calculate metrics
     r2_calc = R2Score()
-    r2 = r2_calc.calculate_score(y_test, y_pred)
+    r2 = _finite_metric(r2_calc.calculate_score(y_test, y_pred))
     
     rmse_calc = RMSE()
-    rmse = rmse_calc.calculate_score(y_test, y_pred)
+    rmse = _finite_metric(rmse_calc.calculate_score(y_test, y_pred))
     
-    mae = mean_absolute_error(y_test, y_pred)
-    mse = rmse ** 2
+    mae = _finite_metric(mean_absolute_error(y_test, y_pred))
+    mse = _finite_metric(rmse ** 2)
     
     # Log to MLflow
     mlflow.log_metric("r2_score", r2)
@@ -212,10 +224,10 @@ def evaluate_model(model, X_test, y_test, model_type):
     print(f"   MAE: {mae:.4f}")
     
     return {
-        'r2_score': float(r2),
-        'rmse': float(rmse),
-        'mae': float(mae),
-        'mse': float(mse)
+        'r2_score': _finite_metric(r2),
+        'rmse': _finite_metric(rmse),
+        'mae': _finite_metric(mae),
+        'mse': _finite_metric(mse)
     }
 
 

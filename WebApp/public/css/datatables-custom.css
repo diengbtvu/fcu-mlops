@@ -298,3 +298,13 @@
     background-color: #fff5f5;
     border-bottom-color: #dc3545;
 }
+
+/* Keep admin history headers/cells in one line; use horizontal scroll instead */
+#admin-history-table thead th,
+#admin-history-table tbody td,
+#admin-history-table_wrapper .dataTables_scrollHead th,
+#admin-history-table_wrapper .dataTables_scrollBody td {
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+}
