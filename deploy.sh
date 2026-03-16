@@ -89,6 +89,35 @@ upsert_env_value() {
     fi
 }
 
+clear_laravel_cache_safely() {
+    local cache_store cache_table table_count
+
+    cache_store="$(get_env_value "WebApp/.env" "CACHE_STORE")"
+    if [ -z "$cache_store" ]; then
+        cache_store="database"
+    fi
+
+    if [ "$cache_store" != "database" ]; then
+        compose exec -T laravel-webapp php artisan cache:clear
+        return
+    fi
+
+    cache_table="$(get_env_value "WebApp/.env" "DB_CACHE_TABLE")"
+    if [ -z "$cache_table" ]; then
+        cache_table="cache"
+    fi
+
+    table_count="$(compose exec -T mysql mysql -N -B -ularavel_user -pLaravelSecurePass2025! -D laravel_db \
+        -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='laravel_db' AND table_name='${cache_table}';" \
+        2>/dev/null | tr -d '[:space:]')"
+
+    if [ "$table_count" = "1" ]; then
+        compose exec -T laravel-webapp php artisan cache:clear
+    else
+        echo -e "${YELLOW}Skipping cache clear: table '${cache_table}' is not created yet.${NC}"
+    fi
+}
+
 is_valid_laravel_app_key() {
     local key="$1"
     if [[ "$key" != base64:* ]]; then
@@ -238,9 +267,9 @@ fi
 # Clear cached config/routes/views so updated .env is applied
 echo -e "${YELLOW}Clearing Laravel caches...${NC}"
 compose exec -T laravel-webapp php artisan config:clear
-compose exec -T laravel-webapp php artisan cache:clear
 compose exec -T laravel-webapp php artisan route:clear
 compose exec -T laravel-webapp php artisan view:clear
+clear_laravel_cache_safely
 
 # Run migrations and seeders
 if [ "$FRESH" = true ]; then
@@ -252,15 +281,16 @@ if [ "$FRESH" = true ]; then
     
     echo -e "${YELLOW}Creating storage link...${NC}"
     compose exec laravel-webapp php artisan storage:link
-    
-    echo -e "${YELLOW}Clearing caches...${NC}"
-    compose exec laravel-webapp php artisan config:clear
-    compose exec laravel-webapp php artisan cache:clear
-    compose exec laravel-webapp php artisan view:clear
 else
     echo -e "${YELLOW}Running database migrations...${NC}"
     compose exec laravel-webapp php artisan migrate --force
 fi
+
+echo -e "${YELLOW}Clearing caches after migrations...${NC}"
+compose exec -T laravel-webapp php artisan config:clear
+compose exec -T laravel-webapp php artisan route:clear
+compose exec -T laravel-webapp php artisan view:clear
+clear_laravel_cache_safely
 
 # Ensure at least initial users exist for login
 echo -e "${YELLOW}Checking initial user data...${NC}"
