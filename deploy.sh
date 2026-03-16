@@ -89,6 +89,46 @@ upsert_env_value() {
     fi
 }
 
+is_localhost_like_url() {
+    local url="$1"
+    [[ "$url" =~ ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?(/.*)?$ ]]
+}
+
+replace_localhost_host_in_url() {
+    local url="$1"
+    local host="$2"
+    echo "$url" | sed -E "s#(https?://)(localhost|127\\.0\\.0\\.1)#\\1${host}#"
+}
+
+extract_url_scheme() {
+    local url="$1"
+    echo "$url" | sed -E 's#^([a-zA-Z][a-zA-Z0-9+.-]*)://.*#\1#'
+}
+
+extract_url_host() {
+    local url="$1"
+    echo "$url" | sed -E 's#^[a-zA-Z][a-zA-Z0-9+.-]*://([^/:]+).*#\1#'
+}
+
+detect_public_host() {
+    local detected_host
+    detected_host=""
+
+    if command -v curl > /dev/null 2>&1; then
+        detected_host="$(curl -4 -fsS --max-time 2 https://api.ipify.org 2>/dev/null || true)"
+    fi
+
+    if [ -z "$detected_host" ] && command -v hostname > /dev/null 2>&1; then
+        detected_host="$(hostname -I 2>/dev/null | awk '{for (i=1; i<=NF; i++) if ($i !~ /^127\./) {print $i; exit}}')"
+    fi
+
+    if [ -z "$detected_host" ] && command -v ip > /dev/null 2>&1; then
+        detected_host="$(ip route get 1.1.1.1 2>/dev/null | awk '/src/ {for (i=1; i<=NF; i++) if ($i == "src") {print $(i+1); exit}}')"
+    fi
+
+    printf '%s' "$detected_host"
+}
+
 clear_laravel_cache_safely() {
     local cache_store cache_table table_count
 
@@ -185,8 +225,54 @@ fi
 # Keep .env.docker key in sync with runtime env
 upsert_env_value ".env.docker" "APP_KEY" "$APP_KEY_VALUE"
 
-# For local HTTP access, secure cookies must be disabled to avoid 419 CSRF/session issues
+# Resolve APP_URL for public deployments
 APP_URL_VALUE="$(get_env_value "WebApp/.env" "APP_URL")"
+if [ -z "$APP_URL_VALUE" ]; then
+    APP_URL_VALUE="$(get_env_value ".env.docker" "APP_URL")"
+fi
+PUBLIC_APP_URL_VALUE="$(get_env_value ".env.docker" "PUBLIC_APP_URL")"
+if [ -n "$PUBLIC_APP_URL_VALUE" ]; then
+    APP_URL_VALUE="$PUBLIC_APP_URL_VALUE"
+elif is_localhost_like_url "$APP_URL_VALUE"; then
+    DETECTED_PUBLIC_HOST="$(detect_public_host)"
+    if [ -n "$DETECTED_PUBLIC_HOST" ]; then
+        RESOLVED_APP_URL="$(replace_localhost_host_in_url "$APP_URL_VALUE" "$DETECTED_PUBLIC_HOST")"
+        if [ "$RESOLVED_APP_URL" != "$APP_URL_VALUE" ]; then
+            APP_URL_VALUE="$RESOLVED_APP_URL"
+            echo -e "${YELLOW}Detected non-local host '${DETECTED_PUBLIC_HOST}'. Using APP_URL=${APP_URL_VALUE}${NC}"
+        fi
+    fi
+fi
+if [ -n "$APP_URL_VALUE" ]; then
+    upsert_env_value "WebApp/.env" "APP_URL" "$APP_URL_VALUE"
+    upsert_env_value ".env.docker" "APP_URL" "$APP_URL_VALUE"
+fi
+
+# Keep predict-service public URL aligned with APP_URL host when needed
+PREDICT_SERVICE_PUBLIC_URL_VALUE="$(get_env_value "WebApp/.env" "PREDICT_SERVICE_PUBLIC_URL")"
+if [ -z "$PREDICT_SERVICE_PUBLIC_URL_VALUE" ]; then
+    PREDICT_SERVICE_PUBLIC_URL_VALUE="$(get_env_value ".env.docker" "PREDICT_SERVICE_PUBLIC_URL")"
+fi
+PUBLIC_PREDICT_SERVICE_URL_VALUE="$(get_env_value ".env.docker" "PUBLIC_PREDICT_SERVICE_URL")"
+if [ -n "$PUBLIC_PREDICT_SERVICE_URL_VALUE" ]; then
+    PREDICT_SERVICE_PUBLIC_URL_VALUE="$PUBLIC_PREDICT_SERVICE_URL_VALUE"
+elif [ -n "$APP_URL_VALUE" ] && { [ -z "$PREDICT_SERVICE_PUBLIC_URL_VALUE" ] || is_localhost_like_url "$PREDICT_SERVICE_PUBLIC_URL_VALUE"; }; then
+    APP_URL_SCHEME="$(extract_url_scheme "$APP_URL_VALUE")"
+    APP_URL_HOST="$(extract_url_host "$APP_URL_VALUE")"
+    if [ -n "$APP_URL_SCHEME" ] && [ -n "$APP_URL_HOST" ]; then
+        PREDICT_SERVICE_PUBLIC_URL_VALUE="${APP_URL_SCHEME}://${APP_URL_HOST}:5000"
+    fi
+fi
+if [ -n "$PREDICT_SERVICE_PUBLIC_URL_VALUE" ]; then
+    upsert_env_value "WebApp/.env" "PREDICT_SERVICE_PUBLIC_URL" "$PREDICT_SERVICE_PUBLIC_URL_VALUE"
+    upsert_env_value ".env.docker" "PREDICT_SERVICE_PUBLIC_URL" "$PREDICT_SERVICE_PUBLIC_URL_VALUE"
+fi
+
+if is_localhost_like_url "$APP_URL_VALUE"; then
+    echo -e "${YELLOW}APP_URL is localhost. Set PUBLIC_APP_URL in .env.docker when deploying to public IP/domain.${NC}"
+fi
+
+# For local HTTP access, secure cookies must be disabled to avoid 419 CSRF/session issues
 SESSION_SECURE_COOKIE_VALUE="$(get_env_value "WebApp/.env" "SESSION_SECURE_COOKIE")"
 if [[ "$APP_URL_VALUE" == http://* ]] && [[ "${SESSION_SECURE_COOKIE_VALUE,,}" == "true" ]]; then
     echo -e "${YELLOW}APP_URL uses HTTP; setting SESSION_SECURE_COOKIE=false for local Docker access...${NC}"
@@ -206,8 +292,11 @@ if [ -z "$JWT_SECRET_VALUE" ]; then
     upsert_env_value "WebApp/.env" "JWT_SECRET" "$JWT_SECRET_VALUE"
 fi
 upsert_env_value ".env.docker" "JWT_SECRET" "$JWT_SECRET_VALUE"
-# Export for docker-compose variable interpolation in predict-service
+# Export for docker-compose variable interpolation
 export JWT_SECRET="$JWT_SECRET_VALUE"
+if [ -n "$PREDICT_SERVICE_PUBLIC_URL_VALUE" ]; then
+    export PREDICT_SERVICE_PUBLIC_URL="$PREDICT_SERVICE_PUBLIC_URL_VALUE"
+fi
 
 # Build containers
 if [ "$BUILD" = true ] || [ "$FRESH" = true ]; then
@@ -306,7 +395,7 @@ echo -e "${GREEN}=========================================${NC}"
 echo -e "${GREEN}Deployment Complete!${NC}"
 echo -e "${GREEN}=========================================${NC}"
 echo ""
-echo -e "${CYAN}Access the application at: http://localhost:52025${NC}"
+echo -e "${CYAN}Access the application at: ${APP_URL_VALUE}${NC}"
 echo ""
 echo -e "${YELLOW}Default admin credentials:${NC}"
 echo "  Username: admin"

@@ -14,7 +14,7 @@ services:
       - DB_USERNAME=laravel_user
       - DB_PASSWORD=LaravelSecurePass2025!
       - PREDICT_SERVICE_URL=http://predict-service:5000
-      - PREDICT_SERVICE_PUBLIC_URL=http://localhost:5000
+      - PREDICT_SERVICE_PUBLIC_URL=${PREDICT_SERVICE_PUBLIC_URL:-http://localhost:5000}
       - PREDICTION_SERVICE_URL=http://predict-service:5000
     networks:
       - app-network
