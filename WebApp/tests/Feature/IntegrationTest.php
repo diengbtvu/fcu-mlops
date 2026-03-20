@@ -36,17 +36,17 @@ class IntegrationTest extends TestCase
     private function validFeatureData(array $overrides = []): array
     {
         return array_merge([
-            'ph' => 6.5,
-            'vss' => 3500,
-            'ethanol' => 12.0,
-            'acetate' => 25.0,
-            'propionate' => 8.0,
-            'butyrate' => 35.0,
-            'sucrose_degradation' => 72.0,
-            'orp_mid' => -180.0,
-            'orp_low' => -220.0,
-            'vfa' => 90.0,
-            'cod_o' => 12000.0,
+            'ph' => 5.8,
+            'vss' => 2.36,
+            'ethanol' => 1739.25,
+            'acetate' => 925.5,
+            'propionate' => 1100.0,
+            'butyrate' => 10.6,
+            'sucrose_degradation' => 91.68,
+            'orp_mid' => -226.67,
+            'orp_low' => -481.0,
+            'vfa' => 3723.5,
+            'cod_o' => 11.52,
         ], $overrides);
     }
 
@@ -194,7 +194,7 @@ class IntegrationTest extends TestCase
 
         $testData = $this->validFeatureData([
             'ph' => 6.2,
-            'vss' => 3200,
+            'vss' => 3.2,
         ]);
 
         $testResponse = $this->actingAs($this->admin)->postJson(route('admin.models.test', $createdModel), $testData);
@@ -240,7 +240,7 @@ class IntegrationTest extends TestCase
 
         $predictionData = $this->validPredictionData($model->id, [
             'ph' => 6.3,
-            'vss' => 3300,
+            'vss' => 3.3,
         ]);
 
         $makePredictionResponse = $this->actingAs($this->user)->postJson(route('user.predict.make'), $predictionData);
@@ -252,7 +252,7 @@ class IntegrationTest extends TestCase
             'user_id' => $this->user->id,
             'ml_model_id' => $model->id,
             'pH' => 6.3,
-            'VSS' => 3300,
+            'VSS' => 3.3,
             'HPR' => 0.852
         ]);
 
@@ -312,7 +312,7 @@ class IntegrationTest extends TestCase
         // 2. Admin makes a prediction
         $predictionData = $this->validPredictionData($model->id, [
             'ph' => 6.8,
-            'vss' => 3800,
+            'vss' => 3.8,
         ]);
 
         $makePredictionResponse = $this->actingAs($this->admin)->postJson(route('admin.predict.make'), $predictionData);
@@ -329,7 +329,7 @@ class IntegrationTest extends TestCase
             'user_id' => $this->admin->id,
             'ml_model_id' => $model->id,
             'pH' => 6.8,
-            'VSS' => 3800,
+            'VSS' => 3.8,
             'HPR' => 0.927
         ]);
     }

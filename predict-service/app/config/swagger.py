@@ -64,30 +64,30 @@ def init_swagger(app):
                     "ph": {
                         "type": "number",
                         "description": "System pH",
-                        "example": 6.5
+                        "example": 5.8
                     },
                     "vss": {
                         "type": "number",
                         "description": "Volatile Suspended Solids (mg/L)",
-                        "example": 3500
+                        "example": 2.36
                     },
                     "ethanol": {
                         "type": "number",
                         "description": "Ethanol concentration (mM)",
-                        "example": 12.5
+                        "example": 1739.25
                     },
                     "acetate": {
                         "type": "number",
                         "description": "Acetate concentration (mM)",
-                        "example": 25.0
+                        "example": 925.5
                     },
-                    "propionate": {"type": "number", "description": "Propionate concentration (mM)", "example": 8.0},
-                    "butyrate": {"type": "number", "description": "Butyrate concentration (mM)", "example": 35.0},
-                    "sucrose_degradation": {"type": "number", "description": "Sucrose degradation (%)", "example": 72.0},
-                    "orp_mid": {"type": "number", "description": "ORP Mid (mV)", "example": -180.0},
-                    "orp_low": {"type": "number", "description": "ORP Low (mV)", "example": -220.0},
-                    "vfa": {"type": "number", "description": "VFA concentration (mM)", "example": 90.0},
-                    "cod_o": {"type": "number", "description": "COD-O (mg/L)", "example": 12000.0},
+                    "propionate": {"type": "number", "description": "Propionate concentration (mM)", "example": 1100.0},
+                    "butyrate": {"type": "number", "description": "Butyrate concentration (mM)", "example": 10.6},
+                    "sucrose_degradation": {"type": "number", "description": "Sucrose degradation (%)", "example": 91.68},
+                    "orp_mid": {"type": "number", "description": "ORP Mid (mV)", "example": -226.67},
+                    "orp_low": {"type": "number", "description": "ORP Low (mV)", "example": -481.0},
+                    "vfa": {"type": "number", "description": "VFA concentration (mM)", "example": 3723.5},
+                    "cod_o": {"type": "number", "description": "COD-O (mg/L)", "example": 11.52},
                 }
             },
             "PredictResponse": {

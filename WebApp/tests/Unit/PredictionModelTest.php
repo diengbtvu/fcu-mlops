@@ -27,17 +27,17 @@ class PredictionModelTest extends TestCase
         return array_merge([
             'user_id' => $userId,
             'ml_model_id' => $modelId,
-            'pH' => 6.5,
-            'VSS' => 3500.0,
-            'Ethanol' => 12.0,
-            'Acetate' => 25.0,
-            'Propionate' => 8.0,
-            'Butyrate' => 35.0,
-            'Sucrose_Degradation' => 72.0,
-            'ORP_Mid' => -180.0,
-            'ORP_Low' => -220.0,
-            'VFA' => 90.0,
-            'COD_O' => 12000.0,
+            'pH' => 5.8,
+            'VSS' => 2.36,
+            'Ethanol' => 1739.25,
+            'Acetate' => 925.5,
+            'Propionate' => 1100.0,
+            'Butyrate' => 10.6,
+            'Sucrose_Degradation' => 91.68,
+            'ORP_Mid' => -226.67,
+            'ORP_Low' => -481.0,
+            'VFA' => 3723.5,
+            'COD_O' => 11.52,
             'HPR' => 1.250,
             'PredictionDateTime' => now(),
         ], $overrides);
@@ -134,30 +134,32 @@ class PredictionModelTest extends TestCase
         $prediction = Prediction::factory()->create([
             'user_id' => $user->id,
             'ml_model_id' => $model->id,
-            'pH' => 7.0,
-            'VSS' => 5000.0,
-            'Ethanol' => 50.0,
-            'Acetate' => 100.0,
-            'Propionate' => 50.0,
-            'Butyrate' => 100.0,
-            'Sucrose_Degradation' => 80.0,
-            'ORP_Mid' => -150.0,
-            'ORP_Low' => -250.0,
-            'VFA' => 200.0,
-            'COD_O' => 25000.0,
+            'pH' => 6.2,
+            'VSS' => 3.4,
+            'Ethanol' => 2200.0,
+            'Acetate' => 1400.0,
+            'Propionate' => 1200.0,
+            'Butyrate' => 16.0,
+            'Sucrose_Degradation' => 88.0,
+            'ORP_Mid' => -260.0,
+            'ORP_Low' => -420.0,
+            'VFA' => 4800.0,
+            'COD_O' => 18.0,
         ]);
 
-        $this->assertTrue($prediction->pH >= 3 && $prediction->pH <= 8);
-        $this->assertTrue($prediction->VSS >= 0 && $prediction->VSS <= 10000);
-        $this->assertTrue($prediction->Ethanol >= 0 && $prediction->Ethanol <= 100);
-        $this->assertTrue($prediction->Acetate >= 0 && $prediction->Acetate <= 200);
-        $this->assertTrue($prediction->Propionate >= 0 && $prediction->Propionate <= 100);
-        $this->assertTrue($prediction->Butyrate >= 0 && $prediction->Butyrate <= 200);
-        $this->assertTrue($prediction->Sucrose_Degradation >= 0 && $prediction->Sucrose_Degradation <= 100);
-        $this->assertTrue($prediction->ORP_Mid >= -500 && $prediction->ORP_Mid <= 100);
-        $this->assertTrue($prediction->ORP_Low >= -500 && $prediction->ORP_Low <= 100);
-        $this->assertTrue($prediction->VFA >= 0 && $prediction->VFA <= 500);
-        $this->assertTrue($prediction->COD_O >= 0 && $prediction->COD_O <= 50000);
+        $ranges = config('prediction.features');
+
+        $this->assertTrue($prediction->pH >= $ranges['ph']['min'] && $prediction->pH <= $ranges['ph']['max']);
+        $this->assertTrue($prediction->VSS >= $ranges['vss']['min'] && $prediction->VSS <= $ranges['vss']['max']);
+        $this->assertTrue($prediction->Ethanol >= $ranges['ethanol']['min'] && $prediction->Ethanol <= $ranges['ethanol']['max']);
+        $this->assertTrue($prediction->Acetate >= $ranges['acetate']['min'] && $prediction->Acetate <= $ranges['acetate']['max']);
+        $this->assertTrue($prediction->Propionate >= $ranges['propionate']['min'] && $prediction->Propionate <= $ranges['propionate']['max']);
+        $this->assertTrue($prediction->Butyrate >= $ranges['butyrate']['min'] && $prediction->Butyrate <= $ranges['butyrate']['max']);
+        $this->assertTrue($prediction->Sucrose_Degradation >= $ranges['sucrose_degradation']['min'] && $prediction->Sucrose_Degradation <= $ranges['sucrose_degradation']['max']);
+        $this->assertTrue($prediction->ORP_Mid >= $ranges['orp_mid']['min'] && $prediction->ORP_Mid <= $ranges['orp_mid']['max']);
+        $this->assertTrue($prediction->ORP_Low >= $ranges['orp_low']['min'] && $prediction->ORP_Low <= $ranges['orp_low']['max']);
+        $this->assertTrue($prediction->VFA >= $ranges['vfa']['min'] && $prediction->VFA <= $ranges['vfa']['max']);
+        $this->assertTrue($prediction->COD_O >= $ranges['cod_o']['min'] && $prediction->COD_O <= $ranges['cod_o']['max']);
     }
 
     #[\PHPUnit\Framework\Attributes\Test]

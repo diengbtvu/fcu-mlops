@@ -300,19 +300,18 @@ class UserController extends Controller
 
     private function predictionFeatureValidationRules(): array
     {
-        return [
-            'ph' => 'required|numeric|min:3|max:8',
-            'vss' => 'required|numeric|min:0|max:10000',
-            'ethanol' => 'required|numeric|min:0|max:100',
-            'acetate' => 'required|numeric|min:0|max:200',
-            'propionate' => 'required|numeric|min:0|max:100',
-            'butyrate' => 'required|numeric|min:0|max:200',
-            'sucrose_degradation' => 'required|numeric|min:0|max:100',
-            'orp_mid' => 'required|numeric|min:-500|max:100',
-            'orp_low' => 'required|numeric|min:-500|max:100',
-            'vfa' => 'required|numeric|min:0|max:500',
-            'cod_o' => 'required|numeric|min:0|max:50000',
-        ];
+        $rules = [];
+
+        foreach (config('prediction.features', []) as $fieldName => $fieldConfig) {
+            $rules[$fieldName] = [
+                'required',
+                'numeric',
+                'min:' . $fieldConfig['min'],
+                'max:' . $fieldConfig['max'],
+            ];
+        }
+
+        return $rules;
     }
 
     private function extractPredictionFeatures(Request $request): array

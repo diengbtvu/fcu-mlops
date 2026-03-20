@@ -18,21 +18,23 @@ class PredictionFactory extends Factory
      */
     public function definition(): array
     {
+        $features = config('prediction.features');
+
         return [
             'user_id' => User::factory(),
             'ml_model_id' => MLModel::factory(),
-            'pH' => fake()->randomFloat(2, 3, 8),
-            'VSS' => fake()->randomFloat(2, 0, 10000),
-            'Ethanol' => fake()->randomFloat(2, 0, 100),
-            'Acetate' => fake()->randomFloat(2, 0, 200),
-            'Propionate' => fake()->randomFloat(2, 0, 100),
-            'Butyrate' => fake()->randomFloat(2, 0, 200),
-            'Sucrose_Degradation' => fake()->randomFloat(2, 0, 100),
-            'ORP_Mid' => fake()->randomFloat(2, -500, 100),
-            'ORP_Low' => fake()->randomFloat(2, -500, 100),
-            'VFA' => fake()->randomFloat(2, 0, 500),
-            'COD_O' => fake()->randomFloat(2, 0, 50000),
-            'HPR' => fake()->randomFloat(3, 0.05, 5.0),
+            'pH' => fake()->randomFloat(4, $features['ph']['min'], $features['ph']['max']),
+            'VSS' => fake()->randomFloat(4, $features['vss']['min'], $features['vss']['max']),
+            'Ethanol' => fake()->randomFloat(4, $features['ethanol']['min'], $features['ethanol']['max']),
+            'Acetate' => fake()->randomFloat(4, $features['acetate']['min'], $features['acetate']['max']),
+            'Propionate' => fake()->randomFloat(4, $features['propionate']['min'], $features['propionate']['max']),
+            'Butyrate' => fake()->randomFloat(4, $features['butyrate']['min'], $features['butyrate']['max']),
+            'Sucrose_Degradation' => fake()->randomFloat(4, $features['sucrose_degradation']['min'], $features['sucrose_degradation']['max']),
+            'ORP_Mid' => fake()->randomFloat(4, $features['orp_mid']['min'], $features['orp_mid']['max']),
+            'ORP_Low' => fake()->randomFloat(4, $features['orp_low']['min'], $features['orp_low']['max']),
+            'VFA' => fake()->randomFloat(4, $features['vfa']['min'], $features['vfa']['max']),
+            'COD_O' => fake()->randomFloat(4, $features['cod_o']['min'], $features['cod_o']['max']),
+            'HPR' => fake()->randomFloat(4, 0.0, 22.0),
             'PredictionDateTime' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
@@ -83,7 +85,7 @@ class PredictionFactory extends Factory
     public function highHpr(): static
     {
         return $this->state(fn (array $attributes) => [
-            'HPR' => fake()->randomFloat(3, 2.5, 5.0),
+            'HPR' => fake()->randomFloat(4, 10.0, 22.0),
         ]);
     }
 
@@ -93,7 +95,7 @@ class PredictionFactory extends Factory
     public function lowHpr(): static
     {
         return $this->state(fn (array $attributes) => [
-            'HPR' => fake()->randomFloat(3, 0.05, 1.0),
+            'HPR' => fake()->randomFloat(4, 0.0, 2.0),
         ]);
     }
 
@@ -169,18 +171,20 @@ class PredictionFactory extends Factory
      */
     public function extremeFeatures(): static
     {
+        $features = config('prediction.features');
+
         return $this->state(fn (array $attributes) => [
-            'pH' => fake()->randomElement([3.0, 8.0]),
-            'VSS' => fake()->randomElement([0.0, 10000.0]),
-            'Ethanol' => fake()->randomElement([0.0, 100.0]),
-            'Acetate' => fake()->randomElement([0.0, 200.0]),
-            'Propionate' => fake()->randomElement([0.0, 100.0]),
-            'Butyrate' => fake()->randomElement([0.0, 200.0]),
-            'Sucrose_Degradation' => fake()->randomElement([0.0, 100.0]),
-            'ORP_Mid' => fake()->randomElement([-500.0, 100.0]),
-            'ORP_Low' => fake()->randomElement([-500.0, 100.0]),
-            'VFA' => fake()->randomElement([0.0, 500.0]),
-            'COD_O' => fake()->randomElement([0.0, 50000.0]),
+            'pH' => fake()->randomElement([$features['ph']['min'], $features['ph']['max']]),
+            'VSS' => fake()->randomElement([$features['vss']['min'], $features['vss']['max']]),
+            'Ethanol' => fake()->randomElement([$features['ethanol']['min'], $features['ethanol']['max']]),
+            'Acetate' => fake()->randomElement([$features['acetate']['min'], $features['acetate']['max']]),
+            'Propionate' => fake()->randomElement([$features['propionate']['min'], $features['propionate']['max']]),
+            'Butyrate' => fake()->randomElement([$features['butyrate']['min'], $features['butyrate']['max']]),
+            'Sucrose_Degradation' => fake()->randomElement([$features['sucrose_degradation']['min'], $features['sucrose_degradation']['max']]),
+            'ORP_Mid' => fake()->randomElement([$features['orp_mid']['min'], $features['orp_mid']['max']]),
+            'ORP_Low' => fake()->randomElement([$features['orp_low']['min'], $features['orp_low']['max']]),
+            'VFA' => fake()->randomElement([$features['vfa']['min'], $features['vfa']['max']]),
+            'COD_O' => fake()->randomElement([$features['cod_o']['min'], $features['cod_o']['max']]),
         ]);
     }
 

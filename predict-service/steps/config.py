@@ -105,17 +105,17 @@ class HydrogenExperimentConfig(BaseModel):
 
     # Input value ranges for validation
     feature_ranges: Dict[str, Dict[str, float]] = {
-        "pH":                  {"min": 3.0,   "max": 8.0},
-        "VSS":                 {"min": 0.0,   "max": 10000.0},
-        "Ethanol":             {"min": 0.0,   "max": 100.0},
-        "Acetate":             {"min": 0.0,   "max": 200.0},
-        "Propionate":          {"min": 0.0,   "max": 100.0},
-        "Butyrate":            {"min": 0.0,   "max": 200.0},
+        "pH":                  {"min": 4.5,   "max": 9.0},
+        "VSS":                 {"min": 0.0,   "max": 10.0},
+        "Ethanol":             {"min": 0.0,   "max": 6000.0},
+        "Acetate":             {"min": 0.0,   "max": 8000.0},
+        "Propionate":          {"min": 0.0,   "max": 4000.0},
+        "Butyrate":            {"min": 0.0,   "max": 120.0},
         "Sucrose_Degradation": {"min": 0.0,   "max": 100.0},
-        "ORP_Mid":             {"min": -500.0, "max": 100.0},
-        "ORP_Low":             {"min": -500.0, "max": 100.0},
-        "VFA":                 {"min": 0.0,   "max": 500.0},
-        "COD-O":               {"min": 0.0,   "max": 50000.0},
+        "ORP_Mid":             {"min": -700.0, "max": -150.0},
+        "ORP_Low":             {"min": -700.0, "max": -200.0},
+        "VFA":                 {"min": 0.0,   "max": 30000.0},
+        "COD-O":               {"min": 0.0,   "max": 50.0},
     }
 
     # Models to compare in experiment

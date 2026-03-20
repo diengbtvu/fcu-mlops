@@ -75,24 +75,24 @@ class PredictionForm {
     }
 
     validateData(data) {
-        const validations = [
-            { condition: !data.ml_model_id || Number.isNaN(data.ml_model_id), message: 'Please select an AI model' },
-            { condition: Number.isNaN(data.ph) || data.ph < 3 || data.ph > 8, message: 'pH must be between 3 and 8' },
-            { condition: Number.isNaN(data.vss) || data.vss < 0 || data.vss > 10000, message: 'VSS must be between 0 and 10000' },
-            { condition: Number.isNaN(data.ethanol) || data.ethanol < 0 || data.ethanol > 100, message: 'Ethanol must be between 0 and 100' },
-            { condition: Number.isNaN(data.acetate) || data.acetate < 0 || data.acetate > 200, message: 'Acetate must be between 0 and 200' },
-            { condition: Number.isNaN(data.propionate) || data.propionate < 0 || data.propionate > 100, message: 'Propionate must be between 0 and 100' },
-            { condition: Number.isNaN(data.butyrate) || data.butyrate < 0 || data.butyrate > 200, message: 'Butyrate must be between 0 and 200' },
-            { condition: Number.isNaN(data.sucrose_degradation) || data.sucrose_degradation < 0 || data.sucrose_degradation > 100, message: 'Sucrose degradation must be between 0 and 100' },
-            { condition: Number.isNaN(data.orp_mid) || data.orp_mid < -500 || data.orp_mid > 100, message: 'ORP Mid must be between -500 and 100' },
-            { condition: Number.isNaN(data.orp_low) || data.orp_low < -500 || data.orp_low > 100, message: 'ORP Low must be between -500 and 100' },
-            { condition: Number.isNaN(data.vfa) || data.vfa < 0 || data.vfa > 500, message: 'VFA must be between 0 and 500' },
-            { condition: Number.isNaN(data.cod_o) || data.cod_o < 0 || data.cod_o > 50000, message: 'COD-O must be between 0 and 50000' }
-        ];
+        if (!data.ml_model_id || Number.isNaN(data.ml_model_id)) {
+            throw new Error('Please select an AI model');
+        }
 
-        for (const validation of validations) {
-            if (validation.condition) {
-                throw new Error(validation.message);
+        const inputs = this.form.querySelectorAll('input[type="number"]');
+
+        for (const input of inputs) {
+            const value = parseFloat(input.value);
+            const min = input.min === '' ? Number.NEGATIVE_INFINITY : parseFloat(input.min);
+            const max = input.max === '' ? Number.POSITIVE_INFINITY : parseFloat(input.max);
+            const label = input.dataset.label || input.name;
+
+            if (Number.isNaN(value)) {
+                throw new Error(`${label} is required`);
+            }
+
+            if (value < min || value > max) {
+                throw new Error(`${label} must be between ${input.min} and ${input.max}`);
             }
         }
     }

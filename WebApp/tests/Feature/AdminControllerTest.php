@@ -35,17 +35,17 @@ class AdminControllerTest extends TestCase
     private function validPredictionData(int $modelId, array $overrides = []): array
     {
         return array_merge([
-            'ph' => 6.5,
-            'vss' => 3500,
-            'ethanol' => 12.0,
-            'acetate' => 25.0,
-            'propionate' => 8.0,
-            'butyrate' => 35.0,
-            'sucrose_degradation' => 72.0,
-            'orp_mid' => -180.0,
-            'orp_low' => -220.0,
-            'vfa' => 90.0,
-            'cod_o' => 12000.0,
+            'ph' => 5.8,
+            'vss' => 2.36,
+            'ethanol' => 1739.25,
+            'acetate' => 925.5,
+            'propionate' => 1100.0,
+            'butyrate' => 10.6,
+            'sucrose_degradation' => 91.68,
+            'orp_mid' => -226.67,
+            'orp_low' => -481.0,
+            'vfa' => 3723.5,
+            'cod_o' => 11.52,
             'ml_model_id' => $modelId,
         ], $overrides);
     }
@@ -463,7 +463,7 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseHas('predictions', [
             'user_id' => $this->admin->id,
             'ml_model_id' => $model->id,
-            'pH' => 6.5,
+            'pH' => 5.8,
             'HPR' => 0.855,
         ]);
     }

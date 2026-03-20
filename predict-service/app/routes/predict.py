@@ -8,9 +8,62 @@ from app.scalers.shared_scaler import get_scaler
 from app.utils.mlflow_cache import MLflowModelCache
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
 from app.utils.database_utils import DatabaseUtils
+from steps.config import HydrogenExperimentConfig
 import traceback
 
 predict_bp = Blueprint('predict', __name__, url_prefix='/predict')
+
+EXPERIMENT_CONFIG = HydrogenExperimentConfig()
+FEATURE_FIELD_MAP = {
+    'ph': 'pH',
+    'vss': 'VSS',
+    'ethanol': 'Ethanol',
+    'acetate': 'Acetate',
+    'propionate': 'Propionate',
+    'butyrate': 'Butyrate',
+    'sucrose_degradation': 'Sucrose_Degradation',
+    'orp_mid': 'ORP_Mid',
+    'orp_low': 'ORP_Low',
+    'vfa': 'VFA',
+    'cod_o': 'COD-O',
+}
+FEATURE_DESCRIPTIONS = {
+    'ph': 'System pH',
+    'vss': 'Volatile Suspended Solids (mg/L)',
+    'ethanol': 'Ethanol concentration (mM)',
+    'acetate': 'Acetate concentration (mM)',
+    'propionate': 'Propionate concentration (mM)',
+    'butyrate': 'Butyrate concentration (mM)',
+    'sucrose_degradation': 'Sucrose degradation (%)',
+    'orp_mid': 'ORP Mid (mV)',
+    'orp_low': 'ORP Low (mV)',
+    'vfa': 'VFA concentration (mM)',
+    'cod_o': 'COD-O (mg/L)',
+}
+FEATURE_EXAMPLES = {
+    'ph': 5.8,
+    'vss': 2.36,
+    'ethanol': 1739.25,
+    'acetate': 925.5,
+    'propionate': 1100.0,
+    'butyrate': 10.6,
+    'sucrose_degradation': 91.68,
+    'orp_mid': -226.67,
+    'orp_low': -481.0,
+    'vfa': 3723.5,
+    'cod_o': 11.52,
+}
+SUPPORTED_MODEL_TYPES = ['keras', 'pytorch', 'sklearn', 'xgboost', 'pickle', 'joblib']
+SWAGGER_FEATURE_PROPERTIES = {
+    request_key: {
+        'type': 'number',
+        'minimum': EXPERIMENT_CONFIG.feature_ranges[feature_name]['min'],
+        'maximum': EXPERIMENT_CONFIG.feature_ranges[feature_name]['max'],
+        'description': FEATURE_DESCRIPTIONS[request_key],
+        'example': FEATURE_EXAMPLES[request_key],
+    }
+    for request_key, feature_name in FEATURE_FIELD_MAP.items()
+}
 
 # Try to import swagger decorator, but continue without it if not available
 try:
@@ -33,6 +86,40 @@ def _scale_with_feature_names(scaler, input_df: pd.DataFrame) -> pd.DataFrame:
     scaled_values = scaler.transform(input_df)
     return pd.DataFrame(scaled_values, columns=input_df.columns, index=input_df.index)
 
+
+def _validate_prediction_features(payload: dict) -> dict:
+    """
+    Validate and normalize incoming feature values against the Hydrogen
+    experiment ranges derived from the current dataset.
+    """
+    normalized = {}
+
+    for request_key, feature_name in FEATURE_FIELD_MAP.items():
+        if request_key not in payload:
+            raise ValueError(f'Missing required field: {request_key}')
+
+        try:
+            value = float(payload[request_key])
+        except (TypeError, ValueError):
+            raise ValueError(f'{request_key} must be numeric') from None
+
+        bounds = EXPERIMENT_CONFIG.feature_ranges[feature_name]
+        if value < bounds['min'] or value > bounds['max']:
+            raise ValueError(
+                f'{request_key} must be between {bounds["min"]} and {bounds["max"]}'
+            )
+
+        normalized[request_key] = value
+
+    return normalized
+
+
+def _build_input_dataframe(features: dict) -> pd.DataFrame:
+    return pd.DataFrame({
+        feature_name: [features[request_key]]
+        for request_key, feature_name in FEATURE_FIELD_MAP.items()
+    })
+
 @predict_bp.route('/model', methods=['POST'])
 @token_required  
 @swag_from({
@@ -54,17 +141,7 @@ def _scale_with_feature_names(scaler, input_df: pd.DataFrame) -> pd.DataFrame:
                     'model_path', 'model_type'
                 ],
                 'properties': {
-                    'ph': {'type': 'number', 'minimum': 3, 'maximum': 8, 'description': 'System pH'},
-                    'vss': {'type': 'number', 'minimum': 0, 'maximum': 10000, 'description': 'Volatile Suspended Solids (mg/L)'},
-                    'ethanol': {'type': 'number', 'minimum': 0, 'maximum': 100, 'description': 'Ethanol concentration'},
-                    'acetate': {'type': 'number', 'minimum': 0, 'maximum': 200, 'description': 'Acetate concentration'},
-                    'propionate': {'type': 'number', 'minimum': 0, 'maximum': 100, 'description': 'Propionate concentration'},
-                    'butyrate': {'type': 'number', 'minimum': 0, 'maximum': 200, 'description': 'Butyrate concentration'},
-                    'sucrose_degradation': {'type': 'number', 'minimum': 0, 'maximum': 100, 'description': 'Sucrose degradation (%)'},
-                    'orp_mid': {'type': 'number', 'minimum': -500, 'maximum': 100, 'description': 'ORP Mid (mV)'},
-                    'orp_low': {'type': 'number', 'minimum': -500, 'maximum': 100, 'description': 'ORP Low (mV)'},
-                    'vfa': {'type': 'number', 'minimum': 0, 'maximum': 500, 'description': 'VFA concentration'},
-                    'cod_o': {'type': 'number', 'minimum': 0, 'maximum': 50000, 'description': 'COD-O (mg/L)'},
+                    **SWAGGER_FEATURE_PROPERTIES,
                     'model_path': {
                         'type': 'string',
                         'description': 'Absolute path to the model file'
@@ -134,49 +211,13 @@ def predict_with_dynamic_model():
             if field not in data:
                 return jsonify({'error': f'Missing required field: {field}'}), 400
 
-        # Extract parameters
-        ph                  = float(data['ph'])
-        vss                 = float(data['vss'])
-        ethanol             = float(data['ethanol'])
-        acetate             = float(data['acetate'])
-        propionate          = float(data['propionate'])
-        butyrate            = float(data['butyrate'])
-        sucrose_degradation = float(data['sucrose_degradation'])
-        orp_mid             = float(data['orp_mid'])
-        orp_low             = float(data['orp_low'])
-        vfa                 = float(data['vfa'])
-        cod_o               = float(data['cod_o'])
-        model_path          = data['model_path']
-        model_type          = data['model_type'].lower()
-
-        # Validate ranges
-        if not (3.0 <= ph <= 8.0):
-            return jsonify({'error': 'ph must be between 3.0 and 8.0'}), 400
-        if not (0 <= vss <= 10000):
-            return jsonify({'error': 'vss must be between 0 and 10000'}), 400
-        if not (0 <= ethanol <= 100):
-            return jsonify({'error': 'ethanol must be between 0 and 100'}), 400
-        if not (0 <= acetate <= 200):
-            return jsonify({'error': 'acetate must be between 0 and 200'}), 400
-        if not (0 <= propionate <= 100):
-            return jsonify({'error': 'propionate must be between 0 and 100'}), 400
-        if not (0 <= butyrate <= 200):
-            return jsonify({'error': 'butyrate must be between 0 and 200'}), 400
-        if not (0 <= sucrose_degradation <= 100):
-            return jsonify({'error': 'sucrose_degradation must be between 0 and 100'}), 400
-        if not (-500 <= orp_mid <= 100):
-            return jsonify({'error': 'orp_mid must be between -500 and 100'}), 400
-        if not (-500 <= orp_low <= 100):
-            return jsonify({'error': 'orp_low must be between -500 and 100'}), 400
-        if not (0 <= vfa <= 500):
-            return jsonify({'error': 'vfa must be between 0 and 500'}), 400
-        if not (0 <= cod_o <= 50000):
-            return jsonify({'error': 'cod_o must be between 0 and 50000'}), 400
+        features = _validate_prediction_features(data)
+        model_path = data['model_path']
+        model_type = data['model_type'].lower()
 
         # Validate model type
-        supported_types = ['keras', 'pytorch', 'sklearn', 'xgboost', 'pickle', 'joblib']
-        if model_type not in supported_types:
-            return jsonify({'error': f'Unsupported model_type: {model_type}. Supported types: {supported_types}'}), 400
+        if model_type not in SUPPORTED_MODEL_TYPES:
+            return jsonify({'error': f'Unsupported model_type: {model_type}. Supported types: {SUPPORTED_MODEL_TYPES}'}), 400
 
         # Check if model file exists
         if not os.path.exists(model_path):
@@ -188,19 +229,7 @@ def predict_with_dynamic_model():
             return jsonify({'error': f'Failed to load model from {model_path}'}), 500
 
         # Prepare input DataFrame with correct column names (match training feature names)
-        input_data = pd.DataFrame({
-            'pH':                  [ph],
-            'VSS':                 [vss],
-            'Ethanol':             [ethanol],
-            'Acetate':             [acetate],
-            'Propionate':          [propionate],
-            'Butyrate':            [butyrate],
-            'Sucrose_Degradation': [sucrose_degradation],
-            'ORP_Mid':             [orp_mid],
-            'ORP_Low':             [orp_low],
-            'VFA':                 [vfa],
-            'COD-O':               [cod_o],
-        })
+        input_data = _build_input_dataframe(features)
 
         # Get shared scaler (MinMaxScaler)
         scaler = get_scaler()
@@ -220,13 +249,7 @@ def predict_with_dynamic_model():
             'user': request.user["username"],
             'model_used': os.path.basename(model_path),
             'model_type': model_type,
-            'input_parameters': {
-                'ph': ph, 'vss': vss, 'ethanol': ethanol,
-                'acetate': acetate, 'propionate': propionate,
-                'butyrate': butyrate, 'sucrose_degradation': sucrose_degradation,
-                'orp_mid': orp_mid, 'orp_low': orp_low,
-                'vfa': vfa, 'cod_o': cod_o,
-            }
+            'input_parameters': features
         })
 
     except ValueError as ve:
@@ -280,17 +303,7 @@ def health_check():
                     'sucrose_degradation', 'orp_mid', 'orp_low', 'vfa', 'cod_o'
                 ],
                 'properties': {
-                    'ph': {'type': 'number', 'minimum': 3, 'maximum': 8},
-                    'vss': {'type': 'number', 'minimum': 0, 'maximum': 10000},
-                    'ethanol': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                    'acetate': {'type': 'number', 'minimum': 0, 'maximum': 200},
-                    'propionate': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                    'butyrate': {'type': 'number', 'minimum': 0, 'maximum': 200},
-                    'sucrose_degradation': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                    'orp_mid': {'type': 'number', 'minimum': -500, 'maximum': 100},
-                    'orp_low': {'type': 'number', 'minimum': -500, 'maximum': 100},
-                    'vfa': {'type': 'number', 'minimum': 0, 'maximum': 500},
-                    'cod_o': {'type': 'number', 'minimum': 0, 'maximum': 50000}
+                    **SWAGGER_FEATURE_PROPERTIES
                 }
             }
         }
@@ -330,6 +343,8 @@ def predict_with_active_model():
             if field not in data:
                 return jsonify({'error': f'Missing required field: {field}'}), 400
 
+        features = _validate_prediction_features(data)
+
         # Get active model from database
         db_utils = DatabaseUtils()
         active_model_info = db_utils.get_active_model()
@@ -368,19 +383,7 @@ def predict_with_active_model():
         if model is None:
             return jsonify({'error': f'Failed to load model from {model_path}'}), 500
 
-        input_data = pd.DataFrame({
-            'pH':                  [float(data['ph'])],
-            'VSS':                 [float(data['vss'])],
-            'Ethanol':             [float(data['ethanol'])],
-            'Acetate':             [float(data['acetate'])],
-            'Propionate':          [float(data['propionate'])],
-            'Butyrate':            [float(data['butyrate'])],
-            'Sucrose_Degradation': [float(data['sucrose_degradation'])],
-            'ORP_Mid':             [float(data['orp_mid'])],
-            'ORP_Low':             [float(data['orp_low'])],
-            'VFA':                 [float(data['vfa'])],
-            'COD-O':               [float(data['cod_o'])],
-        })
+        input_data = _build_input_dataframe(features)
 
         scaler = get_scaler()
         if scaler is None:
@@ -400,9 +403,11 @@ def predict_with_active_model():
             'model_id': active_model_info.get('id'),
             'model_type': model_type,
             'model_path': model_path,
-            'input_parameters': {k: float(data[k]) for k in required_fields}
+            'input_parameters': features
         })
 
+    except ValueError as ve:
+        return jsonify({'error': str(ve)}), 400
     except Exception as e:
         return jsonify({'error': f'Prediction error: {str(e)}'}), 500
 
@@ -442,19 +447,7 @@ def predict_with_active_model():
                             'ph', 'vss', 'ethanol', 'acetate', 'propionate', 'butyrate',
                             'sucrose_degradation', 'orp_mid', 'orp_low', 'vfa', 'cod_o'
                         ],
-                        'properties': {
-                            'ph': {'type': 'number', 'minimum': 3, 'maximum': 8},
-                            'vss': {'type': 'number', 'minimum': 0, 'maximum': 10000},
-                            'ethanol': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                            'acetate': {'type': 'number', 'minimum': 0, 'maximum': 200},
-                            'propionate': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                            'butyrate': {'type': 'number', 'minimum': 0, 'maximum': 200},
-                            'sucrose_degradation': {'type': 'number', 'minimum': 0, 'maximum': 100},
-                            'orp_mid': {'type': 'number', 'minimum': -500, 'maximum': 100},
-                            'orp_low': {'type': 'number', 'minimum': -500, 'maximum': 100},
-                            'vfa': {'type': 'number', 'minimum': 0, 'maximum': 500},
-                            'cod_o': {'type': 'number', 'minimum': 0, 'maximum': 50000}
-                        }
+                        'properties': SWAGGER_FEATURE_PROPERTIES
                     },
                     'force_reload': {
                         'type': 'boolean',
@@ -510,6 +503,8 @@ def predict_with_mlflow():
         for field in required_features:
             if field not in features:
                 return jsonify({'error': f'Missing required feature: {field}'}), 400
+
+        features = _validate_prediction_features(features)
         
         # Determine run_id từ các options
         run_id = None
@@ -608,43 +603,7 @@ def predict_with_mlflow():
             }), 500
         
         # Prepare input data
-        input_data = pd.DataFrame({
-            'pH': [features['ph']],
-            'VSS': [features['vss']],
-            'Ethanol': [features['ethanol']],
-            'Acetate': [features['acetate']],
-            'Propionate': [features['propionate']],
-            'Butyrate': [features['butyrate']],
-            'Sucrose_Degradation': [features['sucrose_degradation']],
-            'ORP_Mid': [features['orp_mid']],
-            'ORP_Low': [features['orp_low']],
-            'VFA': [features['vfa']],
-            'COD-O': [features['cod_o']],
-        })
-        
-        # Validate ranges
-        if not (3.0 <= features['ph'] <= 8.0):
-            return jsonify({'error': 'ph must be between 3.0 and 8.0'}), 400
-        if not (0 <= features['vss'] <= 10000):
-            return jsonify({'error': 'vss must be between 0 and 10000'}), 400
-        if not (0 <= features['ethanol'] <= 100):
-            return jsonify({'error': 'ethanol must be between 0 and 100'}), 400
-        if not (0 <= features['acetate'] <= 200):
-            return jsonify({'error': 'acetate must be between 0 and 200'}), 400
-        if not (0 <= features['propionate'] <= 100):
-            return jsonify({'error': 'propionate must be between 0 and 100'}), 400
-        if not (0 <= features['butyrate'] <= 200):
-            return jsonify({'error': 'butyrate must be between 0 and 200'}), 400
-        if not (0 <= features['sucrose_degradation'] <= 100):
-            return jsonify({'error': 'sucrose_degradation must be between 0 and 100'}), 400
-        if not (-500 <= features['orp_mid'] <= 100):
-            return jsonify({'error': 'orp_mid must be between -500 and 100'}), 400
-        if not (-500 <= features['orp_low'] <= 100):
-            return jsonify({'error': 'orp_low must be between -500 and 100'}), 400
-        if not (0 <= features['vfa'] <= 500):
-            return jsonify({'error': 'vfa must be between 0 and 500'}), 400
-        if not (0 <= features['cod_o'] <= 50000):
-            return jsonify({'error': 'cod_o must be between 0 and 50000'}), 400
+        input_data = _build_input_dataframe(features)
         
         # Scale features
         scaled_data = _scale_with_feature_names(scaler, input_data)
@@ -683,6 +642,11 @@ def predict_with_mlflow():
             }
         }), 200
         
+    except ValueError as ve:
+        return jsonify({
+            'success': False,
+            'error': str(ve)
+        }), 400
     except Exception as e:
         print(f"❌ Prediction error: {str(e)}")
         traceback.print_exc()

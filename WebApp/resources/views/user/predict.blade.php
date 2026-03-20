@@ -18,19 +18,7 @@
 
 @section('content')
 @php
-    $featureFields = [
-        ['name' => 'ph', 'label' => 'pH', 'icon' => 'bi-droplet', 'min' => 3, 'max' => 8, 'step' => '0.01', 'unit' => '-', 'placeholder' => 'e.g. 6.5'],
-        ['name' => 'vss', 'label' => 'VSS', 'icon' => 'bi-bar-chart', 'min' => 0, 'max' => 10000, 'step' => '0.1', 'unit' => 'mg/L', 'placeholder' => 'e.g. 3500'],
-        ['name' => 'ethanol', 'label' => 'Ethanol', 'icon' => 'bi-beaker', 'min' => 0, 'max' => 100, 'step' => '0.01', 'unit' => 'mM', 'placeholder' => 'e.g. 12.5'],
-        ['name' => 'acetate', 'label' => 'Acetate', 'icon' => 'bi-beaker', 'min' => 0, 'max' => 200, 'step' => '0.01', 'unit' => 'mM', 'placeholder' => 'e.g. 25'],
-        ['name' => 'propionate', 'label' => 'Propionate', 'icon' => 'bi-beaker', 'min' => 0, 'max' => 100, 'step' => '0.01', 'unit' => 'mM', 'placeholder' => 'e.g. 8'],
-        ['name' => 'butyrate', 'label' => 'Butyrate', 'icon' => 'bi-beaker', 'min' => 0, 'max' => 200, 'step' => '0.01', 'unit' => 'mM', 'placeholder' => 'e.g. 35'],
-        ['name' => 'sucrose_degradation', 'label' => 'Sucrose Degradation', 'icon' => 'bi-percent', 'min' => 0, 'max' => 100, 'step' => '0.01', 'unit' => '%', 'placeholder' => 'e.g. 72'],
-        ['name' => 'orp_mid', 'label' => 'ORP Mid', 'icon' => 'bi-activity', 'min' => -500, 'max' => 100, 'step' => '0.1', 'unit' => 'mV', 'placeholder' => 'e.g. -180'],
-        ['name' => 'orp_low', 'label' => 'ORP Low', 'icon' => 'bi-activity', 'min' => -500, 'max' => 100, 'step' => '0.1', 'unit' => 'mV', 'placeholder' => 'e.g. -220'],
-        ['name' => 'vfa', 'label' => 'VFA', 'icon' => 'bi-graph-up', 'min' => 0, 'max' => 500, 'step' => '0.01', 'unit' => 'mM', 'placeholder' => 'e.g. 90'],
-        ['name' => 'cod_o', 'label' => 'COD-O', 'icon' => 'bi-speedometer2', 'min' => 0, 'max' => 50000, 'step' => '1', 'unit' => 'mg/L', 'placeholder' => 'e.g. 12000'],
-    ];
+    $featureFields = config('prediction.features', []);
 @endphp
 <div class="prediction-form-container">
 <div class="loading-overlay" id="loadingOverlay">
@@ -107,21 +95,22 @@
                     @endif
 
                     <div class="row">
-                        @foreach($featureFields as $field)
+                        @foreach($featureFields as $fieldName => $field)
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="{{ $field['name'] }}" class="form-label">
+                                    <label for="{{ $fieldName }}" class="form-label">
                                         <i class="bi {{ $field['icon'] }} me-1"></i>
                                         {{ $field['label'] }}
                                     </label>
                                     <input
                                         type="number"
                                         class="form-control"
-                                        id="{{ $field['name'] }}"
-                                        name="{{ $field['name'] }}"
+                                        id="{{ $fieldName }}"
+                                        name="{{ $fieldName }}"
                                         min="{{ $field['min'] }}"
                                         max="{{ $field['max'] }}"
                                         step="{{ $field['step'] }}"
+                                        data-label="{{ $field['label'] }}"
                                         placeholder="{{ $field['placeholder'] }}"
                                         required
                                     >
