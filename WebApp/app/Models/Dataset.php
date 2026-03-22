@@ -16,6 +16,7 @@ class Dataset extends Model
     protected $fillable = [
         'DatasetName',
         'FilePath',
+        'SelectedSheet',
         'Description',
         'UploadedBy',
         'UploadDate',

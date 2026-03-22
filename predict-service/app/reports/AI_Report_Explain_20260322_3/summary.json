@@ -1,0 +1,228 @@
+{
+  "model_name": "AI_Report_Explain_20260322_3",
+  "model_type": "knn",
+  "model_label": "KNN",
+  "comparison_enabled": true,
+  "created_at": "2026-03-22T09:08:02.065988",
+  "selected_model_metrics": {
+    "r2_score": 0.8171678017037467,
+    "rmse": 0.11318090995439674,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.732409747545017,
+      "rmse": 0.13692475905328272,
+      "mse": 0.018748389641799527,
+      "mae": 0.09460256693779978
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.5604531394996005,
+      "rmse": 0.1754888111857837,
+      "mse": 0.030796322851399643,
+      "mae": 0.10855624704298139
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.7756018171353091,
+      "rmse": 0.12538815399769956,
+      "mse": 0.015722189162950824,
+      "mae": 0.08355692337682429
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8171678017037467,
+      "rmse": 0.11318090995439674,
+      "mse": 0.012809918378105262,
+      "mae": 0.07502308749135642
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.7494763101779772,
+      "rmse": 0.13248638205179633,
+      "mse": 0.017552641429174544,
+      "mae": 0.09559303423201744
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "gra_ranking.json",
+    "analysis_summary": "analysis_summary_report.txt",
+    "summary": "summary.json",
+    "training_bundle_zip": "training_bundle.zip",
+    "best_model": "best_model.pkl",
+    "best_scaler_X": "best_scaler_X.pkl",
+    "best_scaler_Y": "best_scaler_Y.pkl",
+    "scaler": "scaler.pkl",
+    "best_model_info": "best_model_info.txt",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "best_model_shap_values": "best_model_shap_values.npy",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "fig3a_gra_ranking": "fig3a_gra_ranking.png",
+    "fig3b_shap_analysis": "fig3b_shap_analysis.png",
+    "fig3_feature_analysis": "fig3_feature_analysis.png",
+    "fig4_univariate_analysis": "fig4_univariate_analysis.png",
+    "fig5_model_comparison": "fig5_model_comparison.png",
+    "fig6ab_mse_r2_features": "fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time": "fig6c_prediction_time.png",
+    "results_summary": "results_summary.txt",
+    "best_model_summary": "best_model_summary.json",
+    "model_svm_scatter": "model_svm_scatter.png",
+    "model_dt_scatter": "model_dt_scatter.png",
+    "model_rf_scatter": "model_rf_scatter.png",
+    "model_knn_scatter": "model_knn_scatter.png",
+    "model_xgboost_scatter": "model_xgboost_scatter.png",
+    "llm_explanations": "llm_explanations.json"
+  },
+  "llm_explanations": {
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at": "2026-03-22T09:09:19.373433",
+    "overview": {
+      "en": "This report uses 197 cleaned rows from the “HRT 12 -4 h” sheet to predict HPR based on measurements like pH, VFA, and ORP. Among the tested models, KNN performed best overall (R² ≈ 0.817, RMSE ≈ 0.113). Different “feature importance” methods in the report don’t always pick the same top drivers (for example, Grey Relational Analysis ranks pH highest, while the model-based importance table ranks VSS highest), so it’s best to treat them as complementary clues rather than a single definitive answer.",
+      "zh_TW": "這份報告使用「HRT 12 -4 h」資料表中前處理後的 197 筆資料，利用 pH、VFA、ORP 等指標來預測 HPR。在多個模型中，KNN 的整體表現最好（R² 約 0.817、RMSE 約 0.113）。另外，報告中的不同「特徵重要性」方法不一定會選出相同的關鍵因素（例如灰關聯分析把 pH 排第一，但模型重要性表把 VSS 排第一），因此建議把它們當作互補線索，而不是唯一結論。"
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "This table summarizes how well the trained model predicts HPR. In this report, the best model is KNN with R² ≈ 0.817 (higher means predictions follow the real values more closely) and RMSE ≈ 0.113 (lower means smaller typical errors), along with MSE ≈ 0.0128 and MAE ≈ 0.075—overall suggesting fairly good, but not perfect, accuracy.",
+        "zh_TW": "這個表格用來總結模型預測 HPR 的表現。本報告最佳模型為 KNN：R² 約 0.817（越高代表預測越貼近真實值）、RMSE 約 0.113（越低代表常見誤差越小），另外 MSE 約 0.0128、MAE 約 0.075，整體顯示準確度不錯，但仍非完全無誤差。"
+      },
+      "fig3a_gra_ranking": {
+        "en": "This chart ranks input factors using Grey Relational Analysis (a “similarity” ranking: higher score means the feature’s changes resemble HPR’s changes more). Here the top-ranked features are pH (score ≈ 0.766), then Propionate (≈ 0.733) and VFA (≈ 0.732), with the remaining features gradually lower—so pH stands out as the strongest match by this method.",
+        "zh_TW": "這張圖用灰關聯分析做特徵排序（可理解為「變化型態與 HPR 越像，分數越高」）。結果顯示排名前三為 pH（約 0.766）、Propionate（約 0.733）、VFA（約 0.732），其餘特徵分數依序較低；以此方法來看，pH 的關聯最突出。"
+      },
+      "fig3b_shap_analysis": {
+        "en": "This chart uses SHAP to show which inputs most influenced the model’s predictions (bigger SHAP impact means the model’s output changes more when that feature changes). In the provided SHAP importance table, ORP_Low has the largest average impact (mean |SHAP| ≈ 0.037), followed by Butyrate and ORP_Mid (both around 0.03), while pH and Sucrose_Degradation are among the smallest—so the model’s behavior here is especially sensitive to ORP-related inputs.",
+        "zh_TW": "這張圖用 SHAP 來呈現哪些輸入最影響模型的預測（SHAP 影響越大，代表該特徵變動時模型輸出更容易跟著變）。依提供的 SHAP 重要性表，ORP_Low 的平均影響最大（mean |SHAP| 約 0.037），接著是 Butyrate 與 ORP_Mid（約 0.03 左右）；pH 與 Sucrose_Degradation 的影響相對較小，因此模型對 ORP 相關指標特別敏感。"
+      },
+      "fig3_feature_analysis": {
+        "en": "This combined feature analysis figure is meant to compare multiple ways of judging “what matters most” (for example, GRA ranking vs SHAP vs model-based importance). In this report, these methods highlight different leaders—GRA puts pH first, the feature-importance table puts VSS first (importance ≈ 0.505), and SHAP puts ORP_Low first—so the safest takeaway is that several signals (pH/ORP/VSS and key acids like VFA/Butyrate) are all important, depending on the lens used.",
+        "zh_TW": "這張「綜合特徵分析」通常用來把多種判斷「重要因素」的方法放在一起比較（例如灰關聯排序、SHAP、模型重要性）。在本報告中，不同方法的第一名不同：灰關聯把 pH 排第一、特徵重要性表把 VSS 排第一（重要性約 0.505）、SHAP 把 ORP_Low 排第一；因此較穩健的解讀是：pH／ORP／VSS，以及 VFA、Butyrate 等酸類指標，都可能在不同角度下扮演關鍵角色。"
+      },
+      "fig4_univariate_analysis": {
+        "en": "A univariate analysis chart typically checks each feature on its own against HPR to see if there’s a clear one-to-one pattern. The detailed plotted patterns aren’t provided here, so any “strong/weak” visual trend can’t be confirmed from the chart alone; however, the correlation summary shows HPR is strongly related to VFA (correlation ≈ 0.798) and also to Butyrate (≈ 0.783) and Acetate (≈ 0.764), which suggests those single-feature relationships are worth paying attention to.",
+        "zh_TW": "單變量分析通常是把每個特徵單獨拿來和 HPR 對照，看看是否存在明顯的一對一關係。由於這裡沒有提供圖上具體分布細節，無法僅憑圖形確認趨勢強弱；但從相關性摘要可見，HPR 與 VFA（約 0.798）關係很強，與 Butyrate（約 0.783）與 Acetate（約 0.764）也有較強關聯，表示這些單一特徵值得特別關注。"
+      },
+      "fig5_model_comparison": {
+        "en": "This chart compares different prediction approaches side by side. Based on the model comparison results provided, KNN performs best (R² ≈ 0.817; lowest RMSE ≈ 0.113), followed by Random Forest (R² ≈ 0.776), while Decision Tree is the weakest here (R² ≈ 0.560), meaning its predictions deviate more from the real HPR values.",
+        "zh_TW": "這張圖用來把不同預測方法放在一起比較。依提供的模型比較結果，KNN 表現最好（R² 約 0.817，且 RMSE 最低約 0.113），其次是 Random Forest（R² 約 0.776）；Decision Tree 在此最弱（R² 約 0.560），代表預測偏離真實 HPR 的情況較多。"
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "These charts show how accuracy changes as you add more features (R² higher is better; MSE lower is better). From the incremental feature table, using only 1 feature (pH) performs poorly (KNN R² is negative), but performance improves a lot by 2–3 features; for KNN, the best point in this table is at 8 features (R² ≈ 0.822, MSE ≈ 0.01247), and adding more features after that doesn’t clearly improve further.",
+        "zh_TW": "這兩張圖呈現「加入更多特徵後，準確度如何變化」（R² 越高越好、MSE 越低越好）。從逐步加入特徵的表格可見，只用 1 個特徵（pH）效果很差（KNN 的 R² 為負值），但加入到 2–3 個特徵後表現大幅改善；對 KNN 而言，表格中最佳點出現在 8 個特徵（R² 約 0.822、MSE 約 0.01247），之後再加特徵並沒有明顯更好。"
+      },
+      "fig6c_prediction_time": {
+        "en": "A “prediction over time” chart usually checks whether predictions stay stable and track real changes across the sequence of samples. The underlying time values and plotted curves aren’t included in the provided evidence, so we can’t confirm specific time-based patterns; when reading this figure, the main thing to look for is whether the prediction line consistently follows the actual line without long stretches of lag or drift.",
+        "zh_TW": "「隨時間的預測」圖通常用來檢查：模型預測是否在樣本序列中保持穩定，並能跟上真實值的起伏。由於這裡沒有提供時間軸數值與實際曲線細節，無法確認特定的時間趨勢；閱讀時可重點觀察預測曲線是否長時間落後或逐漸偏移（漂移），以及是否能貼近真實曲線。"
+      },
+      "model_svm_scatter": {
+        "en": "This scatter plot typically shows SVM predictions vs the actual HPR (points closer to the diagonal line mean better predictions). While the point cloud isn’t provided here, the summary metrics show SVM reaches R² ≈ 0.732 and RMSE ≈ 0.137, which is decent but clearly behind the best model (KNN).",
+        "zh_TW": "這種散點圖通常是把 SVM 的預測值與真實 HPR 放在一起比較（點越靠近對角線代表越準）。雖然這裡沒有提供散點分布細節，但指標顯示 SVM 的 R² 約 0.732、RMSE 約 0.137，表現尚可，但明顯不如最佳的 KNN。"
+      },
+      "model_dt_scatter": {
+        "en": "This scatter plot is meant to show how close the Decision Tree’s predictions are to the real HPR values. The plot itself isn’t provided here, but the table shows this model has the lowest performance among the compared models (R² ≈ 0.560; RMSE ≈ 0.175), so you’d expect the points to be more spread out from the diagonal.",
+        "zh_TW": "這張散點圖用來看決策樹的預測值與真實 HPR 是否貼近。雖然沒有提供圖上散點的具體樣子，但表格顯示此模型在各模型中表現最差（R² 約 0.560、RMSE 約 0.175），因此可預期散點會較分散、離對角線較遠。"
+      },
+      "model_rf_scatter": {
+        "en": "This scatter plot shows Random Forest predictions compared with actual HPR. The detailed points aren’t shown here, but the metrics indicate it performs relatively well (R² ≈ 0.776; RMSE ≈ 0.125), so the points should generally cluster nearer the diagonal than weaker models like the Decision Tree.",
+        "zh_TW": "這張散點圖比較 Random Forest 的預測值與真實 HPR。雖然沒有提供散點細節，但指標顯示它表現相對不錯（R² 約 0.776、RMSE 約 0.125），因此散點通常會比決策樹更集中、較靠近對角線。"
+      },
+      "model_knn_scatter": {
+        "en": "This scatter plot represents the best model in the report (KNN), comparing predicted vs actual HPR. The plot details aren’t included here, but with R² ≈ 0.817 and the lowest RMSE (≈ 0.113) among the tested models, you would expect points to lie closer to the diagonal overall—though some spread is still normal because the model isn’t perfect.",
+        "zh_TW": "這張散點圖對應本報告最佳模型 KNN，用來比較預測 HPR 與真實 HPR。雖然沒有提供散點細節，但 KNN 的 R² 約 0.817、且在測試模型中 RMSE 最低（約 0.113），因此整體應該更靠近對角線；但仍可能有一定分散，因為模型並非完全無誤差。"
+      },
+      "model_xgboost_scatter": {
+        "en": "This scatter plot shows XGBoost predicted vs actual HPR. The plotted points aren’t provided here, but the reported performance (R² ≈ 0.749; RMSE ≈ 0.132) suggests it’s middle-of-the-pack—better than a single Decision Tree, but not as good as KNN or Random Forest in this report.",
+        "zh_TW": "這張散點圖呈現 XGBoost 的預測值與真實 HPR 的對照。雖然未提供散點圖細節，但指標（R² 約 0.749、RMSE 約 0.132）顯示它屬於中間水準：比單一決策樹好，但不如本報告中的 KNN 或 Random Forest。"
+      },
+      "model_comparison_bars": {
+        "en": "This bar chart is another way to visualize the model comparison numbers. Using the provided results, the bars for KNN should show the highest R² and lowest error (RMSE/MSE/MAE), while the Decision Tree bars should show the lowest R² and higher errors, making the “best vs weakest” difference easy to see at a glance.",
+        "zh_TW": "這個長條圖是用更直觀的方式呈現各模型的比較結果。依提供的數據，KNN 的長條應該會呈現最高的 R² 與最低的誤差（RMSE/MSE/MAE），而 Decision Tree 則是最低的 R² 與較高誤差，讓「最好 vs 最弱」的差異一眼可見。"
+      },
+      "predicted_vs_actual": {
+        "en": "A predicted-versus-actual chart checks how closely the model’s outputs follow real HPR values across samples. The specific plotted series isn’t included here, but given the best model’s R² ≈ 0.817, the overall fit should be reasonably close; if you see wide gaps in parts of the chart, those are the situations where the model is less reliable.",
+        "zh_TW": "「預測值 vs 真實值」圖用來觀察模型輸出是否能跟上每筆樣本的真實 HPR。雖然沒有提供圖上的具體曲線，但以最佳模型 R² 約 0.817 來看，整體貼合度應該不錯；若圖上某些區段落差很大，通常代表那些情況下模型較不可靠。"
+      },
+      "residuals": {
+        "en": "A residual chart shows the remaining error (actual minus predicted) to reveal bias (for example, always predicting too high or too low). The plotted residual pattern isn’t provided, so we can’t confirm whether errors are evenly spread; as a reading tip, residuals scattered around zero without obvious patterns usually indicate healthier, less biased predictions.",
+        "zh_TW": "殘差圖顯示「剩下的誤差」（真實值減預測值），用來檢查是否存在偏差（例如總是預測偏高或偏低）。由於未提供殘差圖的具體分布，無法確認誤差是否均勻；一般解讀上，若殘差大致圍繞 0 且沒有明顯規律，通常代表模型偏差較小、較健康。"
+      },
+      "feature_importance": {
+        "en": "This chart visualizes which features the model considered most useful, based on the provided importance table. VSS dominates (importance ≈ 0.505), far above the rest; the next group includes Acetate (≈ 0.120), Butyrate (≈ 0.097), and VFA (≈ 0.075), while pH is low by this measure (≈ 0.017), so “importance” here reflects this specific calculation method rather than a universal truth.",
+        "zh_TW": "這張圖把「特徵重要性」用圖形方式呈現，依據提供的重要性表。VSS 的重要性最高（約 0.505），明顯高於其他特徵；第二梯隊包含 Acetate（約 0.120）、Butyrate（約 0.097）、VFA（約 0.075），而 pH 在此方法下較低（約 0.017）。也因此，這裡的「重要」是特定計算方式的結果，不一定代表所有角度都一致。"
+      },
+      "correlation_heatmap": {
+        "en": "A correlation heatmap shows which variables move together (values close to +1 mean they rise/fall together; close to −1 means they move oppositely). From the provided top correlations, several inputs are very strongly linked—especially Butyrate vs VFA (≈ 0.960) and Acetate vs VFA (≈ 0.943)—and HPR is strongly linked with VFA (≈ 0.798), which can matter because highly linked inputs may carry overlapping information.",
+        "zh_TW": "相關性熱圖用來看哪些變數會一起上升/下降（接近 +1 代表同向變動；接近 −1 代表反向變動）。依提供的高相關性摘要，許多輸入彼此高度連動，特別是 Butyrate 與 VFA（約 0.960）、Acetate 與 VFA（約 0.943）；而 HPR 與 VFA 的相關性也很強（約 0.798）。這很重要，因為高度連動的特徵可能在資訊上有重疊。"
+      },
+      "feature_distributions": {
+        "en": "Feature distribution charts show how values are spread (common ranges vs rare extremes). The descriptive statistics table indicates features were scaled from 0 to 1 (min 0, max 1 for each), and some features cluster higher on average—for example Sucrose_Degradation has a high mean (≈ 0.804)—while others like pH have a lower mean (≈ 0.235), suggesting the dataset’s typical levels differ by feature even after scaling.",
+        "zh_TW": "特徵分布圖用來看數值的常見範圍與極端值出現頻率。描述統計表顯示各特徵已縮放到 0 到 1（每個特徵最小 0、最大 1），且即使縮放後，不同特徵的常態位置仍不同：例如 Sucrose_Degradation 的平均值偏高（約 0.804），pH 的平均值較低（約 0.235），表示各特徵在資料中的典型水準不同。"
+      },
+      "feature_vs_target": {
+        "en": "This chart plots each feature against HPR to look for relationships. The exact scatter patterns aren’t provided here, but the correlation summary suggests that VFA, Butyrate, and Acetate are among the features most aligned with HPR (correlations with HPR ≈ 0.798, 0.783, and 0.764), so those plots are the most likely to show a clear upward pattern.",
+        "zh_TW": "這張圖把各特徵與 HPR 放在一起對照，看看是否有關聯。雖然沒有提供散點的具體樣子，但相關性摘要顯示 VFA、Butyrate、Acetate 與 HPR 的一致性較高（與 HPR 相關性約 0.798、0.783、0.764），因此這幾張對照圖最可能呈現較明顯的上升趨勢。"
+      },
+      "boxplots": {
+        "en": "Boxplots summarize the “typical range” and highlight unusually high/low values for each feature. The detailed box shapes aren’t provided here, but the descriptive stats show substantial variation in several features (for example HPR has std ≈ 0.277 on a 0–1 scale), so it would be normal for some boxplots to show wide spreads and potential outliers.",
+        "zh_TW": "盒鬚圖用來快速總結每個特徵的「常見範圍」，並標示可能特別高/低的值。雖然未提供盒鬚圖的具體形狀，但描述統計顯示多個特徵變異不小（例如 HPR 在 0–1 尺度下的標準差約 0.277），因此某些特徵出現較寬的分布、甚至離群值，是合理的。"
+      },
+      "time_series": {
+        "en": "A time-series chart shows how measurements change across an ordered sequence (often time). The evidence provided doesn’t include the actual time axis or plotted values for this chart, so we can’t confirm specific rises or drops; if your goal is operations monitoring, focus on whether HPR and key drivers (like VFA) change together or diverge during certain periods.",
+        "zh_TW": "時間序列圖用來看指標在一段序列（通常是時間）中的變化。由於未提供這張圖的時間軸與具體曲線數值，無法確認特定的升降；若用於監控，建議觀察 HPR 是否與關鍵指標（例如 VFA）同向變動，或在某些時段出現明顯分歧。"
+      },
+      "model_comparison_table": {
+        "en": "This table gives the exact performance numbers for each model. KNN is best overall (R² ≈ 0.817; RMSE ≈ 0.113; MAE ≈ 0.075), Random Forest is second (R² ≈ 0.776), SVM and XGBoost are in the middle, and Decision Tree is lowest (R² ≈ 0.560), so KNN is the most reliable choice among those tested for this dataset.",
+        "zh_TW": "這個表格列出每個模型的精確表現數字。KNN 整體最佳（R² 約 0.817、RMSE 約 0.113、MAE 約 0.075），Random Forest 次之（R² 約 0.776），SVM 與 XGBoost 居中，而 Decision Tree 最低（R² 約 0.560）。因此在本資料集與測試條件下，KNN 是最可靠的選擇。"
+      },
+      "feature_importance_table": {
+        "en": "This table lists feature importance scores used in the report’s importance chart. It shows VSS as the strongest contributor by this method (≈ 0.505), with Acetate, Butyrate, and VFA next; COD-O is the smallest (≈ 0.010). Treat this as “how this particular model/setting used the features,” especially since other methods in the report (GRA, SHAP) rank features differently.",
+        "zh_TW": "這個表格列出特徵重要性分數（也就是重要性圖的數據來源）。依此方法，VSS 的重要性最高（約 0.505），接著是 Acetate、Butyrate、VFA；COD-O 最低（約 0.010）。建議把它視為「此模型/設定如何使用特徵」的結果，因為報告中其他方法（GRA、SHAP）排序並不相同。"
+      },
+      "best_model_shap_importance": {
+        "en": "This table ranks features by their average SHAP impact for the best model (KNN). ORP_Low ranks first (mean |SHAP| ≈ 0.037), followed by Butyrate and ORP_Mid (≈ 0.031 and ≈ 0.030), while Sucrose_Degradation and pH are at the bottom (≈ 0.0097 and ≈ 0.0105), meaning they changed the KNN predictions less on average in this analysis.",
+        "zh_TW": "這個表格用 SHAP 平均影響量來排序最佳模型（KNN）的特徵。ORP_Low 排第一（mean |SHAP| 約 0.037），其次為 Butyrate 與 ORP_Mid（約 0.031、約 0.030）；Sucrose_Degradation 與 pH 位於後段（約 0.0097、約 0.0105），代表在這份 SHAP 分析中，它們平均對 KNN 預測的影響較小。"
+      },
+      "descriptive_statistics": {
+        "en": "This table summarizes each column’s basic stats (count, average, spread, and min/max). All listed features (and HPR) have min 0 and max 1, indicating the data was normalized/scaled; with 197 rows, HPR shows a fairly wide spread (std ≈ 0.277), suggesting the target varies a lot across samples, which is useful for training but can also make prediction harder in extreme cases.",
+        "zh_TW": "這個表格整理每個欄位的基本統計（筆數、平均、離散程度、最小/最大值）。所有特徵與 HPR 的最小值為 0、最大值為 1，表示資料已做正規化/縮放；在 197 筆資料中，HPR 的分散程度不小（標準差約 0.277），代表目標值變化幅度大，雖有利於學到差異，但在極端情況下也可能更難預測。"
+      },
+      "correlation_matrix": {
+        "en": "This table provides the numerical version of the correlation heatmap. The strongest reported pairs include Butyrate vs VFA (≈ 0.960) and Acetate vs VFA (≈ 0.943), and HPR correlates strongly with VFA (≈ 0.798); these strong links mean several inputs move together, so “importance” may be shared across related features rather than coming from only one variable.",
+        "zh_TW": "這個表格是相關性熱圖的數字版。摘要中的最強關係包含 Butyrate 與 VFA（約 0.960）、Acetate 與 VFA（約 0.943），而 HPR 與 VFA 也高度相關（約 0.798）。這些強連動代表多個輸入會一起變動，因此「重要性」可能分散在一群相關特徵上，而不一定只由單一變數主導。"
+      },
+      "table1_incremental_results": {
+        "en": "This table shows what happens when features are added step-by-step (starting from pH, then adding Propionate, then VFA, etc.). It highlights that 1 feature performs very poorly across models (negative R² values), but adding just a few key features boosts accuracy a lot; for KNN specifically, performance peaks in this table at 8 features (R² ≈ 0.822, MSE ≈ 0.01247), and later additions keep performance similar rather than dramatically better.",
+        "zh_TW": "這個表格呈現逐步加入特徵後的結果（先 pH，再加 Propionate，再加 VFA 等）。可以看出只用 1 個特徵時，各模型表現都很差（R² 多為負值），但加入少數關鍵特徵後準確度大幅提升；以 KNN 而言，表格中的高點出現在 8 個特徵（R² 約 0.822、MSE 約 0.01247），之後再加入特徵表現大致相近，沒有明顯大幅躍升。"
+      }
+    }
+  }
+}

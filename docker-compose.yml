@@ -1,6 +1,8 @@
 services:
   laravel-webapp:
-    build: ./WebApp
+    build:
+      context: ./WebApp
+      dockerfile: dockerfile
     volumes:
       - ./WebApp:/var/www/html
       - laravel_storage:/var/www/html/storage
@@ -22,7 +24,10 @@ services:
       - "9000"
 
   predict-service:
-    build: ./predict-service
+    build:
+      context: ./predict-service
+      dockerfile: dockerfile
+    command: ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "300", "run:app"]
     env_file:
       - .env.docker
     environment:

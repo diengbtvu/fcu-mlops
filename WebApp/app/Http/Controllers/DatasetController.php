@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dataset;
+use App\Models\MLModel;
 use App\Services\TrainingService;
 use App\Services\DataAugmentationService;
 use App\Mail\TrainingCompletedMail;
@@ -13,9 +14,123 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\UploadedFile;
 
 class DatasetController extends Controller
 {
+    private function routePrefix(): string
+    {
+        return Auth::user()?->role_id === 1 ? 'admin' : 'user';
+    }
+
+    private function inspectDatasetContents(
+        string $realPath,
+        string $originalFilename,
+        ?string $selectedSheet,
+        int $previewRows = 10
+    ): array
+    {
+        $apiUrl = rtrim(
+            (string) config('services.predict_service.url', 'http://predict-service:5000'),
+            '/'
+        ) . '/train/inspect';
+
+        if (!is_file($realPath)) {
+            throw new \RuntimeException('Dataset file not found on disk.');
+        }
+
+        $payload = [
+            'preview_rows' => max(1, min($previewRows, 20)),
+        ];
+        if ($selectedSheet !== null && $selectedSheet !== '') {
+            $payload['sheet_name'] = $selectedSheet;
+        }
+
+        $response = Http::timeout(120)
+            ->attach(
+                'dataset_file',
+                file_get_contents($realPath),
+                $originalFilename
+            )
+            ->post($apiUrl, $payload);
+
+        $inspection = $response->json();
+
+        if (!$response->successful()) {
+            $message = is_array($inspection)
+                ? ($inspection['error'] ?? 'Unable to inspect the dataset file.')
+                : 'Unable to inspect the dataset file.';
+            throw new \RuntimeException($message);
+        }
+
+        if (!is_array($inspection) || !($inspection['success'] ?? false)) {
+            throw new \RuntimeException(
+                is_array($inspection)
+                    ? ($inspection['error'] ?? 'Unable to inspect the dataset file.')
+                    : 'Unable to inspect the dataset file.'
+            );
+        }
+
+        return $inspection;
+    }
+
+    private function buildReportAssetUrl(string $baseUrl, string $routePrefix, string $filename): string
+    {
+        $baseUrl = rtrim($baseUrl, '/');
+        $routePrefix = '/' . ltrim($routePrefix, '/');
+        $segments = array_map('rawurlencode', explode('/', $filename));
+        $encodedFilename = implode('/', $segments);
+
+        return $baseUrl . $routePrefix . '/' . $encodedFilename;
+    }
+
+    private function resolveTrainingBundleUrl(?MLModel $model): ?string
+    {
+        if (!$model instanceof MLModel) {
+            return null;
+        }
+
+        $reportInfo = is_array($model->training_report) ? $model->training_report : [];
+        $bundleFilename = $reportInfo['files']['training_bundle_zip'] ?? null;
+        $routePrefix = (string) ($reportInfo['route_prefix'] ?? '');
+
+        if (!is_string($bundleFilename) || trim($bundleFilename) === '' || trim($routePrefix) === '') {
+            return null;
+        }
+
+        $predictServicePublicBase = rtrim(
+            (string) config(
+                'services.predict_service.public_url',
+                config('services.predict_service.url', 'http://localhost:5000')
+            ),
+            '/'
+        );
+
+        return $this->buildReportAssetUrl(
+            $predictServicePublicBase,
+            $routePrefix,
+            $bundleFilename
+        );
+    }
+
+    private function inspectDatasetUpload(UploadedFile $uploadedFile, ?string $selectedSheet): array
+    {
+        try {
+            return $this->inspectDatasetContents(
+                $uploadedFile->getRealPath(),
+                $uploadedFile->getClientOriginalName(),
+                $selectedSheet,
+                10
+            );
+        } catch (\RuntimeException $exception) {
+            throw ValidationException::withMessages([
+                'dataset_file' => $exception->getMessage(),
+            ]);
+        }
+    }
+
     /**
      * Apply email settings from database to config
      */
@@ -51,8 +166,21 @@ class DatasetController extends Controller
      */
     public function index()
     {
-        $datasets = Dataset::with('user')->orderByDesc('UploadDate')->get();
-        return view('admin.datasets.index', compact('datasets'));
+        $datasets = Dataset::with([
+            'user',
+            'mlModels' => function ($query) {
+                $query->orderByDesc('CreatedDate')->orderByDesc('id');
+            },
+        ])->orderByDesc('UploadDate')->get();
+
+        $trainingBundleUrls = [];
+        foreach ($datasets as $dataset) {
+            $trainingBundleUrls[$dataset->DatasetId] = $this->resolveTrainingBundleUrl(
+                $dataset->mlModels->first()
+            );
+        }
+
+        return view('admin.datasets.index', compact('datasets', 'trainingBundleUrls'));
     }
 
     /**
@@ -71,21 +199,49 @@ class DatasetController extends Controller
         $request->validate([
             'DatasetName' => 'required|string|max:255',
             'Description' => 'nullable|string',
-            'dataset_file' => 'required|file|mimes:csv,xlsx|max:10240', // Tối đa 10MB
+            'dataset_file' => 'required|file|mimes:csv,xls,xlsx|max:10240',
+            'selected_sheet' => 'nullable|string|max:255',
         ]);
 
+        $uploadedFile = $request->file('dataset_file');
+        $selectedSheet = $request->input('selected_sheet');
+        $inspection = $this->inspectDatasetUpload($uploadedFile, $selectedSheet);
+
+        if (($inspection['requires_sheet_selection'] ?? false) && blank($selectedSheet)) {
+            throw ValidationException::withMessages([
+                'selected_sheet' => 'Please select a sheet before uploading this workbook.',
+            ]);
+        }
+
+        if (!($inspection['is_valid'] ?? false)) {
+            $message = $inspection['validation_error']
+                ?? 'The selected sheet is not valid for training.';
+
+            if (!empty($inspection['missing_columns'] ?? [])) {
+                $message = 'Missing required columns: ' . implode(', ', $inspection['missing_columns']);
+            }
+
+            throw ValidationException::withMessages([
+                'dataset_file' => $message,
+            ]);
+        }
+
+        $resolvedSelectedSheet = $inspection['selected_sheet'] ?? null;
+
         // Lưu file vào storage/app/datasets
-        $path = $request->file('dataset_file')->store('datasets', 'public');
+        $path = $uploadedFile->store('datasets', 'public');
 
         // Lưu thông tin vào DB
         Dataset::create([
             'DatasetName' => $request->DatasetName,
             'FilePath' => $path,
+            'SelectedSheet' => $resolvedSelectedSheet,
             'Description' => $request->Description,
             'UploadedBy' => Auth::id(), // user đang đăng nhập
         ]);
 
-        return redirect()->route('admin.datasets.index')->with('success', 'Dataset uploaded successfully!');
+        return redirect()->route($this->routePrefix() . '.datasets.index')
+            ->with('success', 'Dataset uploaded successfully!');
     }
 
     /**
@@ -93,8 +249,46 @@ class DatasetController extends Controller
      */
     public function show($id)
     {
-        $dataset = Dataset::findOrFail($id);
-        return view('admin.datasets.show', compact('dataset'));
+        $dataset = Dataset::with([
+            'user',
+            'mlModels' => function ($query) {
+                $query->orderByDesc('CreatedDate')->orderByDesc('id');
+            },
+        ])->findOrFail($id);
+        $preview = null;
+        $previewError = null;
+        $storagePath = storage_path('app/public/' . $dataset->FilePath);
+        $latestTrainedModel = $dataset->mlModels->first();
+        $trainingBundleUrl = $this->resolveTrainingBundleUrl($latestTrainedModel);
+
+        if (!is_file($storagePath)) {
+            $previewError = 'Dataset file not found on disk.';
+        } else {
+            try {
+                $preview = $this->inspectDatasetContents(
+                    $storagePath,
+                    basename($dataset->FilePath),
+                    $dataset->SelectedSheet,
+                    20
+                );
+            } catch (\Throwable $exception) {
+                Log::warning('Failed to inspect stored dataset preview', [
+                    'dataset_id' => $dataset->DatasetId,
+                    'file_path' => $dataset->FilePath,
+                    'selected_sheet' => $dataset->SelectedSheet,
+                    'error' => $exception->getMessage(),
+                ]);
+                $previewError = $exception->getMessage();
+            }
+        }
+
+        return view('admin.datasets.show', compact(
+            'dataset',
+            'preview',
+            'previewError',
+            'latestTrainedModel',
+            'trainingBundleUrl'
+        ));
     }
 
     /**
@@ -111,7 +305,8 @@ class DatasetController extends Controller
 
         $dataset->delete();
 
-        return redirect()->route('admin.datasets.index')->with('success', 'Dataset deleted successfully.');
+        return redirect()->route($this->routePrefix() . '.datasets.index')
+            ->with('success', 'Dataset deleted successfully.');
     }
 
     /**
@@ -163,6 +358,7 @@ class DatasetController extends Controller
             'test_size' => $request->input('test_size', 20) / 100,
             'random_state' => $request->input('random_state', 42),
             'session_id' => $request->input('session_id'), // Pass session ID
+            'selected_sheet' => $dataset->SelectedSheet,
         ];
 
         // Add model-specific parameters
@@ -240,7 +436,7 @@ class DatasetController extends Controller
                 ]);
             }
             
-            return redirect()->route('admin.datasets.index')
+            return redirect()->route($this->routePrefix() . '.datasets.index')
                 ->with('success', $message);
         } else {
             // Check if request is AJAX
@@ -251,7 +447,7 @@ class DatasetController extends Controller
                 ], 500);
             }
             
-            return redirect()->route('admin.datasets.index')
+            return redirect()->route($this->routePrefix() . '.datasets.index')
                 ->with('error', 'Training failed: ' . ($result['error'] ?? 'Unknown error'));
         }
     }
@@ -307,10 +503,10 @@ class DatasetController extends Controller
                 $result['augmented_rows'] ?? 0
             );
             
-            return redirect()->route('admin.datasets.index')
+            return redirect()->route($this->routePrefix() . '.datasets.index')
                 ->with('success', $message);
         } else {
-            return redirect()->route('admin.datasets.index')
+            return redirect()->route($this->routePrefix() . '.datasets.index')
                 ->with('error', 'Augmentation failed: ' . ($result['error'] ?? 'Unknown error'));
         }
     }

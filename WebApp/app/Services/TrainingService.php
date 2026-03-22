@@ -355,6 +355,7 @@ class TrainingService
             // Prepare request data
             $requestData = [
                 'dataset_path' => $datasetPath,
+                'sheet_name' => $options['selected_sheet'] ?? $dataset->SelectedSheet ?? null,
                 'model_type' => $options['model_type'] ?? 'random_forest',
                 'training_scope' => $options['training_scope'] ?? 'all_models_compare',
                 'model_name' => $options['model_name'] ?? 'Model_' . $dataset->DatasetName . '_' . date('YmdHis'),

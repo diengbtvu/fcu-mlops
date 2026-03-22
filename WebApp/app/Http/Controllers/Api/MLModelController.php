@@ -67,7 +67,6 @@ class MLModelController extends Controller
                 ], 400);
             }
 
-            // Create new model record
             $modelData = $request->only([
                 'MLMName', 'FilePath', 'LibType', 'IsActive', 'MSEValue', 'MAEValue',
                 'R2Value', 'RMSEValue',
@@ -75,20 +74,28 @@ class MLModelController extends Controller
                 'TrainedBy', 'DatasetId'  // FIXED: snake_case
             ]);
             
-            // Set default values
             $modelData['IsActive'] = $request->get('IsActive', true);
-            $modelData['CreatedDate'] = Carbon::now();
             $modelData['UpdatedDate'] = Carbon::now();
+            $existingModel = MLModel::where('MLMName', $request->get('MLMName'))->first();
+            $created = false;
 
-            $model = MLModel::create($modelData);
+            if ($existingModel) {
+                $modelData['CreatedDate'] = Carbon::now();
+                $existingModel->update($modelData);
+                $model = $existingModel->fresh();
+            } else {
+                $created = true;
+                $modelData['CreatedDate'] = Carbon::now();
+                $model = MLModel::create($modelData);
+            }
 
             // Load relationships only if needed - avoid N+1 queries
             // For API creation, we can return minimal data for faster response
             return response()->json([
                 'success' => true,
-                'message' => 'Model created successfully',
+                'message' => $created ? 'Model created successfully' : 'Model updated successfully',
                 'data' => $model  // Return without eager loading for speed
-            ], 201);
+            ], $created ? 201 : 200);
 
         } catch (\Exception $e) {
             return response()->json([

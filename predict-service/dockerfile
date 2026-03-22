@@ -20,5 +20,6 @@ USER apiuser
 
 EXPOSE 5000
 
-# Run gunicorn with network binding for container access
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "30", "run:app"]
+# Run gunicorn with a longer timeout and a single worker because training is
+# CPU/memory intensive and should be processed sequentially.
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "180", "run:app"]

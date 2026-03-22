@@ -9,9 +9,12 @@
 @endsection
 
 @section('content')
+@php
+    $routePrefix = auth()->user()->role_id == 1 ? 'admin' : 'user';
+@endphp
 <div class="container">
     <h2>{{ __('datasets.title') }}</h2>
-    <a href="{{ route('admin.datasets.create') }}" class="btn btn-primary mb-3">{{ __('datasets.upload_new') }}</a>
+    <a href="{{ route($routePrefix . '.datasets.create') }}" class="btn btn-primary mb-3">{{ __('datasets.upload_new') }}</a>
 
     @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -39,22 +42,34 @@
                 <td>{{ $dataset->user->FullName ?? __('datasets.unknown_user') }}</td>
                 <td>{{ $dataset->UploadDate }}</td>
                 <td>
-                    <!-- <a href="{{ route('admin.datasets.show', $dataset->DatasetId) }}" class="btn btn-info btn-sm">{{ __('datasets.details') }}</a> -->
+                    <a href="{{ route($routePrefix . '.datasets.show', $dataset->DatasetId) }}"
+                        class="btn btn-info btn-sm">
+                        <i class="bi bi-table"></i> {{ __('datasets.view_data') }}
+                    </a>
 
                     <!-- Nút Train Model -->
-                    <a href="{{ route('admin.datasets.train.form', $dataset->DatasetId) }}"
+                    <a href="{{ route($routePrefix . '.datasets.train.form', $dataset->DatasetId) }}"
                         class="btn btn-success btn-sm">
                         <i class="bi bi-cpu"></i> {{ __('datasets.train_model') }}
                     </a>
 
+                    @if (!empty($trainingBundleUrls[$dataset->DatasetId]))
+                        <a href="{{ $trainingBundleUrls[$dataset->DatasetId] }}"
+                            class="btn btn-secondary btn-sm"
+                            target="_blank"
+                            rel="noopener">
+                            <i class="bi bi-file-earmark-zip"></i> {{ __('datasets.download_training_bundle') }}
+                        </a>
+                    @endif
+
                     <!-- Nút Data Augmentation -->
-                    <a href="{{ route('admin.datasets.augment.form', $dataset->DatasetId) }}"
+                    <a href="{{ route($routePrefix . '.datasets.augment.form', $dataset->DatasetId) }}"
                         class="btn btn-warning btn-sm"
                         title="{{ __('datasets.data_augmentation') }}">
                         <i class="bi bi-database-add"></i> {{ __('datasets.augment') }}
                     </a>
 
-                    <form action="{{ route('admin.datasets.destroy', $dataset->DatasetId) }}" method="POST" class="d-inline">
+                    <form action="{{ route($routePrefix . '.datasets.destroy', $dataset->DatasetId) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm" onclick="return confirm(@js(__('datasets.delete_confirm')))">{{ __('delete') }}</button>

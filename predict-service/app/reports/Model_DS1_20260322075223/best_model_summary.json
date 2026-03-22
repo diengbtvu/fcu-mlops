@@ -1,0 +1,90 @@
+{
+  "status": "success",
+  "best_model": "KNN",
+  "r2": 0.8171678017037467,
+  "mse": 0.012809918378105262,
+  "metrics": {
+    "r2_score": 0.8171678017037467,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642,
+    "rmse": 0.11318090995439674
+  },
+  "top_features": [
+    "pH",
+    "Propionate",
+    "VFA"
+  ],
+  "message": "Training completed. Best model saved.",
+  "gra_ranking": [
+    {
+      "rank": 1,
+      "feature": "pH",
+      "score": 0.7655694590080664
+    },
+    {
+      "rank": 2,
+      "feature": "Propionate",
+      "score": 0.7330322960371348
+    },
+    {
+      "rank": 3,
+      "feature": "VFA",
+      "score": 0.7315248068651623
+    },
+    {
+      "rank": 4,
+      "feature": "Butyrate",
+      "score": 0.7296936636722601
+    },
+    {
+      "rank": 5,
+      "feature": "VSS",
+      "score": 0.7115947055633065
+    },
+    {
+      "rank": 6,
+      "feature": "Ethanol",
+      "score": 0.7098663669674234
+    },
+    {
+      "rank": 7,
+      "feature": "Acetate",
+      "score": 0.6842803376628539
+    },
+    {
+      "rank": 8,
+      "feature": "COD-O",
+      "score": 0.6669837911993842
+    },
+    {
+      "rank": 9,
+      "feature": "ORP_Mid",
+      "score": 0.6213566642816752
+    },
+    {
+      "rank": 10,
+      "feature": "ORP_Low",
+      "score": 0.5857373474444038
+    },
+    {
+      "rank": 11,
+      "feature": "Sucrose_Degradation",
+      "score": 0.5800121881879342
+    }
+  ],
+  "artifacts": {
+    "best_model_path": "/app/ml_model/best_model.pkl",
+    "best_scaler_x_path": "/app/ml_model/best_scaler_X.pkl",
+    "best_scaler_y_path": "/app/ml_model/best_scaler_Y.pkl",
+    "shared_scaler_path": "/app/ml_model/scaler.pkl",
+    "best_model_info_path": "/app/ml_model/best_model_info.txt",
+    "gra_ranking_path": "/app/ml_train/artifacts/gra_ranking.json",
+    "incremental_results_path": "/app/ml_train/artifacts/table1_incremental_results.csv",
+    "shap_values_path": "/app/ml_train/artifacts/best_model_shap_values.npy",
+    "shap_importance_path": "/app/ml_train/artifacts/best_model_shap_importance.csv",
+    "summary_path": "/app/ml_train/artifacts/best_model_summary.json"
+  },
+  "best_model_type": "knn",
+  "selected_sheet": "HRT 12 -4 h",
+  "rows_after_preprocessing": 197
+}

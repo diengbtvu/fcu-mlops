@@ -1,0 +1,123 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.2",
+  "generated_at": "2026-03-22T09:23:36.214559",
+  "overview": {
+    "en": "This report builds a Random Forest (RF) model using 216 cleaned rows and compares it with several other models. Overall, RF performs best here (R² about 0.88 with relatively low error), and the features most often highlighted as important include Sucrose_Degradation, Acetate, and Propionate (though different methods rank importance somewhat differently).",
+    "zh_TW": "本報告以 216 筆清理後資料建立隨機森林（RF）模型，並與其他模型比較。整體來看 RF 表現最好（R² 約 0.88 且誤差較低），常被指出較重要的特徵包含蔗糖降解（Sucrose_Degradation）、乙酸鹽（Acetate）與丙酸鹽（Propionate），但不同分析方法的排序會有些差異。"
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "This table compares model quality: higher R² means predictions match real values better, while lower MAE/RMSE/MSE means smaller average mistakes. In these results, RF has the highest R² (about 0.88) and the lowest errors, so it is the strongest overall among the tested models.",
+      "zh_TW": "此表用來比較模型好壞：R² 越高代表越貼近真實值；MAE/RMSE/MSE 越低代表平均誤差越小。以這些結果來看，RF 的 R² 最高（約 0.88）且各項誤差最低，因此在測試模型中整體最佳。"
+    },
+    "fig3a_gra_ranking": {
+      "en": "This chart ranks inputs by how closely they track the outcome (higher score = stronger connection in this ranking method). Sucrose_Degradation ranks #1, followed by Acetate and Propionate, suggesting these are the most closely linked among the listed features here.",
+      "zh_TW": "此圖用分數將各輸入依「與結果的貼近程度」排序（分數越高代表關聯越強）。蔗糖降解（Sucrose_Degradation）排名第 1，其次是乙酸鹽（Acetate）與丙酸鹽（Propionate），表示在這份排序中它們與結果最接近。"
+    },
+    "fig3b_shap_analysis": {
+      "en": "This chart shows which inputs most change the model’s prediction; bigger SHAP values mean a feature tends to influence predictions more. Here, Acetate and ORP_Low stand out as the strongest drivers, with VSS next, while others have smaller impact.",
+      "zh_TW": "此圖顯示哪些輸入最會改變模型的預測；SHAP 值越大代表該特徵越常影響預測結果。此處乙酸鹽（Acetate）與 ORP_Low 影響最明顯，其次是 VSS，其他特徵影響相對較小。"
+    },
+    "fig3_feature_analysis": {
+      "en": "This combined view suggests different ways of measuring “importance” don’t fully agree: GRA highlights Sucrose_Degradation, while model-based methods highlight ORP_Low and Acetate. A practical takeaway is that several features matter (especially Sucrose_Degradation, Acetate, ORP_Low, and VSS), and the exact order depends on the analysis method.",
+      "zh_TW": "此綜合圖顯示不同「重要性」衡量方式不一定一致：GRA 強調蔗糖降解（Sucrose_Degradation），而模型類方法則更凸顯 ORP_Low 與乙酸鹽（Acetate）。較務實的結論是：多個特徵都重要（尤其 Sucrose_Degradation、Acetate、ORP_Low、VSS），但名次會隨分析方法而變。"
+    },
+    "fig4_univariate_analysis": {
+      "en": "This figure likely summarizes each single input on its own (typical values and spread) and highlights strong pair relationships; for example, Butyrate and VFA move closely together (correlation 0.9685). Some inputs are often near the low end after scaling, such as Sucrose_Degradation (mean ≈0.029), which suggests many small values in this dataset.",
+      "zh_TW": "此圖主要是在「單一變數」角度看每個輸入的分佈（常見大小與波動），並可看出某些成對關係很強，例如 Butyrate 與 VFA 的相關性很高（0.9685）。也可見部分指標在縮放後常接近低值，例如 Sucrose_Degradation 的平均約 0.029，表示資料中多為較小的數值。"
+    },
+    "fig5_model_comparison": {
+      "en": "This chart compares prediction quality across models, where higher R² means closer to real values and lower error numbers are better. RF comes out best here (R²≈0.875, RMSE≈0.085) compared with SVM, DT, KNN, and XGBoost.",
+      "zh_TW": "此圖比較不同模型的預測表現；R² 越高代表越貼近真實值，而誤差數值越低越好。此處 RF 表現最佳（R²≈0.875、RMSE≈0.085），優於 SVM、DT、KNN 與 XGBoost。"
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "These plots show how accuracy changes as more inputs are added; for RF, using 11 features gives the best result in the provided step-by-step table (R²≈0.871 and MSE≈0.00746), better than using 8–10 features. Feature importance results also suggest a few inputs drive much of the prediction (e.g., ORP_Low and Acetate rank highest in the importance tables).",
+      "zh_TW": "這兩張圖呈現「加入更多輸入特徵」後表現如何變化；在逐步表中，RF 使用 11 個特徵時最好（R²≈0.871、MSE≈0.00746），比使用 8–10 個特徵更佳。重要度結果也顯示少數特徵貢獻很大（例如 ORP_Low 與 Acetate 在重要度表中名列前茅）。"
+    },
+    "fig6c_prediction_time": {
+      "en": "No time-series prediction values or timestamps are provided here, so we can’t reliably describe the trend over time from the supplied evidence. If this figure plots predicted vs actual HPR across time, it would be used to spot periods where the model tracks well or drifts—but that cannot be confirmed without the chart data.",
+      "zh_TW": "目前未提供任何時間序列的預測數值或時間點，因此無法根據現有證據可靠描述「隨時間變化」的趨勢。若此圖是在時間軸上對照預測與實際 HPR，通常可用來找出模型貼合或偏離的時段，但在缺少圖表資料下無法確認。"
+    },
+    "model_svm_scatter": {
+      "en": "This plot shows how SVM’s predictions line up with real HPR values; tighter clustering around the diagonal would indicate better accuracy. From the table, SVM is solid but not best (R² ≈ 0.822, RMSE ≈ 0.101).",
+      "zh_TW": "這張圖顯示 SVM 的預測值與實際 HPR 的對應情況；若點更貼近對角線，通常代表更準。由指標可見 SVM 表現不錯但不是最佳（R² ≈ 0.822、RMSE ≈ 0.101）。"
+    },
+    "model_dt_scatter": {
+      "en": "This plot shows the Decision Tree’s predicted vs actual HPR; if the points are more spread out, it suggests larger errors. The reported results indicate it is the weakest among these four (R² ≈ 0.745, RMSE ≈ 0.122).",
+      "zh_TW": "這張圖顯示決策樹的預測值與實際 HPR；若點分散得更開，通常表示誤差較大。指標顯示它在這四個模型中最弱（R² ≈ 0.745、RMSE ≈ 0.122）。"
+    },
+    "model_rf_scatter": {
+      "en": "This plot shows Random Forest predictions against actual HPR; ideally, points sit close to the diagonal. The metrics suggest this should look the tightest overall because it performs best (R² ≈ 0.875, RMSE ≈ 0.085).",
+      "zh_TW": "這張圖顯示隨機森林的預測值與實際 HPR；理想狀況下點會更靠近對角線。由於它的指標最好（R² ≈ 0.875、RMSE ≈ 0.085），整體上通常也會呈現最集中。"
+    },
+    "model_knn_scatter": {
+      "en": "This plot shows KNN predicted vs actual HPR; closer-to-diagonal points imply better matching to real values. The table shows KNN is better than SVM and Decision Tree but still behind Random Forest (R² ≈ 0.837, RMSE ≈ 0.097).",
+      "zh_TW": "這張圖顯示 KNN 的預測值與實際 HPR；點越貼近對角線代表越符合真實值。指標顯示 KNN 比 SVM 與決策樹好，但仍落後隨機森林（R² ≈ 0.837、RMSE ≈ 0.097）。"
+    },
+    "model_xgboost_scatter": {
+      "en": "This scatter plot shows how XGBoost’s predictions compare to real outcomes point-by-point: points closer to the ideal diagonal line mean more accurate predictions. Here we only have XGBoost’s overall scores (R² ≈ 0.838, RMSE ≈ 0.097), so the plot would indicate moderate-to-strong accuracy but not the best among the tested methods.",
+      "zh_TW": "此散點圖用每個點呈現 XGBoost 的預測值與真實值的對照：點越接近理想的對角線，代表預測越準。由於目前只有整體指標（R² 約 0.838、RMSE 約 0.097），可解讀為準確度中上，但不是本次測試中最佳。"
+    },
+    "model_comparison_bars": {
+      "en": "These bars compare the tested methods side-by-side using the same metrics, so taller R² and smaller error bars (RMSE/MSE/MAE) mean better performance. In this report, RF ranks best overall (R² ≈ 0.875; RMSE ≈ 0.085; MSE ≈ 0.00724; MAE ≈ 0.0629), while DT is the weakest (R² ≈ 0.745; RMSE ≈ 0.122).",
+      "zh_TW": "這些長條用同一套指標把各方法放在一起比較：R² 越高、誤差（RMSE/MSE/MAE）越低代表越好。本報告中 RF 整體最佳（R² 約 0.875；RMSE 約 0.085；MSE 約 0.00724；MAE 約 0.0629），而 DT 最弱（R² 約 0.745；RMSE 約 0.122）。"
+    },
+    "predicted_vs_actual": {
+      "en": "This chart compares predicted values to actual values; the closer they line up, the more trustworthy the predictions are. For the selected best model (RF), the high R² (≈ 0.875) and relatively low RMSE (≈ 0.085) suggest the predictions generally track the real values well.",
+      "zh_TW": "此圖把預測值與實際值放在一起對照；越貼近一致，代表預測越可靠。以本次選出的最佳模型 RF 來看，較高的 R²（約 0.875）與較低的 RMSE（約 0.085）表示整體預測通常能跟上真實值。"
+    },
+    "residuals": {
+      "en": "A residual chart shows the remaining error after predicting (residual = actual − predicted), and ideally these errors are small and don’t show a clear pattern. We don’t have the chart’s point pattern here, but RF’s low average error (MAE ≈ 0.0629) and low RMSE (≈ 0.085) indicate the leftover errors are generally small overall.",
+      "zh_TW": "殘差圖呈現預測後剩下的誤差（殘差＝實際－預測），理想狀態是誤差小且不出現明顯規律。雖然這裡沒有圖上的分布細節，但 RF 的平均誤差較低（MAE 約 0.0629、RMSE 約 0.085）表示整體剩餘誤差通常不大。"
+    },
+    "feature_importance": {
+      "en": "This chart/table shows which inputs the RF model relied on most when making predictions; bigger importance means the model used that input more. ORP_Low stands out as the largest driver, followed by Acetate and VSS, while the remaining features contribute much less.",
+      "zh_TW": "這張圖/表在說 RF 預測時最依賴哪些輸入；重要性越大，代表模型越常用到它。ORP_Low 最突出，其次是 Acetate 與 VSS，其餘特徵的影響相對小很多。"
+    },
+    "correlation_heatmap": {
+      "en": "This heatmap shows which measurements tend to move together (correlation), which does not prove one causes the other. The strongest pairing is Butyrate with VFA, and several others (like Ethanol with VFA, and VSS with HPR) are also strongly linked.",
+      "zh_TW": "這張熱圖顯示哪些數值常一起上升或下降（相關），但不代表因果關係。最強的是 Butyrate 和 VFA，另外像 Ethanol 和 VFA、以及 VSS 和 HPR 也有明顯的同向關聯。"
+    },
+    "feature_distributions": {
+      "en": "These plots summarize what values are common or rare for each input in this dataset (the numbers here are scaled between 0 and 1). For example, Sucrose_Degradation is usually near the low end on average, while other features spread more widely across the range.",
+      "zh_TW": "這些圖在說每個輸入在資料中常見或少見的取值（此處數值已縮放到 0 到 1）。例如 Sucrose_Degradation 的平均值偏低、常靠近低端，而其他特徵在範圍內分布較分散。"
+    },
+    "feature_vs_target": {
+      "en": "This chart compares each input to the target (HPR) to help you see any visible relationship; clear trends suggest the input may be informative. Based on the provided correlations, VSS shows a strong positive relationship with HPR, but other inputs may look less clear without a strong pattern.",
+      "zh_TW": "這張圖把各個輸入和目標值（HPR）放在一起比較，讓你直觀看到是否有關聯；趨勢越清楚，通常越有參考價值。從已提供的相關性來看，VSS 與 HPR 有明顯正相關，但其他輸入若沒有強烈趨勢，就需要更保守解讀。"
+    },
+    "boxplots": {
+      "en": "These boxplots summarize how each input value is spread out (typical range and unusually high/low points) after scaling to 0–1. From the summary stats, Sucrose_Degradation is usually near the low end, while features like Ethanol and Butyrate show a wider spread.",
+      "zh_TW": "這些盒鬚圖用來看各個輸入在 0–1 縮放後的分布（常見範圍與可能的極端值）。從統計摘要可見，Sucrose_Degradation 多數接近低端，而 Ethanol、Butyrate 的分布較分散。"
+    },
+    "time_series": {
+      "en": "This time-series chart shows how the measured values change across time/order, which helps spot shifts or unstable periods. No specific ups/downs can be confirmed here because the chart’s actual plotted values are not provided.",
+      "zh_TW": "這張時間序列圖展示數值隨時間／順序的變化，用來觀察是否有突然變動或不穩定的區段。由於未提供圖上實際曲線數值，無法確認明確的上升或下降趨勢。"
+    },
+    "model_comparison_table": {
+      "en": "This table compares several prediction methods; higher R² means closer to the real results, while lower MAE/RMSE/MSE means smaller errors. RF is best here (R²≈0.875 with the lowest errors), while DT is the weakest among the listed options.",
+      "zh_TW": "此表比較多種預測方法；R² 越高代表越貼近真實結果，而 MAE/RMSE/MSE 越低代表誤差越小。這裡 RF 最好（R² 約 0.875 且誤差最低），DT 在列出的方法中相對較弱。"
+    },
+    "feature_importance_table": {
+      "en": "This table ranks which inputs mattered most to the RF predictions (bigger importance = more influence in this model). ORP_Low and Acetate stand out as the top drivers, while features like COD-O and Butyrate have much smaller influence in comparison.",
+      "zh_TW": "此表將 RF 預測中各輸入的重要性排序（數值越大代表在這個模型裡影響越大）。ORP_Low 與 Acetate 最突出，而 COD-O、Butyrate 等相對影響較小。"
+    },
+    "best_model_shap_importance": {
+      "en": "This table ranks which inputs most influenced the RF’s predictions (higher SHAP value = bigger impact on the final prediction). In this report, Acetate and ORP_Low show the strongest impact, while COD-O is among the weakest.",
+      "zh_TW": "此表將各輸入對 RF 預測的影響力排序（SHAP 值越大＝對結果影響越大）。本報告中 Acetate 與 ORP_Low 影響最大，而 COD-O 相對較小。"
+    },
+    "descriptive_statistics": {
+      "en": "This table shows the average, spread (std), and min/max for each input, and the values appear scaled to a 0–1 range (min 0 and max 1). For example, Sucrose_Degradation has a low average with a relatively small spread compared with several other inputs.",
+      "zh_TW": "此表提供各輸入的平均值、分散程度（標準差）、最小/最大值，且看起來已縮放到 0–1 範圍（最小為 0、最大為 1）。例如 Sucrose_Degradation 的平均值偏低，且相較部分變數分散較小。"
+    },
+    "correlation_matrix": {
+      "en": "This table shows which pairs of inputs tend to rise or fall together (correlation closer to 1 means they move together strongly). The strongest listed pairing is Butyrate vs VFA (0.9685), while the table does not by itself prove that one causes the other.",
+      "zh_TW": "此表顯示兩個輸入是否常一起上升或下降（相關係數越接近 1 代表一起變動越明顯）。已列出的最強配對是 Butyrate 與 VFA（0.9685），但這不代表彼此一定有因果關係。"
+    },
+    "table1_incremental_results": {
+      "en": "This table shows model scores when adding inputs step-by-step in a fixed order, so you can see whether extra inputs help. For RF, the best shown result is at 11 features (R² ≈ 0.8713), and adding features does not improve every model in every step (for example, DT drops at 11 features).",
+      "zh_TW": "此表依固定順序逐步加入更多輸入，觀察額外變數是否帶來更好表現。以 RF 來看，表中最佳是在 11 個特徵（R² 約 0.8713），且不是每個模型在每一步加入後都會變好（例如 DT 在 11 個特徵時反而下降）。"
+    }
+  }
+}

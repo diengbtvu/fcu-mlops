@@ -206,6 +206,8 @@ class AdminController extends Controller
     public function showModelReport(MLModel $model)
     {
         $model->load(['dataset', 'trainer']);
+        $routeName = (string) optional(request()->route())->getName();
+        $routeNamespace = str_starts_with($routeName, 'user.') ? 'user' : 'admin';
 
         $predictServiceInternalBase = rtrim(
             config('services.predict_service.url', 'http://predict-service:5000'),
@@ -269,6 +271,30 @@ class AdminController extends Controller
             ];
         }
 
+        $llmExplanations = is_array($summary['llm_explanations'] ?? null)
+            ? $summary['llm_explanations']
+            : [];
+
+        $inlineTableKeys = [
+            'model_comparison_table',
+            'feature_importance_table',
+            'best_model_shap_importance',
+            'table1_incremental_results',
+            'descriptive_statistics',
+            'correlation_matrix',
+        ];
+        $inlineTables = [];
+        foreach ($inlineTableKeys as $tableKey) {
+            if (empty($reportAssets[$tableKey]['url'])) {
+                continue;
+            }
+
+            $tableData = $this->fetchReportCsvTable($reportAssets[$tableKey]['url']);
+            if ($tableData !== null) {
+                $inlineTables[$tableKey] = $tableData;
+            }
+        }
+
         $imageKeys = [
             'model_comparison_bars',
             'predicted_vs_actual',
@@ -292,10 +318,13 @@ class AdminController extends Controller
 
         return view('admin.models.report', [
             'model' => $model,
+            'routeNamespace' => $routeNamespace,
             'reportInfo' => $reportInfo,
             'summary' => $summary,
             'summaryError' => $summaryError,
             'reportAssets' => $reportAssets,
+            'llmExplanations' => $llmExplanations,
+            'inlineTables' => $inlineTables,
             'imageKeys' => $imageKeys,
             'tableKeys' => $tableKeys,
         ]);
@@ -1137,6 +1166,59 @@ class AdminController extends Controller
             
             return redirect()->back()->with('error', 'Failed to update permission groups: ' . $e->getMessage());
         }
+    }
+
+    private function fetchReportCsvTable(string $url, int $maxRows = 60): ?array
+    {
+        try {
+            $response = Http::timeout(20)->get($url);
+            if (!$response->successful()) {
+                return null;
+            }
+
+            return $this->parseCsvTable($response->body(), $maxRows);
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+
+    private function parseCsvTable(string $csv, int $maxRows = 60): ?array
+    {
+        $stream = fopen('php://temp', 'r+');
+        if ($stream === false) {
+            return null;
+        }
+
+        fwrite($stream, $csv);
+        rewind($stream);
+
+        $headers = fgetcsv($stream);
+        if (!is_array($headers) || empty($headers)) {
+            fclose($stream);
+            return null;
+        }
+
+        $rows = [];
+        $rowCount = 0;
+        while (($row = fgetcsv($stream)) !== false) {
+            $rowCount++;
+            if ($rowCount <= $maxRows) {
+                $normalizedRow = [];
+                foreach ($headers as $index => $header) {
+                    $normalizedRow[(string) $header] = $row[$index] ?? '';
+                }
+                $rows[] = $normalizedRow;
+            }
+        }
+
+        fclose($stream);
+
+        return [
+            'headers' => array_map('strval', $headers),
+            'rows' => $rows,
+            'row_count' => $rowCount,
+            'truncated' => $rowCount > $maxRows,
+        ];
     }
 
     private function sanitizeReportId(string $modelName): string

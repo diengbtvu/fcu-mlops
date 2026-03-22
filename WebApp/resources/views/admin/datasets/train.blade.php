@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+@php
+    $routePrefix = auth()->user()->role_id == 1 ? 'admin' : 'user';
+@endphp
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
@@ -19,8 +22,8 @@
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('dashboard.title') }}</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.datasets.index') }}">{{ __('nav.datasets') }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.dashboard') }}">{{ __('dashboard.title') }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route($routePrefix . '.datasets.index') }}">{{ __('nav.datasets') }}</a></li>
                     <li class="breadcrumb-item active">{{ __('datasets.train_model') }}</li>
                 </ol>
             </nav>
@@ -40,6 +43,7 @@
                             <p><strong>{{ __('datasets.uploaded_by') }}:</strong> {{ $dataset->user->FullName ?? __('datasets.unknown_user') }}</p>
                             <p><strong>{{ __('datasets.upload_date') }}:</strong> {{ $dataset->UploadDate }}</p>
                             <p><strong>{{ __('datasets.file_path') }}:</strong> <code>{{ $dataset->FilePath }}</code></p>
+                            <p><strong>Selected sheet:</strong> {{ $dataset->SelectedSheet ?: 'CSV / default sheet' }}</p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +55,7 @@
                     <h5 class="mb-0"><i class="bi bi-gear"></i> {{ __('datasets.training_configuration') }}</h5>
                 </div>
                 <div class="card-body">
-                    <form id="trainingForm" action="{{ route('admin.datasets.train', $dataset->DatasetId) }}" method="POST">
+                    <form id="trainingForm" action="{{ route($routePrefix . '.datasets.train', $dataset->DatasetId) }}" method="POST">
                         @csrf
 
                         <!-- Model Type Selection -->
@@ -190,7 +194,7 @@
 
                         <!-- Action Buttons -->
                         <div class="d-flex justify-content-between align-items-center mt-4">
-                            <a href="{{ route('admin.datasets.index') }}" class="btn btn-secondary">
+                            <a href="{{ route($routePrefix . '.datasets.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> {{ __('datasets.back_to_datasets') }}
                             </a>
                             
@@ -281,7 +285,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const PREDICT_SERVICE_URL = '{{ config("services.predict_service.url") }}';
     const PREDICT_SERVICE_PUBLIC_URL = '{{ config("services.predict_service.public_url") }}';
-    const DATASETS_INDEX_URL = '{{ route("admin.datasets.index") }}';
+    const DATASETS_INDEX_URL = '{{ route($routePrefix . ".datasets.index") }}';
+    const REPORT_PAGE_TEMPLATE = '{{ route($routePrefix . ".models.report", ["model" => "__MODEL_ID__"]) }}';
     const CSRF_TOKEN = '{{ csrf_token() }}';
     
     console.log('PREDICT_SERVICE_URL:', PREDICT_SERVICE_URL);
@@ -298,14 +303,36 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${baseUrl}${routePrefix}/${encodedFile}`;
     }
 
-    function renderReportLinks(reportInfo) {
-        if (!reportInfo || !reportInfo.files || typeof reportInfo.files !== 'object') {
+    function buildReportPageUrl(modelId) {
+        if (!modelId) {
             return '';
+        }
+        return REPORT_PAGE_TEMPLATE.replace('__MODEL_ID__', encodeURIComponent(String(modelId)));
+    }
+
+    function renderReportLinks(reportInfo, modelId) {
+        if (!reportInfo || !reportInfo.files || typeof reportInfo.files !== 'object') {
+            const reportPageUrl = buildReportPageUrl(modelId);
+            if (!reportPageUrl) {
+                return '';
+            }
+            return `
+                <div class="mt-3 text-start">
+                    <div class="fw-bold mb-2">Training Report</div>
+                    <a class="btn btn-primary btn-sm me-2 mb-2" href="${reportPageUrl}">Open Full Report</a>
+                </div>
+            `;
         }
 
         const labelMap = {
+            open_full_report: 'Open Full Report',
+            training_bundle_zip: 'Training Bundle ZIP',
+            llm_explanations: 'AI Explanations JSON',
             summary: 'Summary',
+            best_model_summary: 'Best Model Summary',
             analysis_summary: 'Analysis Report (TXT)',
+            results_summary: 'Paper Results Summary',
+            table1_incremental_results: 'Incremental Results CSV',
             model_comparison_bars: 'Model Comparison',
             model_comparison_table: 'Comparison CSV',
             predicted_vs_actual: 'Predicted vs Actual',
@@ -323,8 +350,13 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const preferredOrder = [
+            'open_full_report',
+            'training_bundle_zip',
             'summary',
+            'best_model_summary',
+            'results_summary',
             'analysis_summary',
+            'table1_incremental_results',
             'model_comparison_bars',
             'model_comparison_table',
             'predicted_vs_actual',
@@ -341,7 +373,13 @@ document.addEventListener('DOMContentLoaded', function() {
             'gra_ranking'
         ];
 
-        const links = Object.entries(reportInfo.files)
+        const entries = Object.entries(reportInfo.files);
+        const reportPageUrl = buildReportPageUrl(modelId);
+        if (reportPageUrl) {
+            entries.unshift(['open_full_report', reportPageUrl]);
+        }
+
+        const links = entries
         .sort(([keyA], [keyB]) => {
             const idxA = preferredOrder.indexOf(keyA);
             const idxB = preferredOrder.indexOf(keyB);
@@ -349,8 +387,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const rankB = idxB === -1 ? 999 : idxB;
             return rankA - rankB;
         })
-        .map(([key, filename]) => {
-            const href = buildReportAssetUrl(reportInfo, filename);
+        .map(([key, value]) => {
+            const href = key === 'open_full_report'
+                ? String(value)
+                : buildReportAssetUrl(reportInfo, value);
             const label = labelMap[key] || key;
             return `<a class="btn btn-outline-primary btn-sm me-2 mb-2" href="${href}" target="_blank" rel="noopener">${label}</a>`;
         });
@@ -452,7 +492,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         const resultPayload = progress.result || {};
                         const reportInfo = resultPayload.report_info || null;
-                        const reportLinksHtml = renderReportLinks(reportInfo);
+                        const reportLinksHtml = renderReportLinks(reportInfo, resultPayload.database_id || null);
                         const hasReport = Boolean(reportLinksHtml);
                         const redirectDelay = hasReport ? 12000 : 3000;
 
@@ -579,15 +619,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!response.ok) {
                 let errorMessage = 'Training request failed';
+                const errorBody = await response.text();
+
                 try {
-                    const errorData = await response.json();
+                    const errorData = JSON.parse(errorBody);
                     console.error('❌ Training error:', errorData);
                     errorMessage = errorData.error || errorData.message || errorMessage;
                 } catch (parseError) {
-                    const errorText = await response.text();
-                    console.error('❌ Training error (non-JSON):', errorText);
-                    if (errorText && errorText.trim()) {
-                        errorMessage = errorText.trim().slice(0, 500);
+                    console.error('❌ Training error (non-JSON):', errorBody);
+                    if (errorBody && errorBody.trim()) {
+                        errorMessage = errorBody.trim().slice(0, 500);
                     }
                 }
                 throw new Error(errorMessage);

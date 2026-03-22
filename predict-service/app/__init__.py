@@ -15,11 +15,6 @@ if os.getenv('DEBUG_ENV', 'false').lower() == 'true':
     print(f"   MODEL_DIR: {os.getenv('MODEL_DIR', 'NOT SET')}")
     print(f"   PREDICT_PORT: {os.getenv('PREDICT_PORT', 'NOT SET')}")
 
-from .routes.predict import predict_bp
-from .routes.train import train_bp
-from .routes.augment import augment_bp
-from .routes.progress import progress_bp
-
 def create_app():
     app = Flask(__name__)
     CORS(app, origins=["*"])  # Use origins=["*"] for dev only, specify domain for production
@@ -40,7 +35,13 @@ def create_app():
     except ImportError as e:
         print(f"Warning: Could not load Swagger: {e}")
 
-    # Import and register blueprints
+    # Import blueprints lazily so package import does not pull every optional
+    # runtime dependency unless the app factory is actually called.
+    from .routes.predict import predict_bp
+    from .routes.train import train_bp
+    from .routes.augment import augment_bp
+    from .routes.progress import progress_bp
+
     app.register_blueprint(predict_bp)
     app.register_blueprint(train_bp)
     app.register_blueprint(augment_bp)

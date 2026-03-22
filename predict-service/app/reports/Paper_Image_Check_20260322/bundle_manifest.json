@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-03-22T08:41:13.621146",
+  "source_name": "pilot-performance.xls",
+  "selected_sheet": "HRT 12 -4 h",
+  "best_model": "KNN",
+  "best_model_type": "knn",
+  "r2": 0.8171678017037467,
+  "mse": 0.012809918378105262,
+  "rows_after_preprocessing": 197,
+  "top_features": [
+    "pH",
+    "Propionate",
+    "VFA"
+  ],
+  "report_id": "Paper_Image_Check_20260322",
+  "report_route_prefix": "/train/reports/Paper_Image_Check_20260322"
+}

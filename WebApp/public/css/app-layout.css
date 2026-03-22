@@ -3,6 +3,35 @@
    ========================================================================== */
 
 /* Sidebar styling */
+body.sidebar-fixed-layout .main-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+}
+
+body.sidebar-fixed-layout .main-sidebar .sidebar {
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+
+body.sidebar-fixed-layout .main-sidebar .sidebar nav {
+    flex: 1 1 auto;
+}
+
+body.sidebar-fixed-layout .main-sidebar .sidebar .logout-section {
+    margin-top: auto;
+}
+
+@media (max-width: 991.98px) {
+    body.sidebar-fixed-layout .main-sidebar .sidebar {
+        height: calc(100vh - 4rem);
+    }
+}
+
 .sidebar .nav-link.text-danger:hover {
     background-color: rgba(220, 53, 69, 0.1) !important;
     color: #dc3545 !important;

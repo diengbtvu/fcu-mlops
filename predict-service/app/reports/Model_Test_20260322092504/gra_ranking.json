@@ -1,0 +1,57 @@
+[
+  {
+    "rank": 1,
+    "feature": "Sucrose_Degradation",
+    "score": 0.9491985241165468
+  },
+  {
+    "rank": 2,
+    "feature": "Acetate",
+    "score": 0.8250875809275202
+  },
+  {
+    "rank": 3,
+    "feature": "Propionate",
+    "score": 0.8026081692659972
+  },
+  {
+    "rank": 4,
+    "feature": "VSS",
+    "score": 0.7855548421980986
+  },
+  {
+    "rank": 5,
+    "feature": "VFA",
+    "score": 0.7810281532663721
+  },
+  {
+    "rank": 6,
+    "feature": "Ethanol",
+    "score": 0.7760434827163855
+  },
+  {
+    "rank": 7,
+    "feature": "Butyrate",
+    "score": 0.7756747199839781
+  },
+  {
+    "rank": 8,
+    "feature": "COD-O",
+    "score": 0.7590518801003183
+  },
+  {
+    "rank": 9,
+    "feature": "pH",
+    "score": 0.7243978900879616
+  },
+  {
+    "rank": 10,
+    "feature": "ORP_Mid",
+    "score": 0.6493098358357018
+  },
+  {
+    "rank": 11,
+    "feature": "ORP_Low",
+    "score": 0.5756867464562431
+  }
+]

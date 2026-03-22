@@ -31,7 +31,7 @@
     
     @yield('styles')
 </head>
-<body class="hold-transition sidebar-mini hydrogen-theme">
+<body class="hold-transition sidebar-mini sidebar-fixed-layout hydrogen-theme">
     <div class="wrapper">
         {{-- Header Component --}}
         <x-layout.header />

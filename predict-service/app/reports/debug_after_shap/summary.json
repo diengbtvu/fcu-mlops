@@ -1,0 +1,80 @@
+{
+  "model_name": "debug_after_shap",
+  "model_type": "random_forest",
+  "model_label": "RF",
+  "comparison_enabled": true,
+  "created_at": "2026-03-22T06:53:26.154530",
+  "selected_model_metrics": {
+    "r2_score": 0.8750672257064577,
+    "rmse": 0.08507416366602544,
+    "mse": 0.007237613323473683,
+    "mae": 0.06294446292669846
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.8224906854854594,
+      "rmse": 0.10140749850102927,
+      "mse": 0.010283480752236254,
+      "mae": 0.08143513459660282
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.7446648125257986,
+      "rmse": 0.12162275325913273,
+      "mse": 0.014792094110331881,
+      "mae": 0.07465867677859422
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.8750672257064577,
+      "rmse": 0.08507416366602544,
+      "mse": 0.007237613323473683,
+      "mae": 0.06294446292669846
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8369249252208074,
+      "rmse": 0.09719709599431062,
+      "mse": 0.009447275469727233,
+      "mae": 0.06883164030106194
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.8383368843539042,
+      "rmse": 0.09677539855039556,
+      "mse": 0.009365477764587902,
+      "mae": 0.06895756613835399
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "fig_gra_ranking.png",
+    "analysis_summary": "analysis_summary_report.txt"
+  }
+}

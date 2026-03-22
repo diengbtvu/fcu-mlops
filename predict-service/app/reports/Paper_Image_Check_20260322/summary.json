@@ -1,0 +1,104 @@
+{
+  "model_name": "Paper_Image_Check_20260322",
+  "model_type": "knn",
+  "model_label": "KNN",
+  "comparison_enabled": true,
+  "created_at": "2026-03-22T08:41:13.615918",
+  "selected_model_metrics": {
+    "r2_score": 0.8171678017037467,
+    "rmse": 0.11318090995439674,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.732409747545017,
+      "rmse": 0.13692475905328272,
+      "mse": 0.018748389641799527,
+      "mae": 0.09460256693779978
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.5604531394996005,
+      "rmse": 0.1754888111857837,
+      "mse": 0.030796322851399643,
+      "mae": 0.10855624704298139
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.7756018171353091,
+      "rmse": 0.12538815399769956,
+      "mse": 0.015722189162950824,
+      "mae": 0.08355692337682429
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8171678017037467,
+      "rmse": 0.11318090995439674,
+      "mse": 0.012809918378105262,
+      "mae": 0.07502308749135642
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.7494763101779772,
+      "rmse": 0.13248638205179633,
+      "mse": 0.017552641429174544,
+      "mae": 0.09559303423201744
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "gra_ranking.json",
+    "analysis_summary": "analysis_summary_report.txt",
+    "summary": "summary.json",
+    "training_bundle_zip": "training_bundle.zip",
+    "best_model": "best_model.pkl",
+    "best_scaler_X": "best_scaler_X.pkl",
+    "best_scaler_Y": "best_scaler_Y.pkl",
+    "scaler": "scaler.pkl",
+    "best_model_info": "best_model_info.txt",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "best_model_shap_values": "best_model_shap_values.npy",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "fig3a_gra_ranking": "fig3a_gra_ranking.png",
+    "fig3b_shap_analysis": "fig3b_shap_analysis.png",
+    "fig3_feature_analysis": "fig3_feature_analysis.png",
+    "fig4_univariate_analysis": "fig4_univariate_analysis.png",
+    "fig5_model_comparison": "fig5_model_comparison.png",
+    "fig6ab_mse_r2_features": "fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time": "fig6c_prediction_time.png",
+    "results_summary": "results_summary.txt",
+    "best_model_summary": "best_model_summary.json",
+    "model_svm_scatter": "model_svm_scatter.png",
+    "model_dt_scatter": "model_dt_scatter.png",
+    "model_rf_scatter": "model_rf_scatter.png",
+    "model_knn_scatter": "model_knn_scatter.png",
+    "model_xgboost_scatter": "model_xgboost_scatter.png"
+  }
+}
