@@ -32,6 +32,22 @@
         'vfa' => ['label' => 'predict.vfa', 'placeholder' => 'predict.vfa_placeholder'],
         'cod_o' => ['label' => 'predict.cod_o', 'placeholder' => 'predict.cod_o_placeholder'],
     ];
+    $predictionMessages = [
+        'selectModelError' => __('predict.error_select_model'),
+        'fieldRequired' => __('predict.error_required'),
+        'fieldBetween' => __('predict.error_between'),
+        'predictionResultTitle' => __('predict.prediction_result_title'),
+        'hydrogenProductionRate' => __('predict.hydrogen_production_rate'),
+        'predictionCompletedUsing' => __('predict.prediction_completed_using'),
+        'predictionUsing' => __('predict.prediction_using'),
+        'aiModelFallback' => __('predict.ai_model_fallback'),
+        'adminAccess' => __('predict.admin_access'),
+        'userAccess' => __('predict.user_access'),
+        'mlflowRun' => __('predict.mlflow_run'),
+        'errorTitle' => __('predict.error_title'),
+        'unknownError' => __('predict.unknown_error'),
+        'unknownSize' => __('predict.unknown_size'),
+    ];
 @endphp
 <div class="prediction-form-container">
 <div class="loading-overlay" id="loadingOverlay">
@@ -225,22 +241,7 @@ window.PredictionFormConfig.register('admin-predict', {
     userType: 'admin',
     defaultSubmitLabel: @json(__('predict.predict_button_admin')),
     processingLabel: @json(__('predict.processing')),
-    messages: @json([
-        'selectModelError' => __('predict.error_select_model'),
-        'fieldRequired' => __('predict.error_required'),
-        'fieldBetween' => __('predict.error_between'),
-        'predictionResultTitle' => __('predict.prediction_result_title'),
-        'hydrogenProductionRate' => __('predict.hydrogen_production_rate'),
-        'predictionCompletedUsing' => __('predict.prediction_completed_using'),
-        'predictionUsing' => __('predict.prediction_using'),
-        'aiModelFallback' => __('predict.ai_model_fallback'),
-        'adminAccess' => __('predict.admin_access'),
-        'userAccess' => __('predict.user_access'),
-        'mlflowRun' => __('predict.mlflow_run'),
-        'errorTitle' => __('predict.error_title'),
-        'unknownError' => __('predict.unknown_error'),
-        'unknownSize' => __('predict.unknown_size'),
-    ])
+    messages: @json($predictionMessages)
 });
 </script>
 @endsection
