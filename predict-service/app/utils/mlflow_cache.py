@@ -7,10 +7,11 @@ Quản lý cache cho models từ MLflow để tối ưu performance
 import mlflow
 import mlflow.sklearn
 import mlflow.keras
+import mlflow.xgboost
 from datetime import datetime, timedelta
 import os
 import joblib
-from typing import Tuple, Optional, Dict, Any
+from typing import Tuple, Optional, Dict, Any, List
 import logging
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
 
@@ -40,6 +41,77 @@ class MLflowModelCache:
         """Set cache TTL in hours"""
         cls._cache_ttl = timedelta(hours=hours)
         logger.info(f"Cache TTL set to {hours} hour(s)")
+
+    @classmethod
+    def _detect_model_type(cls, run: Any) -> str:
+        params = run.data.params or {}
+        candidates = [
+            params.get("model_type"),
+            params.get("best_model_type"),
+            params.get("winning_model"),
+            params.get("requested_model_type"),
+        ]
+        for candidate in candidates:
+            normalized = str(candidate or "").strip().lower()
+            if normalized:
+                return normalized
+        return "random_forest"
+
+    @classmethod
+    def _resolve_model_artifact_path(cls, client: Any, run_id: str) -> str:
+        preferred_paths = ["model", "best_model", "paper_training/model"]
+        for artifact_path in preferred_paths:
+            try:
+                local_dir = client.download_artifacts(run_id, artifact_path)
+            except Exception:
+                continue
+            if os.path.isfile(os.path.join(local_dir, "MLmodel")):
+                return artifact_path
+
+        root_entries = client.list_artifacts(run_id)
+        candidate_paths: List[str] = [entry.path for entry in root_entries if getattr(entry, "is_dir", False)]
+
+        for artifact_path in candidate_paths:
+            try:
+                local_dir = client.download_artifacts(run_id, artifact_path)
+            except Exception:
+                continue
+            if os.path.isfile(os.path.join(local_dir, "MLmodel")):
+                return artifact_path
+
+        raise FileNotFoundError(
+            "No MLflow model artifact was found in this run. "
+            "Expected a logged model such as 'model/'. Re-train the model or fall back to file-based prediction."
+        )
+
+    @classmethod
+    def _load_scaler_artifact(cls, client: Any, run_id: str) -> Any:
+        scaler_candidates = [
+            ("scaler", None),
+            ("paper_training", {"best_scaler_X.pkl", "scaler.pkl"}),
+            ("", {"best_scaler_X.pkl", "scaler.pkl"}),
+        ]
+
+        for artifact_path, allowed_files in scaler_candidates:
+            try:
+                download_path = client.download_artifacts(run_id, artifact_path) if artifact_path else client.download_artifacts(run_id, "")
+            except Exception:
+                continue
+
+            if os.path.isfile(download_path) and download_path.endswith(".pkl"):
+                return joblib.load(download_path)
+
+            if not os.path.isdir(download_path):
+                continue
+
+            for filename in sorted(os.listdir(download_path)):
+                if not filename.endswith(".pkl"):
+                    continue
+                if allowed_files is not None and filename not in allowed_files:
+                    continue
+                return joblib.load(os.path.join(download_path, filename))
+
+        raise FileNotFoundError("No compatible scaler artifact was found in MLflow.")
     
     @classmethod
     def get_model(cls, run_id: str, force_reload: bool = False) -> Tuple[Any, Any]:
@@ -79,18 +151,18 @@ class MLflowModelCache:
             # Get run info to determine model flavor
             client = mlflow.tracking.MlflowClient()
             run = client.get_run(run_id)
-            model_type = run.data.params.get('model_type', 'random_forest').lower()
+            model_type = cls._detect_model_type(run)
             
             # Load model based on type
-            model_uri = f"runs:/{run_id}/model"
+            model_artifact_path = cls._resolve_model_artifact_path(client, run_id)
+            model_uri = f"runs:/{run_id}/{model_artifact_path}"
             logger.info(f"Loading model from: {model_uri} (type: {model_type})")
             
             if model_type == 'ann':
                 # Load Keras model
                 model = mlflow.keras.load_model(model_uri)
-            elif model_type in ['xgboost', 'random_forest']:
-                # Load sklearn-compatible model
-                model = mlflow.sklearn.load_model(model_uri)
+            elif model_type == 'xgboost':
+                model = mlflow.xgboost.load_model(model_uri)
             else:
                 # Default to sklearn
                 model = mlflow.sklearn.load_model(model_uri)
@@ -101,17 +173,7 @@ class MLflowModelCache:
             
             # Download scaler artifact
             try:
-                scaler_path = client.download_artifacts(run_id, "scaler")
-                
-                # Find scaler file trong downloaded directory
-                scaler_files = [f for f in os.listdir(scaler_path) if f.endswith('.pkl')]
-                
-                if not scaler_files:
-                    raise FileNotFoundError(f"No scaler .pkl file found in {scaler_path}")
-                
-                scaler_file_path = os.path.join(scaler_path, scaler_files[0])
-                scaler = joblib.load(scaler_file_path)
-                
+                scaler = cls._load_scaler_artifact(client, run_id)
             except Exception as e:
                 logger.warning(f"Failed to load scaler from MLflow: {e}")
                 logger.info("Falling back to shared scaler from ml_model/scaler.pkl")

@@ -35,8 +35,12 @@ class UserController extends Controller
 
     public function predict()
     {
-        // Get available active models for user selection
-        $models = MLModel::where('IsActive', true)->get();
+        // Only expose pipeline-trained MLflow models on the prediction page.
+        $models = MLModel::where('IsActive', true)
+            ->whereNotNull('mlflow_run_id')
+            ->where('mlflow_run_id', '!=', '')
+            ->whereNotNull('training_report')
+            ->get();
         return view('user.predict', compact('models'));
     }
 
@@ -82,14 +86,14 @@ class UserController extends Controller
             $apiUrl = config('services.predict_service.url', 'http://predict-service:5000');
             $token = $this->generateApiToken();
 
-            // 🆕 STRATEGY: Check if model has MLflow tracking
-            if (!empty($selectedModel->mlflow_run_id)) {
-                // ✅ Use MLflow prediction endpoint (NEW - with cache)
-                return $this->predictWithMLflow($selectedModel, $request, $apiUrl, $token);
-            } else {
-                // ✅ Use traditional file-based prediction (OLD)
-                return $this->predictWithFileModel($selectedModel, $request, $apiUrl, $token);
+            if (empty($selectedModel->mlflow_run_id)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Selected model is not registered in MLflow.'
+                ], 400);
             }
+
+            return $this->predictWithMLflow($selectedModel, $request, $apiUrl, $token);
 
         } catch (\Exception $e) {
             \Log::error('Exception in makePrediction (User)', [

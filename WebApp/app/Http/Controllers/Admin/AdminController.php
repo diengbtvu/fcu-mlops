@@ -579,12 +579,6 @@ class AdminController extends Controller
 
     public function forceDeleteModel(MLModel $model)
     {
-        // Check if this is the default model (protect it)
-        if ($this->isDefaultModel($model)) {
-            return redirect()->route('admin.models')
-                ->with('error', "Cannot delete '{$model->MLMName}' because it is the default system model. The system needs at least one default model to function properly.");
-        }
-        
         // Force delete: delete all associated predictions first
         $predictionCount = $model->predictions()->count();
         
@@ -605,15 +599,6 @@ class AdminController extends Controller
         
         return redirect()->route('admin.models')
             ->with('success', "Model '{$modelName}' and {$predictionCount} associated prediction(s) deleted successfully.");
-    }
-
-    /**
-     * Check if a model is the default system model
-     */
-    private function isDefaultModel(MLModel $model)
-    {
-        // The first seeded model is treated as the protected system baseline.
-        return $model->id === 1;
     }
 
     public function testModel(Request $request, MLModel $model)
@@ -711,8 +696,12 @@ class AdminController extends Controller
     // Prediction methods for admin
     public function predict()
     {
-        // Get available active models for admin selection
-        $models = MLModel::where('IsActive', true)->get();
+        // Only expose pipeline-trained MLflow models on the prediction page.
+        $models = MLModel::where('IsActive', true)
+            ->whereNotNull('mlflow_run_id')
+            ->where('mlflow_run_id', '!=', '')
+            ->whereNotNull('training_report')
+            ->get();
         return view('admin.predict', compact('models'));
     }
 
@@ -758,14 +747,14 @@ class AdminController extends Controller
             $apiUrl = config('services.predict_service.url', 'http://predict-service:5000');
             $token = $this->generateApiToken();
 
-            // 🆕 STRATEGY: Check if model has MLflow tracking
-            if (!empty($selectedModel->mlflow_run_id)) {
-                // ✅ Use MLflow prediction endpoint (NEW - with cache)
-                return $this->predictWithMLflow($selectedModel, $request, $apiUrl, $token);
-            } else {
-                // ✅ Use traditional file-based prediction (OLD)
-                return $this->predictWithFileModel($selectedModel, $request, $apiUrl, $token);
+            if (empty($selectedModel->mlflow_run_id)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Selected model is not registered in MLflow.'
+                ], 400);
             }
+
+            return $this->predictWithMLflow($selectedModel, $request, $apiUrl, $token);
 
         } catch (\Exception $e) {
             \Log::error('Exception in makePrediction (Admin)', [

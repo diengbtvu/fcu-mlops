@@ -486,9 +486,25 @@ def train_model():
         if active_run is not None:
             try:
                 mlflow.log_param("winning_model", best_model_name)
+                mlflow.log_param("model_type", best_model_type)
                 for metric_name, metric_value in metrics.items():
                     mlflow.log_metric(metric_name, float(metric_value))
                 artifact_paths = pipeline_result.get("artifacts", {})
+                best_model_path = artifact_paths.get("best_model_path")
+                best_scaler_x_path = artifact_paths.get("best_scaler_x_path")
+                best_scaler_y_path = artifact_paths.get("best_scaler_y_path")
+
+                if runtime.get("best_model_object") is not None:
+                    if best_model_type == "xgboost":
+                        mlflow.xgboost.log_model(runtime["best_model_object"], artifact_path="model")
+                    else:
+                        mlflow.sklearn.log_model(runtime["best_model_object"], artifact_path="model")
+
+                if best_scaler_x_path and os.path.exists(best_scaler_x_path):
+                    mlflow.log_artifact(best_scaler_x_path, "scaler")
+                if best_scaler_y_path and os.path.exists(best_scaler_y_path):
+                    mlflow.log_artifact(best_scaler_y_path, "scaler_y")
+
                 for artifact_key in (
                     "summary_path",
                     "gra_ranking_path",
