@@ -12,7 +12,10 @@ from zipfile import ZIP_DEFLATED, ZipFile
 from app.utils.database_utils import DatabaseUtils
 from app.utils.progress_tracker import TrainingProgressTracker
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
-from app.utils.report_explainer import generate_report_explanations
+from app.utils.report_explainer import (
+    generate_report_explanations,
+    update_report_explanation_status,
+)
 from app.utils.training_report import generate_training_report
 import sys
 import mlflow
@@ -226,6 +229,15 @@ def _start_async_report_explanations(
     source_name: str,
     selected_sheet: str | None,
 ) -> None:
+    started_at = datetime.now().isoformat()
+    update_report_explanation_status(
+        report_info=report_info,
+        status="pending",
+        message="AI explanations are being generated.",
+        report_root=REPORTS_ROOT,
+        started_at=started_at,
+    )
+
     def _runner() -> None:
         try:
             explanation_payload = generate_report_explanations(
@@ -249,6 +261,13 @@ def _start_async_report_explanations(
                 )
                 print(f"🤖 AI report explanations generated for {report_info.get('report_id')}")
         except Exception as explanation_error:
+            update_report_explanation_status(
+                report_info=report_info,
+                status="error",
+                message=str(explanation_error),
+                report_root=REPORTS_ROOT,
+                started_at=started_at,
+            )
             print(f"⚠️ Async AI explanation generation failed: {explanation_error}")
 
     threading.Thread(target=_runner, daemon=True).start()

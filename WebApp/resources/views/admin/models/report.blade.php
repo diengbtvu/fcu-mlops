@@ -25,6 +25,9 @@
     $trainedAt = $model->CreatedDate ?? $model->created_at;
     $inlineTables = is_array($inlineTables ?? null) ? $inlineTables : [];
     $llmExplanations = is_array($llmExplanations ?? null) ? $llmExplanations : [];
+    $llmExplanationStatus = is_array($summary['llm_explanations_status'] ?? null)
+        ? $summary['llm_explanations_status']
+        : [];
     $explanationAssets = is_array($llmExplanations['assets'] ?? null) ? $llmExplanations['assets'] : [];
     $explanationLocale = str_starts_with(app()->getLocale(), 'zh') ? 'zh_TW' : 'en';
     $resolveExplanation = function (string $key) use ($explanationAssets, $explanationLocale): string {
@@ -156,6 +159,19 @@
     $downloadKeys = array_merge($downloadPriorityKeys, $remainingDownloadKeys);
     $bundleAsset = $reportAssets['training_bundle_zip'] ?? null;
     $overviewExplanation = trim((string) (($llmExplanations['overview'][$explanationLocale] ?? $llmExplanations['overview']['en'] ?? $llmExplanations['overview']['zh_TW'] ?? '')));
+    $llmStatus = strtolower(trim((string) ($llmExplanationStatus['status'] ?? '')));
+    $llmStatusMessage = trim((string) ($llmExplanationStatus['message'] ?? ''));
+    $llmStartedAt = null;
+    $llmPendingTooLong = false;
+    if ($llmStatus === 'pending' && !empty($llmExplanationStatus['started_at'])) {
+        try {
+            $llmStartedAt = \Carbon\Carbon::parse($llmExplanationStatus['started_at']);
+            $llmPendingTooLong = $llmStartedAt->lt(now()->subMinutes(5));
+        } catch (\Throwable $e) {
+            $llmStartedAt = null;
+        }
+    }
+    $shouldAutoRefreshLlm = $llmStatus === 'pending' && !$llmPendingTooLong;
 @endphp
 
 <div class="row">
@@ -277,10 +293,32 @@
     </div>
 @endif
 
-@if(empty($llmExplanations) && !empty($reportAssets))
+@if($llmStatus === 'pending' && !empty($reportAssets) && !$llmPendingTooLong)
     <div class="alert alert-info">
         <div class="fw-bold mb-1">AI explanations are being generated</div>
-        <div class="small">This page will refresh automatically in a few seconds.</div>
+        <div class="small">
+            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'This page will refresh automatically in a few seconds.' }}
+        </div>
+    </div>
+@elseif($llmStatus === 'pending' && !empty($reportAssets) && $llmPendingTooLong)
+    <div class="alert alert-warning">
+        <div class="fw-bold mb-1">AI explanations are delayed</div>
+        <div class="small">
+            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The background explanation job is taking longer than expected.' }}
+        </div>
+        <div class="small mt-1">Open the predict-service logs on the server to check the exact OpenAI/API error.</div>
+    </div>
+@elseif($llmStatus === 'error' && !empty($reportAssets))
+    <div class="alert alert-danger">
+        <div class="fw-bold mb-1">AI explanations failed</div>
+        <div class="small">
+            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The explanation job failed on the server.' }}
+        </div>
+    </div>
+@elseif(empty($llmExplanations) && !empty($reportAssets))
+    <div class="alert alert-secondary">
+        <div class="fw-bold mb-1">AI explanations are not available</div>
+        <div class="small">This report does not contain explanation output.</div>
     </div>
 @endif
 
@@ -505,7 +543,7 @@
 @endsection
 
 @section('scripts')
-@if(empty($llmExplanations) && !empty($reportAssets))
+@if($shouldAutoRefreshLlm)
 <script>
 setTimeout(function () {
     window.location.reload();

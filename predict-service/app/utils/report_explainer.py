@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2")
 EXPLANATIONS_FILENAME = "llm_explanations.json"
+STATUS_FILENAME = "llm_explanations_status"
 
 EXPLAINABLE_ASSET_LABELS: Dict[str, str] = {
     "metrics_overview": "Trained metrics overview",
@@ -504,6 +505,47 @@ def _update_summary_file(
     )
 
 
+def update_report_explanation_status(
+    report_info: Dict[str, Any],
+    status: str,
+    message: str = "",
+    report_root: str | Path | None = None,
+    started_at: str | None = None,
+) -> Dict[str, Any]:
+    report_id = str(report_info.get("report_id") or "").strip()
+    if not report_id:
+        return {}
+
+    report_dir = Path(report_root or Path(__file__).resolve().parents[1] / "reports") / report_id
+    report_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = report_dir / "summary.json"
+
+    payload: Dict[str, Any] = {
+        "status": str(status).strip() or "pending",
+        "message": str(message or "").strip(),
+        "updated_at": datetime.now().isoformat(),
+    }
+
+    existing = {}
+    if summary_path.exists():
+        summary = _read_json(summary_path)
+        existing = dict(summary.get("llm_explanations_status") or {})
+        if existing:
+            payload["started_at"] = started_at or existing.get("started_at") or payload["updated_at"]
+        else:
+            payload["started_at"] = started_at or payload["updated_at"]
+        summary["llm_explanations_status"] = payload
+        summary_path.write_text(
+            json.dumps(summary, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    else:
+        payload["started_at"] = started_at or payload["updated_at"]
+
+    report_info["llm_explanations_status"] = payload
+    return payload
+
+
 def generate_report_explanations(
     report_info: Dict[str, Any],
     pipeline_result: Dict[str, Any],
@@ -514,12 +556,11 @@ def generate_report_explanations(
     load_dotenv(dotenv_path=env_path, override=False)
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
-        print("⚠️ Skipping OpenAI report explanations: OPENAI_API_KEY is not configured.")
-        return None
+        raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
 
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
-        return None
+        raise RuntimeError("Training report metadata is missing report_id.")
 
     report_dir = Path(report_root or Path(__file__).resolve().parents[1] / "reports") / report_id
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -574,8 +615,9 @@ def generate_report_explanations(
         try:
             parsed = _call_openai(request_payload, api_key)
         except Exception as exc:
-            print(f"⚠️ OpenAI explanation generation failed on batch {batch_index + 1}: {exc}")
-            return None
+            raise RuntimeError(
+                f"OpenAI explanation generation failed on batch {batch_index + 1}: {exc}"
+            ) from exc
 
         if batch_index == 0 and not any(overview.values()):
             overview = {
@@ -609,6 +651,12 @@ def generate_report_explanations(
     summary_path = report_dir / "summary.json"
     if summary_path.exists():
         _update_summary_file(summary_path, explanation_payload)
+        update_report_explanation_status(
+            report_info=report_info,
+            status="success",
+            message="AI explanations generated successfully.",
+            report_root=report_root,
+        )
 
     files = dict(report_info.get("files") or {})
     files["llm_explanations"] = EXPLANATIONS_FILENAME
