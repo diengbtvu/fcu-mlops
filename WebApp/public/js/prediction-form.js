@@ -26,6 +26,16 @@ class PredictionForm {
         }
     }
 
+    getMessage(key, fallback) {
+        return this.options.messages?.[key] || fallback;
+    }
+
+    formatMessage(template, replacements = {}) {
+        return Object.entries(replacements).reduce((message, [key, value]) => {
+            return message.replaceAll(`:${key}`, value);
+        }, template);
+    }
+
     async handleSubmit(e) {
         e.preventDefault();
 
@@ -76,7 +86,7 @@ class PredictionForm {
 
     validateData(data) {
         if (!data.ml_model_id || Number.isNaN(data.ml_model_id)) {
-            throw new Error('Please select an AI model');
+            throw new Error(this.getMessage('selectModelError', 'Please select an AI model'));
         }
 
         const inputs = this.form.querySelectorAll('input[type="number"]');
@@ -88,45 +98,60 @@ class PredictionForm {
             const label = input.dataset.label || input.name;
 
             if (Number.isNaN(value)) {
-                throw new Error(`${label} is required`);
+                throw new Error(this.formatMessage(
+                    this.getMessage('fieldRequired', ':field is required'),
+                    { field: label }
+                ));
             }
 
             if (value < min || value > max) {
-                throw new Error(`${label} must be between ${input.min} and ${input.max}`);
+                throw new Error(this.formatMessage(
+                    this.getMessage('fieldBetween', ':field must be between :min and :max'),
+                    { field: label, min: input.min, max: input.max }
+                ));
             }
         }
     }
 
     displayResult(result) {
         if (result.success) {
-            const accessType = this.options.userType === 'admin' ? '(Admin Access)' : '(User Access)';
+            const accessType = this.options.userType === 'admin'
+                ? this.getMessage('adminAccess', '(Admin Access)')
+                : this.getMessage('userAccess', '(User Access)');
             const unit = result.unit || 'L/h/L';
             const formattedPrediction = Number(result.prediction).toFixed(4);
             const modelSource = result.model_source || 'file';
             const isMLflow = modelSource === 'mlflow';
+            const modelName = result.model_used || this.getMessage('aiModelFallback', 'AI model');
 
-            let modelInfoHtml = `<i class="bi bi-robot me-1"></i>Prediction completed using <strong>${result.model_used || 'AI model'}</strong> ${accessType}`;
+            let modelInfoHtml = `
+                <i class="bi bi-robot me-1"></i>
+                ${this.getMessage('predictionCompletedUsing', 'Prediction completed using')}
+                <strong>${modelName}</strong> ${accessType}
+            `;
 
             if (isMLflow) {
                 modelInfoHtml = `
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <i class="bi bi-robot me-1"></i>Prediction using <strong>${result.model_used || 'AI model'}</strong> ${accessType}
+                            <i class="bi bi-robot me-1"></i>
+                            ${this.getMessage('predictionUsing', 'Prediction using')}
+                            <strong>${modelName}</strong> ${accessType}
                         </div>
                     </div>
-                    ${result.mlflow_run_id ? `<small class="text-muted d-block mt-1"><i class="bi bi-tag me-1"></i>MLflow Run: ${result.mlflow_run_id.substring(0, 8)}...</small>` : ''}
+                    ${result.mlflow_run_id ? `<small class="text-muted d-block mt-1"><i class="bi bi-tag me-1"></i>${this.getMessage('mlflowRun', 'MLflow Run')}: ${result.mlflow_run_id.substring(0, 8)}...</small>` : ''}
                 `;
             }
 
             this.resultDiv.innerHTML = `
                 <div class="alert alert-success">
-                    <h4><i class="bi bi-check-circle"></i> Prediction Result</h4>
-                    <p class="mb-2"><strong>Hydrogen Production Rate:</strong> <span class="result-value">${formattedPrediction}</span> ${unit}</p>
+                    <h4><i class="bi bi-check-circle"></i> ${this.getMessage('predictionResultTitle', 'Prediction Result')}</h4>
+                    <p class="mb-2"><strong>${this.getMessage('hydrogenProductionRate', 'Hydrogen Production Rate')}:</strong> <span class="result-value">${formattedPrediction}</span> ${unit}</p>
                     <small>${modelInfoHtml}</small>
                 </div>
             `;
         } else {
-            this.displayError(result.error || 'Unknown error occurred');
+            this.displayError(result.error || this.getMessage('unknownError', 'Unknown error occurred'));
         }
         this.showResult();
     }
@@ -134,7 +159,7 @@ class PredictionForm {
     displayError(message) {
         this.resultDiv.innerHTML = `
             <div class="alert alert-danger">
-                <h4><i class="bi bi-exclamation-triangle"></i> Error</h4>
+                <h4><i class="bi bi-exclamation-triangle"></i> ${this.getMessage('errorTitle', 'Error')}</h4>
                 <p class="mb-0">${message}</p>
             </div>
         `;
@@ -149,7 +174,7 @@ class PredictionForm {
         const submitBtn = this.form.querySelector('.btn-predict');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Processing...';
+            submitBtn.innerHTML = `<i class="bi bi-hourglass-split me-2"></i>${this.options.processingLabel || 'Processing...'}`;
         }
     }
 
@@ -161,8 +186,9 @@ class PredictionForm {
         const submitBtn = this.form.querySelector('.btn-predict');
         if (submitBtn) {
             submitBtn.disabled = false;
-            const userType = this.options.userType === 'admin' ? '(ADMIN)' : '';
-            submitBtn.innerHTML = `<i class="bi bi-calculator me-2"></i>Predict HPR ${userType}`;
+            const defaultLabel = this.options.defaultSubmitLabel
+                || (this.options.userType === 'admin' ? 'Predict HPR (Admin)' : 'Predict HPR');
+            submitBtn.innerHTML = `<i class="bi bi-calculator me-2"></i>${defaultLabel}`;
         }
     }
 
@@ -241,7 +267,7 @@ class PredictionForm {
                 modelBadge.className = `model-badge ${libType.toLowerCase()}`;
             }
             if (modelSize) {
-                modelSize.textContent = fileSize > 0 ? `${fileSize}MB` : 'Unknown';
+                modelSize.textContent = fileSize > 0 ? `${fileSize}MB` : this.getMessage('unknownSize', 'Unknown');
             }
 
             if (mlflowBadge) {
