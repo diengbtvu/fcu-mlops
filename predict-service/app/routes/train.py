@@ -233,9 +233,11 @@ def _start_async_report_explanations(
     update_report_explanation_status(
         report_info=report_info,
         status="pending",
-        message="AI explanations are being generated.",
+        message="AI explanations are queued and will start shortly.",
         report_root=REPORTS_ROOT,
         started_at=started_at,
+        progress=0,
+        phase="queued",
     )
 
     def _runner() -> None:
@@ -267,6 +269,7 @@ def _start_async_report_explanations(
                 message=str(explanation_error),
                 report_root=REPORTS_ROOT,
                 started_at=started_at,
+                phase="error",
             )
             print(f"⚠️ Async AI explanation generation failed: {explanation_error}")
 

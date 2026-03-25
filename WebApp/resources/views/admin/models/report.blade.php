@@ -161,6 +161,14 @@
     $overviewExplanation = trim((string) (($llmExplanations['overview'][$explanationLocale] ?? $llmExplanations['overview']['en'] ?? $llmExplanations['overview']['zh_TW'] ?? '')));
     $llmStatus = strtolower(trim((string) ($llmExplanationStatus['status'] ?? '')));
     $llmStatusMessage = trim((string) ($llmExplanationStatus['message'] ?? ''));
+    $llmProgress = (float) ($llmExplanationStatus['progress'] ?? 0);
+    $llmProgress = max(0, min(100, $llmProgress));
+    $llmPhase = trim((string) ($llmExplanationStatus['phase'] ?? ''));
+    $llmStepIndex = isset($llmExplanationStatus['step_index']) ? (int) $llmExplanationStatus['step_index'] : null;
+    $llmTotalSteps = isset($llmExplanationStatus['total_steps']) ? (int) $llmExplanationStatus['total_steps'] : null;
+    $llmCurrentItems = is_array($llmExplanationStatus['current_items'] ?? null)
+        ? array_values(array_filter(array_map('strval', $llmExplanationStatus['current_items'])))
+        : [];
     $llmStartedAt = null;
     $llmPendingTooLong = false;
     if ($llmStatus === 'pending' && !empty($llmExplanationStatus['started_at'])) {
@@ -171,7 +179,20 @@
             $llmStartedAt = null;
         }
     }
-    $shouldAutoRefreshLlm = $llmStatus === 'pending' && !$llmPendingTooLong;
+    $recentlyTrainedWithoutExplanations = false;
+    if (empty($llmExplanations) && $trainedAt) {
+        try {
+            $recentlyTrainedWithoutExplanations = \Carbon\Carbon::parse($trainedAt)->gt(now()->subMinutes(15));
+        } catch (\Throwable $e) {
+            $recentlyTrainedWithoutExplanations = false;
+        }
+    }
+    $shouldPollLlm = !empty($summaryPublicUrl) && (
+        $llmStatus === 'pending'
+        || $llmStatus === ''
+        || ($llmStatus === 'success' && empty($llmExplanations))
+        || $recentlyTrainedWithoutExplanations
+    );
 @endphp
 
 <div class="row">
@@ -293,20 +314,51 @@
     </div>
 @endif
 
-@if($llmStatus === 'pending' && !empty($reportAssets) && !$llmPendingTooLong)
-    <div class="alert alert-info">
-        <div class="fw-bold mb-1">AI explanations are being generated</div>
-        <div class="small">
-            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'This page will refresh automatically in a few seconds.' }}
+@if(($llmStatus === 'pending' || ($llmStatus === '' && empty($llmExplanations) && !empty($reportAssets)) || ($llmStatus === 'success' && empty($llmExplanations))) && !empty($reportAssets))
+    <div
+        class="alert {{ $llmPendingTooLong ? 'alert-warning' : 'alert-info' }}"
+        id="llmProgressAlert"
+        data-summary-url="{{ $summaryPublicUrl }}"
+        data-should-poll="{{ $shouldPollLlm ? 'true' : 'false' }}"
+    >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="fw-bold" id="llmProgressTitle">
+                {{ $llmPendingTooLong ? 'AI explanations are delayed' : 'AI explanations are being generated' }}
+            </div>
+            <div class="small fw-bold" id="llmProgressPercent">{{ number_format($llmProgress, 0) }}%</div>
         </div>
-    </div>
-@elseif($llmStatus === 'pending' && !empty($reportAssets) && $llmPendingTooLong)
-    <div class="alert alert-warning">
-        <div class="fw-bold mb-1">AI explanations are delayed</div>
-        <div class="small">
-            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The background explanation job is taking longer than expected.' }}
+        <div class="progress" style="height: 10px;">
+            <div
+                id="llmProgressBar"
+                class="progress-bar {{ $llmPendingTooLong ? 'bg-warning' : 'progress-bar-striped progress-bar-animated' }}"
+                role="progressbar"
+                style="width: {{ $llmProgress }}%;"
+                aria-valuenow="{{ (int) round($llmProgress) }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+            ></div>
         </div>
-        <div class="small mt-1">Open the predict-service logs on the server to check the exact OpenAI/API error.</div>
+        <div class="small mt-2" id="llmProgressMessage">
+            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The AI explanation job is starting in the background.' }}
+        </div>
+        <div class="small text-muted mt-1" id="llmProgressMeta">
+            @if($llmStepIndex && $llmTotalSteps)
+                Step {{ $llmStepIndex }} / {{ $llmTotalSteps }}
+                @if($llmPhase !== '')
+                    • {{ ucfirst($llmPhase) }}
+                @endif
+            @elseif($llmPhase !== '')
+                {{ ucfirst($llmPhase) }}
+            @endif
+        </div>
+        <div class="small text-muted mt-1" id="llmProgressItems">
+            @if(!empty($llmCurrentItems))
+                {{ implode(' • ', $llmCurrentItems) }}
+            @endif
+        </div>
+        @if($llmPendingTooLong)
+            <div class="small mt-2">Open the predict-service logs on the server to check the exact OpenAI/API error.</div>
+        @endif
     </div>
 @elseif($llmStatus === 'error' && !empty($reportAssets))
     <div class="alert alert-danger">
@@ -317,8 +369,8 @@
     </div>
 @elseif(empty($llmExplanations) && !empty($reportAssets))
     <div class="alert alert-secondary">
-        <div class="fw-bold mb-1">AI explanations are not available</div>
-        <div class="small">This report does not contain explanation output.</div>
+        <div class="fw-bold mb-1">AI explanations are unavailable</div>
+        <div class="small">The report does not currently include explanation output, and no active background explanation status was found.</div>
     </div>
 @endif
 
@@ -543,11 +595,123 @@
 @endsection
 
 @section('scripts')
-@if($shouldAutoRefreshLlm)
+@if($shouldPollLlm)
 <script>
-setTimeout(function () {
-    window.location.reload();
-}, 12000);
+(() => {
+    const alertBox = document.getElementById('llmProgressAlert');
+    if (!alertBox || alertBox.dataset.shouldPoll !== 'true') {
+        return;
+    }
+
+    const summaryUrl = alertBox.dataset.summaryUrl;
+    if (!summaryUrl) {
+        return;
+    }
+
+    const titleEl = document.getElementById('llmProgressTitle');
+    const percentEl = document.getElementById('llmProgressPercent');
+    const barEl = document.getElementById('llmProgressBar');
+    const messageEl = document.getElementById('llmProgressMessage');
+    const metaEl = document.getElementById('llmProgressMeta');
+    const itemsEl = document.getElementById('llmProgressItems');
+
+    let stopped = false;
+
+    const setAlertClass = (className) => {
+        alertBox.className = className;
+    };
+
+    const updateDom = (statusPayload, hasExplanations) => {
+        const status = String(statusPayload.status || '').toLowerCase();
+        const progress = Math.max(0, Math.min(100, Number(statusPayload.progress || 0)));
+        const phase = String(statusPayload.phase || '').trim();
+        const stepIndex = Number(statusPayload.step_index || 0);
+        const totalSteps = Number(statusPayload.total_steps || 0);
+        const items = Array.isArray(statusPayload.current_items) ? statusPayload.current_items.filter(Boolean) : [];
+        const message = String(statusPayload.message || '').trim();
+
+        if (percentEl) {
+            percentEl.textContent = `${Math.round(progress)}%`;
+        }
+        if (barEl) {
+            barEl.style.width = `${progress}%`;
+            barEl.setAttribute('aria-valuenow', String(Math.round(progress)));
+        }
+        if (messageEl) {
+            messageEl.textContent = message || 'The AI explanation job is running.';
+        }
+        if (metaEl) {
+            const stepText = stepIndex > 0 && totalSteps > 0 ? `Step ${stepIndex} / ${totalSteps}` : '';
+            const phaseText = phase ? `${phase.charAt(0).toUpperCase()}${phase.slice(1)}` : '';
+            metaEl.textContent = [stepText, phaseText].filter(Boolean).join(' • ');
+        }
+        if (itemsEl) {
+            itemsEl.textContent = items.join(' • ');
+        }
+
+        if (status === 'success' && hasExplanations) {
+            setAlertClass('alert alert-success');
+            if (titleEl) {
+                titleEl.textContent = 'AI explanations completed';
+            }
+            if (messageEl) {
+                messageEl.textContent = message || 'Reloading the report to display the new explanations.';
+            }
+            if (barEl) {
+                barEl.className = 'progress-bar bg-success';
+                barEl.style.width = '100%';
+            }
+            stopped = true;
+            window.setTimeout(() => window.location.reload(), 1200);
+            return;
+        }
+
+        if (status === 'error') {
+            setAlertClass('alert alert-danger');
+            if (titleEl) {
+                titleEl.textContent = 'AI explanations failed';
+            }
+            if (barEl) {
+                barEl.className = 'progress-bar bg-danger';
+            }
+            stopped = true;
+            return;
+        }
+
+        if (titleEl) {
+            titleEl.textContent = 'AI explanations are being generated';
+        }
+        setAlertClass('alert alert-info');
+        if (barEl) {
+            barEl.className = 'progress-bar progress-bar-striped progress-bar-animated';
+        }
+    };
+
+    const poll = async () => {
+        if (stopped) {
+            return;
+        }
+
+        try {
+            const response = await fetch(summaryUrl, { headers: { Accept: 'application/json' }, cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const summary = await response.json();
+            updateDom(summary.llm_explanations_status || {}, !!summary.llm_explanations);
+        } catch (error) {
+            if (messageEl) {
+                messageEl.textContent = 'Waiting for the explanation status from the server...';
+            }
+        }
+
+        if (!stopped) {
+            window.setTimeout(poll, 3500);
+        }
+    };
+
+    window.setTimeout(poll, 1500);
+})();
 </script>
 @endif
 @endsection

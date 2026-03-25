@@ -511,6 +511,11 @@ def update_report_explanation_status(
     message: str = "",
     report_root: str | Path | None = None,
     started_at: str | None = None,
+    progress: float | None = None,
+    phase: str | None = None,
+    step_index: int | None = None,
+    total_steps: int | None = None,
+    current_items: List[str] | None = None,
 ) -> Dict[str, Any]:
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
@@ -530,10 +535,18 @@ def update_report_explanation_status(
     if summary_path.exists():
         summary = _read_json(summary_path)
         existing = dict(summary.get("llm_explanations_status") or {})
-        if existing:
-            payload["started_at"] = started_at or existing.get("started_at") or payload["updated_at"]
-        else:
-            payload["started_at"] = started_at or payload["updated_at"]
+        payload["started_at"] = started_at or existing.get("started_at") or payload["updated_at"]
+
+        optional_fields = {
+            "progress": max(0.0, min(100.0, round(float(progress), 1))) if progress is not None else existing.get("progress"),
+            "phase": str(phase).strip() if phase is not None else existing.get("phase"),
+            "step_index": int(step_index) if step_index is not None else existing.get("step_index"),
+            "total_steps": int(total_steps) if total_steps is not None else existing.get("total_steps"),
+            "current_items": list(current_items) if current_items is not None else existing.get("current_items"),
+        }
+        for key, value in optional_fields.items():
+            if value is not None:
+                payload[key] = value
         summary["llm_explanations_status"] = payload
         summary_path.write_text(
             json.dumps(summary, ensure_ascii=False, indent=2),
@@ -541,6 +554,16 @@ def update_report_explanation_status(
         )
     else:
         payload["started_at"] = started_at or payload["updated_at"]
+        if progress is not None:
+            payload["progress"] = max(0.0, min(100.0, round(float(progress), 1)))
+        if phase is not None:
+            payload["phase"] = str(phase).strip()
+        if step_index is not None:
+            payload["step_index"] = int(step_index)
+        if total_steps is not None:
+            payload["total_steps"] = int(total_steps)
+        if current_items is not None:
+            payload["current_items"] = list(current_items)
 
     report_info["llm_explanations_status"] = payload
     return payload
@@ -572,15 +595,39 @@ def generate_report_explanations(
         runtime=runtime,
     )
     all_assets = list(prompt_payload["assets"])
+    asset_batches = _chunk_assets(all_assets, 2)
+    total_steps = len(asset_batches) + 2
+    update_report_explanation_status(
+        report_info=report_info,
+        status="pending",
+        message=f"Prepared {len(all_assets)} charts/tables for AI explanation.",
+        report_root=report_root,
+        progress=10,
+        phase="preparing",
+        step_index=1,
+        total_steps=total_steps,
+        current_items=[str(item.get("title") or item.get("key") or "") for item in all_assets[:2]],
+    )
     overview = {"en": "", "zh_TW": ""}
     asset_map: Dict[str, Dict[str, str]] = {}
 
     try:
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message="Generating the overall AI overview.",
+            report_root=report_root,
+            progress=20,
+            phase="overview",
+            step_index=2,
+            total_steps=total_steps,
+            current_items=["AI Report Overview"],
+        )
         overview = _generate_global_overview(prompt_payload, api_key)
     except Exception as exc:
         print(f"⚠️ OpenAI global overview generation failed: {exc}")
 
-    for batch_index, asset_batch in enumerate(_chunk_assets(all_assets, 2)):
+    for batch_index, asset_batch in enumerate(asset_batches):
         batch_keys = [item["key"] for item in asset_batch]
         batch_payload = dict(prompt_payload)
         batch_payload["assets"] = asset_batch
@@ -612,6 +659,21 @@ def generate_report_explanations(
             "max_completion_tokens": 1800,
         }
 
+        current_titles = [str(item.get("title") or item.get("key") or "") for item in asset_batch]
+        batch_start_progress = 25 + ((batch_index / max(1, len(asset_batches))) * 65)
+        batch_end_progress = 25 + (((batch_index + 1) / max(1, len(asset_batches))) * 65)
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message=f"Generating explanations for batch {batch_index + 1}/{len(asset_batches)}.",
+            report_root=report_root,
+            progress=batch_start_progress,
+            phase="assets",
+            step_index=batch_index + 3,
+            total_steps=total_steps,
+            current_items=current_titles,
+        )
+
         try:
             parsed = _call_openai(request_payload, api_key)
         except Exception as exc:
@@ -634,6 +696,18 @@ def generate_report_explanations(
                 "zh_TW": str(item.get("zh_TW") or "").strip(),
             }
 
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message=f"Completed batch {batch_index + 1}/{len(asset_batches)}.",
+            report_root=report_root,
+            progress=batch_end_progress,
+            phase="assets",
+            step_index=batch_index + 3,
+            total_steps=total_steps,
+            current_items=current_titles,
+        )
+
     explanation_payload = {
         "provider": "openai",
         "model": OPENAI_REPORT_MODEL,
@@ -650,12 +724,26 @@ def generate_report_explanations(
 
     summary_path = report_dir / "summary.json"
     if summary_path.exists():
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message="Saving explanation output to the report.",
+            report_root=report_root,
+            progress=95,
+            phase="finalizing",
+            step_index=total_steps,
+            total_steps=total_steps,
+        )
         _update_summary_file(summary_path, explanation_payload)
         update_report_explanation_status(
             report_info=report_info,
             status="success",
             message="AI explanations generated successfully.",
             report_root=report_root,
+            progress=100,
+            phase="completed",
+            step_index=total_steps,
+            total_steps=total_steps,
         )
 
     files = dict(report_info.get("files") or {})

@@ -231,9 +231,11 @@ class AdminController extends Controller
         $summary = null;
         $summaryError = null;
         $routePrefix = '/' . ltrim((string) ($reportInfo['route_prefix'] ?? ''), '/');
+        $summaryPublicUrl = null;
 
         if (!empty($routePrefix) && $routePrefix !== '/') {
             $summaryUrl = $predictServiceInternalBase . $routePrefix . '/summary.json';
+            $summaryPublicUrl = $predictServicePublicBase . $routePrefix . '/summary.json';
             try {
                 $summaryResponse = Http::timeout(15)->acceptJson()->get($summaryUrl);
                 if ($summaryResponse->successful()) {
@@ -321,6 +323,7 @@ class AdminController extends Controller
             'routeNamespace' => $routeNamespace,
             'reportInfo' => $reportInfo,
             'summary' => $summary,
+            'summaryPublicUrl' => $summaryPublicUrl,
             'summaryError' => $summaryError,
             'reportAssets' => $reportAssets,
             'llmExplanations' => $llmExplanations,
