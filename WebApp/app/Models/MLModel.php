@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class MLModel extends Model
 {
     use HasFactory;
+
+    protected static array $reportArtifactSizeCache = [];
 
     protected $table = 'ml_models';
 
@@ -133,6 +137,67 @@ class MLModel extends Model
             return round($sizeInBytes / 1024 / 1024, 2); // MB
         }
         return 0;
+    }
+
+    public function getDisplayFileSizeAttribute()
+    {
+        $localFileSize = $this->getFileSizeAttribute();
+        if ($localFileSize > 0) {
+            return $localFileSize;
+        }
+
+        $artifactUrl = $this->getInternalBestModelArtifactUrl();
+        if (!$artifactUrl) {
+            return 0;
+        }
+
+        if (array_key_exists($artifactUrl, self::$reportArtifactSizeCache)) {
+            return self::$reportArtifactSizeCache[$artifactUrl];
+        }
+
+        try {
+            $response = Http::timeout(5)->head($artifactUrl);
+            if (!$response->successful()) {
+                self::$reportArtifactSizeCache[$artifactUrl] = 0;
+                return 0;
+            }
+
+            $sizeInBytes = (int) ($response->header('Content-Length') ?? 0);
+            $sizeInMb = $sizeInBytes > 0
+                ? round($sizeInBytes / 1024 / 1024, 2)
+                : 0;
+
+            self::$reportArtifactSizeCache[$artifactUrl] = $sizeInMb;
+            return $sizeInMb;
+        } catch (\Throwable $exception) {
+            Log::warning('Could not resolve ML model artifact size from report route.', [
+                'model_id' => $this->id,
+                'model_name' => $this->MLMName,
+                'artifact_url' => $artifactUrl,
+                'error' => $exception->getMessage(),
+            ]);
+
+            self::$reportArtifactSizeCache[$artifactUrl] = 0;
+            return 0;
+        }
+    }
+
+    private function getInternalBestModelArtifactUrl(): ?string
+    {
+        $reportInfo = $this->training_report;
+        if (!is_array($reportInfo)) {
+            return null;
+        }
+
+        $routePrefix = trim((string) ($reportInfo['route_prefix'] ?? ''));
+        $bestModelFilename = trim((string) (($reportInfo['files']['best_model'] ?? '') ?: basename((string) $this->FilePath)));
+        $baseUrl = rtrim((string) config('services.predict_service.url', ''), '/');
+
+        if ($routePrefix === '' || $bestModelFilename === '' || $baseUrl === '') {
+            return null;
+        }
+
+        return $baseUrl . '/' . ltrim($routePrefix, '/') . '/' . rawurlencode($bestModelFilename);
     }
 
     /**

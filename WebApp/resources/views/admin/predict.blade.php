@@ -78,7 +78,7 @@
                             @foreach($models as $model)
                                 <option value="{{ $model->id }}"
                                         data-lib-type="{{ $model->LibType }}"
-                                        data-file-size="{{ $model->file_size }}"
+                                        data-file-size="{{ $model->display_file_size }}"
                                         data-mlflow-run-id="{{ $model->mlflow_run_id ?? '' }}"
                                         data-has-mlflow="{{ !empty($model->mlflow_run_id) ? 'true' : 'false' }}"
                                         {{ $loop->first ? 'selected' : '' }}>
@@ -87,8 +87,8 @@
                                         [{{ __('predict.mlflow_badge') }}]
                                     @endif
                                     ({{ ucfirst($model->LibType) }})
-                                    @if($model->file_size > 0)
-                                        - {{ $model->file_size }}MB
+                                    @if($model->display_file_size > 0)
+                                        - {{ $model->display_file_size }}MB
                                     @endif
                                 </option>
                             @endforeach

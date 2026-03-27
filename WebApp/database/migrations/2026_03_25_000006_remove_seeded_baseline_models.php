@@ -7,12 +7,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::table('ml_models')
+        $baselineModelIds = DB::table('ml_models')
             ->whereIn('MLMName', [
                 'Hydrogen RF Baseline',
                 'Hydrogen XGBoost Baseline',
                 'Hydrogen ANN Baseline',
             ])
+            ->pluck('id');
+
+        if ($baselineModelIds->isEmpty()) {
+            return;
+        }
+
+        DB::table('predictions')
+            ->whereIn('ml_model_id', $baselineModelIds)
+            ->delete();
+
+        DB::table('ml_models')
+            ->whereIn('id', $baselineModelIds)
             ->delete();
     }
 
