@@ -205,6 +205,8 @@
                                             @method('PUT')
                                             <input type="hidden" name="MLMName" value="{{ $model->MLMName }}">
                                             <input type="hidden" name="LibType" value="{{ $model->LibType }}">
+                                            <input type="hidden" name="MSEValue" value="{{ $model->MSEValue ?? 0 }}">
+                                            <input type="hidden" name="MAEValue" value="{{ $model->MAEValue ?? 0 }}">
                                             <!-- Don't include IsActive checkbox to make it false -->
                                             <button type="submit" class="btn btn-warning btn-sm">
                                                 <i class="bi bi-pause"></i> {{ __('models.deactivate') }}
