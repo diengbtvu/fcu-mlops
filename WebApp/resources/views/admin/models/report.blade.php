@@ -158,7 +158,14 @@
     ));
     $downloadKeys = array_merge($downloadPriorityKeys, $remainingDownloadKeys);
     $bundleAsset = $reportAssets['training_bundle_zip'] ?? null;
-    $overviewExplanation = trim((string) (($llmExplanations['overview'][$explanationLocale] ?? $llmExplanations['overview']['en'] ?? $llmExplanations['overview']['zh_TW'] ?? '')));
+    $overviewRaw = trim((string) (($llmExplanations['overview'][$explanationLocale] ?? $llmExplanations['overview']['en'] ?? $llmExplanations['overview']['zh_TW'] ?? '')));
+    // Strip the other language if the LLM accidentally merged both into one string.
+    if ($explanationLocale === 'en' && preg_match('/\bzh_TW\s*[：:]/u', $overviewRaw)) {
+        $overviewRaw = trim(preg_replace('/\bzh_TW\s*[：:].*$/su', '', $overviewRaw));
+    } elseif ($explanationLocale === 'zh_TW' && preg_match('/\bzh_TW\s*[：:]/u', $overviewRaw)) {
+        $overviewRaw = trim(preg_replace('/^.*?\bzh_TW\s*[：:]\s*/su', '', $overviewRaw));
+    }
+    $overviewExplanation = $overviewRaw;
     $llmStatus = strtolower(trim((string) ($llmExplanationStatus['status'] ?? '')));
     $llmStatusMessage = trim((string) ($llmExplanationStatus['message'] ?? ''));
     $llmProgress = (float) ($llmExplanationStatus['progress'] ?? 0);
