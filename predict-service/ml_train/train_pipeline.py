@@ -197,20 +197,24 @@ class GreyRelationalAnalysis:
         X_normalized = _minmax(X)
 
         # Steps 2-3: Deviation sequences & Grey Relational Coefficients
-        grey_relations: Dict[str, float] = {}
-        for idx, feature_name in enumerate(feature_names):
-            xi_seq = X_normalized[:, idx]
-            delta = np.abs(y_normalized - xi_seq)
-            delta_min = delta.min()
-            delta_max = delta.max()
+        # Compute all deviation sequences at once: Δ₀ᵢ(k) = |y*(k) − xᵢ*(k)|
+        deltas = np.abs(y_normalized[:, None] - X_normalized)  # (n_samples, n_features)
 
-            if delta_max == 0:
-                correlation_coefficients = np.ones_like(delta)
-            else:
-                correlation_coefficients = (delta_min + self.xi * delta_max) / (
-                    delta + self.xi * delta_max
-                )
-            grey_relations[str(feature_name)] = float(correlation_coefficients.mean())
+        # Global Δmin and Δmax across ALL features and ALL samples
+        # Δmin = min∀i min∀k Δ₀ᵢ(k),  Δmax = max∀i max∀k Δ₀ᵢ(k)
+        delta_min = deltas.min()
+        delta_max = deltas.max()
+
+        grey_relations: Dict[str, float] = {}
+        if delta_max == 0:
+            for idx, feature_name in enumerate(feature_names):
+                grey_relations[str(feature_name)] = 1.0
+        else:
+            coefficients = (delta_min + self.xi * delta_max) / (
+                deltas + self.xi * delta_max
+            )  # (n_samples, n_features)
+            for idx, feature_name in enumerate(feature_names):
+                grey_relations[str(feature_name)] = float(coefficients[:, idx].mean())
 
         self.grey_relations = grey_relations
         self.ranking = sorted(

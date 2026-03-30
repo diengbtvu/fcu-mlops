@@ -75,25 +75,30 @@ class GreyRelationalAnalysis:
         y_norm = self._minmax_normalize(y)
         X_norm = self._minmax_normalize(X)
 
-        # --- Step 2 & 3: Compute grey relation degree for each feature ---
+        # --- Step 2: Deviation sequences for ALL features ---
+        # Δ₀ᵢ(k) = |x₀*(k) − xᵢ*(k)|   for each feature i
+        n_features = X_norm.shape[1]
+        deltas = np.abs(y_norm[:, None] - X_norm)          # (n_samples, n_features)
+
+        # Global Δmin and Δmax across ALL features and ALL samples
+        # Δmin = min∀i min∀k Δ₀ᵢ(k),  Δmax = max∀i max∀k Δ₀ᵢ(k)
+        delta_min = deltas.min()
+        delta_max = deltas.max()
+
+        # --- Step 3: Grey Relational Coefficient — Equation (2) ---
         grey_relations = {}
-        for i, fname in enumerate(feature_names):
-            xi_seq = X_norm[:, i]
-            # Deviation sequence
-            delta = np.abs(y_norm - xi_seq)
-            delta_min = delta.min()
-            delta_max = delta.max()
+        if delta_max == 0:
+            # All sequences identical → perfect correlation
+            for i, fname in enumerate(feature_names):
+                grey_relations[fname] = 1.0
+        else:
+            coefficients = (delta_min + self.xi * delta_max) / (
+                deltas + self.xi * delta_max
+            )   # (n_samples, n_features)
 
-            # Grey Relational Coefficient — Equation (2)
-            if delta_max == 0:
-                coefficients = np.ones_like(delta)
-            else:
-                coefficients = (delta_min + self.xi * delta_max) / (
-                    delta + self.xi * delta_max
-                )
-
-            # Grey Relational Grade — mean of coefficients
-            grey_relations[fname] = float(coefficients.mean())
+            # Grey Relational Grade — mean of coefficients per feature
+            for i, fname in enumerate(feature_names):
+                grey_relations[fname] = float(coefficients[:, i].mean())
 
         self.grey_relations = grey_relations
 
