@@ -479,8 +479,8 @@ class AdminController extends Controller
 
         $request->validate([
             'MLMName' => 'required|string|max:255',
-            'MSEValue' => 'required|numeric|min:0',
-            'MAEValue' => 'required|numeric|min:0',
+            'MSEValue' => 'nullable|numeric|min:0',
+            'MAEValue' => 'nullable|numeric|min:0',
             'model_file' => [
                 'nullable',
                 'file',
@@ -516,8 +516,8 @@ class AdminController extends Controller
             'MLMName' => $request->MLMName,
             'LibType' => $request->LibType,
             'IsActive' => $request->has('IsActive'),
-            'MSEValue' => $request->MSEValue ?? 0.0, // Default to 0 if not provided
-            'MAEValue' => $request->MAEValue ?? 0.0, // Default to 0 if not provided
+            'MSEValue' => $request->MSEValue ?? $model->MSEValue ?? 0.0,
+            'MAEValue' => $request->MAEValue ?? $model->MAEValue ?? 0.0,
         ];
 
         if ($request->hasFile('model_file')) {
