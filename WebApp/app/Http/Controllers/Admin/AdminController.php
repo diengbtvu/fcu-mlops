@@ -577,6 +577,11 @@ class AdminController extends Controller
         return redirect()->route('admin.models')->with('success', "Model '{$modelName}' deleted successfully.");
     }
 
+    private function isDefaultModel(MLModel $model): bool
+    {
+        return $model->id === 1;
+    }
+
     public function forceDeleteModel(MLModel $model)
     {
         // Force delete: delete all associated predictions first
