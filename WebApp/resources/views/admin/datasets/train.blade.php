@@ -296,11 +296,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let progressInterval = null;
 
     function buildReportAssetUrl(reportInfo, filename) {
-        const baseUrl = (PREDICT_SERVICE_PUBLIC_URL || PREDICT_SERVICE_URL || '').replace(/\/+$/, '');
         const routePrefixRaw = String(reportInfo?.route_prefix || '').trim();
         const routePrefix = routePrefixRaw.startsWith('/') ? routePrefixRaw : `/${routePrefixRaw}`;
         const encodedFile = String(filename || '').split('/').map(encodeURIComponent).join('/');
-        return `${baseUrl}${routePrefix}/${encodedFile}`;
+        return `${routePrefix}/${encodedFile}`;
     }
 
     function buildReportPageUrl(modelId) {

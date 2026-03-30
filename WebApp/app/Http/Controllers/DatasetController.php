@@ -100,16 +100,8 @@ class DatasetController extends Controller
             return null;
         }
 
-        $predictServicePublicBase = rtrim(
-            (string) config(
-                'services.predict_service.public_url',
-                config('services.predict_service.url', 'http://localhost:5000')
-            ),
-            '/'
-        );
-
         return $this->buildReportAssetUrl(
-            $predictServicePublicBase,
+            '',
             $routePrefix,
             $bundleFilename
         );

@@ -266,7 +266,7 @@ class AdminController extends Controller
             $reportAssets[$key] = [
                 'filename' => $filename,
                 'url' => $this->buildReportAssetUrl(
-                    $predictServicePublicBase,
+                    '',
                     $routePrefix,
                     $filename
                 ),
