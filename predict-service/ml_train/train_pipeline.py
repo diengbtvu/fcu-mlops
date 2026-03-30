@@ -181,11 +181,22 @@ class GreyRelationalAnalysis:
         if feature_names is None:
             feature_names = [f"Feature_{idx}" for idx in range(X.shape[1])]
 
-        y_mean = y.mean()
-        y_normalized = y / y_mean if y_mean != 0 else y
-        X_normalized = X / X.mean(axis=0)
-        X_normalized = np.nan_to_num(X_normalized, nan=1.0)
+        # Step 1: MinMax normalisation to [0, 1] (paper Section 2.2)
+        def _minmax(arr: np.ndarray) -> np.ndarray:
+            if arr.ndim == 1:
+                lo, hi = arr.min(), arr.max()
+                return (arr - lo) / (hi - lo) if hi != lo else np.zeros_like(arr)
+            lo = arr.min(axis=0)
+            hi = arr.max(axis=0)
+            denom = hi - lo
+            with np.errstate(divide='ignore', invalid='ignore'):
+                out = np.where(denom != 0, (arr - lo) / denom, 0.0)
+            return np.nan_to_num(out, nan=0.0)
 
+        y_normalized = _minmax(y)
+        X_normalized = _minmax(X)
+
+        # Steps 2-3: Deviation sequences & Grey Relational Coefficients
         grey_relations: Dict[str, float] = {}
         for idx, feature_name in enumerate(feature_names):
             xi_seq = X_normalized[:, idx]
@@ -193,9 +204,12 @@ class GreyRelationalAnalysis:
             delta_min = delta.min()
             delta_max = delta.max()
 
-            correlation_coefficients = (delta_min + self.xi * delta_max) / (
-                delta + self.xi * delta_max
-            )
+            if delta_max == 0:
+                correlation_coefficients = np.ones_like(delta)
+            else:
+                correlation_coefficients = (delta_min + self.xi * delta_max) / (
+                    delta + self.xi * delta_max
+                )
             grey_relations[str(feature_name)] = float(correlation_coefficients.mean())
 
         self.grey_relations = grey_relations
