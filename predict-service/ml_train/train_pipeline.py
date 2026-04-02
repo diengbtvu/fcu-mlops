@@ -1512,11 +1512,24 @@ def train_and_save_model(
     if return_runtime:
         summary["_runtime"] = {
             "best_model_object": best_model,
+            "best_model_name": best_model_name,
+            "best_model_type": MODEL_NAME_TO_API_TYPE[best_model_name],
+            "model_results": results,
+            "trained_models": trained_models,
+            "feature_names": list(feature_names),
             "X_train_df": pd.DataFrame(X_train, columns=feature_names),
             "X_test_df": pd.DataFrame(X_test, columns=feature_names),
+            "X_norm_df": pd.DataFrame(X_norm, columns=feature_names),
             "y_train_series": pd.Series(y_train, name=TARGET_COLUMN),
             "y_test_series": pd.Series(y_test, name=TARGET_COLUMN),
+            "y_norm_series": pd.Series(y_norm, name=TARGET_COLUMN),
             "cleaned_df": df.copy(),
+            "incremental_results_df": incremental_results.copy(),
+            "shap_importance_df": shap_importance.copy(),
+            "top_features": list(top_features),
+            "gra_ranking": _ranking_to_serializable(gra_ranking),
+            "selected_sheet": resolved_sheet,
+            "rows_after_preprocessing": int(len(df)),
         }
 
     _notify_progress(progress_callback, 100, "Training completed. Best model saved.")

@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List
 
+import numpy as np
 import pandas as pd
 import requests
 from dotenv import load_dotenv
@@ -13,6 +14,7 @@ from dotenv import load_dotenv
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2")
 EXPLANATIONS_FILENAME = "llm_explanations.json"
+ASSET_EVIDENCE_FILENAME = "asset_evidence.json"
 STATUS_FILENAME = "llm_explanations_status"
 
 EXPLAINABLE_ASSET_LABELS: Dict[str, str] = {
@@ -155,11 +157,302 @@ def _sort_model_rows(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return sorted(rows, key=_sort_key)
 
 
+def _safe_float(value: Any, digits: int = 6) -> float | None:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+
+    if not np.isfinite(number):
+        return None
+
+    return round(number, digits)
+
+
+def _json_safe_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _json_safe_value(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_json_safe_value(item) for item in value]
+    if isinstance(value, tuple):
+        return [_json_safe_value(item) for item in value]
+    if isinstance(value, np.ndarray):
+        return [_json_safe_value(item) for item in value.tolist()]
+    if isinstance(value, np.generic):
+        return _json_safe_value(value.item())
+    if isinstance(value, float):
+        return value if np.isfinite(value) else None
+    return value
+
+
+def _normalize_matrix(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df
+
+    working = df.copy()
+    first_col = str(working.columns[0])
+    if first_col.lower().startswith("unnamed") or first_col == "":
+        working = working.rename(columns={first_col: "feature"})
+
+    if "feature" in working.columns:
+        working = working.set_index("feature")
+
+    return working
+
+
+def _top_target_correlations(
+    df: pd.DataFrame,
+    target: str = "HPR",
+    limit: int = 6,
+) -> List[Dict[str, Any]]:
+    working = _normalize_matrix(df)
+    if working.empty or target not in working.columns:
+        return []
+
+    pairs: List[Dict[str, Any]] = []
+    series = working[target].drop(labels=[target], errors="ignore")
+    for feature, value in series.items():
+        try:
+            corr = float(value)
+        except (TypeError, ValueError):
+            continue
+        if pd.isna(corr):
+            continue
+        pairs.append(
+            {
+                "feature": str(feature),
+                "correlation": round(corr, 4),
+                "abs_correlation": round(abs(corr), 4),
+            }
+        )
+
+    pairs.sort(key=lambda item: item["abs_correlation"], reverse=True)
+    return pairs[:limit]
+
+
+def _row_feature_name(row: Dict[str, Any]) -> str:
+    return str(
+        row.get("feature")
+        or row.get("Unnamed: 0")
+        or row.get("index")
+        or row.get("name")
+        or ""
+    ).strip()
+
+
+def _feature_distribution_summary(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if not rows:
+        return {
+            "highest_mean_features": [],
+            "highest_std_features": [],
+        }
+
+    by_mean = sorted(
+        [
+            {
+                "feature": _row_feature_name(row),
+                "mean": _safe_float(row.get("mean"), 4),
+            }
+            for row in rows
+            if _row_feature_name(row)
+        ],
+        key=lambda item: item["mean"] if item["mean"] is not None else float("-inf"),
+        reverse=True,
+    )
+    by_std = sorted(
+        [
+            {
+                "feature": _row_feature_name(row),
+                "std": _safe_float(row.get("std"), 4),
+            }
+            for row in rows
+            if _row_feature_name(row)
+        ],
+        key=lambda item: item["std"] if item["std"] is not None else float("-inf"),
+        reverse=True,
+    )
+
+    return {
+        "highest_mean_features": by_mean[:5],
+        "highest_std_features": by_std[:5],
+    }
+
+
+def _incremental_model_bests(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    if not rows:
+        return []
+
+    df = pd.DataFrame(rows)
+    results: List[Dict[str, Any]] = []
+    for model_name in ("SVM", "DT", "RF", "KNN", "XGBoost"):
+        r2_col = f"{model_name}_R2"
+        mse_col = f"{model_name}_MSE"
+        if r2_col not in df.columns or mse_col not in df.columns:
+            continue
+
+        ranked = (
+            df[["n_features", "feature_subset", r2_col, mse_col]]
+            .dropna(subset=[r2_col, mse_col], how="any")
+            .sort_values(by=[r2_col, mse_col], ascending=[False, True])
+        )
+        if ranked.empty:
+            continue
+
+        best_row = ranked.iloc[0]
+        results.append(
+            {
+                "model": model_name,
+                "best_n_features": int(best_row["n_features"]),
+                "best_feature_subset": str(best_row["feature_subset"]),
+                "best_r2": _safe_float(best_row[r2_col], 6),
+                "best_mse": _safe_float(best_row[mse_col], 6),
+            }
+        )
+
+    return results
+
+
+def _prediction_diagnostics(y_true: Any, y_pred: Any) -> Dict[str, Any]:
+    actual = np.asarray(y_true, dtype=float).reshape(-1)
+    predicted = np.asarray(y_pred, dtype=float).reshape(-1)
+    sample_count = min(actual.size, predicted.size)
+    if sample_count == 0:
+        return {}
+
+    actual = actual[:sample_count]
+    predicted = predicted[:sample_count]
+    residuals = predicted - actual
+    abs_residuals = np.abs(residuals)
+
+    diagnostics: Dict[str, Any] = {
+        "sample_count": int(sample_count),
+        "actual_min": _safe_float(np.min(actual), 6),
+        "actual_max": _safe_float(np.max(actual), 6),
+        "predicted_min": _safe_float(np.min(predicted), 6),
+        "predicted_max": _safe_float(np.max(predicted), 6),
+        "residual_mean": _safe_float(np.mean(residuals), 6),
+        "residual_std": _safe_float(np.std(residuals), 6),
+        "mean_abs_residual": _safe_float(np.mean(abs_residuals), 6),
+        "max_abs_residual": _safe_float(np.max(abs_residuals), 6),
+        "p95_abs_residual": _safe_float(np.percentile(abs_residuals, 95), 6),
+    }
+
+    largest_error_index = int(np.argmax(abs_residuals))
+    diagnostics["largest_error_index"] = largest_error_index
+    diagnostics["largest_error_actual"] = _safe_float(actual[largest_error_index], 6)
+    diagnostics["largest_error_predicted"] = _safe_float(predicted[largest_error_index], 6)
+
+    if sample_count > 1:
+        corr = np.corrcoef(actual, predicted)[0, 1]
+        diagnostics["pred_actual_correlation"] = _safe_float(corr, 6)
+        try:
+            slope, intercept = np.polyfit(actual, predicted, 1)
+            diagnostics["linear_fit_slope"] = _safe_float(slope, 6)
+            diagnostics["linear_fit_intercept"] = _safe_float(intercept, 6)
+        except Exception:
+            diagnostics["linear_fit_slope"] = None
+            diagnostics["linear_fit_intercept"] = None
+
+    return diagnostics
+
+
+def _sequence_diagnostics(y_actual: Any, y_predicted: Any) -> Dict[str, Any]:
+    actual = np.asarray(y_actual, dtype=float).reshape(-1)
+    predicted = np.asarray(y_predicted, dtype=float).reshape(-1)
+    sample_count = min(actual.size, predicted.size)
+    if sample_count == 0:
+        return {}
+
+    actual = actual[:sample_count]
+    predicted = predicted[:sample_count]
+    abs_gap = np.abs(predicted - actual)
+
+    diagnostics: Dict[str, Any] = {
+        "sample_count": int(sample_count),
+        "actual_peak_index": int(np.argmax(actual)),
+        "actual_peak_value": _safe_float(np.max(actual), 6),
+        "predicted_peak_index": int(np.argmax(predicted)),
+        "predicted_peak_value": _safe_float(np.max(predicted), 6),
+        "mean_abs_gap": _safe_float(np.mean(abs_gap), 6),
+        "max_abs_gap": _safe_float(np.max(abs_gap), 6),
+    }
+
+    if sample_count > 1:
+        corr = np.corrcoef(actual, predicted)[0, 1]
+        diagnostics["sequence_correlation"] = _safe_float(corr, 6)
+
+    return diagnostics
+
+
+def _format_model_metric_rows(rows: List[Dict[str, Any]], limit: int = 5) -> str:
+    formatted = []
+    for row in rows[:limit]:
+        model_name = str(row.get("model") or "").strip()
+        if not model_name:
+            continue
+        formatted.append(
+            (
+                f"{model_name}: R2={_safe_float(row.get('r2_score'), 4)}, "
+                f"RMSE={_safe_float(row.get('rmse'), 4)}, "
+                f"MSE={_safe_float(row.get('mse'), 5)}, "
+                f"MAE={_safe_float(row.get('mae'), 4)}"
+            )
+        )
+    return " | ".join(formatted)
+
+
+def _format_ranked_feature_rows(
+    rows: List[Dict[str, Any]],
+    value_key: str,
+    limit: int = 5,
+) -> str:
+    formatted = []
+    for row in rows[:limit]:
+        feature = _row_feature_name(row)
+        if not feature:
+            feature = str(row.get("feature") or "").strip()
+        if not feature:
+            continue
+        formatted.append(f"{feature}={_safe_float(row.get(value_key), 4)}")
+    return " | ".join(formatted)
+
+
+def _persist_asset_evidence(
+    report_dir: Path,
+    report_info: Dict[str, Any],
+    payload: Dict[str, Any],
+) -> None:
+    evidence_path = report_dir / ASSET_EVIDENCE_FILENAME
+    evidence_path.write_text(
+        json.dumps(_json_safe_value(payload), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    files = dict(report_info.get("files") or {})
+    files["asset_evidence"] = ASSET_EVIDENCE_FILENAME
+    report_info["files"] = files
+
+    summary_path = report_dir / "summary.json"
+    if summary_path.exists():
+        summary = _read_json(summary_path)
+        summary_files = dict(summary.get("files") or {})
+        summary_files["asset_evidence"] = ASSET_EVIDENCE_FILENAME
+        summary["files"] = summary_files
+        summary_path.write_text(
+            json.dumps(summary, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+
 def _build_asset_evidence(
     explainable_assets: List[Dict[str, Any]],
+    report_info: Dict[str, Any],
     report_context: Dict[str, Any],
     pipeline_result: Dict[str, Any],
-) -> List[Dict[str, Any]]:
+    runtime: Dict[str, Any] | None,
+) -> Dict[str, Any]:
+    files = dict(report_info.get("files") or {})
+    route_prefix = str(report_info.get("route_prefix") or "").strip()
     best_model = str(pipeline_result.get("best_model") or report_context.get("best_model") or "").strip()
     benchmark_rows = _sort_model_rows(list(report_context.get("model_comparison_table") or []))
     top_gra = list(report_context.get("gra_ranking") or [])[:5]
@@ -167,13 +460,39 @@ def _build_asset_evidence(
     feature_importance = list(report_context.get("feature_importance_table") or [])[:6]
     shap_importance = list(report_context.get("shap_importance_table") or [])[:6]
     strongest_correlations = list(report_context.get("top_correlations") or [])[:6]
+    target_correlations = list(report_context.get("target_correlations") or [])[:6]
     descriptive_rows = list(report_context.get("descriptive_statistics_table") or [])[:6]
     incremental_rows = list(report_context.get("incremental_feature_table") or [])[:11]
+    incremental_bests = _incremental_model_bests(incremental_rows)
+    distribution_summary = _feature_distribution_summary(descriptive_rows)
+
+    model_results = dict(runtime.get("model_results") or {}) if isinstance(runtime, dict) else {}
+    y_test_series = runtime.get("y_test_series") if isinstance(runtime, dict) else None
+    prediction_diagnostics: Dict[str, Dict[str, Any]] = {}
+    for model_name, metrics in model_results.items():
+        y_pred_test = metrics.get("y_pred_test") if isinstance(metrics, dict) else None
+        if y_test_series is None or y_pred_test is None:
+            continue
+        prediction_diagnostics[model_name] = _prediction_diagnostics(y_test_series, y_pred_test)
+
+    winning_diagnostics = prediction_diagnostics.get(best_model, {})
+    sequence_evidence: Dict[str, Any] = {}
+    if isinstance(runtime, dict):
+        best_model_object = runtime.get("best_model_object")
+        X_norm_df = runtime.get("X_norm_df")
+        y_norm_series = runtime.get("y_norm_series")
+        if best_model_object is not None and X_norm_df is not None and y_norm_series is not None:
+            try:
+                sequence_predictions = best_model_object.predict(np.asarray(X_norm_df))
+                sequence_evidence = _sequence_diagnostics(y_norm_series, sequence_predictions)
+            except Exception:
+                sequence_evidence = {}
 
     shared_blocks = {
         "model_metrics": {
             "winning_model": best_model,
             "benchmark_models_sorted": benchmark_rows[:5],
+            "best_model_metrics": report_context.get("metrics", {}),
         },
         "feature_story": {
             "top_gra_features": top_gra,
@@ -191,59 +510,227 @@ def _build_asset_evidence(
         },
         "correlation_story": {
             "strongest_correlations": strongest_correlations,
+            "top_target_correlations": target_correlations,
         },
         "incremental_story": {
             "incremental_feature_table": incremental_rows,
+            "best_step_per_model": incremental_bests,
+        },
+        "prediction_story": {
+            "winning_model_diagnostics": winning_diagnostics,
+            "per_model_prediction_diagnostics": prediction_diagnostics,
+        },
+        "sequence_story": {
+            "winning_model_sequence_diagnostics": sequence_evidence,
         },
     }
 
-    evidence_map = {
-        "metrics_overview": ["model_metrics", "data_shape"],
-        "fig5_model_comparison": ["model_metrics"],
-        "model_comparison_bars": ["model_metrics"],
-        "model_comparison_table": ["model_metrics"],
-        "predicted_vs_actual": ["model_metrics", "data_shape"],
-        "residuals": ["model_metrics", "data_shape"],
-        "model_svm_scatter": ["model_metrics"],
-        "model_dt_scatter": ["model_metrics"],
-        "model_rf_scatter": ["model_metrics"],
-        "model_knn_scatter": ["model_metrics"],
-        "model_xgboost_scatter": ["model_metrics"],
-        "fig3a_gra_ranking": ["feature_story"],
-        "fig3_feature_analysis": ["feature_story", "correlation_story"],
-        "gra_ranking": ["feature_story"],
-        "fig3b_shap_analysis": ["feature_story"],
-        "best_model_shap_importance": ["feature_story"],
-        "feature_importance": ["feature_story"],
-        "feature_importance_table": ["feature_story"],
-        "fig4_univariate_analysis": ["distribution_story", "correlation_story"],
-        "feature_distributions": ["distribution_story"],
-        "boxplots": ["distribution_story"],
-        "feature_vs_target": ["distribution_story", "correlation_story"],
-        "descriptive_statistics": ["distribution_story"],
-        "correlation_heatmap": ["correlation_story"],
-        "correlation_matrix": ["correlation_story"],
-        "fig6ab_mse_r2_features": ["incremental_story", "model_metrics"],
-        "table1_incremental_results": ["incremental_story", "model_metrics"],
-        "fig6c_prediction_time": ["model_metrics", "data_shape"],
-        "time_series": ["model_metrics", "data_shape"],
-    }
+    model_metrics_text = (
+        f"Winning model: {best_model}. "
+        f"Benchmark test metrics -> {_format_model_metric_rows(benchmark_rows)}."
+    ).strip()
+    gra_text = (
+        "GRA ranking -> "
+        f"{_format_ranked_feature_rows(top_gra, 'score')}."
+    ).strip()
+    shap_text = (
+        "SHAP importance -> "
+        f"{_format_ranked_feature_rows(shap_importance, 'mean_abs_shap')}."
+    ).strip()
+    feature_importance_text = (
+        "Feature importance -> "
+        f"{_format_ranked_feature_rows(feature_importance, 'importance')}."
+    ).strip()
+    correlation_text = (
+        "Strongest correlations -> "
+        + " | ".join(
+            f"{item['pair']}={item['correlation']}"
+            for item in strongest_correlations[:5]
+        )
+        + ". "
+        + "Top HPR correlations -> "
+        + " | ".join(
+            f"{item['feature']}={item['correlation']}"
+            for item in target_correlations[:5]
+        )
+        + "."
+    ).strip()
+    distribution_text = (
+        "Highest mean features -> "
+        + " | ".join(
+            f"{item['feature']}={item['mean']}"
+            for item in distribution_summary["highest_mean_features"][:5]
+        )
+        + ". Highest std features -> "
+        + " | ".join(
+            f"{item['feature']}={item['std']}"
+            for item in distribution_summary["highest_std_features"][:5]
+        )
+        + "."
+    ).strip()
+    incremental_text = (
+        "Best feature-count step per model -> "
+        + " | ".join(
+            (
+                f"{item['model']}: n={item['best_n_features']}, "
+                f"R2={item['best_r2']}, MSE={item['best_mse']}"
+            )
+            for item in incremental_bests
+        )
+        + "."
+    ).strip()
 
-    asset_evidence: List[Dict[str, Any]] = []
+    asset_evidence_items: List[Dict[str, Any]] = []
     for asset in explainable_assets:
         key = str(asset.get("key") or "")
-        block_names = evidence_map.get(key, [])
-        snippets = {name: shared_blocks[name] for name in block_names if name in shared_blocks}
-        asset_evidence.append(
-            {
-                "key": key,
-                "title": asset.get("title"),
-                "kind": asset.get("kind"),
-                "evidence": snippets,
+        asset_file = str(files.get(key) or "")
+        source_files = ["summary.json"]
+        result_text = ""
+        snippets: Dict[str, Any] = {}
+
+        if key in {"metrics_overview", "fig5_model_comparison", "model_comparison_bars", "model_comparison_table"}:
+            snippets = {
+                "model_metrics": shared_blocks["model_metrics"],
+                "data_shape": shared_blocks["data_shape"],
             }
+            result_text = model_metrics_text
+            source_files.extend(["table_model_comparison.csv", "results_summary.txt", "analysis_summary_report.txt"])
+        elif key in {"fig3a_gra_ranking", "gra_ranking"}:
+            snippets = {"feature_story": shared_blocks["feature_story"]}
+            result_text = gra_text
+            source_files.extend(["gra_ranking.json", "results_summary.txt", "best_model_summary.json"])
+        elif key in {"fig3b_shap_analysis", "best_model_shap_importance"}:
+            snippets = {"feature_story": shared_blocks["feature_story"]}
+            result_text = shap_text
+            source_files.extend(["best_model_shap_importance.csv", "best_model_summary.json"])
+        elif key in {"feature_importance", "feature_importance_table"}:
+            snippets = {"feature_story": shared_blocks["feature_story"]}
+            result_text = feature_importance_text
+            source_files.extend(["table_feature_importance.csv", "best_model_summary.json"])
+        elif key == "fig3_feature_analysis":
+            snippets = {
+                "feature_story": shared_blocks["feature_story"],
+                "correlation_story": shared_blocks["correlation_story"],
+                "incremental_story": shared_blocks["incremental_story"],
+            }
+            result_text = " ".join([gra_text, feature_importance_text, shap_text, correlation_text, incremental_text]).strip()
+            source_files.extend(
+                [
+                    "gra_ranking.json",
+                    "table_feature_importance.csv",
+                    "best_model_shap_importance.csv",
+                    "table_correlation_matrix.csv",
+                    "table1_incremental_results.csv",
+                ]
+            )
+        elif key in {"fig4_univariate_analysis", "feature_vs_target"}:
+            snippets = {
+                "distribution_story": shared_blocks["distribution_story"],
+                "correlation_story": shared_blocks["correlation_story"],
+            }
+            result_text = correlation_text
+            source_files.extend(["table_correlation_matrix.csv", "table_descriptive_statistics.csv", "analysis_summary_report.txt"])
+        elif key in {"descriptive_statistics", "feature_distributions", "boxplots"}:
+            snippets = {"distribution_story": shared_blocks["distribution_story"]}
+            result_text = distribution_text
+            source_files.extend(["table_descriptive_statistics.csv"])
+        elif key in {"correlation_heatmap", "correlation_matrix"}:
+            snippets = {"correlation_story": shared_blocks["correlation_story"]}
+            result_text = correlation_text
+            source_files.extend(["table_correlation_matrix.csv", "analysis_summary_report.txt"])
+        elif key in {"fig6ab_mse_r2_features", "table1_incremental_results"}:
+            snippets = {
+                "incremental_story": shared_blocks["incremental_story"],
+                "model_metrics": shared_blocks["model_metrics"],
+            }
+            result_text = incremental_text
+            source_files.extend(["table1_incremental_results.csv", "results_summary.txt"])
+        elif key in {"predicted_vs_actual", "residuals"}:
+            snippets = {
+                "model_metrics": shared_blocks["model_metrics"],
+                "prediction_story": shared_blocks["prediction_story"],
+                "data_shape": shared_blocks["data_shape"],
+            }
+            result_text = (
+                f"{best_model} prediction diagnostics -> "
+                f"R2={_safe_float(report_context.get('metrics', {}).get('r2_score'), 4)}, "
+                f"RMSE={_safe_float(report_context.get('metrics', {}).get('rmse'), 4)}, "
+                f"MAE={_safe_float(report_context.get('metrics', {}).get('mae'), 4)}, "
+                f"residual_mean={winning_diagnostics.get('residual_mean')}, "
+                f"residual_std={winning_diagnostics.get('residual_std')}, "
+                f"max_abs_residual={winning_diagnostics.get('max_abs_residual')}, "
+                f"corr(pred,actual)={winning_diagnostics.get('pred_actual_correlation')}."
+            )
+            source_files.extend(["table_model_comparison.csv", "best_model_summary.json"])
+        elif key in {"fig6c_prediction_time", "time_series"}:
+            snippets = {
+                "model_metrics": shared_blocks["model_metrics"],
+                "sequence_story": shared_blocks["sequence_story"],
+                "data_shape": shared_blocks["data_shape"],
+            }
+            result_text = (
+                f"{best_model} sequence diagnostics -> "
+                f"actual_peak_index={sequence_evidence.get('actual_peak_index')}, "
+                f"actual_peak_value={sequence_evidence.get('actual_peak_value')}, "
+                f"predicted_peak_index={sequence_evidence.get('predicted_peak_index')}, "
+                f"predicted_peak_value={sequence_evidence.get('predicted_peak_value')}, "
+                f"mean_abs_gap={sequence_evidence.get('mean_abs_gap')}, "
+                f"sequence_correlation={sequence_evidence.get('sequence_correlation')}."
+            )
+            source_files.extend(["best_model_summary.json", "analysis_summary_report.txt"])
+        elif key.startswith("model_") and key.endswith("_scatter"):
+            model_name = key.replace("model_", "").replace("_scatter", "").upper()
+            if model_name == "XGBOOST":
+                model_name = "XGBoost"
+            diag = prediction_diagnostics.get(model_name, {})
+            metrics_row = next((row for row in benchmark_rows if str(row.get("model")) == model_name), {})
+            snippets = {
+                "model_metrics": {
+                    "model_name": model_name,
+                    "metrics": metrics_row,
+                },
+                "prediction_story": {
+                    "diagnostics": diag,
+                },
+            }
+            result_text = (
+                f"{model_name} scatter diagnostics -> "
+                f"R2={_safe_float(metrics_row.get('r2_score'), 4)}, "
+                f"RMSE={_safe_float(metrics_row.get('rmse'), 4)}, "
+                f"MAE={_safe_float(metrics_row.get('mae'), 4)}, "
+                f"corr(pred,actual)={diag.get('pred_actual_correlation')}, "
+                f"slope={diag.get('linear_fit_slope')}, "
+                f"max_abs_residual={diag.get('max_abs_residual')}."
+            )
+            source_files.extend(["table_model_comparison.csv"])
+        else:
+            snippets = {
+                "model_metrics": shared_blocks["model_metrics"],
+                "data_shape": shared_blocks["data_shape"],
+            }
+            result_text = model_metrics_text
+
+        asset_evidence_items.append(
+            _json_safe_value(
+                {
+                    "key": key,
+                    "title": asset.get("title"),
+                    "kind": asset.get("kind"),
+                    "asset_file": asset_file or None,
+                    "route_prefix": route_prefix or None,
+                    "source_files": sorted(set(file_name for file_name in source_files if file_name)),
+                    "result_text": result_text,
+                    "evidence": snippets,
+                }
+            )
         )
 
-    return asset_evidence
+    return {
+        "generated_at": datetime.now().isoformat(),
+        "report_id": report_context.get("report_id"),
+        "best_model": best_model,
+        "assets": asset_evidence_items,
+    }
 
 
 def _build_prompt_payload(
@@ -308,11 +795,20 @@ def _build_prompt_payload(
         "shap_importance_table": _safe_records(shap_importance_df, limit=8),
         "descriptive_statistics_table": descriptive_rows,
         "top_correlations": _strongest_correlations(correlation_df, limit=8),
+        "target_correlations": _top_target_correlations(correlation_df, limit=8),
         "incremental_feature_table": incremental_records,
         "analysis_summary_excerpt": analysis_summary_excerpt,
         "results_summary_excerpt": results_summary_excerpt,
     }
-    asset_evidence = _build_asset_evidence(explainable_assets, report_context, pipeline_result)
+    asset_evidence_payload = _build_asset_evidence(
+        explainable_assets=explainable_assets,
+        report_info=report_info,
+        report_context=report_context,
+        pipeline_result=pipeline_result,
+        runtime=runtime if isinstance(runtime, dict) else None,
+    )
+    _persist_asset_evidence(report_dir, report_info, asset_evidence_payload)
+    asset_evidence = list(asset_evidence_payload.get("assets") or [])
 
     return {
         "task": (
@@ -334,6 +830,7 @@ def _build_prompt_payload(
         "assets": explainable_assets,
         "report_context": report_context,
         "asset_evidence": asset_evidence,
+        "asset_evidence_file": ASSET_EVIDENCE_FILENAME,
     }
 
 
@@ -627,14 +1124,26 @@ def generate_report_explanations(
     except Exception as exc:
         print(f"⚠️ OpenAI global overview generation failed: {exc}")
 
+    asset_evidence_lookup = {
+        str(item.get("key") or ""): item
+        for item in prompt_payload.get("asset_evidence", [])
+        if str(item.get("key") or "").strip()
+    }
+
     for batch_index, asset_batch in enumerate(asset_batches):
         batch_keys = [item["key"] for item in asset_batch]
         batch_payload = dict(prompt_payload)
         batch_payload["assets"] = asset_batch
+        batch_payload["asset_evidence"] = [
+            asset_evidence_lookup[key]
+            for key in batch_keys
+            if key in asset_evidence_lookup
+        ]
         batch_payload["style_rules"] = list(prompt_payload["style_rules"]) + [
             "For each chart or table, write about 2-4 sentences in each language.",
             "For the overview, write about 3-4 sentences in each language.",
             "Do not use bullets. Write complete, readable prose.",
+            "Use the per-asset result_text as the authoritative textual summary for that chart or table.",
         ]
 
         response_format = _build_response_schema(batch_keys)

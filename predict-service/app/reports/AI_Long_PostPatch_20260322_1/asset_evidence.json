@@ -1,0 +1,2669 @@
+{
+  "generated_at": "2026-04-02T02:39:02.166404",
+  "report_id": "AI_Long_PostPatch_20260322_1",
+  "best_model": "KNN",
+  "assets": [
+    {
+      "key": "metrics_overview",
+      "title": "Trained metrics overview",
+      "kind": "table",
+      "asset_file": null,
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "results_summary.txt",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "fig3a_gra_ranking",
+      "title": "Figure 3A - Grey relational ranking",
+      "kind": "chart",
+      "asset_file": "fig3a_gra_ranking.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_summary.json",
+        "gra_ranking.json",
+        "results_summary.txt",
+        "summary.json"
+      ],
+      "result_text": "GRA ranking -> pH=0.7656 | Propionate=0.733 | VFA=0.7315 | Butyrate=0.7297 | VSS=0.7116.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig3b_shap_analysis",
+      "title": "Figure 3B - SHAP analysis",
+      "kind": "chart",
+      "asset_file": "fig3b_shap_analysis.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_shap_importance.csv",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig3_feature_analysis",
+      "title": "Figure 3 - Combined feature analysis",
+      "kind": "chart",
+      "asset_file": "fig3_feature_analysis.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_shap_importance.csv",
+        "gra_ranking.json",
+        "summary.json",
+        "table1_incremental_results.csv",
+        "table_correlation_matrix.csv",
+        "table_feature_importance.csv"
+      ],
+      "result_text": "GRA ranking -> pH=0.7656 | Propionate=0.733 | VFA=0.7315 | Butyrate=0.7297 | VSS=0.7116. Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577. SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281. Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112. Best feature-count step per model -> SVM: n=4, R2=0.754988, MSE=0.017166 | DT: n=10, R2=0.624312, MSE=0.026322 | RF: n=10, R2=0.784072, MSE=0.015129 | KNN: n=8, R2=0.821983, MSE=0.012473 | XGBoost: n=11, R2=0.755729, MSE=0.017115.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {
+              "pair": "Butyrate vs VFA",
+              "correlation": 0.9601,
+              "abs_correlation": 0.9601
+            },
+            {
+              "pair": "Acetate vs VFA",
+              "correlation": 0.9428,
+              "abs_correlation": 0.9428
+            },
+            {
+              "pair": "Acetate vs Butyrate",
+              "correlation": 0.8651,
+              "abs_correlation": 0.8651
+            },
+            {
+              "pair": "Ethanol vs Propionate",
+              "correlation": 0.8548,
+              "abs_correlation": 0.8548
+            },
+            {
+              "pair": "Ethanol vs VFA",
+              "correlation": 0.8486,
+              "abs_correlation": 0.8486
+            },
+            {
+              "pair": "VFA vs HPR",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            }
+          ],
+          "top_target_correlations": [
+            {
+              "feature": "VFA",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            },
+            {
+              "feature": "Butyrate",
+              "correlation": 0.7827,
+              "abs_correlation": 0.7827
+            },
+            {
+              "feature": "Acetate",
+              "correlation": 0.7641,
+              "abs_correlation": 0.7641
+            },
+            {
+              "feature": "VSS",
+              "correlation": 0.7062,
+              "abs_correlation": 0.7062
+            },
+            {
+              "feature": "Ethanol",
+              "correlation": 0.6112,
+              "abs_correlation": 0.6112
+            },
+            {
+              "feature": "COD-O",
+              "correlation": 0.5946,
+              "abs_correlation": 0.5946
+            }
+          ]
+        },
+        "incremental_story": {
+          "incremental_feature_table": [
+            {
+              "n_features": 1,
+              "feature_subset": "pH",
+              "SVM_R2": -0.1640666907,
+              "SVM_MSE": 0.0815589345,
+              "DT_R2": -0.3339317303,
+              "DT_MSE": 0.0934603245,
+              "RF_R2": -0.2351136769,
+              "RF_MSE": 0.0865367563,
+              "KNN_R2": -0.177753732,
+              "KNN_MSE": 0.0825179007,
+              "XGBoost_R2": -0.3038826312,
+              "XGBoost_MSE": 0.0913549705
+            },
+            {
+              "n_features": 2,
+              "feature_subset": "pH -> Propionate",
+              "SVM_R2": 0.5801262376,
+              "SVM_MSE": 0.0294179509,
+              "DT_R2": 0.3742245517,
+              "DT_MSE": 0.0438442052,
+              "RF_R2": 0.481109763,
+              "RF_MSE": 0.0363554212,
+              "KNN_R2": 0.5761767395,
+              "KNN_MSE": 0.0296946677,
+              "XGBoost_R2": 0.3813501709,
+              "XGBoost_MSE": 0.0433449572
+            },
+            {
+              "n_features": 3,
+              "feature_subset": "pH -> Propionate -> VFA",
+              "SVM_R2": 0.7496802787,
+              "SVM_MSE": 0.0175383506,
+              "DT_R2": 0.5433643327,
+              "DT_MSE": 0.0319936296,
+              "RF_R2": 0.7625888854,
+              "RF_MSE": 0.0166339246,
+              "KNN_R2": 0.730054545,
+              "KNN_MSE": 0.0189134041,
+              "XGBoost_R2": 0.7117461861,
+              "XGBoost_MSE": 0.0201961573
+            },
+            {
+              "n_features": 4,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "SVM_R2": 0.7549881995,
+              "SVM_MSE": 0.0171664575,
+              "DT_R2": 0.4747979529,
+              "DT_MSE": 0.0367976506,
+              "RF_R2": 0.7653676654,
+              "RF_MSE": 0.0164392327,
+              "KNN_R2": 0.7108152538,
+              "KNN_MSE": 0.0202613819,
+              "XGBoost_R2": 0.7123129752,
+              "XGBoost_MSE": 0.0201564459
+            },
+            {
+              "n_features": 5,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS",
+              "SVM_R2": 0.7397908706,
+              "SVM_MSE": 0.0182312401,
+              "DT_R2": 0.4791193471,
+              "DT_MSE": 0.0364948773,
+              "RF_R2": 0.6818916415,
+              "RF_MSE": 0.0222878801,
+              "KNN_R2": 0.7308933152,
+              "KNN_MSE": 0.0188546367,
+              "XGBoost_R2": 0.6221321298,
+              "XGBoost_MSE": 0.0264748585
+            },
+            {
+              "n_features": 6,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+              "SVM_R2": 0.7032648672,
+              "SVM_MSE": 0.0207903907,
+              "DT_R2": 0.5527619021,
+              "DT_MSE": 0.0313352002,
+              "RF_R2": 0.7083597887,
+              "RF_MSE": 0.0204334211,
+              "KNN_R2": 0.7393816857,
+              "KNN_MSE": 0.0182599092,
+              "XGBoost_R2": 0.6285496958,
+              "XGBoost_MSE": 0.0260252194
+            },
+            {
+              "n_features": 7,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate",
+              "SVM_R2": 0.7067686139,
+              "SVM_MSE": 0.0205449049,
+              "DT_R2": 0.5324856222,
+              "DT_MSE": 0.0327558334,
+              "RF_R2": 0.7508157795,
+              "RF_MSE": 0.0174587931,
+              "KNN_R2": 0.7208056401,
+              "KNN_MSE": 0.0195614175,
+              "XGBoost_R2": 0.6563089638,
+              "XGBoost_MSE": 0.0240802997
+            },
+            {
+              "n_features": 8,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "SVM_R2": 0.737283961,
+              "SVM_MSE": 0.0184068837,
+              "DT_R2": 0.5606448432,
+              "DT_MSE": 0.0307828914,
+              "RF_R2": 0.7472878403,
+              "RF_MSE": 0.0177059739,
+              "KNN_R2": 0.8219828551,
+              "KNN_MSE": 0.0124725574,
+              "XGBoost_R2": 0.6567550451,
+              "XGBoost_MSE": 0.0240490455
+            },
+            {
+              "n_features": 9,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid",
+              "SVM_R2": 0.7541156076,
+              "SVM_MSE": 0.0172275946,
+              "DT_R2": 0.58860427,
+              "DT_MSE": 0.0288239477,
+              "RF_R2": 0.7400923409,
+              "RF_MSE": 0.018210118,
+              "KNN_R2": 0.8173378462,
+              "KNN_MSE": 0.0127980044,
+              "XGBoost_R2": 0.6734592654,
+              "XGBoost_MSE": 0.0228786844
+            },
+            {
+              "n_features": 10,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "SVM_R2": 0.7460518148,
+              "SVM_MSE": 0.0177925746,
+              "DT_R2": 0.6243118409,
+              "DT_MSE": 0.0263221396,
+              "RF_R2": 0.7840718728,
+              "RF_MSE": 0.0151287449,
+              "KNN_R2": 0.8136516526,
+              "KNN_MSE": 0.0130562731,
+              "XGBoost_R2": 0.7234878984,
+              "XGBoost_MSE": 0.0193734883
+            },
+            {
+              "n_features": 11,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "SVM_R2": 0.7318397882,
+              "SVM_MSE": 0.0187883232,
+              "DT_R2": 0.6074639095,
+              "DT_MSE": 0.0275025697,
+              "RF_R2": 0.7779947768,
+              "RF_MSE": 0.0155545293,
+              "KNN_R2": 0.8178589947,
+              "KNN_MSE": 0.0127614908,
+              "XGBoost_R2": 0.7557287055,
+              "XGBoost_MSE": 0.0171145749
+            }
+          ],
+          "best_step_per_model": [
+            {
+              "model": "SVM",
+              "best_n_features": 4,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "best_r2": 0.754988,
+              "best_mse": 0.017166
+            },
+            {
+              "model": "DT",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.624312,
+              "best_mse": 0.026322
+            },
+            {
+              "model": "RF",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.784072,
+              "best_mse": 0.015129
+            },
+            {
+              "model": "KNN",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.821983,
+              "best_mse": 0.012473
+            },
+            {
+              "model": "XGBoost",
+              "best_n_features": 11,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "best_r2": 0.755729,
+              "best_mse": 0.017115
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig4_univariate_analysis",
+      "title": "Figure 4 - Univariate analysis",
+      "kind": "chart",
+      "asset_file": "fig4_univariate_analysis.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {
+              "Unnamed: 0": "pH",
+              "mean": 0.235499905,
+              "std": 0.1267172991,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "VSS",
+              "mean": 0.358093633,
+              "std": 0.1537613312,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Ethanol",
+              "mean": 0.4735821124,
+              "std": 0.2528296374,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Acetate",
+              "mean": 0.4465350188,
+              "std": 0.2259920382,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Propionate",
+              "mean": 0.367459024,
+              "std": 0.2157947075,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Butyrate",
+              "mean": 0.4286702028,
+              "std": 0.2473608737,
+              "min": 0.0,
+              "max": 1.0
+            }
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {
+              "pair": "Butyrate vs VFA",
+              "correlation": 0.9601,
+              "abs_correlation": 0.9601
+            },
+            {
+              "pair": "Acetate vs VFA",
+              "correlation": 0.9428,
+              "abs_correlation": 0.9428
+            },
+            {
+              "pair": "Acetate vs Butyrate",
+              "correlation": 0.8651,
+              "abs_correlation": 0.8651
+            },
+            {
+              "pair": "Ethanol vs Propionate",
+              "correlation": 0.8548,
+              "abs_correlation": 0.8548
+            },
+            {
+              "pair": "Ethanol vs VFA",
+              "correlation": 0.8486,
+              "abs_correlation": 0.8486
+            },
+            {
+              "pair": "VFA vs HPR",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            }
+          ],
+          "top_target_correlations": [
+            {
+              "feature": "VFA",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            },
+            {
+              "feature": "Butyrate",
+              "correlation": 0.7827,
+              "abs_correlation": 0.7827
+            },
+            {
+              "feature": "Acetate",
+              "correlation": 0.7641,
+              "abs_correlation": 0.7641
+            },
+            {
+              "feature": "VSS",
+              "correlation": 0.7062,
+              "abs_correlation": 0.7062
+            },
+            {
+              "feature": "Ethanol",
+              "correlation": 0.6112,
+              "abs_correlation": 0.6112
+            },
+            {
+              "feature": "COD-O",
+              "correlation": 0.5946,
+              "abs_correlation": 0.5946
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig5_model_comparison",
+      "title": "Figure 5 - Model comparison",
+      "kind": "chart",
+      "asset_file": "fig5_model_comparison.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "results_summary.txt",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "fig6ab_mse_r2_features",
+      "title": "Figure 6A/B - MSE and R² vs feature count",
+      "kind": "chart",
+      "asset_file": "fig6ab_mse_r2_features.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "results_summary.txt",
+        "summary.json",
+        "table1_incremental_results.csv"
+      ],
+      "result_text": "Best feature-count step per model -> SVM: n=4, R2=0.754988, MSE=0.017166 | DT: n=10, R2=0.624312, MSE=0.026322 | RF: n=10, R2=0.784072, MSE=0.015129 | KNN: n=8, R2=0.821983, MSE=0.012473 | XGBoost: n=11, R2=0.755729, MSE=0.017115.",
+      "evidence": {
+        "incremental_story": {
+          "incremental_feature_table": [
+            {
+              "n_features": 1,
+              "feature_subset": "pH",
+              "SVM_R2": -0.1640666907,
+              "SVM_MSE": 0.0815589345,
+              "DT_R2": -0.3339317303,
+              "DT_MSE": 0.0934603245,
+              "RF_R2": -0.2351136769,
+              "RF_MSE": 0.0865367563,
+              "KNN_R2": -0.177753732,
+              "KNN_MSE": 0.0825179007,
+              "XGBoost_R2": -0.3038826312,
+              "XGBoost_MSE": 0.0913549705
+            },
+            {
+              "n_features": 2,
+              "feature_subset": "pH -> Propionate",
+              "SVM_R2": 0.5801262376,
+              "SVM_MSE": 0.0294179509,
+              "DT_R2": 0.3742245517,
+              "DT_MSE": 0.0438442052,
+              "RF_R2": 0.481109763,
+              "RF_MSE": 0.0363554212,
+              "KNN_R2": 0.5761767395,
+              "KNN_MSE": 0.0296946677,
+              "XGBoost_R2": 0.3813501709,
+              "XGBoost_MSE": 0.0433449572
+            },
+            {
+              "n_features": 3,
+              "feature_subset": "pH -> Propionate -> VFA",
+              "SVM_R2": 0.7496802787,
+              "SVM_MSE": 0.0175383506,
+              "DT_R2": 0.5433643327,
+              "DT_MSE": 0.0319936296,
+              "RF_R2": 0.7625888854,
+              "RF_MSE": 0.0166339246,
+              "KNN_R2": 0.730054545,
+              "KNN_MSE": 0.0189134041,
+              "XGBoost_R2": 0.7117461861,
+              "XGBoost_MSE": 0.0201961573
+            },
+            {
+              "n_features": 4,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "SVM_R2": 0.7549881995,
+              "SVM_MSE": 0.0171664575,
+              "DT_R2": 0.4747979529,
+              "DT_MSE": 0.0367976506,
+              "RF_R2": 0.7653676654,
+              "RF_MSE": 0.0164392327,
+              "KNN_R2": 0.7108152538,
+              "KNN_MSE": 0.0202613819,
+              "XGBoost_R2": 0.7123129752,
+              "XGBoost_MSE": 0.0201564459
+            },
+            {
+              "n_features": 5,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS",
+              "SVM_R2": 0.7397908706,
+              "SVM_MSE": 0.0182312401,
+              "DT_R2": 0.4791193471,
+              "DT_MSE": 0.0364948773,
+              "RF_R2": 0.6818916415,
+              "RF_MSE": 0.0222878801,
+              "KNN_R2": 0.7308933152,
+              "KNN_MSE": 0.0188546367,
+              "XGBoost_R2": 0.6221321298,
+              "XGBoost_MSE": 0.0264748585
+            },
+            {
+              "n_features": 6,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+              "SVM_R2": 0.7032648672,
+              "SVM_MSE": 0.0207903907,
+              "DT_R2": 0.5527619021,
+              "DT_MSE": 0.0313352002,
+              "RF_R2": 0.7083597887,
+              "RF_MSE": 0.0204334211,
+              "KNN_R2": 0.7393816857,
+              "KNN_MSE": 0.0182599092,
+              "XGBoost_R2": 0.6285496958,
+              "XGBoost_MSE": 0.0260252194
+            },
+            {
+              "n_features": 7,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate",
+              "SVM_R2": 0.7067686139,
+              "SVM_MSE": 0.0205449049,
+              "DT_R2": 0.5324856222,
+              "DT_MSE": 0.0327558334,
+              "RF_R2": 0.7508157795,
+              "RF_MSE": 0.0174587931,
+              "KNN_R2": 0.7208056401,
+              "KNN_MSE": 0.0195614175,
+              "XGBoost_R2": 0.6563089638,
+              "XGBoost_MSE": 0.0240802997
+            },
+            {
+              "n_features": 8,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "SVM_R2": 0.737283961,
+              "SVM_MSE": 0.0184068837,
+              "DT_R2": 0.5606448432,
+              "DT_MSE": 0.0307828914,
+              "RF_R2": 0.7472878403,
+              "RF_MSE": 0.0177059739,
+              "KNN_R2": 0.8219828551,
+              "KNN_MSE": 0.0124725574,
+              "XGBoost_R2": 0.6567550451,
+              "XGBoost_MSE": 0.0240490455
+            },
+            {
+              "n_features": 9,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid",
+              "SVM_R2": 0.7541156076,
+              "SVM_MSE": 0.0172275946,
+              "DT_R2": 0.58860427,
+              "DT_MSE": 0.0288239477,
+              "RF_R2": 0.7400923409,
+              "RF_MSE": 0.018210118,
+              "KNN_R2": 0.8173378462,
+              "KNN_MSE": 0.0127980044,
+              "XGBoost_R2": 0.6734592654,
+              "XGBoost_MSE": 0.0228786844
+            },
+            {
+              "n_features": 10,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "SVM_R2": 0.7460518148,
+              "SVM_MSE": 0.0177925746,
+              "DT_R2": 0.6243118409,
+              "DT_MSE": 0.0263221396,
+              "RF_R2": 0.7840718728,
+              "RF_MSE": 0.0151287449,
+              "KNN_R2": 0.8136516526,
+              "KNN_MSE": 0.0130562731,
+              "XGBoost_R2": 0.7234878984,
+              "XGBoost_MSE": 0.0193734883
+            },
+            {
+              "n_features": 11,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "SVM_R2": 0.7318397882,
+              "SVM_MSE": 0.0187883232,
+              "DT_R2": 0.6074639095,
+              "DT_MSE": 0.0275025697,
+              "RF_R2": 0.7779947768,
+              "RF_MSE": 0.0155545293,
+              "KNN_R2": 0.8178589947,
+              "KNN_MSE": 0.0127614908,
+              "XGBoost_R2": 0.7557287055,
+              "XGBoost_MSE": 0.0171145749
+            }
+          ],
+          "best_step_per_model": [
+            {
+              "model": "SVM",
+              "best_n_features": 4,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "best_r2": 0.754988,
+              "best_mse": 0.017166
+            },
+            {
+              "model": "DT",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.624312,
+              "best_mse": 0.026322
+            },
+            {
+              "model": "RF",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.784072,
+              "best_mse": 0.015129
+            },
+            {
+              "model": "KNN",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.821983,
+              "best_mse": 0.012473
+            },
+            {
+              "model": "XGBoost",
+              "best_n_features": 11,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "best_r2": 0.755729,
+              "best_mse": 0.017115
+            }
+          ]
+        },
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        }
+      }
+    },
+    {
+      "key": "fig6c_prediction_time",
+      "title": "Figure 6C - Prediction over time",
+      "kind": "chart",
+      "asset_file": "fig6c_prediction_time.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "KNN sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "sequence_story": {
+          "winning_model_sequence_diagnostics": {}
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "model_svm_scatter",
+      "title": "SVM scatter plot",
+      "kind": "chart",
+      "asset_file": "model_svm_scatter.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "SVM scatter diagnostics -> R2=0.7324, RMSE=0.1369, MAE=0.0946, corr(pred,actual)=None, slope=None, max_abs_residual=None.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "SVM",
+          "metrics": {
+            "model": "SVM",
+            "r2_score": 0.7324097475,
+            "rmse": 0.1369247591,
+            "mse": 0.0187483896,
+            "mae": 0.0946025669
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {}
+        }
+      }
+    },
+    {
+      "key": "model_dt_scatter",
+      "title": "Decision tree scatter plot",
+      "kind": "chart",
+      "asset_file": "model_dt_scatter.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "DT scatter diagnostics -> R2=0.5605, RMSE=0.1755, MAE=0.1086, corr(pred,actual)=None, slope=None, max_abs_residual=None.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "DT",
+          "metrics": {
+            "model": "DT",
+            "r2_score": 0.5604531395,
+            "rmse": 0.1754888112,
+            "mse": 0.0307963229,
+            "mae": 0.108556247
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {}
+        }
+      }
+    },
+    {
+      "key": "model_rf_scatter",
+      "title": "Random forest scatter plot",
+      "kind": "chart",
+      "asset_file": "model_rf_scatter.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "RF scatter diagnostics -> R2=0.7756, RMSE=0.1254, MAE=0.0836, corr(pred,actual)=None, slope=None, max_abs_residual=None.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "RF",
+          "metrics": {
+            "model": "RF",
+            "r2_score": 0.7756018171,
+            "rmse": 0.125388154,
+            "mse": 0.0157221892,
+            "mae": 0.0835569234
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {}
+        }
+      }
+    },
+    {
+      "key": "model_knn_scatter",
+      "title": "KNN scatter plot",
+      "kind": "chart",
+      "asset_file": "model_knn_scatter.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN scatter diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, corr(pred,actual)=None, slope=None, max_abs_residual=None.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "KNN",
+          "metrics": {
+            "model": "KNN",
+            "r2_score": 0.8171678017,
+            "rmse": 0.11318091,
+            "mse": 0.0128099184,
+            "mae": 0.0750230875
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {}
+        }
+      }
+    },
+    {
+      "key": "model_xgboost_scatter",
+      "title": "XGBoost scatter plot",
+      "kind": "chart",
+      "asset_file": "model_xgboost_scatter.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "XGBoost scatter diagnostics -> R2=0.7495, RMSE=0.1325, MAE=0.0956, corr(pred,actual)=None, slope=None, max_abs_residual=None.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "XGBoost",
+          "metrics": {
+            "model": "XGBoost",
+            "r2_score": 0.7494763102,
+            "rmse": 0.1324863821,
+            "mse": 0.0175526414,
+            "mae": 0.0955930342
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {}
+        }
+      }
+    },
+    {
+      "key": "model_comparison_bars",
+      "title": "Model comparison bars",
+      "kind": "chart",
+      "asset_file": "fig_model_comparison_bars.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "results_summary.txt",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "predicted_vs_actual",
+      "title": "Predicted versus actual chart",
+      "kind": "chart",
+      "asset_file": "fig_predicted_vs_actual.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "prediction_story": {
+          "winning_model_diagnostics": {},
+          "per_model_prediction_diagnostics": {}
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "residuals",
+      "title": "Residual analysis chart",
+      "kind": "chart",
+      "asset_file": "fig_residuals.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "prediction_story": {
+          "winning_model_diagnostics": {},
+          "per_model_prediction_diagnostics": {}
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "feature_importance",
+      "title": "Feature importance chart",
+      "kind": "chart",
+      "asset_file": "fig_feature_importance.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_feature_importance.csv"
+      ],
+      "result_text": "Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        }
+      }
+    },
+    {
+      "key": "correlation_heatmap",
+      "title": "Correlation heatmap",
+      "kind": "chart",
+      "asset_file": "fig_correlation_heatmap.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv"
+      ],
+      "result_text": "Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112.",
+      "evidence": {
+        "correlation_story": {
+          "strongest_correlations": [
+            {
+              "pair": "Butyrate vs VFA",
+              "correlation": 0.9601,
+              "abs_correlation": 0.9601
+            },
+            {
+              "pair": "Acetate vs VFA",
+              "correlation": 0.9428,
+              "abs_correlation": 0.9428
+            },
+            {
+              "pair": "Acetate vs Butyrate",
+              "correlation": 0.8651,
+              "abs_correlation": 0.8651
+            },
+            {
+              "pair": "Ethanol vs Propionate",
+              "correlation": 0.8548,
+              "abs_correlation": 0.8548
+            },
+            {
+              "pair": "Ethanol vs VFA",
+              "correlation": 0.8486,
+              "abs_correlation": 0.8486
+            },
+            {
+              "pair": "VFA vs HPR",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            }
+          ],
+          "top_target_correlations": [
+            {
+              "feature": "VFA",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            },
+            {
+              "feature": "Butyrate",
+              "correlation": 0.7827,
+              "abs_correlation": 0.7827
+            },
+            {
+              "feature": "Acetate",
+              "correlation": 0.7641,
+              "abs_correlation": 0.7641
+            },
+            {
+              "feature": "VSS",
+              "correlation": 0.7062,
+              "abs_correlation": 0.7062
+            },
+            {
+              "feature": "Ethanol",
+              "correlation": 0.6112,
+              "abs_correlation": 0.6112
+            },
+            {
+              "feature": "COD-O",
+              "correlation": 0.5946,
+              "abs_correlation": 0.5946
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "feature_distributions",
+      "title": "Feature distributions",
+      "kind": "chart",
+      "asset_file": "fig_feature_distributions.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Highest mean features -> Ethanol=0.4736 | Acetate=0.4465 | Butyrate=0.4287 | Propionate=0.3675 | VSS=0.3581. Highest std features -> Ethanol=0.2528 | Butyrate=0.2474 | Acetate=0.226 | Propionate=0.2158 | VSS=0.1538.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {
+              "Unnamed: 0": "pH",
+              "mean": 0.235499905,
+              "std": 0.1267172991,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "VSS",
+              "mean": 0.358093633,
+              "std": 0.1537613312,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Ethanol",
+              "mean": 0.4735821124,
+              "std": 0.2528296374,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Acetate",
+              "mean": 0.4465350188,
+              "std": 0.2259920382,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Propionate",
+              "mean": 0.367459024,
+              "std": 0.2157947075,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Butyrate",
+              "mean": 0.4286702028,
+              "std": 0.2473608737,
+              "min": 0.0,
+              "max": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "feature_vs_target",
+      "title": "Feature vs target chart",
+      "kind": "chart",
+      "asset_file": "fig_feature_vs_target.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {
+              "Unnamed: 0": "pH",
+              "mean": 0.235499905,
+              "std": 0.1267172991,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "VSS",
+              "mean": 0.358093633,
+              "std": 0.1537613312,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Ethanol",
+              "mean": 0.4735821124,
+              "std": 0.2528296374,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Acetate",
+              "mean": 0.4465350188,
+              "std": 0.2259920382,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Propionate",
+              "mean": 0.367459024,
+              "std": 0.2157947075,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Butyrate",
+              "mean": 0.4286702028,
+              "std": 0.2473608737,
+              "min": 0.0,
+              "max": 1.0
+            }
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {
+              "pair": "Butyrate vs VFA",
+              "correlation": 0.9601,
+              "abs_correlation": 0.9601
+            },
+            {
+              "pair": "Acetate vs VFA",
+              "correlation": 0.9428,
+              "abs_correlation": 0.9428
+            },
+            {
+              "pair": "Acetate vs Butyrate",
+              "correlation": 0.8651,
+              "abs_correlation": 0.8651
+            },
+            {
+              "pair": "Ethanol vs Propionate",
+              "correlation": 0.8548,
+              "abs_correlation": 0.8548
+            },
+            {
+              "pair": "Ethanol vs VFA",
+              "correlation": 0.8486,
+              "abs_correlation": 0.8486
+            },
+            {
+              "pair": "VFA vs HPR",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            }
+          ],
+          "top_target_correlations": [
+            {
+              "feature": "VFA",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            },
+            {
+              "feature": "Butyrate",
+              "correlation": 0.7827,
+              "abs_correlation": 0.7827
+            },
+            {
+              "feature": "Acetate",
+              "correlation": 0.7641,
+              "abs_correlation": 0.7641
+            },
+            {
+              "feature": "VSS",
+              "correlation": 0.7062,
+              "abs_correlation": 0.7062
+            },
+            {
+              "feature": "Ethanol",
+              "correlation": 0.6112,
+              "abs_correlation": 0.6112
+            },
+            {
+              "feature": "COD-O",
+              "correlation": 0.5946,
+              "abs_correlation": 0.5946
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "boxplots",
+      "title": "Feature boxplots",
+      "kind": "chart",
+      "asset_file": "fig_boxplots.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Highest mean features -> Ethanol=0.4736 | Acetate=0.4465 | Butyrate=0.4287 | Propionate=0.3675 | VSS=0.3581. Highest std features -> Ethanol=0.2528 | Butyrate=0.2474 | Acetate=0.226 | Propionate=0.2158 | VSS=0.1538.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {
+              "Unnamed: 0": "pH",
+              "mean": 0.235499905,
+              "std": 0.1267172991,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "VSS",
+              "mean": 0.358093633,
+              "std": 0.1537613312,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Ethanol",
+              "mean": 0.4735821124,
+              "std": 0.2528296374,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Acetate",
+              "mean": 0.4465350188,
+              "std": 0.2259920382,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Propionate",
+              "mean": 0.367459024,
+              "std": 0.2157947075,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Butyrate",
+              "mean": 0.4286702028,
+              "std": 0.2473608737,
+              "min": 0.0,
+              "max": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "time_series",
+      "title": "Time-series chart",
+      "kind": "chart",
+      "asset_file": "fig_time_series.png",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "KNN sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "sequence_story": {
+          "winning_model_sequence_diagnostics": {}
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "model_comparison_table",
+      "title": "Model comparison table",
+      "kind": "table",
+      "asset_file": "table_model_comparison.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "results_summary.txt",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        },
+        "data_shape": {
+          "rows_after_preprocessing": 197,
+          "dataset_columns": [],
+          "selected_sheet": "HRT 12 -4 h"
+        }
+      }
+    },
+    {
+      "key": "feature_importance_table",
+      "title": "Feature importance table",
+      "kind": "table",
+      "asset_file": "table_feature_importance.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_feature_importance.csv"
+      ],
+      "result_text": "Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        }
+      }
+    },
+    {
+      "key": "best_model_shap_importance",
+      "title": "SHAP importance table",
+      "kind": "table",
+      "asset_file": "best_model_shap_importance.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "best_model_shap_importance.csv",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {
+              "rank": 1,
+              "feature": "pH",
+              "score": 0.7655694590080664
+            },
+            {
+              "rank": 2,
+              "feature": "Propionate",
+              "score": 0.7330322960371348
+            },
+            {
+              "rank": 3,
+              "feature": "VFA",
+              "score": 0.7315248068651623
+            },
+            {
+              "rank": 4,
+              "feature": "Butyrate",
+              "score": 0.7296936636722601
+            },
+            {
+              "rank": 5,
+              "feature": "VSS",
+              "score": 0.7115947055633065
+            }
+          ],
+          "top_feature_importance": [
+            {
+              "feature": "VSS",
+              "importance": 0.5052222633
+            },
+            {
+              "feature": "Acetate",
+              "importance": 0.1199757325
+            },
+            {
+              "feature": "Butyrate",
+              "importance": 0.0969761328
+            },
+            {
+              "feature": "VFA",
+              "importance": 0.0748037264
+            },
+            {
+              "feature": "Propionate",
+              "importance": 0.0576947792
+            },
+            {
+              "feature": "Ethanol",
+              "importance": 0.0410948829
+            }
+          ],
+          "top_shap_features": [
+            {
+              "feature": "ORP_Low",
+              "mean_abs_shap": 0.0359136816
+            },
+            {
+              "feature": "Butyrate",
+              "mean_abs_shap": 0.0333946393
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0302006397
+            },
+            {
+              "feature": "VFA",
+              "mean_abs_shap": 0.0282292831
+            },
+            {
+              "feature": "Acetate",
+              "mean_abs_shap": 0.0281240926
+            },
+            {
+              "feature": "COD-O",
+              "mean_abs_shap": 0.0268263639
+            }
+          ],
+          "top_features_summary": [
+            "pH",
+            "Propionate",
+            "VFA"
+          ]
+        }
+      }
+    },
+    {
+      "key": "descriptive_statistics",
+      "title": "Descriptive statistics table",
+      "kind": "table",
+      "asset_file": "table_descriptive_statistics.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "summary.json",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Highest mean features -> Ethanol=0.4736 | Acetate=0.4465 | Butyrate=0.4287 | Propionate=0.3675 | VSS=0.3581. Highest std features -> Ethanol=0.2528 | Butyrate=0.2474 | Acetate=0.226 | Propionate=0.2158 | VSS=0.1538.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {
+              "Unnamed: 0": "pH",
+              "mean": 0.235499905,
+              "std": 0.1267172991,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "VSS",
+              "mean": 0.358093633,
+              "std": 0.1537613312,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Ethanol",
+              "mean": 0.4735821124,
+              "std": 0.2528296374,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Acetate",
+              "mean": 0.4465350188,
+              "std": 0.2259920382,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Propionate",
+              "mean": 0.367459024,
+              "std": 0.2157947075,
+              "min": 0.0,
+              "max": 1.0
+            },
+            {
+              "Unnamed: 0": "Butyrate",
+              "mean": 0.4286702028,
+              "std": 0.2473608737,
+              "min": 0.0,
+              "max": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "correlation_matrix",
+      "title": "Correlation matrix table",
+      "kind": "table",
+      "asset_file": "table_correlation_matrix.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv"
+      ],
+      "result_text": "Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112.",
+      "evidence": {
+        "correlation_story": {
+          "strongest_correlations": [
+            {
+              "pair": "Butyrate vs VFA",
+              "correlation": 0.9601,
+              "abs_correlation": 0.9601
+            },
+            {
+              "pair": "Acetate vs VFA",
+              "correlation": 0.9428,
+              "abs_correlation": 0.9428
+            },
+            {
+              "pair": "Acetate vs Butyrate",
+              "correlation": 0.8651,
+              "abs_correlation": 0.8651
+            },
+            {
+              "pair": "Ethanol vs Propionate",
+              "correlation": 0.8548,
+              "abs_correlation": 0.8548
+            },
+            {
+              "pair": "Ethanol vs VFA",
+              "correlation": 0.8486,
+              "abs_correlation": 0.8486
+            },
+            {
+              "pair": "VFA vs HPR",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            }
+          ],
+          "top_target_correlations": [
+            {
+              "feature": "VFA",
+              "correlation": 0.7984,
+              "abs_correlation": 0.7984
+            },
+            {
+              "feature": "Butyrate",
+              "correlation": 0.7827,
+              "abs_correlation": 0.7827
+            },
+            {
+              "feature": "Acetate",
+              "correlation": 0.7641,
+              "abs_correlation": 0.7641
+            },
+            {
+              "feature": "VSS",
+              "correlation": 0.7062,
+              "abs_correlation": 0.7062
+            },
+            {
+              "feature": "Ethanol",
+              "correlation": 0.6112,
+              "abs_correlation": 0.6112
+            },
+            {
+              "feature": "COD-O",
+              "correlation": 0.5946,
+              "abs_correlation": 0.5946
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "table1_incremental_results",
+      "title": "Incremental feature analysis table",
+      "kind": "table",
+      "asset_file": "table1_incremental_results.csv",
+      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "source_files": [
+        "results_summary.txt",
+        "summary.json",
+        "table1_incremental_results.csv"
+      ],
+      "result_text": "Best feature-count step per model -> SVM: n=4, R2=0.754988, MSE=0.017166 | DT: n=10, R2=0.624312, MSE=0.026322 | RF: n=10, R2=0.784072, MSE=0.015129 | KNN: n=8, R2=0.821983, MSE=0.012473 | XGBoost: n=11, R2=0.755729, MSE=0.017115.",
+      "evidence": {
+        "incremental_story": {
+          "incremental_feature_table": [
+            {
+              "n_features": 1,
+              "feature_subset": "pH",
+              "SVM_R2": -0.1640666907,
+              "SVM_MSE": 0.0815589345,
+              "DT_R2": -0.3339317303,
+              "DT_MSE": 0.0934603245,
+              "RF_R2": -0.2351136769,
+              "RF_MSE": 0.0865367563,
+              "KNN_R2": -0.177753732,
+              "KNN_MSE": 0.0825179007,
+              "XGBoost_R2": -0.3038826312,
+              "XGBoost_MSE": 0.0913549705
+            },
+            {
+              "n_features": 2,
+              "feature_subset": "pH -> Propionate",
+              "SVM_R2": 0.5801262376,
+              "SVM_MSE": 0.0294179509,
+              "DT_R2": 0.3742245517,
+              "DT_MSE": 0.0438442052,
+              "RF_R2": 0.481109763,
+              "RF_MSE": 0.0363554212,
+              "KNN_R2": 0.5761767395,
+              "KNN_MSE": 0.0296946677,
+              "XGBoost_R2": 0.3813501709,
+              "XGBoost_MSE": 0.0433449572
+            },
+            {
+              "n_features": 3,
+              "feature_subset": "pH -> Propionate -> VFA",
+              "SVM_R2": 0.7496802787,
+              "SVM_MSE": 0.0175383506,
+              "DT_R2": 0.5433643327,
+              "DT_MSE": 0.0319936296,
+              "RF_R2": 0.7625888854,
+              "RF_MSE": 0.0166339246,
+              "KNN_R2": 0.730054545,
+              "KNN_MSE": 0.0189134041,
+              "XGBoost_R2": 0.7117461861,
+              "XGBoost_MSE": 0.0201961573
+            },
+            {
+              "n_features": 4,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "SVM_R2": 0.7549881995,
+              "SVM_MSE": 0.0171664575,
+              "DT_R2": 0.4747979529,
+              "DT_MSE": 0.0367976506,
+              "RF_R2": 0.7653676654,
+              "RF_MSE": 0.0164392327,
+              "KNN_R2": 0.7108152538,
+              "KNN_MSE": 0.0202613819,
+              "XGBoost_R2": 0.7123129752,
+              "XGBoost_MSE": 0.0201564459
+            },
+            {
+              "n_features": 5,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS",
+              "SVM_R2": 0.7397908706,
+              "SVM_MSE": 0.0182312401,
+              "DT_R2": 0.4791193471,
+              "DT_MSE": 0.0364948773,
+              "RF_R2": 0.6818916415,
+              "RF_MSE": 0.0222878801,
+              "KNN_R2": 0.7308933152,
+              "KNN_MSE": 0.0188546367,
+              "XGBoost_R2": 0.6221321298,
+              "XGBoost_MSE": 0.0264748585
+            },
+            {
+              "n_features": 6,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+              "SVM_R2": 0.7032648672,
+              "SVM_MSE": 0.0207903907,
+              "DT_R2": 0.5527619021,
+              "DT_MSE": 0.0313352002,
+              "RF_R2": 0.7083597887,
+              "RF_MSE": 0.0204334211,
+              "KNN_R2": 0.7393816857,
+              "KNN_MSE": 0.0182599092,
+              "XGBoost_R2": 0.6285496958,
+              "XGBoost_MSE": 0.0260252194
+            },
+            {
+              "n_features": 7,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate",
+              "SVM_R2": 0.7067686139,
+              "SVM_MSE": 0.0205449049,
+              "DT_R2": 0.5324856222,
+              "DT_MSE": 0.0327558334,
+              "RF_R2": 0.7508157795,
+              "RF_MSE": 0.0174587931,
+              "KNN_R2": 0.7208056401,
+              "KNN_MSE": 0.0195614175,
+              "XGBoost_R2": 0.6563089638,
+              "XGBoost_MSE": 0.0240802997
+            },
+            {
+              "n_features": 8,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "SVM_R2": 0.737283961,
+              "SVM_MSE": 0.0184068837,
+              "DT_R2": 0.5606448432,
+              "DT_MSE": 0.0307828914,
+              "RF_R2": 0.7472878403,
+              "RF_MSE": 0.0177059739,
+              "KNN_R2": 0.8219828551,
+              "KNN_MSE": 0.0124725574,
+              "XGBoost_R2": 0.6567550451,
+              "XGBoost_MSE": 0.0240490455
+            },
+            {
+              "n_features": 9,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid",
+              "SVM_R2": 0.7541156076,
+              "SVM_MSE": 0.0172275946,
+              "DT_R2": 0.58860427,
+              "DT_MSE": 0.0288239477,
+              "RF_R2": 0.7400923409,
+              "RF_MSE": 0.018210118,
+              "KNN_R2": 0.8173378462,
+              "KNN_MSE": 0.0127980044,
+              "XGBoost_R2": 0.6734592654,
+              "XGBoost_MSE": 0.0228786844
+            },
+            {
+              "n_features": 10,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "SVM_R2": 0.7460518148,
+              "SVM_MSE": 0.0177925746,
+              "DT_R2": 0.6243118409,
+              "DT_MSE": 0.0263221396,
+              "RF_R2": 0.7840718728,
+              "RF_MSE": 0.0151287449,
+              "KNN_R2": 0.8136516526,
+              "KNN_MSE": 0.0130562731,
+              "XGBoost_R2": 0.7234878984,
+              "XGBoost_MSE": 0.0193734883
+            },
+            {
+              "n_features": 11,
+              "feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "SVM_R2": 0.7318397882,
+              "SVM_MSE": 0.0187883232,
+              "DT_R2": 0.6074639095,
+              "DT_MSE": 0.0275025697,
+              "RF_R2": 0.7779947768,
+              "RF_MSE": 0.0155545293,
+              "KNN_R2": 0.8178589947,
+              "KNN_MSE": 0.0127614908,
+              "XGBoost_R2": 0.7557287055,
+              "XGBoost_MSE": 0.0171145749
+            }
+          ],
+          "best_step_per_model": [
+            {
+              "model": "SVM",
+              "best_n_features": 4,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate",
+              "best_r2": 0.754988,
+              "best_mse": 0.017166
+            },
+            {
+              "model": "DT",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.624312,
+              "best_mse": 0.026322
+            },
+            {
+              "model": "RF",
+              "best_n_features": 10,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low",
+              "best_r2": 0.784072,
+              "best_mse": 0.015129
+            },
+            {
+              "model": "KNN",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.821983,
+              "best_mse": 0.012473
+            },
+            {
+              "model": "XGBoost",
+              "best_n_features": 11,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O -> ORP_Mid -> ORP_Low -> Sucrose_Degradation",
+              "best_r2": 0.755729,
+              "best_mse": 0.017115
+            }
+          ]
+        },
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {
+              "model": "KNN",
+              "r2_score": 0.8171678017,
+              "rmse": 0.11318091,
+              "mse": 0.0128099184,
+              "mae": 0.0750230875
+            },
+            {
+              "model": "RF",
+              "r2_score": 0.7756018171,
+              "rmse": 0.125388154,
+              "mse": 0.0157221892,
+              "mae": 0.0835569234
+            },
+            {
+              "model": "XGBoost",
+              "r2_score": 0.7494763102,
+              "rmse": 0.1324863821,
+              "mse": 0.0175526414,
+              "mae": 0.0955930342
+            },
+            {
+              "model": "SVM",
+              "r2_score": 0.7324097475,
+              "rmse": 0.1369247591,
+              "mse": 0.0187483896,
+              "mae": 0.0946025669
+            },
+            {
+              "model": "DT",
+              "r2_score": 0.5604531395,
+              "rmse": 0.1754888112,
+              "mse": 0.0307963229,
+              "mae": 0.108556247
+            }
+          ],
+          "best_model_metrics": {
+            "r2_score": 0.8171678017037467,
+            "rmse": 0.11318090995439674,
+            "mse": 0.012809918378105262,
+            "mae": 0.07502308749135642
+          }
+        }
+      }
+    }
+  ]
+}

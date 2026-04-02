@@ -100,7 +100,8 @@
     "model_rf_scatter": "model_rf_scatter.png",
     "model_knn_scatter": "model_knn_scatter.png",
     "model_xgboost_scatter": "model_xgboost_scatter.png",
-    "llm_explanations": "llm_explanations.json"
+    "llm_explanations": "llm_explanations.json",
+    "asset_evidence": "asset_evidence.json"
   },
   "llm_explanations": {
     "provider": "openai",
