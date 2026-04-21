@@ -493,7 +493,7 @@
             {{ $llmRetryText }}
         </div>
         @if($llmPendingTooLong)
-            <div class="small mt-2">Open the predict-service logs on the server to check the exact OpenAI/API error.</div>
+            <div class="small mt-2">Open the predict-service logs on the server to check the exact LLM/API error.</div>
         @endif
     </div>
 @elseif($llmStatus === 'error' && !empty($reportAssets))

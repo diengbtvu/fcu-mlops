@@ -3,8 +3,19 @@ services:
     build:
       context: ./WebApp
       dockerfile: dockerfile
+    env_file:
+      - .env.docker
+    command:
+      - sh
+      - -lc
+      - |
+          if [ ! -f /var/www/html/vendor/autoload.php ]; then
+            composer install --no-dev --optimize-autoloader --no-interaction
+          fi
+          exec /usr/local/sbin/php-fpm
     volumes:
       - ./WebApp:/var/www/html
+      - laravel_vendor:/var/www/html/vendor
       - laravel_storage:/var/www/html/storage
       - laravel_cache:/var/www/html/bootstrap/cache
     depends_on:
@@ -32,6 +43,8 @@ services:
       - .env.docker
     environment:
       - LARAVEL_API_URL=http://nginx/api
+    depends_on:
+      - ollama
     volumes:
         - ./predict-service:/app
         - ./WebApp:/var/www/html:ro
@@ -41,6 +54,17 @@ services:
         - training_progress:/app/training_progress
     ports:
       - "5000:5000"
+    networks:
+      - app-network
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    volumes:
+      - /usr/share/ollama/.ollama:/root/.ollama
+    gpus: all
     networks:
       - app-network
 
@@ -76,6 +100,7 @@ networks:
 
 volumes:
   mysql_data:
+  laravel_vendor:
   laravel_storage:
   laravel_cache:
   mlflow_runs:
