@@ -312,7 +312,14 @@ fi
 
 # Start containers
 echo -e "${YELLOW}Starting Docker containers...${NC}"
-compose up -d
+if [ "$BUILD" = true ] || [ "$FRESH" = true ]; then
+    compose up -d
+else
+    # Default startup still uses cached layers, but it rebuilds services whose
+    # Docker context changed so dependency edits (for example requirements.txt)
+    # are picked up automatically.
+    compose up -d --build
+fi
 
 # Ensure mounted directories are writable by predict-service runtime user
 echo -e "${YELLOW}Ensuring predict-service volume permissions...${NC}"

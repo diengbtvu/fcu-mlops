@@ -1,0 +1,37 @@
+{
+  "winning_model": "KNN",
+  "best_model_metrics": {
+    "r2_score": 0.92,
+    "rmse": 0.282843,
+    "mse": 0.08,
+    "mae": 0.2
+  },
+  "winning_model_diagnostics": {
+    "sample_count": 12,
+    "actual_min": 0.05,
+    "actual_max": 1.0,
+    "predicted_min": 0.07,
+    "predicted_max": 0.94,
+    "residual_mean": 0.01,
+    "residual_std": 0.11,
+    "mean_abs_residual": 0.08,
+    "max_abs_residual": 0.24,
+    "p95_abs_residual": 0.19,
+    "largest_error_index": 5,
+    "largest_error_actual": 0.92,
+    "largest_error_predicted": 0.68,
+    "pred_actual_correlation": 0.9,
+    "linear_fit_slope": 0.89,
+    "linear_fit_intercept": 0.04
+  },
+  "winning_model_sequence_diagnostics": {
+    "sample_count": 40,
+    "actual_peak_index": 15,
+    "actual_peak_value": 1.0,
+    "predicted_peak_index": 16,
+    "predicted_peak_value": 0.94,
+    "mean_abs_gap": 0.08,
+    "max_abs_gap": 0.24,
+    "sequence_correlation": 0.89
+  }
+}

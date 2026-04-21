@@ -10,7 +10,8 @@ WORKDIR /app
 # Copy requirements and install dependencies as root
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && python -c "import shap"
 
 # Copy application files and set ownership
 COPY --chown=apiuser:apigroup . .

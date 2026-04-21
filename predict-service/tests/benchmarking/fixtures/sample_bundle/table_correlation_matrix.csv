@@ -1,0 +1,10 @@
+feature_a,feature_b,correlation
+pH,VFA,0.86
+pH,Propionate,0.82
+Propionate,VFA,0.79
+VSS,VFA,0.71
+pH,HPR,0.91
+Propionate,HPR,0.83
+VFA,HPR,0.81
+VSS,HPR,0.74
+Butyrate,HPR,0.69

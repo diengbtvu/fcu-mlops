@@ -273,9 +273,21 @@ class AdminController extends Controller
             ];
         }
 
-        $llmExplanations = is_array($summary['llm_explanations'] ?? null)
-            ? $summary['llm_explanations']
+        $benchmarkStatusPayload = is_array($summary['benchmark_status'] ?? null)
+            ? $summary['benchmark_status']
             : [];
+        $benchmarkStatus = strtolower(trim((string) ($benchmarkStatusPayload['status'] ?? '')));
+        $selectedBenchmarkExplanations = is_array($summary['selected_benchmark_explanations'] ?? null)
+            ? $summary['selected_benchmark_explanations']
+            : [];
+        $hasBenchmarkLifecycle = !empty($benchmarkStatusPayload)
+            || is_array($summary['benchmark_summary'] ?? null)
+            || !empty($selectedBenchmarkExplanations);
+        if ($benchmarkStatus === 'success' && !empty($selectedBenchmarkExplanations)) {
+            $llmExplanations = $selectedBenchmarkExplanations;
+        } else {
+            $llmExplanations = [];
+        }
 
         $inlineTableKeys = [
             'model_comparison_table',
@@ -327,6 +339,8 @@ class AdminController extends Controller
             'summaryError' => $summaryError,
             'reportAssets' => $reportAssets,
             'llmExplanations' => $llmExplanations,
+            'selectedBenchmarkExplanations' => $selectedBenchmarkExplanations,
+            'benchmarkStatusPayload' => $benchmarkStatusPayload,
             'inlineTables' => $inlineTables,
             'imageKeys' => $imageKeys,
             'tableKeys' => $tableKeys,

@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-04-17T01:28:51.836877",
+  "source_name": "/var/www/html/storage/app/public/datasets/5AuArCh9g3HNTMik3jyKaUUG9s6NZRC7to4IX92w.xls",
+  "selected_sheet": "HRT 12 -4 h",
+  "best_model": "KNN",
+  "best_model_type": "knn",
+  "r2": 0.8171678017037467,
+  "mse": 0.012809918378105262,
+  "rows_after_preprocessing": 197,
+  "top_features": [
+    "VFA",
+    "Butyrate",
+    "Acetate"
+  ],
+  "report_id": "KNN_DS1_20260417",
+  "report_route_prefix": "/train/reports/KNN_DS1_20260417"
+}

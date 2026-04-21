@@ -16,6 +16,10 @@ from app.utils.report_explainer import (
     generate_report_explanations,
     update_report_explanation_status,
 )
+from app.utils.report_benchmark import (
+    run_report_benchmark,
+    update_report_benchmark_status,
+)
 from app.utils.training_report import generate_training_report
 import sys
 import mlflow
@@ -239,6 +243,19 @@ def _start_async_report_explanations(
         progress=0,
         phase="queued",
     )
+    update_report_benchmark_status(
+        report_info=report_info,
+        status="pending",
+        message="Benchmark evaluation is queued and will start after AI explanations finish.",
+        report_root=REPORTS_ROOT,
+        started_at=started_at,
+        progress=0,
+        phase="queued",
+        step_index=1,
+        total_steps=3,
+        current_items=["waiting for AI explanations"],
+        output_dir="benchmark_eval",
+    )
 
     def _runner() -> None:
         try:
@@ -261,6 +278,13 @@ def _start_async_report_explanations(
                     source_name=source_name,
                     selected_sheet=selected_sheet,
                 )
+                try:
+                    run_report_benchmark(
+                        report_info=report_info,
+                        report_root=REPORTS_ROOT,
+                    )
+                except Exception as benchmark_error:
+                    print(f"⚠️ Async benchmark evaluation failed: {benchmark_error}")
                 print(f"🤖 AI report explanations generated for {report_info.get('report_id')}")
         except Exception as explanation_error:
             update_report_explanation_status(
@@ -270,6 +294,22 @@ def _start_async_report_explanations(
                 report_root=REPORTS_ROOT,
                 started_at=started_at,
                 phase="error",
+            )
+            update_report_benchmark_status(
+                report_info=report_info,
+                status="error",
+                message=(
+                    "Benchmark evaluation was not completed because the AI explanation step failed: "
+                    f"{explanation_error}"
+                ),
+                report_root=REPORTS_ROOT,
+                started_at=started_at,
+                progress=100,
+                phase="blocked",
+                step_index=1,
+                total_steps=3,
+                current_items=["AI explanations"],
+                output_dir="benchmark_eval",
             )
             print(f"⚠️ Async AI explanation generation failed: {explanation_error}")
 

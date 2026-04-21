@@ -202,6 +202,31 @@ curl -X POST http://localhost:5000/predict/model \
   }'
 ```
 
+## 📊 Offline Benchmarking
+
+The service now includes an additive benchmarking module under `benchmarking/` for claim-level evaluation of artifact-grounded explanations. It does not modify Flask prediction endpoints or runtime inference contracts, but training reports can publish benchmark status back into `summary.json` for the Laravel report page.
+
+When a training report is generated through `/train/model`, the report workflow now writes `benchmark_status` and `benchmark_summary` into the bundle `summary.json`. That lets the report page surface queued/running/completed benchmark state and download links for leaderboard outputs without changing prediction contracts.
+
+After AI explanations complete, the runtime benchmark now runs real `A/B/C` generations with the benchmark client across the full Phase 2 chart bundle under the richest runtime condition, `image_table_summary`. It then publishes `selected_benchmark_explanations` and `benchmark_eval/selected_explanations.json` back into the report bundle so the Laravel report page shows only the benchmark-selected explanation payload after benchmark success.
+
+Run it from `predict-service` with either the bundled synthetic fixture or an existing report bundle:
+
+```bash
+python3 scripts/run_benchmark.py --fixture-only --output-dir ./tmp/benchmark-fixture
+python3 scripts/run_benchmark.py --bundle-path app/reports/AI_Long_PostPatch_20260322_1 --output-dir ./tmp/benchmark-real
+python3 scripts/run_benchmark.py --bundle-path app/reports/AI_Long_PostPatch_20260322_1 --output-dir ./tmp/benchmark-real-openai --client openai
+```
+
+When a bundle contains `llm_explanations.json`, the CLI now ingests it automatically as the official `BASELINE_LLM` arm. That baseline is evaluated as evidence only; it is never used as ground truth. Each asset must now carry a structured `benchmark_payload` with `explanation_short`, `explanation_full`, and `claims[]`; legacy freeform-only baseline files are rejected instead of being heuristically parsed.
+
+Current benchmark coverage includes:
+
+- Core Phase 1 units: `model_comparison/main`, `incremental_feature_analysis/main`, `feature_ranking/gra`
+- Phase 2 chart assets discovered from `asset_evidence.json`, including SHAP, feature importance, correlation, distribution, scatter, residual, and time-series chart families
+
+See [docs/benchmarking.md](docs/benchmarking.md) for scope, outputs, and extension notes.
+
 ## 🏗️ Project Structure
 
 ```

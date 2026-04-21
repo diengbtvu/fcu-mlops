@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-04-16T17:03:56.480918",
+  "source_name": "data/pilot-performance.xls",
+  "selected_sheet": "HRT 12 -4 h",
+  "best_model": "KNN",
+  "best_model_type": "knn",
+  "r2": 0.8171678017037467,
+  "mse": 0.012809918378105262,
+  "rows_after_preprocessing": 197,
+  "top_features": [
+    "VFA",
+    "Butyrate",
+    "Acetate"
+  ],
+  "report_id": "Smoke_SHAP_Fix_20260416",
+  "report_route_prefix": "/train/reports/Smoke_SHAP_Fix_20260416"
+}

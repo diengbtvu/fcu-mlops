@@ -1,0 +1,184 @@
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass, field, is_dataclass
+from pathlib import Path
+from typing import Any, Literal
+
+ArtifactType = str
+InputCondition = Literal["table_only", "image_table", "image_table_summary", "image_only"]
+ArmName = Literal["A", "B", "C", "D"]
+VerificationStatus = Literal["supported", "partially_supported", "contradicted", "unverifiable"]
+BASELINE_ARM = "BASELINE_LLM"
+
+SUPPORTED_ARTIFACT_TYPES: tuple[str, ...] = (
+    "model_comparison/main",
+    "incremental_feature_analysis/main",
+    "feature_ranking/gra",
+)
+SUPPORTED_CONDITIONS: tuple[str, ...] = (
+    "table_only",
+    "image_table",
+    "image_table_summary",
+    "image_only",
+)
+SUPPORTED_ARMS: tuple[str, ...] = ("A", "B", "C", "D", BASELINE_ARM)
+
+
+def to_primitive(value: Any) -> Any:
+    """Convert nested dataclasses and paths to JSON-safe builtins."""
+    if is_dataclass(value):
+        return {key: to_primitive(item) for key, item in asdict(value).items()}
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, dict):
+        return {str(key): to_primitive(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [to_primitive(item) for item in value]
+    if isinstance(value, tuple):
+        return [to_primitive(item) for item in value]
+    return value
+
+
+@dataclass(frozen=True)
+class EvidenceRef:
+    source_file: str
+    priority: str
+    detail: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ManifestRecord:
+    artifact_id: str
+    artifact_type: str
+    chart_type: str
+    source_files: list[str]
+    primary_entities: list[str]
+    bundle_name: str
+    chart_file: str | None = None
+    summary_files: list[str] = field(default_factory=list)
+    asset_key: str | None = None
+    asset_title: str | None = None
+    asset_family: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class GroundTruthFact:
+    fact_id: str
+    fact_type: str
+    subject: str
+    predicate: str
+    object: Any = None
+    value: Any = None
+    unit: str | None = None
+    evidence: list[EvidenceRef] = field(default_factory=list)
+    importance: int = 1
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class GoldArtifact:
+    artifact_id: str
+    artifact_type: str
+    source_files: list[str]
+    chart_type: str
+    primary_entities: list[str]
+    ground_truth_facts: list[GroundTruthFact]
+    salient_facts: list[str]
+    forbidden_inferences: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ArtifactInputs:
+    record: ManifestRecord
+    bundle_dir: Path
+    tables: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    json_payloads: dict[str, Any] = field(default_factory=dict)
+    text_payloads: dict[str, str] = field(default_factory=dict)
+    chart_files: list[str] = field(default_factory=list)
+    asset_payload: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class Claim:
+    claim_id: str
+    claim_text: str
+    claim_type: str
+    span_category: str
+    is_numeric: bool
+    requires_grounding_from: str
+    confidence: float
+    subject: str | None = None
+    predicate: str | None = None
+    object: Any = None
+    metric: str | None = None
+    value: float | int | str | None = None
+    unit: str | None = None
+    ordered_items: list[str] = field(default_factory=list)
+    feature_count: int | None = None
+    hedged: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ExplanationOutput:
+    artifact_id: str
+    arm: str
+    input_condition: str
+    explanation_short: str
+    explanation_full: str
+    claims: list[Claim]
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ClaimVerification:
+    artifact_id: str
+    arm: str
+    input_condition: str
+    claim_id: str
+    claim_text: str
+    status: str
+    matched_fact_ids: list[str] = field(default_factory=list)
+    reason: str = ""
+    numeric_delta: float | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ArtifactScore:
+    artifact_id: str
+    arm: str
+    input_condition: str
+    claim_count: int
+    metrics: dict[str, float | None]
+
+    def to_dict(self) -> dict[str, Any]:
+        payload = to_primitive(self)
+        flattened = {
+            "artifact_id": payload["artifact_id"],
+            "arm": payload["arm"],
+            "input_condition": payload["input_condition"],
+            "claim_count": payload["claim_count"],
+        }
+        flattened.update(payload["metrics"])
+        return flattened

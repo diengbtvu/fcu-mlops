@@ -2,17 +2,42 @@ from __future__ import annotations
 
 import json
 import os
+import random
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 
 import numpy as np
 import pandas as pd
 import requests
 from dotenv import load_dotenv
+from openai_rate_control import shared_openai_request_gate
 
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2")
+OPENAI_REPORT_MAX_RETRIES = max(1, int(os.getenv("OPENAI_REPORT_MAX_RETRIES", "8")))
+OPENAI_REPORT_RETRY_BACKOFF_SECONDS = max(
+    1.0,
+    float(os.getenv("OPENAI_REPORT_RETRY_BACKOFF_SECONDS", "8")),
+)
+OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS = max(
+    0.0,
+    float(os.getenv("OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS", "6")),
+)
+OPENAI_REPORT_RETRY_JITTER_SECONDS = max(
+    0.0,
+    float(os.getenv("OPENAI_REPORT_RETRY_JITTER_SECONDS", "1.0")),
+)
+OPENAI_REPORT_ASSET_BATCH_SIZE = max(1, int(os.getenv("OPENAI_REPORT_ASSET_BATCH_SIZE", "1")))
+OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS = max(
+    2000,
+    int(os.getenv("OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS", "3200")),
+)
+OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS = max(
+    1200,
+    int(os.getenv("OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS", "1800")),
+)
 EXPLANATIONS_FILENAME = "llm_explanations.json"
 ASSET_EVIDENCE_FILENAME = "asset_evidence.json"
 STATUS_FILENAME = "llm_explanations_status"
@@ -838,7 +863,162 @@ def _chunk_assets(items: List[Dict[str, Any]], chunk_size: int) -> List[List[Dic
     return [items[index:index + chunk_size] for index in range(0, len(items), chunk_size)]
 
 
-def _build_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
+def _report_claim_schema() -> Dict[str, Any]:
+    scalar_or_null = {
+        "anyOf": [
+            {"type": "string"},
+            {"type": "number"},
+            {"type": "integer"},
+            {"type": "boolean"},
+            {"type": "null"},
+        ]
+    }
+    return {
+        "type": "object",
+        "properties": {
+            "claim_id": {"type": "string"},
+            "claim_text": {"type": "string"},
+            "claim_type": {"type": "string"},
+            "span_category": {"type": "string"},
+            "is_numeric": {"type": "boolean"},
+            "requires_grounding_from": {"type": "string"},
+            "confidence": {"type": "number"},
+            "subject": {"type": ["string", "null"]},
+            "predicate": {"type": ["string", "null"]},
+            "object": scalar_or_null,
+            "metric": {"type": ["string", "null"]},
+            "value": scalar_or_null,
+            "unit": {"type": ["string", "null"]},
+            "ordered_items": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "feature_count": {"type": ["integer", "null"]},
+            "hedged": {"type": "boolean"},
+        },
+        "required": [
+            "claim_id",
+            "claim_text",
+            "claim_type",
+            "span_category",
+            "is_numeric",
+            "requires_grounding_from",
+            "confidence",
+            "subject",
+            "predicate",
+            "object",
+            "metric",
+            "value",
+            "unit",
+            "ordered_items",
+            "feature_count",
+            "hedged",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _report_benchmark_payload_schema() -> Dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "explanation_short": {"type": "string"},
+            "explanation_full": {"type": "string"},
+            "claims": {
+                "type": "array",
+                "items": _report_claim_schema(),
+            },
+        },
+        "required": [
+            "explanation_short",
+            "explanation_full",
+            "claims",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _normalize_benchmark_payload(
+    asset_key: str,
+    raw_payload: Any,
+    english_text: str,
+) -> Dict[str, Any]:
+    if not isinstance(raw_payload, dict):
+        raise ValueError(f"Asset '{asset_key}' is missing benchmark_payload.")
+
+    explanation_short = str(raw_payload.get("explanation_short") or "").strip()
+    explanation_full = str(raw_payload.get("explanation_full") or "").strip()
+    claims = raw_payload.get("claims")
+
+    if not explanation_short:
+        raise ValueError(f"Asset '{asset_key}' returned an empty benchmark explanation_short.")
+    if not explanation_full:
+        raise ValueError(f"Asset '{asset_key}' returned an empty benchmark explanation_full.")
+    if not isinstance(claims, list):
+        raise ValueError(f"Asset '{asset_key}' returned a non-list benchmark claims payload.")
+
+    return {
+        "explanation_short": explanation_short,
+        "explanation_full": english_text,
+        "claims": [_json_safe_value(claim) for claim in claims],
+    }
+
+
+def _normalize_asset_explanation_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    asset_key = str(item.get("key") or "").strip()
+    if not asset_key:
+        raise ValueError("OpenAI explanation response omitted the asset key.")
+
+    english_text = str(item.get("en") or "").strip()
+    if not english_text:
+        raise ValueError(f"Asset '{asset_key}' returned an empty English explanation.")
+
+    return {
+        "en": english_text,
+        "zh_TW": str(item.get("zh_TW") or "").strip(),
+        "benchmark_payload": _normalize_benchmark_payload(
+            asset_key=asset_key,
+            raw_payload=item.get("benchmark_payload"),
+            english_text=english_text,
+        ),
+    }
+
+
+def _build_response_schema(
+    explainable_keys: List[str],
+    *,
+    include_overview: bool = False,
+) -> Dict[str, Any]:
+    properties: Dict[str, Any] = {
+        "assets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {"type": "string", "enum": explainable_keys},
+                    "en": {"type": "string"},
+                    "zh_TW": {"type": "string"},
+                    "benchmark_payload": _report_benchmark_payload_schema(),
+                },
+                "required": ["key", "en", "zh_TW", "benchmark_payload"],
+                "additionalProperties": False,
+            },
+        },
+    }
+    required = ["assets"]
+
+    if include_overview:
+        properties["overview"] = {
+            "type": "object",
+            "properties": {
+                "en": {"type": "string"},
+                "zh_TW": {"type": "string"},
+            },
+            "required": ["en", "zh_TW"],
+            "additionalProperties": False,
+        }
+        required.insert(0, "overview")
+
     return {
         "type": "json_schema",
         "json_schema": {
@@ -846,31 +1026,8 @@ def _build_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
             "strict": True,
             "schema": {
                 "type": "object",
-                "properties": {
-                    "overview": {
-                        "type": "object",
-                        "properties": {
-                            "en": {"type": "string"},
-                            "zh_TW": {"type": "string"},
-                        },
-                        "required": ["en", "zh_TW"],
-                        "additionalProperties": False,
-                    },
-                    "assets": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "key": {"type": "string", "enum": explainable_keys},
-                                "en": {"type": "string"},
-                                "zh_TW": {"type": "string"},
-                            },
-                            "required": ["key", "en", "zh_TW"],
-                            "additionalProperties": False,
-                        },
-                    },
-                },
-                "required": ["overview", "assets"],
+                "properties": properties,
+                "required": required,
                 "additionalProperties": False,
             },
         },
@@ -903,33 +1060,127 @@ def _build_overview_response_schema() -> Dict[str, Any]:
     }
 
 
-def _call_openai(payload: Dict[str, Any], api_key: str) -> Dict[str, Any]:
-    response = requests.post(
-        OPENAI_CHAT_COMPLETIONS_URL,
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json=payload,
-        timeout=180,
+def _report_retry_after_seconds(response: requests.Response | None) -> float | None:
+    if response is None:
+        return None
+
+    retry_after = str(response.headers.get("Retry-After") or "").strip()
+    if not retry_after:
+        return None
+
+    try:
+        return max(0.0, float(retry_after))
+    except ValueError:
+        return None
+
+
+def _report_error_status_code(error: Exception) -> int | None:
+    if isinstance(error, requests.HTTPError) and error.response is not None:
+        return int(error.response.status_code)
+    return None
+
+
+def _report_retry_reason(error: Exception) -> str:
+    status_code = _report_error_status_code(error)
+    if status_code == 429:
+        return "OpenAI rate limit"
+    if status_code is not None and status_code >= 500:
+        return "OpenAI server error"
+    return "OpenAI request retry"
+
+
+def _format_retry_status_message(scope_label: str, attempt: int, max_attempts: int, wait_seconds: float, error: Exception) -> str:
+    reason = _report_retry_reason(error)
+    status_code = _report_error_status_code(error)
+    status_text = f"HTTP {status_code}" if status_code is not None else "request error"
+    return (
+        f"{reason} while {scope_label}. "
+        f"Retry {attempt}/{max_attempts} in {wait_seconds:.1f}s ({status_text})."
     )
-    response.raise_for_status()
-    data = response.json()
-    choice = data["choices"][0]
-    content = choice["message"]["content"]
-    if not isinstance(content, str):
-        raise ValueError("OpenAI response did not contain a text JSON payload.")
-    if not content.strip():
-        raise ValueError(
-            "OpenAI response returned empty content "
-            f"(finish_reason={choice.get('finish_reason')!r})."
+
+
+def _build_retry_payload(scope_label: str, attempt: int, max_attempts: int, wait_seconds: float, error: Exception) -> Dict[str, Any]:
+    payload: Dict[str, Any] = {
+        "scope": scope_label,
+        "attempt": int(attempt),
+        "max_attempts": int(max_attempts),
+        "wait_seconds": round(float(wait_seconds), 1),
+        "reason": _report_retry_reason(error),
+    }
+    status_code = _report_error_status_code(error)
+    if status_code is not None:
+        payload["status_code"] = status_code
+    return payload
+
+
+def _call_openai(
+    payload: Dict[str, Any],
+    api_key: str,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
+) -> Dict[str, Any]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+
+    last_error: Exception | None = None
+    for attempt in range(1, OPENAI_REPORT_MAX_RETRIES + 1):
+        try:
+            with shared_openai_request_gate().request_slot(
+                OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS,
+                OPENAI_REPORT_RETRY_JITTER_SECONDS,
+            ):
+                response = requests.post(
+                    OPENAI_CHAT_COMPLETIONS_URL,
+                    headers=headers,
+                    json=payload,
+                    timeout=180,
+                )
+            response.raise_for_status()
+            data = response.json()
+            choice = data["choices"][0]
+            content = choice["message"]["content"]
+            if not isinstance(content, str):
+                raise ValueError("OpenAI response did not contain a text JSON payload.")
+            if not content.strip():
+                raise ValueError(
+                    "OpenAI response returned empty content "
+                    f"(finish_reason={choice.get('finish_reason')!r})."
+                )
+            return json.loads(content)
+        except requests.HTTPError as exc:
+            last_error = exc
+            status_code = exc.response.status_code if exc.response is not None else None
+            should_retry = status_code == 429 or (status_code is not None and status_code >= 500)
+            if not should_retry or attempt >= OPENAI_REPORT_MAX_RETRIES:
+                raise
+            retry_after_seconds = _report_retry_after_seconds(exc.response)
+        except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
+            last_error = exc
+            if attempt >= OPENAI_REPORT_MAX_RETRIES:
+                raise
+            retry_after_seconds = None
+
+        wait_seconds = max(
+            retry_after_seconds or 0.0,
+            OPENAI_REPORT_RETRY_BACKOFF_SECONDS * attempt,
+        ) + random.uniform(0.0, OPENAI_REPORT_RETRY_JITTER_SECONDS)
+        shared_openai_request_gate().push_cooldown(wait_seconds)
+        if on_retry is not None:
+            on_retry(attempt, OPENAI_REPORT_MAX_RETRIES, wait_seconds, last_error)
+        print(
+            f"⚠️ OpenAI request attempt {attempt}/{OPENAI_REPORT_MAX_RETRIES} failed: "
+            f"{last_error}. Retrying in {wait_seconds:.1f}s."
         )
-    return json.loads(content)
+        time.sleep(wait_seconds)
+
+    raise RuntimeError(f"OpenAI request failed after {OPENAI_REPORT_MAX_RETRIES} attempts: {last_error}")
 
 
 def _generate_global_overview(
     prompt_payload: Dict[str, Any],
     api_key: str,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
 ) -> Dict[str, str]:
     overview_payload = {
         "task": (
@@ -976,10 +1227,10 @@ def _generate_global_overview(
         "response_format": _build_overview_response_schema(),
         "reasoning_effort": "low",
         "verbosity": "medium",
-        "max_completion_tokens": 2800,
+        "max_completion_tokens": OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS,
     }
 
-    parsed = _call_openai(request_payload, api_key)
+    parsed = _call_openai(request_payload, api_key, on_retry=on_retry)
     overview = parsed.get("overview", {})
     return {
         "en": str(overview.get("en") or "").strip(),
@@ -1013,6 +1264,7 @@ def update_report_explanation_status(
     step_index: int | None = None,
     total_steps: int | None = None,
     current_items: List[str] | None = None,
+    retry_payload: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
@@ -1044,6 +1296,8 @@ def update_report_explanation_status(
         for key, value in optional_fields.items():
             if value is not None:
                 payload[key] = value
+        if retry_payload:
+            payload["retry"] = retry_payload
         summary["llm_explanations_status"] = payload
         summary_path.write_text(
             json.dumps(summary, ensure_ascii=False, indent=2),
@@ -1061,6 +1315,8 @@ def update_report_explanation_status(
             payload["total_steps"] = int(total_steps)
         if current_items is not None:
             payload["current_items"] = list(current_items)
+        if retry_payload:
+            payload["retry"] = retry_payload
 
     report_info["llm_explanations_status"] = payload
     return payload
@@ -1092,8 +1348,8 @@ def generate_report_explanations(
         runtime=runtime,
     )
     all_assets = list(prompt_payload["assets"])
-    asset_batches = _chunk_assets(all_assets, 2)
-    total_steps = len(asset_batches) + 2
+    asset_batches = _chunk_assets(all_assets, OPENAI_REPORT_ASSET_BATCH_SIZE)
+    total_steps = len(asset_batches) + 3
     update_report_explanation_status(
         report_info=report_info,
         status="pending",
@@ -1106,23 +1362,7 @@ def generate_report_explanations(
         current_items=[str(item.get("title") or item.get("key") or "") for item in all_assets[:2]],
     )
     overview = {"en": "", "zh_TW": ""}
-    asset_map: Dict[str, Dict[str, str]] = {}
-
-    try:
-        update_report_explanation_status(
-            report_info=report_info,
-            status="pending",
-            message="Generating the overall AI overview.",
-            report_root=report_root,
-            progress=20,
-            phase="overview",
-            step_index=2,
-            total_steps=total_steps,
-            current_items=["AI Report Overview"],
-        )
-        overview = _generate_global_overview(prompt_payload, api_key)
-    except Exception as exc:
-        print(f"⚠️ OpenAI global overview generation failed: {exc}")
+    asset_map: Dict[str, Dict[str, Any]] = {}
 
     asset_evidence_lookup = {
         str(item.get("key") or ""): item
@@ -1144,9 +1384,13 @@ def generate_report_explanations(
             "For the overview, write about 3-4 sentences in each language.",
             "Do not use bullets. Write complete, readable prose.",
             "Use the per-asset result_text as the authoritative textual summary for that chart or table.",
+            "For each asset, also return benchmark_payload.explanation_short as a one-sentence English summary.",
+            "For each asset, return benchmark_payload.explanation_full as the same English paragraph you returned in en.",
+            "For each asset, return benchmark_payload.claims as structured factual claims grounded only in the supplied evidence.",
+            "Unsupported or weakly grounded claims must be omitted rather than guessed.",
         ]
 
-        response_format = _build_response_schema(batch_keys)
+        response_format = _build_response_schema(batch_keys, include_overview=False)
         request_payload = {
             "model": OPENAI_REPORT_MODEL,
             "messages": [
@@ -1165,7 +1409,7 @@ def generate_report_explanations(
             "response_format": response_format,
             "reasoning_effort": "low",
             "verbosity": "low",
-            "max_completion_tokens": 1800,
+            "max_completion_tokens": OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS,
         }
 
         current_titles = [str(item.get("title") or item.get("key") or "") for item in asset_batch]
@@ -1178,32 +1422,50 @@ def generate_report_explanations(
             report_root=report_root,
             progress=batch_start_progress,
             phase="assets",
-            step_index=batch_index + 3,
+            step_index=batch_index + 2,
             total_steps=total_steps,
             current_items=current_titles,
         )
 
         try:
-            parsed = _call_openai(request_payload, api_key)
+            parsed = _call_openai(
+                request_payload,
+                api_key,
+                on_retry=lambda attempt, max_attempts, wait_seconds, error, batch_index=batch_index, current_titles=current_titles, batch_start_progress=batch_start_progress: update_report_explanation_status(
+                    report_info=report_info,
+                    status="pending",
+                    message=_format_retry_status_message(
+                        f"generating explanations for batch {batch_index + 1}/{len(asset_batches)}",
+                        attempt,
+                        max_attempts,
+                        wait_seconds,
+                        error,
+                    ),
+                    report_root=report_root,
+                    progress=batch_start_progress,
+                    phase="assets",
+                    step_index=batch_index + 2,
+                    total_steps=total_steps,
+                    current_items=current_titles,
+                    retry_payload=_build_retry_payload(
+                        f"batch {batch_index + 1}/{len(asset_batches)}",
+                        attempt,
+                        max_attempts,
+                        wait_seconds,
+                        error,
+                    ),
+                ),
+            )
         except Exception as exc:
             raise RuntimeError(
                 f"OpenAI explanation generation failed on batch {batch_index + 1}: {exc}"
             ) from exc
 
-        if batch_index == 0 and not any(overview.values()):
-            overview = {
-                "en": str(parsed.get("overview", {}).get("en") or "").strip(),
-                "zh_TW": str(parsed.get("overview", {}).get("zh_TW") or "").strip(),
-            }
-
         for item in parsed.get("assets", []):
             key = str(item.get("key") or "").strip()
             if not key:
                 continue
-            asset_map[key] = {
-                "en": str(item.get("en") or "").strip(),
-                "zh_TW": str(item.get("zh_TW") or "").strip(),
-            }
+            asset_map[key] = _normalize_asset_explanation_item(item)
 
         update_report_explanation_status(
             report_info=report_info,
@@ -1212,10 +1474,53 @@ def generate_report_explanations(
             report_root=report_root,
             progress=batch_end_progress,
             phase="assets",
-            step_index=batch_index + 3,
+            step_index=batch_index + 2,
             total_steps=total_steps,
             current_items=current_titles,
         )
+
+    try:
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message="Generating the overall AI overview.",
+            report_root=report_root,
+            progress=90,
+            phase="overview",
+            step_index=len(asset_batches) + 2,
+            total_steps=total_steps,
+            current_items=["AI Report Overview"],
+        )
+        overview = _generate_global_overview(
+            prompt_payload,
+            api_key,
+            on_retry=lambda attempt, max_attempts, wait_seconds, error: update_report_explanation_status(
+                report_info=report_info,
+                status="pending",
+                message=_format_retry_status_message(
+                    "generating the overall AI overview",
+                    attempt,
+                    max_attempts,
+                    wait_seconds,
+                    error,
+                ),
+                report_root=report_root,
+                progress=90,
+                phase="overview",
+                step_index=len(asset_batches) + 2,
+                total_steps=total_steps,
+                current_items=["AI Report Overview"],
+                retry_payload=_build_retry_payload(
+                    "overall overview",
+                    attempt,
+                    max_attempts,
+                    wait_seconds,
+                    error,
+                ),
+            ),
+        )
+    except Exception as exc:
+        print(f"⚠️ OpenAI global overview generation failed: {exc}")
 
     explanation_payload = {
         "provider": "openai",

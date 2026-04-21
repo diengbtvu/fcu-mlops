@@ -1,0 +1,6 @@
+feature,mean_abs_shap
+ORP_Low,0.045
+pH,0.041
+VFA,0.036
+Propionate,0.031
+COD-O,0.027
