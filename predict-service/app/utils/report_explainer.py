@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import os
 from datetime import datetime
@@ -11,8 +12,12 @@ import pandas as pd
 import requests
 from dotenv import load_dotenv
 
-OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
-OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2")
+DEFAULT_OPENAI_CHAT_BASE_URL = "https://api.openai.com/v1"
+DEFAULT_OPENAI_REPORT_MODEL = "gpt-5.2"
+DEFAULT_OLLAMA_BASE_URL = "http://127.0.0.1:11434"
+DEFAULT_OLLAMA_REPORT_MODEL = "gemma4:e4b"
+DEFAULT_OLLAMA_NUM_CTX = 16384
+SUPPORTED_LLM_PROVIDERS = {"openai", "ollama"}
 EXPLANATIONS_FILENAME = "llm_explanations.json"
 ASSET_EVIDENCE_FILENAME = "asset_evidence.json"
 STATUS_FILENAME = "llm_explanations_status"
@@ -56,6 +61,109 @@ TABLE_KEYS = {
     "correlation_matrix",
     "table1_incremental_results",
 }
+
+
+def _provider_display_name(provider: str) -> str:
+    if provider == "ollama":
+        return "Ollama"
+    return "OpenAI"
+
+
+def _get_llm_provider() -> str:
+    provider = str(
+        os.getenv("REPORT_LLM_PROVIDER")
+        or os.getenv("LLM_PROVIDER")
+        or "openai"
+    ).strip().lower()
+    if provider not in SUPPORTED_LLM_PROVIDERS:
+        supported = ", ".join(sorted(SUPPORTED_LLM_PROVIDERS))
+        raise RuntimeError(
+            f"Unsupported REPORT_LLM_PROVIDER '{provider}'. Supported values: {supported}."
+        )
+    return provider
+
+
+def _get_report_model(provider: str) -> str:
+    if provider == "ollama":
+        model = str(
+            os.getenv("OLLAMA_REPORT_MODEL")
+            or os.getenv("REPORT_LLM_MODEL")
+            or os.getenv("LLM_MODEL")
+            or DEFAULT_OLLAMA_REPORT_MODEL
+        ).strip()
+    else:
+        model = str(
+            os.getenv("OPENAI_REPORT_MODEL")
+            or os.getenv("REPORT_LLM_MODEL")
+            or os.getenv("LLM_MODEL")
+            or DEFAULT_OPENAI_REPORT_MODEL
+        ).strip()
+
+    if not model:
+        raise RuntimeError(
+            f"{_provider_display_name(provider)} report model is not configured."
+        )
+    return model
+
+
+def _get_openai_chat_completions_url() -> str:
+    base_url = str(
+        os.getenv("OPENAI_BASE_URL") or DEFAULT_OPENAI_CHAT_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/chat/completions"
+
+
+def _get_openai_api_key() -> str:
+    return str(os.getenv("OPENAI_API_KEY") or "").strip()
+
+
+def _get_ollama_chat_url() -> str:
+    base_url = str(
+        os.getenv("OLLAMA_BASE_URL") or DEFAULT_OLLAMA_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/api/chat"
+
+
+def _get_ollama_num_ctx() -> int:
+    raw_value = str(os.getenv("OLLAMA_NUM_CTX") or DEFAULT_OLLAMA_NUM_CTX).strip()
+    try:
+        value = int(raw_value)
+    except ValueError:
+        value = DEFAULT_OLLAMA_NUM_CTX
+    return max(4096, value)
+
+
+def _extract_json_object(raw_content: str, provider: str) -> Dict[str, Any]:
+    candidates: List[str] = []
+    stripped = raw_content.strip()
+    if stripped:
+        candidates.append(stripped)
+
+        if stripped.startswith("```") and stripped.endswith("```"):
+            lines = stripped.splitlines()
+            if len(lines) >= 3:
+                fenced_body = "\n".join(lines[1:-1]).strip()
+                if fenced_body:
+                    candidates.append(fenced_body)
+
+        start = stripped.find("{")
+        end = stripped.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            embedded_json = stripped[start:end + 1].strip()
+            if embedded_json:
+                candidates.append(embedded_json)
+
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+
+    raise ValueError(
+        f"{_provider_display_name(provider)} response did not contain a valid JSON object."
+    )
 
 
 def _read_json(path: Path) -> Dict[str, Any]:
@@ -820,7 +928,7 @@ def _build_prompt_payload(
             "Write one medium-length paragraph per asset.",
             "Keep the explanation concrete and friendly.",
             "Avoid heavy jargon. If a term matters, explain it in simple words.",
-            "Do not mention OpenAI, prompting, or the model itself in the explanations.",
+            "Do not mention the AI provider, prompting, or the model itself in the explanations.",
             "Do not invent numbers or trends that are not in the provided data.",
             "For each asset, clearly cover: what it shows, how to read it, the main takeaway, and one practical caution or limitation when relevant.",
             "Use concrete numbers, ranks, or feature names whenever they are available in the provided evidence.",
@@ -877,6 +985,36 @@ def _build_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
     }
 
 
+def _build_assets_only_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "report_asset_explanations",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "assets": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {"type": "string", "enum": explainable_keys},
+                                "en": {"type": "string"},
+                                "zh_TW": {"type": "string"},
+                            },
+                            "required": ["key", "en", "zh_TW"],
+                            "additionalProperties": False,
+                        },
+                    },
+                },
+                "required": ["assets"],
+                "additionalProperties": False,
+            },
+        },
+    }
+
+
 def _build_overview_response_schema() -> Dict[str, Any]:
     return {
         "type": "json_schema",
@@ -903,9 +1041,33 @@ def _build_overview_response_schema() -> Dict[str, Any]:
     }
 
 
+def _build_ollama_json_only_instruction(
+    response_schema: Dict[str, Any],
+    *,
+    allowed_keys: List[str] | None = None,
+) -> str:
+    schema = response_schema["json_schema"]["schema"]
+    compact_schema = json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
+    instructions = [
+        "Return ONLY one valid JSON object.",
+        "Do not output markdown, explanations, headings, or prose outside JSON.",
+        "The JSON must exactly match this schema:",
+        compact_schema,
+        "If any field is uncertain, use an empty string, but keep the JSON valid.",
+    ]
+    if allowed_keys:
+        instructions.append(
+            "Allowed asset keys for this request: " + ", ".join(allowed_keys) + "."
+        )
+        instructions.append(
+            "Include every listed key exactly once in the assets array."
+        )
+    return " ".join(instructions)
+
+
 def _call_openai(payload: Dict[str, Any], api_key: str) -> Dict[str, Any]:
     response = requests.post(
-        OPENAI_CHAT_COMPLETIONS_URL,
+        _get_openai_chat_completions_url(),
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
@@ -924,12 +1086,151 @@ def _call_openai(payload: Dict[str, Any], api_key: str) -> Dict[str, Any]:
             "OpenAI response returned empty content "
             f"(finish_reason={choice.get('finish_reason')!r})."
         )
-    return json.loads(content)
+    return _extract_json_object(content, "openai")
+
+
+def _call_ollama(payload: Dict[str, Any]) -> Dict[str, Any]:
+    def _post(chat_payload: Dict[str, Any]) -> Dict[str, Any]:
+        response = requests.post(
+            _get_ollama_chat_url(),
+            headers={"Content-Type": "application/json"},
+            json=chat_payload,
+            timeout=300,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    def _repair(raw_content: str, original_payload: Dict[str, Any]) -> Dict[str, Any]:
+        repair_payload = {
+            "model": original_payload["model"],
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "Convert the provided content into one valid JSON object only. "
+                        "Do not add markdown or commentary."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        _build_ollama_json_only_instruction(
+                            {
+                                "json_schema": {
+                                    "schema": original_payload["format"],
+                                }
+                            }
+                        )
+                        + "\n\nContent to convert:\n"
+                        + raw_content
+                    ),
+                },
+            ],
+            "stream": False,
+            "format": original_payload["format"],
+            "options": {
+                "temperature": 0,
+                "num_predict": max(
+                    int((original_payload.get("options") or {}).get("num_predict") or 1200),
+                    1200,
+                ),
+                "num_ctx": max(
+                    int((original_payload.get("options") or {}).get("num_ctx") or _get_ollama_num_ctx()),
+                    8192,
+                ),
+            },
+        }
+        repair_data = _post(repair_payload)
+        repair_content = ((repair_data.get("message") or {}).get("content") or "").strip()
+        if not repair_content:
+            raise ValueError("Ollama repair response returned empty content.")
+        return _extract_json_object(repair_content, "ollama")
+
+    last_error: Exception | None = None
+    for attempt_index in range(3):
+        request_payload = copy.deepcopy(payload)
+        if attempt_index > 0 and request_payload.get("messages"):
+            retry_message = (
+                "Your previous response was empty or invalid. "
+                "Return only one valid JSON object that matches the requested schema."
+            )
+            first_message = dict(request_payload["messages"][0])
+            first_message["content"] = f"{first_message.get('content', '')} {retry_message}".strip()
+            request_payload["messages"][0] = first_message
+
+        try:
+            data = _post(request_payload)
+            message = data.get("message") or {}
+            content = message.get("content")
+            if not isinstance(content, str):
+                raise ValueError("Ollama response did not contain a text JSON payload.")
+            if not content.strip():
+                raise ValueError("Ollama response returned empty content.")
+            try:
+                return _extract_json_object(content, "ollama")
+            except ValueError:
+                return _repair(content, request_payload)
+        except Exception as exc:
+            last_error = exc
+
+    if last_error is not None:
+        raise last_error
+    raise ValueError("Ollama request failed for an unknown reason.")
+
+
+def _call_llm(
+    provider: str,
+    payload: Dict[str, Any],
+    api_key: str | None = None,
+) -> Dict[str, Any]:
+    if provider == "ollama":
+        return _call_ollama(payload)
+    if provider == "openai":
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
+        return _call_openai(payload, api_key)
+    raise RuntimeError(f"Unsupported LLM provider: {provider}")
+
+
+def _build_llm_request_payload(
+    provider: str,
+    model: str,
+    messages: List[Dict[str, str]],
+    response_schema: Dict[str, Any],
+    *,
+    max_completion_tokens: int,
+    reasoning_effort: str = "low",
+    verbosity: str = "low",
+) -> Dict[str, Any]:
+    if provider == "ollama":
+        options: Dict[str, Any] = {
+            "temperature": 0,
+            "num_predict": int(max_completion_tokens),
+            "num_ctx": _get_ollama_num_ctx(),
+        }
+        return {
+            "model": model,
+            "messages": messages,
+            "stream": False,
+            "format": response_schema["json_schema"]["schema"],
+            "options": options,
+        }
+
+    return {
+        "model": model,
+        "messages": messages,
+        "response_format": response_schema,
+        "reasoning_effort": reasoning_effort,
+        "verbosity": verbosity,
+        "max_completion_tokens": max_completion_tokens,
+    }
 
 
 def _generate_global_overview(
     prompt_payload: Dict[str, Any],
-    api_key: str,
+    provider: str,
+    model: str,
+    api_key: str | None = None,
 ) -> Dict[str, str]:
     overview_payload = {
         "task": (
@@ -958,28 +1259,30 @@ def _generate_global_overview(
         ],
     }
 
-    request_payload = {
-        "model": OPENAI_REPORT_MODEL,
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are a bilingual machine-learning report summarizer for non-technical users. "
-                    "Return strict JSON only."
-                ),
-            },
-            {
-                "role": "user",
-                "content": json.dumps(overview_payload, ensure_ascii=False),
-            },
-        ],
-        "response_format": _build_overview_response_schema(),
-        "reasoning_effort": "low",
-        "verbosity": "medium",
-        "max_completion_tokens": 2800,
-    }
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a bilingual machine-learning report summarizer for non-technical users. "
+                "Return strict JSON only."
+            ),
+        },
+        {
+            "role": "user",
+            "content": json.dumps(overview_payload, ensure_ascii=False),
+        },
+    ]
+    request_payload = _build_llm_request_payload(
+        provider=provider,
+        model=model,
+        messages=messages,
+        response_schema=_build_overview_response_schema(),
+        max_completion_tokens=2800,
+        reasoning_effort="low",
+        verbosity="medium",
+    )
 
-    parsed = _call_openai(request_payload, api_key)
+    parsed = _call_llm(provider, request_payload, api_key=api_key)
     overview = parsed.get("overview", {})
     return {
         "en": str(overview.get("en") or "").strip(),
@@ -1074,9 +1377,14 @@ def generate_report_explanations(
 ) -> Dict[str, Any] | None:
     env_path = Path(__file__).resolve().parents[2] / ".env"
     load_dotenv(dotenv_path=env_path, override=False)
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
+    provider = _get_llm_provider()
+    provider_label = _provider_display_name(provider)
+    model = _get_report_model(provider)
+    api_key: str | None = None
+    if provider == "openai":
+        api_key = _get_openai_api_key()
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
 
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
@@ -1092,12 +1400,15 @@ def generate_report_explanations(
         runtime=runtime,
     )
     all_assets = list(prompt_payload["assets"])
-    asset_batches = _chunk_assets(all_assets, 2)
+    asset_batches = _chunk_assets(all_assets, 1 if provider == "ollama" else 2)
     total_steps = len(asset_batches) + 2
     update_report_explanation_status(
         report_info=report_info,
         status="pending",
-        message=f"Prepared {len(all_assets)} charts/tables for AI explanation.",
+        message=(
+            f"Prepared {len(all_assets)} charts/tables for AI explanation "
+            f"with {provider_label} ({model})."
+        ),
         report_root=report_root,
         progress=10,
         phase="preparing",
@@ -1112,7 +1423,7 @@ def generate_report_explanations(
         update_report_explanation_status(
             report_info=report_info,
             status="pending",
-            message="Generating the overall AI overview.",
+            message=f"Generating the overall AI overview with {provider_label}.",
             report_root=report_root,
             progress=20,
             phase="overview",
@@ -1120,9 +1431,14 @@ def generate_report_explanations(
             total_steps=total_steps,
             current_items=["AI Report Overview"],
         )
-        overview = _generate_global_overview(prompt_payload, api_key)
+        overview = _generate_global_overview(
+            prompt_payload,
+            provider=provider,
+            model=model,
+            api_key=api_key,
+        )
     except Exception as exc:
-        print(f"⚠️ OpenAI global overview generation failed: {exc}")
+        print(f"⚠️ {provider_label} global overview generation failed: {exc}")
 
     asset_evidence_lookup = {
         str(item.get("key") or ""): item
@@ -1146,27 +1462,38 @@ def generate_report_explanations(
             "Use the per-asset result_text as the authoritative textual summary for that chart or table.",
         ]
 
-        response_format = _build_response_schema(batch_keys)
-        request_payload = {
-            "model": OPENAI_REPORT_MODEL,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a bilingual machine-learning report explainer for non-technical users. "
-                        "Return strict JSON only."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(batch_payload, ensure_ascii=False),
-                },
-            ],
-            "response_format": response_format,
-            "reasoning_effort": "low",
-            "verbosity": "low",
-            "max_completion_tokens": 1800,
-        }
+        response_format = (
+            _build_assets_only_response_schema(batch_keys)
+            if provider == "ollama"
+            else _build_response_schema(batch_keys)
+        )
+        system_content = (
+            _build_ollama_json_only_instruction(response_format, allowed_keys=batch_keys)
+            if provider == "ollama"
+            else (
+                "You are a bilingual machine-learning report explainer for non-technical users. "
+                "Return strict JSON only."
+            )
+        )
+        messages = [
+            {
+                "role": "system",
+                "content": system_content,
+            },
+            {
+                "role": "user",
+                "content": json.dumps(batch_payload, ensure_ascii=False),
+            },
+        ]
+        request_payload = _build_llm_request_payload(
+            provider=provider,
+            model=model,
+            messages=messages,
+            response_schema=response_format,
+            max_completion_tokens=1200 if provider == "ollama" else 1800,
+            reasoning_effort="low",
+            verbosity="low",
+        )
 
         current_titles = [str(item.get("title") or item.get("key") or "") for item in asset_batch]
         batch_start_progress = 25 + ((batch_index / max(1, len(asset_batches))) * 65)
@@ -1184,10 +1511,10 @@ def generate_report_explanations(
         )
 
         try:
-            parsed = _call_openai(request_payload, api_key)
+            parsed = _call_llm(provider, request_payload, api_key=api_key)
         except Exception as exc:
             raise RuntimeError(
-                f"OpenAI explanation generation failed on batch {batch_index + 1}: {exc}"
+                f"{provider_label} explanation generation failed on batch {batch_index + 1}: {exc}"
             ) from exc
 
         if batch_index == 0 and not any(overview.values()):
@@ -1218,8 +1545,8 @@ def generate_report_explanations(
         )
 
     explanation_payload = {
-        "provider": "openai",
-        "model": OPENAI_REPORT_MODEL,
+        "provider": provider,
+        "model": model,
         "generated_at": datetime.now().isoformat(),
         "overview": overview,
         "assets": asset_map,
