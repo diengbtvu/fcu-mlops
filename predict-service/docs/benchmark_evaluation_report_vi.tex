@@ -1,0 +1,1786 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T5]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[vietnamese]{babel}
+\else
+  \usepackage{fontspec}
+  \usepackage{polyglossia}
+  \setdefaultlanguage{vietnamese}
+  \setmainfont{DejaVu Serif}
+\fi
+
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  urlcolor=blue!50!black
+}
+
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{220,220,220}
+
+\lstdefinelanguage{json}{
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{codebg},
+  rulecolor=\color{codeframe},
+  morestring=[b]",
+  stringstyle=\color{green!40!black},
+  literate=
+   *{:}{{{\color{black}{:}}}}{1}
+    {,}{{{\color{black}{,}}}}{1}
+    {\{}{{{\color{black}{\{}}}}{1}
+    {\}}{{{\color{black}{\}}}}}{1}
+    {[}{{{\color{black}{[}}}}{1}
+    {]}{{{\color{black}{]}}}}{1}
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{codebg},
+  rulecolor=\color{codeframe},
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\setlist[itemize]{noitemsep,topsep=4pt}
+\setlist[enumerate]{noitemsep,topsep=4pt}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\newcommand{\filepath}[1]{\path{#1}}
+\newcommand{\field}[1]{\texttt{#1}}
+
+\title{Báo Cáo \LaTeX{} Về Quy Trình Đánh Giá Benchmark\\
+\large Minh họa đầy đủ từ đầu vào đến điểm số bằng dữ liệu thật của report \texttt{KNN\_Main\_Dataset\_20260421}}
+\author{}
+\date{2026-04-22}
+
+\begin{document}
+\maketitle
+
+\section*{Tóm tắt điều hành}
+Báo cáo này mô tả toàn bộ quy trình benchmark của hệ thống bằng đúng dữ liệu đã chạy thật trong thư mục
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval}.
+Thay vì nói chung chung, báo cáo đi theo một artifact cụ thể là
+\field{KNN\_Main\_Dataset\_20260421:chart:correlation\_heatmap}
+để minh họa luồng thành công, và một artifact cụ thể là
+\field{KNN\_Main\_Dataset\_20260421:chart:time\_series}
+để minh họa luồng thất bại.
+
+Run benchmark hiện tại được thực hiện bằng \field{ollama / gemma4:e4b}, có
+\field{24} artifact, \field{96} generation, \field{96} verification, chạy cùng một condition là
+\field{image\_table\_summary}. Hàng thắng chung là arm \field{C} với
+\field{Fact F1 = 0.3053189160}, cao hơn baseline \field{BASELINE\_LLM}
+với \field{Fact F1 = 0.1958420884}. Tuy nhiên benchmark theo từng chart cho thấy
+không phải chart nào arm \field{C} cũng tốt nhất; ví dụ \field{correlation\_heatmap} rất mạnh
+nhưng \field{time\_series} đang rơi về \field{F1 = 0}.
+
+\section{Bức tranh tổng: chúng ta đang đánh giá cái gì}
+
+\subsection{Nói ngắn gọn bằng ngôn ngữ đời thường}
+Mục tiêu của benchmark này là trả lời một câu rất cụ thể:
+\textbf{AI có đang giải thích đúng, đủ, và đúng trọng tâm những gì chart hoặc bảng thật sự thể hiện hay không?}
+
+Chúng ta không chấm explanation theo kiểu ``đọc thấy hay'' hoặc ``câu văn có mượt hay không''.
+Thay vào đó, chúng ta ép explanation phải đi qua một quy trình có thể kiểm tra được:
+\begin{enumerate}
+  \item lấy dữ liệu thật từ report sau train;
+  \item xác định mỗi chart được phép nói về cái gì;
+  \item yêu cầu AI viết explanation và tách ra các claim có cấu trúc;
+  \item đối chiếu từng claim đó với bộ fact chuẩn;
+  \item tính điểm để biết explanation đúng bao nhiêu, thiếu bao nhiêu, và bịa bao nhiêu.
+\end{enumerate}
+
+Vì vậy, khi báo cáo nói một arm có \field{Fact F1} cao hơn, điều đó không có nghĩa arm đó ``viết văn hay hơn''.
+Nó có nghĩa là arm đó đang mô tả \emph{trung thực hơn với dữ liệu thật}, cover được nhiều fact quan trọng hơn,
+và sinh ít claim không xác minh được hơn.
+
+\subsection{Một câu mô tả chuẩn của quy trình}
+\textbf{Quy trình evaluation chất lượng explanation của chúng ta là:}
+chuyển mỗi chart hoặc bảng thành một bài test benchmark độc lập, cho AI sinh explanation có cấu trúc,
+rồi đo chất lượng explanation đó bằng cách so các claim của AI với bộ gold facts được trích trực tiếp từ dữ liệu thật.
+
+\subsection{Đầu vào, xử lý, đầu ra của toàn pipeline}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}p{4.9cm} >{\raggedright\arraybackslash}p{5.1cm}}
+\toprule
+Giai đoạn & Hệ thống làm gì & Đầu ra để dùng tiếp \\
+\midrule
+Kết quả train & Đọc chart, bảng, JSON, text summary của report thật & dữ liệu gốc của report \\
+Chuẩn bị bằng chứng & Gom lại bằng chứng cho từng asset/chart & \field{asset\_evidence.json} \\
+Định nghĩa bài test & Tạo danh sách artifact sẽ benchmark & \field{manifest.jsonl} \\
+Tạo đáp án chuẩn & Trích fact chuẩn cho từng artifact & \field{gold/*.json} \\
+Sinh explanation & AI hoặc baseline viết explanation và claims & \field{generations/*.json} \\
+Đối chiếu claim & Chấm từng claim với gold fact & \field{verifications/*.json} \\
+Tính điểm & Gộp thành precision, recall, F1, unsupported & \field{leaderboard.json}, \field{per\_chart\_benchmark.json} \\
+Chọn output cho web & Chọn hàng thắng chung để hiển thị thật & \field{selected\_explanations.json} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Mỗi giai đoạn đang trả lời câu hỏi gì}
+\begin{itemize}
+  \item \textbf{Asset evidence}: chart này thực sự có những bằng chứng nào?
+  \item \textbf{Manifest}: benchmark sẽ chấm chính xác những artifact nào?
+  \item \textbf{Gold}: với artifact này, đâu là bộ sự thật chuẩn?
+  \item \textbf{Generations}: AI đã nói ra những claim nào?
+  \item \textbf{Verifications}: từng claim đó được xác nhận, bác bỏ, hay không thể xác minh?
+  \item \textbf{Leaderboard}: nhìn toàn cục thì arm nào tốt nhất?
+  \item \textbf{Per-chart benchmark}: chart nào mạnh, chart nào yếu, yếu vì sao?
+  \item \textbf{Selected explanations}: website cuối cùng đang dùng explanation nào?
+\end{itemize}
+
+\subsection{Vì sao quy trình này thực sự đo được chất lượng explanation}
+Điểm mạnh của benchmark này là nó không dừng ở mức ``AI có viết được một đoạn nghe hợp lý hay không''.
+Nó đo explanation theo bốn trục chất lượng rất cụ thể.
+
+\textbf{Trục 1: độ bám dữ liệu gốc.}
+Explanation chỉ được coi là tốt nếu claim của nó map được về fact thật trong gold.
+Nếu câu văn nghe hợp lý nhưng không khớp fact của artifact đang chấm, benchmark vẫn không cho điểm.
+
+\textbf{Trục 2: độ chính xác fact.}
+Nếu AI nói \field{Butyrate vs VFA = 0.9601} và gold cũng ghi đúng như vậy, claim được \field{supported}.
+Nếu AI nói một số lệch hoặc sai thứ hạng, claim có thể bị \field{contradicted}.
+
+\textbf{Trục 3: độ bao phủ.}
+Một explanation có thể nói đúng nhưng quá ít.
+Khi đó precision cao nhưng recall thấp.
+Benchmark dùng \field{Fact Recall} và \field{Coverage of Salient Facts} để đo xem AI có cover được những ý quan trọng nhất hay không.
+
+\textbf{Trục 4: mức độ bịa hoặc lạc đề.}
+Nếu AI sinh claim không thể gắn vào fact nào của artifact, claim đó bị \field{unverifiable}.
+Tỷ lệ này đi thẳng vào \field{Unsupported Claim Rate}.
+Đây là cơ chế phạt hallucination (nói nghe hợp lý nhưng không có chỗ dựa trong dữ liệu của artifact).
+
+\subsection{Ví dụ cực ngắn để người đọc hiểu ngay benchmark đang làm gì}
+Với artifact \field{correlation\_heatmap}, gold có fact thật là:
+\field{Butyrate vs VFA = 0.9601}.
+Nếu AI viết đúng claim này, claim được \field{supported}.
+Nếu AI viết một câu mơ hồ như ``các thành phần hóa học có liên hệ rất mạnh với nhau'' mà không có subject và value đủ rõ,
+claim đó có thể không được verifier xác nhận.
+
+Ngược lại, với artifact \field{time\_series}, gold không chờ \field{R2} hay \field{MSE};
+nó chờ các fact như \field{actual\_peak\_index}, \field{predicted\_peak\_index}, \field{sequence\_correlation}.
+Nếu AI lại nói ``KNN has the highest R2 score'', câu đó có thể đúng ở mức toàn report,
+nhưng vẫn bị \field{unverifiable} vì nó không phải explanation đúng trọng tâm cho artifact \field{time\_series}.
+
+\subsection{Điều người đọc nên nhớ sau phần này}
+Nếu chỉ cần nhớ một ý, thì ý đó là:
+\textbf{benchmark của chúng ta không chấm explanation bằng cảm tính; nó chấm bằng cách biến explanation thành các claim kiểm chứng được, rồi đối chiếu từng claim với bộ sự thật chuẩn lấy từ dữ liệu thật.}
+
+\textbf{Vì vậy, điểm benchmark chính là thước đo mức độ explanation của AI bám dữ liệu thật, đúng fact, đủ ý quan trọng, và ít bịa.}
+
+\section{Tiêu chí đánh giá của benchmark gồm những gì}
+
+Phần này gom toàn bộ ``tiêu chí đánh giá'' về một chỗ, để người đọc hiểu rõ benchmark của chúng ta đang chấm explanation theo những chuẩn nào.
+
+\subsection{Có hai lớp tiêu chí khác nhau}
+Benchmark của chúng ta không chỉ có \emph{một} loại tiêu chí.
+Nó có hai lớp:
+
+\begin{itemize}
+  \item \textbf{Tiêu chí quy trình}: explanation phải đi qua đúng pipeline, đúng scope artifact, đúng cấu trúc claim, đúng luật verifier.
+  \item \textbf{Tiêu chí chất lượng đầu ra}: sau khi đi qua pipeline, explanation được đo bằng các metric như \field{Fact Precision}, \field{Fact Recall}, \field{Fact F1}, \field{Unsupported Claim Rate}, \field{Contradiction Rate}, \field{Coverage of Salient Facts}, \field{Numeric Accuracy}.
+\end{itemize}
+
+Nếu explanation thất bại ở lớp thứ nhất, nó thường rơi thẳng thành \field{unverifiable} trước cả khi có cơ hội ghi điểm tốt ở lớp thứ hai.
+
+\subsection{Tiêu chí mức 1: explanation phải đúng phạm vi artifact}
+\textbf{Giải thích:}
+Mỗi artifact là một bài test riêng.
+Benchmark không chấp nhận kiểu ``nói đúng ở mức toàn report nhưng nói sai chart đang được chấm''.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item explanation có đang nói đúng trọng tâm của artifact hiện tại không;
+  \item claim có đang bám vào đúng loại fact mà gold của artifact đó chứa hay không.
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+Artifact \field{time\_series} chỉ có gold facts như
+\field{actual\_peak\_index}, \field{predicted\_peak\_index}, \field{mean\_abs\_gap}, \field{sequence\_correlation}.
+Nếu AI lại nói \field{R2 = 0.81717} hay \field{KNN has the lowest MSE},
+claim đó vẫn rớt vì sai scope artifact.
+
+\textbf{Nếu fail thì hiện ra ở đâu:}
+Trong \field{verifications}, claim sẽ bị \field{unverifiable} với lý do kiểu
+\field{No matching numeric fact was found for this claim.}
+
+\subsection{Tiêu chí mức 2: explanation phải bám dữ liệu thật}
+\textbf{Giải thích:}
+Benchmark yêu cầu explanation phải grounded (có chỗ dựa trong dữ liệu thật), chứ không được dựa vào suy đoán hay tri thức chung.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item claim có map được về fact trong gold hay không;
+  \item claim có sử dụng đúng source priority hay không:
+  \field{table/json > chart > summary\_text};
+  \item claim có bị lạc sang thứ không có bằng chứng trong artifact không.
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+Đây là tiêu chí bảo vệ explanation khỏi hallucination (nói nghe hợp lý nhưng không có chỗ dựa trong dữ liệu của chính chart đó).
+
+\textbf{Nếu fail thì hiện ra ở đâu:}
+Benchmark phạt bằng \field{Unsupported Claim Rate}.
+
+\subsection{Tiêu chí mức 3: claim phải có hình dạng máy chấm hiểu được}
+\textbf{Giải thích:}
+Một explanation có thể nghe đúng với con người nhưng vẫn không benchmark được nếu claim quá mơ hồ.
+Vì vậy benchmark của chúng ta yêu cầu explanation không chỉ là văn bản tự do; nó phải tách được ra các claim có cấu trúc.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item claim có \field{claim\_text} rõ ràng hay không;
+  \item claim có \field{claim\_type} thuộc enum hợp lệ hay không;
+  \item numeric claim có \field{value} hay không;
+  \item subject và metric có đủ cụ thể để map vào gold fact hay không.
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+Claim
+\field{Butyrate vs VFA = 0.9601}
+rất dễ verify vì có:
+\begin{itemize}
+  \item subject rõ: \field{Butyrate vs VFA}
+  \item metric rõ: \field{correlation}
+  \item value rõ: \field{0.9601}
+\end{itemize}
+
+Ngược lại, claim kiểu
+\field{các thành phần hóa học có liên hệ rất mạnh với nhau}
+thường không đủ cấu trúc để verifier match.
+
+\textbf{Nếu fail thì hiện ra ở đâu:}
+\begin{itemize}
+  \item \field{Numeric claim is missing a numeric value}
+  \item \field{Claim type 'freeform' is not yet rule-verified}
+\end{itemize}
+
+\subsection{Tiêu chí mức 4: fact phải đúng}
+\textbf{Giải thích:}
+Sau khi claim đã có cấu trúc, benchmark kiểm luôn tính đúng sai của nội dung.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item số có đúng với gold không;
+  \item thứ hạng có đúng với ranking fact không;
+  \item top feature / best model có đúng với fact chuẩn không;
+  \item tên subject có đúng đối tượng không.
+\end{itemize}
+
+\textbf{Kết quả chấm có thể là:}
+\begin{itemize}
+  \item \field{supported}: đúng
+  \item \field{partially\_supported}: gần đúng, thường chỉ có khi có hedge và sai lệch nhỏ
+  \item \field{contradicted}: sai
+  \item \field{unverifiable}: không đủ điều kiện để xác minh
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+Đây là tiêu chí đo ``AI có nói fact thật hay không''.
+
+\subsection{Tiêu chí mức 5: explanation phải đủ ý quan trọng}
+\textbf{Giải thích:}
+Một explanation không thể được coi là tốt nếu nó chỉ nói đúng một vài ý nhỏ mà bỏ sót phần quan trọng nhất của chart.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item AI có cover được bao nhiêu gold facts nói chung;
+  \item AI có cover được bao nhiêu \field{salient facts} nói riêng.
+\end{itemize}
+
+\textbf{Metric phản ánh tiêu chí này:}
+\begin{itemize}
+  \item \field{Fact Recall}
+  \item \field{Coverage of Salient Facts}
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+Tiêu chí này đo \emph{độ đầy đủ} của explanation, không chỉ độ đúng.
+
+\textbf{Ví dụ thật:}
+Artifact \field{correlation\_heatmap / C} có precision rất cao,
+nhưng recall không phải 1.0 vì model chủ yếu nói các metric values, còn bỏ sót một phần ranking/top-feature facts.
+
+\subsection{Tiêu chí mức 6: explanation phải đủ thận trọng, không bịa}
+\textbf{Giải thích:}
+Benchmark không thưởng cho model nói nhiều bằng mọi giá.
+Nó ưu tiên mô hình biết bỏ bớt claim yếu hơn là đoán liều.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item tỷ lệ claim \field{unverifiable} có cao không;
+  \item tỷ lệ claim \field{contradicted} có cao không.
+\end{itemize}
+
+\textbf{Metric phản ánh tiêu chí này:}
+\begin{itemize}
+  \item \field{Unsupported Claim Rate}
+  \item \field{Contradiction Rate}
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+\begin{itemize}
+  \item \field{Unsupported} cao nghĩa là model hay nói thứ benchmark không xác nhận được.
+  \item \field{Contradiction} cao nghĩa là model nói ra fact sai.
+\end{itemize}
+
+\subsection{Tiêu chí mức 7: explanation số phải chính xác về mặt định lượng}
+\textbf{Giải thích:}
+Với các chart nhiều số, benchmark không chỉ kiểm ``nói đúng hướng'' mà còn kiểm ``nói đúng số''.
+
+\textbf{Benchmark đang kiểm điều gì:}
+\begin{itemize}
+  \item numeric claim có đúng số thật không;
+  \item nếu có hedge thì sai lệch có còn nằm trong tolerance cho phép không.
+\end{itemize}
+
+\textbf{Metric phản ánh tiêu chí này:}
+\begin{itemize}
+  \item \field{Numeric Accuracy}
+  \item \field{Numeric Tolerance Accuracy}
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+Đây là tiêu chí rất quan trọng với chart có nhiều hệ số, điểm số model, tương quan, residual, peak values.
+
+\subsection{Tiêu chí mức 8: explanation tốt cho benchmark tổng chưa chắc tốt cho từng chart}
+\textbf{Giải thích:}
+Benchmark của chúng ta có hai tầng quyết định:
+\begin{itemize}
+  \item tầng \emph{đánh giá}: chấm mọi artifact độc lập
+  \item tầng \emph{chọn output cho website}: chọn một hàng thắng chung
+\end{itemize}
+
+\textbf{Benchmark đang kiểm điều gì ở tầng cuối:}
+\begin{itemize}
+  \item hàng \field{arm + condition} nào có điểm tổng cao nhất;
+  \item hàng nào được phép chọn cho website, hiện là hàng tốt nhất trong \field{A/B/C}, không lấy baseline.
+\end{itemize}
+
+\textbf{Ý nghĩa chất lượng:}
+Nếu chỉ nhìn leaderboard tổng, ta biết ``arm nào tốt nhất toàn cục''.
+Nếu muốn biết ``chart nào explanation đang tốt hay dở'', phải nhìn \field{per\_chart\_benchmark}.
+
+\subsection{Tóm tắt toàn bộ tiêu chí đánh giá trong một bảng}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.7cm} >{\raggedright\arraybackslash}p{5.1cm} >{\raggedright\arraybackslash}p{4.2cm}}
+\toprule
+Tiêu chí & Benchmark đang hỏi gì & Được phản ánh ở đâu \\
+\midrule
+Đúng scope artifact & Explanation có nói đúng bài test hiện tại không & \field{verifications.reason}, \field{unsupported} \\
+Bám dữ liệu thật & Claim có chỗ dựa trong gold fact không & \field{supported/unverifiable} \\
+Cấu trúc claim đủ rõ & Claim có subject, metric, value, type đủ để verify không & \field{claim\_extractor}, \field{verifications.reason} \\
+Đúng fact & Claim có đúng với gold fact không & \field{supported}, \field{contradicted} \\
+Đủ ý quan trọng & Explanation có cover được nhiều fact quan trọng không & \field{Fact Recall}, \field{Coverage of Salient Facts} \\
+Ít bịa / ít đoán & Explanation có sinh nhiều claim không xác minh được không & \field{Unsupported Claim Rate} \\
+Đúng số & Numeric claim có đúng giá trị không & \field{Numeric Accuracy} \\
+Thắng ở mức toàn cục & Arm nào tốt nhất toàn benchmark & \field{leaderboard} \\
+Thắng ở mức từng chart & Artifact nào arm nào tốt nhất & \field{per\_chart\_benchmark} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Điều người đọc nên nhớ về ``tiêu chí đánh giá''}
+Nếu chỉ cần giữ một câu, thì câu đó là:
+\textbf{Benchmark của chúng ta đánh giá explanation AI theo ba câu hỏi cốt lõi:}
+\begin{enumerate}
+  \item AI có nói đúng fact của chart đó không?
+  \item AI có nói đủ các fact quan trọng không?
+  \item AI có bịa, lạc đề, hoặc nói thứ không xác minh được không?
+\end{enumerate}
+
+Toàn bộ pipeline và toàn bộ file benchmark còn lại thực chất chỉ là cách kỹ thuật để trả lời ba câu hỏi này một cách có thể audit và lặp lại được.
+
+\section{Phạm vi và dữ liệu thật dùng trong báo cáo}
+
+\subsection{Run benchmark được phân tích}
+Thông tin này lấy trực tiếp từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/run_metadata.json}
+và \filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/summary.json}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.1cm} >{\raggedright\arraybackslash}p{9.2cm}}
+\toprule
+Trường & Giá trị thật \\
+\midrule
+Bundle benchmark & \field{/app/app/reports/KNN\_Main\_Dataset\_20260421} \\
+Output benchmark & \field{/app/app/reports/KNN\_Main\_Dataset\_20260421/benchmark\_eval} \\
+Thời điểm chạy & \field{2026-04-21T11:29:30.058966+00:00} \\
+Arms được so & \field{A}, \field{B}, \field{C}, \field{BASELINE\_LLM} \\
+Condition được so & \field{image\_table\_summary} \\
+Client/model & \field{ollama / gemma4:e4b} \\
+Số artifact & \field{24} \\
+Số generation & \field{96} \\
+Warnings & rỗng \\
+Best overall & \field{C / image\_table\_summary} \\
+Website selection & \field{C / image\_table\_summary} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Các file đầu ra quan trọng của benchmark}
+Các file này được tạo bởi CLI benchmark trong
+\filepath{predict-service/benchmarking/cli.py:203-307}, sau đó được publish về report trong
+\filepath{predict-service/app/utils/report_benchmark.py:203-288}.
+
+\begin{itemize}
+  \item \filepath{benchmark_eval/manifest.jsonl}: manifest (danh sách chính thức mọi đơn vị benchmark phải được chấm).
+  \item \filepath{benchmark_eval/gold/*.json}: gold artifact (bộ sự thật chuẩn của từng artifact).
+  \item \filepath{benchmark_eval/generations/*.json}: output explanation + claims của từng \field{arm / condition / artifact}.
+  \item \filepath{benchmark_eval/verifications/*.json}: kết quả đối chiếu từng claim với gold.
+  \item \filepath{benchmark_eval/scores/leaderboard.json}: điểm tổng theo hàng \field{arm + condition}.
+  \item \filepath{benchmark_eval/scores/per\_chart\_benchmark.json}: điểm chi tiết theo từng chart/artifact.
+  \item \filepath{benchmark_eval/selected\_explanations.json}: explanation thật được website lấy sau khi chọn hàng thắng chung.
+\end{itemize}
+
+\subsection{Bảng tổng leaderboard của run này}
+Các số sau lấy trực tiếp từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/scores/leaderboard.json}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Arm & Artifacts & Claims & Precision & Recall & Fact F1 & Unsupported \\
+\midrule
+\field{C} & 24 & 125 & 0.7052 & 0.2064 & 0.3053 & 0.2375 \\
+\field{B} & 24 & 103 & 0.6302 & 0.1831 & 0.2745 & 0.3299 \\
+\field{BASELINE\_LLM} & 24 & 92 & 0.4840 & 0.1256 & 0.1958 & 0.5076 \\
+\field{A} & 24 & 81 & 0.4861 & 0.1204 & 0.1873 & 0.4583 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Thuật ngữ dùng trong báo cáo}
+
+\textbf{Artifact} là đơn vị benchmark nhỏ nhất mà hệ thống chấm độc lập. Một artifact có thể là chart như
+\field{correlation\_heatmap} hoặc phần lõi của cả bundle như
+\field{model\_comparison/main}. Artifact quan trọng vì điểm tổng cuối cùng là trung bình của điểm ở từng artifact, chứ không phải một đoạn report dài được chấm một lần.
+
+\textbf{Asset} là một phần nội dung hiển thị ở website hoặc report như một chart hay một bảng. Với chart benchmark, mỗi asset chart thường trở thành một artifact chart. Asset tồn tại trước; artifact là cách hệ thống đóng gói asset để đem đi benchmark.
+
+\textbf{Manifest} là danh sách chuẩn của tất cả artifact sẽ được benchmark, kèm \field{artifact\_id}, loại artifact, file nguồn, chart file, và các thực thể chính. Nó giống như hợp đồng đầu vào giữa report và benchmark: thiếu manifest hoặc manifest sai thì toàn bộ benchmark sẽ lệch.
+
+\textbf{Claim} là một mệnh đề có cấu trúc do model sinh ra, ví dụ ``Butyrate vs VFA = 0.9601''. Benchmark không chấm cả đoạn văn tự do trước tiên; nó chấm các claim này.
+
+\textbf{Gold fact} là sự thật chuẩn được trích ra từ bảng, JSON, hoặc evidence nội bộ. Gold fact mới là ``đáp án'' để verifier đối chiếu claim.
+
+\textbf{Verifier} là bộ đối chiếu quy tắc. Nó không ``hiểu ngữ nghĩa mở rộng'' như người đọc tự do, mà so claim với gold theo subject, metric, value, ranking và tolerance đã định.
+
+\textbf{Leaderboard} là bảng xếp hạng các hàng \field{arm + condition}. Đây là nơi chọn hàng thắng chung.
+
+\textbf{Per-chart benchmark} là báo cáo điểm theo từng artifact/chart. Nó dùng để biết chart nào đang mạnh, chart nào đang rớt, và vì sao rớt.
+
+\section{Giải thích rõ 8 file benchmark chính}
+
+Phần này trả lời trực tiếp câu hỏi ``\field{asset\_evidence}, \field{manifest}, \field{gold},
+\field{generations}, \field{verifications}, \field{leaderboard},
+\field{per\_chart\_benchmark}, và \field{selected\_explanations} là gì, bên trong có gì''.
+Mục tiêu của phần này là cho người đọc nhìn được \emph{vai trò của từng file} trước khi đi vào luồng xử lý chi tiết ở các giai đoạn sau.
+
+\subsection{\texttt{asset\_evidence.json} là gì}
+File thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/asset_evidence.json}
+
+\textbf{Bản chất của file này:}
+\field{asset\_evidence.json} là ``gói bằng chứng đã sơ chế'' cho từng chart hoặc bảng.
+Nó không phải output chấm điểm, cũng không phải output cuối cho website.
+Nó là lớp trung gian nằm giữa \emph{kết quả train thô} và \emph{explanation do model sinh ra}.
+
+\textbf{Vì sao file này cần tồn tại:}
+Nếu cho model đọc thẳng toàn bộ thư mục report, model sẽ dễ bị lạc sang file không liên quan hoặc trộn lẫn nhiều loại số liệu.
+\field{asset\_evidence.json} buộc hệ thống trả lời trước ba câu:
+\begin{itemize}
+  \item chart này tên gì;
+  \item chart này được phép dùng file nguồn nào;
+  \item chart này có các fact chính nào cần ưu tiên nói.
+\end{itemize}
+
+\textbf{Bên trong có gì:}
+\begin{itemize}
+  \item \field{key}: mã asset nội bộ, ví dụ \field{correlation\_heatmap}.
+  \item \field{title}: tên hiển thị của chart/bảng.
+  \item \field{kind}: \field{chart} hoặc \field{table}.
+  \item \field{asset\_file}: tên file ảnh thật của chart.
+  \item \field{source\_files}: các file nguồn mà asset này được phép bám vào.
+  \item \field{result\_text}: tóm tắt số liệu quan trọng nhất đã cô đặc sẵn.
+  \item \field{evidence}: bằng chứng có cấu trúc, ví dụ \field{correlation\_story}, \field{distribution\_story}, \field{importance\_story}.
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+Trong run hiện tại, asset \field{correlation\_heatmap} có:
+\begin{itemize}
+  \item \field{asset\_file = fig\_correlation\_heatmap.png}
+  \item \field{source\_files = [analysis\_summary\_report.txt, summary.json, table\_correlation\_matrix.csv]}
+  \item \field{result\_text} nêu thẳng các cặp mạnh nhất như
+  \field{Butyrate vs VFA = 0.9601},
+  \field{Acetate vs VFA = 0.9428}
+  và top HPR correlations như
+  \field{VFA = 0.7984}, \field{Butyrate = 0.7827}, \field{Acetate = 0.7641}.
+\end{itemize}
+
+\textbf{Nói ngắn gọn:}
+\field{asset\_evidence.json} là ``nguyên liệu giải thích đã được làm sạch và đóng gói theo từng asset''.
+
+\subsection{\texttt{manifest.jsonl} là gì}
+File thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/manifest.jsonl}
+
+\textbf{Bản chất của file này:}
+\field{manifest.jsonl} là ``danh sách bài test benchmark chính thức''.
+Mỗi dòng JSON là một artifact độc lập sẽ được benchmark.
+
+\textbf{Vì sao cần file này:}
+Benchmark không chấm ``cả report'' một lần.
+Nó chấm từng artifact nhỏ một, ví dụ:
+\field{model\_comparison/main},
+\field{incremental\_feature\_analysis/main},
+\field{chart:correlation\_heatmap},
+\field{chart:time\_series}.
+Manifest là hợp đồng nói rằng:
+``run này phải chấm đúng các artifact này, bằng đúng các file nguồn này''.
+
+\textbf{Bên trong mỗi dòng có gì:}
+\begin{itemize}
+  \item \field{artifact\_id}: danh tính duy nhất của artifact.
+  \item \field{artifact\_type}: loại logic để build gold và verify.
+  \item \field{chart\_type}: loại biểu đồ về mặt hình thức.
+  \item \field{source\_files}: file gốc sẽ được load vào benchmark.
+  \item \field{primary\_entities}: thực thể chính mà claim thường sẽ nhắc tới.
+  \item \field{bundle\_name}: tên bundle/report.
+  \item \field{chart\_file}: file ảnh của chart nếu có.
+  \item \field{summary\_files}: file text tóm tắt nếu có.
+  \item \field{asset\_key}, \field{asset\_title}, \field{asset\_family}: metadata để map ngược về asset.
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+Artifact
+\field{KNN\_Main\_Dataset\_20260421:chart:correlation\_heatmap}
+trong manifest có:
+\begin{itemize}
+  \item \field{artifact\_type = chart/correlation\_heatmap}
+  \item \field{source\_files = [analysis\_summary\_report.txt, summary.json, table\_correlation\_matrix.csv, fig\_correlation\_heatmap.png]}
+  \item \field{primary\_entities} gồm
+  \field{Butyrate vs VFA}, \field{Acetate vs VFA}, \field{VFA}, \field{Butyrate}, \field{Acetate}, \field{VSS}, \ldots
+\end{itemize}
+
+\textbf{Nói ngắn gọn:}
+\field{manifest.jsonl} là ``benchmark sẽ chấm những artifact nào, bằng dữ liệu nào''.
+
+\subsection{Thư mục \texttt{gold/} là gì}
+Thư mục thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/gold}
+
+\textbf{Bản chất của thư mục này:}
+\field{gold/} chứa ``đáp án chuẩn'' cho từng artifact.
+Mỗi file trong thư mục này là một \field{gold artifact}.
+
+\textbf{Vì sao cần gold:}
+Benchmark chỉ có ý nghĩa nếu claim của model được so với một bộ sự thật chuẩn có cấu trúc.
+Gold chính là bộ chuẩn đó. Không có gold thì verifier không có gì để đối chiếu.
+
+\textbf{Bên trong một gold file có gì:}
+\begin{itemize}
+  \item \field{artifact\_id}, \field{artifact\_type}, \field{source\_files}
+  \item \field{ground\_truth\_facts}: danh sách sự thật chuẩn
+  \item \field{salient\_facts}: tập fact cốt lõi, dùng để tính \field{coverage\_of\_salient\_facts}
+  \item \field{forbidden\_inferences}: các suy luận bị cấm
+\end{itemize}
+
+\textbf{Một \field{ground\_truth\_fact} thường có:}
+\begin{itemize}
+  \item \field{fact\_id}: mã fact duy nhất
+  \item \field{fact\_type}: ví dụ \field{metric\_value}, \field{ranking}, \field{top\_feature}, \field{best\_model}
+  \item \field{subject}, \field{predicate}, \field{object} hoặc \field{value}
+  \item \field{evidence}: fact này lấy từ file nào
+  \item \field{importance}: mức quan trọng của fact
+\end{itemize}
+
+\textbf{Ví dụ thật 1:}
+Gold của
+\field{chart:correlation\_heatmap}
+có fact:
+\begin{itemize}
+  \item \field{metric:Butyrate vs VFA:correlation = 0.9601}
+  \item \field{top\_feature:target\_correlation = VFA, value 0.7984}
+  \item \field{ranking:correlation = [Butyrate vs VFA, Acetate vs VFA, \ldots]}
+\end{itemize}
+
+\textbf{Ví dụ thật 2:}
+Gold của
+\field{chart:time\_series}
+không chứa \field{R2} hay \field{MSE}.
+Nó chứa các fact đúng với bản chất chart chuỗi thời gian:
+\begin{itemize}
+  \item \field{actual\_peak\_index = 130}
+  \item \field{predicted\_peak\_index = 146}
+  \item \field{predicted\_peak\_value = 0.829894}
+  \item \field{mean\_abs\_gap = 0.066591}
+  \item \field{sequence\_correlation = 0.931488}
+\end{itemize}
+
+\textbf{Nói ngắn gọn:}
+\field{gold/} là ``đáp án máy chấm dùng để phân xử claim đúng, sai, hay không thể xác minh''.
+
+\subsection{Thư mục \texttt{generations/} là gì}
+Thư mục thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/generations}
+
+\textbf{Bản chất của thư mục này:}
+\field{generations/} là nơi lưu toàn bộ output explanation của benchmark.
+Mỗi file tương ứng với đúng một bộ ba:
+\field{artifact + arm + condition}.
+
+\textbf{Vì sao cần file này:}
+Đây là nơi lưu ``model đã nói gì''.
+Nếu muốn audit model, debug benchmark, hay tái chấm điểm thì đây là lớp dữ liệu quan trọng nhất.
+
+\textbf{Bên trong mỗi file generation có gì:}
+\begin{itemize}
+  \item \field{artifact\_id}
+  \item \field{arm}: ví dụ \field{A}, \field{B}, \field{C}, \field{BASELINE\_LLM}
+  \item \field{input\_condition}: run này là \field{image\_table\_summary}
+  \item \field{explanation\_short}: đoạn giải thích ngắn
+  \item \field{explanation\_full}: đoạn giải thích đầy đủ
+  \item \field{claims}: danh sách claim có cấu trúc để benchmark chấm
+\end{itemize}
+
+\textbf{Bên trong một claim thường có gì:}
+\begin{itemize}
+  \item \field{claim\_id}
+  \item \field{claim\_text}
+  \item \field{claim\_type}
+  \item \field{subject}, \field{predicate}, \field{object}
+  \item \field{metric}
+  \item \field{value}
+  \item \field{ordered\_items}, \field{feature\_count}, \field{hedged}
+\end{itemize}
+
+\textbf{Ví dụ thật tốt:}
+Generation của
+\field{chart:correlation\_heatmap / C / image\_table\_summary}
+chứa claim:
+\begin{itemize}
+  \item \field{Butyrate vs VFA = 0.9601}
+  \item \field{Acetate vs VFA = 0.9428}
+  \item \field{VFA = 0.7984} với \field{metric = target\_correlation}
+\end{itemize}
+Đây là shape rất tốt vì subject và metric đủ chuẩn để verifier map vào gold.
+
+\textbf{Ví dụ thật xấu:}
+Generation của
+\field{chart:time\_series / A / image\_table\_summary}
+lại nói:
+\begin{itemize}
+  \item \field{KNN achieved the highest R2 score of 0.81717}
+  \item \field{top correlated features are VFA, Butyrate, Acetate}
+\end{itemize}
+Các claim này có thể đúng ở mức report tổng, nhưng sai \emph{scope artifact}, nên benchmark vẫn cho rớt.
+
+\textbf{Nói ngắn gọn:}
+\field{generations/} là ``model và baseline đã sinh ra explanation nào cho từng artifact''.
+
+\subsection{Thư mục \texttt{verifications/} là gì}
+Thư mục thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/verifications}
+
+\textbf{Bản chất của thư mục này:}
+\field{verifications/} là lớp kết quả do verifier tạo ra sau khi đối chiếu từng claim với gold.
+
+\textbf{Vì sao cần file này:}
+Nếu chỉ nhìn leaderboard thì chỉ thấy điểm tổng.
+Muốn hiểu tại sao điểm cao hay thấp thì phải quay về từng claim trong \field{verifications/}.
+
+\textbf{Bên trong mỗi file verification có gì:}
+\begin{itemize}
+  \item \field{artifact\_id}
+  \item \field{arm}
+  \item \field{input\_condition}
+  \item \field{verifications}: danh sách kết quả chấm cho từng claim
+\end{itemize}
+
+\textbf{Một verification item có gì:}
+\begin{itemize}
+  \item \field{claim\_id}, \field{claim\_text}
+  \item \field{status}: \field{supported}, \field{partially\_supported}, \field{contradicted}, \field{unverifiable}
+  \item \field{matched\_fact\_ids}: claim này match vào fact nào
+  \item \field{reason}: lý do chấm
+  \item \field{numeric\_delta}: độ lệch số nếu có
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+Ở
+\field{correlation\_heatmap / C},
+claim \field{Butyrate vs VFA = 0.9601} được:
+\begin{itemize}
+  \item \field{status = supported}
+  \item \field{matched\_fact\_ids = [metric:Butyrate vs VFA:correlation]}
+  \item \field{reason = Gold value for Butyrate vs VFA correlation is 0.9601.}
+  \item \field{numeric\_delta = 0.0}
+\end{itemize}
+
+\textbf{Ví dụ thật khác:}
+Ở
+\field{time\_series / A},
+claim \field{KNN achieved the highest R2 score of 0.81717} bị:
+\begin{itemize}
+  \item \field{status = unverifiable}
+  \item \field{reason = No matching numeric fact was found for this claim.}
+\end{itemize}
+Điều này không có nghĩa claim là sai tuyệt đối; nó có nghĩa là claim không thuộc phạm vi fact của artifact \field{time\_series}.
+
+\textbf{Nói ngắn gọn:}
+\field{verifications/} là ``máy chấm đã phán từng claim như thế nào và vì sao''.
+
+\subsection{\texttt{leaderboard.json} là gì}
+File thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/scores/leaderboard.json}
+
+\textbf{Bản chất của file này:}
+\field{leaderboard.json} là bảng xếp hạng tổng của benchmark theo từng hàng
+\field{arm + condition}.
+
+\textbf{Vì sao cần file này:}
+Đây là nơi hệ thống trả lời câu hỏi:
+``Trong toàn bộ run, chiến lược sinh explanation nào tốt nhất?''
+
+\textbf{Bên trong file có gì:}
+\begin{itemize}
+  \item \field{leaderboard}: danh sách row tổng hợp theo \field{arm + input\_condition}
+  \item \field{artifact\_scores}: điểm từng artifact trước khi được gom thành leaderboard tổng
+\end{itemize}
+
+\textbf{Bên trong một row của \field{leaderboard} có gì:}
+\begin{itemize}
+  \item \field{arm}
+  \item \field{input\_condition}
+  \item \field{artifact\_count}
+  \item \field{claim\_count}
+  \item \field{fact\_precision}
+  \item \field{fact\_recall}
+  \item \field{fact\_f1}
+  \item \field{unsupported\_claim\_rate}
+  \item \field{contradiction\_rate}
+  \item \field{coverage\_of\_salient\_facts}
+  \item \field{numeric\_accuracy}
+  \item \field{numeric\_tolerance\_accuracy}
+\end{itemize}
+
+\textbf{Ví dụ thật của run hiện tại:}
+\begin{itemize}
+  \item \field{C}: \field{artifact\_count = 24}, \field{claim\_count = 125}, \field{fact\_f1 = 0.3053189160}
+  \item \field{B}: \field{fact\_f1 = 0.2745463000}
+  \item \field{BASELINE\_LLM}: \field{fact\_f1 = 0.1958420884}
+  \item \field{A}: \field{fact\_f1 = 0.1873227893}
+\end{itemize}
+
+\textbf{Nói ngắn gọn:}
+\field{leaderboard.json} là ``ai thắng chung nếu nhìn toàn bộ benchmark như một cuộc thi tổng''.
+
+\subsection{\texttt{per\_chart\_benchmark.json} là gì}
+File thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/scores/per_chart_benchmark.json}
+
+\textbf{Bản chất của file này:}
+\field{per\_chart\_benchmark.json} là báo cáo benchmark theo từng artifact/chart, không chỉ theo hàng tổng.
+
+\textbf{Vì sao cần file này:}
+Leaderboard tổng có thể cho biết arm \field{C} thắng chung,
+nhưng không cho biết chart nào do \field{B} hay baseline làm tốt hơn.
+\field{per\_chart\_benchmark.json} là file dùng để nhìn vào chi tiết đó.
+
+\textbf{Bên trong file có gì:}
+\begin{itemize}
+  \item \field{artifact\_count}, \field{chart\_count}, \field{core\_artifact\_count}, \field{row\_count}
+  \item \field{coverage\_gaps}: chart/artifact nào bị thiếu row benchmark
+  \item \field{best\_rows}: top các row tốt nhất theo artifact
+  \item \field{hardest\_rows}: top các artifact khó nhất
+  \item \field{rows}: toàn bộ row chi tiết
+  \item \field{artifacts}: dữ liệu đã gom theo từng artifact, mỗi artifact chứa toàn bộ row của chính nó
+\end{itemize}
+
+\textbf{Bên trong một row chi tiết có gì:}
+\begin{itemize}
+  \item metadata artifact:
+  \field{artifact\_id}, \field{asset\_key}, \field{asset\_title},
+  \field{asset\_family}, \field{chart\_file}, \field{source\_files}
+  \item thông tin hàng benchmark:
+  \field{arm}, \field{input\_condition}, \field{row\_rank}
+  \item điểm:
+  \field{fact\_precision}, \field{fact\_recall}, \field{fact\_f1},
+  \field{unsupported\_claim\_rate}, \field{contradiction\_rate}
+  \item breakdown:
+  \field{supported\_claim\_count},
+  \field{unverifiable\_claim\_count},
+  \field{top\_reasons},
+  \field{mean\_numeric\_delta}
+\end{itemize}
+
+\textbf{Ví dụ thật:}
+\begin{itemize}
+  \item \field{chart:correlation\_heatmap}: best row là \field{C}, \field{F1 = 0.75}, \field{unsupported = 0}
+  \item \field{chart:feature\_vs\_target}: best row là \field{B}, \field{F1 = 0.695652}
+  \item \field{chart:feature\_importance}: best row là \field{BASELINE\_LLM}, \field{F1 = 0.545455}
+  \item \field{chart:time\_series}: best row vẫn chỉ là \field{A}, nhưng \field{F1 = 0}, \field{unsupported = 1.0}
+\end{itemize}
+
+\textbf{Ví dụ về \field{coverage\_gaps}:}
+Run hiện tại có
+\field{coverage\_gaps = []},
+nghĩa là benchmark đã đủ sạch và không còn thiếu row nào giữa các arm.
+
+\textbf{Nói ngắn gọn:}
+\field{per\_chart\_benchmark.json} là ``bản mổ xẻ từng chart, từng artifact, từng lý do thắng thua''.
+
+\subsection{\texttt{selected\_explanations.json} là gì}
+File thật:
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/selected_explanations.json}
+
+\textbf{Bản chất của file này:}
+\field{selected\_explanations.json} là output cuối cùng mà website dùng sau khi benchmark chọn ra một hàng thắng chung.
+
+\textbf{Vì sao cần file này:}
+Benchmark có thể sinh rất nhiều generation cho mỗi artifact, nhưng website không thể hiển thị tất cả.
+Nó cần một bộ explanation cuối cùng đã được chọn.
+File này chính là bộ explanation đã chọn đó.
+
+\textbf{Bên trong file có gì:}
+\begin{itemize}
+  \item \field{provider}: ở run này là \field{benchmark\_selected}
+  \item \field{model}
+  \item \field{generated\_at}
+  \item \field{selection\_method}: cách chọn, hiện là \field{best\_nonbaseline\_leaderboard\_row}
+  \item \field{selected\_arm}
+  \item \field{selected\_condition}
+  \item \field{selected\_row}: row thắng trong leaderboard
+  \item \field{overview}: đoạn tóm tắt chung cho website
+  \item \field{assets}: map từ \field{asset\_key} sang explanation thật của asset đó
+\end{itemize}
+
+\textbf{Bên trong \field{assets} có gì:}
+Mỗi key như \field{correlation\_heatmap}, \field{feature\_importance}, \field{time\_series}
+thường có:
+\begin{itemize}
+  \item \field{en}: explanation tiếng Anh đã chọn
+  \item \field{zh\_TW}: bản tiếng Hoa, nếu có
+\end{itemize}
+
+\textbf{Ví dụ thật của run hiện tại:}
+\begin{itemize}
+  \item \field{selected\_arm = C}
+  \item \field{selected\_condition = image\_table\_summary}
+  \item \field{selected\_row.fact\_f1 = 0.3053189160}
+\end{itemize}
+
+\textbf{Hệ quả thật cần hiểu rõ:}
+Vì website đang lấy \field{C} cho toàn bộ asset, nên asset \field{time\_series} trên website cũng lấy explanation của \field{C},
+dù benchmark của chính artifact \field{time\_series / C} hiện có \field{F1 = 0}.
+Nghĩa là file này không còn là ``dữ liệu benchmark'', mà là ``dữ liệu sản phẩm đã chọn để hiển thị''.
+
+\textbf{Nói ngắn gọn:}
+\field{selected\_explanations.json} là ``bộ explanation cuối cùng được benchmark chọn ra để website dùng thật''.
+
+\subsection{Tóm tắt 8 file trong một bảng}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{8.7cm}}
+\toprule
+File / thư mục & Vai trò thực tế \\
+\midrule
+\field{asset\_evidence.json} & Gói bằng chứng đã sơ chế cho từng asset trước khi model viết explanation \\
+\field{manifest.jsonl} & Danh sách artifact benchmark chính thức phải được chấm \\
+\field{gold/} & Bộ đáp án chuẩn của từng artifact \\
+\field{generations/} & Explanation và claims thật do từng arm sinh ra \\
+\field{verifications/} & Kết quả verifier chấm từng claim với gold \\
+\field{leaderboard.json} & Bảng xếp hạng tổng theo hàng \field{arm + condition} \\
+\field{per\_chart\_benchmark.json} & Báo cáo chi tiết theo từng chart/artifact \\
+\field{selected\_explanations.json} & Bộ explanation cuối cùng được chọn để website dùng \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Giai đoạn 1: Sinh \texttt{asset\_evidence} từ kết quả train}
+
+\subsection{Mục đích của giai đoạn}
+Giai đoạn này xảy ra trong
+\filepath{predict-service/app/utils/report_explainer.py:899-970}.
+Hệ thống đọc các file gốc sau train như
+\field{summary.json}, \field{table\_correlation\_matrix.csv},
+\field{table\_feature\_importance.csv}, \field{table1\_incremental\_results.csv},
+\field{analysis\_summary\_report.txt} rồi gói chúng thành
+\field{asset\_evidence.json}.
+
+\textbf{Vì sao bước này tồn tại:} model không nên đọc trực tiếp toàn bộ thư mục rồi tự suy đoán. Hệ thống gom lại những gì ``được phép dùng'' cho từng asset, đồng thời viết sẵn
+\field{result\_text} như một tóm tắt chuẩn để model bám theo.
+
+\subsection{Tiêu chí bắt buộc của giai đoạn}
+Một asset chart hợp lệ trong \field{asset\_evidence.json} phải có ít nhất:
+\begin{itemize}
+  \item \field{key}: mã nội bộ của chart, ví dụ \field{correlation\_heatmap}.
+  \item \field{title}: tên chart để hiển thị và để benchmark map ngược.
+  \item \field{kind}: phân biệt \field{chart} hay \field{table}.
+  \item \field{asset\_file}: file ảnh thật của chart.
+  \item \field{source\_files}: danh sách file nguồn mà chart này được phép dùng.
+  \item \field{result\_text}: tóm tắt số liệu chính.
+  \item \field{evidence}: bằng chứng có cấu trúc, ví dụ top correlations hoặc top importances.
+\end{itemize}
+
+\subsection{Ví dụ thật: asset evidence của \texttt{correlation\_heatmap}}
+Đoạn sau lấy trực tiếp từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/asset_evidence.json}.
+
+\begin{lstlisting}[language=json,caption={Asset evidence thật của correlation\_heatmap}]
+{
+  "key": "correlation_heatmap",
+  "title": "Correlation heatmap",
+  "kind": "chart",
+  "asset_file": "fig_correlation_heatmap.png",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "summary.json",
+    "table_correlation_matrix.csv"
+  ],
+  "result_text": "Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112.",
+  "evidence": {
+    "correlation_story": {
+      "strongest_correlations": [
+        {"pair": "Butyrate vs VFA", "correlation": 0.9601},
+        {"pair": "Acetate vs VFA", "correlation": 0.9428},
+        {"pair": "Acetate vs Butyrate", "correlation": 0.8651}
+      ],
+      "top_target_correlations": [
+        {"feature": "VFA", "correlation": 0.7984},
+        {"feature": "Butyrate", "correlation": 0.7827},
+        {"feature": "Acetate", "correlation": 0.7641}
+      ]
+    }
+  }
+}
+\end{lstlisting}
+
+\textbf{Giải thích thuật ngữ ngay trên ví dụ:}
+\field{result\_text} không phải đoạn văn tự do để đọc cho hay; nó là một bản tóm tắt đã cô đặc các con số chính để model ít bị đi chệch. \field{evidence.correlation\_story} không phải ``trang trí JSON''; nó là nguồn dữ liệu có cấu trúc mà gold builder sẽ dùng lại ở bước sau.
+
+\section{Giai đoạn 2: Tạo manifest và nạp input cho từng artifact}
+
+\subsection{Manifest được tạo như thế nào}
+Manifest được xây trong
+\filepath{predict-service/benchmarking/manifest.py:277-359}.
+Hệ thống duyệt các artifact lõi như \field{model\_comparison/main}, \field{incremental\_feature\_analysis/main},
+\field{feature\_ranking/gra}, sau đó duyệt tiếp toàn bộ chart có trong
+\field{asset\_evidence.json}. Với mỗi asset chart, hệ thống tạo một \field{ManifestRecord}.
+
+\subsection{Tiêu chí bắt buộc của manifest}
+Mỗi record của manifest phải có:
+\begin{itemize}
+  \item \field{artifact\_id}: danh tính duy nhất của artifact trong toàn run.
+  \item \field{artifact\_type}: kiểu logic mà gold builder và verifier sẽ dùng.
+  \item \field{chart\_type}: loại biểu đồ về mặt hình thức.
+  \item \field{source\_files}: đúng tập file gốc sẽ được nạp.
+  \item \field{primary\_entities}: các thực thể chính mà model có khả năng nói tới.
+  \item \field{asset\_key}, \field{asset\_title}, \field{asset\_family}: metadata để map lại về website và về gold builder đúng họ biểu đồ.
+\end{itemize}
+
+\subsection{Ví dụ thật: manifest record của \texttt{correlation\_heatmap}}
+Đoạn sau lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/manifest.jsonl}.
+
+\begin{lstlisting}[language=json,caption={Manifest record thật của correlation\_heatmap}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+  "artifact_type": "chart/correlation_heatmap",
+  "chart_type": "heatmap",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "summary.json",
+    "table_correlation_matrix.csv",
+    "fig_correlation_heatmap.png"
+  ],
+  "primary_entities": [
+    "Butyrate vs VFA",
+    "Acetate vs VFA",
+    "Acetate vs Butyrate",
+    "Ethanol vs Propionate",
+    "Ethanol vs VFA",
+    "VFA vs HPR",
+    "VFA",
+    "Butyrate",
+    "Acetate",
+    "VSS",
+    "Ethanol",
+    "COD-O"
+  ],
+  "bundle_name": "KNN_Main_Dataset_20260421",
+  "chart_file": "fig_correlation_heatmap.png",
+  "summary_files": ["analysis_summary_report.txt"],
+  "asset_key": "correlation_heatmap",
+  "asset_title": "Correlation heatmap",
+  "asset_family": "correlation"
+}
+\end{lstlisting}
+
+\subsection{Input thật được nạp cho artifact}
+Hàm \filepath{predict-service/benchmarking/manifest.py:362-397}
+nạp input vào cấu trúc \field{ArtifactInputs}. Các file được phân vào bốn ngăn:
+\begin{itemize}
+  \item \field{tables}: toàn bộ CSV được đọc thành list bản ghi.
+  \item \field{json\_payloads}: toàn bộ JSON được parse.
+  \item \field{text\_payloads}: toàn bộ TXT được đọc nguyên văn.
+  \item \field{chart\_files}: danh sách file ảnh của chart.
+\end{itemize}
+
+Với \field{correlation\_heatmap}, input thật gồm:
+\begin{itemize}
+  \item \field{tables["table\_correlation\_matrix.csv"]}: ma trận tương quan đầy đủ 12 biến.
+  \item \field{json\_payloads["summary.json"]}: metric tổng, leaderboard benchmark, selected model metrics.
+  \item \field{text\_payloads["analysis\_summary\_report.txt"]}: tóm tắt text.
+  \item \field{chart\_files = ["fig\_correlation\_heatmap.png"]}.
+  \item \field{asset\_payload}: đúng object trong \field{asset\_evidence.json}.
+\end{itemize}
+
+\section{Giai đoạn 3: Build prompt benchmark cho từng arm và condition}
+
+\subsection{Arm và condition nghĩa là gì}
+\filepath{predict-service/benchmarking/prompts.py:11-28}
+định nghĩa \field{ARM\_INSTRUCTIONS}.
+
+\begin{itemize}
+  \item \field{A}: baseline chart-to-text, thiên về mô tả trực tiếp.
+  \item \field{B}: giải thích nhiều lớp, đi theo quan sát $\rightarrow$ diễn giải $\rightarrow$ lưu ý.
+  \item \field{C}: sinh, tự kiểm tra, rồi tự loại claim yếu trước khi trả.
+\end{itemize}
+
+\field{Condition} là mức dữ liệu mà model được nhìn. Run này chỉ dùng
+\field{image\_table\_summary}, tức model được nhìn đồng thời:
+\begin{itemize}
+  \item bảng / JSON,
+  \item file chart,
+  \item và summary text.
+\end{itemize}
+
+\subsection{Tiêu chí bắt buộc của prompt benchmark}
+Prompt benchmark được build trong
+\filepath{predict-service/benchmarking/prompts.py:132-181}
+và có các tiêu chí cứng:
+\begin{itemize}
+  \item output phải là JSON chặt với 6 khóa chính:
+  \field{artifact\_id, arm, input\_condition, explanation\_short, explanation\_full, claims};
+  \item mỗi claim phải có ít nhất các khóa:
+  \field{claim\_id, claim\_text, claim\_type, span\_category, is\_numeric, requires\_grounding\_from, confidence};
+  \item \field{claim\_type} chỉ được nằm trong enum cố định:
+  \field{best\_model, metric\_value, ranking, top\_feature, feature\_subset\_optimum, plateau, rank\_score, freeform};
+  \item ưu tiên bằng chứng phải theo thứ tự:
+  \field{table/json > chart > summary\_text};
+  \item bỏ claim còn hơn đoán.
+\end{itemize}
+
+\subsection{Prompt thật của \texttt{correlation\_heatmap / C / image\_table\_summary}}
+Đoạn dưới là prompt thật được code build ra cho artifact này. Nội dung lấy bằng cách gọi
+\field{build\_generation\_prompt(inputs, arm="C", condition="image\_table\_summary")}.
+
+\begin{lstlisting}[caption={Phần đầu prompt thật cho correlation\_heatmap / C / image\_table\_summary}]
+You are generating artifact-grounded ML explanations for offline benchmarking.
+Return strict JSON with keys: artifact_id, arm, input_condition,
+explanation_short, explanation_full, claims.
+Each claim must include: claim_id, claim_text, claim_type, span_category,
+is_numeric, requires_grounding_from, confidence.
+Allowed claim_type values: best_model, metric_value, ranking, top_feature,
+feature_subset_optimum, plateau, rank_score, freeform.
+Rules:
+- Table/json evidence outranks chart evidence.
+- Chart evidence outranks summary text.
+- Omission is better than speculation.
+- Unsupported claims are worse than short answers.
+- Arm instruction: Generate, self-check, and revise. Remove unsupported claims
+  before returning the final explanation.
+\end{lstlisting}
+
+Ngay sau phần này là block \field{BEGIN\_CONTEXT\_JSON ... END\_CONTEXT\_JSON}
+chứa đúng \field{artifact\_id}, \field{asset\_tables}, \field{asset\_json\_payloads},
+\field{asset\_text\_payloads}, \field{chart\_files}, và \field{summary\_text}.
+Điểm quan trọng là benchmark không đẩy ``tri thức mơ hồ'', mà đẩy một JSON context có thể audit được.
+
+\section{Giai đoạn 4: Sinh explanation và claims}
+
+\subsection{Luồng code}
+Benchmark gọi model qua
+\filepath{predict-service/benchmarking/generator.py:8-33}.
+Kết quả thô của model được chuyển qua \field{normalize\_generation(...)} để ép lại
+\field{artifact\_id}, \field{arm}, \field{input\_condition}, và chuẩn hóa claims.
+
+\subsection{Tiêu chí bắt buộc của output generation}
+Một generation hợp lệ phải thỏa:
+\begin{itemize}
+  \item có \field{explanation\_short} và \field{explanation\_full};
+  \item có danh sách \field{claims};
+  \item mỗi claim có \field{claim\_text} không rỗng;
+  \item nếu claim là numeric claim thì phải suy ra được \field{value} hoặc bị đánh \field{unverifiable} ở bước sau.
+\end{itemize}
+
+\subsection{Ví dụ thật: generation tốt của \texttt{correlation\_heatmap / C}}
+Đoạn dưới lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/generations/knn_main_dataset_20260421_chart_correlation_heatmap_c_image_table_summary.json}.
+
+\begin{lstlisting}[language=json,caption={Generation thật của correlation\_heatmap / C}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The correlation heatmap shows that Butyrate vs VFA (0.9601) and Acetate vs VFA (0.9428) are the strongest correlations. Furthermore, VFA is the top correlated feature with HPR (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA=0.9601",
+      "claim_type": "metric_value",
+      "subject": "Butyrate vs VFA",
+      "metric": "correlation",
+      "value": 0.9601
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "VFA=0.7984",
+      "claim_type": "metric_value",
+      "subject": "VFA",
+      "metric": "target_correlation",
+      "value": 0.7984
+    }
+  ]
+}
+\end{lstlisting}
+
+\textbf{Điểm mạnh của output này:}
+\begin{itemize}
+  \item subject của pairwise correlation được viết đúng dạng \field{Butyrate vs VFA};
+  \item metric của top feature với HPR được viết đúng dạng \field{target\_correlation};
+  \item numeric value có thật, không để \field{null};
+  \item claim bám đúng evidence, không nói lạc sang model performance.
+\end{itemize}
+
+\subsection{Ví dụ thật: generation hỏng của \texttt{time\_series / A}}
+Đoạn dưới lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/generations/knn_main_dataset_20260421_chart_time_series_a_image_table_summary.json}.
+
+\begin{lstlisting}[language=json,caption={Generation thật của time\_series / A}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest performance metrics, including an R2 score of 0.81717 and the lowest Mean Squared Error (MSE) of 0.012810.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "claim_type": "metric_value",
+      "subject": "KNN",
+      "metric": "r2_score",
+      "value": 0.817168
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA, Butyrate, and Acetate.",
+      "claim_type": "top_feature",
+      "subject": "HPR",
+      "metric": "target_correlation"
+    }
+  ]
+}
+\end{lstlisting}
+
+Đây là ví dụ hỏng rất điển hình: artifact đang là \field{time\_series}, nhưng output lại nói về
+\field{R2}, \field{MSE}, và top correlated features. Nghĩa là model đang lôi tri thức đúng của bundle ra nói, nhưng nói sai \emph{scope} (phạm vi benchmark của artifact hiện tại). Verifier sẽ không cho điểm chỉ vì ``nội dung nghe hợp lý''.
+
+\section{Giai đoạn 5: Chuẩn hóa claim}
+
+\subsection{Luồng code}
+Phần normalize nằm ở
+\filepath{predict-service/benchmarking/claim_extractor.py:321-520}.
+Nó làm các việc sau:
+\begin{itemize}
+  \item suy ra \field{claim\_type} chuẩn nếu model trả loại mơ hồ;
+  \item chuẩn hóa \field{metric}, ví dụ \field{r2}, \field{r-squared}, \field{r squared} về \field{r2\_score};
+  \item chuẩn hóa subject như \field{Random Forest} về \field{RF};
+  \item rút \field{value} số từ claim text nếu model chưa điền vào trường \field{value};
+  \item nếu generation thiếu metadata chuẩn thì backfill \field{artifact\_id}, \field{arm}, \field{input\_condition}.
+\end{itemize}
+
+\subsection{Tiêu chí của bước normalize}
+Sau normalize, mỗi claim cần đạt:
+\begin{itemize}
+  \item \field{claim\_text} không rỗng;
+  \item \field{claim\_type} thuộc enum chuẩn;
+  \item numeric claim có \field{value} nếu tách được;
+  \item \field{metric} đủ cụ thể để verifier map được vào gold fact;
+  \item \field{subject} đủ đúng để match fact, nhất là các claim dạng pairwise correlation.
+\end{itemize}
+
+\subsection{Ví dụ thật: baseline raw claim trước và sau normalize}
+Baseline không gọi model mới; nó lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/llm_explanations.json}
+rồi chuyển sang generation benchmark trong
+\filepath{predict-service/benchmarking/baseline_adapter.py:962-997}.
+
+\textbf{Claim raw trong \field{llm\_explanations.json}:}
+
+\begin{lstlisting}[language=json,caption={Claim raw của baseline trong llm\_explanations.json}]
+{
+  "claim_id": "claim_1",
+  "claim_text": "Butyrate and VFA have a correlation of 0.9601.",
+  "claim_type": "factual",
+  "subject": "Butyrate",
+  "predicate": "has correlation with",
+  "object": "VFA",
+  "metric": "correlation",
+  "value": 0.9601
+}
+\end{lstlisting}
+
+\textbf{Sau normalize thành generation benchmark:}
+
+\begin{lstlisting}[language=json,caption={Claim baseline sau normalize trong generation file}]
+{
+  "claim_id": "claim_1",
+  "claim_text": "Butyrate and VFA have a correlation of 0.9601.",
+  "claim_type": "metric_value",
+  "subject": "Butyrate",
+  "predicate": "has correlation with",
+  "object": "VFA",
+  "metric": "correlation",
+  "value": 0.9601
+}
+\end{lstlisting}
+
+\textbf{Ý nghĩa của ví dụ này:}
+\begin{itemize}
+  \item normalize đã làm được một việc đúng: đổi \field{claim\_type = factual} sang \field{metric\_value};
+  \item nhưng normalize chưa làm được việc quan trọng hơn: biến cặp \field{Butyrate + VFA} thành subject chuẩn \field{Butyrate vs VFA};
+  \item vì thế tới bước verify, claim này vẫn rớt \field{unverifiable}.
+\end{itemize}
+
+Đây là ví dụ rất quan trọng: benchmark không chỉ thưởng cho ``nói đúng nội dung'', mà còn cần claim có hình dạng đúng hợp đồng để map vào gold fact.
+
+\section{Giai đoạn 6: Xây gold facts}
+
+\subsection{Gold fact là gì}
+Gold fact là đơn vị sự thật chuẩn có cấu trúc. Nó được build trong
+\filepath{predict-service/benchmarking/gold_builders.py}. Với case
+\field{correlation\_heatmap}, code nằm ở
+\filepath{predict-service/benchmarking/gold_builders.py:709-820}.
+
+\textbf{Ý nghĩa của gold fact:} benchmark không so claim với một đoạn văn đáp án mẫu, mà so với một tập fact có \field{fact\_id}, \field{fact\_type}, \field{subject}, \field{predicate}, \field{object/value}, và bằng chứng nguồn.
+
+\subsection{Tiêu chí bắt buộc của gold artifact}
+Một gold artifact hợp lệ phải có:
+\begin{itemize}
+  \item \field{artifact\_id}, \field{artifact\_type}, \field{source\_files};
+  \item \field{ground\_truth\_facts}: danh sách sự thật chuẩn;
+  \item \field{salient\_facts}: những fact quan trọng nhất, dùng riêng để tính coverage của fact nổi bật;
+  \item \field{forbidden\_inferences}: các suy luận bị cấm, ví dụ ``không được nói correlation là causation''.
+\end{itemize}
+
+\subsection{Ví dụ thật: gold artifact của \texttt{correlation\_heatmap}}
+Đoạn sau lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/gold/knn_main_dataset_20260421_chart_correlation_heatmap.json}.
+
+\begin{lstlisting}[language=json,caption={Một phần gold artifact thật của correlation\_heatmap}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap:top_feature:target_correlation",
+      "fact_type": "top_feature",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": "VFA",
+      "value": 0.7984,
+      "importance": 3
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap:ranking:correlation",
+      "fact_type": "ranking",
+      "subject": "feature_pairs",
+      "predicate": "correlation",
+      "object": [
+        "Butyrate vs VFA",
+        "Acetate vs VFA",
+        "Acetate vs Butyrate",
+        "Ethanol vs Propionate",
+        "Ethanol vs VFA",
+        "VFA vs HPR"
+      ]
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "value": 0.9601
+    }
+  ],
+  "salient_facts": [
+    "KNN_Main_Dataset_20260421:chart:correlation_heatmap:top_feature:target_correlation",
+    "KNN_Main_Dataset_20260421:chart:correlation_heatmap:ranking:target_correlation",
+    "KNN_Main_Dataset_20260421:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret correlation as causation."
+  ]
+}
+\end{lstlisting}
+
+\subsection{Ví dụ thật: gold artifact của \texttt{time\_series}}
+Đây là nơi thấy rất rõ vì sao \field{time\_series} không thể được chấm bằng claim kiểu model comparison.
+
+\begin{lstlisting}[language=json,caption={Một phần gold artifact thật của time\_series}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "ground_truth_facts": [
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "actual_peak_index", "value": 130.0},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "actual_peak_value", "value": 1.0},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "predicted_peak_index", "value": 146.0},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "predicted_peak_value", "value": 0.829894},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "mean_abs_gap", "value": 0.066591},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "max_abs_gap", "value": 0.399107},
+    {"fact_type": "metric_value", "subject": "KNN", "predicate": "sequence_correlation", "value": 0.931488}
+  ]
+}
+\end{lstlisting}
+
+Nói ngắn gọn, \field{time\_series} ở đây đang chờ claim về ``đỉnh thực ở vị trí nào, đỉnh dự đoán ở vị trí nào, gap trung bình là bao nhiêu, tương quan chuỗi là bao nhiêu''. Nếu model lại nói về \field{R2} hoặc \field{top correlated features}, verifier sẽ không có fact nào để match.
+
+\section{Giai đoạn 7: Verify claim}
+
+\subsection{Luồng code}
+Verifier nằm ở
+\filepath{predict-service/benchmarking/verifier.py:1-320}.
+Các trạng thái chính là:
+\begin{itemize}
+  \item \field{supported}: claim được fact xác nhận;
+  \item \field{partially\_supported}: claim gần đúng trong tolerance lỏng và có hedge;
+  \item \field{contradicted}: claim bị fact bác bỏ;
+  \item \field{unverifiable}: verifier không tìm được fact thích hợp hoặc claim thiếu cấu trúc cần thiết.
+\end{itemize}
+
+\subsection{Tiêu chí verifier dùng để chấm}
+Với numeric claim, verifier làm ba việc:
+\begin{enumerate}
+  \item chuẩn hóa metric, ví dụ \field{r2}, \field{r-squared} về \field{r2\_score};
+  \item tạo tập ứng viên subject hợp lệ, ví dụ model alias \field{Random Forest} $\rightarrow$ \field{RF};
+  \item tìm gold fact có cùng subject, metric, fact type và so numeric value theo tolerance.
+\end{enumerate}
+
+\subsection{Ví dụ thành công: verification của \texttt{correlation\_heatmap / C}}
+Đoạn dưới lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/verifications/knn_main_dataset_20260421_chart_correlation_heatmap_c_image_table_summary.json}.
+
+\begin{lstlisting}[language=json,caption={Verification thật của correlation\_heatmap / C}]
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA=0.9601",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.0
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "VFA=0.7984",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:correlation_heatmap:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    }
+  ]
+}
+\end{lstlisting}
+
+\textbf{Điểm cần chú ý:} mọi claim ở đây đều \field{supported}, nhưng điều đó không đồng nghĩa recall bằng 1.0, vì gold artifact còn có ranking facts và top-feature facts mà arm \field{C} không phát biểu ra.
+
+\subsection{Ví dụ thất bại 1: verification của \texttt{correlation\_heatmap / A}}
+Đoạn dưới lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/verifications/knn_main_dataset_20260421_chart_correlation_heatmap_a_image_table_summary.json}.
+
+\begin{lstlisting}[language=json,caption={Verification thật của correlation\_heatmap / A}]
+{
+  "verifications": [
+    {
+      "claim_id": "C1",
+      "claim_text": "The model's performance, indicated by the R-squared value, suggests that the input features are highly predictive of the target variable.",
+      "status": "unverifiable",
+      "reason": "Numeric claim is missing a numeric value."
+    },
+    {
+      "claim_id": "C2",
+      "claim_text": "The features related to pH, Temperature, and Concentration are the most significant predictors.",
+      "status": "unverifiable",
+      "reason": "Claim type 'freeform' is not yet rule-verified."
+    }
+  ]
+}
+\end{lstlisting}
+
+Ý nghĩa của ví dụ này:
+\begin{itemize}
+  \item claim \field{C1} bị đánh numeric claim nhưng lại không có số, nên rơi thẳng vào \field{unverifiable};
+  \item claim \field{C2} là \field{freeform}, mà verifier hiện chưa có luật chấm cho \field{freeform}, nên cũng rơi vào \field{unverifiable};
+  \item đây là lỗi ``claim contract'' chứ không phải lỗi ``claim bị chứng minh sai''.
+\end{itemize}
+
+\subsection{Ví dụ thất bại 2: verification của \texttt{time\_series / A}}
+Đoạn dưới lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/verifications/knn_main_dataset_20260421_chart_time_series_a_image_table_summary.json}.
+
+\begin{lstlisting}[language=json,caption={Verification thật của time\_series / A}]
+{
+  "verifications": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "status": "unverifiable",
+      "reason": "No matching numeric fact was found for this claim."
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA, Butyrate, and Acetate.",
+      "status": "unverifiable",
+      "reason": "No top-feature fact found."
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN model has the lowest Mean Squared Error (MSE) of 0.012810.",
+      "status": "unverifiable",
+      "reason": "No matching numeric fact was found for this claim."
+    }
+  ]
+}
+\end{lstlisting}
+
+Đây là ví dụ ``nói đúng nhưng nói nhầm bài''. Các con số \field{R2} và \field{MSE} là số thật của bundle, nhưng không phải fact của artifact \field{time\_series}. Benchmark chấm theo artifact, nên vẫn phải cho \field{0 điểm}.
+
+\section{Giai đoạn 8: Tính điểm}
+
+\subsection{Công thức thật trong code}
+Điểm artifact được tính trong
+\filepath{predict-service/benchmarking/metrics.py:22-116}.
+Trọng số trạng thái là:
+\[
+w(\text{supported}) = 1,\quad
+w(\text{partially supported}) = 0.5,\quad
+w(\text{contradicted}) = 0,\quad
+w(\text{unverifiable}) = 0
+\]
+
+\[
+\text{Fact Precision} =
+\frac{\sum_i w(\text{status}_i)}{N_{\text{claims}}}
+\]
+
+\[
+\text{Fact Recall} =
+\frac{\sum_{\text{fact}} \max w(\text{claim matched to fact})}{N_{\text{gold facts}}}
+\]
+
+\[
+\text{Fact F1} =
+\frac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
+
+\[
+\text{Unsupported Claim Rate} =
+\frac{N_{\text{unverifiable}}}{N_{\text{claims}}}
+\]
+
+\[
+\text{Contradiction Rate} =
+\frac{N_{\text{contradicted}}}{N_{\text{claims}}}
+\]
+
+\[
+\text{Coverage of Salient Facts} =
+\frac{\sum_{\text{salient fact}} \max w(\text{claim matched to salient fact})}{N_{\text{salient facts}}}
+\]
+
+Điểm leaderboard tổng được build trong
+\filepath{predict-service/benchmarking/metrics.py:119-160}
+bằng \textbf{macro-average} (trung bình đều trên từng artifact), không phải gộp mọi claim của mọi artifact lại rồi tính một lần.
+
+\subsection{Tính thật bằng tay cho \texttt{correlation\_heatmap / C}}
+Artifact này có:
+\begin{itemize}
+  \item \field{9} claim;
+  \item cả \field{9} claim đều \field{supported};
+  \item gold có \field{15} fact;
+  \item salient facts có \field{3} fact.
+\end{itemize}
+
+Vậy:
+\[
+\text{Fact Precision} = \frac{9}{9} = 1.0
+\]
+
+\[
+\text{Fact Recall} = \frac{9}{15} = 0.6
+\]
+
+\[
+\text{Fact F1} = \frac{2 \times 1.0 \times 0.6}{1.0 + 0.6} = 0.75
+\]
+
+\[
+\text{Unsupported Claim Rate} = \frac{0}{9} = 0
+\]
+
+Coverage of salient facts chỉ bằng:
+\[
+\frac{1}{3} = 0.3333
+\]
+chứ không phải 1.0, vì ba salient facts của artifact này là:
+\begin{itemize}
+  \item top feature theo HPR correlation,
+  \item ranking của target correlations,
+  \item metric \field{Butyrate vs VFA}.
+\end{itemize}
+Arm \field{C} chỉ match chắc chắn vào salient fact thứ ba; còn top-feature fact và ranking fact không được claim dưới đúng kiểu fact tương ứng.
+
+\subsection{Tính thật bằng tay cho \texttt{time\_series / A}}
+Artifact này có:
+\begin{itemize}
+  \item \field{3} claim;
+  \item cả \field{3} claim đều \field{unverifiable};
+  \item gold có \field{7} fact.
+\end{itemize}
+
+Vậy:
+\[
+\text{Fact Precision} = \frac{0}{3} = 0,\quad
+\text{Fact Recall} = \frac{0}{7} = 0,\quad
+\text{Fact F1} = 0
+\]
+
+\[
+\text{Unsupported Claim Rate} = \frac{3}{3} = 1.0
+\]
+
+\subsection{Ý nghĩa từng tiêu chí điểm}
+\textbf{Fact Precision} đo ``những gì model đã nói ra thì đúng đến đâu''. Precision cao nhưng recall thấp nghĩa là model nói ít nhưng thường đúng.
+
+\textbf{Fact Recall} đo ``trong bộ sự thật chuẩn của artifact, model cover được bao nhiêu''. Recall thấp nghĩa là model bỏ sót nhiều fact dù những gì nói ra có thể đúng.
+
+\textbf{Fact F1} là điểm cân bằng giữa precision và recall; benchmark đang ưu tiên giá trị này khi xếp hạng leaderboard.
+
+\textbf{Unsupported Claim Rate} đo tỷ lệ claim verifier không xác minh được. Chỉ số này rất nhạy với lỗi contract của claim.
+
+\textbf{Contradiction Rate} đo tỷ lệ claim thật sự sai với gold. Đây là lỗi nặng hơn về mặt nội dung.
+
+\textbf{Coverage of Salient Facts} đo model có cover được các fact quan trọng nhất hay không. Chỉ số này giúp tránh trường hợp model nói rất nhiều fact vụn mà bỏ sót fact cốt lõi.
+
+\section{Giai đoạn 9: Tổng hợp per-chart và leaderboard}
+
+\subsection{Per-chart benchmark được build như thế nào}
+Phần này nằm trong
+\filepath{predict-service/benchmarking/chart_reporting.py:170-296}.
+Hệ thống gộp:
+\begin{itemize}
+  \item metadata từ manifest,
+  \item score từ \field{artifact\_scores},
+  \item reason/status breakdown từ \field{verifications},
+\end{itemize}
+để tạo \field{per\_chart\_benchmark.json}.
+
+\textbf{Vai trò của per-chart benchmark:} leaderboard tổng chỉ cho biết ``arm nào thắng chung'', còn per-chart benchmark mới trả lời ``chart nào đang làm hệ thống rớt điểm''.
+
+\subsection{Kết quả per-chart quan trọng của run này}
+Thông tin dưới đây lấy từ
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/scores/per_chart_benchmark.json}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.4cm} l r r}
+\toprule
+Artifact & Best arm & Best F1 & Unsupported \\
+\midrule
+\field{chart:fig4\_univariate\_analysis} & C & 0.800 & 0.000 \\
+\field{chart:correlation\_heatmap} & C & 0.750 & 0.000 \\
+\field{chart:feature\_vs\_target} & B & 0.696 & 0.000 \\
+\field{chart:feature\_importance} & BASELINE\_LLM & 0.545 & 0.000 \\
+\field{chart:feature\_distributions} & BASELINE\_LLM & 0.545 & 0.000 \\
+\field{chart:model\_comparison\_bars} & A & 0.533 & 0.000 \\
+\field{chart:time\_series} & A & 0.000 & 1.000 \\
+\field{incremental\_feature\_analysis/main} & A & 0.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Điểm đáng chú ý:}
+\begin{itemize}
+  \item \field{coverage\_gaps = []}: benchmark hiện không còn thiếu row nào; tức bốn arm được so trên cùng protocol.
+  \item Có chart mà baseline thắng, ví dụ \field{feature\_importance} và \field{feature\_distributions}.
+  \item Có chart mà arm \field{C} rất mạnh, ví dụ \field{correlation\_heatmap}.
+  \item Có chart mà cả hệ thống đang gần như chưa giải được, ví dụ \field{time\_series} và \field{incremental\_feature\_analysis/main}.
+\end{itemize}
+
+\section{Giai đoạn 10: Chọn explanation cho website}
+
+\subsection{Luồng chọn}
+Website không chọn ``best arm cho từng chart'', mà chọn \textbf{một hàng thắng chung} rồi dùng hàng đó cho toàn bộ site. Luồng này nằm ở
+\filepath{predict-service/benchmarking/selection.py:60-184}.
+
+Hàm \field{select\_best\_benchmark\_row(...)} sẽ chọn hàng đầu tiên trong leaderboard thuộc các arm được phép hiển thị cho website, tức thường là \field{A}, \field{B}, hoặc \field{C}. Baseline bị loại khỏi lựa chọn website.
+
+\subsection{Kết quả chọn thật của run này}
+File
+\filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/benchmark_eval/selected_explanations.json}
+cho biết:
+
+\begin{lstlisting}[language=json,caption={Metadata chọn explanation thật cho website}]
+{
+  "provider": "benchmark_selected",
+  "model": "gemma4:e4b",
+  "selection_method": "best_nonbaseline_leaderboard_row",
+  "selected_arm": "C",
+  "selected_condition": "image_table_summary",
+  "selected_row": {
+    "arm": "C",
+    "fact_f1": 0.3053189160183676
+  }
+}
+\end{lstlisting}
+
+\subsection{Hệ quả thật: website có thể lấy explanation kém ở chart cụ thể}
+Vì website đang lấy \field{C} cho toàn bộ asset, nên asset \field{time\_series} trên website hiện cũng lấy bản của \field{C}, dù artifact \field{time\_series / C} có \field{F1 = 0}.
+
+Đoạn sau lấy từ chính \field{selected\_explanations.json}:
+
+\begin{lstlisting}[caption={Explanation time\_series thật mà website đang lấy từ selected\_explanations.json}]
+The analysis confirms that the KNN model is the superior predictor for HPR,
+evidenced by its R2 score of 0.81717 and the lowest MSE of 0.012810 among all
+tested models. Feature importance analysis highlights VFA (0.7984), Butyrate
+(0.7827), and Acetate (0.7641) as the top three features most correlated with
+HPR.
+\end{lstlisting}
+
+Đoạn này ``đúng ở mức bundle'' nhưng \emph{sai scope đối với artifact time-series}. Điều đó giải thích vì sao benchmark hiện là một công cụ tốt để phát hiện lỗi hiển thị cho website: nếu chỉ đọc bằng cảm giác, người xem rất dễ tưởng explanation này tốt.
+
+\section{Kết luận kỹ thuật rút ra từ run hiện tại}
+
+\textbf{Một là, pipeline benchmark hiện tại đã công bằng ở mức protocol.}
+Bốn hàng \field{A}, \field{B}, \field{C}, \field{BASELINE\_LLM} đều cùng
+\field{24 artifact}, cùng \field{1 condition}, cùng verifier và metric logic. Không còn coverage gap.
+
+\textbf{Hai là, arm \field{C} là lựa chọn hợp lý nhất nếu buộc phải chọn một arm chung cho cả website.}
+Điểm \field{Fact F1 = 0.3053} của \field{C} đang cao nhất leaderboard tổng.
+
+\textbf{Ba là, benchmark đã chỉ ra rất rõ những failure mode còn tồn tại.}
+\begin{itemize}
+  \item \textbf{Sai scope artifact}: ví dụ \field{time\_series} nói sang \field{R2/MSE}.
+  \item \textbf{Claim còn quá tự do}: \field{freeform} chưa có luật verify nên dễ rơi \field{unverifiable}.
+  \item \textbf{Subject không đúng contract}: ví dụ baseline nói \field{Butyrate and VFA} thay vì \field{Butyrate vs VFA}.
+  \item \textbf{Recall thấp dù precision cao}: \field{correlation\_heatmap / C} có precision 1.0 nhưng recall chỉ 0.6 vì bỏ sót ranking/top-feature facts.
+\end{itemize}
+
+\textbf{Bốn là, nếu mục tiêu là website tốt nhất theo từng chart, chiến lược chọn một arm chung chưa phải tối ưu.}
+Per-chart benchmark cho thấy có chart baseline thắng, có chart \field{B} thắng, có chart \field{A} thắng. Hiện website vẫn đang lấy \field{C} cho tất cả vì selection dựa trên leaderboard tổng.
+
+\appendix
+
+\section{Phụ lục A: Tồn kho 24 artifact của run này}
+Thông tin này tổng hợp từ \field{manifest.jsonl} và best row trong \field{per\_chart\_benchmark.json}. Mục đích của bảng là cho thấy benchmark hiện đang chấm đúng những gì, bằng file nào, và kết quả tốt nhất của từng artifact là gì.
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.4cm} >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+Artifact & Loại & File nguồn chính & Best row \\
+\midrule
+\endfirsthead
+\toprule
+Artifact & Loại & File nguồn chính & Best row \\
+\midrule
+\endhead
+\field{model\_comparison/main} & model comparison & \field{table\_model\_comparison.csv}, \field{summary.json}, \field{fig5\_model\_comparison.png} & A, F1=0.178 \\
+\field{incremental\_feature\_analysis/main} & incremental analysis & \field{table1\_incremental\_results.csv}, \field{fig6ab\_mse\_r2\_features.png} & A, F1=0.000 \\
+\field{feature\_ranking/gra} & GRA ranking & \field{gra\_ranking.json}, \field{fig3a\_gra\_ranking.png} & BASELINE\_LLM, F1=0.375 \\
+\field{chart:fig3a\_gra\_ranking} & chart/GRA ranking & \field{best\_model\_summary.json}, \field{gra\_ranking.json} & B, F1=0.526 \\
+\field{chart:fig3b\_shap\_analysis} & chart/SHAP & \field{best\_model\_shap\_importance.csv}, \field{best\_model\_summary.json} & A, F1=0.364 \\
+\field{chart:fig3\_feature\_analysis} & chart/combined feature analysis & \field{best\_model\_shap\_importance.csv}, \field{gra\_ranking.json}, \field{table1\_incremental\_results.csv} & BASELINE\_LLM, F1=0.286 \\
+\field{chart:fig4\_univariate\_analysis} & chart/correlation & \field{table\_correlation\_matrix.csv}, \field{table\_descriptive\_statistics.csv} & C, F1=0.800 \\
+\field{chart:fig5\_model\_comparison} & chart/model comparison & \field{table\_model\_comparison.csv}, \field{summary.json} & B, F1=0.467 \\
+\field{chart:fig6ab\_mse\_r2\_features} & chart/incremental metrics & \field{table1\_incremental\_results.csv}, \field{summary.json} & A, F1=0.444 \\
+\field{chart:fig6c\_prediction\_time} & chart/sequence summary & \field{best\_model\_summary.json}, \field{summary.json} & BASELINE\_LLM, F1=0.250 \\
+\field{chart:model\_svm\_scatter} & chart/scatter & \field{summary.json}, \field{table\_model\_comparison.csv} & A, F1=0.316 \\
+\field{chart:model\_dt\_scatter} & chart/scatter & \field{summary.json}, \field{table\_model\_comparison.csv} & A, F1=0.316 \\
+\field{chart:model\_rf\_scatter} & chart/scatter & \field{summary.json}, \field{table\_model\_comparison.csv} & A, F1=0.316 \\
+\field{chart:model\_knn\_scatter} & chart/scatter & \field{summary.json}, \field{table\_model\_comparison.csv} & A, F1=0.316 \\
+\field{chart:model\_xgboost\_scatter} & chart/scatter & \field{summary.json}, \field{table\_model\_comparison.csv} & A, F1=0.400 \\
+\field{chart:model\_comparison\_bars} & chart/bar chart & \field{table\_model\_comparison.csv}, \field{fig\_model\_comparison\_bars.png} & A, F1=0.533 \\
+\field{chart:predicted\_vs\_actual} & chart/prediction overview & \field{best\_model\_summary.json}, \field{fig\_predicted\_vs\_actual.png} & C, F1=0.316 \\
+\field{chart:residuals} & chart/residuals & \field{best\_model\_summary.json}, \field{fig\_residuals.png} & C, F1=0.304 \\
+\field{chart:feature\_importance} & chart/feature importance & \field{table\_feature\_importance.csv}, \field{fig\_feature\_importance.png} & BASELINE\_LLM, F1=0.545 \\
+\field{chart:correlation\_heatmap} & chart/heatmap & \field{table\_correlation\_matrix.csv}, \field{fig\_correlation\_heatmap.png} & C, F1=0.750 \\
+\field{chart:feature\_distributions} & chart/distribution & \field{table\_descriptive\_statistics.csv}, \field{fig\_feature\_distributions.png} & BASELINE\_LLM, F1=0.545 \\
+\field{chart:feature\_vs\_target} & chart/correlation & \field{table\_correlation\_matrix.csv}, \field{fig\_feature\_vs\_target.png} & B, F1=0.696 \\
+\field{chart:boxplots} & chart/boxplots & \field{table\_descriptive\_statistics.csv}, \field{fig\_boxplots.png} & A, F1=0.316 \\
+\field{chart:time\_series} & chart/time series & \field{best\_model\_summary.json}, \field{fig\_time\_series.png} & A, F1=0.000 \\
+\bottomrule
+\end{longtable}
+
+\section{Phụ lục B: Đường dẫn code chính của pipeline}
+\begin{itemize}
+  \item \filepath{predict-service/app/utils/report_explainer.py:899-970}: đọc report output và tạo \field{asset\_evidence}.
+  \item \filepath{predict-service/app/utils/report_explainer.py:1665-1684}: prompt rules cho explanation gốc.
+  \item \filepath{predict-service/benchmarking/manifest.py:277-359}: build manifest.
+  \item \filepath{predict-service/benchmarking/manifest.py:362-397}: load inputs cho từng artifact.
+  \item \filepath{predict-service/benchmarking/prompts.py:132-181}: build prompt benchmark.
+  \item \filepath{predict-service/benchmarking/generator.py:8-33}: generate và normalize metadata.
+  \item \filepath{predict-service/benchmarking/claim_extractor.py:321-520}: normalize claim.
+  \item \filepath{predict-service/benchmarking/gold_builders.py:709-820}: build gold cho correlation heatmap.
+  \item \filepath{predict-service/benchmarking/verifier.py:232-268}: verify numeric claim.
+  \item \filepath{predict-service/benchmarking/metrics.py:22-116}: tính điểm artifact.
+  \item \filepath{predict-service/benchmarking/metrics.py:119-160}: build leaderboard.
+  \item \filepath{predict-service/benchmarking/chart_reporting.py:170-296}: build per-chart benchmark.
+  \item \filepath{predict-service/benchmarking/selection.py:60-184}: chọn explanation cho website.
+  \item \filepath{predict-service/app/utils/report_benchmark.py:203-288}: publish benchmark về \field{summary.json}.
+\end{itemize}
+
+\end{document}
