@@ -210,6 +210,8 @@ When a training report is generated through `/train/model`, the report workflow 
 
 After AI explanations complete, the runtime benchmark now runs real `A/B/C` generations with the benchmark client across the full Phase 2 chart bundle under the richest runtime condition, `image_table_summary`. It then publishes `selected_benchmark_explanations` and `benchmark_eval/selected_explanations.json` back into the report bundle so the Laravel report page shows only the benchmark-selected explanation payload after benchmark success.
 
+Benchmark extraction is now a two-step flow: the benchmark LLM first generates the explanation text, then performs a second pass that extracts standardized claims from that explanation against a per-artifact variable catalog derived from the training bundle outputs. Each chart/table only passes its own allowed variables into that extraction step, and the system does not fall back to heuristic sentence splitting.
+
 Run it from `predict-service` with either the bundled synthetic fixture or an existing report bundle:
 
 ```bash
@@ -218,7 +220,7 @@ python3 scripts/run_benchmark.py --bundle-path app/reports/AI_Long_PostPatch_202
 python3 scripts/run_benchmark.py --bundle-path app/reports/AI_Long_PostPatch_20260322_1 --output-dir ./tmp/benchmark-real-openai --client openai
 ```
 
-When a bundle contains `llm_explanations.json`, the CLI now ingests it automatically as the official `BASELINE_LLM` arm. That baseline is evaluated as evidence only; it is never used as ground truth. Each asset must now carry a structured `benchmark_payload` with `explanation_short`, `explanation_full`, and `claims[]`; legacy freeform-only baseline files are rejected instead of being heuristically parsed.
+`llm_explanations.json` is no longer ingested as a benchmark arm. Runtime benchmarking now compares only the configured prompt arms such as `A/B/C`, while website selection is made from those benchmark rows alone.
 
 Current benchmark coverage includes:
 

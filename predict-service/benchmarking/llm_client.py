@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import os
 import random
@@ -9,8 +10,15 @@ from pathlib import Path
 from typing import Any
 
 from openai_rate_control import shared_openai_request_gate
-from .prompts import ARM_INSTRUCTIONS, build_generation_prompt, build_prompt_context, extract_prompt_context
-from .schemas import ArtifactInputs
+from .prompts import (
+    ARM_INSTRUCTIONS,
+    build_claim_extraction_prompt,
+    build_explanation_prompt,
+    build_prompt_context,
+    extract_claim_extraction_context,
+    extract_prompt_context,
+)
+from .schemas import ArtifactInputs, CANONICAL_CLAIM_TYPES
 
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_BENCHMARK_MODEL = os.getenv("OPENAI_BENCHMARK_MODEL", os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2"))
@@ -28,6 +36,11 @@ OPENAI_BENCHMARK_RETRY_JITTER_SECONDS = max(
     float(os.getenv("OPENAI_BENCHMARK_RETRY_JITTER_SECONDS", "1.0")),
 )
 OPENAI_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OPENAI_BENCHMARK_TIMEOUT_SECONDS", "240")))
+OLLAMA_BENCHMARK_MODEL = os.getenv("OLLAMA_BENCHMARK_MODEL", os.getenv("OLLAMA_REPORT_MODEL", "gemma4:e4b"))
+OLLAMA_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OLLAMA_BENCHMARK_TIMEOUT_SECONDS", "300")))
+OLLAMA_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("OLLAMA_BENCHMARK_MAX_RETRIES", "3")))
+OLLAMA_BASE_URL = str(os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")).strip().rstrip("/")
+OLLAMA_BENCHMARK_NUM_CTX = max(4096, int(os.getenv("OLLAMA_BENCHMARK_NUM_CTX", os.getenv("OLLAMA_NUM_CTX", "16384"))))
 
 
 def _as_float(value: Any) -> float:
@@ -38,25 +51,180 @@ def _round_number(value: float) -> float:
     return round(value, 6)
 
 
+def _extract_json_object(raw_content: str, provider: str) -> dict[str, Any]:
+    candidates: list[str] = []
+    stripped = raw_content.strip()
+    if stripped:
+        candidates.append(stripped)
+
+        if stripped.startswith("```") and stripped.endswith("```"):
+            lines = stripped.splitlines()
+            if len(lines) >= 3:
+                fenced_body = "\n".join(lines[1:-1]).strip()
+                if fenced_body:
+                    candidates.append(fenced_body)
+
+        start = stripped.find("{")
+        end = stripped.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            embedded_json = stripped[start:end + 1].strip()
+            if embedded_json:
+                candidates.append(embedded_json)
+
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+
+    raise ValueError(f"{provider} benchmark response did not contain a valid JSON object.")
+
+
+def _build_ollama_json_only_instruction(schema: dict[str, Any]) -> str:
+    compact_schema = json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
+    return " ".join(
+        [
+            "Return ONLY one valid JSON object.",
+            "Do not output markdown, headings, explanations, or prose outside JSON.",
+            "The JSON must exactly match this schema:",
+            compact_schema,
+            "If any field is unsupported, keep the JSON valid and use an empty string or empty array.",
+        ]
+    )
+
+
+def _failed_generation_payload(
+    artifact_id: str,
+    arm: str,
+    input_condition: str,
+    error_message: str,
+) -> dict[str, Any]:
+    trimmed_error = str(error_message or "generation_failed").strip()[:240]
+    return {
+        "artifact_id": artifact_id,
+        "arm": arm,
+        "input_condition": input_condition,
+        "explanation_short": "Benchmark generation failed to produce valid JSON.",
+        "explanation_full": (
+            "Benchmark generation failed before producing a grounded explanation. "
+            f"Error: {trimmed_error}"
+        ),
+        "claims": [],
+    }
+
+
+def _explanation_only_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "artifact_id": str(payload.get("artifact_id") or "").strip(),
+        "arm": str(payload.get("arm") or "").strip(),
+        "input_condition": str(payload.get("input_condition") or "").strip(),
+        "explanation_short": str(payload.get("explanation_short") or "").strip(),
+        "explanation_full": str(payload.get("explanation_full") or payload.get("explanation_short") or "").strip(),
+    }
+
+
+def _merge_explanation_and_claims(
+    explanation_payload: dict[str, Any],
+    claims_payload: dict[str, Any] | None,
+) -> dict[str, Any]:
+    claims = claims_payload.get("claims") if isinstance(claims_payload, dict) else []
+    if not isinstance(claims, list):
+        claims = []
+    merged = _explanation_only_payload(explanation_payload)
+    merged["claims"] = claims
+    return merged
+
+
+def _normalized_text(value: Any) -> str:
+    return str(value or "").strip().lower()
+
+
+def _source_variable_id_for_claim(
+    claim_payload: dict[str, Any],
+    variable_catalog: list[dict[str, Any]],
+) -> str | None:
+    claim_type = _normalized_text(claim_payload.get("claim_type"))
+    subject = _normalized_text(claim_payload.get("subject"))
+    metric = _normalized_text(claim_payload.get("metric"))
+    for variable in variable_catalog:
+        variable_claim_type = _normalized_text(variable.get("claim_type"))
+        variable_subject = _normalized_text(variable.get("subject"))
+        variable_metric = _normalized_text(variable.get("metric"))
+        if claim_type != variable_claim_type:
+            continue
+        if claim_type in {"metric_value", "rank_score"} and subject == variable_subject and metric == variable_metric:
+            return str(variable.get("source_variable_id") or "").strip() or None
+        if claim_type in {"feature_subset_optimum", "plateau"} and subject == variable_subject:
+            return str(variable.get("source_variable_id") or "").strip() or None
+        if claim_type == "ranking" and metric == variable_metric:
+            return str(variable.get("source_variable_id") or "").strip() or None
+        if claim_type in {"best_model", "top_feature"} and (
+            metric == variable_metric or not variable_metric
+        ):
+            return str(variable.get("source_variable_id") or "").strip() or None
+    return None
+
+
 class BaseLLMClient(ABC):
     name = "base"
     model_name: str | None = None
 
     @abstractmethod
-    def generate_json(self, prompt: str) -> dict[str, Any]:
-        """Return a JSON-like dictionary for the benchmark prompt."""
+    def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
+        """Return a JSON-like dictionary for the explanation-generation prompt."""
+
+    @abstractmethod
+    def extract_claims_json(self, prompt: str) -> dict[str, Any]:
+        """Return a JSON-like dictionary for the claim-extraction prompt."""
 
     def generate_artifact(
         self,
         inputs: ArtifactInputs,
+        variable_catalog: list[dict[str, Any]],
         arms: list[str],
         conditions: list[str],
     ) -> list[dict[str, Any]]:
         outputs: list[dict[str, Any]] = []
         for arm in arms:
             for condition in conditions:
-                prompt = build_generation_prompt(inputs=inputs, arm=arm, condition=condition)
-                outputs.append(self.generate_json(prompt))
+                try:
+                    explanation_payload = self.generate_explanation_json(
+                        build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+                    )
+                except Exception as exc:
+                    outputs.append(
+                        _failed_generation_payload(
+                            artifact_id=inputs.record.artifact_id,
+                            arm=arm,
+                            input_condition=condition,
+                            error_message=str(exc),
+                        )
+                    )
+                    continue
+
+                try:
+                    claims_payload = self.extract_claims_json(
+                        build_claim_extraction_prompt(
+                            artifact_id=inputs.record.artifact_id,
+                            arm=arm,
+                            input_condition=condition,
+                            explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                            explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                            primary_entities=inputs.record.primary_entities,
+                            variable_catalog=variable_catalog,
+                        )
+                    )
+                except Exception:
+                    claims_payload = {
+                        "artifact_id": inputs.record.artifact_id,
+                        "arm": arm,
+                        "input_condition": condition,
+                        "claims": [],
+                    }
+
+                outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
         return outputs
 
     def metadata(self) -> dict[str, Any]:
@@ -71,8 +239,50 @@ class FixtureLLMClient(BaseLLMClient):
 
     name = "fixture"
 
-    def generate_json(self, prompt: str) -> dict[str, Any]:
+    def __init__(self) -> None:
+        self._cached_generations: dict[tuple[str, str, str], dict[str, Any]] = {}
+
+    def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
         context = extract_prompt_context(prompt)
+        payload = self._full_generation_payload(context)
+        cache_key = (
+            str(payload.get("artifact_id") or ""),
+            str(payload.get("arm") or ""),
+            str(payload.get("input_condition") or ""),
+        )
+        self._cached_generations[cache_key] = copy.deepcopy(payload)
+        return _explanation_only_payload(payload)
+
+    def extract_claims_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_claim_extraction_context(prompt)
+        cache_key = (
+            str(context.get("artifact_id") or ""),
+            str(context.get("arm") or ""),
+            str(context.get("input_condition") or ""),
+        )
+        payload = copy.deepcopy(self._cached_generations.get(cache_key) or {})
+        raw_claims = payload.get("claims")
+        if not isinstance(raw_claims, list):
+            raw_claims = []
+
+        variable_catalog = list(context.get("allowed_variables") or [])
+        claims: list[dict[str, Any]] = []
+        for raw_claim in raw_claims:
+            if not isinstance(raw_claim, dict):
+                continue
+            claim = dict(raw_claim)
+            claim["source_variable_id"] = _source_variable_id_for_claim(claim, variable_catalog)
+            if claim["source_variable_id"]:
+                claims.append(claim)
+
+        return {
+            "artifact_id": str(context.get("artifact_id") or ""),
+            "arm": str(context.get("arm") or ""),
+            "input_condition": str(context.get("input_condition") or ""),
+            "claims": claims,
+        }
+
+    def _full_generation_payload(self, context: dict[str, Any]) -> dict[str, Any]:
         if context.get("chart_asset"):
             return self._chart_output(context)
         artifact_type = str(context["artifact_type"])
@@ -857,11 +1067,12 @@ def _claim_schema() -> dict[str, Any]:
         "properties": {
             "claim_id": {"type": "string"},
             "claim_text": {"type": "string"},
-            "claim_type": {"type": "string"},
+            "claim_type": {"type": "string", "enum": list(CANONICAL_CLAIM_TYPES)},
             "span_category": {"type": "string"},
             "is_numeric": {"type": "boolean"},
             "requires_grounding_from": {"type": "string"},
             "confidence": {"type": "number"},
+            "source_variable_id": {"type": ["string", "null"]},
             "subject": {"type": ["string", "null"]},
             "predicate": {"type": ["string", "null"]},
             "object": scalar_or_null,
@@ -883,6 +1094,7 @@ def _claim_schema() -> dict[str, Any]:
             "is_numeric",
             "requires_grounding_from",
             "confidence",
+            "source_variable_id",
             "subject",
             "predicate",
             "object",
@@ -897,7 +1109,7 @@ def _claim_schema() -> dict[str, Any]:
     }
 
 
-def _generation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
     return {
         "type": "object",
         "properties": {
@@ -906,6 +1118,25 @@ def _generation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -
             "input_condition": {"type": "string", "enum": allowed_conditions},
             "explanation_short": {"type": "string"},
             "explanation_full": {"type": "string"},
+        },
+        "required": [
+            "artifact_id",
+            "arm",
+            "input_condition",
+            "explanation_short",
+            "explanation_full",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _claim_extraction_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "artifact_id": {"type": "string"},
+            "arm": {"type": "string", "enum": allowed_arms},
+            "input_condition": {"type": "string", "enum": allowed_conditions},
             "claims": {
                 "type": "array",
                 "items": _claim_schema(),
@@ -915,44 +1146,53 @@ def _generation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -
             "artifact_id",
             "arm",
             "input_condition",
-            "explanation_short",
-            "explanation_full",
             "claims",
         ],
         "additionalProperties": False,
     }
 
 
-def _single_generation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _single_explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
     return {
         "type": "json_schema",
         "json_schema": {
-            "name": "benchmark_generation",
+            "name": "benchmark_explanation",
             "strict": True,
-            "schema": _generation_schema(allowed_arms, allowed_conditions),
+            "schema": _explanation_schema(allowed_arms, allowed_conditions),
         },
     }
 
 
-def _batch_generation_schema(
+def _single_claim_extraction_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "benchmark_claim_extraction",
+            "strict": True,
+            "schema": _claim_extraction_schema(allowed_arms, allowed_conditions),
+        },
+    }
+
+
+def _batch_explanation_schema(
     *,
-    generation_count: int,
+    explanation_count: int,
     allowed_arms: list[str],
     allowed_conditions: list[str],
 ) -> dict[str, Any]:
     return {
         "type": "json_schema",
         "json_schema": {
-            "name": "benchmark_generation_batch",
+            "name": "benchmark_explanation_batch",
             "strict": True,
             "schema": {
                 "type": "object",
                 "properties": {
                     "generations": {
                         "type": "array",
-                        "items": _generation_schema(allowed_arms, allowed_conditions),
-                        "minItems": generation_count,
-                        "maxItems": generation_count,
+                        "items": _explanation_schema(allowed_arms, allowed_conditions),
+                        "minItems": explanation_count,
+                        "maxItems": explanation_count,
                     }
                 },
                 "required": ["generations"],
@@ -960,6 +1200,306 @@ def _batch_generation_schema(
             },
         },
     }
+
+
+class OllamaLLMClient(BaseLLMClient):
+    """Local Ollama benchmark client using one request per arm-condition output."""
+
+    name = "ollama"
+
+    def __init__(
+        self,
+        *,
+        model: str | None = None,
+        timeout_seconds: int = OLLAMA_BENCHMARK_TIMEOUT_SECONDS,
+    ) -> None:
+        from dotenv import load_dotenv
+
+        env_path = Path(__file__).resolve().parents[1] / ".env"
+        load_dotenv(dotenv_path=env_path, override=False)
+        self.model_name = str(
+            model
+            or os.getenv("OLLAMA_BENCHMARK_MODEL")
+            or os.getenv("OLLAMA_REPORT_MODEL")
+            or OLLAMA_BENCHMARK_MODEL
+        ).strip()
+        if not self.model_name:
+            raise RuntimeError("OLLAMA_BENCHMARK_MODEL is not configured for the benchmark client.")
+        self.timeout_seconds = max(60, int(timeout_seconds))
+
+    def _call_ollama(self, payload: dict[str, Any]) -> dict[str, Any]:
+        import requests
+
+        chat_url = f"{OLLAMA_BASE_URL}/api/chat"
+
+        def _post(chat_payload: dict[str, Any]) -> dict[str, Any]:
+            response = requests.post(
+                chat_url,
+                headers={"Content-Type": "application/json"},
+                json=chat_payload,
+                timeout=self.timeout_seconds,
+            )
+            response.raise_for_status()
+            return response.json()
+
+        def _repair(raw_content: str, original_payload: dict[str, Any]) -> dict[str, Any]:
+            repair_schema = dict(original_payload.get("format") or {})
+            repair_payload = {
+                "model": original_payload["model"],
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Convert the provided content into one valid JSON object only. "
+                            "Do not add markdown or commentary."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            _build_ollama_json_only_instruction(repair_schema)
+                            + "\n\nContent to convert:\n"
+                            + raw_content
+                        ),
+                    },
+                ],
+                "stream": False,
+                "format": repair_schema,
+                "options": {
+                    "temperature": 0,
+                    "num_predict": max(
+                        int((original_payload.get("options") or {}).get("num_predict") or 1800),
+                        1800,
+                    ),
+                    "num_ctx": max(
+                        int((original_payload.get("options") or {}).get("num_ctx") or OLLAMA_BENCHMARK_NUM_CTX),
+                        8192,
+                    ),
+                },
+            }
+            repair_data = _post(repair_payload)
+            repair_content = ((repair_data.get("message") or {}).get("content") or "").strip()
+            if not repair_content:
+                raise ValueError("Ollama benchmark repair response returned empty content.")
+            return _extract_json_object(repair_content, "Ollama")
+
+        last_error: Exception | None = None
+        for attempt_index in range(OLLAMA_BENCHMARK_MAX_RETRIES):
+            request_payload = copy.deepcopy(payload)
+            if attempt_index > 0 and request_payload.get("messages"):
+                retry_message = (
+                    "Your previous response was empty or invalid. "
+                    "Return only one valid JSON object that matches the requested schema."
+                )
+                first_message = dict(request_payload["messages"][0])
+                first_message["content"] = f"{first_message.get('content', '')} {retry_message}".strip()
+                request_payload["messages"][0] = first_message
+
+            try:
+                data = _post(request_payload)
+                message = data.get("message") or {}
+                content = message.get("content")
+                if not isinstance(content, str):
+                    raise ValueError("Ollama benchmark response did not contain a text JSON payload.")
+                if not content.strip():
+                    raise ValueError("Ollama benchmark response returned empty content.")
+                try:
+                    return _extract_json_object(content, "Ollama")
+                except ValueError:
+                    return _repair(content, request_payload)
+            except Exception as exc:
+                last_error = exc
+
+        if last_error is not None:
+            raise last_error
+        raise ValueError("Ollama benchmark request failed for an unknown reason.")
+
+    def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        schema = _single_explanation_schema(
+            allowed_arms=[str(context.get("arm") or "A")],
+            allowed_conditions=[str(context.get("input_condition") or "table_only")],
+        )["json_schema"]["schema"]
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " Unsupported claims must be omitted rather than guessed."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": 1800,
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        return self._call_ollama(payload)
+
+    def extract_claims_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_claim_extraction_context(prompt)
+        schema = _single_claim_extraction_schema(
+            allowed_arms=[str(context.get("arm") or "A")],
+            allowed_conditions=[str(context.get("input_condition") or "table_only")],
+        )["json_schema"]["schema"]
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " Extract only the listed standardized variables that are explicitly present in the explanation."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": 1800,
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        return self._call_ollama(payload)
+
+    def generate_artifact(
+        self,
+        inputs: ArtifactInputs,
+        variable_catalog: list[dict[str, Any]],
+        arms: list[str],
+        conditions: list[str],
+    ) -> list[dict[str, Any]]:
+        requested_outputs: list[dict[str, Any]] = []
+        requested_pairs: list[tuple[str, str]] = []
+        for arm in arms:
+            for condition in conditions:
+                requested_pairs.append((arm, condition))
+                requested_outputs.append(
+                    {
+                        "arm": arm,
+                        "input_condition": condition,
+                        "arm_instruction": ARM_INSTRUCTIONS.get(arm, ARM_INSTRUCTIONS["A"]),
+                        "context": build_prompt_context(inputs=inputs, arm=arm, condition=condition),
+                    }
+                )
+
+        schema = _batch_explanation_schema(
+            explanation_count=len(requested_outputs),
+            allowed_arms=arms,
+            allowed_conditions=conditions,
+        )["json_schema"]["schema"]
+        payload = {
+            "task": (
+                "Generate one explanation output for each requested arm-condition pair. "
+                "Each output must stay artifact-grounded and contain explanation text only."
+            ),
+            "rules": [
+                "Table/json evidence outranks chart evidence.",
+                "Chart evidence outranks summary text.",
+                "Do not use llm_explanations.json as ground truth.",
+                "Keep explanation_short to one sentence.",
+                "Keep explanation_full concise: roughly 60-100 words per output.",
+            ],
+            "requested_outputs": requested_outputs,
+        }
+        request_payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " You generate artifact-grounded ML explanations for offline benchmarking. "
+                        + "Keep the explanation grounded in the artifact context."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(payload, ensure_ascii=False),
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": max(2200, 1200 * len(requested_outputs)),
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        explanations_by_pair: dict[tuple[str, str], dict[str, Any]] = {}
+
+        try:
+            parsed = self._call_ollama(request_payload)
+            generations = parsed.get("generations")
+            if not isinstance(generations, list):
+                raise ValueError("Ollama benchmark response did not contain a generations array.")
+            for generation in generations:
+                if not isinstance(generation, dict):
+                    continue
+                arm = str(generation.get("arm") or "").strip()
+                condition = str(generation.get("input_condition") or "").strip()
+                if (arm, condition) not in requested_pairs:
+                    continue
+                explanations_by_pair[(arm, condition)] = generation
+        except Exception:
+            explanations_by_pair = {}
+
+        for arm, condition in requested_pairs:
+            if (arm, condition) in explanations_by_pair:
+                continue
+            prompt = build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+            try:
+                explanations_by_pair[(arm, condition)] = self.generate_explanation_json(prompt)
+            except Exception as exc:
+                explanations_by_pair[(arm, condition)] = _failed_generation_payload(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    error_message=str(exc),
+                )
+
+        outputs: list[dict[str, Any]] = []
+        for arm, condition in requested_pairs:
+            explanation_payload = explanations_by_pair[(arm, condition)]
+            if not explanation_payload.get("explanation_full"):
+                outputs.append(_merge_explanation_and_claims(explanation_payload, None))
+                continue
+            try:
+                claims_payload = self.extract_claims_json(
+                    build_claim_extraction_prompt(
+                        artifact_id=inputs.record.artifact_id,
+                        arm=arm,
+                        input_condition=condition,
+                        explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                        explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                        primary_entities=inputs.record.primary_entities,
+                        variable_catalog=variable_catalog,
+                    )
+                )
+            except Exception:
+                claims_payload = {
+                    "artifact_id": inputs.record.artifact_id,
+                    "arm": arm,
+                    "input_condition": condition,
+                    "claims": [],
+                }
+            outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
+
+        return outputs
 
 
 class OpenAILLMClient(BaseLLMClient):
@@ -1078,7 +1618,7 @@ class OpenAILLMClient(BaseLLMClient):
             f"Benchmark OpenAI request failed after {OPENAI_BENCHMARK_MAX_RETRIES} attempts: {last_error}"
         )
 
-    def generate_json(self, prompt: str) -> dict[str, Any]:
+    def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
         context = extract_prompt_context(prompt)
         payload = {
             "model": self.model_name,
@@ -1087,7 +1627,7 @@ class OpenAILLMClient(BaseLLMClient):
                     "role": "system",
                     "content": (
                         "You generate artifact-grounded ML explanations for offline benchmarking. "
-                        "Return strict JSON only. Unsupported claims must be omitted rather than hedged."
+                        "Return strict JSON only."
                     ),
                 },
                 {
@@ -1095,7 +1635,34 @@ class OpenAILLMClient(BaseLLMClient):
                     "content": prompt,
                 },
             ],
-            "response_format": _single_generation_schema(
+            "response_format": _single_explanation_schema(
+                allowed_arms=[str(context.get("arm") or "A")],
+                allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            ),
+            "reasoning_effort": "low",
+            "verbosity": "low",
+            "max_completion_tokens": 1800,
+        }
+        return self._call_openai(payload)
+
+    def extract_claims_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_claim_extraction_context(prompt)
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You extract standardized benchmark variables from explanations. "
+                        "Return strict JSON only. Extract only variables explicitly present in the explanation."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "response_format": _single_claim_extraction_schema(
                 allowed_arms=[str(context.get("arm") or "A")],
                 allowed_conditions=[str(context.get("input_condition") or "table_only")],
             ),
@@ -1108,12 +1675,15 @@ class OpenAILLMClient(BaseLLMClient):
     def generate_artifact(
         self,
         inputs: ArtifactInputs,
+        variable_catalog: list[dict[str, Any]],
         arms: list[str],
         conditions: list[str],
     ) -> list[dict[str, Any]]:
         requested_outputs: list[dict[str, Any]] = []
+        requested_pairs: list[tuple[str, str]] = []
         for arm in arms:
             for condition in conditions:
+                requested_pairs.append((arm, condition))
                 requested_outputs.append(
                     {
                         "arm": arm,
@@ -1126,16 +1696,14 @@ class OpenAILLMClient(BaseLLMClient):
         payload = {
             "task": (
                 "Generate one explanation output for each requested arm-condition pair. "
-                "Each output must stay artifact-grounded and include explicit claims."
+                "Each output must stay artifact-grounded and contain explanation text only."
             ),
             "rules": [
                 "Table/json evidence outranks chart evidence.",
                 "Chart evidence outranks summary text.",
                 "Do not use llm_explanations.json as ground truth.",
-                "Unsupported claims are worse than omissions.",
                 "Keep explanation_short to one sentence.",
                 "Keep explanation_full concise: roughly 60-100 words per output.",
-                "Prefer 2-4 claims per output, but include enough claims to cover the strongest supported facts.",
             ],
             "requested_outputs": requested_outputs,
         }
@@ -1146,7 +1714,7 @@ class OpenAILLMClient(BaseLLMClient):
                     "role": "system",
                     "content": (
                         "You generate artifact-grounded ML explanations for offline benchmarking. "
-                        "Return strict JSON only. Claims must be evidence-backed."
+                        "Return strict JSON only."
                     ),
                 },
                 {
@@ -1154,8 +1722,8 @@ class OpenAILLMClient(BaseLLMClient):
                     "content": json.dumps(payload, ensure_ascii=False),
                 },
             ],
-            "response_format": _batch_generation_schema(
-                generation_count=len(requested_outputs),
+            "response_format": _batch_explanation_schema(
+                explanation_count=len(requested_outputs),
                 allowed_arms=arms,
                 allowed_conditions=conditions,
             ),
@@ -1163,8 +1731,60 @@ class OpenAILLMClient(BaseLLMClient):
             "verbosity": "low",
             "max_completion_tokens": max(2200, 1200 * len(requested_outputs)),
         }
-        parsed = self._call_openai(request_payload)
-        generations = parsed.get("generations")
-        if not isinstance(generations, list):
-            raise ValueError("OpenAI benchmark response did not contain a generations array.")
-        return [generation for generation in generations if isinstance(generation, dict)]
+        explanations_by_pair: dict[tuple[str, str], dict[str, Any]] = {}
+        try:
+            parsed = self._call_openai(request_payload)
+            generations = parsed.get("generations")
+            if not isinstance(generations, list):
+                raise ValueError("OpenAI benchmark response did not contain a generations array.")
+            for generation in generations:
+                if not isinstance(generation, dict):
+                    continue
+                arm = str(generation.get("arm") or "").strip()
+                condition = str(generation.get("input_condition") or "").strip()
+                if (arm, condition) not in requested_pairs:
+                    continue
+                explanations_by_pair[(arm, condition)] = generation
+        except Exception:
+            explanations_by_pair = {}
+
+        for arm, condition in requested_pairs:
+            if (arm, condition) in explanations_by_pair:
+                continue
+            try:
+                explanations_by_pair[(arm, condition)] = self.generate_explanation_json(
+                    build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+                )
+            except Exception as exc:
+                explanations_by_pair[(arm, condition)] = _failed_generation_payload(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    error_message=str(exc),
+                )
+
+        outputs: list[dict[str, Any]] = []
+        for arm, condition in requested_pairs:
+            explanation_payload = explanations_by_pair[(arm, condition)]
+            try:
+                claims_payload = self.extract_claims_json(
+                    build_claim_extraction_prompt(
+                        artifact_id=inputs.record.artifact_id,
+                        arm=arm,
+                        input_condition=condition,
+                        explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                        explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                        primary_entities=inputs.record.primary_entities,
+                        variable_catalog=variable_catalog,
+                    )
+                )
+            except Exception:
+                claims_payload = {
+                    "artifact_id": inputs.record.artifact_id,
+                    "arm": arm,
+                    "input_condition": condition,
+                    "claims": [],
+                }
+            outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
+
+        return outputs

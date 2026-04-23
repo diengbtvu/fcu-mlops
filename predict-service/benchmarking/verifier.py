@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
-from .schemas import Claim, ClaimVerification, GoldArtifact
+from .schemas import Claim, ClaimVerification, GoldArtifact, GroundTruthFact
 
 STATUS_SUPPORTED = "supported"
 STATUS_PARTIAL = "partially_supported"
 STATUS_CONTRADICTED = "contradicted"
 STATUS_UNVERIFIABLE = "unverifiable"
+PAIR_SUBJECT_PATTERN = re.compile(r"^(?P<left>.+?)\s+vs\s+(?P<right>.+?)$", re.IGNORECASE)
 
 
 def _as_float(value: Any) -> float | None:
@@ -21,43 +23,160 @@ def _metric_alias(metric: str | None) -> str | None:
     if not metric:
         return None
     lowered = metric.strip().lower()
+    lowered = lowered.replace("–", "-").replace("—", "-")
+    lowered = re.sub(r"[_-]+", " ", lowered)
+    lowered = re.sub(r"\s+", " ", lowered).strip()
     return {
         "r2": "r2_score",
         "r²": "r2_score",
+        "r2 score": "r2_score",
+        "r squared": "r2_score",
+        "r-squared": "r2_score",
         "r2_score": "r2_score",
         "best_r2": "r2_score",
         "mse": "mse",
         "best_mse": "mse",
         "rmse": "rmse",
         "mae": "mae",
+        "mean absolute error": "mae",
         "score": "gra_score",
+        "gra score": "gra_score",
         "gra_score": "gra_score",
         "importance": "importance",
+        "feature importance": "importance",
         "mean_abs_shap": "mean_abs_shap",
+        "mean abs shap": "mean_abs_shap",
+        "shap": "mean_abs_shap",
         "target_correlation": "target_correlation",
+        "target correlation": "target_correlation",
+        "top feature correlation": "target_correlation",
         "correlation": "correlation",
+        "correlation strength": "correlation",
+        "correlation coefficient": "correlation",
         "corr(pred,actual)": "pred_actual_correlation",
         "corr(pred, actual)": "pred_actual_correlation",
+        "pred actual correlation": "pred_actual_correlation",
+        "predicted vs actual correlation": "pred_actual_correlation",
+        "predicted-vs-actual correlation": "pred_actual_correlation",
+        "correlation between predicted and actual values": "pred_actual_correlation",
         "pred_actual_correlation": "pred_actual_correlation",
+        "sequence correlation": "sequence_correlation",
         "sequence_correlation": "sequence_correlation",
         "slope": "linear_fit_slope",
+        "linear fit slope": "linear_fit_slope",
         "linear_fit_slope": "linear_fit_slope",
         "intercept": "linear_fit_intercept",
         "linear_fit_intercept": "linear_fit_intercept",
         "residual_mean": "residual_mean",
+        "residual std": "residual_std",
+        "residual standard deviation": "residual_std",
         "residual_std": "residual_std",
+        "mean abs residual": "mean_abs_residual",
         "mean_abs_residual": "mean_abs_residual",
+        "max abs residual": "max_abs_residual",
+        "max absolute residual": "max_abs_residual",
         "max_abs_residual": "max_abs_residual",
         "p95_abs_residual": "p95_abs_residual",
+        "p95 abs residual": "p95_abs_residual",
         "actual_peak_index": "actual_peak_index",
         "actual_peak_value": "actual_peak_value",
         "predicted_peak_index": "predicted_peak_index",
         "predicted_peak_value": "predicted_peak_value",
+        "mean abs gap": "mean_abs_gap",
         "mean_abs_gap": "mean_abs_gap",
+        "max abs gap": "max_abs_gap",
         "max_abs_gap": "max_abs_gap",
         "mean": "mean",
+        "average": "mean",
+        "standard deviation": "std",
         "std": "std",
     }.get(lowered, lowered)
+
+
+def _canonical_model_name(value: str | None) -> str | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    lowered = text.lower()
+    if "random forest" in lowered or re.search(r"\brf\b", text, re.IGNORECASE):
+        return "RF"
+    if "xgboost" in lowered or "xg boost" in lowered:
+        return "XGBoost"
+    if "support vector" in lowered or re.search(r"\bsvm\b", text, re.IGNORECASE):
+        return "SVM"
+    if "decision tree" in lowered or "deep tree" in lowered or re.search(r"\bdt\b", text, re.IGNORECASE):
+        return "DT"
+    if "k nearest" in lowered or re.search(r"\bknn\b", text, re.IGNORECASE):
+        return "KNN"
+    return None
+
+
+def _canonical_subject(value: Any) -> str | None:
+    text = str(value or "").strip().strip(".,;:")
+    if not text:
+        return None
+    model_name = _canonical_model_name(text)
+    if model_name:
+        return model_name
+    text = re.sub(r"^\s*the\s+", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s+model\b", "", text, flags=re.IGNORECASE).strip()
+    return text or None
+
+
+def _subject_candidates(claim: Claim) -> list[str]:
+    candidates: list[str] = []
+    for raw_value in (claim.subject, claim.object):
+        subject = _canonical_subject(raw_value)
+        if subject and subject not in candidates:
+            candidates.append(subject)
+
+    match = PAIR_SUBJECT_PATTERN.match(str(claim.subject or "").strip())
+    if match:
+        left = _canonical_subject(match.group("left"))
+        right = _canonical_subject(match.group("right"))
+        if left and right:
+            reversed_pair = f"{right} vs {left}"
+            if reversed_pair not in candidates:
+                candidates.append(reversed_pair)
+
+    return candidates
+
+
+def _metric_candidates(claim: Claim) -> list[str]:
+    candidates: list[str] = []
+    primary_metric = _metric_alias(claim.metric)
+    if primary_metric:
+        candidates.append(primary_metric)
+
+    context = " ".join(part for part in (claim.metric, claim.predicate, claim.claim_text) if part).lower()
+    if "sequence correlation" in context and "sequence_correlation" not in candidates:
+        candidates.append("sequence_correlation")
+    if any(
+        token in context
+        for token in (
+            "corr(pred,actual)",
+            "corr(pred, actual)",
+            "pred actual correlation",
+            "predicted vs actual",
+            "predicted-vs-actual",
+            "predicted and actual",
+            "pred_actual",
+        )
+    ) and "pred_actual_correlation" not in candidates:
+        candidates.append("pred_actual_correlation")
+    if any(
+        token in context
+        for token in (
+            "target correlation",
+            "top feature correlation",
+            "correlation with hpr",
+            "with hpr",
+            "target variable",
+        )
+    ) and "target_correlation" not in candidates:
+        candidates.append("target_correlation")
+
+    return candidates
 
 
 def _numeric_status(
@@ -97,11 +216,20 @@ def _verification(
     )
 
 
+def _fact_by_source_variable_id(gold: GoldArtifact, claim: Claim) -> list[GroundTruthFact]:
+    source_variable_id = str(claim.source_variable_id or "").strip()
+    if not source_variable_id:
+        return []
+    return [fact for fact in gold.ground_truth_facts if fact.fact_id == source_variable_id]
+
+
 def _verify_best_model(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
     candidate = str(claim.object or claim.subject or "").strip()
     if not candidate:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Best-model claim lacks a model name.")
-    facts = [fact for fact in gold.ground_truth_facts if fact.fact_type == "best_model"]
+    facts = _fact_by_source_variable_id(gold, claim) or [
+        fact for fact in gold.ground_truth_facts if fact.fact_type == "best_model"
+    ]
     if not facts:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="No best-model fact found.")
     fact = facts[0]
@@ -111,19 +239,22 @@ def _verify_best_model(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
 
 
 def _verify_metric_value(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
-    metric = _metric_alias(claim.metric)
+    metrics = _metric_candidates(claim)
+    subjects = _subject_candidates(claim)
     claim_value = _as_float(claim.value)
     if claim_value is None:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Numeric claim is missing a numeric value.")
 
-    candidate_facts = [
-        fact
-        for fact in gold.ground_truth_facts
-        if fact.subject == claim.subject
-        and fact.value is not None
-        and fact.fact_type in {"metric_value", "rank_score", "best_r2", "best_mse"}
-        and _metric_alias(fact.predicate) == metric
-    ]
+    candidate_facts = _fact_by_source_variable_id(gold, claim)
+    if not candidate_facts:
+        candidate_facts = [
+            fact
+            for fact in gold.ground_truth_facts
+            if fact.subject in subjects
+            and fact.value is not None
+            and fact.fact_type in {"metric_value", "rank_score", "best_r2", "best_mse"}
+            and _metric_alias(fact.predicate) in metrics
+        ]
 
     if not candidate_facts:
         return _verification(
@@ -154,7 +285,7 @@ def _verify_ranking(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Ranking claim needs at least two ordered items.")
 
     metric = _metric_alias(claim.metric)
-    candidate_facts = [
+    candidate_facts = _fact_by_source_variable_id(gold, claim) or [
         fact for fact in gold.ground_truth_facts if fact.fact_type == "ranking"
     ]
     if metric:
@@ -203,7 +334,9 @@ def _verify_top_feature(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
     if not candidate:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Top-feature claim lacks a feature name.")
     metric = _metric_alias(claim.metric or claim.predicate)
-    facts = [fact for fact in gold.ground_truth_facts if fact.fact_type == "top_feature"]
+    facts = _fact_by_source_variable_id(gold, claim) or [
+        fact for fact in gold.ground_truth_facts if fact.fact_type == "top_feature"
+    ]
     if metric:
         metric_facts = [fact for fact in facts if _metric_alias(fact.predicate) == metric]
         if metric_facts:
@@ -228,7 +361,7 @@ def _verify_feature_count_fact(
 ) -> ClaimVerification:
     if claim.feature_count is None:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Claim lacks a feature count.")
-    facts = [
+    facts = _fact_by_source_variable_id(gold, claim) or [
         fact
         for fact in gold.ground_truth_facts
         if fact.fact_type == fact_type and (claim.subject is None or fact.subject == claim.subject)

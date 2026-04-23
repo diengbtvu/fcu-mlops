@@ -6,14 +6,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .baseline_adapter import load_llm_baseline_generations
+from .chart_reporting import write_per_chart_benchmark_outputs
 from .generator import generate_explanations
 from .gold_builders import build_gold_artifacts
 from .io_utils import bundle_workspace, ensure_output_layout, slugify, write_csv_rows, write_json, write_jsonl
-from .llm_client import FixtureLLMClient, OpenAILLMClient
+from .llm_client import FixtureLLMClient, OllamaLLMClient, OpenAILLMClient
 from .manifest import build_manifest, load_artifact_inputs
 from .metrics import build_leaderboard, compute_artifact_scores
-from .schemas import BASELINE_ARM, SUPPORTED_ARMS, SUPPORTED_CONDITIONS
+from .schemas import SUPPORTED_ARMS, SUPPORTED_CONDITIONS
 from .verifier import verify_claims
 
 DEFAULT_ARMS = "A,B,C"
@@ -61,14 +61,8 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Use the bundled synthetic fixture bundle when --bundle-path is omitted.",
     )
     parser.add_argument(
-        "--llm-baseline",
-        action=argparse.BooleanOptionalAction,
-        default=True,
-        help="Ingest llm_explanations.json as the official baseline arm when present.",
-    )
-    parser.add_argument(
         "--client",
-        choices=("fixture", "openai"),
+        choices=("fixture", "openai", "ollama"),
         default="fixture",
         help="LLM client for benchmark generations. Default: fixture.",
     )
@@ -108,7 +102,6 @@ def _metadata_payload(
     warnings: list[str],
     manifest_count: int,
     generation_count: int,
-    baseline_enabled: bool,
     client_metadata: dict[str, Any],
 ) -> dict[str, Any]:
     return {
@@ -120,7 +113,6 @@ def _metadata_payload(
         "conditions": conditions,
         "client": client_metadata.get("client"),
         "client_model": client_metadata.get("model"),
-        "baseline_arm": BASELINE_ARM if baseline_enabled else None,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "artifact_count": manifest_count,
         "generation_count": generation_count,
@@ -133,6 +125,8 @@ def _build_llm_client(client_name: str) -> Any:
         return FixtureLLMClient()
     if client_name == "openai":
         return OpenAILLMClient()
+    if client_name == "ollama":
+        return OllamaLLMClient()
     raise ValueError(f"Unsupported benchmark client: {client_name}")
 
 
@@ -216,22 +210,21 @@ def main(argv: list[str] | None = None) -> int:
             command = "run" if args.command == "export" else args.command
             generation_count = 0
             artifact_scores = []
-            effective_arms = [arm for arm in arms if arm != BASELINE_ARM]
-            baseline_requested = bool(args.llm_baseline or BASELINE_ARM in arms)
-            baseline_enabled = False
+            effective_arms = list(arms)
 
             if command in {"run"}:
                 gold_by_artifact = {gold.artifact_id: gold for gold in gold_artifacts}
                 for record in records:
                     inputs = load_artifact_inputs(record, workspace.bundle_dir)
+                    gold = gold_by_artifact[record.artifact_id]
                     generations = generate_explanations(
                         inputs=inputs,
+                        gold=gold,
                         arms=effective_arms,
                         conditions=conditions,
                         client=client,
                     )
                     generation_count += len(generations)
-                    gold = gold_by_artifact[record.artifact_id]
                     for generation in generations:
                         _persist_generation_outputs(
                             generation=generation,
@@ -239,37 +232,6 @@ def main(argv: list[str] | None = None) -> int:
                             layout=layout,
                             artifact_scores=artifact_scores,
                         )
-
-                if baseline_requested:
-                    baseline_path = workspace.bundle_dir / "llm_explanations.json"
-                    if not baseline_path.exists():
-                        if BASELINE_ARM in arms:
-                            raise FileNotFoundError(
-                                f"Explicit baseline arm requested but file is missing: {baseline_path}"
-                            )
-                        warnings.append(
-                            f"Baseline file not found at {baseline_path}; skipping {BASELINE_ARM}."
-                        )
-                    else:
-                        baseline_generations, baseline_warnings = load_llm_baseline_generations(
-                            workspace.bundle_dir,
-                            records,
-                        )
-                        warnings.extend(baseline_warnings)
-                        generation_count += len(baseline_generations)
-                        baseline_enabled = bool(baseline_generations)
-                        if baseline_path.exists() and not baseline_generations:
-                            warnings.append(
-                                f"{baseline_path.name} was present but produced no benchmarkable baseline generations."
-                            )
-                        for generation in baseline_generations:
-                            gold = gold_by_artifact[generation.artifact_id]
-                            _persist_generation_outputs(
-                                generation=generation,
-                                gold=gold,
-                                layout=layout,
-                                artifact_scores=artifact_scores,
-                            )
 
                 leaderboard = build_leaderboard(artifact_scores)
                 write_json(
@@ -280,6 +242,10 @@ def main(argv: list[str] | None = None) -> int:
                     },
                 )
                 write_csv_rows(layout["scores"] / "leaderboard.csv", leaderboard)
+                write_per_chart_benchmark_outputs(
+                    layout["root"],
+                    artifact_scores=artifact_scores,
+                )
 
             write_json(
                 layout["root"] / "run_metadata.json",
@@ -288,12 +254,11 @@ def main(argv: list[str] | None = None) -> int:
                     bundle_path=bundle_path,
                     resolved_bundle_dir=workspace.bundle_dir,
                     output_dir=output_dir,
-                    arms=effective_arms + ([BASELINE_ARM] if baseline_enabled else []),
+                    arms=effective_arms,
                     conditions=conditions,
                     warnings=warnings,
                     manifest_count=len(records),
                     generation_count=generation_count,
-                    baseline_enabled=baseline_enabled,
                     client_metadata=client.metadata(),
                 ),
             )

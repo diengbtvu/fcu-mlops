@@ -8,7 +8,6 @@ ArtifactType = str
 InputCondition = Literal["table_only", "image_table", "image_table_summary", "image_only"]
 ArmName = Literal["A", "B", "C", "D"]
 VerificationStatus = Literal["supported", "partially_supported", "contradicted", "unverifiable"]
-BASELINE_ARM = "BASELINE_LLM"
 
 SUPPORTED_ARTIFACT_TYPES: tuple[str, ...] = (
     "model_comparison/main",
@@ -21,7 +20,17 @@ SUPPORTED_CONDITIONS: tuple[str, ...] = (
     "image_table_summary",
     "image_only",
 )
-SUPPORTED_ARMS: tuple[str, ...] = ("A", "B", "C", "D", BASELINE_ARM)
+SUPPORTED_ARMS: tuple[str, ...] = ("A", "B", "C", "D")
+CANONICAL_CLAIM_TYPES: tuple[str, ...] = (
+    "best_model",
+    "metric_value",
+    "ranking",
+    "top_feature",
+    "feature_subset_optimum",
+    "plateau",
+    "rank_score",
+    "freeform",
+)
 
 
 def to_primitive(value: Any) -> Any:
@@ -121,6 +130,7 @@ class Claim:
     is_numeric: bool
     requires_grounding_from: str
     confidence: float
+    source_variable_id: str | None = None
     subject: str | None = None
     predicate: str | None = None
     object: Any = None

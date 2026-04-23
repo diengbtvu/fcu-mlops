@@ -4,6 +4,7 @@ from collections import defaultdict
 from statistics import mean
 
 from .schemas import ArtifactScore, Claim, ClaimVerification, GoldArtifact
+from .variable_catalog import allowed_variable_facts
 
 STATUS_WEIGHT = {
     "supported": 1.0,
@@ -49,7 +50,8 @@ def compute_artifact_scores(
     precision_numerator = sum(STATUS_WEIGHT[verification.status] for verification in verifications)
     fact_precision = precision_numerator / claim_count
 
-    fact_coverage = {fact.fact_id: 0.0 for fact in gold.ground_truth_facts}
+    benchmark_facts = allowed_variable_facts(gold)
+    fact_coverage = {fact.fact_id: 0.0 for fact in benchmark_facts}
     for verification in verifications:
         weight = STATUS_WEIGHT[verification.status]
         for fact_id in verification.matched_fact_ids:
@@ -70,9 +72,10 @@ def compute_artifact_scores(
         / claim_count
     )
 
-    salient_denominator = len(gold.salient_facts)
+    salient_fact_ids = [fact_id for fact_id in gold.salient_facts if fact_id in fact_coverage]
+    salient_denominator = len(salient_fact_ids)
     coverage_of_salient_facts = (
-        sum(fact_coverage.get(fact_id, 0.0) for fact_id in gold.salient_facts) / salient_denominator
+        sum(fact_coverage.get(fact_id, 0.0) for fact_id in salient_fact_ids) / salient_denominator
         if salient_denominator
         else 0.0
     )
