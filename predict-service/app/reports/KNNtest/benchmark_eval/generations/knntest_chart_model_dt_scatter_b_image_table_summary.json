@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:model_dt_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Decision Tree (DT) model shows moderate performance with an R2 of 0.5605, an RMSE of 0.1755, and an MAE of 0.1086, suggesting room for improvement.",
+  "explanation_full": "Observations from the scatter plot diagnostics indicate that the Decision Tree (DT) model achieved an R2 score of 0.5605, which suggests a moderate level of variance explained. The model's error metrics are an RMSE of 0.1755 and an MAE of 0.1086. The correlation between predicted and actual values is 0.787161, showing a strong positive trend. Interpretation suggests that while the DT model captures a significant portion of the relationship, the residual error (RMSE) indicates considerable variability. This variability might be due to the inherent complexity of the data or the model's inability to capture non-linear patterns effectively.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "achieved R2 score",
+      "object": 0.5605,
+      "metric": "r2_score",
+      "value": 0.5605,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The Decision Tree (DT) model had an RMSE of 0.1755.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "had RMSE",
+      "object": 0.1755,
+      "metric": "rmse",
+      "value": 0.1755,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The correlation between predicted and actual values for DT was 0.787161.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "correlation (pred, actual)",
+      "object": 0.787161,
+      "metric": "correlation",
+      "value": 0.787161,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

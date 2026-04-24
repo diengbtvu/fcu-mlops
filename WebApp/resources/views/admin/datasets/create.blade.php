@@ -11,7 +11,8 @@
 @section('content')
 @php
     $routePrefix = auth()->user()->role_id == 1 ? 'admin' : 'user';
-    $inspectUrl = rtrim(config('services.predict_service.public_url', config('services.predict_service.url')), '/') . '/train/inspect';
+    $predictBrowserBase = rtrim((string) config('services.predict_service.browser_url', ''), '/');
+    $inspectUrl = ($predictBrowserBase !== '' ? $predictBrowserBase : '') . '/train/inspect';
     $sheetUiTexts = [
         'chooseSheet' => __('datasets.choose_sheet'),
         'sourceLabel' => __('datasets.preview_source'),

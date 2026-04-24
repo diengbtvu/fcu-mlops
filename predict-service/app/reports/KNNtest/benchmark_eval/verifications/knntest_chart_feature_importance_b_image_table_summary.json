@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate, Butyrate, and VFA are highly significant predictors.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA has an importance score of 0.0748.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

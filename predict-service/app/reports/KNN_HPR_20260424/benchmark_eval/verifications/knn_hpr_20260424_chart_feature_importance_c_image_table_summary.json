@@ -1,0 +1,104 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS has the highest importance score (0.5052)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VSS importance as 0.5052",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate follows with a score of 0.12",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:Acetate:importance"
+      ],
+      "reason": "Gold value for Acetate importance is 0.1199757325.",
+      "numeric_delta": 2.4267499999994224e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Butyrate has an importance of 0.097",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:Butyrate:importance"
+      ],
+      "reason": "Gold value for Butyrate importance is 0.0969761328.",
+      "numeric_delta": 2.3867199999999533e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "VFA is ranked fourth with a score of 0.0748",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.0748037264.",
+      "numeric_delta": 3.7264000000009068e-06
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Propionate has an importance of 0.0577",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:Propionate:importance"
+      ],
+      "reason": "Gold value for Propionate importance is 0.0576947792.",
+      "numeric_delta": 5.220800000003967e-06
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "VSS importance as 0.5052, Acetate as 0.11997, Butyrate as 0.0969, VFA as 0.0748, and Propionate as 0.0576",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

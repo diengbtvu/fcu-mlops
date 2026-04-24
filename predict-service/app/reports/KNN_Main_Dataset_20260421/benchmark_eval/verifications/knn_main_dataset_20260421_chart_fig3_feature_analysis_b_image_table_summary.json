@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "The model performs best when considering the full set of features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    }
+  ]
+}

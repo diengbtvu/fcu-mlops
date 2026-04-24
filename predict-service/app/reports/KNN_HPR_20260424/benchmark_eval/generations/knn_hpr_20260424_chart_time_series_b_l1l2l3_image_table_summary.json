@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model (R2=0.817), supported by high sequence correlation (0.931) and strong feature correlations from VFA, Butyrate, and Acetate.",
+  "explanation_full": "This comprehensive explanation synthesizes the model's overall success (L1) with detailed evidence. KNN is the best model (R2: 0.817), which is further validated by the time-series diagnostics showing a strong sequence correlation of 0.931. The feature analysis (L2/L3) pinpoints VFA, Butyrate, and Acetate as the most influential predictors, which aligns with the top correlated features listed in the summary report, providing a complete picture of model efficacy and underlying drivers.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the best model (R2=0.817)",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "best model",
+      "object": "0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "high sequence correlation (0.931)",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "metric": "sequence_correlation",
+      "value": 0.931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

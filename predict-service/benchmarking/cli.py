@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from .claim_extractor import normalize_generation
 from .chart_reporting import write_per_chart_benchmark_outputs
 from .generator import generate_explanations
 from .gold_builders import build_gold_artifacts
@@ -13,11 +15,12 @@ from .io_utils import bundle_workspace, ensure_output_layout, slugify, write_csv
 from .llm_client import FixtureLLMClient, OllamaLLMClient, OpenAILLMClient
 from .manifest import build_manifest, load_artifact_inputs
 from .metrics import build_leaderboard, compute_artifact_scores
-from .schemas import SUPPORTED_ARMS, SUPPORTED_CONDITIONS
+from .schemas import SUPPORTED_ARMS, SUPPORTED_CONDITIONS, SUPPORTED_SEMANTIC_LEVELS
 from .verifier import verify_claims
 
 DEFAULT_ARMS = "A,B,C"
 DEFAULT_CONDITIONS = "table_only,image_table,image_table_summary"
+DEFAULT_LEVELS = "L1,L2L3,L1L2L3"
 
 
 def _fixture_bundle_path() -> Path:
@@ -56,6 +59,13 @@ def _build_parser() -> argparse.ArgumentParser:
         help=f"Comma-separated conditions. Default: {DEFAULT_CONDITIONS}.",
     )
     parser.add_argument(
+        "--levels",
+        help=(
+            "Comma-separated semantic levels for Arm B only. "
+            f"Default when Arm B is selected: {DEFAULT_LEVELS}."
+        ),
+    )
+    parser.add_argument(
         "--fixture-only",
         action="store_true",
         help="Use the bundled synthetic fixture bundle when --bundle-path is omitted.",
@@ -65,6 +75,11 @@ def _build_parser() -> argparse.ArgumentParser:
         choices=("fixture", "openai", "ollama"),
         default="fixture",
         help="LLM client for benchmark generations. Default: fixture.",
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Reuse any existing valid generation files in the output directory and regenerate only missing runs.",
     )
     return parser
 
@@ -99,6 +114,7 @@ def _metadata_payload(
     output_dir: Path,
     arms: list[str],
     conditions: list[str],
+    levels: list[str],
     warnings: list[str],
     manifest_count: int,
     generation_count: int,
@@ -111,6 +127,7 @@ def _metadata_payload(
         "output_dir": str(output_dir.resolve()),
         "arms": arms,
         "conditions": conditions,
+        "levels": levels,
         "client": client_metadata.get("client"),
         "client_model": client_metadata.get("model"),
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -130,25 +147,108 @@ def _build_llm_client(client_name: str) -> Any:
     raise ValueError(f"Unsupported benchmark client: {client_name}")
 
 
+def _generation_base_name(generation: Any) -> str:
+    name_parts = [generation.artifact_id, generation.arm]
+    if getattr(generation, "semantic_level", None):
+        name_parts.append(generation.semantic_level)
+    name_parts.append(generation.input_condition)
+    return slugify("_".join(name_parts))
+
+
+def _generation_base_name_for_run(
+    artifact_id: str,
+    arm: str,
+    input_condition: str,
+    semantic_level: str | None,
+) -> str:
+    name_parts = [artifact_id, arm]
+    if semantic_level:
+        name_parts.append(semantic_level)
+    name_parts.append(input_condition)
+    return slugify("_".join(name_parts))
+
+
+def _requested_runs(
+    arms: list[str],
+    conditions: list[str],
+    levels: list[str],
+) -> list[tuple[str, str, str | None]]:
+    runs: list[tuple[str, str, str | None]] = []
+    for arm in arms:
+        for condition in conditions:
+            if arm == "B":
+                for level in levels:
+                    runs.append((arm, condition, level))
+            else:
+                runs.append((arm, condition, None))
+    return runs
+
+
+def _prune_unexpected_output_files(layout: dict[str, Path], expected_base_names: set[str]) -> None:
+    for key in ("generations", "extracted_claims", "verifications", "arm_c_traces"):
+        directory = layout[key]
+        for path in directory.glob("*.json"):
+            if path.stem not in expected_base_names:
+                path.unlink()
+
+
+def _load_existing_generation(
+    layout: dict[str, Path],
+    artifact_id: str,
+    arm: str,
+    input_condition: str,
+    semantic_level: str | None,
+) -> Any | None:
+    base_name = _generation_base_name_for_run(
+        artifact_id=artifact_id,
+        arm=arm,
+        input_condition=input_condition,
+        semantic_level=semantic_level,
+    )
+    path = layout["generations"] / f"{base_name}.json"
+    if not path.exists():
+        return None
+
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    try:
+        return normalize_generation(
+            payload=payload,
+            artifact_id=artifact_id,
+            arm=arm,
+            input_condition=input_condition,
+            semantic_level=semantic_level,
+        )
+    except ValueError:
+        return None
+
+
 def _persist_generation_outputs(
     generation: Any,
     gold: Any,
     layout: dict[str, Path],
     artifact_scores: list[Any],
 ) -> None:
-    base_name = slugify(
-        f"{generation.artifact_id}_{generation.arm}_{generation.input_condition}"
-    )
+    base_name = _generation_base_name(generation)
     write_json(
         layout["generations"] / f"{base_name}.json",
         generation.to_dict(),
     )
+    if getattr(generation, "correction_trace", None) is not None:
+        write_json(
+            layout["arm_c_traces"] / f"{base_name}.json",
+            generation.correction_trace.to_dict(),
+        )
     write_json(
         layout["extracted_claims"] / f"{base_name}.json",
         {
             "artifact_id": generation.artifact_id,
             "arm": generation.arm,
             "input_condition": generation.input_condition,
+            "semantic_level": generation.semantic_level,
             "claims": [claim.to_dict() for claim in generation.claims],
         },
     )
@@ -157,6 +257,7 @@ def _persist_generation_outputs(
         claims=generation.claims,
         arm=generation.arm,
         input_condition=generation.input_condition,
+        semantic_level=generation.semantic_level,
     )
     write_json(
         layout["verifications"] / f"{base_name}.json",
@@ -164,6 +265,7 @@ def _persist_generation_outputs(
             "artifact_id": generation.artifact_id,
             "arm": generation.arm,
             "input_condition": generation.input_condition,
+            "semantic_level": generation.semantic_level,
             "verifications": [item.to_dict() for item in verifications],
         },
     )
@@ -174,6 +276,7 @@ def _persist_generation_outputs(
             verifications=verifications,
             arm=generation.arm,
             input_condition=generation.input_condition,
+            semantic_level=generation.semantic_level,
         )
     )
 
@@ -187,6 +290,14 @@ def main(argv: list[str] | None = None) -> int:
         output_dir = Path(args.output_dir).expanduser().resolve()
         arms = _parse_csv_option(args.arms, SUPPORTED_ARMS, "--arms")
         conditions = _parse_csv_option(args.conditions, SUPPORTED_CONDITIONS, "--conditions")
+        if "B" in arms:
+            levels = _parse_csv_option(
+                args.levels or DEFAULT_LEVELS,
+                SUPPORTED_SEMANTIC_LEVELS,
+                "--levels",
+            )
+        else:
+            levels = []
     except (FileNotFoundError, ValueError) as exc:
         print(f"benchmarking error: {exc}", file=sys.stderr)
         return 2
@@ -195,9 +306,24 @@ def main(argv: list[str] | None = None) -> int:
         client = _build_llm_client(args.client)
         layout = ensure_output_layout(output_dir)
         with bundle_workspace(bundle_path) as workspace:
+            effective_arms = list(arms)
             records = build_manifest(workspace.bundle_dir)
             gold_artifacts = build_gold_artifacts(workspace.bundle_dir, records)
             warnings = _warning_messages(records, conditions)
+            requested_runs = _requested_runs(effective_arms, conditions, levels)
+            expected_base_names = {
+                _generation_base_name_for_run(
+                    artifact_id=record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    semantic_level=semantic_level,
+                )
+                for record in records
+                for arm, condition, semantic_level in requested_runs
+            }
+
+            if args.resume:
+                _prune_unexpected_output_files(layout, expected_base_names)
 
             write_jsonl(
                 layout["root"] / "manifest.jsonl",
@@ -210,22 +336,77 @@ def main(argv: list[str] | None = None) -> int:
             command = "run" if args.command == "export" else args.command
             generation_count = 0
             artifact_scores = []
-            effective_arms = list(arms)
 
             if command in {"run"}:
                 gold_by_artifact = {gold.artifact_id: gold for gold in gold_artifacts}
                 for record in records:
                     inputs = load_artifact_inputs(record, workspace.bundle_dir)
                     gold = gold_by_artifact[record.artifact_id]
-                    generations = generate_explanations(
-                        inputs=inputs,
-                        gold=gold,
-                        arms=effective_arms,
-                        conditions=conditions,
-                        client=client,
-                    )
-                    generation_count += len(generations)
-                    for generation in generations:
+                    generation_count += len(requested_runs)
+                    generation_by_run: dict[tuple[str, str, str | None], Any] = {}
+                    missing_non_b: dict[str, set[str]] = {}
+                    missing_b: dict[str, set[str]] = {}
+
+                    for arm, condition, semantic_level in requested_runs:
+                        existing_generation = (
+                            _load_existing_generation(
+                                layout=layout,
+                                artifact_id=record.artifact_id,
+                                arm=arm,
+                                input_condition=condition,
+                                semantic_level=semantic_level,
+                            )
+                            if args.resume
+                            else None
+                        )
+                        if existing_generation is not None:
+                            generation_by_run[(arm, condition, semantic_level)] = existing_generation
+                            continue
+
+                        if arm == "B":
+                            missing_b.setdefault(condition, set()).add(str(semantic_level))
+                        else:
+                            missing_non_b.setdefault(arm, set()).add(condition)
+
+                    for arm, missing_conditions in missing_non_b.items():
+                        if not missing_conditions:
+                            continue
+                        generated = generate_explanations(
+                            inputs=inputs,
+                            gold=gold,
+                            arms=[arm],
+                            conditions=[condition for condition in conditions if condition in missing_conditions],
+                            client=client,
+                            semantic_levels=levels,
+                        )
+                        for generation in generated:
+                            generation_by_run[
+                                (generation.arm, generation.input_condition, generation.semantic_level)
+                            ] = generation
+
+                    for condition, missing_levels in missing_b.items():
+                        if not missing_levels:
+                            continue
+                        generated = generate_explanations(
+                            inputs=inputs,
+                            gold=gold,
+                            arms=["B"],
+                            conditions=[condition],
+                            client=client,
+                            semantic_levels=[level for level in levels if level in missing_levels],
+                        )
+                        for generation in generated:
+                            generation_by_run[
+                                (generation.arm, generation.input_condition, generation.semantic_level)
+                            ] = generation
+
+                    for run in requested_runs:
+                        generation = generation_by_run.get(run)
+                        if generation is None:
+                            raise RuntimeError(
+                                "Missing generation output for "
+                                f"{record.artifact_id} / {run[0]} / {run[1]} / {run[2]}"
+                            )
                         _persist_generation_outputs(
                             generation=generation,
                             gold=gold,
@@ -256,6 +437,7 @@ def main(argv: list[str] | None = None) -> int:
                     output_dir=output_dir,
                     arms=effective_arms,
                     conditions=conditions,
+                    levels=levels,
                     warnings=warnings,
                     manifest_count=len(records),
                     generation_count=generation_count,

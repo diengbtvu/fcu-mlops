@@ -1,0 +1,59 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved the best performance with an R² of 0.83014 and an MSE of 0.011901 when using 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "RF achieved the best performance with 11 features (all features).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.785537.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Overall, KNN is the best model, achieving an R² of 0.81717 and an MSE of 0.012810 on the full test set.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "XGBoost achieved the highest R² (0.768407) and lowest MSE (0.016226) with 4 features.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:fig6ab_mse_r2_features:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.768407.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

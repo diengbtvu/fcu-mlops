@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3b_shap_analysis",
+      "claim_text": "ORP_Low is the most influential feature in predicting the hydrogen production rate.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3b_shap_analysis",
+      "claim_text": "Butyrate is the second most influential feature in predicting the hydrogen production rate.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3b_shap_analysis",
+      "claim_text": "VFA and Acetate are highly influential features in predicting the hydrogen production rate.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3b_shap_analysis",
+      "claim_text": "The SHAP analysis shows the relative importance of various features for HPR prediction.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Analysis Summary' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

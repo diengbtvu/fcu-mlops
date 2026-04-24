@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from itertools import combinations
 from pathlib import Path
 from typing import Any
@@ -9,10 +10,38 @@ from .schemas import EvidenceRef, GoldArtifact, GroundTruthFact, ManifestRecord
 
 HIGHER_IS_BETTER = {"r2_score"}
 ERROR_METRICS = {"mse", "rmse", "mae"}
+FACT_SEMANTIC_LEVELS: dict[str, str] = {
+    "best_model": "L2L3",
+    "metric_value": "L1",
+    "ranking": "L2L3",
+    "top_feature": "L2L3",
+    "feature_subset_optimum": "L2L3",
+    "plateau": "L2L3",
+    "rank_score": "L1",
+    "best_r2": "L1",
+    "best_mse": "L1",
+    "pairwise_metric_gap": "L2L3",
+}
+
+
+def fact_semantic_level(fact_type: str) -> str:
+    return FACT_SEMANTIC_LEVELS.get(fact_type, "L2L3")
 
 
 def _as_float(value: Any) -> float:
     return float(str(value).strip())
+
+
+def _optional_float(value: Any) -> float | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text or text.lower() in {"none", "null"}:
+        return None
+    numeric = float(text)
+    if not math.isfinite(numeric):
+        return None
+    return numeric
 
 
 def _sort_metric_rows(
@@ -66,6 +95,7 @@ def _fact(
         value=value,
         evidence=_evidence(source_file, detail),
         importance=importance,
+        semantic_level=fact_semantic_level(fact_type),
     )
 
 
@@ -111,6 +141,7 @@ def _build_model_comparison_gold(record: ManifestRecord, bundle_dir: Path) -> Go
             value=_as_float(best_row["r2_score"]),
             evidence=_table_evidence(source_file, f"best model by r2_score = {best_model}"),
             importance=3,
+            semantic_level=fact_semantic_level("best_model"),
         )
     ]
 
@@ -126,6 +157,7 @@ def _build_model_comparison_gold(record: ManifestRecord, bundle_dir: Path) -> Go
                     value=_as_float(row[metric]),
                     evidence=_table_evidence(source_file, f"{model_name} {metric}"),
                     importance=2 if model_name == best_model else 1,
+                    semantic_level=fact_semantic_level("metric_value"),
                 )
             )
 
@@ -144,6 +176,7 @@ def _build_model_comparison_gold(record: ManifestRecord, bundle_dir: Path) -> Go
                 object=ranking,
                 evidence=_table_evidence(source_file, f"{metric} ranking"),
                 importance=2 if metric == "r2_score" else 1,
+                semantic_level=fact_semantic_level("ranking"),
             )
         )
 
@@ -168,6 +201,7 @@ def _build_model_comparison_gold(record: ManifestRecord, bundle_dir: Path) -> Go
                     value=gap_value,
                     evidence=_table_evidence(source_file, f"{best_model} vs {other_model} {metric} gap"),
                     importance=1,
+                    semantic_level=fact_semantic_level("pairwise_metric_gap"),
                 )
             )
 
@@ -286,6 +320,7 @@ def _build_incremental_gold(record: ManifestRecord, bundle_dir: Path) -> GoldArt
             value=optimum_feature_count,
             evidence=_table_evidence(source_file, f"{best_r2_model} optimum subset"),
             importance=3,
+            semantic_level=fact_semantic_level("feature_subset_optimum"),
         ),
         GroundTruthFact(
             fact_id=f"{record.artifact_id}:best_r2",
@@ -296,6 +331,7 @@ def _build_incremental_gold(record: ManifestRecord, bundle_dir: Path) -> GoldArt
             value=best_r2_value,
             evidence=_table_evidence(source_file, f"{best_r2_model} best R2"),
             importance=3,
+            semantic_level=fact_semantic_level("best_r2"),
         ),
         GroundTruthFact(
             fact_id=f"{record.artifact_id}:best_mse",
@@ -306,6 +342,7 @@ def _build_incremental_gold(record: ManifestRecord, bundle_dir: Path) -> GoldArt
             value=best_mse_value,
             evidence=_table_evidence(source_file, f"{best_mse_model} best MSE"),
             importance=3,
+            semantic_level=fact_semantic_level("best_mse"),
         ),
         GroundTruthFact(
             fact_id=f"{record.artifact_id}:plateau",
@@ -316,6 +353,7 @@ def _build_incremental_gold(record: ManifestRecord, bundle_dir: Path) -> GoldArt
             value=plateau_count,
             evidence=_table_evidence(source_file, f"{best_r2_model} plateau start"),
             importance=2,
+            semantic_level=fact_semantic_level("plateau"),
         ),
     ]
 
@@ -358,6 +396,7 @@ def _build_feature_ranking_gold(record: ManifestRecord, bundle_dir: Path) -> Gol
             value=_as_float(top_item["score"]),
             evidence=_table_evidence(source_file, "top GRA feature"),
             importance=3,
+            semantic_level=fact_semantic_level("top_feature"),
         ),
         GroundTruthFact(
             fact_id=f"{record.artifact_id}:ranking",
@@ -367,6 +406,7 @@ def _build_feature_ranking_gold(record: ManifestRecord, bundle_dir: Path) -> Gol
             object=ordered_features,
             evidence=_table_evidence(source_file, "GRA rank ordering"),
             importance=2,
+            semantic_level=fact_semantic_level("ranking"),
         ),
     ]
     for item in ranking_rows:
@@ -383,6 +423,7 @@ def _build_feature_ranking_gold(record: ManifestRecord, bundle_dir: Path) -> Gol
                 value=score_value,
                 evidence=_table_evidence(source_file, f"{feature} GRA score"),
                 importance=2 if rank_value <= 3 else 1,
+                semantic_level=fact_semantic_level("rank_score"),
             )
         )
 
@@ -1005,6 +1046,9 @@ def _build_prediction_metrics_gold(record: ManifestRecord, bundle_dir: Path) -> 
             )
     for metric_name in diagnostic_keys:
         if metric_name in diagnostics:
+            numeric_value = _optional_float(diagnostics[metric_name])
+            if numeric_value is None:
+                continue
             facts.append(
                 _fact(
                     record,
@@ -1012,7 +1056,7 @@ def _build_prediction_metrics_gold(record: ManifestRecord, bundle_dir: Path) -> 
                     "metric_value",
                     model_name,
                     metric_name,
-                    value=_as_float(diagnostics[metric_name]),
+                    value=numeric_value,
                     source_file=source_file,
                     detail=f"{model_name} {metric_name}",
                     importance=2 if metric_name in {"pred_actual_correlation", "max_abs_residual"} else 1,
@@ -1074,6 +1118,9 @@ def _build_prediction_sequence_gold(record: ManifestRecord, bundle_dir: Path) ->
         "sequence_correlation",
     ):
         if metric_name in diagnostics:
+            numeric_value = _optional_float(diagnostics[metric_name])
+            if numeric_value is None:
+                continue
             facts.append(
                 _fact(
                     record,
@@ -1081,7 +1128,7 @@ def _build_prediction_sequence_gold(record: ManifestRecord, bundle_dir: Path) ->
                     "metric_value",
                     model_name,
                     metric_name,
-                    value=_as_float(diagnostics[metric_name]),
+                    value=numeric_value,
                     source_file=source_file,
                     detail=f"{model_name} {metric_name}",
                     importance=2 if metric_name in {"mean_abs_gap", "sequence_correlation"} else 1,

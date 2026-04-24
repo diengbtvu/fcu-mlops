@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model, showing superior performance metrics (R2=0.8172, RMSE=0.1132, MAE=0.075) compared to other models, with a strong correlation of 0.90.",
+  "explanation_full": "The model performance analysis indicates that KNN is the superior model. Specifically, it achieved the highest performance metrics, demonstrating superior predictive capability. This suggests that the underlying data structure is well-suited for the KNN algorithm. The high correlation coefficient further supports this conclusion.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model.",
+      "claim_type": "freeform",
+      "span_category": "The model performance analysis indicates that KNN is the superior model.",
+      "is_numeric": false,
+      "requires_grounding_from": "The model performance analysis indicates that KNN is the superior model.",
+      "confidence": 0.95,
+      "subject": "Model Performance",
+      "predicate": "is superior",
+      "object": "KNN",
+      "metric": "performance",
+      "value": "superior",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

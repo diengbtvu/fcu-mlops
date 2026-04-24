@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "top-feature",
+      "claim_text": "ORP_Low is the top feature by mean_abs_shap.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "ORP_Low",
+      "predicate": null,
+      "object": "ORP_Low",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "ranking",
+      "claim_text": "The mean_abs_shap ordering is ORP_Low > pH > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "ORP_Low",
+        "pH",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "top-score",
+      "claim_text": "ORP_Low has mean_abs_shap=0.045000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "ORP_Low",
+      "predicate": null,
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": 0.045,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

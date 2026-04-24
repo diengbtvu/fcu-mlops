@@ -1,0 +1,83 @@
+{
+  "artifact_id": "KNNtest:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA has the highest GRA ranking score.",
+      "claim_type": "Feature Importance",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has score",
+      "object": 0.7931135436956089,
+      "metric": "gra score",
+      "value": 0.7931,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate is the second most important feature.",
+      "claim_type": "Feature Ranking",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "ranks second",
+      "object": 0.7902467550177025,
+      "metric": "gra score",
+      "value": 0.7902,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate is the third most important feature.",
+      "claim_type": "Feature Ranking",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "ranks third",
+      "object": 0.7772199976368066,
+      "metric": "gra score",
+      "value": 0.7772,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three features according to GRA.",
+      "claim_type": "Feature Grouping",
+      "span_category": "VFA, Butyrate, Acetate",
+      "is_numeric": false,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "VFA, Butyrate, Acetate",
+      "predicate": "are top three features",
+      "object": null,
+      "metric": "gra ranking",
+      "value": null,
+      "unit": "",
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

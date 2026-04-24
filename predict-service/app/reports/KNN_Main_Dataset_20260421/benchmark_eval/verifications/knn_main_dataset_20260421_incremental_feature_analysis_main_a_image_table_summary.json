@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "Education is the strongest predictor of Salary.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

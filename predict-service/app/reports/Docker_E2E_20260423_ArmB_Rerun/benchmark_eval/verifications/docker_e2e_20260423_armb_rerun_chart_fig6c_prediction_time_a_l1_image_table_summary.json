@@ -1,0 +1,50 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved perfect metrics (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0).",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time:metric:DT:mean_abs_gap"
+      ],
+      "reason": "Gold value for DT mean_abs_gap is 0.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The sequence diagnostics for the DT model confirm high performance, reporting a sequence correlation of 1.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time:metric:DT:sequence_correlation"
+      ],
+      "reason": "Gold value for DT sequence_correlation is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The sequence diagnostics for the DT model confirm high performance, reporting a mean absolute gap of 0.0.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time:metric:DT:mean_abs_gap"
+      ],
+      "reason": "Gold value for DT mean_abs_gap is 0.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

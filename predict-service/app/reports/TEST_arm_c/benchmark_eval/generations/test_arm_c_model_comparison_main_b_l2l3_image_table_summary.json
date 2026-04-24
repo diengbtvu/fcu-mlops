@@ -1,0 +1,12 @@
+{
+  "artifact_id": "TEST_arm_c:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model, achieving an R² of 0.817 and an MSE of 0.0128, which is superior to RF (R²=0.776) and SVM (R²=0.732).",
+  "explanation_full": "The analysis confirms that KNN is the optimal model, boasting an R² of 0.817 and an MSE of 0.0128, as detailed in the model performance comparison. This metric is better than RF's R² of 0.776 and SVM's R² of 0.732. Furthermore, the incremental feature analysis shows that KNN's performance metrics are consistently strong across feature counts, supporting its selection as the best benchmark model.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

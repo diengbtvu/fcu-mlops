@@ -1,0 +1,42 @@
+{
+  "artifact_id": "KNNtest:chart:model_knn_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:model_knn_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNNtest:chart:model_knn_scatter:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.746669641202516e-12
+    },
+    {
+      "artifact_id": "KNNtest:chart:model_knn_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN has the lowest Mean Absolute Error (MAE) of 0.075.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:model_knn_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The correlation between predicted and actual values for KNN is 0.9073.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

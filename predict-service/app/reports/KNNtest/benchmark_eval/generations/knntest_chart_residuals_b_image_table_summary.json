@@ -1,0 +1,45 @@
+{
+  "artifact_id": "KNNtest:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN demonstrated the strongest performance, achieving an R2 of 0.8172 and an RMSE of 0.1132, indicating superior predictive accuracy.",
+  "explanation_full": "Observations from the residual analysis chart show that the KNN model significantly outperformed other benchmark models. KNN achieved an R2 score of 0.8172 and a low RMSE of 0.1132, suggesting strong predictive power. The correlation between predicted and actual values was also high at 0.9073. In contrast, the Decision Tree (DT) model showed the weakest performance with an R2 of 0.5605. These results suggest that KNN is the most reliable model for this prediction task. However, the analysis is limited to the provided sample size of 40 data points.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "claim_type": "Metric Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_R2_value",
+      "confidence": 1.0,
+      "subject": "KNN_R2_value",
+      "predicate": "is_greater_than",
+      "object": "Other_Models_R2_value",
+      "metric": "r2_score",
+      "value": 0.8,
+      "unit": "dimensionless",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The model's performance is superior to other models.",
+      "claim_type": "comparative",
+      "span_category": "overall_assessment",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_vs_Others",
+      "confidence": 0.9,
+      "subject": "KNN",
+      "predicate": "is_better_than",
+      "object": "Other_Models",
+      "metric": "performance",
+      "value": 1.0,
+      "unit": "scale",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

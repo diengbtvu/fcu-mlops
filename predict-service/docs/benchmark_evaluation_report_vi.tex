@@ -1246,11 +1246,10 @@ Sau normalize, mỗi claim cần đạt:
   \item \field{subject} đủ đúng để match fact, nhất là các claim dạng pairwise correlation.
 \end{itemize}
 
-\subsection{Ví dụ thật: baseline raw claim trước và sau normalize}
-Baseline không gọi model mới; nó lấy từ
+\subsection{Ví dụ thật: raw claim giải thích trước và sau normalize}
+File
 \filepath{predict-service/app/reports/KNN_Main_Dataset_20260421/llm_explanations.json}
-rồi chuyển sang generation benchmark trong
-\filepath{predict-service/benchmarking/baseline_adapter.py:962-997}.
+là output explanation thô của pipeline giải thích. File này có thể chứa claim raw để phục vụ phân tích, nhưng không còn được ingest như một arm benchmark. Benchmark hiện chỉ chấm các arm prompt \field{A/B/C}.
 
 \textbf{Claim raw trong \field{llm\_explanations.json}:}
 
@@ -1678,7 +1677,7 @@ cho biết:
 {
   "provider": "benchmark_selected",
   "model": "gemma4:e4b",
-  "selection_method": "best_nonbaseline_leaderboard_row",
+  "selection_method": "best_leaderboard_row",
   "selected_arm": "C",
   "selected_condition": "image_table_summary",
   "selected_row": {

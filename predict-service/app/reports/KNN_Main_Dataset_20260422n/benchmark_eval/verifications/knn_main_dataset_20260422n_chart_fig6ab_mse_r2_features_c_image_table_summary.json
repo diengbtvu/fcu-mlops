@@ -1,0 +1,72 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved the best performance with an R² of 0.83014 and an MSE of 0.011901 when using 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "RF achieved its best performance with 11 features (all features), resulting in an R² of 0.785537 and an MSE of 0.015026.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.785537.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "SVM's best performance was found with 4 features (VFA -> Butyrate -> Acetate -> VSS), achieving an R² of 0.779437 and an MSE of 0.015453.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.779437.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "XGBoost's best performance was found with 4 features (VFA -> Butyrate -> Acetate -> VSS), resulting in an R² of 0.768407 and an MSE of 0.016226.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.768407.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "DT's best performance was found with 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low), achieving an R² of 0.671427 and an MSE of 0.023021.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.671427.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

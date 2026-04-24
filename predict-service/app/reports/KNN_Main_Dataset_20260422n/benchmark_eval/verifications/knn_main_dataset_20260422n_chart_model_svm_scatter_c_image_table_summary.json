@@ -1,0 +1,59 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The SVM model achieved an R2 score of 0.7324.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 9.747499999934739e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The SVM model had an RMSE of 0.1369.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_svm_scatter:metric:SVM:rmse"
+      ],
+      "reason": "Gold value for SVM rmse is 0.1369247591.",
+      "numeric_delta": 2.4759099999993595e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The SVM model had an MAE of 0.0946.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_svm_scatter:metric:SVM:mae"
+      ],
+      "reason": "Gold value for SVM mae is 0.0946025669.",
+      "numeric_delta": 2.5669000000005937e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The correlation between predicted and actual values for SVM was 0.86576.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

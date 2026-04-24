@@ -1,0 +1,231 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model achieved an R2 score of 0.7324, RMSE of 0.1369, and MAE of 0.0946, as shown in the scatter plot diagnostics and the model comparison table.",
+  "explanation_full": "The SVM model's performance metrics, derived from the scatter plot diagnostics and the model comparison table, indicate an R2 score of 0.7324, a Root Mean Squared Error (RMSE) of 0.1369, and a Mean Absolute Error (MAE) of 0.0946. Additionally, the diagnostics report a correlation between predicted and actual values of 0.86576, and the linear fit slope was 0.858436.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The SVM model achieved an R2 score of 0.7324",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7324,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The SVM model's performance metrics... indicate an R2 score of 0.7324",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7324,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "diagnostics report a correlation between predicted and actual values of 0.86576",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+      "subject": "SVM",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.86576,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "the linear fit slope was 0.858436",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:linear_fit_slope",
+      "subject": "SVM",
+      "predicate": "linear_fit_slope",
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.858436,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The SVM model achieved an R2 score of 0.7324, RMSE of 0.1369, and MAE of 0.0946, as shown in the scatter plot diagnostics and the model comparison table.",
+        "draft_explanation_full": "The SVM model's performance metrics, derived from the scatter plot diagnostics and the model comparison table, indicate an R2 score of 0.7324, a Root Mean Squared Error (RMSE) of 0.1369, and a Mean Absolute Error (MAE) of 0.0946. Additionally, the diagnostics report a correlation between predicted and actual values of 0.86576, and the linear fit slope was 0.858436.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The SVM model achieved an R2 score of 0.7324",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+            "subject": "SVM",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.7324,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "The SVM model's performance metrics... indicate an R2 score of 0.7324",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+            "subject": "SVM",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.7324,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "diagnostics report a correlation between predicted and actual values of 0.86576",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+            "subject": "SVM",
+            "predicate": "pred_actual_correlation",
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.86576,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "the linear fit slope was 0.858436",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:linear_fit_slope",
+            "subject": "SVM",
+            "predicate": "linear_fit_slope",
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.858436,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The SVM model achieved an R2 score of 0.7324",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The R2 score for SVM is explicitly stated as 0.7324 in the result_text and confirmed in the model_metrics section of the evidence packet.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
+            ],
+            "grounded_fact_summary": "SVM R2 score is 0.7324."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "The SVM model's performance metrics... indicate an R2 score of 0.7324",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The R2 score for SVM is explicitly stated as 0.7324 in the result_text and confirmed in the model_metrics section of the evidence packet.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
+            ],
+            "grounded_fact_summary": "SVM R2 score is 0.7324."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "diagnostics report a correlation between predicted and actual values of 0.86576",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet's result_text and prediction_story confirm the correlation (pred_actual_correlation) is 0.86576.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+            ],
+            "grounded_fact_summary": "The correlation between predicted and actual values for SVM is 0.86576."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "the linear fit slope was 0.858436",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet's result_text and prediction_story confirm the linear fit slope for SVM is 0.858436.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:linear_fit_slope"
+            ],
+            "grounded_fact_summary": "The linear fit slope for SVM is 0.858436."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 4
+    }
+  },
+  "parent_draft_hash": "87737f249fe2ccc89ebb10d50da41c29be6d59af"
+}

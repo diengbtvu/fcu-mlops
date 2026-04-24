@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:model_dt_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Decision Tree (DT) model achieved an R2 score of 0.5605, an RMSE of 0.1755, and an MAE of 0.1086.",
+  "explanation_full": "The Decision Tree (DT) model's performance metrics are clearly presented in the scatter plot diagnostics. Specifically, the model achieved an R2 score of 0.5605, indicating a moderate fit to the data. The Root Mean Square Error (RMSE) was 0.1755, and the Mean Absolute Error (MAE) was 0.1086. Furthermore, the correlation between predicted and actual values was 0.787161, and the linear fit slope was 0.802783, suggesting a positive, though not perfect, linear relationship between predictions and actual outcomes.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "achieved R2 score",
+      "object": 0.5605,
+      "metric": "r2_score",
+      "value": 0.5605,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The Decision Tree (DT) model had an RMSE of 0.1755.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "had RMSE",
+      "object": 0.1755,
+      "metric": "rmse",
+      "value": 0.1755,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The correlation between predicted and actual values for DT was 0.787161.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "correlation (pred, actual)",
+      "object": 0.787161,
+      "metric": "correlation",
+      "value": 0.787161,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

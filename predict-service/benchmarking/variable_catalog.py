@@ -33,14 +33,23 @@ def is_benchmarkable_fact(fact: GroundTruthFact) -> bool:
     return fact.fact_type in BENCHMARK_VARIABLE_FACT_TYPES
 
 
-def benchmarkable_facts(gold: GoldArtifact) -> list[GroundTruthFact]:
-    return [fact for fact in gold.ground_truth_facts if is_benchmarkable_fact(fact)]
+def benchmarkable_facts(
+    gold: GoldArtifact,
+    semantic_level: str | None = None,
+) -> list[GroundTruthFact]:
+    facts = [fact for fact in gold.ground_truth_facts if is_benchmarkable_fact(fact)]
+    if semantic_level and semantic_level != "L1L2L3":
+        facts = [fact for fact in facts if fact.semantic_level == semantic_level]
+    return facts
 
 
-def allowed_variable_facts(gold: GoldArtifact) -> list[GroundTruthFact]:
+def allowed_variable_facts(
+    gold: GoldArtifact,
+    semantic_level: str | None = None,
+) -> list[GroundTruthFact]:
     allowed_ids = set(gold.salient_facts)
     facts: list[GroundTruthFact] = []
-    for fact in benchmarkable_facts(gold):
+    for fact in benchmarkable_facts(gold, semantic_level=semantic_level):
         if fact.fact_id in allowed_ids or fact.importance >= 2:
             facts.append(fact)
     facts.sort(key=lambda fact: (-fact.importance, fact.fact_id))
@@ -75,9 +84,12 @@ def _slot_label(fact: GroundTruthFact) -> str:
     return fact.fact_id
 
 
-def build_variable_catalog(gold: GoldArtifact) -> list[dict[str, Any]]:
+def build_variable_catalog(
+    gold: GoldArtifact,
+    semantic_level: str | None = None,
+) -> list[dict[str, Any]]:
     catalog: list[dict[str, Any]] = []
-    for fact in allowed_variable_facts(gold):
+    for fact in allowed_variable_facts(gold, semantic_level=semantic_level):
         catalog.append(
             {
                 "source_variable_id": fact.fact_id,
@@ -90,6 +102,7 @@ def build_variable_catalog(gold: GoldArtifact) -> list[dict[str, Any]]:
                 "value_kind": _value_kind(fact),
                 "unit": fact.unit,
                 "importance": fact.importance,
+                "semantic_level": fact.semantic_level,
             }
         )
     return catalog

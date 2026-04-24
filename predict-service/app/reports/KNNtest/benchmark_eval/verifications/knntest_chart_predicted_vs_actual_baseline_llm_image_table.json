@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNNtest:chart:predicted_vs_actual",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_1",
+      "claim_text": "KNN prediction diagnostics show R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'metric_summary' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

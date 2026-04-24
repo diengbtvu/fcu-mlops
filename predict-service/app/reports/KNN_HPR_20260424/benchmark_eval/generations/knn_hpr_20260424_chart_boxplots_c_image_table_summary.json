@@ -1,0 +1,281 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol, Acetate, and Butyrate show the highest mean values among the features, while Ethanol, Butyrate, and Acetate exhibit the largest standard deviations.",
+  "explanation_full": "Based on the feature boxplots, the descriptive statistics indicate that Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed closely by Butyrate (mean: 0.4287). Regarding variability, Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations among the measured features. The table data confirms these trends, showing Ethanol with a mean of 0.4736 and a standard deviation of 0.2528, and Acetate with a mean of 0.4465 and a standard deviation of 0.2260. Similarly, Butyrate has a mean of 0.4287 and a standard deviation of 0.2474.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed closely by Butyrate (mean: 0.4287).",
+      "claim_type": "metric_value",
+      "span_category": "feature_name",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": "0.4736",
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations among the measured features.",
+      "claim_type": "metric_value",
+      "span_category": "feature_name",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": "0.2528",
+      "metric": "std",
+      "value": 0.2528,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Ethanol with a mean of 0.4736 and a standard deviation of 0.2528",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": "0.4736",
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "Acetate with a mean of 0.4465 and a standard deviation of 0.2260.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Acetate",
+      "predicate": "mean",
+      "object": "0.4465",
+      "metric": "mean",
+      "value": 0.4465,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "Butyrate has a mean of 0.4287 and a standard deviation of 0.2474.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Butyrate",
+      "predicate": "mean",
+      "object": "0.4287",
+      "metric": "mean",
+      "value": 0.4287,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "Ethanol, Acetate, and Butyrate show the highest mean values among the features, while Ethanol, Butyrate, and Acetate exhibit the largest standard deviations.",
+        "draft_explanation_full": "Based on the feature boxplots, the descriptive statistics indicate that Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed closely by Butyrate (mean: 0.4287). Regarding variability, Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations among the measured features. The table data confirms these trends, showing Ethanol with a mean of 0.4736 and a standard deviation of 0.2528, and Acetate with a mean of 0.4465 and a standard deviation of 0.2260. Similarly, Butyrate has a mean of 0.4287 and a standard deviation of 0.2474.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed closely by Butyrate (mean: 0.4287).",
+            "claim_type": "metric_value",
+            "span_category": "feature_name",
+            "is_numeric": false,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+            "subject": "Ethanol",
+            "predicate": "mean",
+            "object": "0.4736",
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations among the measured features.",
+            "claim_type": "metric_value",
+            "span_category": "feature_name",
+            "is_numeric": false,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+            "subject": "Ethanol",
+            "predicate": "std",
+            "object": "0.2528",
+            "metric": "std",
+            "value": 0.2528,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Ethanol with a mean of 0.4736 and a standard deviation of 0.2528",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+            "subject": "Ethanol",
+            "predicate": "mean",
+            "object": "0.4736",
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "Acetate with a mean of 0.4465 and a standard deviation of 0.2260.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+            "subject": "Acetate",
+            "predicate": "mean",
+            "object": "0.4465",
+            "metric": "mean",
+            "value": 0.4465,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate has a mean of 0.4287 and a standard deviation of 0.2474.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+            "subject": "Butyrate",
+            "predicate": "mean",
+            "object": "0.4287",
+            "metric": "mean",
+            "value": 0.4287,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed closely by Butyrate (mean: 0.4287).",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The explanation explicitly states that Ethanol (mean: 0.4736), Acetate (mean: 0.4465), and Butyrate (mean: 0.4287) have the highest mean values.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:boxplots:top_feature:mean"
+            ],
+            "grounded_fact_summary": "Ethanol (mean: 0.4736), Acetate (mean: 0.4465), and Butyrate (mean: 0.4287) have the highest mean values."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations among the measured features.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The explanation states that Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:boxplots:top_feature:std"
+            ],
+            "grounded_fact_summary": "Ethanol (std: 0.2528), Butyrate (std: 0.2474), and Acetate (std: 0.226) show the largest standard deviations."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Ethanol with a mean of 0.4736 and a standard deviation of 0.2528",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The explanation provides these specific values for Ethanol's mean and standard deviation.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+              "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std"
+            ],
+            "grounded_fact_summary": "Ethanol has a mean of 0.4736 and a standard deviation of 0.2528."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "Acetate with a mean of 0.4465 and a standard deviation of 0.2260.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The explanation confirms Acetate's mean (0.4465) and standard deviation (0.226).",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:boxplots:metric:Acetate:mean"
+            ],
+            "grounded_fact_summary": "Acetate has a mean of 0.4465 and a standard deviation of 0.2260."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate has a mean of 0.4287 and a standard deviation of 0.2474.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The explanation confirms Butyrate's mean (0.4287) and standard deviation (0.2474).",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:boxplots:metric:Butyrate:mean"
+            ],
+            "grounded_fact_summary": "Butyrate has a mean of 0.4287 and a standard deviation of 0.2474."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 5
+    }
+  },
+  "parent_draft_hash": "b1b5b7e74a024fd7e35710924f72fe80fddef0b4"
+}

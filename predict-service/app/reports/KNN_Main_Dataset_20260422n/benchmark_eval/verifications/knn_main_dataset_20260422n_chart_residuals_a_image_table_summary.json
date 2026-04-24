@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:residuals",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_id",
+      "claim_text": "The table summarizes the performance of different models, with KNN showing the best results.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    }
+  ]
+}

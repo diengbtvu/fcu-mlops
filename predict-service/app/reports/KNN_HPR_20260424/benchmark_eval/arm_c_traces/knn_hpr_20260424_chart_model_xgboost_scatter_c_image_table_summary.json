@@ -1,0 +1,169 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The XGBoost model achieved an R2 score of 0.7495, an RMSE of 0.1325, and a correlation between predicted and actual values of 0.8750.",
+      "draft_explanation_full": "The XGBoost scatter plot diagnostics indicate the following performance metrics: R2 score is 0.7495, RMSE is 0.1325, and MAE is 0.0956. Furthermore, the correlation between predicted and actual values is 0.8750, and the linear fit slope is 0.8387. These metrics are derived from the scatter plot analysis.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "R2 score is 0.7495",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+          "subject": "XGBoost",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7495,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "RMSE is 0.1325",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "XGBoost",
+          "predicate": "RMSE",
+          "object": null,
+          "metric": "rmse",
+          "value": 0.1325,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "MAE is 0.0956",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "XGBoost",
+          "predicate": "MAE",
+          "object": null,
+          "metric": "mae",
+          "value": 0.0956,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "correlation between predicted and actual values is 0.8750",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation",
+          "subject": "XGBoost",
+          "predicate": "pred_actual_correlation",
+          "object": null,
+          "metric": "pred_actual_correlation",
+          "value": 0.875,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "linear fit slope is 0.8387",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+          "subject": "XGBoost",
+          "predicate": "linear_fit_slope",
+          "object": null,
+          "metric": "linear_fit_slope",
+          "value": 0.8387,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "R2 score is 0.7495",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet explicitly states R2=0.7495 in the result_text and the validated_facts confirm this value.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+          ],
+          "grounded_fact_summary": "XGBoost R2 score is 0.7495."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "RMSE is 0.1325",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet states RMSE=0.1325 in the result_text and the validated_facts confirm this value.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "XGBoost RMSE is 0.1325."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "MAE is 0.0956",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet states MAE=0.0956 in the result_text and the validated_facts confirm this value.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "XGBoost MAE is 0.0956."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "correlation between predicted and actual values is 0.8750",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet states corr(pred,actual)=0.875024 in the result_text and the validated_facts confirm this value.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+          ],
+          "grounded_fact_summary": "XGBoost prediction-actual correlation is 0.8750."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "linear fit slope is 0.8387",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet states slope=0.838684 in the result_text and the validated_facts confirm this value.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+          ],
+          "grounded_fact_summary": "XGBoost linear fit slope is 0.8387."
+        }
+      ],
+      "corrected_explanation_short": "",
+      "corrected_explanation_full": "",
+      "corrected_claims": [],
+      "corrected_validations": []
+    }
+  ],
+  "decision_counts": {
+    "keep": 5
+  }
+}

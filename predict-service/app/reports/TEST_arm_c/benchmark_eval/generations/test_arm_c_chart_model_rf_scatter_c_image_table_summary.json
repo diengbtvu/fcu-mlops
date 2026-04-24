@@ -1,0 +1,182 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_rf_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest (RF) model achieved an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836, with a correlation between predicted and actual values of 0.88511.",
+  "explanation_full": "The Random Forest (RF) model's performance metrics, derived from the scatter plot diagnostics, show an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836. Furthermore, the correlation between the predicted and actual values is 0.88511, and the linear fit slope is 0.848822. These metrics are presented in the chart diagnostics section of the artifact.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "R2 score of 0.7756",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": 0.7756,
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "correlation between predicted and actual values of 0.88511",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
+      "subject": "RF",
+      "predicate": "pred_actual_correlation",
+      "object": 0.88511,
+      "metric": "pred_actual_correlation",
+      "value": 0.88511,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "linear fit slope is 0.848822",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:linear_fit_slope",
+      "subject": "RF",
+      "predicate": "linear_fit_slope",
+      "object": 0.848822,
+      "metric": "linear_fit_slope",
+      "value": 0.848822,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The Random Forest (RF) model achieved an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836, with a correlation between predicted and actual values of 0.88511.",
+        "draft_explanation_full": "The Random Forest (RF) model's performance metrics, derived from the scatter plot diagnostics, show an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836. Furthermore, the correlation between the predicted and actual values is 0.88511, and the linear fit slope is 0.848822. These metrics are presented in the chart diagnostics section of the artifact.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "R2 score of 0.7756",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:r2_score",
+            "subject": "RF",
+            "predicate": "r2_score",
+            "object": 0.7756,
+            "metric": "r2_score",
+            "value": 0.7756,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "correlation between predicted and actual values of 0.88511",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
+            "subject": "RF",
+            "predicate": "pred_actual_correlation",
+            "object": 0.88511,
+            "metric": "pred_actual_correlation",
+            "value": 0.88511,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "linear fit slope is 0.848822",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:linear_fit_slope",
+            "subject": "RF",
+            "predicate": "linear_fit_slope",
+            "object": 0.848822,
+            "metric": "linear_fit_slope",
+            "value": 0.848822,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "R2 score of 0.7756",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim value (0.7756) matches the grounded fact value (0.7756018171) for RF R2 score.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:model_rf_scatter:metric:RF:r2_score"
+            ],
+            "grounded_fact_summary": "RF R2 score is 0.7756."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "correlation between predicted and actual values of 0.88511",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim value (0.88511) matches the grounded fact value (0.88511) for RF pred_actual_correlation.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
+            ],
+            "grounded_fact_summary": "RF correlation between predicted and actual values is 0.88511."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "linear fit slope is 0.848822",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim value (0.848822) matches the grounded fact value (0.848822) for RF linear_fit_slope.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:model_rf_scatter:metric:RF:linear_fit_slope"
+            ],
+            "grounded_fact_summary": "RF linear fit slope is 0.848822."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 3
+    }
+  },
+  "parent_draft_hash": "9076ae3023d395e2f52c3f17603daedd098f22d1"
+}

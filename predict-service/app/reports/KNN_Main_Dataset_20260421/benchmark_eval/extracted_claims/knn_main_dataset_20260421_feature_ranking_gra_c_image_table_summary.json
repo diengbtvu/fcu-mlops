@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most important feature.",
+      "claim_type": "rank_score",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN is the best model, achieving an R² of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": "KNN",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The KNN score reached 0.817859 when all 11 features are included.",
+      "claim_type": "metric_value",
+      "span_category": "incremental_feature_analysis",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "score at 11 features",
+      "object": 0.817859,
+      "metric": "knn_score",
+      "value": 0.817859,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ]
+}

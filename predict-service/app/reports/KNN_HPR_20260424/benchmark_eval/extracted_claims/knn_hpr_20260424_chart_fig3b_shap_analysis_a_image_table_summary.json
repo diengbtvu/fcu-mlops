@@ -1,0 +1,72 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0376)",
+      "claim_type": "metric_value",
+      "span_category": "ORP_Low",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": 0.0376,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Low has the mean absolute SHAP value of 0.0376",
+      "claim_type": "metric_value",
+      "span_category": "ORP_Low",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": 0.0376,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "ORP_Low is followed by ORP_Mid (0.0312), Butyrate (0.0304), VFA (0.0298), COD-O (0.0288), and Acetate (0.0266)",
+      "claim_type": "metric_value",
+      "span_category": "ORP_Low, ORP_Mid, Butyrate, VFA, COD-O, Acetate",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "ORP_Low",
+        "ORP_Mid",
+        "Butyrate",
+        "VFA",
+        "COD-O",
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

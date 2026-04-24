@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best performing model, showing strong predictive power (R2=0.8172) and a high correlation (0.9073), while the DT model showed the weakest performance.",
+  "explanation_full": "Observations from the residual analysis chart confirm that the KNN model is the superior predictor, boasting an R2 score of 0.8172 and an RMSE of 0.1132. The correlation between predicted and actual values is strong at 0.907. In contrast, the model performance varied across algorithms, with the least predictive model being the one associated with the lowest correlation coefficient. Overall, the results indicate that the KNN model provides the most reliable prediction.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model provides the most reliable prediction.",
+      "claim_type": "freeform",
+      "span_category": "KNN",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN",
+      "confidence": 0.95,
+      "subject": "Model Performance Comparison",
+      "predicate": "provides the most reliable prediction",
+      "object": "prediction",
+      "metric": "reliability",
+      "value": "high",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

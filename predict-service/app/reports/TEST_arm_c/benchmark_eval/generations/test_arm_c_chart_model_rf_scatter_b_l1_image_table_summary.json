@@ -1,0 +1,51 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest (RF) model achieved an R2 score of 0.7756, indicating a moderate fit to the data.",
+  "explanation_full": "The Random Forest (RF) model demonstrated a performance with an R2 score of 0.7756, suggesting that it explains about 77.6% of the variance in the target variable. This metric, derived from the model's evaluation, positions it relative to other models like KNN (R2=0.8172) and XGBoost (R2=0.7495) in the provided table. The scatter plot further visualizes this performance, showing a correlation of 0.88511 between predicted and actual values, which is a strong indicator of predictive capability.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "showing a correlation of 0.88511 between predicted and actual values",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
+      "subject": "RF",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.88511,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

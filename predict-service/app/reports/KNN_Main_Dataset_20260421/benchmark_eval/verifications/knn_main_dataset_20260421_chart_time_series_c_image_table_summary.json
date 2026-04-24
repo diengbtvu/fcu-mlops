@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN model is the best model.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No best-model fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN model achieved an R2 score of 0.81717.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three correlated features with HPR.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No top-feature fact found.",
+      "numeric_delta": null
+    }
+  ]
+}

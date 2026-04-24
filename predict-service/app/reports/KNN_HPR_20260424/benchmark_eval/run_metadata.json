@@ -1,0 +1,25 @@
+{
+  "command": "run",
+  "source_bundle_path": "/app/app/reports/KNN_HPR_20260424",
+  "resolved_bundle_dir": "/app/app/reports/KNN_HPR_20260424",
+  "output_dir": "/app/app/reports/KNN_HPR_20260424/benchmark_eval",
+  "arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "conditions": [
+    "image_table_summary"
+  ],
+  "levels": [
+    "L1",
+    "L2L3",
+    "L1L2L3"
+  ],
+  "client": "ollama",
+  "client_model": "gemma4:e4b",
+  "created_at": "2026-04-24T02:17:26.989254+00:00",
+  "artifact_count": 24,
+  "generation_count": 120,
+  "warnings": []
+}

@@ -1,0 +1,78 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The DT model achieved perfect performance metrics (R2=1.0, RMSE=0.0, MAE=0.0)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "DT model achieved perfect performance metrics: R2=1.0, RMSE=0.0, and MAE=0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "SVM model showed significantly worse performance with R2=0.0, RMSE=0.0875, and MAE=0.0872",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "XGBoost also performed poorly with R2=0.0, RMSE=2.73e-07, and MAE=2.73e-07",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "DT, RF, and KNN all achieved R2=1.0, RMSE=0.0, and MAE=0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

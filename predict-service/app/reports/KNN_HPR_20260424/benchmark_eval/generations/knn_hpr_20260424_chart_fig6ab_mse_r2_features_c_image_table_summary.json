@@ -1,0 +1,350 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest R² score (0.83014) and lowest MSE (0.011901) when using 9 features, specifically: VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low. The RF model performed best with 11 features (R²=0.785537, MSE=0.015026).",
+  "explanation_full": "Based on the incremental feature analysis, the KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901. The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'. For comparison, the RF model showed its best performance with 11 features, yielding an R² of 0.785537 and an MSE of 0.015026. The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved the highest R² score (0.83014)",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+      "subject": "KNN",
+      "predicate": "R² score",
+      "object": "0.83014",
+      "metric": "r2_score",
+      "value": 0.83014,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "and lowest MSE (0.011901) when using 9 features",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse",
+      "subject": "KNN",
+      "predicate": "MSE",
+      "object": "0.011901",
+      "metric": "mse",
+      "value": 0.011901,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 9,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The RF model performed best with 11 features (R²=0.785537, MSE=0.015026)",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score",
+      "subject": "RF",
+      "predicate": "R² score",
+      "object": "0.785537",
+      "metric": "r2_score",
+      "value": 0.785537,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "The KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+      "subject": "KNN",
+      "predicate": "R² score",
+      "object": "0.83014",
+      "metric": "r2_score",
+      "value": 0.83014,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 9,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate",
+        "Ethanol",
+        "COD-O",
+        "pH",
+        "ORP_Low"
+      ],
+      "feature_count": 9,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "R² score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model achieved the highest R² score (0.83014) and lowest MSE (0.011901) when using 9 features, specifically: VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low. The RF model performed best with 11 features (R²=0.785537, MSE=0.015026).",
+        "draft_explanation_full": "Based on the incremental feature analysis, the KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901. The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'. For comparison, the RF model showed its best performance with 11 features, yielding an R² of 0.785537 and an MSE of 0.015026. The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved the highest R² score (0.83014)",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+            "subject": "KNN",
+            "predicate": "R² score",
+            "object": "0.83014",
+            "metric": "r2_score",
+            "value": 0.83014,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "and lowest MSE (0.011901) when using 9 features",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse",
+            "subject": "KNN",
+            "predicate": "MSE",
+            "object": "0.011901",
+            "metric": "mse",
+            "value": 0.011901,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 9,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "The RF model performed best with 11 features (R²=0.785537, MSE=0.015026)",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score",
+            "subject": "RF",
+            "predicate": "R² score",
+            "object": "0.785537",
+            "metric": "r2_score",
+            "value": 0.785537,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+            "subject": "KNN",
+            "predicate": "R² score",
+            "object": "0.83014",
+            "metric": "r2_score",
+            "value": 0.83014,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 9,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "feature_subset_optimum",
+            "is_numeric": false,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+            "subject": "KNN",
+            "predicate": "feature_subset_optimum",
+            "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate",
+              "Ethanol",
+              "COD-O",
+              "pH",
+              "ORP_Low"
+            ],
+            "feature_count": 9,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score",
+            "subject": "KNN",
+            "predicate": "R² score",
+            "object": "0.81717",
+            "metric": "r2_score",
+            "value": 0.81717,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved the highest R² score (0.83014)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet explicitly states that KNN achieved an R² of 0.83014 with 9 features, which is the highest R² reported for any model in the incremental analysis.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
+            ],
+            "grounded_fact_summary": "KNN achieved R²=0.83014 with 9 features."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "and lowest MSE (0.011901) when using 9 features",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet shows that KNN achieved an MSE of 0.011901 with 9 features, which is the lowest MSE reported for any model in the incremental analysis.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse"
+            ],
+            "grounded_fact_summary": "KNN achieved MSE=0.011901 with 9 features."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "The RF model performed best with 11 features (R²=0.785537, MSE=0.015026)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms that for RF, the best performance was at 11 features with R²=0.785537 and MSE=0.015026.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
+            ],
+            "grounded_fact_summary": "RF performed best with 11 features (R²=0.785537, MSE=0.015026)."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "This claim is a synthesis of the best metrics for KNN at 9 features, which are directly supported by the 'best_r2' and 'best_mse' facts.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse"
+            ],
+            "grounded_fact_summary": "KNN's best performance was at 9 features (R²=0.83014, MSE=0.011901)."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet explicitly links the best performance for KNN (9 features) to the feature subset 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+            ],
+            "grounded_fact_summary": "The optimal feature subset for KNN is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'."
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The summary text payload and the 'summary.json' payload both state that KNN has the best overall performance on the test set with R² = 0.81717 and MSE = 0.012810.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score"
+            ],
+            "grounded_fact_summary": "KNN's best overall performance on the test set was R² = 0.81717 and MSE = 0.012810."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 6
+    }
+  },
+  "parent_draft_hash": "8e00e6bc3c98d3ef7d8db072c90fdb78a1edbfc2"
+}

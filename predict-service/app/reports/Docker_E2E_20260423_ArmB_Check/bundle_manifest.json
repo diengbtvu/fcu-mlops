@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-04-23T03:07:04.653515",
+  "source_name": "/app/data/Dataset.new3.csv",
+  "selected_sheet": null,
+  "best_model": "DT",
+  "best_model_type": "decision_tree",
+  "r2": 1.0,
+  "mse": 0.0,
+  "rows_after_preprocessing": 281,
+  "top_features": [
+    "Sucrose_Degradation",
+    "VFA",
+    "COD-O"
+  ],
+  "report_id": "Docker_E2E_20260423_ArmB_Check",
+  "report_route_prefix": "/train/reports/Docker_E2E_20260423_ArmB_Check"
+}

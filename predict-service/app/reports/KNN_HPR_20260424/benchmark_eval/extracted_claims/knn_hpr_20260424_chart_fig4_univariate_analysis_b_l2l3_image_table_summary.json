@@ -1,0 +1,69 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA correlates highly with Butyrate (0.9601)",
+      "claim_type": "metric_value",
+      "span_category": "correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+      "subject": "feature_pairs",
+      "predicate": "correlation",
+      "object": "Butyrate",
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [
+        "Butyrate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VFA correlates highly with Acetate (0.9428)",
+      "claim_type": "metric_value",
+      "span_category": "correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+      "subject": "feature_pairs",
+      "predicate": "correlation",
+      "object": "Acetate",
+      "metric": "correlation",
+      "value": 0.9428,
+      "unit": null,
+      "ordered_items": [
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA, Butyrate, and Acetate are the most influential factors determining HPR",
+      "claim_type": "freeform",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

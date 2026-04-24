@@ -1,0 +1,61 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "baseline-r2",
+      "claim_text": "RF has r2_score=0.88.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.88,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-correlation",
+      "claim_text": "RF has pred_actual_correlation=0.86.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.86,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.86,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-linear_fit_slope",
+      "claim_text": "RF has linear_fit_slope=0.84.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.84,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.84,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

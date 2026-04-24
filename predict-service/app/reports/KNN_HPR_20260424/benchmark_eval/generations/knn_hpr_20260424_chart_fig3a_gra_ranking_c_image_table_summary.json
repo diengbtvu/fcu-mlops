@@ -1,0 +1,390 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Grey Relational Analysis (GRA) ranking shows that VFA (0.7931) is the most important feature, followed by Butyrate (0.7902), and Acetate (0.7772).",
+  "explanation_full": "According to the Grey Relational Analysis (GRA) ranking presented in Figure 3A, the features are ranked by their importance scores. VFA achieved the highest score at 0.7931, indicating it is the most influential feature. This is followed closely by Butyrate with a score of 0.7902, and Acetate with a score of 0.7772. The ranking continues with VSS (0.7768) and Propionate (0.7596) as the next most significant features.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA (0.7931) is the most important feature",
+      "claim_type": "rank_score",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "subject": "VFA",
+      "predicate": "gra_score",
+      "object": "0.7931",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate (0.7902)",
+      "claim_type": "rank_score",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "subject": "Butyrate",
+      "predicate": "gra_score",
+      "object": "0.7902",
+      "metric": "gra_score",
+      "value": 0.7902,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate (0.7772)",
+      "claim_type": "rank_score",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+      "subject": "Acetate",
+      "predicate": "gra_score",
+      "object": "0.7772",
+      "metric": "gra_score",
+      "value": 0.7772,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "VFA achieved the highest score at 0.7931",
+      "claim_type": "rank_score",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA",
+      "subject": "VFA",
+      "predicate": "gra_score",
+      "object": "0.7931",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "Butyrate with a score of 0.7902",
+      "claim_type": "rank_score",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "subject": "Butyrate",
+      "predicate": "gra_score",
+      "object": "0.7902",
+      "metric": "gra_score",
+      "value": 0.7902,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "Acetate with a score of 0.7772",
+      "claim_type": "rank_score",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+      "subject": "Acetate",
+      "predicate": "gra_score",
+      "object": "0.7772",
+      "metric": "gra_score",
+      "value": 0.7772,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_7",
+      "claim_text": "The ranking continues with VSS (0.7768) and Propionate (0.7596) as the next most significant features",
+      "claim_type": "ranking",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": null,
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The Grey Relational Analysis (GRA) ranking shows that VFA (0.7931) is the most important feature, followed by Butyrate (0.7902), and Acetate (0.7772).",
+        "draft_explanation_full": "According to the Grey Relational Analysis (GRA) ranking presented in Figure 3A, the features are ranked by their importance scores. VFA achieved the highest score at 0.7931, indicating it is the most influential feature. This is followed closely by Butyrate with a score of 0.7902, and Acetate with a score of 0.7772. The ranking continues with VSS (0.7768) and Propionate (0.7596) as the next most significant features.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "VFA (0.7931) is the most important feature",
+            "claim_type": "rank_score",
+            "span_category": "VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+            "subject": "VFA",
+            "predicate": "gra_score",
+            "object": "0.7931",
+            "metric": "gra_score",
+            "value": 0.7931,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Butyrate (0.7902)",
+            "claim_type": "rank_score",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+            "subject": "Butyrate",
+            "predicate": "gra_score",
+            "object": "0.7902",
+            "metric": "gra_score",
+            "value": 0.7902,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate (0.7772)",
+            "claim_type": "rank_score",
+            "span_category": "Acetate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+            "subject": "Acetate",
+            "predicate": "gra_score",
+            "object": "0.7772",
+            "metric": "gra_score",
+            "value": 0.7772,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VFA achieved the highest score at 0.7931",
+            "claim_type": "rank_score",
+            "span_category": "VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA",
+            "subject": "VFA",
+            "predicate": "gra_score",
+            "object": "0.7931",
+            "metric": "gra_score",
+            "value": 0.7931,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate with a score of 0.7902",
+            "claim_type": "rank_score",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+            "subject": "Butyrate",
+            "predicate": "gra_score",
+            "object": "0.7902",
+            "metric": "gra_score",
+            "value": 0.7902,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Acetate with a score of 0.7772",
+            "claim_type": "rank_score",
+            "span_category": "Acetate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+            "subject": "Acetate",
+            "predicate": "gra_score",
+            "object": "0.7772",
+            "metric": "gra_score",
+            "value": 0.7772,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "The ranking continues with VSS (0.7768) and Propionate (0.7596) as the next most significant features",
+            "claim_type": "ranking",
+            "span_category": "VSS",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+            "subject": "gra",
+            "predicate": "gra_score",
+            "object": null,
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "VFA (0.7931) is the most important feature",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet explicitly states VFA has the highest GRA score (0.7931) in the ranking.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature"
+            ],
+            "grounded_fact_summary": "VFA has the highest GRA score of 0.7931."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Butyrate (0.7902)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms Butyrate's GRA score is 0.7902.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate"
+            ],
+            "grounded_fact_summary": "Butyrate's GRA score is 0.7902."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate (0.7772)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms Acetate's GRA score is 0.7772.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate"
+            ],
+            "grounded_fact_summary": "Acetate's GRA score is 0.7772."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VFA achieved the highest score at 0.7931",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms VFA's score is 0.7931 and it is ranked first.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA"
+            ],
+            "grounded_fact_summary": "VFA achieved a GRA score of 0.7931."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate with a score of 0.7902",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms Butyrate's score is 0.7902.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate"
+            ],
+            "grounded_fact_summary": "Butyrate has a GRA score of 0.7902."
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Acetate with a score of 0.7772",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms Acetate's score is 0.7772.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate"
+            ],
+            "grounded_fact_summary": "Acetate has a GRA score of 0.7772."
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "The ranking continues with VSS (0.7768) and Propionate (0.7596) as the next most significant features",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet lists VSS (0.7768) and Propionate (0.7596) immediately following Acetate in the ranking.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking"
+            ],
+            "grounded_fact_summary": "VSS (0.7768) and Propionate (0.7596) follow Acetate in the GRA ranking."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 7
+    }
+  },
+  "parent_draft_hash": "d6f42bfbd54c407082f33c7904925f6e463845f3"
+}

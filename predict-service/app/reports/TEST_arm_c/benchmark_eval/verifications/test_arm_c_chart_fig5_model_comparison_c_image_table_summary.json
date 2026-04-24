@@ -1,0 +1,7 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig5_model_comparison",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": []
+}

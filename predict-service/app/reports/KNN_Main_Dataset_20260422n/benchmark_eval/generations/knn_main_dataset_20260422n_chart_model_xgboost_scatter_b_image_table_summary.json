@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model shows a strong linear relationship with predicted and actual values (correlation of 0.8750), achieving an R2 score of 0.7495. Its Mean Absolute Error (MAE) is 0.0956, suggesting good predictive performance.",
+  "explanation_full": "Observations indicate that the XGBoost model exhibits a strong correlation (0.8750) between its predicted and actual values, suggesting a robust linear fit. Quantitatively, the model achieved an R2 score of 0.7495 and a Mean Absolute Error (MAE) of 0.0956. Interpretation suggests that the model provides reliable predictions, with the low MAE indicating minimal average deviation from the true values. The scope of this analysis is limited to the 40 samples used in the scatter plot, and the residuals show a mean of -0.0254, suggesting minor systematic bias.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The XGBoost model has a correlation of 0.8750 between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has correlation (pred, actual)",
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.875024,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "XGBoost achieved an R2 score of 0.7495.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has R2 score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7494763102,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The Mean Absolute Error (MAE) for XGBoost is 0.0956.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has MAE",
+      "object": null,
+      "metric": "mae",
+      "value": 0.095593,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

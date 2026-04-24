@@ -1,0 +1,48 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieving the highest R² score at 0.81717 when all 11 features are included",
+      "claim_type": "metric_value",
+      "span_category": "R² score",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "R² score",
+      "object": 0.81717,
+      "metric": "best_r2",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "the KNN model's R² score increases from 0.6449 with just 'VFA' to 0.8179 when all 11 features are used",
+      "claim_type": "metric_value",
+      "span_category": "R² score",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "R² score",
+      "object": 0.8179,
+      "metric": "best_r2",
+      "value": 0.8179,
+      "unit": null,
+      "ordered_items": [
+        "0.6449"
+      ],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ]
+}

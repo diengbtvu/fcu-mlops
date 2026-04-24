@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VSS is the most important feature, followed by Acetate, Butyrate, and VFA, which are the top three predictors.",
+  "explanation_full": "The feature importance analysis confirms that VSS is the most critical feature, with an importance score of 0.5052. The top three predictors are VFA, Butyrate, and Acetate, which are also highlighted in the model summary. Specifically, Acetate (0.1199) and Butyrate (0.0969) are the next most important features after VSS. VFA (0.0748) also shows strong predictive power, making these four features the most relevant for understanding the model's output.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "claim_type": "comparison",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "is most important",
+      "object": "0.505222263291806",
+      "metric": "importance",
+      "value": 0.505222263291806,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top three predictors are VFA, Butyrate, and Acetate.",
+      "claim_type": "fact",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_summary.json",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is top predictor",
+      "object": "Butyrate",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate has an importance score of 0.1199.",
+      "claim_type": "fact",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "has importance",
+      "object": "0.11997573248269215",
+      "metric": "importance",
+      "value": 0.11997573248269215,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

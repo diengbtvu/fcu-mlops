@@ -1,0 +1,267 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra",
+  "artifact_type": "feature_ranking/gra",
+  "source_files": [
+    "gra_ranking.json",
+    "fig3a_gra_ranking.png",
+    "fig_gra_ranking.png",
+    "results_summary.txt"
+  ],
+  "chart_type": "ranking_chart",
+  "primary_entities": [
+    "VFA",
+    "Butyrate",
+    "Acetate",
+    "VSS",
+    "Propionate",
+    "Ethanol",
+    "COD-O",
+    "pH",
+    "ORP_Low",
+    "ORP_Mid",
+    "Sucrose_Degradation"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:top_feature",
+      "fact_type": "top_feature",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": "VFA",
+      "value": 0.7931135436956089,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "top GRA feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:ranking",
+      "fact_type": "ranking",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate",
+        "Ethanol",
+        "COD-O",
+        "pH",
+        "ORP_Low",
+        "ORP_Mid",
+        "Sucrose_Degradation"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "GRA rank ordering"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:VFA",
+      "fact_type": "rank_score",
+      "subject": "VFA",
+      "predicate": "gra_score",
+      "object": 1,
+      "value": 0.7931135436956089,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "VFA GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:Butyrate",
+      "fact_type": "rank_score",
+      "subject": "Butyrate",
+      "predicate": "gra_score",
+      "object": 2,
+      "value": 0.7902467550177025,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Butyrate GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:Acetate",
+      "fact_type": "rank_score",
+      "subject": "Acetate",
+      "predicate": "gra_score",
+      "object": 3,
+      "value": 0.7772199976368066,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Acetate GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:VSS",
+      "fact_type": "rank_score",
+      "subject": "VSS",
+      "predicate": "gra_score",
+      "object": 4,
+      "value": 0.7768076560138514,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "VSS GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:Propionate",
+      "fact_type": "rank_score",
+      "subject": "Propionate",
+      "predicate": "gra_score",
+      "object": 5,
+      "value": 0.7595541448908357,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Propionate GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:Ethanol",
+      "fact_type": "rank_score",
+      "subject": "Ethanol",
+      "predicate": "gra_score",
+      "object": 6,
+      "value": 0.7329323381694035,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Ethanol GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:COD-O",
+      "fact_type": "rank_score",
+      "subject": "COD-O",
+      "predicate": "gra_score",
+      "object": 7,
+      "value": 0.7183267981481565,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "COD-O GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:pH",
+      "fact_type": "rank_score",
+      "subject": "pH",
+      "predicate": "gra_score",
+      "object": 8,
+      "value": 0.7101968586952534,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "pH GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:ORP_Low",
+      "fact_type": "rank_score",
+      "subject": "ORP_Low",
+      "predicate": "gra_score",
+      "object": 9,
+      "value": 0.6396185753634854,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "ORP_Low GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:ORP_Mid",
+      "fact_type": "rank_score",
+      "subject": "ORP_Mid",
+      "predicate": "gra_score",
+      "object": 10,
+      "value": 0.6216932459109569,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "ORP_Mid GRA score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra:rank_score:Sucrose_Degradation",
+      "fact_type": "rank_score",
+      "subject": "Sucrose_Degradation",
+      "predicate": "gra_score",
+      "object": 11,
+      "value": 0.5833963988102198,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Sucrose_Degradation GRA score"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "KNN_Main_Dataset_20260421:feature_ranking/gra:top_feature",
+    "KNN_Main_Dataset_20260421:feature_ranking/gra:ranking"
+  ],
+  "forbidden_inferences": [
+    "Do not treat GRA rank as proof of causality.",
+    "Do not let summary prose override ranking JSON."
+  ]
+}

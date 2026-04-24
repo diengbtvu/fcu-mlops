@@ -1,0 +1,7 @@
+{
+  "artifact_id": "KNN_HPR_20260423:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": []
+}

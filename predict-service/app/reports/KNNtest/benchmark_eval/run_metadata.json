@@ -1,0 +1,22 @@
+{
+  "command": "run",
+  "source_bundle_path": "/app/app/reports/KNNtest",
+  "resolved_bundle_dir": "/app/app/reports/KNNtest",
+  "output_dir": "/app/app/reports/KNNtest/benchmark_eval",
+  "arms": [
+    "A",
+    "B",
+    "C",
+    "BASELINE_LLM"
+  ],
+  "conditions": [
+    "image_table_summary"
+  ],
+  "client": "ollama",
+  "client_model": "gemma4:e4b",
+  "baseline_arm": "BASELINE_LLM",
+  "created_at": "2026-04-21T08:56:12.155696+00:00",
+  "artifact_count": 24,
+  "generation_count": 96,
+  "warnings": []
+}

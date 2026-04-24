@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model, showing superior performance metrics (R2=0.81717, MSE=0.012810) compared to other models, and VFA, Butyrate, and Acetate are the most correlated features.",
+  "explanation_full": "Observations show that the KNN model significantly outperforms all other benchmark models, achieving an R2 score of 0.81717 and the lowest MSE of 0.012810. The top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641). Interpretation suggests that these three features are the primary drivers of HPR variability. We must note, however, that the analysis is based on a limited dataset of 197 samples, which may constrain the generalizability of these findings.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model is the best performing model.",
+      "claim_type": "freeform",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top correlated features with HPR.",
+      "claim_type": "top_feature",
+      "span_category": "feature_correlation",
+      "is_numeric": false,
+      "requires_grounding_from": "analysis_summary_report.txt",
+      "confidence": 1.0,
+      "subject": "HPR",
+      "predicate": "is most correlated with",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The dataset contains 197 samples.",
+      "claim_type": "metric_value",
+      "span_category": "data_overview",
+      "is_numeric": true,
+      "requires_grounding_from": "analysis_summary_report.txt",
+      "confidence": 1.0,
+      "subject": "Dataset",
+      "predicate": "has total samples",
+      "object": "197",
+      "metric": "sample_count",
+      "value": 197.0,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

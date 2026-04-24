@@ -64,6 +64,7 @@ def test_clear_report_benchmark_snapshot_removes_stale_summary_and_files(tmp_pat
                     "summary": "summary.json",
                     "benchmark_manifest": "benchmark_eval/manifest.jsonl",
                     "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+                    "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
                     "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json",
                 },
                 "benchmark_summary": {"generated_at": "2026-04-16T00:00:00Z"},
@@ -76,6 +77,7 @@ def test_clear_report_benchmark_snapshot_removes_stale_summary_and_files(tmp_pat
         "report_id": report_dir.name,
         "files": {
             "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+            "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
             "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json",
         },
         "benchmark_summary": {"generated_at": "2026-04-16T00:00:00Z"},
@@ -88,6 +90,54 @@ def test_clear_report_benchmark_snapshot_removes_stale_summary_and_files(tmp_pat
     assert "benchmark_summary" not in updated
     assert "selected_benchmark_explanations" not in updated
     assert "benchmark_manifest" not in updated["files"]
+    assert "benchmark_per_chart_json" not in updated["files"]
     assert "benchmark_selected_explanations" not in updated["files"]
     assert "benchmark_summary" not in report_info
     assert "selected_benchmark_explanations" not in report_info
+
+
+def test_reset_benchmark_output_dir_removes_stale_outputs(tmp_path: Path) -> None:
+    report_benchmark = _load_report_benchmark_module()
+    benchmark_dir = tmp_path / "benchmark_eval"
+    (benchmark_dir / "generations").mkdir(parents=True)
+    (benchmark_dir / "generations" / "old.json").write_text("{}", encoding="utf-8")
+
+    report_benchmark._reset_benchmark_output_dir(benchmark_dir)
+
+    assert benchmark_dir.exists()
+    assert list(benchmark_dir.iterdir()) == []
+
+
+def test_running_progress_payload_uses_live_file_counts(tmp_path: Path) -> None:
+    report_benchmark = _load_report_benchmark_module()
+    benchmark_dir = tmp_path / "benchmark_eval"
+    for name in ("gold", "generations", "extracted_claims", "verifications", "scores"):
+        (benchmark_dir / name).mkdir(parents=True, exist_ok=True)
+    (benchmark_dir / "manifest.jsonl").write_text("{}", encoding="utf-8")
+    for idx in range(3):
+        (benchmark_dir / "gold" / f"gold_{idx}.json").write_text("{}", encoding="utf-8")
+    for idx in range(5):
+        (benchmark_dir / "generations" / f"generation_{idx}.json").write_text("{}", encoding="utf-8")
+    for idx in range(4):
+        (benchmark_dir / "extracted_claims" / f"claims_{idx}.json").write_text("{}", encoding="utf-8")
+        (benchmark_dir / "verifications" / f"verification_{idx}.json").write_text("{}", encoding="utf-8")
+
+    payload = report_benchmark._running_progress_payload(
+        benchmark_dir=benchmark_dir,
+        expected_generation_count=10,
+    )
+
+    assert payload["progress"] > 40
+    assert "4/10" in payload["message"]
+    assert payload["current_items"][0] == "generated 5/10"
+    assert payload["current_items"][1] == "verified 4/10"
+    assert payload["current_items"][2].startswith("latest verification:")
+
+
+def test_effective_benchmark_timeout_scales_with_expected_runs(monkeypatch) -> None:
+    report_benchmark = _load_report_benchmark_module()
+    monkeypatch.setattr(report_benchmark, "BENCHMARK_TIMEOUT_SECONDS", 3600)
+    monkeypatch.setattr(report_benchmark, "BENCHMARK_SECONDS_PER_GENERATION", 45)
+
+    assert report_benchmark._effective_benchmark_timeout(120) == 5400
+    assert report_benchmark._effective_benchmark_timeout(None) == 3600

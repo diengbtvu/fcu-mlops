@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:feature_importance",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature, accounting for 50.52% of the importance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate is the second most important feature, with 12.00% importance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_importance",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate is the third most important feature, with 9.70% importance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

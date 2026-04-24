@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Identifies key predictors (pH, Glucose, Lactate, Acetate, Ethanol, Temperature, Time) crucial for understanding process dynamics and model performance.",
+  "explanation_full": "The analysis identifies several crucial variables: Chemical components (pH, Glucose, Lactate, Acetate, Ethanol) and Physical/Process parameters (Temperature, Time). These features are critical for understanding metabolic pathways and predicting the final outcome, suggesting a high degree of predictive accuracy in the model.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

@@ -1,0 +1,57 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The strongest correlations are observed between Butyrate and VFA (0.9601), and Acetate and VFA (0.9428), indicating a strong linear relationship between these metabolites.",
+  "explanation_full": "At the L2/L3 level, the focus shifts to specific strong correlations evident in the chart. The highest correlation is between Butyrate and VFA (0.9601), suggesting that changes in one metabolite strongly predict changes in the other. Similarly, Acetate and VFA show a very high correlation of 0.9428. These strong pairwise correlations among the primary entities (Butyrate, Acetate, VFA) are crucial for understanding the metabolic interplay that influences HPR, as detailed in the correlation story.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The highest correlation is between Butyrate and VFA (0.9601)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:correlation",
+      "subject": "Butyrate",
+      "predicate": "correlation",
+      "object": "VFA",
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [
+        "Butyrate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate and VFA show a very high correlation of 0.9428",
+      "claim_type": "metric_value",
+      "span_category": "Acetate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:correlation",
+      "subject": "Acetate",
+      "predicate": "correlation",
+      "object": "VFA",
+      "metric": "correlation",
+      "value": 0.9428,
+      "unit": null,
+      "ordered_items": [
+        "Acetate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

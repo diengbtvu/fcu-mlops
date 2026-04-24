@@ -1,0 +1,53 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA, Butyrate, and Acetate.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No top-feature fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN's RMSE is 0.113181, which is lower than RF's 0.125388 and XGBoost's 0.132486.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The sequence correlation for KNN is 0.931488.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+      ],
+      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low (0.0352), Butyrate (0.0334), and ORP_Mid (0.0296) exhibit the highest mean absolute SHAP values",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.035244838.",
+      "numeric_delta": 4.4837999999998435e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Low (0.0352)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.035244838.",
+      "numeric_delta": 4.4837999999998435e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate (0.0334)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig3b_shap_analysis:metric:Butyrate:mean_abs_shap"
+      ],
+      "reason": "Gold value for Butyrate mean_abs_shap is 0.033441743.",
+      "numeric_delta": 4.1743000000003805e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "ORP_Mid (0.0296)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig3b_shap_analysis:metric:ORP_Mid:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Mid mean_abs_shap is 0.0295513804.",
+      "numeric_delta": 4.861960000000082e-05
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:correlation_heatmap",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "The correlation coefficients between pH and the other measured parameters are all 1.0.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C2",
+      "claim_text": "The R^2 value will be 1.0, indicating a perfect fit.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C3",
+      "claim_text": "You cannot use all pH columns simultaneously in a standard regression model without causing issues like multicollinearity.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C4",
+      "claim_text": "select only one pH column as the sole predictor.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "all measured variables contribute to the prediction",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C2",
+      "claim_text": "'V' (Voltage) and 'I' (Current) might be the most strongly correlated pair",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C3",
+      "claim_text": "'V' (Voltage) and 'I' (Current) is the highest",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C4",
+      "claim_text": "'V' (Voltage) and 'I' (Current) suggests potential multicollinearity",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C5",
+      "claim_text": "PCA on (V, I) is recommended",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C6",
+      "claim_text": "T, P, and R should be retained",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

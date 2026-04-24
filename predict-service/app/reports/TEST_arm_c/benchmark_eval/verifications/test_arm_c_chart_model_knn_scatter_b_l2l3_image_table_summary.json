@@ -1,0 +1,86 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model's strong correlation (0.9073) and low mean absolute residual (0.0750) confirm its predictive accuracy shown in the scatter plot.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The model exhibits a strong correlation coefficient of 0.9073 between predicted and actual values.",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 1.0000000000287557e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "the mean absolute residual is reported as 0.0750",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The linear fit slope of 0.8798",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope"
+      ],
+      "reason": "Gold value for KNN linear_fit_slope is 0.879798.",
+      "numeric_delta": 2.0000000000575113e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "the low RMSE of 0.1132 from the table",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 1.9089999999999385e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "making it the best choice among the tested algorithms.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

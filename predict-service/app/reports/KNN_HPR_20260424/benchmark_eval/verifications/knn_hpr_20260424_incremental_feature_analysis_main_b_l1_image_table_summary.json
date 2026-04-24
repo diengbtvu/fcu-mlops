@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieving the highest R² score at 0.81717 when all 11 features are included",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.012969724935705917
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "the KNN model's R² score increases from 0.6449 with just 'VFA' to 0.8179 when all 11 features are used",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.012239724935705909
+    }
+  ]
+}

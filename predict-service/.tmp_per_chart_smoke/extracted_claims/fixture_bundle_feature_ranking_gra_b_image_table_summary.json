@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "top-feature",
+      "claim_text": "pH is the top feature in the GRA ranking.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.98,
+      "subject": "pH",
+      "predicate": null,
+      "object": "pH",
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "rank-order",
+      "claim_text": "The top GRA ordering is pH > Propionate > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "pH",
+        "Propionate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "top-score",
+      "claim_text": "pH has GRA score 0.910000.",
+      "claim_type": "rank_score",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.96,
+      "subject": "pH",
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": 0.91,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

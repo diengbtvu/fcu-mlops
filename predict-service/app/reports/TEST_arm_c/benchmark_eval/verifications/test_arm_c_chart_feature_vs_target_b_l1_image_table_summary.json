@@ -1,0 +1,50 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA (0.9601) exhibit the strongest correlations",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate vs VFA (0.9428) exhibit the strongest correlations",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Acetate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Acetate vs VFA correlation is 0.9428.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA is the top correlated feature with HPR (0.7984)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

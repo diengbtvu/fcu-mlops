@@ -1,0 +1,69 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature",
+      "claim_type": "freeform",
+      "span_category": "VSS",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "subject": "VSS",
+      "predicate": "is most important",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VSS as the most critical predictor with an importance score of 0.5052",
+      "claim_type": "metric_value",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "subject": "VSS",
+      "predicate": "has importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.5052,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate, Butyrate, and VFA form the next tier of highly influential features",
+      "claim_type": "freeform",
+      "span_category": "Acetate, Butyrate, and VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:ranking",
+      "subject": "Acetate, Butyrate, and VFA",
+      "predicate": "are next tier of highly influential features",
+      "object": null,
+      "metric": "influence",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Acetate",
+        "Butyrate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

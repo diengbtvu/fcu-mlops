@@ -1,0 +1,44 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean (0.4736) and standard deviation (0.2528).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:boxplots:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 2.1849466680379237e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "pH has the lowest mean (0.2355) and standard deviation (0.1267).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:boxplots:metric:pH:mean"
+      ],
+      "reason": "Gold value for pH mean is 0.235499905.",
+      "numeric_delta": 4.565706146486548e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The dataset is based on 197 observations.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

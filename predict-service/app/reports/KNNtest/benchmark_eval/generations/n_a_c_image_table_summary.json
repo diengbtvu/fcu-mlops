@@ -1,0 +1,8 @@
+{
+  "artifact_id": "N/A",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The content is a general summary and interpretation of data structure, lacking specific, extractable claims.",
+  "explanation_full": "The document analyzes the structure of hypothetical data (Model/Feature Groupings, Performance Metrics, Trend Observation) and provides advice on how to proceed. It does not contain any specific, verifiable claims or data points that can be extracted into the required claim structure.",
+  "claims": []
+}

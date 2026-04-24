@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model performed best, achieving an R2 score of 0.8172, which is superior to all other benchmark models.",
+  "explanation_full": "The residual analysis chart indicates that the KNN model is the best performer among the tested algorithms, boasting an R2 score of 0.8172. This metric suggests that the model explains a high proportion of the variance in the data compared to other models like RF (R2=0.7756) and XGBoost (R2=0.7495). Furthermore, the low RMSE (0.1132) and MAE (0.075) for KNN suggest that its predictions are consistently close to the actual values, confirming its superior predictive capability for HPR.",
+  "claims": [],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

@@ -1,0 +1,50 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ridge, Lasso, and Elastic Net achieve the highest R^2 (0.99)",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.010000000000000009
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Ridge, Lasso, and Elastic Net achieve the lowest error metrics (MSE=0.000, RMSE=0.020)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_mean"
+      ],
+      "reason": "Gold value for DT residual_mean is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Ridge, Lasso, and Elastic Net slightly outperforming Linear Regression (R^2=0.98)",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.020000000000000018
+    }
+  ]
+}

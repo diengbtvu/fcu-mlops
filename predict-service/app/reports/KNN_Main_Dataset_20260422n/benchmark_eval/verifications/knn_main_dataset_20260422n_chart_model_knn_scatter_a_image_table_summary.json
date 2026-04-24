@@ -1,0 +1,72 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved an R2 score of 0.8172.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_knn_scatter:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.219830000000812e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The KNN model achieved an RMSE of 0.1132.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_knn_scatter:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 1.9089999999999385e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The KNN model achieved an MAE of 0.075.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_knn_scatter:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.0750230875.",
+      "numeric_delta": 2.30875000000047e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The correlation between predicted and actual values for KNN is 0.9073.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_knn_scatter:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 1.0000000000287557e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "KNN outperformed SVM in R2 score.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_knn_scatter:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 1.1828321982999999
+    }
+  ]
+}

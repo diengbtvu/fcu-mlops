@@ -1,0 +1,92 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean (0.4736)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 1.7887600000043857e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol has a high standard deviation (0.2528)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.2528296374.",
+      "numeric_delta": 2.9637399999948855e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VSS has the lowest mean (0.3581)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:VSS:mean"
+      ],
+      "reason": "Gold value for VSS mean is 0.358093633.",
+      "numeric_delta": 6.366999999951606e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VSS has the lowest standard deviation (0.1538)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:VSS:std"
+      ],
+      "reason": "Gold value for VSS std is 0.1537613312.",
+      "numeric_delta": 3.866880000000239e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Acetate (mean: 0.4465, std: 0.226)",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Acetate:mean"
+      ],
+      "reason": "Gold value for Acetate mean is 0.4465350188.",
+      "numeric_delta": 0.2205350188
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Butyrate (mean: 0.4287, std: 0.247)",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Butyrate:mean"
+      ],
+      "reason": "Gold value for Butyrate mean is 0.4286702028.",
+      "numeric_delta": 0.1816702028
+    }
+  ]
+}

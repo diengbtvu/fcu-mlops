@@ -1,0 +1,64 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model performed best, achieving an R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN model... highest R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "lowest RMSE (0.1132)",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:max_abs_residual"
+      ],
+      "reason": "Gold value for KNN max_abs_residual is 0.367254.",
+      "numeric_delta": 0.254054
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "lowest MAE (0.075)",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:max_abs_residual"
+      ],
+      "reason": "Gold value for KNN max_abs_residual is 0.367254.",
+      "numeric_delta": 0.292254
+    }
+  ]
+}

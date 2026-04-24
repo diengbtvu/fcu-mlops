@@ -1,0 +1,106 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN consistently outperforms other models, achieving the highest R² (0.817) and lowest MSE (0.0128) across the full feature set.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.01314000000000004
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The best feature set for KNN is found at 9 features (VFA -> ... -> ORP_Low), yielding R²=0.8301 and MSE=0.0119.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Overall, KNN is the best model, followed by RF, and DT is the worst performer.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:ranking:r2_score"
+      ],
+      "reason": "Gold best model is ['KNN', 'RF', 'SVM', 'XGBoost', 'DT'].",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The KNN model is the superior performer, achieving the highest R² (0.817) and lowest MSE (0.0128) when considering the full set of features.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.01314000000000004
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The best feature subset for KNN is identified at 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low), yielding an R² of 0.8301 and MSE of 0.0119.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "KNN: Best R² (0.8301) at 9 features.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 4.0000000000040004e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "The DT model consistently shows the lowest performance across all feature counts, with the lowest R² (0.5604) in the final benchmark comparison.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.671427.",
+      "numeric_delta": 0.11102699999999999
+    }
+  ]
+}

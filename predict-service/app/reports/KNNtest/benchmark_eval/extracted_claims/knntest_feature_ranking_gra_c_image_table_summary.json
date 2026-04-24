@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:feature_ranking/gra",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most important feature with a score of 0.7931.",
+      "claim_type": "Feature Importance",
+      "span_category": "VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "gra_ranking",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "0.7931",
+      "metric": "gra_score",
+      "value": 0.7931135436956089,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate and Acetate follow as the second and third most important features.",
+      "claim_type": "Feature Ranking",
+      "span_category": "Butyrate, Acetate",
+      "is_numeric": false,
+      "requires_grounding_from": "gra_ranking",
+      "confidence": 1.0,
+      "subject": "Butyrate, Acetate",
+      "predicate": "are the second and third most important features",
+      "object": null,
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN is the best model, achieving an R² of 0.81717.",
+      "claim_type": "Model Performance",
+      "span_category": "KNN",
+      "is_numeric": false,
+      "requires_grounding_from": "summary_text",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": 0.81717,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

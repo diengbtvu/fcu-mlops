@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model, achieving the highest R² (0.81717) and lowest RMSE (0.11318), while DT performed the worst.",
+  "explanation_full": "The model comparison clearly shows that KNN is the superior model, evidenced by its highest R² score (0.81717) and lowest RMSE (0.11318). In contrast, the DT model performed the poorest, recording the lowest R² (0.56045) and highest RMSE (0.17548). Among the remaining models, RF (R²=0.77560) outperformed XGBoost (R²=0.74948) and SVM (R²=0.73241), indicating a stronger predictive capability.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model, achieving the highest R² score (0.81717) and lowest RMSE (0.11318).",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the superior model",
+      "object": "0.81717 and 0.11318",
+      "metric": "r² and rmse",
+      "value": 0.8171678017037467,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The DT model performed the poorest, recording the lowest R² (0.56045) and highest RMSE (0.17548).",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "performed the poorest",
+      "object": "0.56045 and 0.17548",
+      "metric": "r² and rmse",
+      "value": 0.5604531394996005,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "RF outperformed XGBoost and SVM, with an R² of 0.77560.",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "outperformed",
+      "object": "XGBoost and SVM",
+      "metric": "r2_score",
+      "value": 0.7756018171353091,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

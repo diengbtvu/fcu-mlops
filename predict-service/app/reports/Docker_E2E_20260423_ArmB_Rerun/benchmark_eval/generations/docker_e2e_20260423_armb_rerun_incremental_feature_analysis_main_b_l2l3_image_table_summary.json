@@ -1,0 +1,48 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The incremental feature analysis shows that while DT, RF, and KNN maintain perfect performance (R²=1.0, MSE=0.0) regardless of the number of features included, SVM and XGBoost consistently perform poorly (R²=0.0). The performance of SVM gradually improves as more features are added, with the lowest MSE observed at 7 features (Acetate).",
+  "explanation_full": "The incremental feature analysis demonstrates a clear divergence in model performance based on the number of features included. For DT, RF, and KNN, the performance remains perfect (R²=1.0, MSE=0.0) across all feature subsets, from 1 to 11 features. In contrast, SVM and XGBoost consistently show an R² of 0.0. For SVM, the Mean Squared Error (MSE) shows a decreasing trend as more features are added, suggesting that the model's ability to fit the data improves slightly with feature inclusion, reaching its minimum MSE of approximately 0.0066 at 10 features (ORP_Mid). XGBoost maintains a negligible MSE across all steps, but its R² remains 0.0. Overall, the analysis highlights the robustness of DT, RF, and KNN models, which achieve perfect scores regardless of feature set size, while SVM's performance is highly sensitive to feature count, and XGBoost fails to capture predictive power (R²=0.0). The feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate' (7 features) is notable for SVM as it achieves the lowest MSE (0.00877) before the MSE begins to increase again at 9 features (0.00875). This suggests a potential optimal feature subset for SVM, although the overall R² remains 0.0 for all models and feature counts, except for DT, RF, and KNN, which achieve perfect scores.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate' (7 features) is notable for SVM as it achieves the lowest MSE (0.00877)",
+      "claim_type": "metric_value",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum",
+      "subject": "SVM",
+      "predicate": "feature_subset_optimum",
+      "object": "Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate",
+      "metric": "mse",
+      "value": 0.00877,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 7,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The performance of SVM gradually improves as more features are added, with the lowest MSE observed at 7 features (Acetate).",
+      "claim_type": "metric_value",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum",
+      "subject": "SVM",
+      "predicate": "feature_subset_optimum",
+      "object": null,
+      "metric": "mse",
+      "value": 0.00877,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 7,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3"
+}

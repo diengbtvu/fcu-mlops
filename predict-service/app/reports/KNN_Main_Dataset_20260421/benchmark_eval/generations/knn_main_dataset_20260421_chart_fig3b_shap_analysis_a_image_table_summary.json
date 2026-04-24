@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SHAP analysis shows that ORP_Low, Butyrate, ORP_Mid, VFA, and COD-O are the top features in terms of mean absolute SHAP values.",
+  "explanation_full": "Based on the SHAP analysis, the features with the highest mean absolute SHAP values are ORP_Low (0.0367), Butyrate (0.0347), ORP_Mid (0.0298), VFA (0.0296), and COD-O (0.0286). These values indicate the relative importance of these features in the model's predictions. The top feature importance ranking from the summary also highlights VFA, Butyrate, and Acetate as the most influential features overall.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": "0.03668805020869625",
+      "metric": "mean_abs_shap",
+      "value": 0.03668805020869625,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate has the second highest mean absolute SHAP value.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "mean_abs_shap",
+      "object": "0.03473793615996937",
+      "metric": "mean_abs_shap",
+      "value": 0.03473793615996937,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_text_3",
+      "claim_text": "VFA, Butyrate, and Acetate are the top features.",
+      "claim_type": "top_feature",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_summary.json",
+      "confidence": 1.0,
+      "subject": "VFA, Butyrate, and Acetate",
+      "predicate": "top_features",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "DT, RF, and KNN models all achieved perfect performance metrics, including an R² score of 1.0 and zero values for RMSE, MSE, and MAE.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "DT, RF, and KNN models all achieved perfect performance metrics, including an R² score of 1.0 and zero values for RMSE, MSE, and MAE.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "DT, RF, and KNN models all achieved perfect performance metrics, including an R² score of 1.0 and zero values for RMSE, MSE, and MAE.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:mse"
+      ],
+      "reason": "Gold value for DT mse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "DT, RF, and KNN models all achieved perfect performance metrics, including an R² score of 1.0 and zero values for RMSE, MSE, and MAE.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "SVM model scored 0.0 for R².",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "SVM model scored 0.0 for R².",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.0.",
+      "numeric_delta": 0.0875
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "SVM model scored 0.0 for R².",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.0.",
+      "numeric_delta": 0.0872
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "XGBoost model scored 0.0 for R².",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "XGBoost model showed a very low RMSE of 2.73e-07.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.0.",
+      "numeric_delta": 2.73
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_10",
+      "claim_text": "XGBoost model showed an MAE of 2.73e-07.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.0.",
+      "numeric_delta": 2.73
+    }
+  ]
+}

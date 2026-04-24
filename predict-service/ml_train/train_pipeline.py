@@ -722,6 +722,33 @@ def _paper_incremental_results_view(results_table: pd.DataFrame) -> pd.DataFrame
     return paper_table
 
 
+def _safe_linear_fit(
+    x_values: Sequence[float] | np.ndarray,
+    y_values: Sequence[float] | np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.poly1d] | None:
+    """Return a best-fit line only when the input is numerically stable."""
+    x = np.asarray(x_values, dtype=float).reshape(-1)
+    y = np.asarray(y_values, dtype=float).reshape(-1)
+    mask = np.isfinite(x) & np.isfinite(y)
+    x = x[mask]
+    y = y[mask]
+
+    if x.size < 2 or y.size < 2:
+        return None
+    if np.allclose(x, x[0]):
+        return None
+
+    try:
+        coefficients = np.polyfit(x, y, 1)
+    except Exception:
+        return None
+
+    if not np.all(np.isfinite(coefficients)):
+        return None
+
+    return x, y, coefficients, np.poly1d(coefficients)
+
+
 def plot_model_comparison(
     results: Dict[str, Dict[str, Any]],
     y_test: np.ndarray,
@@ -739,11 +766,11 @@ def plot_model_comparison(
         y_pred_test = np.asarray(result["y_pred_test"])
         ax.scatter(y_test, y_pred_test, alpha=0.6, s=20, label="Data Points")
 
-        if len(y_test) > 1:
-            z = np.polyfit(y_test, y_pred_test, 1)
-            p = np.poly1d(z)
-            x_line = np.linspace(float(np.min(y_test)), float(np.max(y_test)), 100)
-            ax.plot(x_line, p(x_line), "r-", linewidth=2, label="Best Linear Fit")
+        fit_result = _safe_linear_fit(y_test, y_pred_test)
+        if fit_result is not None:
+            x_fit, _, _, fit_line = fit_result
+            x_line = np.linspace(float(np.min(x_fit)), float(np.max(x_fit)), 100)
+            ax.plot(x_line, fit_line(x_line), "r-", linewidth=2, label="Best Linear Fit")
 
         ax.set_xlabel("Measured", fontsize=10)
         ax.set_ylabel("Predicted", fontsize=10)
@@ -849,11 +876,11 @@ def plot_univariate_analysis(
         y_clean = y[mask]
 
         ax.scatter(x_clean, y_clean, alpha=0.5, s=30, c="steelblue")
-        if len(x_clean) > 2:
-            z = np.polyfit(x_clean, y_clean, 1)
-            p = np.poly1d(z)
-            x_line = np.linspace(float(x_clean.min()), float(x_clean.max()), 100)
-            ax.plot(x_line, p(x_line), "r--", alpha=0.7, linewidth=2)
+        fit_result = _safe_linear_fit(x_clean, y_clean)
+        if fit_result is not None:
+            x_fit, _, _, fit_line = fit_result
+            x_line = np.linspace(float(np.min(x_fit)), float(np.max(x_fit)), 100)
+            ax.plot(x_line, fit_line(x_line), "r--", alpha=0.7, linewidth=2)
 
         ax.set_xlabel(feature, fontsize=10)
         ax.set_ylabel("HPR (L/h/L)", fontsize=10)
@@ -1130,18 +1157,18 @@ def _save_model_scatter_plots(
     for model_name, result in results.items():
         fig, ax = plt.subplots(figsize=(8, 6))
         y_pred_test = np.asarray(result["y_pred_test"])
-        ax.scatter(y_test, y_pred_test, alpha=0.6, s=40, c="steelblue")
+        ax.scatter(y_test, y_pred_test, alpha=0.6, s=40, c="steelblue", label="Data Points")
 
-        if len(y_test) > 1:
-            z = np.polyfit(y_test, y_pred_test, 1)
-            p = np.poly1d(z)
-            x_line = np.linspace(float(np.min(y_test)), float(np.max(y_test)), 100)
+        fit_result = _safe_linear_fit(y_test, y_pred_test)
+        if fit_result is not None:
+            x_fit, _, coefficients, fit_line = fit_result
+            x_line = np.linspace(float(np.min(x_fit)), float(np.max(x_fit)), 100)
             ax.plot(
                 x_line,
-                p(x_line),
+                fit_line(x_line),
                 "r-",
                 linewidth=2,
-                label=f"Linear Fit: y={z[0]:.2f}x+{z[1]:.3f}",
+                label=f"Linear Fit: y={coefficients[0]:.2f}x+{coefficients[1]:.3f}",
             )
 
         ax.set_xlabel("Measured", fontsize=12)

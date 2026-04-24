@@ -1,0 +1,76 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "highest R2 score (0.8172)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "low residual standard deviation (0.1125)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:residual_std"
+      ],
+      "reason": "Gold value for KNN residual_std is 0.112518.",
+      "numeric_delta": 1.8000000000004124e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "strong correlation of 0.9073 between predictions and actuals",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 1.0000000000287557e-06
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "mean absolute residual (0.0750) is the lowest among the models",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:max_abs_residual"
+      ],
+      "reason": "Gold value for KNN max_abs_residual is 0.367254.",
+      "numeric_delta": 0.292254
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model, achieving the highest R² score (0.81717) and lowest RMSE (0.11318).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The DT model performed the poorest, recording the lowest R² (0.56045) and highest RMSE (0.17548).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "RF outperformed XGBoost and SVM, with an R² of 0.77560.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

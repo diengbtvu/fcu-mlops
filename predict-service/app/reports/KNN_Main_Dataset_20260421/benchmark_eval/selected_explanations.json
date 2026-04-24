@@ -1,0 +1,128 @@
+{
+  "provider": "benchmark_selected",
+  "model": "gemma4:e4b",
+  "generated_at": "2026-04-22T05:24:50.268337+00:00",
+  "selection_method": "best_leaderboard_row",
+  "selected_arm": "C",
+  "selected_condition": "image_table_summary",
+  "selected_row": {
+    "arm": "C",
+    "input_condition": "image_table_summary",
+    "artifact_count": 24,
+    "claim_count": 125,
+    "fact_precision": 0.7052083333333333,
+    "fact_recall": 0.20638771797308383,
+    "fact_f1": 0.3053189160183676,
+    "unsupported_claim_rate": 0.2375,
+    "contradiction_rate": 0.057291666666666664,
+    "coverage_of_salient_facts": 0.2326388888888889,
+    "numeric_accuracy": 0.7725694444444444,
+    "numeric_tolerance_accuracy": 0.7725694444444444
+  },
+  "overview": {
+    "en": "The model comparison clearly indicates that KNN is the superior model, achieving the highest R² score (0.81717) and the lowest RMSE (0.11318). This performance is significantly better than DT (R²=0.56045) and RF (R²=0.77560). Furthermore, KNN maintains the lowest MSE (0.012810). The results suggest that KNN is the most robust choice for this prediction task, although the model's performance should always be validated against real-world data.\n\nThe model comparison shows that KNN is the best performing model. It achieved the highest R2 score (0.81717) and the lowest Mean Squared Error (MSE) (0.012810). When compared to other models, RF scored 0.775602 R2 and 0.015722 MSE; XGBoost scored 0.749476 R2 and 0.017553 MSE; SVM scored 0.732410 R2 and 0.018748 MSE; and DT scored 0.560453 R2 and 0.030796 MSE. Overall, KNN significantly outperforms the other benchmark models.\n\nThe model comparison chart and associated tables consistently show that the K-Nearest Neighbors (KNN) model performs best across multiple metrics. Specifically, KNN achieved the highest R2 score (0.81717) and the lowest Root Mean Squared Error (RMSE) (0.11318). When compared to other models, KNN significantly outperforms DT (R2=0.56045, RMSE=0.17549), and maintains superior performance over RF, XGBoost, and SVM.",
+    "zh_TW": ""
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "The model comparison clearly indicates that KNN is the superior model, achieving the highest R² score (0.81717) and the lowest RMSE (0.11318). This performance is significantly better than DT (R²=0.56045) and RF (R²=0.77560). Furthermore, KNN maintains the lowest MSE (0.012810). The results suggest that KNN is the most robust choice for this prediction task, although the model's performance should always be validated against real-world data.",
+      "zh_TW": ""
+    },
+    "model_comparison_table": {
+      "en": "The model comparison clearly indicates that KNN is the superior model, achieving the highest R² score (0.81717) and the lowest RMSE (0.11318). This performance is significantly better than DT (R²=0.56045) and RF (R²=0.77560). Furthermore, KNN maintains the lowest MSE (0.012810). The results suggest that KNN is the most robust choice for this prediction task, although the model's performance should always be validated against real-world data.",
+      "zh_TW": ""
+    },
+    "table1_incremental_results": {
+      "en": "The incremental feature analysis tracks how model performance (R² and MSE) changes as features are added sequentially. The results demonstrate a general trend of increasing performance (higher R² and lower MSE) as more relevant features are included. For instance, with 11 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low -> ORP_Mid -> Sucrose_Degradation), the KNN model achieves the highest R² (0.8178) and the lowest MSE (0.01276). Similarly, RF also shows strong performance (R²=0.7855, MSE=0.0150). The analysis confirms that the inclusion of all 11 features provides the optimal feature set for maximizing model performance across the tested models.",
+      "zh_TW": ""
+    },
+    "gra_ranking": {
+      "en": "The feature ranking analysis identifies VFA as the most important feature (score: 0.7931), followed by Butyrate (0.7902) and Acetate (0.7772). Model performance metrics show that KNN is the best model, achieving an R² of 0.81717 and an MSE of 0.012810. Furthermore, the incremental feature analysis confirms that the model benefits from a larger feature set, with the KNN score reaching 0.817859 when all 11 features are included. These results highlight the importance of the top three features and the overall benefit of comprehensive feature inclusion.",
+      "zh_TW": ""
+    },
+    "fig3a_gra_ranking": {
+      "en": "The Grey Relational Analysis (GRA) ranking identifies the relative importance of various features for the prediction task. According to the ranking, VFA has the highest score (0.7931), indicating it is the most influential feature. Butyrate follows closely with a score of 0.7902, and Acetate ranks third with a score of 0.7772. The remaining features, VSS (0.7768), Propionate (0.7596), and Ethanol (0.7329), follow in descending order of importance.",
+      "zh_TW": ""
+    },
+    "fig3b_shap_analysis": {
+      "en": "The SHAP analysis reveals the relative importance of features, with ORP_Low (0.0367) having the highest mean absolute SHAP value, followed by Butyrate (0.0347), ORP_Mid (0.0298), VFA (0.0296), and COD-O (0.0286). Additionally, the model summary explicitly lists VFA, Butyrate, and Acetate as the top features. These findings suggest that the model relies heavily on these parameters for accurate predictions. The claims are grounded in the provided SHAP importance table and the model summary.",
+      "zh_TW": ""
+    },
+    "fig3_feature_analysis": {
+      "en": "The analysis of feature importance and feature subset selection reveals that the KNN model performs best with a subset of 9 features. This optimal subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low', yielding an R2 score of 0.83014 and an MSE of 0.011901. \n\nIn terms of feature importance, the GRA ranking identifies VFA (0.7931) as the most important feature, followed by Butyrate (0.7902) and Acetate (0.7772). The feature importance analysis confirms VSS (0.5052) as the most important feature, followed by Acetate (0.12) and Butyrate (0.097).",
+      "zh_TW": ""
+    },
+    "fig4_univariate_analysis": {
+      "en": "The univariate analysis reveals the strongest correlations between various chemical components and the target variable, HPR. Specifically, VFA exhibits the strongest correlation with HPR (0.7984). Among the strongest pairwise correlations, Butyrate vs VFA (0.9601) and Acetate vs VFA (0.9428) are the highest. The analysis also shows that Acetate vs Butyrate has a strong correlation of 0.8651.",
+      "zh_TW": ""
+    },
+    "fig5_model_comparison": {
+      "en": "The model comparison shows that KNN is the best performing model. It achieved the highest R2 score (0.81717) and the lowest Mean Squared Error (MSE) (0.012810). When compared to other models, RF scored 0.775602 R2 and 0.015722 MSE; XGBoost scored 0.749476 R2 and 0.017553 MSE; SVM scored 0.732410 R2 and 0.018748 MSE; and DT scored 0.560453 R2 and 0.030796 MSE. Overall, KNN significantly outperforms the other benchmark models.",
+      "zh_TW": ""
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "The analysis of MSE and R² across varying feature counts shows that KNN achieved the highest R² score (0.83014) and the lowest MSE (0.011901) when using 9 features. The optimal feature subset for KNN is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'.\n\nFor other models:\n*   **RF** achieved the highest R² (0.785537) with 11 features, and the lowest MSE (0.015026).\n*   **XGBoost** achieved the highest R² (0.768407) and lowest MSE (0.016226) with 4 features.\n*   **SVM** achieved the highest R² (0.779437) and lowest MSE (0.015453) with 4 features.\n*   **DT** achieved the highest R² (0.671427) and lowest MSE (0.023021) with 9 features.\n\nOverall, KNN is the best model, achieving an R² of 0.81717 and an MSE of 0.012810 on the full test set.",
+      "zh_TW": ""
+    },
+    "fig6c_prediction_time": {
+      "en": "The model comparison confirms that KNN is the best benchmark model, achieving an R2 score of 0.81717 and an MSE of 0.012810. Furthermore, the analysis identifies VFA, Butyrate, and Acetate as the top three features correlated with HPR. The sequence diagnostics report a high sequence correlation of 0.931488 for KNN. These findings are strongly supported by the provided summary metrics and feature ranking.",
+      "zh_TW": ""
+    },
+    "model_svm_scatter": {
+      "en": "The SVM model's performance is characterized by an R2 score of 0.7324, which indicates a solid fit. The model also demonstrated a strong correlation of 0.86576 between predicted and actual values. Error metrics include an RMSE of 0.1369 and an MAE of 0.0946. These metrics provide a comprehensive view of the model's predictive accuracy based on the scatter plot diagnostics.",
+      "zh_TW": ""
+    },
+    "model_dt_scatter": {
+      "en": "The Decision Tree (DT) model's performance metrics, derived from the scatter plot diagnostics, show an R2 score of 0.5605. This indicates that the model explains a moderate amount of the variance in the data. The model also exhibited an RMSE of 0.1755 and an MAE of 0.1086. Furthermore, the correlation between predicted and actual values was 0.787161, suggesting a strong positive linear relationship. These metrics provide a clear quantitative assessment of the model's predictive capability.",
+      "zh_TW": ""
+    },
+    "model_rf_scatter": {
+      "en": "The Random Forest (RF) model exhibits strong predictive performance based on the scatter plot diagnostics. Key metrics include an R2 score of 0.7756, which indicates that 77.56% of the variance is explained. The model also recorded an RMSE of 0.1254 and an MAE of 0.0836. Furthermore, the correlation between predicted and actual values was 0.88511, confirming a strong linear relationship. These results collectively suggest that RF is a highly reliable model for this task.",
+      "zh_TW": ""
+    },
+    "model_knn_scatter": {
+      "en": "The KNN model is the best performer, evidenced by its R2 score of 0.8172 and its lowest RMSE of 0.1132. Furthermore, the prediction-actual correlation is strong at 0.9073, and the linear fit slope is 0.8798. These metrics collectively confirm KNN's superior predictive capability compared to other models. The analysis should also note the maximum absolute residual of 0.3673, indicating the range of prediction errors.",
+      "zh_TW": ""
+    },
+    "model_xgboost_scatter": {
+      "en": "The XGBoost model demonstrates solid predictive performance, evidenced by an R2 score of 0.7495. The model's error metrics are also quantifiable: the RMSE is 0.1325, and the MAE is 0.0956. Furthermore, the strong correlation of 0.875024 between predicted and actual values confirms that the model captures the underlying trend effectively. These metrics confirm XGBoost's reliability in predicting outcomes for this dataset.",
+      "zh_TW": ""
+    },
+    "model_comparison_bars": {
+      "en": "The model comparison chart and associated tables consistently show that the K-Nearest Neighbors (KNN) model performs best across multiple metrics. Specifically, KNN achieved the highest R2 score (0.81717) and the lowest Root Mean Squared Error (RMSE) (0.11318). When compared to other models, KNN significantly outperforms DT (R2=0.56045, RMSE=0.17549), and maintains superior performance over RF, XGBoost, and SVM.",
+      "zh_TW": ""
+    },
+    "predicted_vs_actual": {
+      "en": "The KNN model was identified as the best performing model among the benchmarked algorithms. Its performance metrics are R2=0.8172, RMSE=0.1132, and MAE=0.075. When compared to other models, KNN significantly outperforms DT (R2=0.5605), RF (R2=0.7756), XGBoost (R2=0.7495), SVM (R2=0.7324), and KNN itself (R2=0.8172). The model's prediction diagnostics show a strong correlation between predicted and actual values (0.9073), indicating good predictive power.",
+      "zh_TW": ""
+    },
+    "residuals": {
+      "en": "The KNN model demonstrated the best performance across multiple metrics compared to all other benchmark models (RF, XGBoost, SVM, and DT). Specifically, KNN achieved an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. These values are superior to the corresponding metrics of the other models. For instance, KNN's R2 score (0.8172) is higher than RF (0.7756), XGBoost (0.7495), SVM (0.7324), and DT (0.5605). Similarly, KNN's RMSE (0.1132) is lower than all other models, and its MAE (0.075) is the lowest among the group. The residual analysis also shows a strong correlation between predicted and actual values (0.9073).",
+      "zh_TW": ""
+    },
+    "feature_importance": {
+      "en": "The feature importance analysis confirms that VSS is the most critical feature, with an importance score of 0.5052. The top three features contributing to the model are VFA, Butyrate, and Acetate, based on the feature story ranking. Specifically, VFA (0.7931) and Butyrate (0.7902) rank highest in the feature story, while VSS (0.7768) is also highly ranked. The table data confirms VSS's high importance (0.5052), followed by Acetate (0.12) and Butyrate (0.097).",
+      "zh_TW": ""
+    },
+    "correlation_heatmap": {
+      "en": "The correlation heatmap reveals several strong relationships between the measured variables. The strongest correlations observed are between Butyrate and VFA (0.9601), and between Acetate and VFA (0.9428). Other strong correlations include Acetate vs Butyrate (0.8651), Ethanol vs Propionate (0.8548), and Ethanol vs VFA (0.8486). When examining the correlation with the target variable HPR, VFA shows the highest correlation (0.7984). This is followed by Butyrate (0.7827) and Acetate (0.7641), indicating that these three features are the most predictive of HPR.",
+      "zh_TW": ""
+    },
+    "feature_distributions": {
+      "en": "The feature distributions indicate that Ethanol, Acetate, and Butyrate are the most prominent features, showing the highest mean values (0.4736, 0.4465, and 0.4287, respectively). Furthermore, Ethanol exhibits the greatest variability, with the highest standard deviation (0.2528). In contrast, pH has the lowest mean (0.2355) and the lowest standard deviation (0.1267). These findings provide a clear picture of the central tendency and spread of the key chemical components.",
+      "zh_TW": ""
+    },
+    "feature_vs_target": {
+      "en": "The correlation analysis reveals several strong relationships between features and the target variable (HPR) or between features themselves. The strongest correlations found are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When considering the top predictors for HPR, VFA shows the highest correlation (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641). Overall, VFA is a highly correlated feature with HPR, suggesting its importance in predicting hydrogen production.",
+      "zh_TW": ""
+    },
+    "boxplots": {
+      "en": "The descriptive statistics indicate that Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean values, followed by Butyrate (mean: 0.4287). Regarding variability, Ethanol exhibits the largest standard deviation (0.2528). These findings are directly supported by the descriptive statistics table, which summarizes the distribution of key features.",
+      "zh_TW": ""
+    },
+    "time_series": {
+      "en": "The analysis confirms that the KNN model is the superior predictor for HPR, evidenced by its R2 score of 0.81717 and the lowest MSE of 0.012810 among all tested models. Feature importance analysis highlights VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641) as the top three features most correlated with HPR. These findings suggest that optimizing processes related to these specific chemical components could significantly improve hydrogen production.",
+      "zh_TW": ""
+    }
+  }
+}

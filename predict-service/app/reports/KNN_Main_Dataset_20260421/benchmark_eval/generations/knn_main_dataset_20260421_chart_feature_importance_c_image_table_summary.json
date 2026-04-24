@@ -1,0 +1,65 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VSS is the most important feature, followed by Acetate, Butyrate, and VFA, which are the top three contributors to the model's prediction.",
+  "explanation_full": "The feature importance analysis confirms that VSS is the most critical feature, with an importance score of 0.5052. The top three features contributing to the model are VFA, Butyrate, and Acetate, based on the feature story ranking. Specifically, VFA (0.7931) and Butyrate (0.7902) rank highest in the feature story, while VSS (0.7768) is also highly ranked. The table data confirms VSS's high importance (0.5052), followed by Acetate (0.12) and Butyrate (0.097).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "claim_type": "freeform",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "has the highest importance",
+      "object": "0.505222263291806",
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top three features are VFA, Butyrate, and Acetate.",
+      "claim_type": "top_feature",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_summary.json",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is one of the top three features",
+      "object": "Butyrate",
+      "metric": "top_features",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA has an importance of 0.0748037264118768.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has importance",
+      "object": "0.0748037264118768",
+      "metric": "importance",
+      "value": 0.0748037264118768,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

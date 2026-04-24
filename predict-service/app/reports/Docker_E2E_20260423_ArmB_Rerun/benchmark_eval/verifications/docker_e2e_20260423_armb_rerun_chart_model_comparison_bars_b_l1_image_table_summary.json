@@ -1,0 +1,120 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "DT's R2 score is 1.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "DT's RMSE is 0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "DT's MSE is 0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mse"
+      ],
+      "reason": "Gold value for DT mse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "DT's MAE is 0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "SVM's R2 score is 0.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "SVM's RMSE is 0.0875",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:rmse"
+      ],
+      "reason": "Gold value for SVM rmse is 0.0875457684.",
+      "numeric_delta": 4.5768400000006926e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "SVM's MSE is 0.00766",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:mse"
+      ],
+      "reason": "Gold value for SVM mse is 0.0076642616.",
+      "numeric_delta": 4.2615999999995324e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "SVM's MAE is 0.0872",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:mae"
+      ],
+      "reason": "Gold value for SVM mae is 0.0872453182.",
+      "numeric_delta": 4.531820000000519e-05
+    }
+  ]
+}

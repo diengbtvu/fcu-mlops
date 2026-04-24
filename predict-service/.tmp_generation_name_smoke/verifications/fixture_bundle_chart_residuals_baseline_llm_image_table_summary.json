@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:residuals",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:residuals",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "baseline-r2",
+      "claim_text": "KNN has r2_score=0.92.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.92.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:residuals",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "baseline-correlation",
+      "claim_text": "KNN has pred_actual_correlation=0.9.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:residuals:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.9.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:residuals",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "baseline-residual_std",
+      "claim_text": "KNN has residual_std=0.11.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:residuals:metric:KNN:residual_std"
+      ],
+      "reason": "Gold value for KNN residual_std is 0.11.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

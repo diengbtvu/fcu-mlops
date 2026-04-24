@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The feature importance chart indicates that VSS is the most important feature, followed by Acetate, Butyrate, and VFA.",
+  "explanation_full": "The feature importance chart visually ranks the predictive power of various features for the model. According to the chart, VSS exhibits the highest importance score at 0.5052, suggesting it is the primary driver of the prediction. Following VSS, Acetate, Butyrate, and VFA show progressively lower, yet still significant, levels of importance. This hierarchy suggests that metabolic indicators like VSS are crucial for model performance, while other components contribute to the prediction to varying degrees.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS exhibits the highest importance score at 0.5052",
+      "claim_type": "metric_value",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.5052,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

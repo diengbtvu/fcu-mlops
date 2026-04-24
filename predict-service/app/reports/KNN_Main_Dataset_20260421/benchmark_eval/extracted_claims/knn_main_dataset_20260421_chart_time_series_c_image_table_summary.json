@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model is the best model.",
+      "claim_type": "best_model",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": "KNN",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN model achieved an R2 score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R2 score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three correlated features with HPR.",
+      "claim_type": "top_feature",
+      "span_category": "feature_correlation",
+      "is_numeric": false,
+      "requires_grounding_from": "analysis_summary_report.txt",
+      "confidence": 1.0,
+      "subject": "HPR",
+      "predicate": "is most correlated with",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

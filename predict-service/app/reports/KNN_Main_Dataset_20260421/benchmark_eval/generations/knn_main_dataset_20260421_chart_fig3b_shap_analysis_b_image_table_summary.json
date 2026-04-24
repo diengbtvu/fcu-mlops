@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SHAP analysis indicates that ORP_Low, Butyrate, ORP_Mid, VFA, and COD-O are the most influential features, with VFA, Butyrate, and Acetate being the top features overall.",
+  "explanation_full": "Observationally, the mean absolute SHAP values show a clear ranking, with ORP_Low (0.0367) being the highest, followed by Butyrate (0.0347), ORP_Mid (0.0298), VFA (0.0296), and COD-O (0.0286). Furthermore, the summary text identifies VFA, Butyrate, and Acetate as the top features. Interpreting this, the model's predictions are most strongly influenced by these key parameters. However, it should be noted that SHAP values represent local feature contributions and may not fully capture all underlying biological relationships.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0367).",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": "0.03668805020869625",
+      "metric": "mean_abs_shap",
+      "value": 0.03668805020869625,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top features.",
+      "claim_type": "top_feature",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_summary.json",
+      "confidence": 1.0,
+      "subject": "VFA, Butyrate, and Acetate",
+      "predicate": "top_features",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The model's predictions are most strongly influenced by these key parameters.",
+      "claim_type": "freeform",
+      "span_category": "interpretation",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 0.9,
+      "subject": null,
+      "predicate": null,
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": true
+    }
+  ]
+}

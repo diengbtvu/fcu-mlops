@@ -12,6 +12,7 @@ from typing import Any, Callable, Dict, List
 import numpy as np
 import pandas as pd
 import requests
+from benchmarking.schemas import CANONICAL_CLAIM_TYPES
 from dotenv import load_dotenv
 from openai_rate_control import shared_openai_request_gate
 
@@ -988,7 +989,7 @@ def _report_claim_schema() -> Dict[str, Any]:
         "properties": {
             "claim_id": {"type": "string"},
             "claim_text": {"type": "string"},
-            "claim_type": {"type": "string"},
+            "claim_type": {"type": "string", "enum": list(CANONICAL_CLAIM_TYPES)},
             "span_category": {"type": "string"},
             "is_numeric": {"type": "boolean"},
             "requires_grounding_from": {"type": "string"},
@@ -1678,6 +1679,7 @@ def generate_report_explanations(
             "For each asset, also return benchmark_payload.explanation_short as a one-sentence English summary.",
             "For each asset, return benchmark_payload.explanation_full as the same English paragraph you returned in en.",
             "For each asset, return benchmark_payload.claims as structured factual claims grounded only in the supplied evidence.",
+            f"Use only these benchmark claim_type values: {', '.join(CANONICAL_CLAIM_TYPES)}.",
             "Unsupported or weakly grounded claims must be omitted rather than guessed.",
         ]
 

@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0367).",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": "0.03668805020869625",
+      "metric": "mean_abs_shap",
+      "value": 0.03668805020869625,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top features.",
+      "claim_type": "top_feature",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_summary.json",
+      "confidence": 1.0,
+      "subject": "VFA, Butyrate, and Acetate",
+      "predicate": "top_features",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The model's predictions are most strongly influenced by these key parameters.",
+      "claim_type": "freeform",
+      "span_category": "interpretation",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 0.9,
+      "subject": null,
+      "predicate": null,
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": true
+    }
+  ]
+}

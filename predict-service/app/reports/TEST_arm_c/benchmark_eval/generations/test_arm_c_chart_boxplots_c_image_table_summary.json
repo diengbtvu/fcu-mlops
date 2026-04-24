@@ -1,0 +1,290 @@
+{
+  "artifact_id": "TEST_arm_c:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol, Acetate, and Butyrate show the highest mean values among the features, with Ethanol having the highest mean (0.4736).",
+  "explanation_full": "Based on the feature boxplots, the descriptive statistics indicate that Ethanol, Acetate, and Butyrate exhibit the highest mean values among the measured features. Specifically, Ethanol has the highest mean at 0.4736, followed by Acetate at 0.4465, and then Butyrate at 0.4287. Conversely, pH shows the lowest mean value among the listed features.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol, Acetate, and Butyrate show the highest mean values among the features",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:boxplots:top_feature:mean",
+      "subject": "distribution",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Ethanol",
+        "Acetate",
+        "Butyrate"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol has the highest mean at 0.4736",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate at 0.4465",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Acetate:mean",
+      "subject": "Acetate",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4465,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "Butyrate at 0.4287",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Butyrate:mean",
+      "subject": "Butyrate",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4287,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "pH shows the lowest mean value among the listed features",
+      "claim_type": "top_feature",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:boxplots:top_feature:mean",
+      "subject": "pH",
+      "predicate": "mean",
+      "object": "pH",
+      "metric": "mean",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "Ethanol, Acetate, and Butyrate show the highest mean values among the features, with Ethanol having the highest mean (0.4736).",
+        "draft_explanation_full": "Based on the feature boxplots, the descriptive statistics indicate that Ethanol, Acetate, and Butyrate exhibit the highest mean values among the measured features. Specifically, Ethanol has the highest mean at 0.4736, followed by Acetate at 0.4465, and then Butyrate at 0.4287. Conversely, pH shows the lowest mean value among the listed features.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Ethanol, Acetate, and Butyrate show the highest mean values among the features",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "feature_subset_optimum",
+            "is_numeric": false,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:boxplots:top_feature:mean",
+            "subject": "distribution",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "Ethanol",
+              "Acetate",
+              "Butyrate"
+            ],
+            "feature_count": 3,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Ethanol has the highest mean at 0.4736",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Ethanol:mean",
+            "subject": "Ethanol",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate at 0.4465",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Acetate:mean",
+            "subject": "Acetate",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4465,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "Butyrate at 0.4287",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:boxplots:metric:Butyrate:mean",
+            "subject": "Butyrate",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4287,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "pH shows the lowest mean value among the listed features",
+            "claim_type": "top_feature",
+            "span_category": "feature_subset_optimum",
+            "is_numeric": false,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:boxplots:top_feature:mean",
+            "subject": "pH",
+            "predicate": "mean",
+            "object": "pH",
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Ethanol, Acetate, and Butyrate show the highest mean values among the features",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim correctly identifies the top three features by mean based on the evidence provided in the chart's result text and supported by the ranking fact.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:boxplots:top_feature:mean",
+              "TEST_arm_c:chart:boxplots:ranking:mean"
+            ],
+            "grounded_fact_summary": "Ethanol, Acetate, and Butyrate have the highest mean values among the features."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Ethanol has the highest mean at 0.4736",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim accurately reflects the highest mean value for Ethanol (0.4736) as stated in the evidence.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:boxplots:top_feature:mean",
+              "TEST_arm_c:chart:boxplots:metric:Ethanol:mean"
+            ],
+            "grounded_fact_summary": "Ethanol has the highest mean value at 0.4736."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate at 0.4465",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim accurately reports the mean value for Acetate (0.4465) as found in the evidence.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:boxplots:metric:Acetate:mean"
+            ],
+            "grounded_fact_summary": "Acetate has a mean value of 0.4465."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "Butyrate at 0.4287",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim accurately reports the mean value for Butyrate (0.4287) as found in the evidence.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:boxplots:metric:Butyrate:mean"
+            ],
+            "grounded_fact_summary": "Butyrate has a mean value of 0.4287."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "pH shows the lowest mean value among the listed features",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The ranking fact confirms that pH has the lowest mean value among the listed features.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:boxplots:ranking:mean"
+            ],
+            "grounded_fact_summary": "pH has the lowest mean value among the listed features."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 5
+    }
+  },
+  "parent_draft_hash": "039add7faea794bb2d454b076dcdd41771a582cc"
+}

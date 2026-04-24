@@ -109,6 +109,18 @@ def test_verifier_supports_phase_two_chart_metrics_and_top_features() -> None:
             value=0.86,
         ),
         Claim(
+            claim_id="pair-correlation-reversed",
+            claim_text="VFA vs pH has correlation=0.86.",
+            claim_type="metric_value",
+            span_category="sentence",
+            is_numeric=True,
+            requires_grounding_from="table/json",
+            confidence=0.8,
+            subject="VFA vs pH",
+            metric="correlation",
+            value=0.86,
+        ),
+        Claim(
             claim_id="bad-top-target",
             claim_text="VSS is the top feature by target_correlation.",
             claim_type="top_feature",
@@ -125,4 +137,67 @@ def test_verifier_supports_phase_two_chart_metrics_and_top_features() -> None:
 
     assert verifications[0].status == "supported"
     assert verifications[1].status == "supported"
-    assert verifications[2].status == "contradicted"
+    assert verifications[2].status == "supported"
+    assert verifications[3].status == "contradicted"
+
+
+def test_verifier_maps_prediction_correlation_aliases() -> None:
+    gold = _gold_map()["chart/model_rf_scatter"]
+    claims = [
+        Claim(
+            claim_id="pred-actual",
+            claim_text="The correlation between predicted and actual values for Random Forest (RF) was 0.86.",
+            claim_type="metric_value",
+            span_category="sentence",
+            is_numeric=True,
+            requires_grounding_from="table/json",
+            confidence=0.8,
+            subject="Random Forest (RF)",
+            predicate="correlation between predicted and actual values",
+            metric="correlation",
+            value=0.86,
+        )
+    ]
+
+    verifications = verify_claims(gold, claims, arm="A", input_condition="table_only")
+
+    assert verifications[0].status == "supported"
+
+
+def test_verifier_ignores_incompatible_source_variable_id_for_numeric_claims() -> None:
+    gold = _gold_map()["model_comparison/main"]
+    claims = [
+        Claim(
+            claim_id="svm-r2",
+            claim_text="SVM achieved R2=0.88.",
+            claim_type="metric_value",
+            span_category="sentence",
+            is_numeric=True,
+            requires_grounding_from="table/json",
+            confidence=0.9,
+            source_variable_id="sample_bundle:model_comparison/main:metric:KNN:r2_score",
+            subject="SVM",
+            metric="r2_score",
+            value=0.88,
+        ),
+        Claim(
+            claim_id="knn-r2-via-ranking-source",
+            claim_text="KNN achieved R2=0.92.",
+            claim_type="metric_value",
+            span_category="sentence",
+            is_numeric=True,
+            requires_grounding_from="table/json",
+            confidence=0.9,
+            source_variable_id="sample_bundle:model_comparison/main:ranking:r2_score",
+            subject="KNN",
+            metric="r2_score",
+            value=0.92,
+        ),
+    ]
+
+    verifications = verify_claims(gold, claims, arm="A", input_condition="table_only")
+
+    assert verifications[0].matched_fact_ids == ["sample_bundle:model_comparison/main:metric:SVM:r2_score"]
+    assert verifications[0].status == "supported"
+    assert verifications[1].matched_fact_ids == ["sample_bundle:model_comparison/main:metric:KNN:r2_score"]
+    assert verifications[1].status == "supported"

@@ -17,6 +17,7 @@ from app.utils.report_explainer import (
     update_report_explanation_status,
 )
 from app.utils.report_benchmark import (
+    publish_benchmark_results,
     run_report_benchmark,
     update_report_benchmark_status,
 )
@@ -212,6 +213,107 @@ def _materialize_training_bundle(
             print(f"⚠️ Could not update report summary with bundle files: {summary_error}")
 
     return report_info
+
+
+def _read_report_summary(summary_path: str) -> Dict[str, Any]:
+    if not os.path.exists(summary_path):
+        return {}
+    try:
+        with open(summary_path, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _reconcile_report_summary_state(report_dir: str) -> None:
+    summary_path = os.path.join(report_dir, "summary.json")
+    summary = _read_report_summary(summary_path)
+    if not summary:
+        return
+
+    report_id = os.path.basename(report_dir.rstrip(os.sep))
+    report_info: Dict[str, Any] = {
+        "report_id": report_id,
+        "files": dict(summary.get("files") or {}),
+        "selected_benchmark_explanations": summary.get("selected_benchmark_explanations"),
+    }
+
+    llm_path = os.path.join(report_dir, "llm_explanations.json")
+    llm_status = summary.get("llm_explanations_status")
+    if os.path.exists(llm_path):
+        report_info["files"]["llm_explanations"] = "llm_explanations.json"
+        if not isinstance(llm_status, dict) or str(llm_status.get("status") or "").strip().lower() != "success":
+            existing_started_at = (
+                llm_status.get("started_at")
+                if isinstance(llm_status, dict)
+                else None
+            )
+            update_report_explanation_status(
+                report_info=report_info,
+                status="success",
+                message="AI explanations generated successfully.",
+                report_root=REPORTS_ROOT,
+                started_at=existing_started_at,
+                progress=100,
+                phase="completed",
+                step_index=(llm_status or {}).get("step_index") if isinstance(llm_status, dict) else None,
+                total_steps=(llm_status or {}).get("total_steps") if isinstance(llm_status, dict) else None,
+            )
+
+    benchmark_dir = os.path.join(report_dir, "benchmark_eval")
+    leaderboard_path = os.path.join(benchmark_dir, "scores", "leaderboard.json")
+    run_metadata_path = os.path.join(benchmark_dir, "run_metadata.json")
+    benchmark_status = summary.get("benchmark_status")
+    if os.path.exists(leaderboard_path):
+        publish_benchmark_results(
+            report_info=report_info,
+            report_root=REPORTS_ROOT,
+            benchmark_dirname="benchmark_eval",
+        )
+        existing_started_at = (
+            benchmark_status.get("started_at")
+            if isinstance(benchmark_status, dict)
+            else None
+        )
+        update_report_benchmark_status(
+            report_info=report_info,
+            status="success",
+            message="Benchmark evaluation completed successfully.",
+            report_root=REPORTS_ROOT,
+            started_at=existing_started_at,
+            progress=100,
+            phase="completed",
+            step_index=3,
+            total_steps=3,
+            current_items=["leaderboard", "run metadata"],
+            output_dir="benchmark_eval",
+        )
+    elif os.path.exists(run_metadata_path):
+        benchmark_status_value = (
+            str(benchmark_status.get("status") or "").strip().lower()
+            if isinstance(benchmark_status, dict)
+            else ""
+        )
+        if benchmark_status_value in {"", "pending"}:
+            existing_started_at = (
+                benchmark_status.get("started_at")
+                if isinstance(benchmark_status, dict)
+                else None
+            )
+            update_report_benchmark_status(
+                report_info=report_info,
+                status="pending",
+                message="Benchmark evaluation is running on generated outputs.",
+                report_root=REPORTS_ROOT,
+                started_at=existing_started_at,
+                progress=90,
+                phase="finalizing",
+                step_index=3,
+                total_steps=3,
+                current_items=["leaderboard", "run metadata"],
+                output_dir="benchmark_eval",
+            )
 
 
 def _build_progress_callback(session_id: str | None) -> Any:
@@ -710,6 +812,9 @@ def get_training_report_asset(report_id, filename):
         abort(400)
     if not os.path.exists(report_dir):
         abort(404)
+
+    if filename == "summary.json":
+        _reconcile_report_summary_state(report_dir)
 
     return send_from_directory(report_dir, filename)
 

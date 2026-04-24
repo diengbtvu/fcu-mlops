@@ -7,6 +7,7 @@ from typing import Any, Literal
 ArtifactType = str
 InputCondition = Literal["table_only", "image_table", "image_table_summary", "image_only"]
 ArmName = Literal["A", "B", "C", "D"]
+SemanticLevel = Literal["L1", "L2L3", "L1L2L3"]
 VerificationStatus = Literal["supported", "partially_supported", "contradicted", "unverifiable"]
 
 SUPPORTED_ARTIFACT_TYPES: tuple[str, ...] = (
@@ -21,6 +22,7 @@ SUPPORTED_CONDITIONS: tuple[str, ...] = (
     "image_only",
 )
 SUPPORTED_ARMS: tuple[str, ...] = ("A", "B", "C", "D")
+SUPPORTED_SEMANTIC_LEVELS: tuple[str, ...] = ("L1", "L2L3", "L1L2L3")
 CANONICAL_CLAIM_TYPES: tuple[str, ...] = (
     "best_model",
     "metric_value",
@@ -87,6 +89,7 @@ class GroundTruthFact:
     unit: str | None = None
     evidence: list[EvidenceRef] = field(default_factory=list)
     importance: int = 1
+    semantic_level: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return to_primitive(self)
@@ -153,6 +156,10 @@ class ExplanationOutput:
     explanation_short: str
     explanation_full: str
     claims: list[Claim]
+    semantic_level: str | None = None
+    generation_stage: str | None = None
+    correction_trace: "ArmCTrace | None" = None
+    parent_draft_hash: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return to_primitive(self)
@@ -166,6 +173,7 @@ class ClaimVerification:
     claim_id: str
     claim_text: str
     status: str
+    semantic_level: str | None = None
     matched_fact_ids: list[str] = field(default_factory=list)
     reason: str = ""
     numeric_delta: float | None = None
@@ -181,6 +189,7 @@ class ArtifactScore:
     input_condition: str
     claim_count: int
     metrics: dict[str, float | None]
+    semantic_level: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         payload = to_primitive(self)
@@ -189,6 +198,49 @@ class ArtifactScore:
             "arm": payload["arm"],
             "input_condition": payload["input_condition"],
             "claim_count": payload["claim_count"],
+            "semantic_level": payload.get("semantic_level"),
         }
         flattened.update(payload["metrics"])
         return flattened
+
+
+@dataclass(frozen=True)
+class ArmCValidationRecord:
+    claim_id: str
+    claim_text: str
+    status: str
+    recommended_action: str
+    rationale: str = ""
+    matched_fact_ids: list[str] = field(default_factory=list)
+    grounded_fact_summary: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class CorrectionIteration:
+    iteration_index: int
+    draft_explanation_short: str
+    draft_explanation_full: str
+    draft_claims: list[Claim]
+    draft_validations: list[ArmCValidationRecord]
+    corrected_explanation_short: str
+    corrected_explanation_full: str
+    corrected_claims: list[Claim]
+    corrected_validations: list[ArmCValidationRecord]
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ArmCTrace:
+    mode: str
+    iteration_count: int
+    selected_generation_stage: str
+    iterations: list[CorrectionIteration]
+    decision_counts: dict[str, int] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)

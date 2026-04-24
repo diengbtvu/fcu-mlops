@@ -1,0 +1,7 @@
+{
+  "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": []
+}

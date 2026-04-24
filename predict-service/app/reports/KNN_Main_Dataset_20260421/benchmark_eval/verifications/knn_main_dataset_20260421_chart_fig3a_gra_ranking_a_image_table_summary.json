@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "VFA is the most important feature according to the analysis.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

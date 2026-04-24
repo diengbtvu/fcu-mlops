@@ -1,0 +1,106 @@
+{
+  "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_1",
+      "claim_text": "KNN model achieved its best performance with 9 features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_2",
+      "claim_text": "The R² score for KNN with 9 features was 0.83014.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_3",
+      "claim_text": "The MSE for KNN with 9 features was 0.011901.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_4",
+      "claim_text": "RF model achieved its best performance with 11 features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_5",
+      "claim_text": "The R² score for RF with 11 features was 0.785537.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_6",
+      "claim_text": "The MSE for RF with 11 features was 0.015026.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_7",
+      "claim_text": "XGBoost model achieved its best performance with 4 features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_8",
+      "claim_text": "The R² score for XGBoost with 4 features was 0.768407.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6ab_mse_r2_features",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6ab_mse_r2_features_9",
+      "claim_text": "The MSE for XGBoost with 4 features was 0.016226.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Performance Metric' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

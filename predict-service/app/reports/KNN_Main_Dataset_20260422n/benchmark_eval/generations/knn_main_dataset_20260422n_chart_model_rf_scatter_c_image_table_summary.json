@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_rf_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest (RF) model shows strong performance with an R2 of 0.7756 and a high correlation of 0.88511, suggesting reliable predictions.",
+  "explanation_full": "The Random Forest (RF) model exhibits strong performance metrics, including an R2 score of 0.7756 and a correlation of 0.88511 between predicted and actual values. The Mean Absolute Error (MAE) is 0.0836, indicating a low average prediction error. These results suggest that RF is a highly effective model for this dataset. The diagnostics are based on 40 samples, which is a limitation to consider when generalizing these findings.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "achieved R2 score",
+      "object": "0.7756",
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values for RF was 0.88511.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "correlation (pred, actual)",
+      "object": "0.88511",
+      "metric": "pred_actual_correlation",
+      "value": 0.88511,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The diagnostics are based on 40 samples.",
+      "claim_type": "metric_value",
+      "span_category": "model_diagnostics",
+      "is_numeric": false,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": null,
+      "predicate": null,
+      "object": "40",
+      "metric": null,
+      "value": 40.0,
+      "unit": "samples",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

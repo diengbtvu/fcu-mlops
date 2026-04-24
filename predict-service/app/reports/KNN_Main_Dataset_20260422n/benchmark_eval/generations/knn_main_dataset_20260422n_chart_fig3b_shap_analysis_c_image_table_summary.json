@@ -1,0 +1,67 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "ORP_Low is the most important feature (0.0359), followed by ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289).",
+  "explanation_full": "The SHAP analysis clearly identifies the most critical predictors for the model. ORP_Low is the leading feature with a mean absolute SHAP value of 0.0359. This is followed by ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289). These four features are consistently the most impactful, suggesting that redox potential and specific organic acids are key determinants. Features like COD-O and Acetate, while still relevant, show lower mean absolute SHAP values (0.0258 and 0.0257, respectively). The overall finding is that the redox potential and key organic acids are the primary drivers of the model's predictions.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low is the most important feature with a mean absolute SHAP value of 0.0359.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "is the most important feature",
+      "object": "0.0359",
+      "metric": "mean_abs_shap",
+      "value": 0.0359,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289) are the next most impactful features.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Mid, Butyrate, VFA",
+      "predicate": "are highly impactful",
+      "object": "0.0314, 0.0311, 0.0289",
+      "metric": "mean_abs_shap",
+      "value": 0.0289,
+      "unit": null,
+      "ordered_items": [
+        "ORP_Mid",
+        "Butyrate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "COD-O and Acetate have lower mean absolute SHAP values (0.0258 and 0.0257, respectively).",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "COD-O, Acetate",
+      "predicate": "have mean absolute SHAP values",
+      "object": "0.0258, 0.0257",
+      "metric": "mean_abs_shap",
+      "value": 0.0257,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

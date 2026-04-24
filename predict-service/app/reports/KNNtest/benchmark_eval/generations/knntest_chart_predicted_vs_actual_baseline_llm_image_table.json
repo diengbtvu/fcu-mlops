@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNNtest:chart:predicted_vs_actual",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "explanation_short": "The KNN model shows a strong fit for HPR prediction with an R² score of 0.8172 and a correlation of 0.9073.",
+  "explanation_full": "The 'Predicted versus actual chart' helps us understand how well our model estimates the target value (HPR) compared to the real-world measurements. The best model, KNN, achieved an R² score of 0.8172, which indicates that the model explains about 81.72% of the variation in the data, suggesting a strong fit. Furthermore, the correlation between predicted and actual values is 0.9073, meaning that as the actual value increases, the prediction tends to increase strongly. The main takeaway is that KNN is a highly reliable predictor for HPR, but a practical caution is that the largest absolute error observed was 0.3673, suggesting that while the model is generally accurate, there are specific instances where the prediction deviates significantly from reality.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN prediction diagnostics show R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+      "claim_type": "metric_summary",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "asset_evidence[0].evidence.prediction_story.winning_model_diagnostics",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "diagnostics",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

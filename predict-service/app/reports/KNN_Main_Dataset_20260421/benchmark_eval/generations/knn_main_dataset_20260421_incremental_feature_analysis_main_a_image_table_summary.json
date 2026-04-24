@@ -1,0 +1,31 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows that 'Education' is the highest predictor of 'Salary'.",
+  "explanation_full": "The table presents a correlation matrix. By examining the correlation coefficients, it is clear that 'Education' has the strongest correlation with 'Salary' (0.3), indicating that it is the best predictor among the variables listed. While 'Experience' also shows a correlation with 'Salary' (0.2), the correlation between 'Education' and 'Salary' is higher.",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "Education is the strongest predictor of Salary.",
+      "claim_type": "metric_value",
+      "span_category": "Education and Salary",
+      "is_numeric": false,
+      "requires_grounding_from": "table",
+      "confidence": 0.9,
+      "subject": "Correlation",
+      "predicate": "Education and Salary",
+      "object": "Education and Salary",
+      "metric": "correlation",
+      "value": 0.3,
+      "unit": "Correlation",
+      "ordered_items": [
+        "Correlation",
+        "Correlation",
+        "Correlation"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol and Acetate show the highest average concentrations, while Ethanol also exhibits the greatest variability among the measured features.",
+  "explanation_full": "Observationally, the data indicates that Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) possess the highest average concentrations among the measured features. Butyrate (mean: 0.4287) follows closely. Furthermore, the variability of these features is also notable, with Ethanol displaying the largest standard deviation (0.2528). This suggests that while Ethanol is highly concentrated on average, its measured values are also widely dispersed. These quantitative observations are derived directly from the descriptive statistics provided in the table.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean value.",
+      "claim_type": "comparison",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": 0.4735821123781505,
+      "metric": "mean",
+      "value": 0.4735821123781505,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate has the second highest mean value.",
+      "claim_type": "comparison",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "mean",
+      "object": 0.4465350187686395,
+      "metric": "mean",
+      "value": 0.4465350187686395,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Ethanol exhibits the largest standard deviation.",
+      "claim_type": "comparison",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": 0.2528296373896118,
+      "metric": "std",
+      "value": 0.2528296373896118,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

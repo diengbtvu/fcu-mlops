@@ -1,0 +1,44 @@
+{
+  "artifact_id": "fixture_bundle:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "optimum-subset",
+      "claim_text": "KNN reaches its best subset at 6 features.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 6.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "fixture_bundle:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "best-r2",
+      "claim_text": "KNN reaches R2=0.920000 at the optimum subset.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "plateau",
+      "claim_text": "Performance plateaus after 6 features.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:incremental_feature_analysis/main:plateau"
+      ],
+      "reason": "Gold plateau count is 6.",
+      "numeric_delta": 0
+    }
+  ]
+}

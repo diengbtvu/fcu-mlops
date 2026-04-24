@@ -1,0 +1,686 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "corrected",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The KNN model achieved the highest R2 score (0.817) among benchmark models, with an RMSE of 0.113 and an MAE of 0.075. The sequence diagnostics show the actual peak occurred at index 130 with a value of 1.0, while the prediction was at index 146 with a value of 0.83.",
+      "draft_explanation_full": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717, an RMSE of 0.11318, an MSE of 0.01281, and an MAE of 0.07502. When comparing model performance, KNN outperformed RF (R2: 0.776), XGBoost (R2: 0.749), and SVM (R2: 0.732). Regarding the time series sequence diagnostics, the actual peak was observed at index 130 with a value of 1.0. The model predicted a peak at index 146 with a value of 0.8299. The sequence also exhibited a sequence correlation of 0.9315.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) among benchmark models",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "best performing model",
+          "object": "R2 score",
+          "metric": "r2_score",
+          "value": 0.817,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN model... with an RMSE of 0.113",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.113,
+          "metric": "rmse",
+          "value": 0.113,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN model... and an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.075,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "the actual peak occurred at index 130 with a value of 1.0",
+          "claim_type": "metric_value",
+          "span_category": "actual peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+          "subject": "actual peak",
+          "predicate": "occurred at index",
+          "object": 130,
+          "metric": null,
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "the prediction was at index 146 with a value of 0.83",
+          "claim_type": "metric_value",
+          "span_category": "predicted peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index",
+          "subject": "prediction",
+          "predicate": "at index",
+          "object": 146,
+          "metric": null,
+          "value": 0.83,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "best performing model",
+          "object": "R2 score",
+          "metric": "r2_score",
+          "value": 0.81717,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "KNN model... achieving an RMSE of 0.11318",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.11318,
+          "metric": "rmse",
+          "value": 0.11318,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "KNN model... and an MAE of 0.07502",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.07502,
+          "metric": "mae",
+          "value": 0.07502,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "The actual peak was observed at index 130 with a value of 1.0",
+          "claim_type": "metric_value",
+          "span_category": "actual peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+          "subject": "actual peak",
+          "predicate": "observed at index",
+          "object": 130,
+          "metric": null,
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_10",
+          "claim_text": "The model predicted a peak at index 146 with a value of 0.8299",
+          "claim_type": "metric_value",
+          "span_category": "predicted peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index",
+          "subject": "model prediction",
+          "predicate": "predicted peak at index",
+          "object": 146,
+          "metric": null,
+          "value": 0.8299,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_11",
+          "claim_text": "The sequence also exhibited a sequence correlation of 0.9315",
+          "claim_type": "metric_value",
+          "span_category": "sequence correlation",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation",
+          "subject": "sequence",
+          "predicate": "exhibited sequence correlation",
+          "object": 0.9315,
+          "metric": "sequence_correlation",
+          "value": 0.9315,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) among benchmark models",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states the highest R2 score, which is supported by the evidence (0.817168). However, the source_variable_id points to 'mean_abs_gap', which is incorrect for R2 score. The value 0.817 is a rounded version of the grounded value 0.817168.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN achieved the highest R2 score (0.817168) among benchmark models."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN model... with an RMSE of 0.113",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states the RMSE is 0.113. The grounded value is 0.113181. The source_variable_id is incorrect, pointing to 'mean_abs_gap'.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN model has an RMSE of 0.113181."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN model... and an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states the MAE is 0.075. The grounded value is 0.075023. The source_variable_id is incorrect, pointing to 'mean_abs_gap'.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN model has an MAE of 0.075023."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "the actual peak occurred at index 130 with a value of 1.0",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The actual peak index (130) and value (1.0) are directly supported by the validated facts.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak occurred at index 130 with a value of 1.0."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "the prediction was at index 146 with a value of 0.83",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The predicted index (146) is correct, but the value (0.83) is a rounding of the grounded value (0.829894). The source_variable_id is correct for the index, but the value is rounded.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The model predicted a peak at index 146 with a value of 0.829894."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The R2 score (0.81717) matches the rounded value from the grounded evidence (0.817168). The subject and predicate are correctly identified.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN achieved an R2 score of 0.81717."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "KNN model... achieving an RMSE of 0.11318",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The RMSE value (0.11318) matches the grounded evidence (0.113181) when rounded to 5 decimal places, and the subject/predicate are correct.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN model has an RMSE of 0.11318."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "KNN model... and an MAE of 0.07502",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The MAE value (0.07502) matches the grounded evidence (0.075023) when rounded to 5 decimal places, and the subject/predicate are correct.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "KNN model has an MAE of 0.07502."
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "The actual peak was observed at index 130 with a value of 1.0",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "This claim is identical in meaning and fully supported by the evidence.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak occurred at index 130 with a value of 1.0."
+        },
+        {
+          "claim_id": "claim_10",
+          "claim_text": "The model predicted a peak at index 146 with a value of 0.8299",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The predicted index (146) is correct, but the value (0.8299) is a rounding of the grounded value (0.829894).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The model predicted a peak at index 146 with a value of 0.829894."
+        },
+        {
+          "claim_id": "claim_11",
+          "claim_text": "The sequence also exhibited a sequence correlation of 0.9315",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The sequence correlation (0.9315) is a rounding of the grounded value (0.931488).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation"
+          ],
+          "grounded_fact_summary": "The sequence correlation is 0.931488."
+        }
+      ],
+      "corrected_explanation_short": "The KNN model was the best performer, achieving an R2 score of 0.817, an RMSE of 0.113, and an MAE of 0.075. Sequence diagnostics show the actual peak at index 130 (value 1.0) and the prediction at index 146 (value 0.8299). The sequence correlation was 0.9315.",
+      "corrected_explanation_full": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717, an RMSE of 0.11318, an MSE of 0.01281, and an MAE of 0.07502. Regarding the time series sequence diagnostics, the actual peak was observed at index 130 with a value of 1.0. The model predicted a peak at index 146 with a value of 0.8299. Furthermore, the sequence exhibited a sequence correlation of 0.9315.",
+      "corrected_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) among benchmark models",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "best performing model",
+          "object": "R2 score",
+          "metric": "r2_score",
+          "value": 0.817,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN model... with an RMSE of 0.113",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:rmse",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.113,
+          "metric": "rmse",
+          "value": 0.113,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN model... and an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mae",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.075,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "the actual peak occurred at index 130 with a value of 1.0",
+          "claim_type": "metric_value",
+          "span_category": "actual peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+          "subject": "actual peak",
+          "predicate": "occurred at index",
+          "object": 130,
+          "metric": null,
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "the prediction was at index 146 with a value of 0.8299",
+          "claim_type": "metric_value",
+          "span_category": "predicted peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index",
+          "subject": "prediction",
+          "predicate": "at index",
+          "object": 146,
+          "metric": null,
+          "value": 0.8299,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "best performing model",
+          "object": "R2 score",
+          "metric": "r2_score",
+          "value": 0.81717,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "KNN model... achieving an RMSE of 0.11318",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:rmse",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.11318,
+          "metric": "rmse",
+          "value": 0.11318,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "KNN model... and an MAE of 0.07502",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:mae",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.07502,
+          "metric": "mae",
+          "value": 0.07502,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "The actual peak was observed at index 130 with a value of 1.0",
+          "claim_type": "metric_value",
+          "span_category": "actual peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+          "subject": "actual peak",
+          "predicate": "observed at index",
+          "object": 130,
+          "metric": null,
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_10",
+          "claim_text": "The model predicted a peak at index 146 with a value of 0.8299",
+          "claim_type": "metric_value",
+          "span_category": "predicted peak index",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index",
+          "subject": "model prediction",
+          "predicate": "predicted peak at index",
+          "object": 146,
+          "metric": null,
+          "value": 0.8299,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_11",
+          "claim_text": "The sequence also exhibited a sequence correlation of 0.9315",
+          "claim_type": "metric_value",
+          "span_category": "sequence correlation",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation",
+          "subject": "sequence",
+          "predicate": "exhibited sequence correlation",
+          "object": 0.9315,
+          "metric": "sequence_correlation",
+          "value": 0.9315,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) among benchmark models",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence shows KNN has the highest R2 score (0.817168) compared to other models listed in the summary text and JSON payload.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN has the highest R2 score (0.817168) among benchmark models."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN model... with an RMSE of 0.113",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The RMSE for KNN is 0.113181, which rounds correctly to 0.113.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:rmse"
+          ],
+          "grounded_fact_summary": "KNN model has an RMSE of 0.113181."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN model... and an MAE of 0.075",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The MAE for KNN is 0.075023, which rounds correctly to 0.075.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:mae"
+          ],
+          "grounded_fact_summary": "KNN model has an MAE of 0.075023."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "the actual peak occurred at index 130 with a value of 1.0",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The validated fact confirms the actual peak index is 130 and the value is 1.0.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak occurred at index 130 with a value of 1.0."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "the prediction was at index 146 with a value of 0.8299",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The validated fact confirms the predicted peak index is 146. The value 0.8299 is a correct rounding of the evidence value 0.829894.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The prediction was at index 146 with a value of 0.8299."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "The KNN model was identified as the best performing model, achieving an R2 score of 0.81717",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence explicitly states KNN has the best R2 score of 0.817168, which matches the claim's precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN model achieved an R2 score of 0.817168, identifying it as the best performing model."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "KNN model... achieving an RMSE of 0.11318",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence shows KNN's RMSE is 0.113181, which matches the claim's precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:rmse"
+          ],
+          "grounded_fact_summary": "KNN model achieved an RMSE of 0.113181."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "KNN model... and an MAE of 0.07502",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence shows KNN's MAE is 0.075023, which matches the claim's precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:mae"
+          ],
+          "grounded_fact_summary": "KNN model achieved an MAE of 0.075023."
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "The actual peak was observed at index 130 with a value of 1.0",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The validated fact confirms the actual peak index is 130 and the value is 1.0.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak was observed at index 130 with a value of 1.0."
+        },
+        {
+          "claim_id": "claim_10",
+          "claim_text": "The model predicted a peak at index 146 with a value of 0.8299",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The validated fact confirms the predicted peak index is 146 and the value 0.8299 is a correct rounding of the evidence value 0.829894.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The model predicted a peak at index 146 with a value of 0.8299."
+        },
+        {
+          "claim_id": "claim_11",
+          "claim_text": "The sequence also exhibited a sequence correlation of 0.9315",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The validated fact confirms the sequence correlation is 0.931488, which rounds correctly to 0.9315.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation"
+          ],
+          "grounded_fact_summary": "The sequence exhibited a sequence correlation of 0.931488."
+        }
+      ]
+    }
+  ],
+  "decision_counts": {
+    "edit": 6,
+    "keep": 5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": []
+}

@@ -1,0 +1,68 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN significantly outperforms other models, achieving the best balance of high R2 (0.8172) and low RMSE (0.1132) compared to RF, XGBoost, SVM, and DT.",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": 0.1132,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN's R2 score of 0.8172 and RMSE of 0.1132 are notably better than the next best model, RF (R2=0.7756, RMSE=0.1254).",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [
+        "KNN",
+        "RF"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN provides the most reliable prediction, minimizing both the overall error (RMSE) and maximizing the explained variance (R2) when compared against the other benchmark algorithms.",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

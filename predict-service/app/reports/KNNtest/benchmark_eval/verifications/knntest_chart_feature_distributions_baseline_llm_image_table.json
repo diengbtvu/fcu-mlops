@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNNtest:chart:feature_distributions",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "feature_distributions_1",
+      "claim_text": "Ethanol has the highest mean value among the listed features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Descriptive Statistic' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "feature_distributions_2",
+      "claim_text": "Acetate is the second highest mean feature, with a mean of 0.4465.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Descriptive Statistic' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "feature_distributions_3",
+      "claim_text": "Butyrate has a mean of 0.4287.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Descriptive Statistic' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "feature_distributions_4",
+      "claim_text": "Ethanol shows the largest variation, with a standard deviation of 0.2528.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Descriptive Statistic' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "feature_distributions_5",
+      "claim_text": "Acetate has a standard deviation of 0.226.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Descriptive Statistic' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

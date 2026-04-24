@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "The model's performance, indicated by the R-squared value, suggests that the input features are highly predictive of the target variable.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C2",
+      "claim_text": "The features related to pH, Temperature, and Concentration are the most significant predictors.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C3",
+      "claim_text": "pH is likely the most critical factor.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C4",
+      "claim_text": "Temperature influences the reaction rate (Arrhenius behavior).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C5",
+      "claim_text": "The primary levers for process improvement are pH control, Temperature management, and Reactant Concentration.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

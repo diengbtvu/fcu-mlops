@@ -1,0 +1,18 @@
+{
+  "artifact_id": "model_output",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The model successfully extracted the key information from the provided table.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'extraction' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

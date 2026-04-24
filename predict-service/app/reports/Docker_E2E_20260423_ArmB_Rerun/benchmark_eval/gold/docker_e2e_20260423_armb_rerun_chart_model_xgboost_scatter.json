@@ -1,0 +1,257 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+  "artifact_type": "chart/model_xgboost_scatter",
+  "source_files": [
+    "summary.json",
+    "table_model_comparison.csv",
+    "model_xgboost_scatter.png"
+  ],
+  "chart_type": "scatter_plot",
+  "primary_entities": [
+    "XGBoost"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "rmse",
+      "object": null,
+      "value": 2.735e-07,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:mse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:mae",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mae",
+      "object": null,
+      "value": 2.735e-07,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:residual_mean",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "residual_mean",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost residual_mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:residual_std",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "residual_std",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost residual_std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:mean_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mean_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mean_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:max_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost max_abs_residual"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:p95_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "p95_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost p95_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:actual_min",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "actual_min",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost actual_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:actual_max",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "actual_max",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost actual_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:predicted_min",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "predicted_min",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost predicted_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:predicted_max",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "predicted_max",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost predicted_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:max_abs_residual"
+  ],
+  "forbidden_inferences": [
+    "Do not read diagnostic plots as guarantees for every individual prediction.",
+    "Do not let narrative prose override the diagnostic metrics."
+  ]
+}

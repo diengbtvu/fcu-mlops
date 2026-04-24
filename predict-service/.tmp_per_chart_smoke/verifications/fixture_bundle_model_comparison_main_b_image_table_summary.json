@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "best-model",
+      "claim_text": "KNN is the best model in the comparison.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:model_comparison/main:best_model"
+      ],
+      "reason": "Gold best model is KNN.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "best-r2",
+      "claim_text": "KNN achieved R2=0.920000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.92.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "ranking",
+      "claim_text": "The leading R2 ranking is KNN > RF > SVM.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "fixture_bundle:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.92.",
+      "numeric_delta": 1.08
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "artifact_id": "KNNtest:incremental_feature_analysis/main",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved its best performance (R²=0.83014) with 9 features.",
+      "claim_type": "Performance Metric",
+      "span_category": "Feature Importance",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN model",
+      "predicate": "achieved best performance",
+      "object": "R²=0.83014",
+      "metric": "r2_score",
+      "value": 0.83014,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 9,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The 9 features used for KNN's best performance were VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low.",
+      "claim_type": "Feature List",
+      "span_category": "Feature Importance",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "Features",
+      "predicate": "are",
+      "object": "VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low",
+      "metric": null,
+      "value": 9.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 9,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The best feature set for KNN was VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low.",
+      "claim_type": "Feature Subset",
+      "span_category": "Feature Importance",
+      "is_numeric": false,
+      "requires_grounding_from": "asset_evidence_file",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "best feature set",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "The best feature set for KNN was VFA -",
+        "Butyrate -",
+        "Acetate -",
+        "VSS -",
+        "Propionate -",
+        "Ethanol -",
+        "COD-O -",
+        "pH -",
+        "ORP_Low"
+      ],
+      "feature_count": 9,
+      "hedged": false
+    }
+  ]
+}

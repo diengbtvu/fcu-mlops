@@ -1,0 +1,67 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_importance",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+  "explanation_full": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+  "claims": [
+    {
+      "claim_id": "baseline-top-importance",
+      "claim_text": "VSS is the top feature by importance.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "VSS",
+      "predicate": null,
+      "object": "VSS",
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-ranking-importance",
+      "claim_text": "The importance ordering is VSS > pH > Propionate.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.86,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VSS",
+        "pH",
+        "Propionate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-metric-importance",
+      "claim_text": "VSS has importance=0.52.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "VSS",
+      "predicate": null,
+      "object": null,
+      "metric": "importance",
+      "value": 0.52,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

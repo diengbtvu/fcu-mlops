@@ -304,8 +304,7 @@ class AdminControllerTest extends TestCase
                     'generated_at' => '2026-04-16T00:00:00Z',
                     'artifact_count' => 3,
                     'generation_count' => 30,
-                    'baseline_arm' => 'BASELINE_LLM',
-                    'row_count' => 4,
+                    'row_count' => 3,
                     'best_overall' => [
                         'arm' => 'A',
                         'input_condition' => 'image_table_summary',
@@ -313,12 +312,12 @@ class AdminControllerTest extends TestCase
                         'fact_precision' => 0.91,
                         'fact_recall' => 0.49,
                     ],
-                    'baseline_row' => [
-                        'arm' => 'BASELINE_LLM',
+                    'selected_explanations' => [
+                        'arm' => 'A',
                         'input_condition' => 'image_table_summary',
-                        'fact_f1' => 0.48,
-                        'unsupported_claim_rate' => 0.11,
-                        'contradiction_rate' => 0.0,
+                        'asset_count' => 24,
+                        'provider' => 'benchmark_selected',
+                        'model' => 'gemma4:e4b',
                     ],
                     'leaderboard_preview' => [
                         [
@@ -421,6 +420,153 @@ class AdminControllerTest extends TestCase
         $response->assertSee('Benchmark-selected explanation should be shown.');
         $response->assertDontSee('Runtime explanation should not be shown.');
         $response->assertSee('Displaying benchmark-selected explanations');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function admin_report_can_preview_a_different_benchmark_row()
+    {
+        $manifestJsonl = implode("\n", [
+            json_encode([
+                'artifact_id' => 'rf_test_20260317:model_comparison/main',
+                'artifact_type' => 'model_comparison/main',
+                'asset_key' => 'fig5_model_comparison',
+            ], JSON_UNESCAPED_SLASHES),
+            '',
+        ]);
+
+        Http::fake([
+            '*/train/reports/*/summary.json' => Http::response([
+                'selected_model_metrics' => [
+                    'r2_score' => 0.91,
+                    'rmse' => 0.05,
+                    'mse' => 0.0025,
+                    'mae' => 0.03,
+                ],
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                    'benchmark_selected_explanations' => 'benchmark_eval/selected_explanations.json',
+                ],
+                'selected_benchmark_explanations' => [
+                    'selected_arm' => 'A',
+                    'selected_condition' => 'image_table_summary',
+                    'selected_semantic_level' => null,
+                    'selected_row' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                    ],
+                    'overview' => ['en' => 'A default overview should not be shown.'],
+                    'assets' => [
+                        'metrics_overview' => ['en' => 'A default explanation should not be shown.'],
+                    ],
+                ],
+                'benchmark_status' => [
+                    'status' => 'success',
+                    'message' => 'Benchmark evaluation completed successfully.',
+                    'progress' => 100,
+                    'phase' => 'completed',
+                ],
+                'benchmark_summary' => [
+                    'generated_at' => '2026-04-17T00:00:00Z',
+                    'artifact_count' => 1,
+                    'generation_count' => 5,
+                    'row_count' => 2,
+                    'best_overall' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'fact_f1' => 0.81,
+                        'fact_precision' => 0.91,
+                        'fact_recall' => 0.74,
+                    ],
+                    'selected_explanations' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'asset_count' => 24,
+                        'provider' => 'benchmark_selected',
+                        'model' => 'gemma4:e4b',
+                    ],
+                    'leaderboard_preview' => [
+                        [
+                            'arm' => 'A',
+                            'input_condition' => 'image_table_summary',
+                            'semantic_level' => null,
+                            'fact_f1' => 0.81,
+                            'fact_precision' => 0.91,
+                            'unsupported_claim_rate' => 0.05,
+                            'coverage_of_salient_facts' => 0.82,
+                        ],
+                        [
+                            'arm' => 'B',
+                            'input_condition' => 'image_table_summary',
+                            'semantic_level' => 'L1L2L3',
+                            'fact_f1' => 0.78,
+                            'fact_precision' => 0.88,
+                            'unsupported_claim_rate' => 0.11,
+                            'coverage_of_salient_facts' => 0.79,
+                        ],
+                    ],
+                ],
+            ], 200),
+            '*/train/reports/*/benchmark_eval/scores/leaderboard.json' => Http::response([
+                'leaderboard' => [
+                    [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'fact_f1' => 0.81,
+                        'fact_precision' => 0.91,
+                        'fact_recall' => 0.74,
+                    ],
+                    [
+                        'arm' => 'B',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => 'L1L2L3',
+                        'fact_f1' => 0.78,
+                        'fact_precision' => 0.88,
+                        'fact_recall' => 0.71,
+                    ],
+                ],
+            ], 200),
+            '*/train/reports/*/benchmark_eval/run_metadata.json' => Http::response([
+                'client_model' => 'gemma4:e4b',
+                'created_at' => '2026-04-17T00:00:00Z',
+            ], 200),
+            '*/train/reports/*/benchmark_eval/manifest.jsonl' => Http::response($manifestJsonl, 200),
+            '*/train/reports/*/benchmark_eval/generations/rf_test_20260317_model_comparison_main_b_l1l2l3_image_table_summary.json' => Http::response([
+                'artifact_id' => 'rf_test_20260317:model_comparison/main',
+                'arm' => 'B',
+                'input_condition' => 'image_table_summary',
+                'semantic_level' => 'L1L2L3',
+                'explanation_short' => 'Manual B explanation should be shown.',
+                'explanation_full' => 'Manual B explanation should be shown.',
+            ], 200),
+        ]);
+
+        $model = MLModel::factory()->create([
+            'training_report' => [
+                'report_id' => 'rf_test_20260317',
+                'route_prefix' => '/train/reports/rf_test_20260317',
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.models.report', [
+            'model' => $model,
+            'benchmark_row' => 'B|image_table_summary|L1L2L3',
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertSee('Displaying manually selected benchmark explanations');
+        $response->assertSee('Manual B explanation should be shown.');
+        $response->assertSee('Currently displaying: B · image_table_summary · L1L2L3');
+        $response->assertSee('Website default: A · image_table_summary');
+        $response->assertDontSee('A default explanation should not be shown.');
     }
 
     #[\PHPUnit\Framework\Attributes\Test]

@@ -1,0 +1,313 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+  "artifact_type": "chart/model_knn_scatter",
+  "source_files": [
+    "summary.json",
+    "table_model_comparison.csv",
+    "model_knn_scatter.png"
+  ],
+  "chart_type": "scatter_plot",
+  "primary_entities": [
+    "KNN"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.8171678017,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:rmse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.11318091,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0128099184,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:mae",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0750230875,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "value": 0.907301,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN pred_actual_correlation"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "linear_fit_slope",
+      "object": null,
+      "value": 0.879798,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN linear_fit_slope"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_intercept",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "linear_fit_intercept",
+      "object": null,
+      "value": 0.05714,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN linear_fit_intercept"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:residual_mean",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "residual_mean",
+      "object": null,
+      "value": 0.012229,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN residual_mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:residual_std",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "residual_std",
+      "object": null,
+      "value": 0.112518,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN residual_std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:mean_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mean_abs_residual",
+      "object": null,
+      "value": 0.075023,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mean_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:max_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "value": 0.367254,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN max_abs_residual"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:p95_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "p95_abs_residual",
+      "object": null,
+      "value": 0.252559,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN p95_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:actual_min",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "actual_min",
+      "object": null,
+      "value": 0.051602,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN actual_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:actual_max",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "actual_max",
+      "object": null,
+      "value": 0.954908,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN actual_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:predicted_min",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "predicted_min",
+      "object": null,
+      "value": 0.055238,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN predicted_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:predicted_max",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "predicted_max",
+      "object": null,
+      "value": 0.829894,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN predicted_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score",
+    "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation",
+    "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope",
+    "TEST_arm_c:chart:model_knn_scatter:metric:KNN:max_abs_residual"
+  ],
+  "forbidden_inferences": [
+    "Do not read diagnostic plots as guarantees for every individual prediction.",
+    "Do not let narrative prose override the diagnostic metrics."
+  ]
+}

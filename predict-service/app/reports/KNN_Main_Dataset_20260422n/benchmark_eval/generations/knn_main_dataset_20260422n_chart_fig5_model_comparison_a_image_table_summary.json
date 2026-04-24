@@ -1,0 +1,8 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig5_model_comparison",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The provided content is a list of key-value pairs, which can be interpreted as examples.",
+  "explanation_full": "The input content is a JSON array containing two objects. Each object has 'input' and 'output' keys, suggesting a set of examples or mappings.",
+  "claims": []
+}

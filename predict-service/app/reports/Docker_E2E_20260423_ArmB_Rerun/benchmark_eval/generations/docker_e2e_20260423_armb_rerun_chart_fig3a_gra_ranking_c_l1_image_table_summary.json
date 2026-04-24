@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Grey Relational Analysis (GRA) ranking identifies Sucrose_Degradation, VFA, and COD-O as the top three most important features, with Sucrose_Degradation having the highest score (0.9998).",
+  "explanation_full": "The Grey Relational Analysis (GRA) ranking, presented in Figure 3A, evaluates the importance of various features for the model. The ranking shows that Sucrose_Degradation is the most influential feature with a score of 0.9998. This is followed closely by VFA (0.9994) and COD-O (0.999). The remaining features are ranked in descending order of importance: Butyrate (0.9671), VSS (0.9634), pH (0.9545), Acetate (0.9217), Ethanol (0.8568), Propionate (0.5962), ORP_Mid (0.3352), and ORP_Low (0.3352). This indicates that the degradation of sucrose and the concentration of VFA and COD-O are the primary drivers for the model's predictions.",
+  "claims": [],
+  "semantic_level": "L1"
+}

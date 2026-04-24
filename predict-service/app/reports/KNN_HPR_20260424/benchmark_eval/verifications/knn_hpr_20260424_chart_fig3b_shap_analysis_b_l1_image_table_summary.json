@@ -1,0 +1,64 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA has a mean absolute SHAP value of 0.0298",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0298303953.",
+      "numeric_delta": 3.039529999999957e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate has a mean absolute SHAP value of 0.0304",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:Butyrate:mean_abs_shap"
+      ],
+      "reason": "Gold value for Butyrate mean_abs_shap is 0.0304246981.",
+      "numeric_delta": 2.4698100000001416e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate has a mean absolute SHAP value of 0.0266",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:Acetate:mean_abs_shap"
+      ],
+      "reason": "Gold value for Acetate mean_abs_shap is 0.0266095146.",
+      "numeric_delta": 9.514599999999734e-06
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three features influencing the model's predictions.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 3
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-mean",
+      "claim_text": "Ethanol is the top feature by mean.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:boxplots:top_feature:mean"
+      ],
+      "reason": "Gold top feature for mean is Ethanol.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "mean-ranking",
+      "claim_text": "The mean ordering is Ethanol > Propionate > VFA.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:boxplots:ranking:mean"
+      ],
+      "reason": "Claimed ordering is consistent with the gold ranking.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-std",
+      "claim_text": "Butyrate is the top feature by std.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:boxplots:top_feature:std"
+      ],
+      "reason": "Gold top feature for std is Butyrate.",
+      "numeric_delta": null
+    }
+  ]
+}

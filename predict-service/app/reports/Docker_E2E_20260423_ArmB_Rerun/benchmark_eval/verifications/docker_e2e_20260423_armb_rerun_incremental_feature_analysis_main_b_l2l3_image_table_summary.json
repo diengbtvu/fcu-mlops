@@ -1,0 +1,36 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate' (7 features) is notable for SVM as it achieves the lowest MSE (0.00877)",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold value for DT feature_subset_optimum is 1.0.",
+      "numeric_delta": 0.99123
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The performance of SVM gradually improves as more features are added, with the lowest MSE observed at 7 features (Acetate).",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold value for DT feature_subset_optimum is 1.0.",
+      "numeric_delta": 0.99123
+    }
+  ]
+}

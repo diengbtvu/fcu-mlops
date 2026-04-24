@@ -1,0 +1,12 @@
+n_features,feature_subset,SVM_R2,SVM_MSE,DT_R2,DT_MSE,RF_R2,RF_MSE,KNN_R2,KNN_MSE,XGBoost_R2,XGBoost_MSE
+1,Sucrose_Degradation,0.0,0.00999937964675071,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+2,Sucrose_Degradation -> VFA,0.0,0.00999656020654098,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+3,Sucrose_Degradation -> VFA -> COD-O,0.0,0.009999541310340107,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+4,Sucrose_Degradation -> VFA -> COD-O -> Butyrate,0.0,0.009952759210301573,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+5,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS,0.0,0.009739486181018017,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+6,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH,0.0,0.009564581243193445,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+7,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate,0.0,0.008775596848796367,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+8,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol,0.0,0.0073351704314986235,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+9,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate,0.0,0.00875812487441378,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+10,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid,0.0,0.006607876482459992,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14
+11,Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid -> ORP_Low,0.0,0.00704423003264645,1.0,0.0,1.0,0.0,1.0,0.0,0.0,7.477596651503524e-14

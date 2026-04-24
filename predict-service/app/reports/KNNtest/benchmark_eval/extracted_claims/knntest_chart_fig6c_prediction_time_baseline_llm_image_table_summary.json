@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The actual peak value occurred at index 130 with a value of 1.0.",
+      "claim_type": "factual",
+      "span_category": "value",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "actual peak value",
+      "predicate": "occurred at",
+      "object": "index 130",
+      "metric": "index",
+      "value": 130.0,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model predicted a peak at index 146 with a value of 0.829894.",
+      "claim_type": "factual",
+      "span_category": "value",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "model predicted peak",
+      "predicate": "occurred at",
+      "object": "index 146",
+      "metric": "index",
+      "value": 146.0,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model achieved a sequence correlation of 0.931488.",
+      "claim_type": "factual",
+      "span_category": "correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "achieved",
+      "object": 0.931488,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

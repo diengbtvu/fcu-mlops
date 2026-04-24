@@ -1,0 +1,3378 @@
+{
+  "model_name": "TEST arm c",
+  "model_type": "knn",
+  "model_label": "KNN",
+  "comparison_enabled": true,
+  "created_at": "2026-04-24T02:26:49.504521",
+  "selected_model_metrics": {
+    "r2_score": 0.8171678017037467,
+    "rmse": 0.11318090995439674,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.7324097475450169,
+      "rmse": 0.13692475905328275,
+      "mse": 0.018748389641799534,
+      "mae": 0.09460256693779986
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.5604531394996005,
+      "rmse": 0.1754888111857837,
+      "mse": 0.030796322851399643,
+      "mae": 0.10855624704298139
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.775601817135309,
+      "rmse": 0.12538815399769956,
+      "mse": 0.015722189162950824,
+      "mae": 0.08355692337682431
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8171678017037467,
+      "rmse": 0.11318090995439674,
+      "mse": 0.012809918378105262,
+      "mae": 0.07502308749135642
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.7494763101779772,
+      "rmse": 0.13248638205179633,
+      "mse": 0.017552641429174544,
+      "mae": 0.09559303423201744
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "gra_ranking.json",
+    "analysis_summary": "analysis_summary_report.txt",
+    "summary": "summary.json",
+    "training_bundle_zip": "training_bundle.zip",
+    "best_model": "best_model.pkl",
+    "best_scaler_X": "best_scaler_X.pkl",
+    "best_scaler_Y": "best_scaler_Y.pkl",
+    "scaler": "scaler.pkl",
+    "best_model_info": "best_model_info.txt",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "best_model_shap_values": "best_model_shap_values.npy",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "fig3a_gra_ranking": "fig3a_gra_ranking.png",
+    "fig3b_shap_analysis": "fig3b_shap_analysis.png",
+    "fig3_feature_analysis": "fig3_feature_analysis.png",
+    "fig4_univariate_analysis": "fig4_univariate_analysis.png",
+    "fig5_model_comparison": "fig5_model_comparison.png",
+    "fig6ab_mse_r2_features": "fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time": "fig6c_prediction_time.png",
+    "results_summary": "results_summary.txt",
+    "best_model_summary": "best_model_summary.json",
+    "model_svm_scatter": "model_svm_scatter.png",
+    "model_dt_scatter": "model_dt_scatter.png",
+    "model_rf_scatter": "model_rf_scatter.png",
+    "model_knn_scatter": "model_knn_scatter.png",
+    "model_xgboost_scatter": "model_xgboost_scatter.png",
+    "asset_evidence": "asset_evidence.json",
+    "llm_explanations": "llm_explanations.json",
+    "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+    "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+    "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+    "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+    "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+    "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+    "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+  },
+  "llm_explanations_status": {
+    "status": "success",
+    "message": "AI explanations generated successfully.",
+    "updated_at": "2026-04-24T02:35:06.062730",
+    "started_at": "2026-04-24T02:26:49.658267",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 31,
+    "total_steps": 31,
+    "current_items": [
+      "AI Report Overview"
+    ]
+  },
+  "benchmark_status": {
+    "status": "success",
+    "message": "Benchmark evaluation completed successfully.",
+    "updated_at": "2026-04-24T06:25:49.486788",
+    "started_at": "2026-04-24T02:35:06.229405",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 3,
+    "total_steps": 3,
+    "current_items": [
+      "leaderboard",
+      "run metadata"
+    ],
+    "output_dir": "benchmark_eval"
+  },
+  "llm_explanations": {
+    "provider": "ollama",
+    "model": "gemma4:e4b",
+    "generated_at": "2026-04-24T02:35:06.058677",
+    "overview": {
+      "en": "The analysis of the dataset reveals that the Support Vector Regression (SVR) model is the most effective predictor for the target variable. The model achieved a high predictive accuracy, suggesting a strong underlying relationship between the input features and the target. The key features contributing to the model's performance are VFA, TDS, and DO. These variables are highly correlated with the target, indicating that they are the primary drivers of the variation in the target variable. The model's performance is further supported by the R-squared value, which quantifies the proportion of the variance in the dependent variable that is predictable from the independent variables. A high R-squared value confirms the model's predictive power. In summary, the SVR model provides a robust and reliable prediction framework. The combination of VFA, TDS, and DO as key predictors, coupled with the high R-squared value, establishes a strong foundation for reliable forecasting.",
+      "zh_TW": "數據集的分析顯示，支持向量迴歸（SVR）模型是預測目標變數最有效的預測器。該模型達到了高預測準確性，表明輸入特徵與目標之間存在強烈的潛在關係。貢獻模型性能的關鍵特徵是VFA、TDS和DO。這些變數與目標高度相關，表明它們是目標變數變化的主要驅動因素。模型的性能進一步得到R平方值的支持，該值量化了依賴變數中可由獨立變數預測的變異比例。高R平方值證實了模型的預測能力。總而言之，SVR模型提供了一個穩健可靠的預測框架。VFA、TDS和DO作為關鍵預測器，結合高R平方值，為可靠的預測奠定了堅實的基礎。"
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "This table compares how well different machine learning models predict the target value, which is Hydrogen Production Rate (HPR). The metrics shown—R² (R-squared), RMSE (Root Mean Square Error), MSE (Mean Squared Error), and MAE (Mean Absolute Error)—are all measures of accuracy, where higher R² and lower error values (RMSE, MSE, MAE) indicate better performance. The KNN model performed the best, achieving an R² of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). Overall, the KNN model provides the most reliable prediction, suggesting that the relationship between the input features and HPR is strong and predictable. A practical caution is that while KNN is the best model, its performance relies heavily on the quality and completeness of the training data.",
+        "zh_TW": "這張表格比較了不同機器學習模型預測目標值（即氫氣產率，HPR）的表現。表格中的指標，包括R²（決定係數）、RMSE（均方根誤差）、MSE（平均平方誤差）和MAE（平均絕對誤差），都是衡量準確性的指標，其中R²越高，以及誤差值（RMSE、MSE、MAE）越低，代表表現越好。KNN模型表現最佳，達到了R²=0.8172和RMSE=0.1132，顯著優於RF（R²=0.7756）和XGBoost（R²=0.7495）等其他模型。總體而言，KNN模型提供了最可靠的預測，這表明輸入特徵與HPR之間的關係是強大且可預測的。一個實際的注意事項是，雖然KNN是最佳模型，但其表現高度依賴於訓練數據的品質和完整性。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model is the best predictor, showing an R² of 0.8172 and an RMSE of 0.1132, outperforming all other models.",
+          "explanation_full": "This table compares how well different machine learning models predict the target value, which is Hydrogen Production Rate (HPR). The metrics shown—R² (R-squared), RMSE (Root Mean Square Error), MSE (Mean Squared Error), and MAE (Mean Absolute Error)—are all measures of accuracy, where higher R² and lower error values (RMSE, MSE, MAE) indicate better performance. The KNN model performed the best, achieving an R² of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). Overall, the KNN model provides the most reliable prediction, suggesting that the relationship between the input features and HPR is strong and predictable. A practical caution is that while KNN is the best model, its performance relies heavily on the quality and completeness of the training data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN model achieved an R² of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN model achieved an RMSE of 0.1132.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "RMSE",
+              "value": 0.1132,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "RF model achieved an R² of 0.7756.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 0.7756,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "XGBoost model achieved an R² of 0.7495.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 0.7495,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "KNN model outperformed RF model in R² score.",
+              "claim_type": "ranking",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "outperformed",
+              "object": "RF",
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_6",
+              "claim_text": "KNN model is the best predictor among the tested models.",
+              "claim_type": "best_model",
+              "span_category": "Model Performance",
+              "is_numeric": true,
+              "requires_grounding_from": "metrics_overview",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "is the best predictor",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3a_gra_ranking": {
+        "en": "This chart, titled 'Grey relational ranking,' helps us understand which chemical components are most important for predicting hydrogen production. It ranks features based on their overall relevance, with VFA scoring the highest at 0.7931, followed closely by Butyrate (0.7902) and Acetate (0.7772). The main takeaway is that VFA, Butyrate, and Acetate are the most critical indicators, suggesting that monitoring these specific compounds provides the best insight into the process. A practical caution is that while these features are highly correlated with the target, other factors not included in this ranking might also play a role in real-world variations.",
+        "zh_TW": "這張名為「灰相關排名」的圖表，幫助我們了解哪些化學成分對於預測氫氣產量最重要。它根據整體相關性對特徵進行了排名，其中VFA的得分最高，為0.7931，緊隨其後的是丁酸鹽（Butyrate，0.7902）和乙酸鹽（Acetate，0.7772）。主要結論是VFA、丁酸鹽和乙酸酸鹽是最關鍵的指標，這表明監測這些特定化合物能為過程提供最佳的洞察力。一個實際的注意事項是，雖然這些特徵與目標值高度相關，但在現實世界的變化中，其他未包含在這個排名中的因素也可能發揮作用。",
+        "benchmark_payload": {
+          "explanation_short": "VFA, Butyrate, and Acetate are the top three most important features for predicting hydrogen production based on the Grey relational ranking.",
+          "explanation_full": "This chart, titled 'Grey relational ranking,' helps us understand which chemical components are most important for predicting hydrogen production. It ranks features based on their overall relevance, with VFA scoring the highest at 0.7931, followed closely by Butyrate (0.7902) and Acetate (0.7772). The main takeaway is that VFA, Butyrate, and Acetate are the most critical indicators, suggesting that monitoring these specific compounds provides the best insight into the process. A practical caution is that while these features are highly correlated with the target, other factors not included in this ranking might also play a role in real-world variations.",
+          "claims": [
+            {
+              "claim_id": "fig3a_gra_ranking_1",
+              "claim_text": "VFA is the top-ranked feature for predicting hydrogen production with a score of 0.7931.",
+              "claim_type": "ranking",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "gra_ranking",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the top-ranked feature",
+              "object": "0.7931",
+              "metric": "score",
+              "value": 0.7931,
+              "unit": "score",
+              "ordered_items": [
+                "VFA"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3a_gra_ranking_2",
+              "claim_text": "Butyrate ranks second with a score of 0.7902.",
+              "claim_type": "ranking",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "gra_ranking",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "ranks second",
+              "object": "0.7902",
+              "metric": "score",
+              "value": 0.7902,
+              "unit": "score",
+              "ordered_items": [
+                "Butyrate"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3a_gra_ranking_3",
+              "claim_text": "Acetate ranks third with a score of 0.7772.",
+              "claim_type": "ranking",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "gra_ranking",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "ranks third",
+              "object": "0.7772",
+              "metric": "score",
+              "value": 0.7772,
+              "unit": "score",
+              "ordered_items": [
+                "Acetate"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3b_shap_analysis": {
+        "en": "This chart, known as SHAP analysis, helps us understand which specific factors are most influential in predicting the outcome. It shows that the lowest ORP (ORP_Low) and Butyrate levels are the most important factors, followed by ORP_Mid, COD-O, VFA, and Acetate. This means that changes in these specific measurements have the biggest impact on the prediction. A practical caution is that while these features are highly influential, the analysis only shows their individual importance and doesn't fully explain how they interact with each other.",
+        "zh_TW": "這張圖，稱為 SHAP 分析，幫助我們了解哪些特定的因素對預測結果影響最大。它顯示最低 ORP（ORP_Low）和丁酸鹽（Butyrate）的水平是最重要的因素，其次是 ORP_Mid、COD-O、VFA 和乙酸鹽（Acetate）。這意味著這些特定測量值的變化對預測結果有最大的影響。一個實際的注意事項是，雖然這些特徵影響力很大，但分析只顯示了它們的個別重要性，並沒有完全解釋它們之間如何相互作用。",
+        "benchmark_payload": {
+          "explanation_short": "The most influential features in predicting the outcome are ORP_Low and Butyrate, followed by ORP_Mid, COD-O, VFA, and Acetate.",
+          "explanation_full": "This chart, known as SHAP analysis, helps us understand which specific factors are most influential in predicting the outcome. It shows that the lowest ORP (ORP_Low) and Butyrate levels are the most important factors, followed by ORP_Mid, COD-O, VFA, and Acetate. This means that changes in these specific measurements have the biggest impact on the prediction. A practical caution is that while these features are highly influential, the analysis only shows their individual importance and doesn't fully explain how they interact with each other.",
+          "claims": [
+            {
+              "claim_id": "fig3b_shap_analysis_1",
+              "claim_text": "The most influential features in predicting the outcome are ORP_Low and Butyrate.",
+              "claim_type": "top_feature",
+              "span_category": "feature_importance",
+              "is_numeric": false,
+              "requires_grounding_from": "fig3b_shap_analysis",
+              "confidence": 1.0,
+              "subject": "ORP_Low",
+              "predicate": "is more important than",
+              "object": "Butyrate",
+              "metric": "mean_abs_shap",
+              "value": 0.035244838,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3b_shap_analysis_2",
+              "claim_text": "ORP_Low and Butyrate are the most important factors, followed by ORP_Mid, COD-O, VFA, and Acetate.",
+              "claim_type": "ranking",
+              "span_category": "feature_importance",
+              "is_numeric": false,
+              "requires_grounding_from": "fig3b_shap_analysis",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": "are ranked",
+              "object": null,
+              "metric": "mean_abs_shap",
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "ORP_Low",
+                "Butyrate",
+                "ORP_Mid",
+                "COD-O",
+                "VFA",
+                "Acetate"
+              ],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3_feature_analysis": {
+        "en": "This chart provides a comprehensive analysis of which chemical measurements are most useful for predicting hydrogen production (HPR). It combines several methods—like feature ranking, feature importance, and correlation analysis—to show the predictive power of different chemical components. The main takeaway is that the combination of VFA, Butyrate, and Acetate are consistently among the most important features, with VFA being the top feature across multiple metrics. For instance, the correlation between VFA and HPR is 0.7984, indicating a strong relationship. A practical caution is that while many features are correlated, the predictive power of a small, optimized subset of features (like VFA, Butyrate, and Acetate) can sometimes outperform using all available data.",
+        "zh_TW": "這張圖提供了關於哪些化學測量最適合預測氫氣產生量（HPR）的綜合分析。它結合了多種方法，例如特徵排名、特徵重要性和相關性分析，來展示不同化學成分的預測能力。主要結論是，VFA、丁酸酯和乙酸酯等成分在多個指標中持續表現出最高的預測重要性，其中VFA是多數指標中的頂級特徵。舉例來說，VFA與HPR的相關係數為0.7984，顯示出強烈的關聯性。一個實用的注意事項是，雖然許多特徵之間存在相關性，但有時使用一小組經過優化的特徵子集（如VFA、丁酸酯和乙酸酯）的預測能力，可能會優於使用所有可用數據。",
+        "benchmark_payload": {
+          "explanation_short": "The analysis shows that VFA, Butyrate, and Acetate are the most important features for predicting hydrogen production, with VFA showing the strongest correlation to HPR.",
+          "explanation_full": "This chart provides a comprehensive analysis of which chemical measurements are most useful for predicting hydrogen production (HPR). It combines several methods—like feature ranking, feature importance, and correlation analysis—to show the predictive power of different chemical components. The main takeaway is that the combination of VFA, Butyrate, and Acetate are consistently among the most important features, with VFA being the top feature across multiple metrics. For instance, the correlation between VFA and HPR is 0.7984, indicating a strong relationship. A practical caution is that while many features are correlated, the predictive power of a small, optimized subset of features (like VFA, Butyrate, and Acetate) can sometimes outperform using all available data.",
+          "claims": [
+            {
+              "claim_id": "fig3_feature_analysis_1",
+              "claim_text": "VFA is the top feature for predicting hydrogen production, ranking first in GRA and having the highest correlation with HPR (0.7984).",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "result_text",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the top feature",
+              "object": "hydrogen production",
+              "metric": "GRA ranking",
+              "value": 0.7931,
+              "unit": "score",
+              "ordered_items": [
+                "VFA",
+                "Butyrate",
+                "Acetate",
+                "VSS",
+                "Propionate"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3_feature_analysis_2",
+              "claim_text": "Butyrate and Acetate are the second and third most important features, respectively, with strong correlations to VFA (0.9601 and 0.9428).",
+              "claim_type": "ranking",
+              "span_category": "Butyrate, Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "evidence",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "is highly correlated with VFA",
+              "object": "VFA",
+              "metric": "correlation",
+              "value": 0.9601,
+              "unit": null,
+              "ordered_items": [
+                "Butyrate",
+                "Acetate"
+              ],
+              "feature_count": 2,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3_feature_analysis_3",
+              "claim_text": "The best feature subset for predicting HPR using KNN is VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low (9 features), achieving an R² of 0.83014.",
+              "claim_type": "feature_subset_optimum",
+              "span_category": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+              "is_numeric": true,
+              "requires_grounding_from": "results_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "best feature subset",
+              "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+              "metric": "R²",
+              "value": 0.83014,
+              "unit": null,
+              "ordered_items": [
+                "VFA",
+                "Butyrate",
+                "Acetate",
+                "VSS",
+                "Propionate",
+                "Ethanol",
+                "COD-O",
+                "pH",
+                "ORP_Low"
+              ],
+              "feature_count": 9,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig4_univariate_analysis": {
+        "en": "This chart helps us understand which chemical components are most related to the final hydrogen production (HPR). It shows the strength of the relationship between each component and HPR, allowing us to identify the most important predictors. The analysis reveals that VFA (0.7984) and Butyrate (0.7827) are the strongest predictors, followed closely by Acetate (0.7641). This suggests that these specific compounds are key drivers of hydrogen production. A practical caution is that while these correlations are strong, they do not guarantee perfect prediction, and other unmeasured factors might also play a role in the final outcome.",
+        "zh_TW": "這張圖幫助我們了解哪些化學成分與最終的氫氣產量（HPR）最相關。它顯示了每個成分與HPR之間的關係強度，使我們能夠找出最重要的預測因子。分析結果顯示，VFA（0.7984）和丁酸鹽（Butyrate）（0.7827）是最強的預測因子，接著是乙酸鹽（Acetate）（0.7641）。這表明這些特定的化合物是驅動氫氣產量的關鍵因素。一個實際的注意事項是，雖然這些相關性很強，但它們不能保證完美的預測，其他未測量的因素也可能在最終結果中扮演角色。",
+        "benchmark_payload": {
+          "explanation_short": "The analysis identifies VFA and Butyrate as the strongest predictors of hydrogen production, followed by Acetate.",
+          "explanation_full": "This chart helps us understand which chemical components are most related to the final hydrogen production (HPR). It shows the strength of the relationship between each component and HPR, allowing us to identify the most important predictors. The analysis reveals that VFA (0.7984) and Butyrate (0.7827) are the strongest predictors, followed closely by Acetate (0.7641). This suggests that these specific compounds are key drivers of hydrogen production. A practical caution is that while these correlations are strong, they do not guarantee perfect prediction, and other unmeasured factors might also play a role in the final outcome.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA is the strongest predictor of hydrogen production with a correlation of 0.7984.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "fig4_univariate_analysis",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the strongest predictor of",
+              "object": "hydrogen production",
+              "metric": "correlation",
+              "value": 0.7984,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Butyrate is the second strongest predictor of hydrogen production with a correlation of 0.7827.",
+              "claim_type": "ranking",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "fig4_univariate_analysis",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "is the second strongest predictor of",
+              "object": "hydrogen production",
+              "metric": "correlation",
+              "value": 0.7827,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Acetate is the third strongest predictor of hydrogen production with a correlation of 0.7641.",
+              "claim_type": "ranking",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "fig4_univariate_analysis",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "is the third strongest predictor of",
+              "object": "hydrogen production",
+              "metric": "correlation",
+              "value": 0.7641,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig5_model_comparison": {
+        "en": "This chart compares how well different predictive models can estimate the Hydrogen Production Rate (HPR) based on various chemical measurements. The models are evaluated using metrics like R² (which measures how much of the variation in HPR is explained by the features) and RMSE (which measures the average magnitude of the prediction errors). The KNN model performed the best, achieving an R² score of 0.8172 and a low RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). This suggests that the KNN model is the most reliable tool for predicting HPR from these measurements. However, users should remember that model performance is based on historical data, and real-world conditions might introduce variability not captured by the model.",
+        "zh_TW": "這張圖比較了不同預測模型根據各種化學測量，預估氫氣產率（HPR）的表現。模型透過 R²（衡量特徵解釋 HPR 變異量的程度）和 RMSE（衡量預測誤差的平均大小）等指標進行評估。KNN 模型表現最佳，達到 0.8172 的 R² 分數和 0.1132 的低 RMSE，顯著優於 RF（R²=0.7756）和 XGBoost（R²=0.7495）等其他模型。這表明 KNN 模型是從這些測量中預測 HPR 最可靠的工具。不過，使用者應記住，模型表現是基於歷史數據，實際的環境條件可能會引入模型無法捕捉的變異性。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model is the best predictor for HPR, showing an R² of 0.8172 and an RMSE of 0.1132, outperforming other models.",
+          "explanation_full": "This chart compares how well different predictive models can estimate the Hydrogen Production Rate (HPR) based on various chemical measurements. The models are evaluated using metrics like R² (which measures how much of the variation in HPR is explained by the features) and RMSE (which measures the average magnitude of the prediction errors). The KNN model performed the best, achieving an R² score of 0.8172 and a low RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). This suggests that the KNN model is the most reliable tool for predicting HPR from these measurements. However, users should remember that model performance is based on historical data, and real-world conditions might introduce variability not captured by the model.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN model has an R² score of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "fig5_model_comparison",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "has an R² score of",
+              "object": 0.8172,
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN model has an RMSE of 0.1132.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "fig5_model_comparison",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "has an RMSE of",
+              "object": 0.1132,
+              "metric": "RMSE",
+              "value": 0.1132,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "RF model has an R² score of 0.7756.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "fig5_model_comparison",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "has an R² score of",
+              "object": 0.7756,
+              "metric": "R²",
+              "value": 0.7756,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "XGBoost model has an R² score of 0.7495.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "fig5_model_comparison",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "has an R² score of",
+              "object": 0.7495,
+              "metric": "R²",
+              "value": 0.7495,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "KNN model is the best predictor for HPR.",
+              "claim_type": "best_model",
+              "span_category": "model_comparison",
+              "is_numeric": false,
+              "requires_grounding_from": "fig5_model_comparison",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "is the best predictor for HPR",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "The chart shows how well different machine learning models predict the target variable (HPR) using varying numbers of input features. Generally, adding more features improves the prediction accuracy, but this benefit plateaus or even declines, suggesting that too many features might introduce noise. Specifically, the KNN model achieved the highest R² score of 0.83014 and the lowest MSE of 0.011901 when using 9 features (VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low). This suggests that a carefully selected subset of 9 features is optimal for the KNN model.",
+        "zh_TW": "這張圖顯示了使用不同數量輸入特徵時，各種機器學習模型預測目標變數（HPR）的準確性。一般而言，增加更多特徵會提高預測準確度，但這種提升會達到平台期甚至下降，這表明過多的特徵可能會引入雜訊。具體來說，當使用 9 個特徵（VFA、Butyrate、Acetate、VSS、Propionate、Ethanol、COD-O、pH、ORP_Low）時，KNN 模型達到了最高的 R² 分數 0.83014 和最低的 MSE 0.011901。這表明對於 KNN 模型來說，選擇 9 個特徵的子集是最優的。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model performed best with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901.",
+          "explanation_full": "The chart shows how well different machine learning models predict the target variable (HPR) using varying numbers of input features. Generally, adding more features improves the prediction accuracy, but this benefit plateaus or even declines, suggesting that too many features might introduce noise. Specifically, the KNN model achieved the highest R² score of 0.83014 and the lowest MSE of 0.011901 when using 9 features (VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low). This suggests that a carefully selected subset of 9 features is optimal for the KNN model.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN model achieved the highest R² score of 0.83014 when using 9 features.",
+              "claim_type": "best_model",
+              "span_category": "KNN",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved the highest R² score",
+              "object": "0.83014",
+              "metric": "R²",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": 9,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN model achieved the lowest MSE of 0.011901 when using 9 features.",
+              "claim_type": "metric_value",
+              "span_category": "KNN",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved the lowest MSE",
+              "object": null,
+              "metric": "MSE",
+              "value": 0.011901,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": 9,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The optimal feature subset for KNN includes 9 features: VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low.",
+              "claim_type": "feature_subset_optimum",
+              "span_category": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "VFA",
+                "Butyrate",
+                "Acetate",
+                "VSS",
+                "Propionate",
+                "Ethanol",
+                "COD-O",
+                "pH",
+                "ORP_Low"
+              ],
+              "feature_count": 9,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig6c_prediction_time": {
+        "en": "This chart, titled 'Prediction over time,' shows how well the model predicts changes in the system over time, using the KNN model. The model predicted a peak value of 0.829894 at time index 146, while the actual peak was 1.0 at index 130. The sequence correlation of 0.931488 indicates a strong relationship between the predicted and actual trends. Overall, the model performs well, suggesting it can accurately track the system's dynamic changes, though there is a slight difference in the predicted peak value and timing.",
+        "zh_TW": "這張標題為「隨時間的預測」的圖表，展示了模型使用 KNN 模型預測系統隨時間變化的準確性。模型預測的峰值為 0.829894，發生在時間索引 146，而實際峰值為 1.0，發生在索引 130。序列相關係數為 0.931488，顯示預測和實際趨勢之間存在強相關性。總體而言，該模型表現良好，表明它能夠準確追蹤系統的動態變化，但預測的峰值和時間點與實際值存在輕微差異。",
+        "benchmark_payload": {
+          "explanation_short": "The model shows a strong correlation (0.931488) between predicted and actual trends, with a predicted peak value of 0.829894 compared to the actual peak of 1.0.",
+          "explanation_full": "This chart, titled 'Prediction over time,' shows how well the model predicts changes in the system over time, using the KNN model. The model predicted a peak value of 0.829894 at time index 146, while the actual peak was 1.0 at index 130. The sequence correlation of 0.931488 indicates a strong relationship between the predicted and actual trends. Overall, the model performs well, suggesting it can accurately track the system's dynamic changes, though there is a slight difference in the predicted peak value and timing.",
+          "claims": [
+            {
+              "claim_id": "fig6c_prediction_time_1",
+              "claim_text": "The model predicted a peak value of 0.829894.",
+              "claim_type": "metric_value",
+              "span_category": "predicted_peak_value",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "predicted",
+              "object": null,
+              "metric": "predicted_peak_value",
+              "value": 0.829894,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig6c_prediction_time_2",
+              "claim_text": "The actual peak value was 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "actual_peak_value",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": "system",
+              "predicate": "had",
+              "object": null,
+              "metric": "actual_peak_value",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig6c_prediction_time_3",
+              "claim_text": "The sequence correlation was 0.931488.",
+              "claim_type": "metric_value",
+              "span_category": "sequence_correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "sequence_correlation",
+              "value": 0.931488,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_svm_scatter": {
+        "en": "The SVM scatter plot helps visualize how well the model's predictions match the actual measured values. It shows a strong positive correlation (0.866) between predicted and actual values, and the linear fit line has a slope of 0.858, indicating that for every unit increase in the actual value, the model predicts an increase of 0.858 units. The model achieved an R² score of 0.732, meaning it explains about 73.2% of the variance in the data. A practical caution is that the largest error (residual) was 0.610, which is quite large compared to the average absolute error (0.095), suggesting that the model struggles significantly with certain data points.",
+        "zh_TW": "SVM 散點圖用於視覺化模型預測值與實際測量值之間的匹配程度。它顯示預測值和實際值之間有強的正相關性（0.866），且線性擬合線的斜率為 0.858，這表示實際值每增加一個單位，模型預測值會增加 0.858 個單位。該模型獲得了 0.732 的 R² 分數，這代表它解釋了數據變異的約 73.2%。一個實際的注意事項是，最大的誤差（殘差）為 0.610，相較於平均絕對誤差（0.095），這個誤差相當大，暗示模型在處理某些數據點時表現出顯著的困難。",
+        "benchmark_payload": {
+          "explanation_short": "The SVM scatter plot shows a strong positive correlation between predicted and actual values, with an R² score of 0.732.",
+          "explanation_full": "The SVM scatter plot helps visualize how well the model's predictions match the actual measured values. It shows a strong positive correlation (0.866) between predicted and actual values, and the linear fit line has a slope of 0.858, indicating that for every unit increase in the actual value, the model predicts an increase of 0.858 units. The model achieved an R² score of 0.732, meaning it explains about 73.2% of the variance in the data. A practical caution is that the largest error (residual) was 0.610, which is quite large compared to the average absolute error (0.095), suggesting that the model struggles significantly with certain data points.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The SVM scatter plot shows a strong positive correlation between predicted and actual values.",
+              "claim_type": "freeform",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "model_svm_scatter",
+              "confidence": 1.0,
+              "subject": "predicted and actual values",
+              "predicate": "show a strong positive correlation",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The linear fit line has a slope of 0.858.",
+              "claim_type": "freeform",
+              "span_category": "slope",
+              "is_numeric": true,
+              "requires_grounding_from": "model_svm_scatter",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": 0.858,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The model achieved an R² score of 0.732.",
+              "claim_type": "metric_value",
+              "span_category": "R2_score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_svm_scatter",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "achieved an R² score",
+              "object": null,
+              "metric": "R2_score",
+              "value": 0.732,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The largest error (residual) was 0.610.",
+              "claim_type": "freeform",
+              "span_category": "residual",
+              "is_numeric": true,
+              "requires_grounding_from": "model_svm_scatter",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": 0.61,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_dt_scatter": {
+        "en": "This scatter plot helps us understand how well the Decision Tree (DT) model performed on the test data. It shows the relationship between the actual measured values and the values the model predicted. The model achieved an R-squared (R²) score of 0.5605, meaning it explains about 56% of the variation in the data, and had a Root Mean Square Error (RMSE) of 0.1755. The correlation between predicted and actual values is 0.7872, suggesting a moderately strong linear relationship. A practical caution is that the model's largest error was 0.5979, which is quite large compared to the average error (MAE of 0.1086), indicating that while it performs reasonably well overall, it struggles significantly with certain data points.",
+        "zh_TW": "這張散點圖幫助我們了解決策樹（DT）模型在測試數據上的表現。它展示了實際測量值與模型預測值之間的關係。該模型達到了 R 平方（R²）分數 0.5605，這意味著它解釋了數據變異的約 56%，並且具有 0.1755 的均方根誤差（RMSE）。預測值與實際值之間的相關係數為 0.7872，表明存在中等偏強的線性關係。一個實際的注意事項是，該模型的最大誤差為 0.5979，與平均誤差（MAE 為 0.1086）相比相當大，這表明雖然整體表現尚可，但它在某些數據點上表現出顯著的困難。",
+        "benchmark_payload": {
+          "explanation_short": "The Decision Tree model achieved an R-squared score of 0.5605, indicating moderate predictive power with a notable maximum residual error of 0.5979.",
+          "explanation_full": "This scatter plot helps us understand how well the Decision Tree (DT) model performed on the test data. It shows the relationship between the actual measured values and the values the model predicted. The model achieved an R-squared (R²) score of 0.5605, meaning it explains about 56% of the variation in the data, and had a Root Mean Square Error (RMSE) of 0.1755. The correlation between predicted and actual values is 0.7872, suggesting a moderately strong linear relationship. A practical caution is that the model's largest error was 0.5979, which is quite large compared to the average error (MAE of 0.1086), indicating that while it performs reasonably well overall, it struggles significantly with certain data points.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The Decision Tree model achieved an R-squared score of 0.5605.",
+              "claim_type": "metric_value",
+              "span_category": "R2",
+              "is_numeric": true,
+              "requires_grounding_from": "model_dt_scatter",
+              "confidence": 1.0,
+              "subject": "Decision Tree model",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R2",
+              "value": 0.5604531395,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The Decision Tree model had a Root Mean Square Error (RMSE) of 0.1755.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_dt_scatter",
+              "confidence": 1.0,
+              "subject": "Decision Tree model",
+              "predicate": "had",
+              "object": null,
+              "metric": "RMSE",
+              "value": 0.1754888112,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The correlation between predicted and actual values is 0.7872.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "model_dt_scatter",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "correlation",
+              "value": 0.787161,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The model's largest error was 0.5979.",
+              "claim_type": "metric_value",
+              "span_category": "max_residual",
+              "is_numeric": true,
+              "requires_grounding_from": "model_dt_scatter",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "largest error",
+              "object": null,
+              "metric": "max_abs_residual",
+              "value": 0.597936,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_rf_scatter": {
+        "en": "This scatter plot helps us understand how well the Random Forest model's predictions match the actual measured values. The plot shows a strong positive correlation (0.88511) between predicted and actual values, and the linear fit line has a slope of 0.848822, indicating that for every unit increase in the actual value, the model predicts a corresponding increase. The model achieved an R² score of 0.7756, meaning it explains about 77.56% of the variation in the data. A practical caution is that the largest error (residual) was 0.450808, which is quite large compared to the average absolute error (0.083557), suggesting that while the model is generally good, it struggles with certain extreme data points.",
+        "zh_TW": "這張散點圖幫助我們了解隨機森林模型的預測值與實際測量值之間的吻合程度。圖表顯示預測值和實際值之間有強的正相關性（0.88511），且線性擬合的斜率為0.848822，這表示實際值每增加一個單位，模型預測值也會相應增加。該模型達到了R²分數0.7756，這代表它解釋了數據變異的約77.56%。一個實際的注意事項是，最大的誤差（殘差）為0.450808，相較於平均絕對誤差（0.083557）來說相當大，這暗示著雖然模型整體表現良好，但在處理某些極端數據點時會遇到困難。",
+        "benchmark_payload": {
+          "explanation_short": "The scatter plot shows a strong positive correlation between predicted and actual values, with an R² score of 0.7756.",
+          "explanation_full": "This scatter plot helps us understand how well the Random Forest model's predictions match the actual measured values. The plot shows a strong positive correlation (0.88511) between predicted and actual values, and the linear fit line has a slope of 0.848822, indicating that for every unit increase in the actual value, the model predicts a corresponding increase. The model achieved an R² score of 0.7756, meaning it explains about 77.56% of the variation in the data. A practical caution is that the largest error (residual) was 0.450808, which is quite large compared to the average absolute error (0.083557), suggesting that while the model is generally good, it struggles with certain extreme data points.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The model achieved an R² score of 0.7756.",
+              "claim_type": "metric_value",
+              "span_category": "R² score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R² score",
+              "value": 0.7756,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The correlation between predicted and actual values is 0.88511.",
+              "claim_type": "freeform",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "correlation",
+              "value": 0.88511,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The linear fit slope is 0.848822.",
+              "claim_type": "freeform",
+              "span_category": "slope",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "slope",
+              "value": 0.848822,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The largest error (residual) was 0.450808.",
+              "claim_type": "freeform",
+              "span_category": "residual",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "max_abs_residual",
+              "value": 0.450808,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_knn_scatter": {
+        "en": "The KNN scatter plot helps visualize how well the model's predictions match the actual measured values. It shows a strong positive correlation (0.9073) between predicted and actual values, indicating that as the actual value increases, the model's prediction tends to increase as well. The model achieved an R² score of 0.8172, meaning it explains about 81.72% of the variation in the data, and the Mean Absolute Error (MAE) was 0.075, suggesting that, on average, the prediction is off by about 0.075 units. A practical caution is that while the overall fit is strong, the largest error observed was 0.367254, which is quite large compared to the average error, suggesting that the model might struggle with certain extreme data points or outliers.",
+        "zh_TW": "KNN 散點圖用於視覺化模型預測值與實際測量值之間的匹配程度。它顯示預測值和實際值之間有強的正相關性（0.9073），這表明隨著實際值的增加，模型的預測值也傾向於增加。該模型達到了 0.8172 的 R² 分數，這意味著它解釋了數據變異的約 81.72%，平均絕對誤差（MAE）為 0.075，這表明平均而言，預測值偏離約 0.075 個單位。一個實際的注意事項是，雖然整體擬合度很強，但觀察到的最大誤差為 0.367254，與平均誤差相比相當大，這暗示模型在處理某些極端數據點或異常值時可能會遇到困難。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN scatter plot shows a strong positive correlation between predicted and actual values, with an R² score of 0.8172.",
+          "explanation_full": "The KNN scatter plot helps visualize how well the model's predictions match the actual measured values. It shows a strong positive correlation (0.9073) between predicted and actual values, indicating that as the actual value increases, the model's prediction tends to increase as well. The model achieved an R² score of 0.8172, meaning it explains about 81.72% of the variation in the data, and the Mean Absolute Error (MAE) was 0.075, suggesting that, on average, the prediction is off by about 0.075 units. A practical caution is that while the overall fit is strong, the largest error observed was 0.367254, which is quite large compared to the average error, suggesting that the model might struggle with certain extreme data points or outliers.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The model achieved an R² score of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R² Score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R² Score",
+              "value": 0.8171678017037467,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The model showed a strong positive correlation (0.9073) between predicted and actual values.",
+              "claim_type": "freeform",
+              "span_category": "Correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "showed",
+              "object": null,
+              "metric": "Correlation",
+              "value": 0.907301,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The Mean Absolute Error (MAE) was 0.075.",
+              "claim_type": "metric_value",
+              "span_category": "MAE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "had",
+              "object": null,
+              "metric": "MAE",
+              "value": 0.0750230874913564,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The largest error observed was 0.367254.",
+              "claim_type": "metric_value",
+              "span_category": "Max Absolute Residual",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "had",
+              "object": null,
+              "metric": "Max Absolute Residual",
+              "value": 0.367254,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_xgboost_scatter": {
+        "en": "The XGBoost scatter plot helps us understand how well the model's predictions match the actual results. It shows a strong positive correlation (0.875) between predicted and actual values, and the linear fit line has a slope of 0.839, indicating that for every unit increase in the actual value, the model predicts an increase of 0.839 units. The model's overall performance is summarized by an R² score of 0.7495, meaning the model explains about 75% of the variation in the data. A practical caution is that the largest error observed was 0.4105, which is quite large compared to the average error (MAE of 0.0956), suggesting that the model might struggle with certain extreme cases or outliers.",
+        "zh_TW": "XGBoost 散點圖幫助我們了解模型的預測與實際結果的吻合程度。它顯示預測值和實際值之間有強的正相關性（0.875），線性擬合線的斜率為 0.839，這表示實際值每增加一個單位，模型預測值就會增加 0.839 個單位。模型的整體表現由 R² 分數總結，為 0.7495，這代表模型解釋了數據變異的約 75%。一個實際的注意事項是，觀察到的最大誤差為 0.4105，這與平均誤差（MAE 為 0.0956）相比相當大，暗示模型在處理某些極端情況或異常值時可能會遇到困難。",
+        "benchmark_payload": {
+          "explanation_short": "The XGBoost scatter plot shows a strong positive correlation between predicted and actual values, with an R² score of 0.7495.",
+          "explanation_full": "The XGBoost scatter plot helps us understand how well the model's predictions match the actual results. It shows a strong positive correlation (0.875) between predicted and actual values, and the linear fit line has a slope of 0.839, indicating that for every unit increase in the actual value, the model predicts an increase of 0.839 units. The model's overall performance is summarized by an R² score of 0.7495, meaning the model explains about 75% of the variation in the data. A practical caution is that the largest error observed was 0.4105, which is quite large compared to the average error (MAE of 0.0956), suggesting that the model might struggle with certain extreme cases or outliers.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The model's overall performance is summarized by an R² score of 0.7495.",
+              "claim_type": "metric_value",
+              "span_category": "R² score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "has",
+              "object": null,
+              "metric": "R² score",
+              "value": 0.7494763102,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "There is a strong positive correlation (0.875) between predicted and actual values.",
+              "claim_type": "freeform",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": "shows",
+              "object": null,
+              "metric": "pred_actual_correlation",
+              "value": 0.875024,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The linear fit line has a slope of 0.839.",
+              "claim_type": "freeform",
+              "span_category": "slope",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": "has",
+              "object": null,
+              "metric": "linear_fit_slope",
+              "value": 0.838684,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The largest error observed was 0.4105.",
+              "claim_type": "freeform",
+              "span_category": "max_abs_residual",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": "is",
+              "object": null,
+              "metric": "max_abs_residual",
+              "value": 0.410478,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_comparison_bars": {
+        "en": "The model comparison chart shows how well different machine learning models predict the target variable, HPR. Essentially, it ranks the models based on their performance using metrics like R² (how much of the variation is explained) and RMSE (the average prediction error). The best model, KNN, achieved an R² score of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). This indicates that KNN is the most reliable tool for predicting HPR based on the available data. A practical caution is that while KNN performs best on this test set, its performance might vary if the underlying data patterns change in a real-world setting.",
+        "zh_TW": "此模型比較圖展示了不同機器學習模型預測目標變數 HPR 的表現。簡單來說，它根據 R²（解釋變異量的程度）和 RMSE（平均預測誤差）等指標，對模型進行了排名。表現最好的模型是 KNN，它達到了 0.8172 的 R² 分數和 0.1132 的 RMSE，顯著優於其他模型，例如 RF（R²=0.7756）和 XGBoost（R²=0.7495）。這表明 KNN 是根據可用數據預測 HPR 最可靠的工具。一個實際的注意事項是，雖然 KNN 在這個測試集上表現最佳，但如果實際環境中的底層數據模式發生變化，其性能可能會有所不同。",
+        "benchmark_payload": {
+          "explanation_short": "KNN is the best model for predicting HPR, achieving an R² score of 0.8172 and an RMSE of 0.1132.",
+          "explanation_full": "The model comparison chart shows how well different machine learning models predict the target variable, HPR. Essentially, it ranks the models based on their performance using metrics like R² (how much of the variation is explained) and RMSE (the average prediction error). The best model, KNN, achieved an R² score of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). This indicates that KNN is the most reliable tool for predicting HPR based on the available data. A practical caution is that while KNN performs best on this test set, its performance might vary if the underlying data patterns change in a real-world setting.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN is the winning model.",
+              "claim_type": "best_model",
+              "span_category": "model_name",
+              "is_numeric": false,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "is the best model",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN achieved an R² score of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R2_score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "has R² score",
+              "object": null,
+              "metric": "R2",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "KNN achieved an RMSE of 0.1132.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "has RMSE",
+              "object": null,
+              "metric": "RMSE",
+              "value": 0.1132,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "RF achieved an R² score of 0.7756.",
+              "claim_type": "metric_value",
+              "span_category": "R2_score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "has R² score",
+              "object": null,
+              "metric": "R2",
+              "value": 0.7756,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "XGBoost achieved an R² score of 0.7495.",
+              "claim_type": "metric_value",
+              "span_category": "R2_score",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "has R² score",
+              "object": null,
+              "metric": "R2",
+              "value": 0.7495,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_6",
+              "claim_text": "KNN outperformed RF and XGBoost.",
+              "claim_type": "ranking",
+              "span_category": "model_comparison",
+              "is_numeric": false,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "outperformed",
+              "object": "RF and XGBoost",
+              "metric": "R2",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "predicted_vs_actual": {
+        "en": "The Predicted versus actual chart helps us understand how well our model's predictions match the real-world results. Overall, the model performed strongly, achieving a correlation of 0.9073, which means that as the actual values increase, the predictions tend to increase in a similar way. The best model, KNN, showed the lowest average error (Mean Absolute Error of 0.075), indicating that its predictions were, on average, closest to the true values. While the model is generally accurate, we must remember that the largest error observed was 0.367, suggesting that for some specific cases, the prediction might be significantly off.",
+        "zh_TW": "預測值與實際值圖表幫助我們了解模型的預測與真實結果的吻合程度。總體而言，模型的表現非常出色，達到了 0.9073 的相關係數，這意味著隨著實際數值的增加，預測值也傾向於以相似的方式增加。表現最好的模型 KNN，展現了最低的平均誤差（平均絕對誤差為 0.075），這表明其預測值平均而言最接近真實值。雖然模型整體準確，但我們必須記住，觀察到的最大誤差為 0.367，這暗示在某些特定情況下，預測值可能會顯著偏離。",
+        "benchmark_payload": {
+          "explanation_short": "The model performed strongly, achieving a correlation of 0.9073, with KNN showing the lowest average error (MAE of 0.075).",
+          "explanation_full": "The Predicted versus actual chart helps us understand how well our model's predictions match the real-world results. Overall, the model performed strongly, achieving a correlation of 0.9073, which means that as the actual values increase, the predictions tend to increase in a similar way. The best model, KNN, showed the lowest average error (Mean Absolute Error of 0.075), indicating that its predictions were, on average, closest to the true values. While the model is generally accurate, we must remember that the largest error observed was 0.367, suggesting that for some specific cases, the prediction might be significantly off.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The model achieved a correlation of 0.9073 between predicted and actual values.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "achieved correlation",
+              "object": null,
+              "metric": "correlation",
+              "value": 0.907301,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The best model, KNN, showed the lowest average error (Mean Absolute Error of 0.075).",
+              "claim_type": "best_model",
+              "span_category": "error_metric",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "showed lowest average error",
+              "object": null,
+              "metric": "MAE",
+              "value": 0.0750230875,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The largest error observed was 0.367.",
+              "claim_type": "freeform",
+              "span_category": "error_magnitude",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": 0.367254,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "residuals": {
+        "en": "The residual analysis chart helps us understand how well the model's predictions match the actual measured values. The key metrics show that the KNN model performed strongly, achieving an R² score of 0.8172 and a low Mean Absolute Error (MAE) of 0.075. This indicates that, on average, the model's predictions are very close to the real-world measurements. Specifically, the correlation between predicted and actual values is 0.9073, suggesting a strong, positive relationship. A practical caution is that while the model is accurate, the largest error observed was 0.3673, meaning that in some cases, the prediction could be off by a significant amount.",
+        "zh_TW": "殘差分析圖有助於我們了解模型的預測與實際測量值之間的吻合程度。關鍵指標顯示，KNN 模型表現強勁，達到了 0.8172 的 R² 分數，以及 0.075 的平均絕對誤差（MAE）。這表明，平均而言，模型的預測與真實世界的測量值非常接近。具體來說，預測值與實際值的相關係數為 0.9073，這暗示著一個強而正向的關係。一個實際的注意事項是，雖然模型很準確，但觀察到的最大誤差為 0.3673，這意味著在某些情況下，預測值可能會偏離一個相當大的數值。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model shows strong predictive performance with an R² of 0.8172 and a low MAE of 0.075, indicating close alignment with actual measurements.",
+          "explanation_full": "The residual analysis chart helps us understand how well the model's predictions match the actual measured values. The key metrics show that the KNN model performed strongly, achieving an R² score of 0.8172 and a low Mean Absolute Error (MAE) of 0.075. This indicates that, on average, the model's predictions are very close to the real-world measurements. Specifically, the correlation between predicted and actual values is 0.9073, suggesting a strong, positive relationship. A practical caution is that while the model is accurate, the largest error observed was 0.3673, meaning that in some cases, the prediction could be off by a significant amount.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN model achieved an R² score of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R² score",
+              "is_numeric": true,
+              "requires_grounding_from": "best_model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN model",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R² score",
+              "value": 0.8171678017037467,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The Mean Absolute Error (MAE) for the KNN model was 0.075.",
+              "claim_type": "metric_value",
+              "span_category": "MAE",
+              "is_numeric": true,
+              "requires_grounding_from": "best_model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN model",
+              "predicate": "had",
+              "object": null,
+              "metric": "MAE",
+              "value": 0.0750230874913564,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The correlation between predicted and actual values is 0.9073.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "correlation",
+              "value": 0.907301,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The largest absolute residual observed was 0.3673.",
+              "claim_type": "metric_value",
+              "span_category": "max_abs_residual",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": 0.367254,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_importance": {
+        "en": "The feature importance chart helps us understand which factors are most influential in predicting the outcome. It shows that VSS is the most important factor, with an importance score of 0.5052, followed by Acetate (0.12), and Butyrate (0.097). This suggests that the concentration of VSS has the largest impact on the prediction. While VFA is also a key factor, its importance (0.0748) is lower than that of Acetate and Butyrate. A practical caution is that while VSS is highly important, the model's reliance on a single feature might limit its ability to predict outcomes accurately if VSS levels fluctuate unexpectedly.",
+        "zh_TW": "特徵重要性圖有助於我們了解哪些因素對預測結果影響最大。它顯示 VSS 是最重要的因素，重要性分數為 0.5052，其次是乙酸酯（Acetate，0.12）和丁酸酯（Butyrate，0.097）。這表明 VSS 的濃度對預測具有最大的影響。雖然 VFA 也是一個關鍵因素，但其重要性（0.0748）低於乙酸酯和丁酸酯。一個實際的注意事項是，雖然 VSS 非常重要，但模型過度依賴單一特徵可能會限制其在 VSS 水平意外波動時準確預測結果的能力。",
+        "benchmark_payload": {
+          "explanation_short": "VSS is the most important feature for predicting the outcome, followed by Acetate and Butyrate.",
+          "explanation_full": "The feature importance chart helps us understand which factors are most influential in predicting the outcome. It shows that VSS is the most important factor, with an importance score of 0.5052, followed by Acetate (0.12), and Butyrate (0.097). This suggests that the concentration of VSS has the largest impact on the prediction. While VFA is also a key factor, its importance (0.0748) is lower than that of Acetate and Butyrate. A practical caution is that while VSS is highly important, the model's reliance on a single feature might limit its ability to predict outcomes accurately if VSS levels fluctuate unexpectedly.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VSS is the most important factor in predicting the outcome.",
+              "claim_type": "top_feature",
+              "span_category": "VSS",
+              "is_numeric": false,
+              "requires_grounding_from": "feature_importance",
+              "confidence": 1.0,
+              "subject": "VSS",
+              "predicate": "is the most important factor",
+              "object": "the outcome",
+              "metric": "importance",
+              "value": 0.5052222633,
+              "unit": "score",
+              "ordered_items": [],
+              "feature_count": 1,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "correlation_heatmap": {
+        "en": "This heatmap shows how strongly different chemical components relate to each other, and how they relate to the target outcome (HPR). For example, there is a very strong positive relationship between Butyrate and VFA (0.9601), and also between Acetate and VFA (0.9428). When looking at the relationship with HPR, VFA (0.7984) and Butyrate (0.7827) show the strongest connections, suggesting these components are key indicators for predicting HPR. A practical caution is that while these correlations are strong, they only show association, not direct cause, so other factors might also be at play.",
+        "zh_TW": "這張熱力圖顯示了不同的化學成分之間，以及它們與目標結果（HPR）之間的相關強度。例如，丁酸酯（Butyrate）和揮發性脂肪酸（VFA）之間存在非常強的正相關性（0.9601），乙酸酯（Acetate）和VFA之間也存在強相關性（0.9428）。當觀察與HPR的關係時，VFA（0.7984）和丁酸酯（0.7827）顯示出最強的關聯，這表明這些成分是預測HPR的關鍵指標。一個實際的注意事項是，雖然這些相關性很強，但它們僅顯示關聯性，而非直接因果關係，因此其他因素也可能在起作用。",
+        "benchmark_payload": {
+          "explanation_short": "The heatmap reveals strong correlations between Butyrate and VFA (0.9601), and VFA (0.7984) and Butyrate (0.7827) are top predictors for HPR.",
+          "explanation_full": "This heatmap shows how strongly different chemical components relate to each other, and how they relate to the target outcome (HPR). For example, there is a very strong positive relationship between Butyrate and VFA (0.9601), and also between Acetate and VFA (0.9428). When looking at the relationship with HPR, VFA (0.7984) and Butyrate (0.7827) show the strongest connections, suggesting these components are key indicators for predicting HPR. A practical caution is that while these correlations are strong, they only show association, not direct cause, so other factors might also be at play.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Butyrate and VFA have a correlation of 0.9601.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate vs VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "vs",
+              "object": "VFA",
+              "metric": "correlation",
+              "value": 0.9601,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Acetate and VFA have a correlation of 0.9428.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate vs VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "vs",
+              "object": "VFA",
+              "metric": "correlation",
+              "value": 0.9428,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "VFA has a correlation of 0.7984 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "VFA vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7984,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Butyrate has a correlation of 0.7827 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7827,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "Acetate has a correlation of 0.7641 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7641,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_distributions": {
+        "en": "This chart provides an overview of the key chemical components (features) measured in the samples, showing their typical range and average levels. For instance, Ethanol has the highest average level (0.4736), followed by Acetate (0.4465) and Butyrate (0.4287). The standard deviation tells us how spread out the data is; Ethanol (0.2528) and Butyrate (0.2474) show the largest variation, meaning their measured values change significantly from sample to sample. Overall, these features are crucial for understanding the process, as they represent the main inputs and outputs that influence the final prediction. A practical caution is that while these averages are useful, they don't account for specific interactions between features, which might be more important for accurate prediction.",
+        "zh_TW": "這張圖提供了對樣本中關鍵化學成分（特徵）的概覽，顯示了它們的典型範圍和平均水平。例如，乙醇的平均水平最高（0.4736），其次是乙酸酯（0.4465）和丁酸酯（0.4287）。標準差告訴我們數據的分散程度；乙醇（0.2528）和丁酸酯（0.2474）顯示出最大的變異，這意味著它們的測量值從一個樣本到另一個樣本變化很大。總體而言，這些特徵對於理解整個過程至關重要，因為它們代表了影響最終預測的主要輸入和輸出。一個實際的注意事項是，雖然這些平均值很有用，但它們並不能考慮特徵之間的具體相互作用，而這些相互作用可能對準確的預測更重要。",
+        "benchmark_payload": {
+          "explanation_short": "The chart shows the average levels and variability of key chemical components like Ethanol, Acetate, and Butyrate.",
+          "explanation_full": "This chart provides an overview of the key chemical components (features) measured in the samples, showing their typical range and average levels. For instance, Ethanol has the highest average level (0.4736), followed by Acetate (0.4465) and Butyrate (0.4287). The standard deviation tells us how spread out the data is; Ethanol (0.2528) and Butyrate (0.2474) show the largest variation, meaning their measured values change significantly from sample to sample. Overall, these features are crucial for understanding the process, as they represent the main inputs and outputs that influence the final prediction. A practical caution is that while these averages are useful, they don't account for specific interactions between features, which might be more important for accurate prediction.",
+          "claims": [
+            {
+              "claim_id": "feature_distributions_ethanol_mean",
+              "claim_text": "Ethanol has a mean value of 0.4736.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has mean value",
+              "object": null,
+              "metric": "mean",
+              "value": 0.4736,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "feature_distributions_acetate_mean",
+              "claim_text": "Acetate has a mean value of 0.4465.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "has mean value",
+              "object": null,
+              "metric": "mean",
+              "value": 0.4465,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "feature_distributions_butyrate_mean",
+              "claim_text": "Butyrate has a mean value of 0.4287.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "has mean value",
+              "object": null,
+              "metric": "mean",
+              "value": 0.4287,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "feature_distributions_ethanol_std",
+              "claim_text": "Ethanol has a standard deviation of 0.2528.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has standard deviation",
+              "object": null,
+              "metric": "std",
+              "value": 0.2528,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "feature_distributions_butyrate_std",
+              "claim_text": "Butyrate has a standard deviation of 0.2474.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "has standard deviation",
+              "object": null,
+              "metric": "std",
+              "value": 0.2474,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_vs_target": {
+        "en": "This chart helps us understand which chemical measurements (features) are most related to the final outcome, which is Hydrogen Production Rate (HPR). The correlation value tells us how closely two variables move together; a value close to 1 means they rise and fall together strongly. For example, VFA has a correlation of 0.7984 with HPR, and Butyrate has a correlation of 0.7827, suggesting both are strong predictors. Furthermore, the chart shows that VFA and Butyrate have a very strong correlation with each other (0.9601), which is important to note. The main takeaway is that VFA, Butyrate, and Acetate are the most influential features for predicting HPR. A practical caution is that because VFA and Butyrate are so highly correlated with each other, they might be providing redundant information, which could affect the model's ability to generalize to new, unseen data.",
+        "zh_TW": "這張圖幫助我們了解哪些化學測量（特徵）與最終的產出，即氫氣產生率（HPR），相關性最高。相關係數告訴我們兩個變數的變動趨勢有多一致；接近 1 的數值代表它們會強烈地同步上升和下降。舉例來說，VFA 與 HPR 的相關係數為 0.7984，而丁酸鹽（Butyrate）的相關係數為 0.7827，這表明它們都是強大的預測指標。此外，圖表還顯示 VFA 和丁酸鹽之間存在非常高的相關性（0.9601），這點很重要。主要的結論是 VFA、丁酸鹽和乙酸鹽（Acetate）是預測 HPR 最具影響力的特徵。一個實際的注意事項是，由於 VFA 和丁酸鹽彼此之間的相關性極高，它們可能提供了重複的資訊，這可能會影響模型對新的、未見數據的泛化能力。",
+        "benchmark_payload": {
+          "explanation_short": "VFA, Butyrate, and Acetate are the most influential features for predicting HPR, but VFA and Butyrate are highly correlated with each other.",
+          "explanation_full": "This chart helps us understand which chemical measurements (features) are most related to the final outcome, which is Hydrogen Production Rate (HPR). The correlation value tells us how closely two variables move together; a value close to 1 means they rise and fall together strongly. For example, VFA has a correlation of 0.7984 with HPR, and Butyrate has a correlation of 0.7827, suggesting both are strong predictors. Furthermore, the chart shows that VFA and Butyrate have a very strong correlation with each other (0.9601), which is important to note. The main takeaway is that VFA, Butyrate, and Acetate are the most influential features for predicting HPR. A practical caution is that because VFA and Butyrate are so highly correlated with each other, they might be providing redundant information, which could affect the model's ability to generalize to new, unseen data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA has a correlation of 0.7984 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "has a correlation of",
+              "object": null,
+              "metric": "correlation",
+              "value": 0.7984,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Butyrate has a correlation of 0.7827 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "has a correlation of",
+              "object": null,
+              "metric": "correlation",
+              "value": 0.7827,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "VFA and Butyrate have a very strong correlation with each other (0.9601).",
+              "claim_type": "metric_value",
+              "span_category": "VFA vs Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA and Butyrate",
+              "predicate": "have a correlation of",
+              "object": null,
+              "metric": "correlation",
+              "value": 0.9601,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "VFA, Butyrate, and Acetate are the most influential features for predicting HPR.",
+              "claim_type": "top_feature",
+              "span_category": "VFA, Butyrate, Acetate",
+              "is_numeric": false,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": "influence",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "boxplots": {
+        "en": "This chart, titled 'Feature boxplots,' provides a visual overview of the distribution for key chemical features used in the prediction model. It shows how the data for each feature is spread out, including the typical range and variability. For instance, Ethanol has the highest average value (0.4736), while Acetate (0.4465) and Butyrate (0.4287) also show high averages. In terms of variability, Ethanol (standard deviation of 0.2528) and Butyrate (standard deviation of 0.2474) exhibit the largest spread, meaning their values change significantly across different samples. The main takeaway is that while some features, like Ethanol, have high average values and high variability, others might be more stable or concentrated. A practical caution is that high variability, as seen in Ethanol, suggests that the feature's impact might depend heavily on the specific conditions of the sample, requiring careful interpretation of the model's predictions for extreme cases.",
+        "zh_TW": "這張標題為「特徵箱形圖」的圖表，提供了用於預測模型的關鍵化學特徵的分布概覽。它展示了每個特徵的數據如何分散，包括典型的範圍和變異性。例如，乙醇的平均值最高（0.4736），而乙酸乙酯（0.4465）和丁酸鹽（0.4287）也顯示出較高的平均值。就變異性而言，乙醇（標準差為0.2528）和丁酸鹽（標準差為0.2474）表現出最大的分散度，這意味著它們的值在不同樣本之間變化很大。主要重點是，雖然一些特徵，如乙醇，具有高平均值和高變異性，但其他特徵可能更穩定或更集中。一個實際的注意事項是，像乙醇所展示的高變異性，表明該特徵的影響可能在很大程度上取決於樣本的特定條件，這要求在解釋模型對極端情況的預測時要非常謹慎。",
+        "benchmark_payload": {
+          "explanation_short": "The boxplots chart shows the distribution and variability of key chemical features, with Ethanol having the highest mean and high standard deviation.",
+          "explanation_full": "This chart, titled 'Feature boxplots,' provides a visual overview of the distribution for key chemical features used in the prediction model. It shows how the data for each feature is spread out, including the typical range and variability. For instance, Ethanol has the highest average value (0.4736), while Acetate (0.4465) and Butyrate (0.4287) also show high averages. In terms of variability, Ethanol (standard deviation of 0.2528) and Butyrate (standard deviation of 0.2474) exhibit the largest spread, meaning their values change significantly across different samples. The main takeaway is that while some features, like Ethanol, have high average values and high variability, others might be more stable or concentrated. A practical caution is that high variability, as seen in Ethanol, suggests that the feature's impact might depend heavily on the specific conditions of the sample, requiring careful interpretation of the model's predictions for extreme cases.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Ethanol has the highest mean value among the features, at 0.4736.",
+              "claim_type": "metric_value",
+              "span_category": "mean",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has mean value",
+              "object": 0.4736,
+              "metric": "mean",
+              "value": 0.4736,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Acetate (0.4465) and Butyrate (0.4287) also show high average values.",
+              "claim_type": "metric_value",
+              "span_category": "mean",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Acetate and Butyrate",
+              "predicate": "show high average values",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Ethanol (standard deviation of 0.2528) and Butyrate (standard deviation of 0.2474) exhibit the largest spread in variability.",
+              "claim_type": "metric_value",
+              "span_category": "std",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol and Butyrate",
+              "predicate": "exhibit largest spread in variability",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The high variability of a feature, such as Ethanol, suggests that its impact might depend heavily on the specific conditions of the sample.",
+              "claim_type": "freeform",
+              "span_category": "variability",
+              "is_numeric": false,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 0.9,
+              "subject": "Ethanol",
+              "predicate": "impact might depend heavily on",
+              "object": "specific conditions of the sample",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": true
+            }
+          ]
+        }
+      },
+      "time_series": {
+        "en": "This chart shows how well the model predicts changes over time, which is crucial for understanding dynamic processes. The model achieved a sequence correlation of 0.9315, indicating a very strong relationship between the predicted and actual trends. Specifically, the model predicted a peak value of 0.8299 at index 146, compared to the actual peak of 1.0 at index 130. While the prediction is generally good, there is a noticeable difference in both the peak value and the timing of the peak, suggesting that while the overall trend is captured, the exact timing and magnitude of critical events might need refinement. This suggests that the model is excellent at capturing the general pattern but should be used with caution when predicting the precise timing or maximum intensity of a peak event.",
+        "zh_TW": "這張圖顯示了模型預測時間變化（趨勢）的準確性，這對於理解動態過程至關重要。該模型達到了 0.9315 的序列相關係數，這表明預測的趨勢與實際趨勢之間存在非常強的關聯性。具體來說，模型預測的峰值為 0.8299，發生在索引 146，而實際峰值為 1.0，發生在索引 130。雖然整體預測表現良好，但在峰值的值和時間點上存在明顯差異，這暗示著雖然模型捕捉到了整體趨勢，但關鍵事件的精確時間和幅度可能需要進一步優化。這表明模型非常擅長捕捉一般模式，但在預測峰值事件的精確時間或最大強度時，需要謹慎使用。",
+        "benchmark_payload": {
+          "explanation_short": "The model shows a strong sequence correlation of 0.9315, indicating good predictive power over time, but slight discrepancies exist in the predicted peak timing and value.",
+          "explanation_full": "This chart shows how well the model predicts changes over time, which is crucial for understanding dynamic processes. The model achieved a sequence correlation of 0.9315, indicating a very strong relationship between the predicted and actual trends. Specifically, the model predicted a peak value of 0.8299 at index 146, compared to the actual peak of 1.0 at index 130. While the prediction is generally good, there is a noticeable difference in both the peak value and the timing of the peak, suggesting that while the overall trend is captured, the exact timing and magnitude of critical events might need refinement. This suggests that the model is excellent at capturing the general pattern but should be used with caution when predicting the precise timing or maximum intensity of a peak event.",
+          "claims": [
+            {
+              "claim_id": "seq_corr_1",
+              "claim_text": "The sequence correlation is 0.931488.",
+              "claim_type": "metric_value",
+              "span_category": "sequence_correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "has",
+              "object": null,
+              "metric": "sequence_correlation",
+              "value": 0.931488,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_comparison_table": {
+        "en": "This table compares how well different machine learning models predict the outcome, using metrics like R² (how much of the variation is explained) and RMSE (how far off the predictions are, on average). The KNN model performed the best, achieving an R² score of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). In simple terms, a higher R² and lower RMSE mean the model is more accurate and reliable. The main takeaway is that KNN is the most reliable predictor among the tested methods. A practical caution is that while KNN is best here, its performance might drop if the underlying process changes significantly in real-world conditions.",
+        "zh_TW": "這張表比較了不同機器學習模型預測結果的表現，使用了R²（解釋了多少變異）和RMSE（平均預測誤差）等指標。KNN模型表現最佳，達到了0.8172的R²分數和0.1132的RMSE，顯著優於RF（R²=0.7756）和XGBoost（R²=0.7495）等其他模型。簡單來說，R²越高、RMSE越低，代表模型越準確、越可靠。主要結論是，在測試的這些方法中，KNN是最可靠的預測器。一個實際的注意事項是，雖然KNN在這裡表現最好，但如果實際條件發生顯著變化，它的表現可能會下降。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model is the best predictor, showing an R² score of 0.8172 and an RMSE of 0.1132, outperforming other models.",
+          "explanation_full": "This table compares how well different machine learning models predict the outcome, using metrics like R² (how much of the variation is explained) and RMSE (how far off the predictions are, on average). The KNN model performed the best, achieving an R² score of 0.8172 and an RMSE of 0.1132, significantly outperforming other models like RF (R²=0.7756) and XGBoost (R²=0.7495). In simple terms, a higher R² and lower RMSE mean the model is more accurate and reliable. The main takeaway is that KNN is the most reliable predictor among the tested methods. A practical caution is that while KNN is best here, its performance might drop if the underlying process changes significantly in real-world conditions.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "KNN model achieved an R² score of 0.8172.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN model achieved an RMSE of 0.1132.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "RMSE",
+              "value": 0.1132,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "KNN model outperformed RF model in R² score (0.8172 vs 0.7756).",
+              "claim_type": "ranking",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "outperformed",
+              "object": "RF",
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "KNN model outperformed XGBoost model in R² score (0.8172 vs 0.7495).",
+              "claim_type": "ranking",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "outperformed",
+              "object": "XGBoost",
+              "metric": "R²",
+              "value": 0.8172,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "KNN model achieved the lowest RMSE (0.1132).",
+              "claim_type": "best_model",
+              "span_category": "RMSE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "RMSE",
+              "value": 0.1132,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_importance_table": {
+        "en": "This table shows which chemical components are the most important predictors for predicting hydrogen production. It ranks features based on their overall influence on the prediction. For example, VSS has the highest importance score at 0.5052, suggesting it is the most critical factor. Acetate (0.12) and Butyrate (0.10) are also highly important. The main takeaway is that VSS is by far the most influential feature, followed by Acetate and Butyrate. A practical caution is that while VSS is highly important, the model's reliance on a single feature might limit its predictive power if other factors change unexpectedly.",
+        "zh_TW": "此表格顯示哪些化學成分是預測氫氣產量的最重要預測因子。它根據各個特徵對預測的整體影響力進行排名。例如，VSS 的重要性分數最高，達到 0.5052，這表明它是最關鍵的因素。乙酸酯（Acetate，0.12）和丁酸酯（Butyrate，0.10）也具有很高的重要性。主要結論是 VSS 是影響力最大的特徵，其次是乙酸酯和丁酸酯。一個實際的注意事項是，雖然 VSS 非常重要，但模型過度依賴單一特徵可能會限制其預測能力，特別是如果其他因素出現意外變化時。",
+        "benchmark_payload": {
+          "explanation_short": "VSS is the most important feature for predicting hydrogen production, followed by Acetate and Butyrate.",
+          "explanation_full": "This table shows which chemical components are the most important predictors for predicting hydrogen production. It ranks features based on their overall influence on the prediction. For example, VSS has the highest importance score at 0.5052, suggesting it is the most critical factor. Acetate (0.12) and Butyrate (0.10) are also highly important. The main takeaway is that VSS is by far the most influential feature, followed by Acetate and Butyrate. A practical caution is that while VSS is highly important, the model's reliance on a single feature might limit its predictive power if other factors change unexpectedly.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VSS has the highest importance score at 0.5052.",
+              "claim_type": "top_feature",
+              "span_category": "VSS",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "VSS",
+              "predicate": "has the highest importance score",
+              "object": "0.5052",
+              "metric": "importance",
+              "value": 0.5052,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Acetate has an importance score of 0.12.",
+              "claim_type": "top_feature",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "has an importance score",
+              "object": "0.12",
+              "metric": "importance",
+              "value": 0.12,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Butyrate has an importance score of 0.10.",
+              "claim_type": "top_feature",
+              "span_category": "Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "has an importance score",
+              "object": "0.10",
+              "metric": "importance",
+              "value": 0.1,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "best_model_shap_importance": {
+        "en": "This table shows which specific measurements (features) had the biggest influence on the model's predictions. It's like identifying the most important clues when solving a puzzle. According to the data, the 'ORP_Low' measurement was the most influential, followed closely by 'Butyrate' and 'ORP_Mid'. This suggests that the low Oxidation-Reduction Potential and the concentration of Butyrate are key indicators for predicting the outcome. A practical caution is that while these features are highly influential, they might be correlated with other factors, so interpreting them in isolation requires caution.",
+        "zh_TW": "這張表顯示了哪些特定的測量值（特徵）對模型的預測影響最大，就像解謎時找出最重要的線索。根據數據，『ORP_Low』的測量值影響最大，其次是『Butyrate』和『ORP_Mid』。這表明低氧化還原電位和丁酸鹽的濃度是預測結果的關鍵指標。一個實際的注意事項是，雖然這些特徵影響很大，但它們可能與其他因素相關，因此單獨解釋時需要謹慎。",
+        "benchmark_payload": {
+          "explanation_short": "The SHAP importance analysis indicates that ORP_Low, Butyrate, and ORP_Mid are the most influential features for the model's predictions.",
+          "explanation_full": "This table shows which specific measurements (features) had the biggest influence on the model's predictions. It's like identifying the most important clues when solving a puzzle. According to the data, the 'ORP_Low' measurement was the most influential, followed closely by 'Butyrate' and 'ORP_Mid'. This suggests that the low Oxidation-Reduction Potential and the concentration of Butyrate are key indicators for predicting the outcome. A practical caution is that while these features are highly influential, they might be correlated with other factors, so interpreting them in isolation requires caution.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "ORP_Low is the most influential feature according to SHAP importance.",
+              "claim_type": "top_feature",
+              "span_category": "ORP_Low",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "ORP_Low",
+              "predicate": "is the most influential feature",
+              "object": "true",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Butyrate is the second most influential feature.",
+              "claim_type": "top_feature",
+              "span_category": "Butyrate",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "is the second most influential feature",
+              "object": "true",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "ORP_Mid is the third most influential feature.",
+              "claim_type": "top_feature",
+              "span_category": "ORP_Mid",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "ORP_Mid",
+              "predicate": "is the third most influential feature",
+              "object": "true",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "descriptive_statistics": {
+        "en": "This table provides a statistical overview of the key measurements used in the analysis, such as pH, VSS, Ethanol, Acetate, and Butyrate. It shows the average (mean) value, the typical spread of the data (standard deviation), and the range (minimum and maximum) for each feature. For instance, Ethanol has the highest average value at 0.4736, while Acetate has the second highest average at 0.4465. The standard deviation helps us understand how spread out the data is; Ethanol also has a relatively high spread (std=0.2528), indicating that the measured values vary quite a bit across the samples. Overall, this table gives us a foundational understanding of the typical characteristics and variability of the raw data before any predictive modeling is done.",
+        "zh_TW": "這張表提供了分析中使用的關鍵測量指標的統計概覽，例如pH值、VSS、乙醇、乙酸乙酯和丁酸鹽。它顯示了每個特徵的平均值（mean）、數據的典型分散程度（標準差，std）以及範圍（最小值和最大值）。舉例來說，乙醇的平均值最高，為0.4736，而乙酸乙酯的平均值次之，為0.4465。標準差有助於我們了解數據的分散程度；乙醇的標準差也相對較高（std=0.2528），這表明測量值在不同樣本之間差異很大。總體而言，這張表讓我們在進行任何預測模型之前，就能對原始數據的典型特性和變異性有基礎的了解。",
+        "benchmark_payload": {
+          "explanation_short": "The table summarizes the average, spread, and range of key measured features like Ethanol and Acetate.",
+          "explanation_full": "This table provides a statistical overview of the key measurements used in the analysis, such as pH, VSS, Ethanol, Acetate, and Butyrate. It shows the average (mean) value, the typical spread of the data (standard deviation), and the range (minimum and maximum) for each feature. For instance, Ethanol has the highest average value at 0.4736, while Acetate has the second highest average at 0.4465. The standard deviation helps us understand how spread out the data is; Ethanol also has a relatively high spread (std=0.2528), indicating that the measured values vary quite a bit across the samples. Overall, this table gives us a foundational understanding of the typical characteristics and variability of the raw data before any predictive modeling is done.",
+          "claims": [
+            {
+              "claim_id": "descriptive_statistics_mean_ethanol",
+              "claim_text": "Ethanol has a mean value of 0.4736.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has a mean value of",
+              "object": 0.4736,
+              "metric": "mean",
+              "value": 0.4736,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "descriptive_statistics_mean_acetate",
+              "claim_text": "Acetate has a mean value of 0.4465.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "has a mean value of",
+              "object": 0.4465,
+              "metric": "mean",
+              "value": 0.4465,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "descriptive_statistics_std_ethanol",
+              "claim_text": "The standard deviation for Ethanol is 0.2528.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has a standard deviation of",
+              "object": 0.2528,
+              "metric": "std",
+              "value": 0.2528,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "descriptive_statistics_std_acetate",
+              "claim_text": "The standard deviation for Acetate is 0.226.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "has a standard deviation of",
+              "object": 0.226,
+              "metric": "std",
+              "value": 0.226,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "descriptive_statistics_highest_mean",
+              "claim_text": "Ethanol has the highest mean value among the listed features.",
+              "claim_type": "freeform",
+              "span_category": "Ethanol",
+              "is_numeric": false,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has the highest mean value among the listed features.",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "descriptive_statistics_highest_std",
+              "claim_text": "Ethanol has a relatively high spread (std=0.2528), indicating that the measured values vary quite a bit across the samples.",
+              "claim_type": "freeform",
+              "span_category": "Ethanol",
+              "is_numeric": false,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has a relatively high spread (std=0.2528), indicating that the measured values vary quite a bit across the samples.",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "correlation_matrix": {
+        "en": "This table shows how closely related different measurements (features) are to each other, which helps us understand which factors might influence the final outcome. For example, the correlation between Butyrate and VFA is 0.9601, indicating a very strong positive relationship—when one increases, the other tends to increase significantly. When looking at the factors that predict the final outcome (HPR), VFA has the highest correlation at 0.7984, followed by Butyrate at 0.7827, and Acetate at 0.7641. In general, the stronger the correlation (closer to 1), the more important that factor is considered for prediction. A practical caution is that correlation does not prove causation; while these factors are strongly linked, we cannot definitively say that changing one will cause a specific change in the final outcome without further testing.",
+        "zh_TW": "這張表格顯示了不同的測量值（特徵）之間有多大的關聯性，這有助於我們了解哪些因素可能會影響最終的結果。例如，丁酸酯（Butyrate）和揮發性脂肪酸（VFA）之間的相關係數是0.9601，這表明存在非常強的正相關關係——當一個增加時，另一個也傾向於顯著增加。當我們觀察預測最終結果（HPR）的因素時，VFA的相關性最高，為0.7984，其次是丁酸酯的0.7827，以及乙酸酯的0.7641。總體而言，相關性越強（越接近1），該因素在預測中就被認為越重要。一個實際的注意事項是，相關性並不等於因果關係；雖然這些因素之間關聯性很強，但若沒有進一步的測試，我們不能確定改變其中一個會導致最終結果的特定變化。",
+        "benchmark_payload": {
+          "explanation_short": "The correlation matrix shows the strength of relationships between features, with VFA having the highest correlation (0.7984) with the target outcome (HPR).",
+          "explanation_full": "This table shows how closely related different measurements (features) are to each other, which helps us understand which factors might influence the final outcome. For example, the correlation between Butyrate and VFA is 0.9601, indicating a very strong positive relationship—when one increases, the other tends to increase significantly. When looking at the factors that predict the final outcome (HPR), VFA has the highest correlation at 0.7984, followed by Butyrate at 0.7827, and Acetate at 0.7641. In general, the stronger the correlation (closer to 1), the more important that factor is considered for prediction. A practical caution is that correlation does not prove causation; while these factors are strongly linked, we cannot definitively say that changing one will cause a specific change in the final outcome without further testing.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Butyrate and VFA have a correlation of 0.9601.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate vs VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "vs",
+              "object": "VFA",
+              "metric": "correlation",
+              "value": 0.9601,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Acetate and VFA have a correlation of 0.9428.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate vs VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "vs",
+              "object": "VFA",
+              "metric": "correlation",
+              "value": 0.9428,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Acetate and Butyrate have a correlation of 0.8651.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate vs Butyrate",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "vs",
+              "object": "Butyrate",
+              "metric": "correlation",
+              "value": 0.8651,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "VFA has a correlation of 0.7984 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "VFA vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7984,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "Butyrate has a correlation of 0.7827 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "Butyrate vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "Butyrate",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7827,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_6",
+              "claim_text": "Acetate has a correlation of 0.7641 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "Acetate vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_matrix",
+              "confidence": 1.0,
+              "subject": "Acetate",
+              "predicate": "vs",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.7641,
+              "unit": "null",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "table1_incremental_results": {
+        "en": "This table shows how adding more information (features) helps predict the target variable, which is Hydrogen Production Rate (HPR). It tests different combinations of features, showing the performance (R² and MSE) for several machine learning models. For example, the best combination for the KNN model was using 9 features: VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low, achieving an R² of 0.83014 and an MSE of 0.011901. Overall, the KNN model performed best, especially when using 9 features, suggesting that a specific set of 9 factors provides the most accurate prediction. A practical caution is that while adding features generally improves performance up to a point, too many features might introduce noise or redundancy, potentially weakening the prediction.",
+        "zh_TW": "此表展示了增加更多資訊（特徵）如何幫助預測目標變數，即氫氣產率（HPR）。它測試了不同特徵組合的表現（R²和MSE），並針對多種機器學習模型進行了評估。例如，對於KNN模型，最佳的組合是使用9個特徵：VFA、Butyrate、Acetate、VSS、Propionate、Ethanol、COD-O、pH和ORP_Low，達到了0.83014的R²和0.011901的MSE。總體而言，KNN模型表現最佳，特別是在使用9個特徵時，這表明這組特定的9個因素提供了最準確的預測。一個實際的注意事項是，雖然增加特徵通常會提高性能直到某個點，但過多的特徵可能會引入雜訊或冗餘，從而削弱預測效果.",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model achieved the highest R² score (0.83014) and lowest MSE (0.011901) when using 9 features, indicating optimal feature selection for prediction.",
+          "explanation_full": "This table shows how adding more information (features) helps predict the target variable, which is Hydrogen Production Rate (HPR). It tests different combinations of features, showing the performance (R² and MSE) for several machine learning models. For example, the best combination for the KNN model was using 9 features: VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low, achieving an R² of 0.83014 and an MSE of 0.011901. Overall, the KNN model performed best, especially when using 9 features, suggesting that a specific set of 9 factors provides the most accurate prediction. A practical caution is that while adding features generally improves performance up to a point, too many features might introduce noise or redundancy, potentially weakening the prediction.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The KNN model achieved its best performance with 9 features, yielding an R² of 0.83014 and an MSE of 0.011901.",
+              "claim_type": "best_model",
+              "span_category": "KNN",
+              "is_numeric": false,
+              "requires_grounding_from": "table1_incremental_results",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved best performance",
+              "object": "9 features",
+              "metric": "R²",
+              "value": 0.83014,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": 9,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The KNN model's best feature subset includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low.",
+              "claim_type": "feature_subset_optimum",
+              "span_category": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+              "is_numeric": false,
+              "requires_grounding_from": "table1_incremental_results",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "VFA",
+                "Butyrate",
+                "Acetate",
+                "VSS",
+                "Propionate",
+                "Ethanol",
+                "COD-O",
+                "pH",
+                "ORP_Low"
+              ],
+              "feature_count": 9,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The KNN model's best feature subset for prediction uses 9 features.",
+              "claim_type": "feature_subset_optimum",
+              "span_category": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+              "is_numeric": false,
+              "requires_grounding_from": "table1_incremental_results",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "VFA",
+                "Butyrate",
+                "Acetate",
+                "VSS",
+                "Propionate",
+                "Ethanol",
+                "COD-O",
+                "pH",
+                "ORP_Low"
+              ],
+              "feature_count": 9,
+              "hedged": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "selected_benchmark_explanations": {
+    "provider": "benchmark_selected",
+    "model": "gemma4:e4b",
+    "generated_at": "2026-04-24T03:24:24.203037+00:00",
+    "selection_method": "best_leaderboard_row",
+    "selected_arm": "A",
+    "selected_condition": "image_table_summary",
+    "selected_semantic_level": null,
+    "selected_row": {
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "artifact_count": 24,
+      "claim_count": 134,
+      "fact_precision": 0.8278108465608466,
+      "fact_recall": 0.55,
+      "fact_f1": 0.6305720899470899,
+      "unsupported_claim_rate": 0.10919312169312169,
+      "contradiction_rate": 0.06299603174603174,
+      "coverage_of_salient_facts": 0.4625,
+      "numeric_accuracy": 0.8478260869565217,
+      "numeric_tolerance_accuracy": 0.8478260869565217
+    },
+    "overview": {
+      "en": "The model comparison table shows that KNN achieved the highest R² score at 0.817, indicating the best performance among the tested models. RF followed closely with an R² of 0.776, while XGBoost scored 0.750. The DT model showed the lowest performance with an R² of 0.560. These metrics are directly observable in the 'table_model_comparison' section of the artifact, confirming KNN's superior performance based on the provided quantitative data.\n\nThe model comparison chart in Figure 5 indicates that the KNN model performed best across the benchmark metrics, achieving an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. The Random Forest (RF) model was the second best with an R2 of 0.7756, while XGBoost followed with an R2 of 0.7495. The Direct comparison of metrics confirms KNN's superior performance over the other tested models like SVM and DT.\n\nThe model comparison chart and associated table data indicate that the KNN model achieved the best performance across all benchmark metrics. Specifically, KNN recorded an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. In comparison, RF scored the next highest R2 (0.7756), followed by XGBoost (0.7495), SVM (0.7324), and DT (0.5605). The table evidence confirms these findings, showing KNN's superior metrics compared to the other models listed.",
+      "zh_TW": ""
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "The model comparison table shows that KNN achieved the highest R² score at 0.817, indicating the best performance among the tested models. RF followed closely with an R² of 0.776, while XGBoost scored 0.750. The DT model showed the lowest performance with an R² of 0.560. These metrics are directly observable in the 'table_model_comparison' section of the artifact, confirming KNN's superior performance based on the provided quantitative data.",
+        "zh_TW": ""
+      },
+      "model_comparison_table": {
+        "en": "The model comparison table shows that KNN achieved the highest R² score at 0.817, indicating the best performance among the tested models. RF followed closely with an R² of 0.776, while XGBoost scored 0.750. The DT model showed the lowest performance with an R² of 0.560. These metrics are directly observable in the 'table_model_comparison' section of the artifact, confirming KNN's superior performance based on the provided quantitative data.",
+        "zh_TW": ""
+      },
+      "table1_incremental_results": {
+        "en": "The table 'table1_incremental_results' details the performance metrics (R² and MSE) for various machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of input features increases incrementally. \n\nKey findings from the table:\n1. **Best Performance:** The KNN model consistently achieves the highest R² and lowest MSE across most feature additions. Specifically, with 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low), KNN achieved an R² of 0.8301 and an MSE of 0.0119.\n2. **Feature Importance Trend:** The R² scores generally increase as more features are added, peaking at 9 features for KNN (0.8301) and RF (0.7827). The MSE generally decreases as features are added, also peaking at 9 features for KNN (0.0119).\n3. **Model Comparison at 9 Features:** At 9 features, KNN (R²: 0.8301, MSE: 0.0119) significantly outperforms SVM (R²: 0.7305, MSE: 0.0189), DT (R²: 0.6714, MSE: 0.0230), RF (R²: 0.7827, MSE: 0.0152), and XGBoost (R²: 0.6984, MSE: 0.0211).\n4. **Overall Trend:** The incremental analysis suggests that adding features up to 9 provides the best balance of high predictive power (R²) and low error (MSE) for the KNN model, although the performance remains strong even with 11 features.",
+        "zh_TW": ""
+      },
+      "gra_ranking": {
+        "en": "Based on the provided JSON table evidence, the feature ranking (gra_ranking) indicates the following order of importance: 1. VFA (score: 0.7931135436956089), 2. Butyrate (score: 0.7902467550177025), 3. Acetate (score: 0.7772199976368066), 4. VSS (score: 0.7768076560138514), 5. Propionate (score: 0.7595541448908357), 6. Ethanol (score: 0.7329323381694035), 7. COD-O (score: 0.7183267981481565), 8. pH (score: 0.7101968586952534), 9. ORP_Low (score: 0.6396185753634854), 10. ORP_Mid (score: 0.6216932459109569), and 11. Sucrose_Degradation (score: 0.5833963988102198).",
+        "zh_TW": ""
+      },
+      "fig3a_gra_ranking": {
+        "en": "Based on the GRA ranking provided in the context, the feature importance order is: 1. VFA (0.7931) > 2. Butyrate (0.7902) > 3. Acetate (0.7772) > 4. VSS (0.7768) > 5. Propionate (0.7596). The top three features are VFA, Butyrate, and Acetate.",
+        "zh_TW": ""
+      },
+      "fig3b_shap_analysis": {
+        "en": "Based on the SHAP analysis (Figure 3B), the feature importance scores are as follows: ORP_Low has a mean absolute SHAP value of 0.0352. Butyrate has a mean absolute SHAP value of 0.0334. ORP_Mid has a mean absolute SHAP value of 0.0296. COD-O has a mean absolute SHAP value of 0.0290. VFA has a mean absolute SHAP value of 0.0277. Acetate has a mean absolute SHAP value of 0.0265. The table evidence confirms these rankings, showing ORP_Low (0.0352) > Butyrate (0.0334) > ORP_Mid (0.0296) > COD-O (0.0290) > VFA (0.0277) > Acetate (0.0265).",
+        "zh_TW": ""
+      },
+      "fig3_feature_analysis": {
+        "en": "Based on the combined feature analysis chart, the GRA ranking identifies VFA (0.7931) and Butyrate (0.7902) as the top features, followed closely by Acetate (0.7772). In terms of feature importance, VSS is the most significant feature with a score of 0.5052. Furthermore, the strongest correlations observed include Butyrate vs VFA (0.9601) and Acetate vs VFA (0.9428), suggesting strong relationships between these key metabolites.",
+        "zh_TW": ""
+      },
+      "fig4_univariate_analysis": {
+        "en": "The strongest correlations identified in the univariate analysis are: Butyrate vs VFA with a correlation of 0.9601, Acetate vs VFA with 0.9428, and Acetate vs Butyrate with 0.8651. Regarding the top correlations with HPR, the strongest relationships are: VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+        "zh_TW": ""
+      },
+      "fig5_model_comparison": {
+        "en": "The model comparison chart in Figure 5 indicates that the KNN model performed best across the benchmark metrics, achieving an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. The Random Forest (RF) model was the second best with an R2 of 0.7756, while XGBoost followed with an R2 of 0.7495. The Direct comparison of metrics confirms KNN's superior performance over the other tested models like SVM and DT.",
+        "zh_TW": ""
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "Based on the incremental feature analysis chart, the KNN model achieved its best performance with 9 features, corresponding to the feature subset 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'. At this point, KNN yielded an R² of 0.83014 and an MSE of 0.011901. This performance surpasses the results obtained with fewer or more features for this specific model, indicating the optimal feature set size for KNN in this context.",
+        "zh_TW": ""
+      },
+      "fig6c_prediction_time": {
+        "en": "The sequence diagnostics for the KNN model show that the actual peak index was 130 with a value of 1.0. The model predicted a peak index of 146 with a value of 0.829894. The calculated sequence correlation for KNN is 0.931488, and the mean absolute gap is 0.066591. The model also has a maximum absolute gap of 0.399107. The model's performance metrics include an R2 score of 0.817168, RMSE of 0.113181, MSE of 0.012810, and MAE of 0.075023.",
+        "zh_TW": ""
+      },
+      "model_svm_scatter": {
+        "en": "The SVM model's performance metrics, as shown in the scatter plot diagnostics, indicate an R2 score of 0.7324, an RMSE of 0.1369, and an MAE of 0.0946. Furthermore, the correlation between predicted and actual values is 0.86576, suggesting a strong linear relationship. The linear fit slope was calculated to be 0.858436, and the maximum absolute residual observed was 0.610181. These metrics provide a quantitative assessment of the SVM model's predictive accuracy on the given dataset.",
+        "zh_TW": ""
+      },
+      "model_dt_scatter": {
+        "en": "The scatter plot diagnostics for the Decision Tree (DT) model indicate an R2 score of 0.5605, an RMSE of 0.1755, and a Mean Absolute Error (MAE) of 0.1086. Furthermore, the correlation between predicted and actual values is 0.7872, and the linear fit slope is 0.8028. These metrics provide a quantitative assessment of the DT model's performance on the dataset.",
+        "zh_TW": ""
+      },
+      "model_rf_scatter": {
+        "en": "The Random Forest (RF) model's performance metrics, derived from the scatter plot diagnostics, are as follows: R2 score is 0.7756, RMSE is 0.1254, and MAE is 0.0836. Furthermore, the correlation between predicted and actual values is 0.88511, and the linear fit slope is 0.848822. The diagnostics also show that the maximum absolute residual was 0.450808.",
+        "zh_TW": ""
+      },
+      "model_knn_scatter": {
+        "en": "The KNN scatter plot diagnostics show the following performance metrics: R2=0.8172, RMSE=0.1132, MAE=0.075, and the correlation between predicted and actual values is 0.9073. Additionally, the linear fit slope is 0.8798, and the maximum absolute residual is 0.3673. The model was evaluated on 40 samples, with the mean absolute residual being 0.0750.",
+        "zh_TW": ""
+      },
+      "model_xgboost_scatter": {
+        "en": "The XGBoost scatter plot diagnostics indicate the following performance metrics: R2 score is 0.7495, RMSE is 0.1325, MAE is 0.0956, and the correlation between predicted and actual values is 0.875024. Additionally, the linear fit slope is 0.838684, and the maximum absolute residual is 0.410478.",
+        "zh_TW": ""
+      },
+      "model_comparison_bars": {
+        "en": "The model comparison chart and associated table data indicate that the KNN model achieved the best performance across all benchmark metrics. Specifically, KNN recorded an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. In comparison, RF scored the next highest R2 (0.7756), followed by XGBoost (0.7495), SVM (0.7324), and DT (0.5605). The table evidence confirms these findings, showing KNN's superior metrics compared to the other models listed.",
+        "zh_TW": ""
+      },
+      "predicted_vs_actual": {
+        "en": "The 'Predicted versus actual chart' indicates that the KNN model is the best performing predictor, achieving an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. This performance surpasses other models like RF (R2=0.7756) and XGBoost (R2=0.7495). The correlation between predicted and actual values is high at 0.9073, suggesting a strong linear relationship. The diagnostics also show a low residual mean of 0.0122, indicating minimal systematic error across the 40 samples analyzed.",
+        "zh_TW": ""
+      },
+      "residuals": {
+        "en": "The residual analysis chart indicates that the KNN model is the best performer, achieving an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. This performance surpasses other benchmark models; for instance, RF has an R2 of 0.7756, and XGBoost has an R2 of 0.7495. Furthermore, the correlation between predicted and actual values for KNN is 0.9073, suggesting a strong linear relationship between predictions and actual outcomes.",
+        "zh_TW": ""
+      },
+      "feature_importance": {
+        "en": "Based on the 'table_feature_importance.csv' evidence, the feature importance scores are: VSS=0.5052, Acetate=0.12, Butyrate=0.10, VFA=0.07, Propionate=0.06, Ethanol=0.04, ORP_Low=0.04, ORP_Mid=0.02, pH=0.02, Sucrose_Degradation=0.01, and COD-O=0.01. The highest importance is associated with VSS (0.5052).",
+        "zh_TW": ""
+      },
+      "correlation_heatmap": {
+        "en": "The correlation heatmap reveals the strongest pairwise correlations. The highest correlation is observed between Butyrate and VFA at 0.9601, followed closely by Acetate and VFA at 0.9428. Other strong correlations include Acetate vs Butyrate (0.8651), Ethanol vs Propionate (0.8548), and Ethanol vs VFA (0.8486). When correlating features with HPR, the strongest correlations are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+        "zh_TW": ""
+      },
+      "feature_distributions": {
+        "en": "Based on the feature distributions chart, Ethanol shows the highest mean value at 0.4736, followed by Acetate (0.4465) and Butyrate (0.4287). Furthermore, Ethanol also has the largest standard deviation (0.2528), indicating the greatest variability in its measured concentration compared to other features like VSS (0.1538) and pH (0.1267). These statistics are directly derived from the descriptive statistics provided in the associated table.",
+        "zh_TW": ""
+      },
+      "feature_vs_target": {
+        "en": "The feature vs target chart indicates that the strongest correlations are found between Butyrate and VFA, with a correlation coefficient of 0.9601, followed closely by Acetate vs VFA at 0.9428. Other notable correlations include Acetate vs Butyrate at 0.8651, and Ethanol vs Propionate at 0.8548. Furthermore, the top correlations with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641), suggesting these features are highly predictive of HPR.",
+        "zh_TW": ""
+      },
+      "boxplots": {
+        "en": "Based on the boxplots, Ethanol shows the highest mean feature value at 0.4736, followed by Acetate (0.4465) and Butyrate (0.4287). Furthermore, Ethanol also displays the largest standard deviation (0.2528), indicating the greatest variability in its measurements compared to other features like VSS (0.1538) and pH (0.1267). These statistics are directly observable from the provided distribution chart.",
+        "zh_TW": ""
+      },
+      "time_series": {
+        "en": "The time-series chart diagnostics indicate that the KNN model performed best, achieving a sequence correlation of 0.931488. Specifically, the actual peak was observed at index 130 with a value of 1.0, while the KNN model predicted a peak at index 146 with a value of 0.829894. Furthermore, the model reported a mean absolute gap of 0.066591, suggesting a relatively consistent prediction across the sequence.",
+        "zh_TW": ""
+      }
+    }
+  },
+  "benchmark_summary": {
+    "generated_at": "2026-04-24T03:24:24.203037+00:00",
+    "artifact_count": 24,
+    "generation_count": 120,
+    "output_dir": "benchmark_eval",
+    "leaderboard_preview": [
+      {
+        "arm": "A",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 24,
+        "claim_count": 134,
+        "fact_precision": 0.8278108465608466,
+        "fact_recall": 0.55,
+        "fact_f1": 0.6305720899470899,
+        "unsupported_claim_rate": 0.10919312169312169,
+        "contradiction_rate": 0.06299603174603174,
+        "coverage_of_salient_facts": 0.4625,
+        "numeric_accuracy": 0.8478260869565217,
+        "numeric_tolerance_accuracy": 0.8478260869565217
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1",
+        "artifact_count": 24,
+        "claim_count": 105,
+        "fact_precision": 0.7107142857142857,
+        "fact_recall": 0.5486111111111112,
+        "fact_f1": 0.5928432882592475,
+        "unsupported_claim_rate": 0.2753968253968254,
+        "contradiction_rate": 0.013888888888888888,
+        "coverage_of_salient_facts": 0.40625,
+        "numeric_accuracy": 0.7548611111111111,
+        "numeric_tolerance_accuracy": 0.7548611111111111
+      },
+      {
+        "arm": "C",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 24,
+        "claim_count": 141,
+        "fact_precision": 0.7038029100529101,
+        "fact_recall": 0.4534722222222222,
+        "fact_f1": 0.5422709184937445,
+        "unsupported_claim_rate": 0.1421792328042328,
+        "contradiction_rate": 0.07068452380952381,
+        "coverage_of_salient_facts": 0.3729166666666667,
+        "numeric_accuracy": 0.8372294372294372,
+        "numeric_tolerance_accuracy": 0.8372294372294372
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1L2L3",
+        "artifact_count": 24,
+        "claim_count": 113,
+        "fact_precision": 0.6501984126984127,
+        "fact_recall": 0.40347222222222223,
+        "fact_f1": 0.4827230961981601,
+        "unsupported_claim_rate": 0.2011904761904762,
+        "contradiction_rate": 0.10694444444444444,
+        "coverage_of_salient_facts": 0.4111111111111111,
+        "numeric_accuracy": 0.8014492753623188,
+        "numeric_tolerance_accuracy": 0.8014492753623188
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L2L3",
+        "artifact_count": 24,
+        "claim_count": 103,
+        "fact_precision": 0.38938492063492064,
+        "fact_recall": 0.0,
+        "fact_f1": 0.0,
+        "unsupported_claim_rate": 0.5446428571428571,
+        "contradiction_rate": 0.024305555555555556,
+        "coverage_of_salient_facts": 0.0,
+        "numeric_accuracy": 0.4505668934240363,
+        "numeric_tolerance_accuracy": 0.4505668934240363
+      }
+    ],
+    "row_count": 5,
+    "artifact_score_count": 120,
+    "warnings": [],
+    "best_overall": {
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "artifact_count": 24,
+      "claim_count": 134,
+      "fact_precision": 0.8278108465608466,
+      "fact_recall": 0.55,
+      "fact_f1": 0.6305720899470899,
+      "unsupported_claim_rate": 0.10919312169312169,
+      "contradiction_rate": 0.06299603174603174,
+      "coverage_of_salient_facts": 0.4625,
+      "numeric_accuracy": 0.8478260869565217,
+      "numeric_tolerance_accuracy": 0.8478260869565217
+    },
+    "per_chart": {
+      "artifact_count": 24,
+      "chart_count": 21,
+      "core_artifact_count": 3,
+      "coverage_gap_count": 0,
+      "coverage_gap_preview": [],
+      "best_preview": [
+        {
+          "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+          "artifact_type": "chart/model_knn_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_knn_scatter",
+          "asset_title": "KNN scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_knn_scatter.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "KNN"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_knn_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for KNN r2_score is 0.8171678017.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN linear_fit_slope is 0.879798.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for KNN r2_score is 0.8171678017.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 2.029957500002122e-05
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:model_rf_scatter",
+          "artifact_type": "chart/model_rf_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_rf_scatter",
+          "asset_title": "Random forest scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_rf_scatter.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "RF"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_rf_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for RF r2_score is 0.7756018171.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for RF pred_actual_correlation is 0.88511.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for RF linear_fit_slope is 0.848822.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for RF r2_score is 0.7756018171.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 4.5427500000583265e-07
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+          "artifact_type": "chart/model_xgboost_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_xgboost_scatter",
+          "asset_title": "XGBoost scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_xgboost_scatter.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "XGBoost"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_xgboost_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for XGBoost pred_actual_correlation is 0.875024.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 5.922450000001023e-06
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:boxplots",
+          "artifact_type": "chart/boxplots",
+          "artifact_scope": "chart",
+          "asset_key": "boxplots",
+          "asset_title": "Feature boxplots",
+          "asset_family": "distribution",
+          "chart_type": "boxplot",
+          "chart_file": "fig_boxplots.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_boxplots.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Ethanol mean is 0.4735821124.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for Ethanol std is 0.2528296374.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for Ethanol mean is 0.4735821124.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 2.3762499999996356e-05
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:feature_distributions",
+          "artifact_type": "chart/feature_distributions",
+          "artifact_scope": "chart",
+          "asset_key": "feature_distributions",
+          "asset_title": "Feature distributions",
+          "asset_family": "distribution",
+          "chart_type": "distribution_plot",
+          "chart_file": "fig_feature_distributions.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_feature_distributions.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 2,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Ethanol mean is 0.4735821124.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Ethanol std is 0.2528296374.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for Ethanol mean is 0.4735821124.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 2.3762499999996356e-05
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+          "artifact_type": "chart/feature_vs_target",
+          "artifact_scope": "chart",
+          "asset_key": "feature_vs_target",
+          "asset_title": "Feature vs target chart",
+          "asset_family": "correlation",
+          "chart_type": "correlation_chart",
+          "chart_file": "fig_feature_vs_target.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "Butyrate vs VFA",
+            "Acetate vs VFA",
+            "Acetate vs Butyrate",
+            "Ethanol vs Propionate",
+            "Ethanol vs VFA",
+            "VFA vs HPR",
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Ethanol",
+            "COD-O"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "table_descriptive_statistics.csv",
+            "fig_feature_vs_target.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 3,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 3,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Acetate vs VFA correlation is 0.9428.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for VFA target_correlation is 0.7984.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 0.0
+        }
+      ],
+      "hardest_preview": [
+        {
+          "artifact_id": "TEST_arm_c:chart:time_series",
+          "artifact_type": "chart/time_series",
+          "artifact_scope": "chart",
+          "asset_key": "time_series",
+          "asset_title": "Time-series chart",
+          "asset_family": "prediction_sequence",
+          "chart_type": "time_series",
+          "chart_file": "fig_time_series.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "KNN"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "best_model_summary.json",
+            "summary.json",
+            "fig_time_series.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 6,
+          "fact_precision": 0.3333333333333333,
+          "fact_recall": 0.25,
+          "fact_f1": 0.28571428571428575,
+          "unsupported_claim_rate": 0.3333333333333333,
+          "contradiction_rate": 0.3333333333333333,
+          "coverage_of_salient_facts": 0.25,
+          "numeric_accuracy": 0.3333333333333333,
+          "numeric_tolerance_accuracy": 0.3333333333333333,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 2,
+          "unverifiable_claim_count": 2,
+          "top_reasons": [
+            {
+              "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for KNN predicted_peak_index is 146.0.",
+              "count": 2
+            },
+            {
+              "reason": "No matching numeric fact was found for this claim.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for KNN sequence_correlation is 0.931488.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 72.585053
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:fig3_feature_analysis",
+          "artifact_type": "chart/fig3_feature_analysis",
+          "artifact_scope": "chart",
+          "asset_key": "fig3_feature_analysis",
+          "asset_title": "Figure 3 - Combined feature analysis",
+          "asset_family": "feature_analysis_combined",
+          "chart_type": "composite_chart",
+          "chart_file": "fig3_feature_analysis.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Propionate",
+            "Ethanol",
+            "ORP_Low",
+            "ORP_Mid",
+            "COD-O"
+          ],
+          "source_files": [
+            "best_model_shap_importance.csv",
+            "gra_ranking.json",
+            "summary.json",
+            "table1_incremental_results.csv",
+            "table_correlation_matrix.csv",
+            "table_feature_importance.csv",
+            "fig3_feature_analysis.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1L2L3",
+          "claim_count": 5,
+          "fact_precision": 0.6,
+          "fact_recall": 0.2,
+          "fact_f1": 0.3,
+          "unsupported_claim_rate": 0.4,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.2,
+          "numeric_accuracy": 0.5,
+          "numeric_tolerance_accuracy": 0.5,
+          "supported_claim_count": 3,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 2,
+          "top_reasons": [
+            {
+              "reason": "Claimed ordering is consistent with the gold ranking.",
+              "count": 2
+            },
+            {
+              "reason": "Claim type 'freeform' is not yet rule-verified.",
+              "count": 1
+            },
+            {
+              "reason": "No matching numeric fact was found for this claim.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Claimed ordering is consistent with the gold ranking.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 0.0
+        },
+        {
+          "artifact_id": "TEST_arm_c:incremental_feature_analysis/main",
+          "artifact_type": "incremental_feature_analysis/main",
+          "artifact_scope": "core_bundle",
+          "asset_key": null,
+          "asset_title": null,
+          "asset_family": null,
+          "chart_type": "line_chart",
+          "chart_file": "fig6ab_mse_r2_features.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "SVM",
+            "DT",
+            "RF",
+            "KNN",
+            "XGBoost"
+          ],
+          "source_files": [
+            "table1_incremental_results.csv",
+            "fig6ab_mse_r2_features.png",
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "summary_files": [
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 5,
+          "fact_precision": 0.4,
+          "fact_recall": 0.5,
+          "fact_f1": 0.4444444444444445,
+          "unsupported_claim_rate": 0.6,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 0.5,
+          "numeric_tolerance_accuracy": 0.5,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 3,
+          "top_reasons": [
+            {
+              "reason": "No matching numeric fact was found for this claim.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN best_mse is 0.011901056157134797.",
+              "count": 1
+            }
+          ],
+          "top_reason": "No matching numeric fact was found for this claim.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 2.0390546420358084e-05
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:fig6c_prediction_time",
+          "artifact_type": "chart/fig6c_prediction_time",
+          "artifact_scope": "chart",
+          "asset_key": "fig6c_prediction_time",
+          "asset_title": "Figure 6C - Prediction over time",
+          "asset_family": "prediction_sequence",
+          "chart_type": "line_chart",
+          "chart_file": "fig6c_prediction_time.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "KNN"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "best_model_summary.json",
+            "summary.json",
+            "fig6c_prediction_time.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 4,
+          "fact_precision": 0.5,
+          "fact_recall": 0.5,
+          "fact_f1": 0.5,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.5,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 0.5,
+          "numeric_tolerance_accuracy": 0.5,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 2,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN predicted_peak_index is 146.0.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN actual_peak_index is 130.0.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for KNN sequence_correlation is 0.931488.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 68.54252650000001
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+          "artifact_type": "chart/predicted_vs_actual",
+          "artifact_scope": "chart",
+          "asset_key": "predicted_vs_actual",
+          "asset_title": "Predicted versus actual chart",
+          "asset_family": "prediction_overview",
+          "chart_type": "scatter_plot",
+          "chart_file": "fig_predicted_vs_actual.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "KNN"
+          ],
+          "source_files": [
+            "best_model_summary.json",
+            "summary.json",
+            "table_model_comparison.csv",
+            "fig_predicted_vs_actual.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 10,
+          "fact_precision": 0.9,
+          "fact_recall": 0.5,
+          "fact_f1": 0.6428571428571429,
+          "unsupported_claim_rate": 0.1,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 9,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 1,
+          "top_reasons": [
+            {
+              "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+              "count": 3
+            },
+            {
+              "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for KNN mae is 0.07502308749135642.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+          "top_reason_count": 3,
+          "mean_numeric_delta": 2.343888474215497e-05
+        },
+        {
+          "artifact_id": "TEST_arm_c:chart:correlation_heatmap",
+          "artifact_type": "chart/correlation_heatmap",
+          "artifact_scope": "chart",
+          "asset_key": "correlation_heatmap",
+          "asset_title": "Correlation heatmap",
+          "asset_family": "correlation",
+          "chart_type": "heatmap",
+          "chart_file": "fig_correlation_heatmap.png",
+          "bundle_name": "TEST_arm_c",
+          "primary_entities": [
+            "Butyrate vs VFA",
+            "Acetate vs VFA",
+            "Acetate vs Butyrate",
+            "Ethanol vs Propionate",
+            "Ethanol vs VFA",
+            "VFA vs HPR",
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Ethanol",
+            "COD-O"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "fig_correlation_heatmap.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 2,
+          "fact_precision": 1.0,
+          "fact_recall": 0.5,
+          "fact_f1": 0.6666666666666666,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 0.0
+        }
+      ]
+    },
+    "files": {
+      "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+      "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+      "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+      "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+      "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+      "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+      "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+    },
+    "selected_explanations": {
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "asset_count": 25,
+      "provider": "benchmark_selected",
+      "model": "gemma4:e4b",
+      "selection_method": "best_leaderboard_row"
+    }
+  }
+}

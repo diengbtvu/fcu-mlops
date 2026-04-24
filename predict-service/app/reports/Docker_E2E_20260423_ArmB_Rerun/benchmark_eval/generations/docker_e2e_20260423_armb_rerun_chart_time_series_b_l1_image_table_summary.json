@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The model performance comparison table shows metrics (r2_score, rmse, mse, mae) for multiple models (SVM, DT, RF, KNN, XGBoost) against the target variable HPR. The metrics are numerical, with values ranging from 0.0 to 1.0 for r2_score, and small floating-point numbers for rmse, mse, and mae.",
+  "explanation_full": "The model performance comparison section presents a table with the following structure:\n- Columns: model, r2_score, rmse, mse, mae.\n- Rows: SVM, DT, RF, KNN, XGBoost.\n- Metrics: r2_score, rmse, mse, mae are numerical metrics used to evaluate model performance.\n- Value Ranges: r2_score ranges from 0.0 to 1.0. rmse, mse, and mae are small floating-point numbers, with the highest observed value being 0.0875457684 for rmse (SVM) and 0.0872453182 for mae (SVM). The lowest observed value is 0.0 for r2_score, mse, and mae (DT, RF, KNN).\n- Units/Scale: The metrics are unitless scores or floating-point values representing model fit and error, respectively. The scale is linear for all metrics.",
+  "claims": [],
+  "semantic_level": "L1"
+}

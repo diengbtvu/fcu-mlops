@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol exhibits the highest mean feature value (0.4736) and the highest standard deviation (0.2528) among the measured features.",
+  "explanation_full": "Based on the feature boxplots, Ethanol shows the highest mean value at 0.4736, indicating it is the most prevalent feature on average. Furthermore, Ethanol also displays the largest standard deviation (0.2528), suggesting the greatest variability in its concentration across the samples. In comparison, Acetate has the second-highest mean (0.4465) and Butyrate has the third-highest mean (0.4287), while VSS has the lowest mean (0.3581). The standard deviations generally decrease from Ethanol down to VSS, reflecting the spread of data for each feature.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol exhibits the highest mean feature value (0.4736)",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol also displays the largest standard deviation (0.2528)",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": null,
+      "metric": "std",
+      "value": 0.2528,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

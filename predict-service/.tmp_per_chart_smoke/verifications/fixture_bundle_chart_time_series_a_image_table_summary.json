@@ -1,0 +1,59 @@
+{
+  "artifact_id": "fixture_bundle:chart:time_series",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:time_series",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "sequence-correlation",
+      "claim_text": "KNN has sequence_correlation=0.890000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:time_series:metric:KNN:sequence_correlation"
+      ],
+      "reason": "Gold value for KNN sequence_correlation is 0.89.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:time_series",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "mean-gap",
+      "claim_text": "KNN has mean_abs_gap=0.080000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:time_series:metric:KNN:mean_abs_gap"
+      ],
+      "reason": "Gold value for KNN mean_abs_gap is 0.08.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:time_series",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "actual-peak-index",
+      "claim_text": "KNN has actual_peak_index=15.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:time_series:metric:KNN:actual_peak_index"
+      ],
+      "reason": "Gold value for KNN actual_peak_index is 15.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:time_series",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "predicted-peak-index",
+      "claim_text": "KNN has predicted_peak_index=16.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:time_series:metric:KNN:predicted_peak_index"
+      ],
+      "reason": "Gold value for KNN predicted_peak_index is 16.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

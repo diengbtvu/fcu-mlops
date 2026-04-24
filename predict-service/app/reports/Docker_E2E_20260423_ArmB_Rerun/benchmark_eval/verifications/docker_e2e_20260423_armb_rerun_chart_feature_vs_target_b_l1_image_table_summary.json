@@ -1,0 +1,62 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The correlation matrix shows Pearson correlation coefficients between various features",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The values range from -1.0 to 1.0, indicating the strength and direction of linear relationships.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold value for ORP_Mid vs ORP_Low correlation is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The correlation matrix calculates the Pearson correlation coefficient between 12 features",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold feature_subset_optimum count is 1.",
+      "numeric_delta": 11
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The correlation coefficients are unitless measures of linear correlation, ranging from -1.0 (perfect negative correlation) to 1.0 (perfect positive correlation).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold value for ORP_Mid vs ORP_Low correlation is 1.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

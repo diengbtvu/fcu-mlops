@@ -1,0 +1,433 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+  "artifact_type": "chart/model_comparison_bars",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "results_summary.txt",
+    "summary.json",
+    "table_model_comparison.csv",
+    "fig_model_comparison_bars.png"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "DT",
+    "KNN",
+    "RF",
+    "XGBoost",
+    "SVM"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model",
+      "fact_type": "best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "DT",
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "winning model = DT"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:ranking:r2_score",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": [
+        "DT",
+        "KNN",
+        "RF",
+        "XGBoost",
+        "SVM"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "model ranking by r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:rmse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT rmse"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mse"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mae",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mae"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:KNN:rmse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:KNN:mae",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:RF:r2_score",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:RF:rmse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:RF:mse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:RF:mae",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:XGBoost:r2_score",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:XGBoost:rmse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "rmse",
+      "object": null,
+      "value": 2.735e-07,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:XGBoost:mse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:XGBoost:mae",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mae",
+      "object": null,
+      "value": 2.735e-07,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:rmse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.0875457684,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0076642616,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:SVM:mae",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0872453182,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:ranking:r2_score",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:r2_score",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:rmse"
+  ],
+  "forbidden_inferences": [
+    "Do not claim deployment performance from benchmark chart scores alone.",
+    "Do not let narrative text override the chart's metric sources."
+  ]
+}

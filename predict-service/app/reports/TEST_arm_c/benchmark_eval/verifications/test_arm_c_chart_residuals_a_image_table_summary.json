@@ -1,0 +1,128 @@
+{
+  "artifact_id": "TEST_arm_c:chart:residuals",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved the highest performance with an R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "an RMSE of 0.1132",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 1.9090045603256667e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "outperforming other models like RF (R2=0.7756) and XGBoost (R2=0.7495)",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN model is the best performer, achieving an R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "an RMSE of 0.1132",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 1.9090045603256667e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "an MAE of 0.075",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.07502308749135642.",
+      "numeric_delta": 2.3087491356418854e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "RF has an R2 of 0.7756",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "XGBoost has an R2 of 0.7495",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "the correlation between predicted and actual values for KNN is 0.9073",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 1.0000000000287557e-06
+    }
+  ]
+}

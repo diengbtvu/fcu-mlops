@@ -1,0 +1,289 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig4_univariate_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The strongest correlations observed are between Butyrate and VFA (0.9601), Acetate and VFA (0.9428), and Acetate and Butyrate (0.8651). Furthermore, VFA shows the top correlations with HPR (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+  "explanation_full": "Based on the univariate analysis, the strongest correlations identified are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When examining the top correlations with HPR, the feature VFA exhibits the highest correlation (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA (0.9601)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate vs VFA (0.9428)",
+      "claim_type": "metric_value",
+      "span_category": "Acetate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+      "subject": "Acetate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.9428,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate vs Butyrate (0.8651)",
+      "claim_type": "metric_value",
+      "span_category": "Acetate vs Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+      "subject": "Acetate vs Butyrate",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.8651,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "VFA exhibits the highest correlation (0.7984) with HPR",
+      "claim_type": "metric_value",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": 0.7984,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "Butyrate (0.7827) and Acetate (0.7641) follow VFA in correlation with HPR",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:ranking:target_correlation",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The strongest correlations observed are between Butyrate and VFA (0.9601), Acetate and VFA (0.9428), and Acetate and Butyrate (0.8651). Furthermore, VFA shows the top correlations with HPR (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+        "draft_explanation_full": "Based on the univariate analysis, the strongest correlations identified are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When examining the top correlations with HPR, the feature VFA exhibits the highest correlation (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641).",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Butyrate vs VFA (0.9601)",
+            "claim_type": "metric_value",
+            "span_category": "Butyrate vs VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+            "subject": "Butyrate vs VFA",
+            "predicate": "correlation",
+            "object": null,
+            "metric": "correlation",
+            "value": 0.9601,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Acetate vs VFA (0.9428)",
+            "claim_type": "metric_value",
+            "span_category": "Acetate vs VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+            "subject": "Acetate vs VFA",
+            "predicate": "correlation",
+            "object": null,
+            "metric": "correlation",
+            "value": 0.9428,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate vs Butyrate (0.8651)",
+            "claim_type": "metric_value",
+            "span_category": "Acetate vs Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+            "subject": "Acetate vs Butyrate",
+            "predicate": "correlation",
+            "object": null,
+            "metric": "correlation",
+            "value": 0.8651,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VFA exhibits the highest correlation (0.7984) with HPR",
+            "claim_type": "metric_value",
+            "span_category": "VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+            "subject": "VFA",
+            "predicate": "target_correlation",
+            "object": null,
+            "metric": "target_correlation",
+            "value": 0.7984,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate (0.7827) and Acetate (0.7641) follow VFA in correlation with HPR",
+            "claim_type": "metric_value",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig4_univariate_analysis:ranking:target_correlation",
+            "subject": "hpr",
+            "predicate": "target_correlation",
+            "object": null,
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "Butyrate vs VFA (0.9601)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The correlation of Butyrate vs VFA is explicitly stated as 0.9601 in the evidence packet's correlation story and is supported by the correlation matrix.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
+            ],
+            "grounded_fact_summary": "The correlation between Butyrate and VFA is 0.9601."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Acetate vs VFA (0.9428)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The correlation of Acetate vs VFA is explicitly stated as 0.9428 in the evidence packet's correlation story and is supported by the correlation matrix.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
+            ],
+            "grounded_fact_summary": "The correlation between Acetate and VFA is 0.9428."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Acetate vs Butyrate (0.8651)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The correlation of Acetate vs Butyrate is explicitly stated as 0.8651 in the evidence packet's correlation story and is supported by the correlation matrix.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
+            ],
+            "grounded_fact_summary": "The correlation between Acetate and Butyrate is 0.8651."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VFA exhibits the highest correlation (0.7984) with HPR",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet confirms VFA has the highest correlation (0.7984) with HPR, as shown in the top HPR correlations list and the ranking fact.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig4_univariate_analysis:top_feature:target_correlation",
+              "TEST_arm_c:chart:fig4_univariate_analysis:ranking:target_correlation"
+            ],
+            "grounded_fact_summary": "VFA has the highest correlation (0.7984) with HPR."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Butyrate (0.7827) and Acetate (0.7641) follow VFA in correlation with HPR",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The ranking fact confirms the order: VFA (0.7984) > Butyrate (0.7827) > Acetate (0.7641) in correlation with HPR.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig4_univariate_analysis:ranking:target_correlation"
+            ],
+            "grounded_fact_summary": "The correlation ranking with HPR is VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641)."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 5
+    }
+  },
+  "parent_draft_hash": "a3c4c805ab51330387a7332fd202ce733ac4c7f2"
+}

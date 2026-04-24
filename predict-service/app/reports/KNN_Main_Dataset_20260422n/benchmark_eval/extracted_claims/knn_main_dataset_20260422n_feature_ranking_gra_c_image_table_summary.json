@@ -1,0 +1,65 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most important feature according to GRA.",
+      "claim_type": "rank_score",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN is the best model with an R² of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": "KNN",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The top three predictors identified by GRA are VFA, Butyrate, and Acetate.",
+      "claim_type": "top_feature",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "Top 3 features",
+      "predicate": "are",
+      "object": "VFA, Butyrate, Acetate",
+      "metric": "gra_score",
+      "value": null,
+      "unit": "",
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

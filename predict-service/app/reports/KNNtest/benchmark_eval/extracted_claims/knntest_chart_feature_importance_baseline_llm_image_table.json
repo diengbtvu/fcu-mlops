@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:feature_importance",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature, accounting for 50.52% of the importance.",
+      "claim_type": "Feature Importance",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "feature_importance",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "is the most important feature",
+      "object": "50.52%",
+      "metric": "importance",
+      "value": 0.5052222633,
+      "unit": "%",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate is the second most important feature, with 12.00% importance.",
+      "claim_type": "Feature Importance",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "feature_importance",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "is the second most important feature",
+      "object": "12.00%",
+      "metric": "importance",
+      "value": 0.1199757325,
+      "unit": "%",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate is the third most important feature, with 9.70% importance.",
+      "claim_type": "Feature Importance",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "feature_importance",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "is the third most important feature",
+      "object": "9.70%",
+      "metric": "importance",
+      "value": 0.0969761328,
+      "unit": "%",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

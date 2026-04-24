@@ -1,0 +1,48 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_rf_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest (RF) model achieved perfect performance metrics, showing an R2 score of 1.0, RMSE of 0.0, and MAE of 0.0.",
+  "explanation_full": "The Random Forest (RF) model demonstrated exceptional performance based on the scatter plot diagnostics. Specifically, the model achieved an R2 score of 1.0, an RMSE of 0.0, and an MAE of 0.0. These metrics indicate a perfect fit between predicted and actual values. The diagnostics also confirm that the maximum absolute residual was 0.0, suggesting no significant prediction errors were observed for the 57 samples analyzed.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "R2 score of 1.0",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 1.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "maximum absolute residual was 0.0",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_rf_scatter:metric:RF:max_abs_residual",
+      "subject": "RF",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "metric": "max_abs_residual",
+      "value": 0.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null
+}

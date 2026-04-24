@@ -1,0 +1,64 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Propionate has the highest mean (0.3581)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:mean"
+      ],
+      "reason": "Gold value for Propionate mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Propionate has the highest standard deviation (0.1538)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:std"
+      ],
+      "reason": "Gold value for Propionate std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Propionate has the highest mean value (0.3581)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:mean"
+      ],
+      "reason": "Gold value for Propionate mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Propionate has the largest standard deviation (0.1538)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:std"
+      ],
+      "reason": "Gold value for Propionate std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    }
+  ]
+}

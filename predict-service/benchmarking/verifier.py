@@ -246,6 +246,15 @@ def _verify_metric_value(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Numeric claim is missing a numeric value.")
 
     candidate_facts = _fact_by_source_variable_id(gold, claim)
+    if candidate_facts:
+        candidate_facts = [
+            fact
+            for fact in candidate_facts
+            if fact.value is not None
+            and fact.fact_type in {"metric_value", "rank_score", "best_r2", "best_mse"}
+            and (not subjects or fact.subject in subjects)
+            and (not metrics or _metric_alias(fact.predicate) in metrics)
+        ]
     if not candidate_facts:
         candidate_facts = [
             fact
@@ -381,7 +390,13 @@ def _verify_feature_count_fact(
     )
 
 
-def verify_claims(gold: GoldArtifact, claims: list[Claim], arm: str, input_condition: str) -> list[ClaimVerification]:
+def verify_claims(
+    gold: GoldArtifact,
+    claims: list[Claim],
+    arm: str,
+    input_condition: str,
+    semantic_level: str | None = None,
+) -> list[ClaimVerification]:
     verifications: list[ClaimVerification] = []
     for claim in claims:
         if claim.claim_type == "best_model":
@@ -409,6 +424,7 @@ def verify_claims(gold: GoldArtifact, claims: list[Claim], arm: str, input_condi
                 artifact_id=verification.artifact_id,
                 arm=arm,
                 input_condition=input_condition,
+                semantic_level=semantic_level,
                 claim_id=verification.claim_id,
                 claim_text=verification.claim_text,
                 status=verification.status,

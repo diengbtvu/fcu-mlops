@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_xgboost_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "XGBoost achieved an R2 score of 0.7495, with a correlation between predicted and actual values of 0.8750, and a Mean Absolute Error (MAE) of 0.0956.",
+  "explanation_full": "The XGBoost model demonstrated a strong performance on the dataset, achieving an R2 score of 0.7495. The correlation between predicted and actual values was high at 0.8750, indicating a strong linear relationship. Furthermore, the Mean Absolute Error (MAE) was 0.0956, suggesting a relatively low average prediction error. The model's diagnostics also reported a linear fit slope of 0.8387 and a maximum absolute residual of 0.4105.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "XGBoost achieved an R2 score of 0.7495.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has R2 score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values for XGBoost was 0.8750.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has correlation (pred, actual)",
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.875024,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "XGBoost had a Mean Absolute Error (MAE) of 0.0956.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "has MAE",
+      "object": null,
+      "metric": "mae",
+      "value": 0.0956,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

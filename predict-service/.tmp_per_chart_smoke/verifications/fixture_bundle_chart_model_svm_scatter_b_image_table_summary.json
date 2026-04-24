@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "r2",
+      "claim_text": "SVM has r2_score=0.840000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.84.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "correlation",
+      "claim_text": "SVM has pred_actual_correlation=0.810000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.81.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "third-metric",
+      "claim_text": "SVM has linear_fit_slope=0.800000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_svm_scatter:metric:SVM:linear_fit_slope"
+      ],
+      "reason": "Gold value for SVM linear_fit_slope is 0.8.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

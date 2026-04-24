@@ -1,0 +1,107 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA: 0.7931",
+      "claim_type": "rank_score",
+      "span_category": "feature_score",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has score",
+      "object": 0.7931135436956089,
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": "",
+      "ordered_items": [
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate: 0.7902",
+      "claim_type": "rank_score",
+      "span_category": "feature_score",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "has score",
+      "object": 0.7902467550177025,
+      "metric": "gra_score",
+      "value": 0.7902,
+      "unit": "",
+      "ordered_items": [
+        "Butyrate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate: 0.7772",
+      "claim_type": "rank_score",
+      "span_category": "feature_score",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "has score",
+      "object": 0.7772199976368066,
+      "metric": "gra_score",
+      "value": 0.7772,
+      "unit": "",
+      "ordered_items": [
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "VSS: 0.7768",
+      "claim_type": "rank_score",
+      "span_category": "feature_score",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "has score",
+      "object": 0.7768076560138514,
+      "metric": "gra_score",
+      "value": 0.7768,
+      "unit": "",
+      "ordered_items": [
+        "VSS"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "Propionate: 0.7596",
+      "claim_type": "rank_score",
+      "span_category": "feature_score",
+      "is_numeric": true,
+      "requires_grounding_from": "gra_ranking.json",
+      "confidence": 1.0,
+      "subject": "Propionate",
+      "predicate": "has score",
+      "object": 0.7595541448908357,
+      "metric": "gra_score",
+      "value": 0.7596,
+      "unit": "",
+      "ordered_items": [
+        "Propionate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

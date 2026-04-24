@@ -1,0 +1,320 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:correlation_heatmap",
+  "artifact_type": "chart/correlation_heatmap",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "summary.json",
+    "table_correlation_matrix.csv",
+    "fig_correlation_heatmap.png"
+  ],
+  "chart_type": "heatmap",
+  "primary_entities": [
+    "Butyrate vs VFA",
+    "Acetate vs VFA",
+    "Acetate vs Butyrate",
+    "Ethanol vs Propionate",
+    "Ethanol vs VFA",
+    "VFA vs HPR",
+    "VFA",
+    "Butyrate",
+    "Acetate",
+    "VSS",
+    "Ethanol",
+    "COD-O"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:top_feature:target_correlation",
+      "fact_type": "top_feature",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": "VFA",
+      "value": 0.7984,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "top HPR correlation feature"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:ranking:target_correlation",
+      "fact_type": "ranking",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Ethanol",
+        "COD-O"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "ranking by HPR correlation"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:ranking:correlation",
+      "fact_type": "ranking",
+      "subject": "feature_pairs",
+      "predicate": "correlation",
+      "object": [
+        "Butyrate vs VFA",
+        "Acetate vs VFA",
+        "Acetate vs Butyrate",
+        "Ethanol vs Propionate",
+        "Ethanol vs VFA",
+        "VFA vs HPR"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "ranking by pairwise correlation strength"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.7984,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "VFA correlation with HPR"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Butyrate:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.7827,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Butyrate correlation with HPR"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Acetate:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "Acetate",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.7641,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Acetate correlation with HPR"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:VSS:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.7062,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "VSS correlation with HPR"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Ethanol:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "Ethanol",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.6112,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Ethanol correlation with HPR"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:COD-O:target_correlation",
+      "fact_type": "metric_value",
+      "subject": "COD-O",
+      "predicate": "target_correlation",
+      "object": null,
+      "value": 0.5946,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "COD-O correlation with HPR"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.9601,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Butyrate vs VFA pairwise correlation"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Acetate vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "Acetate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.9428,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Acetate vs VFA pairwise correlation"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Acetate vs Butyrate:correlation",
+      "fact_type": "metric_value",
+      "subject": "Acetate vs Butyrate",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.8651,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Acetate vs Butyrate pairwise correlation"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Ethanol vs Propionate:correlation",
+      "fact_type": "metric_value",
+      "subject": "Ethanol vs Propionate",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.8548,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Ethanol vs Propionate pairwise correlation"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Ethanol vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "Ethanol vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.8486,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "Ethanol vs VFA pairwise correlation"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:VFA vs HPR:correlation",
+      "fact_type": "metric_value",
+      "subject": "VFA vs HPR",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.7984,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_correlation_matrix.csv",
+          "priority": "table/json",
+          "detail": "VFA vs HPR pairwise correlation"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "KNN_HPR_20260424:chart:correlation_heatmap:top_feature:target_correlation",
+    "KNN_HPR_20260424:chart:correlation_heatmap:ranking:target_correlation",
+    "KNN_HPR_20260424:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret correlation as causation.",
+    "Do not let summary prose override the correlation matrix."
+  ]
+}

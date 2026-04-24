@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "optimum-subset",
+      "claim_text": "KNN reaches its best subset at 6 features.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 6.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "best-r2",
+      "claim_text": "KNN reaches R2=0.920000 at its best step.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.92.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "ranking",
+      "claim_text": "The best-step R2 ranking is KNN > RF > SVM.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.92.",
+      "numeric_delta": 1.08
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:boxplots",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol, Acetate, and Butyrate exhibit the highest mean values, while Ethanol also shows the largest standard deviation among the measured features.",
+  "explanation_full": "Based on the descriptive statistics, Ethanol (mean: 0.4736, std: 0.2528), Acetate (mean: 0.4465, std: 0.226), and Butyrate (mean: 0.4287, std: 0.2474) have the highest mean values among the measured features. Propionate (mean: 0.3675, std: 0.2158) and VSS (mean: 0.3581, std: 0.1538) follow. Furthermore, Ethanol has the largest standard deviation (0.2528), followed by Butyrate (0.2474) and Acetate (0.226).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean value (0.4736).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has mean value",
+      "object": "0.4735821123781505",
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate and Butyrate also have high mean values.",
+      "claim_type": "metric_value",
+      "span_category": "Acetate, Butyrate",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "Acetate",
+      "predicate": "has mean value",
+      "object": "0.4465350187686395",
+      "metric": "mean",
+      "value": 0.4465,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Ethanol has the largest standard deviation (0.2528).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has standard deviation",
+      "object": "0.25282963738961184",
+      "metric": "std",
+      "value": 0.2528,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

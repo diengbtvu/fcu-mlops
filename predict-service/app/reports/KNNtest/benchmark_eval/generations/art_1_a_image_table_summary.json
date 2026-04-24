@@ -1,0 +1,27 @@
+{
+  "artifact_id": "art_1",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows the performance metrics for different models, with Model A having the highest scores across the board.",
+  "explanation_full": "The table provides a comprehensive comparison of various models. Model A consistently outperforms all other models in terms of accuracy, precision, and recall, indicating it is the best performing model overall.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Model A is the best performing model overall.",
+      "claim_type": "overall_assessment",
+      "span_category": "overall_assessment",
+      "is_numeric": false,
+      "requires_grounding_from": "Model_A_vs_Others",
+      "confidence": 1.0,
+      "subject": "Model A",
+      "predicate": "is_best",
+      "object": "Other_Models",
+      "metric": "performance",
+      "value": 1.0,
+      "unit": "scale",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

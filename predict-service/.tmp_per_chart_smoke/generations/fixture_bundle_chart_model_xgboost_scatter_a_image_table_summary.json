@@ -1,0 +1,63 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_xgboost_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "XGBoost diagnostics show a strong overall fit.",
+  "explanation_full": "XGBoost reaches R2=0.860000, pred_actual_correlation=0.840000, and linear_fit_slope=0.820000.",
+  "claims": [
+    {
+      "claim_id": "r2",
+      "claim_text": "XGBoost has r2_score=0.860000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "XGBoost",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.86,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "correlation",
+      "claim_text": "XGBoost has pred_actual_correlation=0.840000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.94,
+      "subject": "XGBoost",
+      "predicate": null,
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.84,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "third-metric",
+      "claim_text": "XGBoost has linear_fit_slope=0.820000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "XGBoost",
+      "predicate": null,
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.82,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

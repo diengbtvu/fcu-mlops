@@ -11,6 +11,7 @@ import json
 import math
 import os
 import re
+import shutil
 from datetime import datetime
 from typing import Any, Dict, List, Tuple
 
@@ -448,6 +449,8 @@ def generate_training_report(
     report_id = sanitize_report_id(model_name)
     reports_root = _build_reports_dir()
     report_dir = os.path.join(reports_root, report_id)
+    if os.path.isdir(report_dir):
+        shutil.rmtree(report_dir)
     os.makedirs(report_dir, exist_ok=True)
 
     feature_names = (

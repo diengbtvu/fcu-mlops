@@ -1,0 +1,64 @@
+{
+  "artifact_id": "KNNtest:chart:residuals",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'metric_summary' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the highest R2 score (0.8172) among the benchmark models.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved the lowest RMSE (0.1132) among the benchmark models.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN achieved the lowest MAE (0.075) among the benchmark models.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The prediction-actual correlation for KNN was 0.9073.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNNtest:chart:residuals:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

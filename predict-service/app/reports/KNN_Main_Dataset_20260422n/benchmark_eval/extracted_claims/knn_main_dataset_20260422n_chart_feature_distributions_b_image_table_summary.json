@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean feature values.",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "is highest mean",
+      "object": "0.4735821123781505",
+      "metric": "mean",
+      "value": 0.4735821123781505,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol exhibits the greatest variability (standard deviation of 0.2528).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has std",
+      "object": "0.25282963738961184",
+      "metric": "std",
+      "value": 0.25282963738961184,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate and Butyrate also show high mean values (0.4465 and 0.4287, respectively).",
+      "claim_type": "metric_value",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "has mean",
+      "object": "0.4465350187686395",
+      "metric": "mean",
+      "value": 0.4465350187686395,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig6c_prediction_time",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved a sequence correlation of 0.931488, with a predicted peak value of 0.829894 at index 146, compared to the actual peak value of 1.0 at index 130. The model also had a mean absolute gap of 0.066591.",
+  "explanation_full": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130. The model predicted a peak value of 0.829894 at index 146. Furthermore, the model achieved a sequence correlation of 0.931488, with a mean absolute gap of 0.066591.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved a sequence correlation of 0.931488",
+      "claim_type": "metric_value",
+      "span_category": "sequence correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "with a predicted peak value of 0.829894 at index 146",
+      "claim_type": "metric_value",
+      "span_category": "predicted peak value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "subject": "KNN",
+      "predicate": "predicted_peak_index",
+      "object": 146.0,
+      "metric": "predicted_peak_index",
+      "value": 0.829894,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "compared to the actual peak value of 1.0 at index 130",
+      "claim_type": "metric_value",
+      "span_category": "actual peak value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "subject": "KNN",
+      "predicate": "actual_peak_index",
+      "object": 130.0,
+      "metric": "actual_peak_index",
+      "value": 1.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130",
+      "claim_type": "metric_value",
+      "span_category": "actual peak value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "subject": "KNN",
+      "predicate": "actual_peak_index",
+      "object": 130.0,
+      "metric": "actual_peak_index",
+      "value": 1.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "The model predicted a peak value of 0.829894 at index 146",
+      "claim_type": "metric_value",
+      "span_category": "predicted peak value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "subject": "KNN",
+      "predicate": "predicted_peak_index",
+      "object": 146.0,
+      "metric": "predicted_peak_index",
+      "value": 0.829894,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "Furthermore, the model achieved a sequence correlation of 0.931488",
+      "claim_type": "metric_value",
+      "span_category": "sequence correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_7",
+      "claim_text": "with a mean absolute gap of 0.066591",
+      "claim_type": "metric_value",
+      "span_category": "mean absolute gap",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": null,
+      "metric": "mean_abs_gap",
+      "value": 0.066591,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "corrected",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "corrected",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model achieved a sequence correlation of 0.931488, with a predicted peak value of 0.829894 at index 146, compared to the actual peak value of 1.0 at index 130.",
+        "draft_explanation_full": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130. The model predicted a peak value of 0.829894 at index 146. Furthermore, the model achieved a sequence correlation of 0.931488, with a mean absolute gap of 0.066591.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved a sequence correlation of 0.931488",
+            "claim_type": "metric_value",
+            "span_category": "sequence correlation",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "with a predicted peak value of 0.829894 at index 146",
+            "claim_type": "metric_value",
+            "span_category": "predicted peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": 0.829894,
+            "metric": "predicted_peak_index",
+            "value": 0.829894,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "compared to the actual peak value of 1.0 at index 130",
+            "claim_type": "metric_value",
+            "span_category": "actual peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": 1.0,
+            "metric": "actual_peak_index",
+            "value": 1.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130",
+            "claim_type": "metric_value",
+            "span_category": "actual peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": 1.0,
+            "metric": "actual_peak_index",
+            "value": 1.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The model predicted a peak value of 0.829894 at index 146",
+            "claim_type": "metric_value",
+            "span_category": "predicted peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": 0.829894,
+            "metric": "predicted_peak_index",
+            "value": 0.829894,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Furthermore, the model achieved a sequence correlation of 0.931488",
+            "claim_type": "metric_value",
+            "span_category": "sequence correlation",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "with a mean absolute gap of 0.066591",
+            "claim_type": "metric_value",
+            "span_category": "mean absolute gap",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "subject": "KNN",
+            "predicate": "mean_abs_gap",
+            "object": 0.066591,
+            "metric": "mean_abs_gap",
+            "value": 0.066591,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved a sequence correlation of 0.931488",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.931488 for sequence_correlation for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "KNN sequence correlation is 0.931488."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "with a predicted peak value of 0.829894 at index 146",
+            "status": "contradicted",
+            "recommended_action": "edit",
+            "rationale": "The claim incorrectly assigns the value 0.829894 (which is the predicted peak value) to the predicate 'predicted_peak_index'. The validated fact shows the predicted_peak_index is 146.0, and the predicted_peak_value is 0.829894. The claim mixes the value and the index.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "KNN predicted peak index is 146.0, and predicted peak value is 0.829894."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "compared to the actual peak value of 1.0 at index 130",
+            "status": "contradicted",
+            "recommended_action": "edit",
+            "rationale": "The claim incorrectly assigns the value 1.0 (which is the actual peak value) to the predicate 'actual_peak_index'. The validated fact shows the actual_peak_index is 130.0, and the actual_peak_value is 1.0. The claim mixes the value and the index.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "KNN actual peak index is 130.0, and actual peak value is 1.0."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim accurately reflects the actual peak value (1.0) and index (130) for KNN, which is supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "KNN actual peak value was 1.0 at index 130."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The model predicted a peak value of 0.829894 at index 146",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim accurately reflects the predicted peak value (0.829894) and index (146) for KNN, which is supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "KNN predicted peak value is 0.829894 at index 146."
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Furthermore, the model achieved a sequence correlation of 0.931488",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.931488 for sequence_correlation for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "KNN sequence correlation is 0.931488."
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "with a mean absolute gap of 0.066591",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.066591 for mean_abs_gap for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+            ],
+            "grounded_fact_summary": "KNN mean absolute gap is 0.066591."
+          }
+        ],
+        "corrected_explanation_short": "The KNN model achieved a sequence correlation of 0.931488, with a predicted peak value of 0.829894 at index 146, compared to the actual peak value of 1.0 at index 130. The model also had a mean absolute gap of 0.066591.",
+        "corrected_explanation_full": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130. The model predicted a peak value of 0.829894 at index 146. Furthermore, the model achieved a sequence correlation of 0.931488, with a mean absolute gap of 0.066591.",
+        "corrected_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved a sequence correlation of 0.931488",
+            "claim_type": "metric_value",
+            "span_category": "sequence correlation",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "with a predicted peak value of 0.829894 at index 146",
+            "claim_type": "metric_value",
+            "span_category": "predicted peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": 146.0,
+            "metric": "predicted_peak_index",
+            "value": 0.829894,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "compared to the actual peak value of 1.0 at index 130",
+            "claim_type": "metric_value",
+            "span_category": "actual peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": 130.0,
+            "metric": "actual_peak_index",
+            "value": 1.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130",
+            "claim_type": "metric_value",
+            "span_category": "actual peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": 130.0,
+            "metric": "actual_peak_index",
+            "value": 1.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The model predicted a peak value of 0.829894 at index 146",
+            "claim_type": "metric_value",
+            "span_category": "predicted peak value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": 146.0,
+            "metric": "predicted_peak_index",
+            "value": 0.829894,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Furthermore, the model achieved a sequence correlation of 0.931488",
+            "claim_type": "metric_value",
+            "span_category": "sequence correlation",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "with a mean absolute gap of 0.066591",
+            "claim_type": "metric_value",
+            "span_category": "mean absolute gap",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "subject": "KNN",
+            "predicate": "mean_abs_gap",
+            "object": null,
+            "metric": "mean_abs_gap",
+            "value": 0.066591,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model achieved a sequence correlation of 0.931488",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.931488 for sequence_correlation for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "KNN sequence correlation is 0.931488."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "with a predicted peak value of 0.829894 at index 146",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mixes two distinct pieces of information: the predicted value (0.829894) and the predicted index (146). The validated fact for predicted_peak_index only confirms the index (146.0), while the value (0.829894) is not explicitly confirmed as the 'predicted peak value' in the validated facts, although it is present in the explanation text.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "KNN predicted peak index is 146.0."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "compared to the actual peak value of 1.0 at index 130",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mixes two distinct pieces of information: the actual value (1.0) and the actual index (130). The validated fact for actual_peak_index only confirms the index (130.0), while the value (1.0) is not explicitly confirmed as the 'actual peak value' in the validated facts, although it is present in the explanation text.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "KNN actual peak index is 130.0."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "The sequence diagnostics for the KNN model show that the actual peak value was 1.0 at index 130",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim states the actual peak value was 1.0, but the validated fact only confirms the actual peak index (130.0). The value (1.0) is not grounded by the validated facts.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "KNN actual peak index is 130.0."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "The model predicted a peak value of 0.829894 at index 146",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mixes two distinct pieces of information: the predicted value (0.829894) and the predicted index (146). The validated fact for predicted_peak_index only confirms the index (146.0), while the value (0.829894) is not explicitly confirmed as the 'predicted peak value' in the validated facts, although it is present in the explanation text.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "KNN predicted peak index is 146.0."
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Furthermore, the model achieved a sequence correlation of 0.931488",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.931488 for sequence_correlation for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "KNN sequence correlation is 0.931488."
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "with a mean absolute gap of 0.066591",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The value 0.066591 for mean_abs_gap for KNN is directly supported by the validated fact TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap.",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+            ],
+            "grounded_fact_summary": "KNN mean absolute gap is 0.066591."
+          }
+        ]
+      }
+    ],
+    "decision_counts": {
+      "keep": 5,
+      "edit": 2
+    }
+  },
+  "parent_draft_hash": "d1f302f7d083d7d87e2b5efead5df997bb247aaa"
+}

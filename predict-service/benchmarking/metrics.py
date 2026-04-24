@@ -26,6 +26,7 @@ def compute_artifact_scores(
     verifications: list[ClaimVerification],
     arm: str,
     input_condition: str,
+    semantic_level: str | None = None,
 ) -> ArtifactScore:
     claim_count = len(verifications)
     if claim_count == 0:
@@ -45,12 +46,13 @@ def compute_artifact_scores(
             input_condition=input_condition,
             claim_count=0,
             metrics=metrics,
+            semantic_level=semantic_level,
         )
 
     precision_numerator = sum(STATUS_WEIGHT[verification.status] for verification in verifications)
     fact_precision = precision_numerator / claim_count
 
-    benchmark_facts = allowed_variable_facts(gold)
+    benchmark_facts = allowed_variable_facts(gold, semantic_level=semantic_level)
     fact_coverage = {fact.fact_id: 0.0 for fact in benchmark_facts}
     for verification in verifications:
         weight = STATUS_WEIGHT[verification.status]
@@ -116,13 +118,14 @@ def compute_artifact_scores(
             "numeric_accuracy": numeric_accuracy,
             "numeric_tolerance_accuracy": numeric_tolerance_accuracy,
         },
+        semantic_level=semantic_level,
     )
 
 
 def build_leaderboard(scores: list[ArtifactScore]) -> list[dict[str, float | int | str | None]]:
-    grouped: dict[tuple[str, str], list[ArtifactScore]] = defaultdict(list)
+    grouped: dict[tuple[str, str, str | None], list[ArtifactScore]] = defaultdict(list)
     for score in scores:
-        grouped[(score.arm, score.input_condition)].append(score)
+        grouped[(score.arm, score.input_condition, score.semantic_level)].append(score)
 
     leaderboard_rows: list[dict[str, float | int | str | None]] = []
     metric_names = [
@@ -135,10 +138,11 @@ def build_leaderboard(scores: list[ArtifactScore]) -> list[dict[str, float | int
         "numeric_accuracy",
         "numeric_tolerance_accuracy",
     ]
-    for (arm, condition), entries in grouped.items():
+    for (arm, condition, semantic_level), entries in grouped.items():
         row: dict[str, float | int | str | None] = {
             "arm": arm,
             "input_condition": condition,
+            "semantic_level": semantic_level,
             "artifact_count": len(entries),
             "claim_count": sum(entry.claim_count for entry in entries),
         }
@@ -158,6 +162,7 @@ def build_leaderboard(scores: list[ArtifactScore]) -> list[dict[str, float | int
             row.get("contradiction_rate") or 0.0,
             row.get("arm") or "",
             row.get("input_condition") or "",
+            row.get("semantic_level") or "",
         )
     )
     return leaderboard_rows

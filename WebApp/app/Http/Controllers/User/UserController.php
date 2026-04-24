@@ -455,6 +455,12 @@ class UserController extends Controller
         return $controller->showModelReport($model);
     }
 
+    public function showModelBenchmark(MLModel $model)
+    {
+        $controller = app(\App\Http\Controllers\Admin\AdminController::class);
+        return $controller->showModelBenchmark($model);
+    }
+
     public function editModel($model)
     {
         $controller = app(\App\Http\Controllers\Admin\AdminController::class);

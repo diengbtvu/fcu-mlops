@@ -12,6 +12,16 @@ services:
           if [ ! -f /var/www/html/vendor/autoload.php ]; then
             composer install --no-dev --optimize-autoloader --no-interaction
           fi
+          attempts=0
+          until php artisan migrate --force --no-interaction; do
+            attempts=$$((attempts + 1))
+            if [ "$$attempts" -ge 20 ]; then
+              echo "Laravel migrations failed after $$attempts attempts."
+              exit 1
+            fi
+            echo "Waiting for database before retrying migrations ($$attempts/20)..."
+            sleep 3
+          done
           exec /usr/local/sbin/php-fpm
     volumes:
       - ./WebApp:/var/www/html

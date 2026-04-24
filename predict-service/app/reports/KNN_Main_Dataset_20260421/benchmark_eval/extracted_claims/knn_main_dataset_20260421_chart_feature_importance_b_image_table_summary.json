@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most influential feature.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "is the most influential feature",
+      "object": null,
+      "metric": "importance",
+      "value": 0.505222263291806,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate, Butyrate, and VFA are the next most important features.",
+      "claim_type": "freeform",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "is more important than",
+      "object": "VFA",
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Butyrate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA has an importance of 0.0748037264118768.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has importance",
+      "object": "0.0748037264118768",
+      "metric": "importance",
+      "value": 0.0748037264118768,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

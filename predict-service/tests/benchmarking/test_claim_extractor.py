@@ -126,6 +126,7 @@ def test_normalize_generation_keeps_manifest_metadata() -> None:
         "artifact_id": "hallucinated-artifact-id",
         "arm": "hallucinated-arm",
         "input_condition": "hallucinated-condition",
+        "semantic_level": "L1",
         "explanation_short": "KNN has R2=0.81.",
         "claims": [
             {
@@ -148,6 +149,7 @@ def test_normalize_generation_keeps_manifest_metadata() -> None:
     assert generation.artifact_id == "fixture:model_comparison/main"
     assert generation.arm == "A"
     assert generation.input_condition == "image_table_summary"
+    assert generation.semantic_level is None
 
 
 def test_normalize_generation_requires_structured_claims_array() -> None:

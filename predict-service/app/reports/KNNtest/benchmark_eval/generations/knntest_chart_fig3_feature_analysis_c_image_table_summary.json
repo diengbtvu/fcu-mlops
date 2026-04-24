@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest R2 score (0.83014) and lowest MSE (0.011901) when using 9 features, specifically VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low. The RF model performed best overall, achieving an R2 of 0.785537 and an MSE of 0.015026 with 11 features.",
+  "explanation_full": "The analysis of feature importance and model performance suggests that the KNN model performed optimally with 9 features, achieving an R2 score of 0.83014 and an MSE of 0.011901. This optimal feature set includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low. \n\nFor comparison, the Random Forest (RF) model achieved the highest R2 score (0.785537) and lowest MSE (0.015026) when utilizing 11 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low -> ORP_Mid -> Sucrose_Degradation). \n\nIn terms of feature importance, VSS (0.5052) was the most important feature, followed by Acetate (0.12), Butyrate (0.097), VFA (0.075), and Propionate (0.058). The strongest correlation was found between Butyrate and VFA (0.9601).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The feature 'VFA' is highly correlated with 'VFA'.",
+      "claim_type": "N/A",
+      "span_category": "N/A",
+      "is_numeric": false,
+      "requires_grounding_from": "N/A",
+      "confidence": 0.9,
+      "subject": "VFA",
+      "predicate": "is highly correlated with",
+      "object": "VFA",
+      "metric": "n/a",
+      "value": "N/A",
+      "unit": "N/A",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

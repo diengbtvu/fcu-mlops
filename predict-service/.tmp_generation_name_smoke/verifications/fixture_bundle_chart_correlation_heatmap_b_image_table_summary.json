@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-target-feature",
+      "claim_text": "pH is the top feature by target_correlation.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:correlation_heatmap:top_feature:target_correlation"
+      ],
+      "reason": "Gold top feature for target_correlation is pH.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "target-ranking",
+      "claim_text": "The target_correlation ordering is pH > Propionate > VFA.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:correlation_heatmap:ranking:target_correlation"
+      ],
+      "reason": "Claimed ordering is consistent with the gold ranking.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-pair",
+      "claim_text": "pH vs VFA has correlation=0.860000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:correlation_heatmap:metric:pH vs VFA:correlation"
+      ],
+      "reason": "Gold value for pH vs VFA correlation is 0.86.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

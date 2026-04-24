@@ -1,0 +1,31 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The analysis shows that KNN achieved the highest R2 score (0.8301) and lowest MSE (0.0119) when using 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low). This suggests that the combination of these 9 features is optimal for the KNN model.",
+  "explanation_full": "The feature analysis across multiple models indicates that the KNN model performed best with a specific subset of 9 features. The optimal feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low', yielding an R2 score of 0.8301 and an MSE of 0.0119. \n\nIn comparison, the RF model achieved the highest overall R2 score (0.7855) with 11 features, and the SVM model achieved the highest R2 score (0.7794) with 4 features. However, for the KNN model, the 9-feature subset is clearly superior. \n\nOverall, the features VFA, Butyrate, and Acetate are highlighted as the top features based on GRA ranking, feature importance, and the strong correlation observed across multiple metrics, suggesting they are the most influential predictors in the model.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "claim_text": "The combination of VFA, Acetate, and VFA is the most influential set of predictors, as indicated by the consistency across multiple feature importance metrics.",
+      "claim_type": "freeform",
+      "span_category": "VFA, Acetate, VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "multiple_metrics",
+      "confidence": 0.95,
+      "subject": "Feature Importance",
+      "predicate": "is the most influential set of predictors",
+      "object": "VFA, Acetate, VFA",
+      "metric": "consistency",
+      "value": "high",
+      "unit": "consistency",
+      "ordered_items": [
+        "VFA",
+        "Acetate",
+        "VFA"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

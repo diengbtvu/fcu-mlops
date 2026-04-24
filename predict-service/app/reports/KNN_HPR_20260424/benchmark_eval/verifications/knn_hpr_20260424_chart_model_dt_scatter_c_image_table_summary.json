@@ -1,0 +1,50 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531395.",
+      "numeric_delta": 4.6860500000023286e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values was 0.7872",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation"
+      ],
+      "reason": "Gold value for DT pred_actual_correlation is 0.787161.",
+      "numeric_delta": 3.900000000001125e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "the linear fit slope was 0.8028",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope"
+      ],
+      "reason": "Gold value for DT linear_fit_slope is 0.802783.",
+      "numeric_delta": 1.6999999999933735e-05
+    }
+  ]
+}

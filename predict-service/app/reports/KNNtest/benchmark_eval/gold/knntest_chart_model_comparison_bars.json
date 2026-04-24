@@ -1,0 +1,411 @@
+{
+  "artifact_id": "KNNtest:chart:model_comparison_bars",
+  "artifact_type": "chart/model_comparison_bars",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "results_summary.txt",
+    "summary.json",
+    "table_model_comparison.csv",
+    "fig_model_comparison_bars.png"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "KNN",
+    "RF",
+    "XGBoost",
+    "SVM",
+    "DT"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:best_model",
+      "fact_type": "best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "value": 0.8171678017,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "winning model = KNN"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:ranking:r2_score",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": [
+        "KNN",
+        "RF",
+        "XGBoost",
+        "SVM",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "model ranking by r2_score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.8171678017,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN r2_score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:KNN:rmse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.11318091,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN rmse"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0128099184,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mse"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:KNN:mae",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0750230875,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mae"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:RF:r2_score",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7756018171,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:RF:rmse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.125388154,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:RF:mse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0157221892,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:RF:mae",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0835569234,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mae"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:XGBoost:r2_score",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7494763102,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:XGBoost:rmse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1324863821,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:XGBoost:mse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0175526414,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:XGBoost:mae",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0955930342,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "XGBoost mae"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7324097475,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:SVM:rmse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1369247591,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0187483896,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:SVM:mae",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0946025669,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mae"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.5604531395,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:DT:rmse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1754888112,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0307963229,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_comparison_bars:metric:DT:mae",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.108556247,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mae"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "KNNtest:chart:model_comparison_bars:best_model",
+    "KNNtest:chart:model_comparison_bars:ranking:r2_score",
+    "KNNtest:chart:model_comparison_bars:metric:KNN:r2_score",
+    "KNNtest:chart:model_comparison_bars:metric:KNN:rmse"
+  ],
+  "forbidden_inferences": [
+    "Do not claim deployment performance from benchmark chart scores alone.",
+    "Do not let narrative text override the chart's metric sources."
+  ]
+}

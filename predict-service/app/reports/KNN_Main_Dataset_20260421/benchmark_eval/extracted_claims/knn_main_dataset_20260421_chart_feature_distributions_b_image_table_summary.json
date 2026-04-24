@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean values (0.4736, 0.4465, and 0.4287, respectively).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol, Acetate, Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has mean value",
+      "object": "0.4736",
+      "metric": "mean",
+      "value": 0.4735821123781505,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol also exhibits the highest standard deviation (0.2528).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has standard deviation",
+      "object": "0.2528",
+      "metric": "std",
+      "value": 0.25282963738961184,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "pH has the lowest mean (0.2355) and standard deviation (0.1267).",
+      "claim_type": "metric_value",
+      "span_category": "pH",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "pH",
+      "predicate": "has mean and standard deviation",
+      "object": "0.2355 and 0.1267",
+      "metric": "std",
+      "value": 0.23549990495434295,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

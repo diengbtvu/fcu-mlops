@@ -1,0 +1,46 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Propionate has the highest mean (0.3581)",
+      "claim_type": "metric_value",
+      "span_category": "Propionate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:mean",
+      "subject": "Propionate",
+      "predicate": "mean",
+      "object": "0.3581",
+      "metric": "mean",
+      "value": 0.3581,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Propionate has the largest standard deviation (0.1538)",
+      "claim_type": "metric_value",
+      "span_category": "Propionate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:std",
+      "subject": "Propionate",
+      "predicate": "std",
+      "object": "0.1538",
+      "metric": "std",
+      "value": 0.1538,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

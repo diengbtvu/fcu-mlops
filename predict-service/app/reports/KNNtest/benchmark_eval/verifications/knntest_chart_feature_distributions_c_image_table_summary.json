@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:feature_distributions",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean feature value (0.4736).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate has the second highest mean feature value (0.4465).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Ethanol and Butyrate show the highest standard deviations (Ethanol: 0.2528, Butyrate: 0.2474).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

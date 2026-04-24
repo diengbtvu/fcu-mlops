@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "DT, KNN, and RF models achieved R2 scores of 1.0, while SVM and XGBoost scored 0.0. SVM had the lowest RMSE (0.0875) among the models with R2=0.0.",
+  "explanation_full": "The model comparison shows that DT, KNN, and RF models achieved perfect R2 scores (1.0) and zero RMSE, MSE, and MAE. In contrast, SVM and XGBoost both achieved an R2 score of 0.0. Specifically, SVM recorded an RMSE of 0.0875, which is the lowest non-zero RMSE among the models that did not achieve R2=1.0. XGBoost also scored 0.0 for R2, with an RMSE of 2.735e-07. The table evidence confirms that DT, KNN, and RF are the top performers with perfect metrics (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0). The table evidence is the strongest source for this comparison, outranking the chart and summary text evidence. The best model is identified as DT, with R2=1.0 and MSE=0.0, as stated in the summary text and JSON payload, but the table provides the most granular and reliable comparison across all models and metrics, making it the primary source for the explanation. The table evidence shows the metrics for all models: DT (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), KNN (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), RF (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), XGBoost (R2=0.0, RMSE=2.7345e-07, MSE=7.4775e-14, MAE=2.7345e-07), and SVM (R2=0.0, RMSE=0.0875, MSE=0.00766, MAE=0.0872). The table evidence is used to construct the explanation as it provides the most complete and structured data set for the comparison.",
+  "claims": [],
+  "semantic_level": "L1"
+}

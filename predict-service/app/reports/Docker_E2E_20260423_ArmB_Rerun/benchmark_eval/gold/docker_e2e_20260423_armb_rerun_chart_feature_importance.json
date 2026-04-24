@@ -1,0 +1,181 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+  "artifact_type": "chart/feature_importance",
+  "source_files": [
+    "best_model_summary.json",
+    "summary.json",
+    "table_feature_importance.csv",
+    "fig_feature_importance.png"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "VFA",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "Ethanol",
+    "VSS",
+    "pH"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:top_feature",
+      "fact_type": "top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VFA",
+      "value": 0.9022956841,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "top importance feature"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:ranking",
+      "fact_type": "ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": [
+        "VFA",
+        "Sucrose_Degradation",
+        "ORP_Mid",
+        "Ethanol",
+        "VSS",
+        "pH"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "importance ranking"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance",
+      "fact_type": "metric_value",
+      "subject": "VFA",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.9022956841,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VFA importance"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:Sucrose_Degradation:importance",
+      "fact_type": "metric_value",
+      "subject": "Sucrose_Degradation",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0831673377,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Sucrose_Degradation importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:ORP_Mid:importance",
+      "fact_type": "metric_value",
+      "subject": "ORP_Mid",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0145369782,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "ORP_Mid importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:Ethanol:importance",
+      "fact_type": "metric_value",
+      "subject": "Ethanol",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Ethanol importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VSS:importance",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VSS importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:pH:importance",
+      "fact_type": "metric_value",
+      "subject": "pH",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "pH importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:top_feature",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:ranking",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret feature scores as causal proof.",
+    "Do not let summary prose override feature ranking values."
+  ]
+}

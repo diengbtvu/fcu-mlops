@@ -69,8 +69,17 @@ def select_best_benchmark_row(
     return None
 
 
-def _generation_file_name(artifact_id: str, arm: str, condition: str) -> str:
-    return f"{slugify(f'{artifact_id}_{arm}_{condition}')}.json"
+def _generation_file_name(
+    artifact_id: str,
+    arm: str,
+    condition: str,
+    semantic_level: str | None = None,
+) -> str:
+    name_parts = [artifact_id, arm]
+    if semantic_level:
+        name_parts.append(semantic_level)
+    name_parts.append(condition)
+    return f"{slugify('_'.join(name_parts))}.json"
 
 
 def _load_selected_generation(
@@ -78,8 +87,14 @@ def _load_selected_generation(
     artifact_id: str,
     arm: str,
     condition: str,
+    semantic_level: str | None = None,
 ) -> dict[str, Any]:
-    path = benchmark_dir / "generations" / _generation_file_name(artifact_id, arm, condition)
+    path = benchmark_dir / "generations" / _generation_file_name(
+        artifact_id,
+        arm,
+        condition,
+        semantic_level,
+    )
     return _read_json(path)
 
 
@@ -92,7 +107,6 @@ def _asset_payload(text: str) -> dict[str, str]:
 
 def _overview_payload(
     assets: dict[str, dict[str, str]],
-    fallback_payload: dict[str, Any] | None,
 ) -> dict[str, str]:
     selected_texts: list[str] = []
     for key in OVERVIEW_PRIORITY_KEYS:
@@ -114,8 +128,6 @@ def _overview_payload(
 
 def build_selected_benchmark_explanations(
     benchmark_dir: Path,
-    *,
-    fallback_payload: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any] | None, list[str]]:
     warnings: list[str] = []
     leaderboard_payload = _read_json(benchmark_dir / "scores" / "leaderboard.json")
@@ -132,6 +144,7 @@ def build_selected_benchmark_explanations(
 
     selected_arm = str(selected_row.get("arm") or "").strip()
     selected_condition = str(selected_row.get("input_condition") or "").strip()
+    selected_semantic_level = str(selected_row.get("semantic_level") or "").strip() or None
     assets: dict[str, dict[str, str]] = {}
 
     for row in manifest_rows:
@@ -143,6 +156,7 @@ def build_selected_benchmark_explanations(
             artifact_id=artifact_id,
             arm=selected_arm,
             condition=selected_condition,
+            semantic_level=selected_semantic_level,
         )
         if not generation:
             warnings.append(
@@ -175,11 +189,12 @@ def build_selected_benchmark_explanations(
         "provider": "benchmark_selected",
         "model": run_metadata.get("client_model"),
         "generated_at": run_metadata.get("created_at"),
-        "selection_method": "best_nonbaseline_leaderboard_row",
+        "selection_method": "best_leaderboard_row",
         "selected_arm": selected_arm,
         "selected_condition": selected_condition,
+        "selected_semantic_level": selected_semantic_level,
         "selected_row": selected_row,
-        "overview": _overview_payload(assets, fallback_payload),
+        "overview": _overview_payload(assets),
         "assets": assets,
     }
     return payload, warnings

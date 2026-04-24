@@ -1,0 +1,29 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "Education is the strongest predictor of Salary.",
+      "claim_type": "metric_value",
+      "span_category": "Education and Salary",
+      "is_numeric": false,
+      "requires_grounding_from": "table",
+      "confidence": 0.9,
+      "subject": "Correlation",
+      "predicate": "Education and Salary",
+      "object": "Education and Salary",
+      "metric": "correlation",
+      "value": 0.3,
+      "unit": "Correlation",
+      "ordered_items": [
+        "Correlation",
+        "Correlation",
+        "Correlation"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

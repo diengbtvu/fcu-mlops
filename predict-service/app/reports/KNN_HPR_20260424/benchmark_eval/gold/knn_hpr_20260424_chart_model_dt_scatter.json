@@ -1,0 +1,313 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+  "artifact_type": "chart/model_dt_scatter",
+  "source_files": [
+    "summary.json",
+    "table_model_comparison.csv",
+    "model_dt_scatter.png"
+  ],
+  "chart_type": "scatter_plot",
+  "primary_entities": [
+    "DT"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.5604531395,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:rmse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1754888112,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0307963229,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:mae",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.108556247,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "value": 0.787161,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT pred_actual_correlation"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "linear_fit_slope",
+      "object": null,
+      "value": 0.802783,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT linear_fit_slope"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_intercept",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "linear_fit_intercept",
+      "object": null,
+      "value": 0.05492,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT linear_fit_intercept"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:residual_mean",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "residual_mean",
+      "object": null,
+      "value": -0.018765,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT residual_mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:residual_std",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "residual_std",
+      "object": null,
+      "value": 0.174483,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT residual_std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:mean_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mean_abs_residual",
+      "object": null,
+      "value": 0.108556,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT mean_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:max_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "value": 0.597936,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT max_abs_residual"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:p95_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "p95_abs_residual",
+      "object": null,
+      "value": 0.309784,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT p95_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:actual_min",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "actual_min",
+      "object": null,
+      "value": 0.051602,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT actual_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:actual_max",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "actual_max",
+      "object": null,
+      "value": 0.954908,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT actual_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:predicted_min",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "predicted_min",
+      "object": null,
+      "value": 0.053704,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT predicted_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:predicted_max",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "predicted_max",
+      "object": null,
+      "value": 0.912982,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "DT predicted_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+    "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation",
+    "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope",
+    "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:max_abs_residual"
+  ],
+  "forbidden_inferences": [
+    "Do not read diagnostic plots as guarantees for every individual prediction.",
+    "Do not let narrative prose override the diagnostic metrics."
+  ]
+}

@@ -1,1 +1,1 @@
-Model thắng cuộc: RF - R²=0.875067 - MSE=0.007238
+Model thắng cuộc: KNN - R²=0.817168 - MSE=0.012810

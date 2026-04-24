@@ -1,0 +1,88 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The scatter plot diagnostics for XGBoost show a strong correlation (0.8750)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "and a linear fit slope of 0.8387",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+      "numeric_delta": 1.6000000000016e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "the model exhibits a strong correlation coefficient of 0.8750 between predicted and actual values",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+      ],
+      "reason": "Gold value for XGBoost pred_actual_correlation is 0.875024.",
+      "numeric_delta": 2.4000000000024002e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "the linear fit analysis reveals a slope of 0.8387",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+      "numeric_delta": 1.6000000000016e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The maximum absolute residual of 0.4105 highlights the largest deviation",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:max_abs_residual"
+      ],
+      "reason": "Gold value for XGBoost max_abs_residual is 0.410478.",
+      "numeric_delta": 2.199999999996649e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "while the mean absolute residual of 0.0956 provides an average measure of prediction error",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

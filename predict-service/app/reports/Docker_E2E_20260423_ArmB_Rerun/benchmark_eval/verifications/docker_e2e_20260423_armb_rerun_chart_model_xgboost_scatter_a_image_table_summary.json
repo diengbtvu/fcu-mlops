@@ -1,0 +1,36 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "XGBoost model shows an R2 score of 0.0",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "XGBoost model's Mean Absolute Error (MAE) is reported as 2.73e-07",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:mae"
+      ],
+      "reason": "Gold value for XGBoost mae is 2.735e-07.",
+      "numeric_delta": 2.7299997265
+    }
+  ]
+}

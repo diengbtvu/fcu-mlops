@@ -1,0 +1,30 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows that 'Category A' has a higher average than 'Category B'.",
+  "explanation_full": "Based on the table, 'Category A' has a higher average than 'Category B'.",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The average value for 'Category A' is higher than 'Category B'.",
+      "claim_type": "freeform",
+      "span_category": "Category A",
+      "is_numeric": true,
+      "requires_grounding_from": "image_table_summary",
+      "confidence": 0.95,
+      "subject": "table_summary",
+      "predicate": "comparison",
+      "object": "category",
+      "metric": "mean",
+      "value": "higher",
+      "unit": "comparison",
+      "ordered_items": [
+        "Category A",
+        "Category B"
+      ],
+      "feature_count": 2,
+      "hedged": false
+    }
+  ]
+}

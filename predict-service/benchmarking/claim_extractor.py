@@ -378,6 +378,13 @@ def _numeric_value(raw_claim: dict[str, Any], claim_text: str) -> float | None:
     if value is not None:
         return _as_float(value)
 
+    if raw_claim.get("ordered_items"):
+        return None
+
+    raw_claim_type = _normalize_key(str(raw_claim.get("claim_type") or ""))
+    if raw_claim_type in {"ranking", "feature ranking", "rank ordering"}:
+        return None
+
     numeric_values = NUMBER_PATTERN.findall(claim_text)
     if not numeric_values:
         return None
@@ -495,14 +502,26 @@ def normalize_generation(
     artifact_id: str,
     arm: str,
     input_condition: str,
+    semantic_level: str | None = None,
 ) -> ExplanationOutput:
     explanation_short = str(payload.get("explanation_short") or "").strip()
     explanation_full = str(payload.get("explanation_full") or explanation_short).strip()
+    resolved_arm = str(arm).strip() or str(payload.get("arm") or "").strip()
+    resolved_semantic_level: str | None = None
+    if resolved_arm == "B":
+        resolved_semantic_level = (
+            semantic_level
+            or str(payload.get("semantic_level") or "").strip()
+            or None
+        )
     return ExplanationOutput(
         artifact_id=str(artifact_id).strip() or str(payload.get("artifact_id") or "").strip(),
-        arm=str(arm).strip() or str(payload.get("arm") or "").strip(),
+        arm=resolved_arm,
         input_condition=str(input_condition).strip() or str(payload.get("input_condition") or "").strip(),
         explanation_short=explanation_short,
         explanation_full=explanation_full,
         claims=extract_claims(payload),
+        semantic_level=resolved_semantic_level,
+        generation_stage=str(payload.get("generation_stage") or "").strip() or None,
+        parent_draft_hash=str(payload.get("parent_draft_hash") or "").strip() or None,
     )

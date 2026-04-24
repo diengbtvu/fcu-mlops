@@ -105,6 +105,7 @@ def ensure_output_layout(output_dir: Path) -> dict[str, Path]:
         "generations": output_dir / "generations",
         "extracted_claims": output_dir / "extracted_claims",
         "verifications": output_dir / "verifications",
+        "arm_c_traces": output_dir / "arm_c_traces",
         "scores": output_dir / "scores",
     }
     for path in layout.values():

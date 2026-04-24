@@ -1,0 +1,120 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Propionate exhibits the highest mean (0.3581) and standard deviation (0.1538) among the measured features.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:mean"
+      ],
+      "reason": "Gold value for distribution mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Propionate exhibits the highest mean (0.3581) and standard deviation (0.1538) among the measured features.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:std"
+      ],
+      "reason": "Gold value for distribution std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Propionate's mean value (0.3581) and standard deviation (0.1538) are the highest among the listed features.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:mean"
+      ],
+      "reason": "Gold value for Propionate mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Propionate's mean value (0.3581) and standard deviation (0.1538) are the highest among the listed features.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:std"
+      ],
+      "reason": "Gold value for Propionate std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Ethanol also shows a relatively high mean (0.1016) and standard deviation (0.1131).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.1015505846.",
+      "numeric_delta": 4.941540000000244e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Ethanol also shows a relatively high mean (0.1016) and standard deviation (0.1131).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.1131220718.",
+      "numeric_delta": 2.2071799999995312e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "pH has a high standard deviation (0.1099) but a low mean (0.0349).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:pH:std"
+      ],
+      "reason": "Gold value for pH std is 0.1099050152.",
+      "numeric_delta": 5.015199999999775e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "pH has a high standard deviation (0.1099) but a low mean (0.0349).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:pH:mean"
+      ],
+      "reason": "Gold value for pH mean is 0.0349481369.",
+      "numeric_delta": 4.8136900000002314e-05
+    }
+  ]
+}

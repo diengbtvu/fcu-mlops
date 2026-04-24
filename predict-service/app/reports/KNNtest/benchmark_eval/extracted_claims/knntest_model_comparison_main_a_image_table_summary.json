@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:model_comparison/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved the highest R² score of 0.81717.",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved the highest R² score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.8171678017037467,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN had the lowest RMSE of 0.11318.",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "had the lowest RMSE",
+      "object": "0.11318",
+      "metric": "rmse",
+      "value": 0.1131809099543967,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The DT model had the lowest R² score of 0.56045.",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "had the lowest R² score",
+      "object": "0.56045",
+      "metric": "r2_score",
+      "value": 0.5604531394996005,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

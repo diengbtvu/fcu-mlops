@@ -24,7 +24,7 @@ Implement a minimal but production-clean benchmarking package that can:
 2. Build a manifest of artifact units.
 3. Build machine-checkable gold facts from table/json files.
 4. Generate explanations for benchmark arms:
-   - Arm A: Chart-to-Text-style baseline
+   - Arm A: direct chart-to-text
    - Arm B: VisText-style layered explanation
    - Arm C: CHOCOLATE-style generate + self-correction
 5. Provide a scaffold for Arm D:
@@ -53,7 +53,7 @@ The module must enforce these rules:
    - primary: table/json
    - secondary: chart image
    - tertiary: summary text
-2. `llm_explanations.json` is evidence or baseline output only, never gold truth.
+2. `llm_explanations.json` is not ingested as a benchmark arm and is never gold truth.
 3. Unsupported claims must be penalized heavily.
 4. Omission is better than speculation.
 5. Claim-level evaluation is mandatory.

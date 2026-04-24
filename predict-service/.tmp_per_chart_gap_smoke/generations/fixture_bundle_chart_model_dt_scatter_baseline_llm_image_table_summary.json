@@ -1,0 +1,63 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_dt_scatter",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "DT scatter diagnostics report R2=0.78, corr(pred,actual)=0.76, slope=0.74, and max_abs_residual=0.42.",
+  "explanation_full": "DT scatter diagnostics report R2=0.78, corr(pred,actual)=0.76, slope=0.74, and max_abs_residual=0.42.",
+  "claims": [
+    {
+      "claim_id": "baseline-r2",
+      "claim_text": "DT has r2_score=0.78.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "DT",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.78,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-correlation",
+      "claim_text": "DT has pred_actual_correlation=0.76.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.86,
+      "subject": "DT",
+      "predicate": null,
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.76,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-linear_fit_slope",
+      "claim_text": "DT has linear_fit_slope=0.74.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.84,
+      "subject": "DT",
+      "predicate": null,
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.74,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "top-target-feature",
+      "claim_text": "pH is the top feature by target_correlation.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "pH",
+      "predicate": null,
+      "object": "pH",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "target-ranking",
+      "claim_text": "The target_correlation ordering is pH > Propionate > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "pH",
+        "Propionate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "top-pair",
+      "claim_text": "pH vs VFA has correlation=0.860000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.93,
+      "subject": "pH vs VFA",
+      "predicate": null,
+      "object": null,
+      "metric": "correlation",
+      "value": 0.86,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

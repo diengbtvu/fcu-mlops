@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the strongest predictor of HPR with a correlation of 0.7984.",
+      "claim_type": "Correlation",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "asset_evidence",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the strongest predictor of HPR",
+      "object": "0.7984",
+      "metric": "correlation",
+      "value": 0.7984,
+      "unit": "N/A",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate is the second strongest predictor of HPR with a correlation of 0.7827.",
+      "claim_type": "Correlation",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "asset_evidence",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "is the second strongest predictor of HPR",
+      "object": "0.7827",
+      "metric": "correlation",
+      "value": 0.7827,
+      "unit": "N/A",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate is the third strongest predictor of HPR with a correlation of 0.7641.",
+      "claim_type": "Correlation",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "asset_evidence",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "is the third strongest predictor of HPR",
+      "object": "0.7641",
+      "metric": "correlation",
+      "value": 0.7641,
+      "unit": "N/A",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "artifact_id": "fixture_bundle:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "optimum-subset",
+      "claim_text": "KNN reaches its best subset at 6 features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "KNN",
+      "predicate": null,
+      "object": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+      "metric": null,
+      "value": 6.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 6,
+      "hedged": false
+    },
+    {
+      "claim_id": "best-r2",
+      "claim_text": "KNN reaches R2=0.920000 at the optimum subset.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.92,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "plateau",
+      "claim_text": "Performance plateaus after 6 features.",
+      "claim_type": "plateau",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": null,
+      "value": 6.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 6,
+      "hedged": false
+    }
+  ]
+}

@@ -18,7 +18,7 @@ from .prompts import (
     extract_claim_extraction_context,
     extract_prompt_context,
 )
-from .schemas import ArtifactInputs, CANONICAL_CLAIM_TYPES
+from .schemas import ArtifactInputs, CANONICAL_CLAIM_TYPES, SUPPORTED_SEMANTIC_LEVELS
 
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_BENCHMARK_MODEL = os.getenv("OPENAI_BENCHMARK_MODEL", os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2"))
@@ -39,8 +39,29 @@ OPENAI_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OPENAI_BENCHMARK_TIMEO
 OLLAMA_BENCHMARK_MODEL = os.getenv("OLLAMA_BENCHMARK_MODEL", os.getenv("OLLAMA_REPORT_MODEL", "gemma4:e4b"))
 OLLAMA_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OLLAMA_BENCHMARK_TIMEOUT_SECONDS", "300")))
 OLLAMA_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("OLLAMA_BENCHMARK_MAX_RETRIES", "3")))
+OLLAMA_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
+    1.0,
+    float(os.getenv("OLLAMA_BENCHMARK_RETRY_BACKOFF_SECONDS", "4")),
+)
+OLLAMA_BENCHMARK_RETRY_JITTER_SECONDS = max(
+    0.0,
+    float(os.getenv("OLLAMA_BENCHMARK_RETRY_JITTER_SECONDS", "0.5")),
+)
 OLLAMA_BASE_URL = str(os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")).strip().rstrip("/")
 OLLAMA_BENCHMARK_NUM_CTX = max(4096, int(os.getenv("OLLAMA_BENCHMARK_NUM_CTX", os.getenv("OLLAMA_NUM_CTX", "16384"))))
+OLLAMA_BENCHMARK_GENERATION_NUM_PREDICT = max(
+    1024,
+    int(os.getenv("OLLAMA_BENCHMARK_GENERATION_NUM_PREDICT", "2200")),
+)
+OLLAMA_BENCHMARK_JSON_NUM_PREDICT = max(
+    2048,
+    int(os.getenv("OLLAMA_BENCHMARK_JSON_NUM_PREDICT", "4096")),
+)
+OLLAMA_BENCHMARK_DISABLE_THINKING = str(
+    os.getenv("OLLAMA_BENCHMARK_DISABLE_THINKING", "1")
+).strip().lower() not in {"0", "false", "no", "off"}
+L1_CLAIM_TYPES = {"metric_value", "rank_score"}
+L2L3_CLAIM_TYPES = {"best_model", "ranking", "top_feature", "feature_subset_optimum", "plateau"}
 
 
 def _as_float(value: Any) -> float:
@@ -87,7 +108,11 @@ def _build_ollama_json_only_instruction(schema: dict[str, Any]) -> str:
     return " ".join(
         [
             "Return ONLY one valid JSON object.",
+            "The first character of the final answer must be { and the last character must be }.",
             "Do not output markdown, headings, explanations, or prose outside JSON.",
+            "Do not think out loud.",
+            "Do not place the answer in a hidden thinking field; the final assistant content must contain the JSON object.",
+            "If you need to reason, do it silently and output only the final JSON.",
             "The JSON must exactly match this schema:",
             compact_schema,
             "If any field is unsupported, keep the JSON valid and use an empty string or empty array.",
@@ -95,17 +120,36 @@ def _build_ollama_json_only_instruction(schema: dict[str, Any]) -> str:
     )
 
 
+def _ollama_json_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    if OLLAMA_BENCHMARK_DISABLE_THINKING:
+        payload = dict(payload)
+        payload["think"] = False
+    return payload
+
+
+def _ollama_message_text(message: dict[str, Any]) -> str:
+    primary = message.get("content")
+    if isinstance(primary, str) and primary.strip():
+        return primary.strip()
+    fallback = message.get("thinking")
+    if isinstance(fallback, str) and fallback.strip():
+        return fallback.strip()
+    return ""
+
+
 def _failed_generation_payload(
     artifact_id: str,
     arm: str,
     input_condition: str,
     error_message: str,
+    semantic_level: str | None = None,
 ) -> dict[str, Any]:
     trimmed_error = str(error_message or "generation_failed").strip()[:240]
     return {
         "artifact_id": artifact_id,
         "arm": arm,
         "input_condition": input_condition,
+        "semantic_level": semantic_level,
         "explanation_short": "Benchmark generation failed to produce valid JSON.",
         "explanation_full": (
             "Benchmark generation failed before producing a grounded explanation. "
@@ -120,6 +164,7 @@ def _explanation_only_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "artifact_id": str(payload.get("artifact_id") or "").strip(),
         "arm": str(payload.get("arm") or "").strip(),
         "input_condition": str(payload.get("input_condition") or "").strip(),
+        "semantic_level": str(payload.get("semantic_level") or "").strip() or None,
         "explanation_short": str(payload.get("explanation_short") or "").strip(),
         "explanation_full": str(payload.get("explanation_full") or payload.get("explanation_short") or "").strip(),
     }
@@ -133,8 +178,41 @@ def _merge_explanation_and_claims(
     if not isinstance(claims, list):
         claims = []
     merged = _explanation_only_payload(explanation_payload)
+    merged["semantic_level"] = (
+        merged.get("semantic_level")
+        or str(claims_payload.get("semantic_level") or "").strip()
+        if isinstance(claims_payload, dict)
+        else merged.get("semantic_level")
+    )
     merged["claims"] = claims
     return merged
+
+
+def _normalize_embedded_claims(
+    payload: dict[str, Any],
+    variable_catalog: list[dict[str, Any]],
+) -> dict[str, Any]:
+    normalized = dict(payload)
+    raw_claims = normalized.get("claims")
+    if not isinstance(raw_claims, list):
+        normalized["claims"] = []
+        return normalized
+
+    claims: list[dict[str, Any]] = []
+    for raw_claim in raw_claims:
+        if not isinstance(raw_claim, dict):
+            continue
+        claim = dict(raw_claim)
+        source_variable_id = _source_variable_id_for_claim(claim, variable_catalog)
+        if not source_variable_id:
+            source_variable_id = str(claim.get("source_variable_id") or "").strip() or None
+        if not source_variable_id:
+            continue
+        claim["source_variable_id"] = source_variable_id
+        claims.append(claim)
+
+    normalized["claims"] = claims
+    return normalized
 
 
 def _normalized_text(value: Any) -> str:
@@ -167,6 +245,34 @@ def _source_variable_id_for_claim(
     return None
 
 
+def _requested_runs(
+    arms: list[str],
+    conditions: list[str],
+    semantic_levels: list[str] | None,
+) -> list[tuple[str, str, str | None]]:
+    runs: list[tuple[str, str, str | None]] = []
+    effective_levels = [level for level in (semantic_levels or SUPPORTED_SEMANTIC_LEVELS) if level in SUPPORTED_SEMANTIC_LEVELS]
+    if not effective_levels:
+        effective_levels = list(SUPPORTED_SEMANTIC_LEVELS)
+    for arm in arms:
+        for condition in conditions:
+            if arm == "B":
+                for semantic_level in effective_levels:
+                    runs.append((arm, condition, semantic_level))
+            else:
+                runs.append((arm, condition, None))
+    return runs
+
+
+def _variable_catalog_for_level(
+    variable_catalog_by_level: dict[str | None, list[dict[str, Any]]],
+    semantic_level: str | None,
+) -> list[dict[str, Any]]:
+    if semantic_level in variable_catalog_by_level:
+        return variable_catalog_by_level[semantic_level]
+    return variable_catalog_by_level.get(None, [])
+
+
 class BaseLLMClient(ABC):
     name = "base"
     model_name: str | None = None
@@ -179,52 +285,69 @@ class BaseLLMClient(ABC):
     def extract_claims_json(self, prompt: str) -> dict[str, Any]:
         """Return a JSON-like dictionary for the claim-extraction prompt."""
 
+    @abstractmethod
+    def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        """Return validator records for the Arm C correction loop."""
+
+    @abstractmethod
+    def correct_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        """Return corrected explanation plus structured claims for the Arm C loop."""
+
     def generate_artifact(
         self,
         inputs: ArtifactInputs,
-        variable_catalog: list[dict[str, Any]],
         arms: list[str],
         conditions: list[str],
+        semantic_levels: list[str] | None = None,
+        variable_catalog_by_level: dict[str | None, list[dict[str, Any]]] | None = None,
     ) -> list[dict[str, Any]]:
+        catalogs = variable_catalog_by_level or {None: []}
         outputs: list[dict[str, Any]] = []
-        for arm in arms:
-            for condition in conditions:
-                try:
-                    explanation_payload = self.generate_explanation_json(
-                        build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+        for arm, condition, semantic_level in _requested_runs(arms, conditions, semantic_levels):
+            variable_catalog = _variable_catalog_for_level(catalogs, semantic_level)
+            explanation_prompt = build_explanation_prompt(
+                inputs=inputs,
+                arm=arm,
+                condition=condition,
+                semantic_level=semantic_level,
+            )
+            try:
+                explanation_payload = self.generate_explanation_json(explanation_prompt)
+            except Exception as exc:
+                outputs.append(
+                    _failed_generation_payload(
+                        artifact_id=inputs.record.artifact_id,
+                        arm=arm,
+                        input_condition=condition,
+                        error_message=str(exc),
+                        semantic_level=semantic_level,
                     )
-                except Exception as exc:
-                    outputs.append(
-                        _failed_generation_payload(
-                            artifact_id=inputs.record.artifact_id,
-                            arm=arm,
-                            input_condition=condition,
-                            error_message=str(exc),
-                        )
-                    )
-                    continue
+                )
+                continue
 
-                try:
-                    claims_payload = self.extract_claims_json(
-                        build_claim_extraction_prompt(
-                            artifact_id=inputs.record.artifact_id,
-                            arm=arm,
-                            input_condition=condition,
-                            explanation_short=str(explanation_payload.get("explanation_short") or ""),
-                            explanation_full=str(explanation_payload.get("explanation_full") or ""),
-                            primary_entities=inputs.record.primary_entities,
-                            variable_catalog=variable_catalog,
-                        )
+            try:
+                claims_payload = self.extract_claims_json(
+                    build_claim_extraction_prompt(
+                        artifact_id=inputs.record.artifact_id,
+                        arm=arm,
+                        input_condition=condition,
+                        semantic_level=semantic_level,
+                        explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                        explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                        primary_entities=inputs.record.primary_entities,
+                        variable_catalog=variable_catalog,
                     )
-                except Exception:
-                    claims_payload = {
-                        "artifact_id": inputs.record.artifact_id,
-                        "arm": arm,
-                        "input_condition": condition,
-                        "claims": [],
-                    }
+                )
+            except Exception:
+                claims_payload = {
+                    "artifact_id": inputs.record.artifact_id,
+                    "arm": arm,
+                    "input_condition": condition,
+                    "semantic_level": semantic_level,
+                    "claims": [],
+                }
 
-                outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
+            outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
         return outputs
 
     def metadata(self) -> dict[str, Any]:
@@ -240,25 +363,371 @@ class FixtureLLMClient(BaseLLMClient):
     name = "fixture"
 
     def __init__(self) -> None:
-        self._cached_generations: dict[tuple[str, str, str], dict[str, Any]] = {}
+        self._cached_generations: dict[tuple[str, str, str, str | None], dict[str, Any]] = {}
+
+    @staticmethod
+    def _cache_key(
+        artifact_id: str,
+        arm: str,
+        input_condition: str,
+        semantic_level: str | None,
+    ) -> tuple[str, str, str, str | None]:
+        return (artifact_id, arm, input_condition, semantic_level)
+
+    @staticmethod
+    def _metric_claims(payload: dict[str, Any]) -> list[dict[str, Any]]:
+        raw_claims = payload.get("claims")
+        if not isinstance(raw_claims, list):
+            return []
+        return [
+            dict(claim)
+            for claim in raw_claims
+            if isinstance(claim, dict) and str(claim.get("claim_type") or "") in L1_CLAIM_TYPES
+        ]
+
+    @staticmethod
+    def _analytic_claims(payload: dict[str, Any]) -> list[dict[str, Any]]:
+        raw_claims = payload.get("claims")
+        if not isinstance(raw_claims, list):
+            return []
+        return [
+            dict(claim)
+            for claim in raw_claims
+            if isinstance(claim, dict) and str(claim.get("claim_type") or "") in L2L3_CLAIM_TYPES
+        ]
+
+    @staticmethod
+    def _metric_names_from_payload(payload: dict[str, Any]) -> list[str]:
+        metric_names: list[str] = []
+        for claim in FixtureLLMClient._metric_claims(payload):
+            metric = str(claim.get("metric") or "").strip()
+            if metric and metric not in metric_names:
+                metric_names.append(metric)
+        return metric_names
+
+    def _structural_text(self, context: dict[str, Any], payload: dict[str, Any]) -> tuple[str, str]:
+        primary_entities = [str(item) for item in context.get("primary_entities") or [] if str(item).strip()]
+        metric_names = self._metric_names_from_payload(payload)
+        chart_asset = dict(context.get("chart_asset") or {})
+        artifact_type = str(context.get("artifact_type") or "")
+
+        if artifact_type == "model_comparison/main":
+            rows = list(context.get("table_model_comparison", []))
+            model_names = [str(row.get("model") or "").strip() for row in rows if str(row.get("model") or "").strip()]
+            metric_names = [
+                key
+                for key in (rows[0].keys() if rows else [])
+                if key != "model" and str(rows[0].get(key, "")).strip()
+            ]
+            short = f"This is a model comparison table with {len(model_names)} models and {len(metric_names)} metrics."
+            full = (
+                f"The table compares {', '.join(model_names)}. Metrics include {', '.join(metric_names)}. "
+                "Each row reports one model and its corresponding metric values."
+            )
+            return short, full
+
+        if artifact_type == "incremental_feature_analysis/main":
+            rows = list(context.get("table1_incremental_results", []))
+            feature_counts = sorted({int(float(row["n_features"])) for row in rows if row.get("n_features") is not None})
+            model_names = sorted({key[:-3] for row in rows for key in row.keys() if key.endswith("_R2")})
+            feature_range = ""
+            if feature_counts:
+                feature_range = f" across feature counts {feature_counts[0]}-{feature_counts[-1]}"
+            short = f"This is an incremental feature analysis table for {len(model_names)} models."
+            full = (
+                f"The table tracks {', '.join(model_names)}{feature_range}. "
+                "Rows enumerate feature subsets and columns report performance metrics such as R2 and MSE."
+            )
+            return short, full
+
+        if artifact_type == "feature_ranking/gra":
+            ranking = list(context.get("gra_ranking", []))
+            feature_names = [str(item.get("feature") or "").strip() for item in ranking if str(item.get("feature") or "").strip()]
+            short = f"This is a GRA ranking table with {len(feature_names)} listed features."
+            full = (
+                f"The table lists ranked features such as {', '.join(feature_names[:4])}. "
+                "Each row includes a feature name, its rank, and its gra_score."
+            )
+            return short, full
+
+        asset_title = str(chart_asset.get("asset_title") or "").strip()
+        asset_family = str(chart_asset.get("asset_family") or "").strip().replace("_", " ")
+        artifact_label = asset_title or asset_family or "chart"
+        entity_text = ", ".join(primary_entities[:4]) if primary_entities else "the listed entities"
+        metric_text = ", ".join(metric_names[:4]) if metric_names else "the listed metrics"
+        short = f"This chart presents {artifact_label} for {entity_text}."
+        full = (
+            f"The chart shows {artifact_label}. It references {entity_text} and reports metrics such as "
+            f"{metric_text}."
+        )
+        return short, full
+
+    def _apply_semantic_level(self, context: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
+        semantic_level = str(context.get("semantic_level") or "").strip() or None
+        payload = copy.deepcopy(payload)
+        payload["semantic_level"] = semantic_level
+        if str(context.get("arm") or "") != "B" or semantic_level is None:
+            return payload
+
+        structural_short, structural_full = self._structural_text(context, payload)
+        analytical_claims = self._analytic_claims(payload)
+        structural_claims = self._metric_claims(payload)
+
+        if semantic_level == "L1":
+            payload["explanation_short"] = structural_short
+            payload["explanation_full"] = structural_full
+            payload["claims"] = structural_claims
+            return payload
+        if semantic_level == "L2L3":
+            payload["claims"] = analytical_claims
+            return payload
+        if semantic_level == "L1L2L3":
+            payload["explanation_short"] = structural_short
+            payload["explanation_full"] = f"{structural_full} {str(payload.get('explanation_full') or '').strip()}".strip()
+            return payload
+        return payload
+
+    @staticmethod
+    def _arm_c_draft_payload(context: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
+        mutated = copy.deepcopy(payload)
+        raw_claims = mutated.get("claims")
+        if not isinstance(raw_claims, list):
+            return mutated
+
+        for claim in raw_claims:
+            if not isinstance(claim, dict):
+                continue
+            claim_type = str(claim.get("claim_type") or "").strip()
+            if claim_type in {"metric_value", "rank_score"} and isinstance(claim.get("value"), (int, float)):
+                original_value = float(claim["value"])
+                draft_value = _round_number(original_value + max(abs(original_value) * 0.08, 0.01))
+                claim["value"] = draft_value
+                subject = str(claim.get("subject") or "The highlighted item").strip()
+                metric = str(claim.get("metric") or claim.get("predicate") or "value").strip()
+                claim["claim_text"] = f"{subject} has {metric}={draft_value:.6f}."
+                mutated["explanation_short"] = f"{subject} draft estimate is {metric}={draft_value:.6f}."
+                mutated["explanation_full"] = (
+                    f"{subject} is described with {metric}={draft_value:.6f} in the draft explanation. "
+                    f"{str(payload.get('explanation_full') or '').strip()}"
+                ).strip()
+                return mutated
+
+        for claim in raw_claims:
+            if not isinstance(claim, dict):
+                continue
+            claim_type = str(claim.get("claim_type") or "").strip()
+            if claim_type in {"best_model", "top_feature"}:
+                alternatives = [str(item).strip() for item in context.get("primary_entities") or [] if str(item).strip()]
+                current_value = str(claim.get("object") or claim.get("subject") or "").strip()
+                replacement = next((item for item in alternatives if item and item != current_value), current_value)
+                claim["object"] = replacement
+                claim["subject"] = replacement if claim_type == "top_feature" else claim.get("subject")
+                mutated["explanation_short"] = f"{replacement} is highlighted in the draft explanation."
+                mutated["explanation_full"] = (
+                    f"The draft explanation highlights {replacement} before correction. "
+                    f"{str(payload.get('explanation_full') or '').strip()}"
+                ).strip()
+                return mutated
+
+        return mutated
+
+    @staticmethod
+    def _fact_summary(fact: dict[str, Any]) -> str:
+        fact_type = str(fact.get("fact_type") or "").strip()
+        subject = str(fact.get("subject") or "").strip()
+        predicate = str(fact.get("predicate") or "").strip()
+        object_value = fact.get("object")
+        value = fact.get("value")
+        if fact_type in {"metric_value", "rank_score"}:
+            if isinstance(value, (int, float)):
+                return f"{subject} {predicate}={float(value):.6f}"
+            return f"{subject} {predicate}={value}"
+        if fact_type in {"best_model", "top_feature"}:
+            metric_suffix = f" by {predicate}" if predicate else ""
+            return f"{fact_type} is {object_value}{metric_suffix}"
+        if fact_type == "ranking":
+            ordered_items = object_value if isinstance(object_value, list) else []
+            return f"{predicate or 'ranking'} = {' > '.join(str(item) for item in ordered_items)}"
+        if fact_type in {"feature_subset_optimum", "plateau"}:
+            return f"{subject} {fact_type} at {value}"
+        return f"{fact_type}: {object_value if object_value not in (None, '') else value}"
+
+    @staticmethod
+    def _normalized_list(value: Any) -> list[str]:
+        if not isinstance(value, list):
+            return []
+        return [_normalized_text(item) for item in value if _normalized_text(item)]
+
+    @staticmethod
+    def _claim_metric_key(claim: dict[str, Any]) -> str:
+        return _normalized_text(claim.get("metric") or claim.get("predicate"))
+
+    @staticmethod
+    def _fact_metric_key(fact: dict[str, Any]) -> str:
+        return _normalized_text(fact.get("predicate"))
+
+    @staticmethod
+    def _find_matching_fact(claim: dict[str, Any], facts: list[dict[str, Any]]) -> dict[str, Any] | None:
+        claim_type = _normalized_text(claim.get("claim_type"))
+        subject = _normalized_text(claim.get("subject"))
+        metric = FixtureLLMClient._claim_metric_key(claim)
+        source_variable_id = str(claim.get("source_variable_id") or "").strip()
+
+        def compatible(fact: dict[str, Any]) -> bool:
+            fact_type = _normalized_text(fact.get("fact_type"))
+            fact_subject = _normalized_text(fact.get("subject"))
+            fact_metric = FixtureLLMClient._fact_metric_key(fact)
+            if claim_type != fact_type:
+                return False
+            if claim_type in {"metric_value", "rank_score"}:
+                return subject == fact_subject and metric == fact_metric
+            if claim_type in {"feature_subset_optimum", "plateau"}:
+                return subject == fact_subject
+            if claim_type == "ranking":
+                return metric == fact_metric
+            if claim_type in {"best_model", "top_feature"}:
+                return metric == fact_metric or not metric or not fact_metric
+            return False
+
+        if source_variable_id:
+            direct_match = next(
+                (
+                    fact
+                    for fact in facts
+                    if str(fact.get("fact_id") or "").strip() == source_variable_id and compatible(fact)
+                ),
+                None,
+            )
+            if direct_match is not None:
+                return direct_match
+
+        return next((fact for fact in facts if compatible(fact)), None)
+
+    @staticmethod
+    def _claim_status_against_fact(claim: dict[str, Any], fact: dict[str, Any]) -> str:
+        claim_type = _normalized_text(claim.get("claim_type"))
+        if claim_type in {"metric_value", "rank_score"}:
+            claim_value = claim.get("value")
+            fact_value = fact.get("value")
+            if isinstance(claim_value, (int, float)) and isinstance(fact_value, (int, float)):
+                return "supported" if abs(float(claim_value) - float(fact_value)) <= 1e-6 else "contradicted"
+            return "supported" if _normalized_text(claim_value) == _normalized_text(fact_value) else "contradicted"
+
+        if claim_type in {"best_model", "top_feature"}:
+            claim_target = _normalized_text(claim.get("object") or claim.get("subject"))
+            fact_target = _normalized_text(fact.get("object") or fact.get("subject"))
+            return "supported" if claim_target == fact_target else "contradicted"
+
+        if claim_type == "ranking":
+            claim_items = FixtureLLMClient._normalized_list(claim.get("ordered_items"))
+            fact_items = FixtureLLMClient._normalized_list(fact.get("object"))
+            if claim_items == fact_items:
+                return "supported"
+            if claim_items and fact_items and claim_items[0] == fact_items[0]:
+                return "partially_supported"
+            return "contradicted"
+
+        if claim_type in {"feature_subset_optimum", "plateau"}:
+            claim_value = claim.get("feature_count")
+            if claim_value is None:
+                claim_value = claim.get("value")
+            fact_value = fact.get("value")
+            if claim_value == fact_value:
+                return "supported"
+            return "contradicted"
+
+        return "unverifiable"
+
+    def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        evidence_packet = dict(context.get("evidence_packet") or {})
+        facts = [dict(item) for item in list(evidence_packet.get("validated_facts") or []) if isinstance(item, dict)]
+        claims = [dict(item) for item in list(context.get("claims") or []) if isinstance(item, dict)]
+
+        validation_records: list[dict[str, Any]] = []
+        for claim in claims:
+            matching_fact = self._find_matching_fact(claim, facts)
+            if matching_fact is None:
+                validation_records.append(
+                    {
+                        "claim_id": str(claim.get("claim_id") or ""),
+                        "claim_text": str(claim.get("claim_text") or ""),
+                        "status": "unverifiable",
+                        "recommended_action": "drop",
+                        "rationale": "No aligned fact was found in the evidence packet.",
+                        "matched_fact_ids": [],
+                        "grounded_fact_summary": None,
+                    }
+                )
+                continue
+
+            status = self._claim_status_against_fact(claim, matching_fact)
+            recommended_action = "keep" if status == "supported" else "edit"
+            rationale = {
+                "supported": "The structured claim matches the evidence packet.",
+                "partially_supported": "The claim overlaps with the evidence packet but needs correction.",
+                "contradicted": "The evidence packet contains a conflicting grounded fact.",
+                "unverifiable": "The evidence packet does not support the structured claim.",
+            }.get(status, "Validator review completed.")
+            validation_records.append(
+                {
+                    "claim_id": str(claim.get("claim_id") or ""),
+                    "claim_text": str(claim.get("claim_text") or ""),
+                    "status": status,
+                    "recommended_action": recommended_action,
+                    "rationale": rationale,
+                    "matched_fact_ids": [str(matching_fact.get("fact_id") or "").strip()],
+                    "grounded_fact_summary": self._fact_summary(matching_fact),
+                }
+            )
+
+        return {
+            "artifact_id": str(context.get("artifact_id") or ""),
+            "arm": "C",
+            "input_condition": str(context.get("input_condition") or ""),
+            "validation_records": validation_records,
+        }
+
+    def correct_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        correction_context = dict(context.get("evidence_packet") or {})
+        payload = self._full_generation_payload(correction_context)
+        payload["artifact_id"] = str(context.get("artifact_id") or payload.get("artifact_id") or "")
+        payload["arm"] = "C"
+        payload["input_condition"] = str(context.get("input_condition") or payload.get("input_condition") or "")
+        payload["semantic_level"] = None
+        return _normalize_embedded_claims(
+            payload,
+            list(correction_context.get("allowed_variables") or []),
+        )
 
     def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
         context = extract_prompt_context(prompt)
-        payload = self._full_generation_payload(context)
-        cache_key = (
+        arm_c_stage = str(context.get("arm_c_stage") or "").strip()
+        if str(context.get("arm") or "") == "C" and arm_c_stage == "corrector":
+            correction_context = dict(context.get("evidence_packet") or {})
+            payload = self._full_generation_payload(correction_context)
+        else:
+            payload = self._full_generation_payload(context)
+            if str(context.get("arm") or "") == "C" and arm_c_stage == "draft":
+                payload = self._arm_c_draft_payload(context, payload)
+            payload = self._apply_semantic_level(context, payload)
+        cache_key = self._cache_key(
             str(payload.get("artifact_id") or ""),
             str(payload.get("arm") or ""),
             str(payload.get("input_condition") or ""),
+            str(payload.get("semantic_level") or "").strip() or None,
         )
         self._cached_generations[cache_key] = copy.deepcopy(payload)
         return _explanation_only_payload(payload)
 
     def extract_claims_json(self, prompt: str) -> dict[str, Any]:
         context = extract_claim_extraction_context(prompt)
-        cache_key = (
+        cache_key = self._cache_key(
             str(context.get("artifact_id") or ""),
             str(context.get("arm") or ""),
             str(context.get("input_condition") or ""),
+            str(context.get("semantic_level") or "").strip() or None,
         )
         payload = copy.deepcopy(self._cached_generations.get(cache_key) or {})
         raw_claims = payload.get("claims")
@@ -279,6 +748,7 @@ class FixtureLLMClient(BaseLLMClient):
             "artifact_id": str(context.get("artifact_id") or ""),
             "arm": str(context.get("arm") or ""),
             "input_condition": str(context.get("input_condition") or ""),
+            "semantic_level": str(context.get("semantic_level") or "").strip() or None,
             "claims": claims,
         }
 
@@ -1109,13 +1579,28 @@ def _claim_schema() -> dict[str, Any]:
     }
 
 
-def _explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _semantic_level_schema(allowed_semantic_levels: list[str] | None = None) -> dict[str, Any]:
+    levels = [level for level in (allowed_semantic_levels or SUPPORTED_SEMANTIC_LEVELS) if level in SUPPORTED_SEMANTIC_LEVELS]
+    return {
+        "anyOf": [
+            {"type": "null"},
+            {"type": "string", "enum": levels},
+        ]
+    }
+
+
+def _explanation_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
     return {
         "type": "object",
         "properties": {
             "artifact_id": {"type": "string"},
             "arm": {"type": "string", "enum": allowed_arms},
             "input_condition": {"type": "string", "enum": allowed_conditions},
+            "semantic_level": _semantic_level_schema(allowed_semantic_levels),
             "explanation_short": {"type": "string"},
             "explanation_full": {"type": "string"},
         },
@@ -1123,6 +1608,7 @@ def _explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) 
             "artifact_id",
             "arm",
             "input_condition",
+            "semantic_level",
             "explanation_short",
             "explanation_full",
         ],
@@ -1130,13 +1616,18 @@ def _explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) 
     }
 
 
-def _claim_extraction_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _claim_extraction_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
     return {
         "type": "object",
         "properties": {
             "artifact_id": {"type": "string"},
             "arm": {"type": "string", "enum": allowed_arms},
             "input_condition": {"type": "string", "enum": allowed_conditions},
+            "semantic_level": _semantic_level_schema(allowed_semantic_levels),
             "claims": {
                 "type": "array",
                 "items": _claim_schema(),
@@ -1146,30 +1637,167 @@ def _claim_extraction_schema(allowed_arms: list[str], allowed_conditions: list[s
             "artifact_id",
             "arm",
             "input_condition",
+            "semantic_level",
             "claims",
         ],
         "additionalProperties": False,
     }
 
 
-def _single_explanation_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _arm_c_validation_record_schema() -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "claim_id": {"type": "string"},
+            "claim_text": {"type": "string"},
+            "status": {
+                "type": "string",
+                "enum": ["supported", "partially_supported", "contradicted", "unverifiable"],
+            },
+            "recommended_action": {
+                "type": "string",
+                "enum": ["keep", "edit", "drop"],
+            },
+            "rationale": {"type": "string"},
+            "matched_fact_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "grounded_fact_summary": {"type": ["string", "null"]},
+        },
+        "required": [
+            "claim_id",
+            "claim_text",
+            "status",
+            "recommended_action",
+            "rationale",
+            "matched_fact_ids",
+            "grounded_fact_summary",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _arm_c_validation_schema(
+    allowed_conditions: list[str],
+    claim_count: int | None = None,
+) -> dict[str, Any]:
+    records_schema: dict[str, Any] = {
+        "type": "array",
+        "items": _arm_c_validation_record_schema(),
+    }
+    if claim_count is not None:
+        records_schema["minItems"] = claim_count
+        records_schema["maxItems"] = claim_count
+    return {
+        "type": "object",
+        "properties": {
+            "artifact_id": {"type": "string"},
+            "arm": {"type": "string", "enum": ["C"]},
+            "input_condition": {"type": "string", "enum": allowed_conditions},
+            "validation_records": records_schema,
+        },
+        "required": [
+            "artifact_id",
+            "arm",
+            "input_condition",
+            "validation_records",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _arm_c_corrector_schema(
+    allowed_conditions: list[str],
+) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "artifact_id": {"type": "string"},
+            "arm": {"type": "string", "enum": ["C"]},
+            "input_condition": {"type": "string", "enum": allowed_conditions},
+            "semantic_level": {"type": "null"},
+            "explanation_short": {"type": "string"},
+            "explanation_full": {"type": "string"},
+            "claims": {
+                "type": "array",
+                "items": _claim_schema(),
+            },
+        },
+        "required": [
+            "artifact_id",
+            "arm",
+            "input_condition",
+            "semantic_level",
+            "explanation_short",
+            "explanation_full",
+            "claims",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _single_explanation_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
     return {
         "type": "json_schema",
         "json_schema": {
             "name": "benchmark_explanation",
             "strict": True,
-            "schema": _explanation_schema(allowed_arms, allowed_conditions),
+            "schema": _explanation_schema(
+                allowed_arms,
+                allowed_conditions,
+                allowed_semantic_levels,
+            ),
         },
     }
 
 
-def _single_claim_extraction_schema(allowed_arms: list[str], allowed_conditions: list[str]) -> dict[str, Any]:
+def _single_claim_extraction_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
     return {
         "type": "json_schema",
         "json_schema": {
             "name": "benchmark_claim_extraction",
             "strict": True,
-            "schema": _claim_extraction_schema(allowed_arms, allowed_conditions),
+            "schema": _claim_extraction_schema(
+                allowed_arms,
+                allowed_conditions,
+                allowed_semantic_levels,
+            ),
+        },
+    }
+
+
+def _single_arm_c_validation_schema(
+    allowed_conditions: list[str],
+    claim_count: int | None = None,
+) -> dict[str, Any]:
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "arm_c_validator_output",
+            "strict": True,
+            "schema": _arm_c_validation_schema(allowed_conditions, claim_count),
+        },
+    }
+
+
+def _single_arm_c_corrector_schema(
+    allowed_conditions: list[str],
+) -> dict[str, Any]:
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "arm_c_corrector_output",
+            "strict": True,
+            "schema": _arm_c_corrector_schema(allowed_conditions),
         },
     }
 
@@ -1179,6 +1807,7 @@ def _batch_explanation_schema(
     explanation_count: int,
     allowed_arms: list[str],
     allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
 ) -> dict[str, Any]:
     return {
         "type": "json_schema",
@@ -1190,7 +1819,11 @@ def _batch_explanation_schema(
                 "properties": {
                     "generations": {
                         "type": "array",
-                        "items": _explanation_schema(allowed_arms, allowed_conditions),
+                        "items": _explanation_schema(
+                            allowed_arms,
+                            allowed_conditions,
+                            allowed_semantic_levels,
+                        ),
                         "minItems": explanation_count,
                         "maxItems": explanation_count,
                     }
@@ -1236,10 +1869,15 @@ class OllamaLLMClient(BaseLLMClient):
             response = requests.post(
                 chat_url,
                 headers={"Content-Type": "application/json"},
-                json=chat_payload,
+                json=_ollama_json_payload(chat_payload),
                 timeout=self.timeout_seconds,
             )
-            response.raise_for_status()
+            if not response.ok:
+                body = response.text.strip()
+                detail = body[:800] if body else response.reason
+                raise RuntimeError(
+                    f"Ollama benchmark HTTP {response.status_code}: {detail}"
+                )
             return response.json()
 
         def _repair(raw_content: str, original_payload: dict[str, Any]) -> dict[str, Any]:
@@ -1268,8 +1906,8 @@ class OllamaLLMClient(BaseLLMClient):
                 "options": {
                     "temperature": 0,
                     "num_predict": max(
-                        int((original_payload.get("options") or {}).get("num_predict") or 1800),
-                        1800,
+                        int((original_payload.get("options") or {}).get("num_predict") or OLLAMA_BENCHMARK_JSON_NUM_PREDICT),
+                        OLLAMA_BENCHMARK_JSON_NUM_PREDICT,
                     ),
                     "num_ctx": max(
                         int((original_payload.get("options") or {}).get("num_ctx") or OLLAMA_BENCHMARK_NUM_CTX),
@@ -1278,7 +1916,7 @@ class OllamaLLMClient(BaseLLMClient):
                 },
             }
             repair_data = _post(repair_payload)
-            repair_content = ((repair_data.get("message") or {}).get("content") or "").strip()
+            repair_content = _ollama_message_text(repair_data.get("message") or {})
             if not repair_content:
                 raise ValueError("Ollama benchmark repair response returned empty content.")
             return _extract_json_object(repair_content, "Ollama")
@@ -1289,7 +1927,9 @@ class OllamaLLMClient(BaseLLMClient):
             if attempt_index > 0 and request_payload.get("messages"):
                 retry_message = (
                     "Your previous response was empty or invalid. "
-                    "Return only one valid JSON object that matches the requested schema."
+                    "Return only one valid JSON object that matches the requested schema. "
+                    "Do not write reasoning, do not use markdown, and do not leave message.content empty. "
+                    "Put the JSON object in the final assistant content."
                 )
                 first_message = dict(request_payload["messages"][0])
                 first_message["content"] = f"{first_message.get('content', '')} {retry_message}".strip()
@@ -1298,9 +1938,7 @@ class OllamaLLMClient(BaseLLMClient):
             try:
                 data = _post(request_payload)
                 message = data.get("message") or {}
-                content = message.get("content")
-                if not isinstance(content, str):
-                    raise ValueError("Ollama benchmark response did not contain a text JSON payload.")
+                content = _ollama_message_text(message)
                 if not content.strip():
                     raise ValueError("Ollama benchmark response returned empty content.")
                 try:
@@ -1309,6 +1947,18 @@ class OllamaLLMClient(BaseLLMClient):
                     return _repair(content, request_payload)
             except Exception as exc:
                 last_error = exc
+                if attempt_index + 1 >= OLLAMA_BENCHMARK_MAX_RETRIES:
+                    break
+                wait_seconds = (
+                    OLLAMA_BENCHMARK_RETRY_BACKOFF_SECONDS * (attempt_index + 1)
+                    + random.uniform(0.0, OLLAMA_BENCHMARK_RETRY_JITTER_SECONDS)
+                )
+                print(
+                    "⚠️ Ollama benchmark request "
+                    f"attempt {attempt_index + 1}/{OLLAMA_BENCHMARK_MAX_RETRIES} failed: "
+                    f"{exc}. Retrying in {wait_seconds:.1f}s."
+                )
+                time.sleep(wait_seconds)
 
         if last_error is not None:
             raise last_error
@@ -1319,6 +1969,9 @@ class OllamaLLMClient(BaseLLMClient):
         schema = _single_explanation_schema(
             allowed_arms=[str(context.get("arm") or "A")],
             allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+            if str(context.get("semantic_level") or "").strip()
+            else None,
         )["json_schema"]["schema"]
         payload = {
             "model": self.model_name,
@@ -1339,7 +1992,7 @@ class OllamaLLMClient(BaseLLMClient):
             "format": schema,
             "options": {
                 "temperature": 0,
-                "num_predict": 1800,
+                "num_predict": OLLAMA_BENCHMARK_GENERATION_NUM_PREDICT,
                 "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
             },
         }
@@ -1350,6 +2003,9 @@ class OllamaLLMClient(BaseLLMClient):
         schema = _single_claim_extraction_schema(
             allowed_arms=[str(context.get("arm") or "A")],
             allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+            if str(context.get("semantic_level") or "").strip()
+            else None,
         )["json_schema"]["schema"]
         payload = {
             "model": self.model_name,
@@ -1370,37 +2026,110 @@ class OllamaLLMClient(BaseLLMClient):
             "format": schema,
             "options": {
                 "temperature": 0,
-                "num_predict": 1800,
+                "num_predict": OLLAMA_BENCHMARK_JSON_NUM_PREDICT,
                 "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
             },
         }
         return self._call_ollama(payload)
 
+    def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        schema = _single_arm_c_validation_schema(
+            allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            claim_count=len(list(context.get("claims") or [])),
+        )["json_schema"]["schema"]
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " You are an adversarial evidence validator. "
+                        + "Do not trust extracted source_variable_id values. "
+                        + "Mark keep only when every entity, metric, object, ranking, and numeric value is fully grounded."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": OLLAMA_BENCHMARK_JSON_NUM_PREDICT,
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        return self._call_ollama(payload)
+
+    def correct_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        schema = _single_arm_c_corrector_schema(
+            allowed_conditions=[str(context.get("input_condition") or "table_only")],
+        )["json_schema"]["schema"]
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " You are correcting an explanation and must return the corrected explanation plus grounded structured claims only."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": OLLAMA_BENCHMARK_JSON_NUM_PREDICT,
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        response = self._call_ollama(payload)
+        return _normalize_embedded_claims(
+            response,
+            list((context.get("evidence_packet") or {}).get("allowed_variables") or []),
+        )
+
     def generate_artifact(
         self,
         inputs: ArtifactInputs,
-        variable_catalog: list[dict[str, Any]],
         arms: list[str],
         conditions: list[str],
+        semantic_levels: list[str] | None = None,
+        variable_catalog_by_level: dict[str | None, list[dict[str, Any]]] | None = None,
     ) -> list[dict[str, Any]]:
         requested_outputs: list[dict[str, Any]] = []
-        requested_pairs: list[tuple[str, str]] = []
-        for arm in arms:
-            for condition in conditions:
-                requested_pairs.append((arm, condition))
-                requested_outputs.append(
-                    {
-                        "arm": arm,
-                        "input_condition": condition,
-                        "arm_instruction": ARM_INSTRUCTIONS.get(arm, ARM_INSTRUCTIONS["A"]),
-                        "context": build_prompt_context(inputs=inputs, arm=arm, condition=condition),
-                    }
-                )
+        requested_runs = _requested_runs(arms, conditions, semantic_levels)
+        for arm, condition, semantic_level in requested_runs:
+            requested_outputs.append(
+                {
+                    "arm": arm,
+                    "input_condition": condition,
+                    "semantic_level": semantic_level,
+                    "arm_instruction": ARM_INSTRUCTIONS.get(arm, ARM_INSTRUCTIONS["A"]),
+                    "context": build_prompt_context(
+                        inputs=inputs,
+                        arm=arm,
+                        condition=condition,
+                        semantic_level=semantic_level,
+                    ),
+                }
+            )
 
         schema = _batch_explanation_schema(
             explanation_count=len(requested_outputs),
             allowed_arms=arms,
             allowed_conditions=conditions,
+            allowed_semantic_levels=semantic_levels,
         )["json_schema"]["schema"]
         payload = {
             "task": (
@@ -1436,11 +2165,14 @@ class OllamaLLMClient(BaseLLMClient):
             "format": schema,
             "options": {
                 "temperature": 0,
-                "num_predict": max(2200, 1200 * len(requested_outputs)),
+                "num_predict": max(
+                    OLLAMA_BENCHMARK_GENERATION_NUM_PREDICT,
+                    1200 * len(requested_outputs),
+                ),
                 "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
             },
         }
-        explanations_by_pair: dict[tuple[str, str], dict[str, Any]] = {}
+        explanations_by_pair: dict[tuple[str, str, str | None], dict[str, Any]] = {}
 
         try:
             parsed = self._call_ollama(request_payload)
@@ -1452,29 +2184,37 @@ class OllamaLLMClient(BaseLLMClient):
                     continue
                 arm = str(generation.get("arm") or "").strip()
                 condition = str(generation.get("input_condition") or "").strip()
-                if (arm, condition) not in requested_pairs:
+                semantic_level = str(generation.get("semantic_level") or "").strip() or None
+                if (arm, condition, semantic_level) not in requested_runs:
                     continue
-                explanations_by_pair[(arm, condition)] = generation
+                explanations_by_pair[(arm, condition, semantic_level)] = generation
         except Exception:
             explanations_by_pair = {}
 
-        for arm, condition in requested_pairs:
-            if (arm, condition) in explanations_by_pair:
+        for arm, condition, semantic_level in requested_runs:
+            if (arm, condition, semantic_level) in explanations_by_pair:
                 continue
-            prompt = build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+            prompt = build_explanation_prompt(
+                inputs=inputs,
+                arm=arm,
+                condition=condition,
+                semantic_level=semantic_level,
+            )
             try:
-                explanations_by_pair[(arm, condition)] = self.generate_explanation_json(prompt)
+                explanations_by_pair[(arm, condition, semantic_level)] = self.generate_explanation_json(prompt)
             except Exception as exc:
-                explanations_by_pair[(arm, condition)] = _failed_generation_payload(
+                explanations_by_pair[(arm, condition, semantic_level)] = _failed_generation_payload(
                     artifact_id=inputs.record.artifact_id,
                     arm=arm,
                     input_condition=condition,
                     error_message=str(exc),
+                    semantic_level=semantic_level,
                 )
 
         outputs: list[dict[str, Any]] = []
-        for arm, condition in requested_pairs:
-            explanation_payload = explanations_by_pair[(arm, condition)]
+        catalogs = variable_catalog_by_level or {None: []}
+        for arm, condition, semantic_level in requested_runs:
+            explanation_payload = explanations_by_pair[(arm, condition, semantic_level)]
             if not explanation_payload.get("explanation_full"):
                 outputs.append(_merge_explanation_and_claims(explanation_payload, None))
                 continue
@@ -1484,10 +2224,11 @@ class OllamaLLMClient(BaseLLMClient):
                         artifact_id=inputs.record.artifact_id,
                         arm=arm,
                         input_condition=condition,
+                        semantic_level=semantic_level,
                         explanation_short=str(explanation_payload.get("explanation_short") or ""),
                         explanation_full=str(explanation_payload.get("explanation_full") or ""),
                         primary_entities=inputs.record.primary_entities,
-                        variable_catalog=variable_catalog,
+                        variable_catalog=_variable_catalog_for_level(catalogs, semantic_level),
                     )
                 )
             except Exception:
@@ -1495,6 +2236,7 @@ class OllamaLLMClient(BaseLLMClient):
                     "artifact_id": inputs.record.artifact_id,
                     "arm": arm,
                     "input_condition": condition,
+                    "semantic_level": semantic_level,
                     "claims": [],
                 }
             outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
@@ -1638,6 +2380,9 @@ class OpenAILLMClient(BaseLLMClient):
             "response_format": _single_explanation_schema(
                 allowed_arms=[str(context.get("arm") or "A")],
                 allowed_conditions=[str(context.get("input_condition") or "table_only")],
+                allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+                if str(context.get("semantic_level") or "").strip()
+                else None,
             ),
             "reasoning_effort": "low",
             "verbosity": "low",
@@ -1665,6 +2410,9 @@ class OpenAILLMClient(BaseLLMClient):
             "response_format": _single_claim_extraction_schema(
                 allowed_arms=[str(context.get("arm") or "A")],
                 allowed_conditions=[str(context.get("input_condition") or "table_only")],
+                allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+                if str(context.get("semantic_level") or "").strip()
+                else None,
             ),
             "reasoning_effort": "low",
             "verbosity": "low",
@@ -1672,26 +2420,89 @@ class OpenAILLMClient(BaseLLMClient):
         }
         return self._call_openai(payload)
 
+    def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are an adversarial evidence validator for a multi-stage factual correction "
+                        "pipeline. Do not trust extracted source_variable_id values. Mark keep only when "
+                        "every entity, metric, object, ranking, and numeric value is fully grounded. "
+                        "Return strict JSON only."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "response_format": _single_arm_c_validation_schema(
+                allowed_conditions=[str(context.get("input_condition") or "table_only")],
+                claim_count=len(list(context.get("claims") or [])),
+            ),
+            "reasoning_effort": "low",
+            "verbosity": "low",
+            "max_completion_tokens": 1800,
+        }
+        return self._call_openai(payload)
+
+    def correct_arm_c_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_prompt_context(prompt)
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You correct artifact-grounded ML explanations. Return strict JSON only with the corrected explanation and structured claims."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "response_format": _single_arm_c_corrector_schema(
+                allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            ),
+            "reasoning_effort": "low",
+            "verbosity": "low",
+            "max_completion_tokens": 1800,
+        }
+        response = self._call_openai(payload)
+        return _normalize_embedded_claims(
+            response,
+            list((context.get("evidence_packet") or {}).get("allowed_variables") or []),
+        )
+
     def generate_artifact(
         self,
         inputs: ArtifactInputs,
-        variable_catalog: list[dict[str, Any]],
         arms: list[str],
         conditions: list[str],
+        semantic_levels: list[str] | None = None,
+        variable_catalog_by_level: dict[str | None, list[dict[str, Any]]] | None = None,
     ) -> list[dict[str, Any]]:
         requested_outputs: list[dict[str, Any]] = []
-        requested_pairs: list[tuple[str, str]] = []
-        for arm in arms:
-            for condition in conditions:
-                requested_pairs.append((arm, condition))
-                requested_outputs.append(
-                    {
-                        "arm": arm,
-                        "input_condition": condition,
-                        "arm_instruction": ARM_INSTRUCTIONS.get(arm, ARM_INSTRUCTIONS["A"]),
-                        "context": build_prompt_context(inputs=inputs, arm=arm, condition=condition),
-                    }
-                )
+        requested_runs = _requested_runs(arms, conditions, semantic_levels)
+        for arm, condition, semantic_level in requested_runs:
+            requested_outputs.append(
+                {
+                    "arm": arm,
+                    "input_condition": condition,
+                    "semantic_level": semantic_level,
+                    "arm_instruction": ARM_INSTRUCTIONS.get(arm, ARM_INSTRUCTIONS["A"]),
+                    "context": build_prompt_context(
+                        inputs=inputs,
+                        arm=arm,
+                        condition=condition,
+                        semantic_level=semantic_level,
+                    ),
+                }
+            )
 
         payload = {
             "task": (
@@ -1726,12 +2537,13 @@ class OpenAILLMClient(BaseLLMClient):
                 explanation_count=len(requested_outputs),
                 allowed_arms=arms,
                 allowed_conditions=conditions,
+                allowed_semantic_levels=semantic_levels,
             ),
             "reasoning_effort": "low",
             "verbosity": "low",
             "max_completion_tokens": max(2200, 1200 * len(requested_outputs)),
         }
-        explanations_by_pair: dict[tuple[str, str], dict[str, Any]] = {}
+        explanations_by_pair: dict[tuple[str, str, str | None], dict[str, Any]] = {}
         try:
             parsed = self._call_openai(request_payload)
             generations = parsed.get("generations")
@@ -1742,40 +2554,49 @@ class OpenAILLMClient(BaseLLMClient):
                     continue
                 arm = str(generation.get("arm") or "").strip()
                 condition = str(generation.get("input_condition") or "").strip()
-                if (arm, condition) not in requested_pairs:
+                semantic_level = str(generation.get("semantic_level") or "").strip() or None
+                if (arm, condition, semantic_level) not in requested_runs:
                     continue
-                explanations_by_pair[(arm, condition)] = generation
+                explanations_by_pair[(arm, condition, semantic_level)] = generation
         except Exception:
             explanations_by_pair = {}
 
-        for arm, condition in requested_pairs:
-            if (arm, condition) in explanations_by_pair:
+        for arm, condition, semantic_level in requested_runs:
+            if (arm, condition, semantic_level) in explanations_by_pair:
                 continue
             try:
-                explanations_by_pair[(arm, condition)] = self.generate_explanation_json(
-                    build_explanation_prompt(inputs=inputs, arm=arm, condition=condition)
+                explanations_by_pair[(arm, condition, semantic_level)] = self.generate_explanation_json(
+                    build_explanation_prompt(
+                        inputs=inputs,
+                        arm=arm,
+                        condition=condition,
+                        semantic_level=semantic_level,
+                    )
                 )
             except Exception as exc:
-                explanations_by_pair[(arm, condition)] = _failed_generation_payload(
+                explanations_by_pair[(arm, condition, semantic_level)] = _failed_generation_payload(
                     artifact_id=inputs.record.artifact_id,
                     arm=arm,
                     input_condition=condition,
                     error_message=str(exc),
+                    semantic_level=semantic_level,
                 )
 
         outputs: list[dict[str, Any]] = []
-        for arm, condition in requested_pairs:
-            explanation_payload = explanations_by_pair[(arm, condition)]
+        catalogs = variable_catalog_by_level or {None: []}
+        for arm, condition, semantic_level in requested_runs:
+            explanation_payload = explanations_by_pair[(arm, condition, semantic_level)]
             try:
                 claims_payload = self.extract_claims_json(
                     build_claim_extraction_prompt(
                         artifact_id=inputs.record.artifact_id,
                         arm=arm,
                         input_condition=condition,
+                        semantic_level=semantic_level,
                         explanation_short=str(explanation_payload.get("explanation_short") or ""),
                         explanation_full=str(explanation_payload.get("explanation_full") or ""),
                         primary_entities=inputs.record.primary_entities,
-                        variable_catalog=variable_catalog,
+                        variable_catalog=_variable_catalog_for_level(catalogs, semantic_level),
                     )
                 )
             except Exception:
@@ -1783,6 +2604,7 @@ class OpenAILLMClient(BaseLLMClient):
                     "artifact_id": inputs.record.artifact_id,
                     "arm": arm,
                     "input_condition": condition,
+                    "semantic_level": semantic_level,
                     "claims": [],
                 }
             outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))

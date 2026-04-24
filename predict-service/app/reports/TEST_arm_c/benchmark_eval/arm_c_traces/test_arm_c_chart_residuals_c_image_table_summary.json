@@ -1,0 +1,354 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The KNN model achieved the highest performance metrics, including an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075, compared to other models like RF (R2=0.7756) and XGBoost (R2=0.7495).",
+      "draft_explanation_full": "The residual analysis chart indicates that the KNN model performed best among the tested algorithms. Specifically, KNN achieved an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. These metrics are superior to those reported for other models, such as RF (R2=0.7756, RMSE=0.1254) and XGBoost (R2=0.7495, RMSE=0.1325). The residual analysis also provides detailed diagnostics for the winning model, showing a residual mean of 0.012229 and a correlation between predicted and actual values of 0.907301.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "KNN achieved an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": 0.8172,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN achieved an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_std",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.1132,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN achieved an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_mean",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.075,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN performed best among the tested algorithms",
+          "claim_type": "freeform",
+          "span_category": "Model Performance",
+          "is_numeric": false,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "KNN",
+          "predicate": "performed best",
+          "object": null,
+          "metric": null,
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN showed a residual mean of 0.012229",
+          "claim_type": "metric_value",
+          "span_category": "residual mean",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_mean",
+          "subject": "KNN",
+          "predicate": "residual_mean",
+          "object": 0.012229,
+          "metric": "residual_mean",
+          "value": 0.012229,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "KNN showed a correlation between predicted and actual values of 0.907301",
+          "claim_type": "metric_value",
+          "span_category": "correlation",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:pred_actual_correlation",
+          "subject": "KNN",
+          "predicate": "correlation between predicted and actual values",
+          "object": 0.907301,
+          "metric": "pred_actual_correlation",
+          "value": 0.907301,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "KNN achieved an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.8172) is a rounded version of the grounded value (0.8171678017037467).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN R2 score is 0.8171678017037467."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN achieved an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.1132) is a rounded version of the grounded value (0.11318090995439674).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:residual_std"
+          ],
+          "grounded_fact_summary": "KNN RMSE is 0.11318090995439674."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN achieved an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.075) is a rounded version of the grounded value (0.07502308749135642).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:residual_mean"
+          ],
+          "grounded_fact_summary": "KNN MAE is 0.07502308749135642."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN performed best among the tested algorithms",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The explanation text explicitly states KNN performed best based on metrics.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "KNN model performed best among tested algorithms."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN showed a residual mean of 0.012229",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The value matches the grounded fact.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:residual_mean"
+          ],
+          "grounded_fact_summary": "KNN residual mean is 0.012229."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "KNN showed a correlation between predicted and actual values of 0.907301",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The value matches the grounded fact.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:pred_actual_correlation"
+          ],
+          "grounded_fact_summary": "KNN pred_actual_correlation is 0.907301."
+        }
+      ],
+      "corrected_explanation_short": "The KNN model performed best, achieving an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. Key diagnostics include a residual mean of 0.012229 and a prediction-actual correlation of 0.907301.",
+      "corrected_explanation_full": "The residual analysis chart indicates that the KNN model performed best among the tested algorithms. Specifically, KNN achieved an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. These metrics are superior to those reported for other models, such as RF (R2=0.7756, RMSE=0.1254) and XGBoost (R2=0.7495, RMSE=0.1325). Furthermore, the diagnostics for the winning model show a residual mean of 0.012229 and a correlation between predicted and actual values of 0.907301.",
+      "corrected_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "KNN achieved an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "R2 score",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": 0.8172,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN achieved an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "RMSE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_std",
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": 0.1132,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN achieved an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "MAE",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_mean",
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": 0.075,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN showed a residual mean of 0.012229",
+          "claim_type": "metric_value",
+          "span_category": "residual mean",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:residual_mean",
+          "subject": "KNN",
+          "predicate": "residual_mean",
+          "object": 0.012229,
+          "metric": "residual_mean",
+          "value": 0.012229,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "KNN showed a correlation between predicted and actual values of 0.907301",
+          "claim_type": "metric_value",
+          "span_category": "correlation",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:residuals:metric:KNN:pred_actual_correlation",
+          "subject": "KNN",
+          "predicate": "correlation between predicted and actual values",
+          "object": 0.907301,
+          "metric": "pred_actual_correlation",
+          "value": 0.907301,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "KNN achieved an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states 0.8172, but the grounded fact value is 0.8171678017037467. This is a rounding difference, but the claim should use the more precise value or be edited to reflect the source precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN R2 score is 0.8171678017037467."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN achieved an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states 0.1132, but the grounded fact value for RMSE is 0.11318090995439674. This is a rounding difference, but the claim should use the more precise value or be edited to reflect the source precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:rmse"
+          ],
+          "grounded_fact_summary": "KNN RMSE is 0.11318090995439674."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN achieved an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states 0.075, but the grounded fact value for MAE is 0.07502308749135642. This is a rounding difference, but the claim should use the more precise value or be edited to reflect the source precision.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:mae"
+          ],
+          "grounded_fact_summary": "KNN MAE is 0.07502308749135642."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN showed a residual mean of 0.012229",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim value matches the grounded fact value (0.012229).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:residual_mean"
+          ],
+          "grounded_fact_summary": "KNN residual mean is 0.012229."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "KNN showed a correlation between predicted and actual values of 0.907301",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim value matches the grounded fact value (0.907301).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:residuals:metric:KNN:pred_actual_correlation"
+          ],
+          "grounded_fact_summary": "KNN pred_actual_correlation is 0.907301."
+        }
+      ]
+    }
+  ],
+  "decision_counts": {
+    "edit": 3,
+    "keep": 3
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_importance",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The feature importance analysis shows that VSS is the most important feature, followed by Acetate, Butyrate, and VFA.",
+  "explanation_full": "Based on the feature importance chart, VSS was identified as the most critical feature with an importance score of 0.5052. Acetate (0.12) and Butyrate (0.097) follow, indicating their significant contribution to the model's predictions. VFA (0.0748) and Propionate (0.0577) also show moderate importance. Overall, the feature importance suggests that VSS is the primary driver, while the other listed compounds contribute progressively less.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": false,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "VSS",
+      "predicate": "is the most important feature",
+      "object": "VSS",
+      "metric": "importance",
+      "value": 0.505222263291806,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate has an importance of 0.12.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "has an importance of",
+      "object": "Acetate",
+      "metric": "importance",
+      "value": 0.11997573248269215,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate has an importance of 0.097.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "table_feature_importance.csv",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "has an importance of",
+      "object": "Butyrate",
+      "metric": "importance",
+      "value": 0.09697613281999995,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

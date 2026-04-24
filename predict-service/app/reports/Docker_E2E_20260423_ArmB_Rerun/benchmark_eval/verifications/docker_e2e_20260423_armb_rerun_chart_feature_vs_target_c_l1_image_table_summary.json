@@ -1,0 +1,50 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The correlation between HPR and Sucrose_Degradation is 0.9999",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA shows a strong positive correlation with HPR at 0.9991",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0008000000000000229
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "COD-O correlates with HPR at 0.9963",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0036000000000000476
+    }
+  ]
+}

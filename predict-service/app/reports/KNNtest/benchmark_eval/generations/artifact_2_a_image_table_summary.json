@@ -1,0 +1,27 @@
+{
+  "artifact_id": "artifact_2",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table summarizes the performance of different models.",
+  "explanation_full": "The table summarizes the performance of different models, showing metrics like accuracy and AUC.",
+  "claims": [
+    {
+      "claim_id": "claim_text_2",
+      "claim_text": "The table summarizes the performance of different models.",
+      "claim_type": "description",
+      "span_category": "description",
+      "is_numeric": false,
+      "requires_grounding_from": "graunded_text",
+      "confidence": 1.0,
+      "subject": "Table",
+      "predicate": "summarizes",
+      "object": "performance of different models",
+      "metric": "confidence",
+      "value": 1.0,
+      "unit": "confidence",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

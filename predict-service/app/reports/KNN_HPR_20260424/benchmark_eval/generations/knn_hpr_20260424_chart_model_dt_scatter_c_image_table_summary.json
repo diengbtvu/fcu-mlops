@@ -1,0 +1,182 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Decision Tree (DT) model achieved an R2 score of 0.5605, RMSE of 0.1755, and MAE of 0.1086 on the scatter plot diagnostics. The correlation between predicted and actual values was 0.7872.",
+  "explanation_full": "The Decision Tree (DT) model's performance metrics, as shown in the scatter plot diagnostics, indicate an R2 score of 0.5605, a Root Mean Squared Error (RMSE) of 0.1755, and a Mean Absolute Error (MAE) of 0.1086. Furthermore, the correlation coefficient between the predicted and actual values was 0.7872, and the linear fit slope was 0.8028. These metrics are derived from the scatter plot analysis.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.5605,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values was 0.7872",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation",
+      "subject": "DT",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.7872,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "the linear fit slope was 0.8028",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope",
+      "subject": "DT",
+      "predicate": "linear_fit_slope",
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.8028,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The Decision Tree (DT) model achieved an R2 score of 0.5605, RMSE of 0.1755, and MAE of 0.1086 on the scatter plot diagnostics. The correlation between predicted and actual values was 0.7872.",
+        "draft_explanation_full": "The Decision Tree (DT) model's performance metrics, as shown in the scatter plot diagnostics, indicate an R2 score of 0.5605, a Root Mean Squared Error (RMSE) of 0.1755, and a Mean Absolute Error (MAE) of 0.1086. Furthermore, the correlation coefficient between the predicted and actual values was 0.7872, and the linear fit slope was 0.8028. These metrics are derived from the scatter plot analysis.",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+            "subject": "DT",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.5605,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "The correlation between predicted and actual values was 0.7872",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation",
+            "subject": "DT",
+            "predicate": "pred_actual_correlation",
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.7872,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "the linear fit slope was 0.8028",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope",
+            "subject": "DT",
+            "predicate": "linear_fit_slope",
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.8028,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet contains the R2 score for DT as 0.5604531395, which rounds to 0.5605.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score"
+            ],
+            "grounded_fact_summary": "DT R2 score is 0.5604531395."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "The correlation between predicted and actual values was 0.7872",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet contains the correlation coefficient for DT as 0.787161, which rounds to 0.7872.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:pred_actual_correlation"
+            ],
+            "grounded_fact_summary": "DT pred_actual_correlation is 0.787161."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "the linear fit slope was 0.8028",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The evidence packet contains the linear fit slope for DT as 0.802783, which rounds to 0.8028.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:linear_fit_slope"
+            ],
+            "grounded_fact_summary": "DT linear_fit_slope is 0.802783."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 3
+    }
+  },
+  "parent_draft_hash": "bf7323529b6aa8d04ca877385242802a54588c17"
+}

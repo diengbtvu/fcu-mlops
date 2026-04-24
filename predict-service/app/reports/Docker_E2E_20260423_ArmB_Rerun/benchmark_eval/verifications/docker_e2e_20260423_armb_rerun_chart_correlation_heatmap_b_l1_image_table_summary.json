@@ -1,0 +1,36 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "the correlation between Sucrose_Degradation and VFA is 0.9988772944614426",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0010227055385574335
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "the correlation between ORP_Mid and ORP_Low is 1.0",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold value for ORP_Mid vs ORP_Low correlation is 1.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The model performs best when considering the full set of features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "full_set_of_features",
+      "is_numeric": false,
+      "requires_grounding_from": "text",
+      "confidence": 0.95,
+      "subject": "model_performance",
+      "predicate": "is_best_when_considering",
+      "object": "full_set_of_features",
+      "metric": "qualitative",
+      "value": "best",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

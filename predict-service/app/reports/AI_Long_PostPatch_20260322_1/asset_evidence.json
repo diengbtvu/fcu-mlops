@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-04-02T02:39:02.166404",
+  "generated_at": "2026-04-21T04:03:18.379632",
   "report_id": "AI_Long_PostPatch_20260322_1",
-  "best_model": "KNN",
+  "best_model": "",
   "assets": [
     {
       "key": "metrics_overview",
       "title": "Trained metrics overview",
       "kind": "table",
       "asset_file": null,
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "results_summary.txt",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "result_text": "Winning model: . Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -56,17 +56,12 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -75,43 +70,17 @@
       "title": "Figure 3A - Grey relational ranking",
       "kind": "chart",
       "asset_file": "fig3a_gra_ranking.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_summary.json",
         "gra_ranking.json",
         "results_summary.txt",
         "summary.json"
       ],
-      "result_text": "GRA ranking -> pH=0.7656 | Propionate=0.733 | VFA=0.7315 | Butyrate=0.7297 | VSS=0.7116.",
+      "result_text": "GRA ranking -> .",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -164,11 +133,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         }
       }
     },
@@ -177,7 +142,7 @@
       "title": "Figure 3B - SHAP analysis",
       "kind": "chart",
       "asset_file": "fig3b_shap_analysis.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_shap_importance.csv",
         "best_model_summary.json",
@@ -186,33 +151,7 @@
       "result_text": "SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281.",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -265,11 +204,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         }
       }
     },
@@ -278,7 +213,7 @@
       "title": "Figure 3 - Combined feature analysis",
       "kind": "chart",
       "asset_file": "fig3_feature_analysis.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_shap_importance.csv",
         "gra_ranking.json",
@@ -287,36 +222,10 @@
         "table_correlation_matrix.csv",
         "table_feature_importance.csv"
       ],
-      "result_text": "GRA ranking -> pH=0.7656 | Propionate=0.733 | VFA=0.7315 | Butyrate=0.7297 | VSS=0.7116. Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577. SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281. Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112. Best feature-count step per model -> SVM: n=4, R2=0.754988, MSE=0.017166 | DT: n=10, R2=0.624312, MSE=0.026322 | RF: n=10, R2=0.784072, MSE=0.015129 | KNN: n=8, R2=0.821983, MSE=0.012473 | XGBoost: n=11, R2=0.755729, MSE=0.017115.",
+      "result_text": "GRA ranking -> . Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577. SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281. Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112. Best feature-count step per model -> SVM: n=4, R2=0.754988, MSE=0.017166 | DT: n=10, R2=0.624312, MSE=0.026322 | RF: n=10, R2=0.784072, MSE=0.015129 | KNN: n=8, R2=0.821983, MSE=0.012473 | XGBoost: n=11, R2=0.755729, MSE=0.017115.",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -369,11 +278,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         },
         "correlation_story": {
           "strongest_correlations": [
@@ -643,7 +548,7 @@
       "title": "Figure 4 - Univariate analysis",
       "kind": "chart",
       "asset_file": "fig4_univariate_analysis.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "summary.json",
@@ -771,17 +676,17 @@
       "title": "Figure 5 - Model comparison",
       "kind": "chart",
       "asset_file": "fig5_model_comparison.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "results_summary.txt",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "result_text": "Winning model: . Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -819,17 +724,12 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -838,7 +738,7 @@
       "title": "Figure 6A/B - MSE and R² vs feature count",
       "kind": "chart",
       "asset_file": "fig6ab_mse_r2_features.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "results_summary.txt",
         "summary.json",
@@ -1042,7 +942,7 @@
           ]
         },
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1080,12 +980,7 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         }
       }
     },
@@ -1094,16 +989,16 @@
       "title": "Figure 6C - Prediction over time",
       "kind": "chart",
       "asset_file": "fig6c_prediction_time.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "best_model_summary.json",
         "summary.json"
       ],
-      "result_text": "KNN sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
+      "result_text": " sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1141,20 +1036,15 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "sequence_story": {
           "winning_model_sequence_diagnostics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -1163,7 +1053,7 @@
       "title": "SVM scatter plot",
       "kind": "chart",
       "asset_file": "model_svm_scatter.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_model_comparison.csv"
@@ -1190,7 +1080,7 @@
       "title": "Decision tree scatter plot",
       "kind": "chart",
       "asset_file": "model_dt_scatter.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_model_comparison.csv"
@@ -1217,7 +1107,7 @@
       "title": "Random forest scatter plot",
       "kind": "chart",
       "asset_file": "model_rf_scatter.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_model_comparison.csv"
@@ -1244,7 +1134,7 @@
       "title": "KNN scatter plot",
       "kind": "chart",
       "asset_file": "model_knn_scatter.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_model_comparison.csv"
@@ -1271,7 +1161,7 @@
       "title": "XGBoost scatter plot",
       "kind": "chart",
       "asset_file": "model_xgboost_scatter.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_model_comparison.csv"
@@ -1298,17 +1188,17 @@
       "title": "Model comparison bars",
       "kind": "chart",
       "asset_file": "fig_model_comparison_bars.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "results_summary.txt",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "result_text": "Winning model: . Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1346,17 +1236,12 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -1365,16 +1250,16 @@
       "title": "Predicted versus actual chart",
       "kind": "chart",
       "asset_file": "fig_predicted_vs_actual.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_summary.json",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
+      "result_text": " prediction diagnostics -> R2=None, RMSE=None, MAE=None, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1412,21 +1297,16 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "prediction_story": {
           "winning_model_diagnostics": {},
           "per_model_prediction_diagnostics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -1435,16 +1315,16 @@
       "title": "Residual analysis chart",
       "kind": "chart",
       "asset_file": "fig_residuals.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_summary.json",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
+      "result_text": " prediction diagnostics -> R2=None, RMSE=None, MAE=None, residual_mean=None, residual_std=None, max_abs_residual=None, corr(pred,actual)=None.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1482,21 +1362,16 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "prediction_story": {
           "winning_model_diagnostics": {},
           "per_model_prediction_diagnostics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -1505,7 +1380,7 @@
       "title": "Feature importance chart",
       "kind": "chart",
       "asset_file": "fig_feature_importance.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_summary.json",
         "summary.json",
@@ -1514,33 +1389,7 @@
       "result_text": "Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577.",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -1593,11 +1442,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         }
       }
     },
@@ -1606,7 +1451,7 @@
       "title": "Correlation heatmap",
       "kind": "chart",
       "asset_file": "fig_correlation_heatmap.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "summary.json",
@@ -1687,7 +1532,7 @@
       "title": "Feature distributions",
       "kind": "chart",
       "asset_file": "fig_feature_distributions.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_descriptive_statistics.csv"
@@ -1747,7 +1592,7 @@
       "title": "Feature vs target chart",
       "kind": "chart",
       "asset_file": "fig_feature_vs_target.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "summary.json",
@@ -1875,7 +1720,7 @@
       "title": "Feature boxplots",
       "kind": "chart",
       "asset_file": "fig_boxplots.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_descriptive_statistics.csv"
@@ -1935,16 +1780,16 @@
       "title": "Time-series chart",
       "kind": "chart",
       "asset_file": "fig_time_series.png",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "best_model_summary.json",
         "summary.json"
       ],
-      "result_text": "KNN sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
+      "result_text": " sequence diagnostics -> actual_peak_index=None, actual_peak_value=None, predicted_peak_index=None, predicted_peak_value=None, mean_abs_gap=None, sequence_correlation=None.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -1982,20 +1827,15 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "sequence_story": {
           "winning_model_sequence_diagnostics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -2004,17 +1844,17 @@
       "title": "Model comparison table",
       "kind": "table",
       "asset_file": "table_model_comparison.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "results_summary.txt",
         "summary.json",
         "table_model_comparison.csv"
       ],
-      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+      "result_text": "Winning model: . Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
       "evidence": {
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -2052,17 +1892,12 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         },
         "data_shape": {
-          "rows_after_preprocessing": 197,
+          "rows_after_preprocessing": null,
           "dataset_columns": [],
-          "selected_sheet": "HRT 12 -4 h"
+          "selected_sheet": null
         }
       }
     },
@@ -2071,7 +1906,7 @@
       "title": "Feature importance table",
       "kind": "table",
       "asset_file": "table_feature_importance.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_summary.json",
         "summary.json",
@@ -2080,33 +1915,7 @@
       "result_text": "Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577.",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -2159,11 +1968,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         }
       }
     },
@@ -2172,7 +1977,7 @@
       "title": "SHAP importance table",
       "kind": "table",
       "asset_file": "best_model_shap_importance.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "best_model_shap_importance.csv",
         "best_model_summary.json",
@@ -2181,33 +1986,7 @@
       "result_text": "SHAP importance -> ORP_Low=0.0359 | Butyrate=0.0334 | ORP_Mid=0.0302 | VFA=0.0282 | Acetate=0.0281.",
       "evidence": {
         "feature_story": {
-          "top_gra_features": [
-            {
-              "rank": 1,
-              "feature": "pH",
-              "score": 0.7655694590080664
-            },
-            {
-              "rank": 2,
-              "feature": "Propionate",
-              "score": 0.7330322960371348
-            },
-            {
-              "rank": 3,
-              "feature": "VFA",
-              "score": 0.7315248068651623
-            },
-            {
-              "rank": 4,
-              "feature": "Butyrate",
-              "score": 0.7296936636722601
-            },
-            {
-              "rank": 5,
-              "feature": "VSS",
-              "score": 0.7115947055633065
-            }
-          ],
+          "top_gra_features": [],
           "top_feature_importance": [
             {
               "feature": "VSS",
@@ -2260,11 +2039,7 @@
               "mean_abs_shap": 0.0268263639
             }
           ],
-          "top_features_summary": [
-            "pH",
-            "Propionate",
-            "VFA"
-          ]
+          "top_features_summary": []
         }
       }
     },
@@ -2273,7 +2048,7 @@
       "title": "Descriptive statistics table",
       "kind": "table",
       "asset_file": "table_descriptive_statistics.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "summary.json",
         "table_descriptive_statistics.csv"
@@ -2333,7 +2108,7 @@
       "title": "Correlation matrix table",
       "kind": "table",
       "asset_file": "table_correlation_matrix.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "analysis_summary_report.txt",
         "summary.json",
@@ -2414,7 +2189,7 @@
       "title": "Incremental feature analysis table",
       "kind": "table",
       "asset_file": "table1_incremental_results.csv",
-      "route_prefix": "/train/reports/AI_Long_PostPatch_20260322_1",
+      "route_prefix": null,
       "source_files": [
         "results_summary.txt",
         "summary.json",
@@ -2618,7 +2393,7 @@
           ]
         },
         "model_metrics": {
-          "winning_model": "KNN",
+          "winning_model": "",
           "benchmark_models_sorted": [
             {
               "model": "KNN",
@@ -2656,12 +2431,7 @@
               "mae": 0.108556247
             }
           ],
-          "best_model_metrics": {
-            "r2_score": 0.8171678017037467,
-            "rmse": 0.11318090995439674,
-            "mse": 0.012809918378105262,
-            "mae": 0.07502308749135642
-          }
+          "best_model_metrics": {}
         }
       }
     }

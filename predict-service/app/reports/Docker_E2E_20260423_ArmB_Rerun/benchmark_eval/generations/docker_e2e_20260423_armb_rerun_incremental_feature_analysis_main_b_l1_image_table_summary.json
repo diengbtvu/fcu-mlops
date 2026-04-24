@@ -1,0 +1,48 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows the R² and MSE values for different machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of input features increases, using a sequential feature subset derived from 'Sucrose_Degradation'.",
+  "explanation_full": "The table, titled 'table1_incremental_results', presents the performance metrics (R² and MSE) for five machine learning models (SVM, DT, RF, KNN, XGBoost) across 11 feature subsets. The first column, 'n_features', indicates the count of features, ranging from 1 to 11. The second column, 'feature_subset', describes the cumulative feature set, starting with 'Sucrose_Degradation' and sequentially adding features like 'VFA', 'COD-O', 'Butyrate', 'VSS', 'pH', 'Acetate', 'Ethanol', 'Propionate', 'ORP_Mid', and 'ORP_Low'. The subsequent columns represent the model performance metrics: 'SVM_R2' and 'SVM_MSE', 'DT_R2' and 'DT_MSE', 'RF_R2' and 'RF_MSE', 'KNN_R2' and 'KNN_MSE', and 'XGBoost_R2' and 'XGBoost_MSE'. The values are numerical, representing R² (coefficient of determination) and MSE (mean squared error).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "DT's best R² is shown.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "table1_incremental_results",
+      "confidence": 0.9,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_r2",
+      "subject": "DT",
+      "predicate": "best_r2",
+      "object": null,
+      "metric": "best_r2",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "DT's best MSE is shown.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "table1_incremental_results",
+      "confidence": 0.9,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_mse",
+      "subject": "DT",
+      "predicate": "best_mse",
+      "object": null,
+      "metric": "best_mse",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1"
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Grey Relational Analysis (GRA) ranking shows that Sucrose_Degradation (0.9998) is the top feature, followed by VFA (0.9994) and COD-O (0.999).",
+  "explanation_full": "The Grey Relational Analysis (GRA) ranking identifies the most relevant features for the model. According to the chart evidence, the ranking is: 1. Sucrose_Degradation (0.9998), 2. VFA (0.9994), 3. COD-O (0.999), 4. Butyrate (0.9671), 5. VSS (0.9634). The top three features are Sucrose_Degradation, VFA, and COD-O, all having scores very close to 1.0.",
+  "claims": [],
+  "semantic_level": "L1"
+}

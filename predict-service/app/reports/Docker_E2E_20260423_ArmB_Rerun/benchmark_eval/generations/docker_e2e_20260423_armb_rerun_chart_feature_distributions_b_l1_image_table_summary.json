@@ -1,0 +1,48 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Propionate has the highest mean feature value (0.3581) and standard deviation (0.1538) compared to other measured features.",
+  "explanation_full": "At the L1 level, the most prominent finding is the distribution of chemical features. Propionate stands out with the highest mean feature value (0.3581) and the largest standard deviation (0.1538). This suggests that Propionate is the most variable and highest-concentrated feature among the measured components. Other features, such as Ethanol (mean: 0.1016, std: 0.1131) and Acetate (mean: 0.0546, std: 0.1023), show lower means and standard deviations, indicating a more constrained range of values.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Propionate has the highest mean feature value (0.3581)",
+      "claim_type": "metric_value",
+      "span_category": "Propionate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:Propionate:mean",
+      "subject": "Propionate",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.3581,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Propionate has the largest standard deviation (0.1538)",
+      "claim_type": "metric_value",
+      "span_category": "Propionate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:Propionate:std",
+      "subject": "Propionate",
+      "predicate": "std",
+      "object": null,
+      "metric": "std",
+      "value": 0.1538,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1"
+}

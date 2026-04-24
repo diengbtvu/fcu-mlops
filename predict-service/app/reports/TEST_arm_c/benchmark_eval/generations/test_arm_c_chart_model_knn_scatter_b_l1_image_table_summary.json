@@ -1,0 +1,51 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest performance metrics, notably an R2 score of 0.8172 and a low RMSE of 0.1132.",
+  "explanation_full": "Based on the model comparison table and the scatter plot diagnostics, the KNN model demonstrates superior performance compared to other benchmark models like SVM, DT, RF, and XGBoost. Specifically, KNN achieved an R2 score of 0.8172, indicating a strong fit, and an RMSE of 0.1132, suggesting low prediction error. These metrics, derived from the summary JSON, confirm KNN's effectiveness in this task, as it outperforms the other models listed in the table.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved an R2 score of 0.8172",
+      "claim_type": "metric_value",
+      "span_category": "R2 score",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN model achieved an RMSE of 0.1132",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "KNN",
+      "predicate": "RMSE",
+      "object": null,
+      "metric": "rmse",
+      "value": 0.1132,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

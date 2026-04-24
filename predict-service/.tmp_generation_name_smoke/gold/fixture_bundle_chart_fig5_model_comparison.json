@@ -1,0 +1,268 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig5_model_comparison",
+  "artifact_type": "chart/fig5_model_comparison",
+  "source_files": [
+    "summary.json",
+    "table_model_comparison.csv"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "KNN",
+    "RF",
+    "SVM"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:best_model",
+      "fact_type": "best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "value": 0.92,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "winning model = KNN"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:ranking:r2_score",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": [
+        "KNN",
+        "RF",
+        "SVM"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "model ranking by r2_score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.92,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN r2_score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:KNN:rmse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.282843,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN rmse"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.08,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mse"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:KNN:mae",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.2,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "KNN mae"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:RF:r2_score",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.88,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:RF:rmse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.316228,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:RF:mse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.1,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:RF:mae",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.24,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "RF mae"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.84,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM r2_score"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:SVM:rmse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.34641,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.12,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig5_model_comparison:metric:SVM:mae",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.28,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mae"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "fixture_bundle:chart:fig5_model_comparison:best_model",
+    "fixture_bundle:chart:fig5_model_comparison:ranking:r2_score",
+    "fixture_bundle:chart:fig5_model_comparison:metric:KNN:r2_score",
+    "fixture_bundle:chart:fig5_model_comparison:metric:KNN:rmse"
+  ],
+  "forbidden_inferences": [
+    "Do not claim deployment performance from benchmark chart scores alone.",
+    "Do not let narrative text override the chart's metric sources."
+  ]
+}

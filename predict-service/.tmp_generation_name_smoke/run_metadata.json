@@ -1,0 +1,47 @@
+{
+  "command": "run",
+  "source_bundle_path": "/home/selab/diengb_tvu/fcu-mlops-eluvation-benchmark/predict-service/tests/benchmarking/fixtures/sample_bundle",
+  "resolved_bundle_dir": "/home/selab/diengb_tvu/fcu-mlops-eluvation-benchmark/predict-service/tests/benchmarking/fixtures/sample_bundle",
+  "output_dir": "/home/selab/diengb_tvu/fcu-mlops-eluvation-benchmark/predict-service/.tmp_generation_name_smoke",
+  "arms": [
+    "A",
+    "B",
+    "C",
+    "BASELINE_LLM"
+  ],
+  "conditions": [
+    "image_table_summary"
+  ],
+  "client": "fixture",
+  "client_model": null,
+  "baseline_arm": "BASELINE_LLM",
+  "created_at": "2026-04-21T09:32:44.740516+00:00",
+  "artifact_count": 24,
+  "generation_count": 96,
+  "warnings": [
+    "fixture_bundle:model_comparison/main: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:incremental_feature_analysis/main: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:feature_ranking/gra: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig3a_gra_ranking: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig3b_shap_analysis: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig3_feature_analysis: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig4_univariate_analysis: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig5_model_comparison: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig6ab_mse_r2_features: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:fig6c_prediction_time: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_svm_scatter: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_dt_scatter: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_rf_scatter: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_knn_scatter: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_xgboost_scatter: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:model_comparison_bars: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:predicted_vs_actual: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:residuals: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:feature_importance: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:correlation_heatmap: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:feature_distributions: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:feature_vs_target: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:boxplots: image-based condition requested but no chart file was available; table/json evidence will still be used.",
+    "fixture_bundle:chart:time_series: image-based condition requested but no chart file was available; table/json evidence will still be used."
+  ]
+}

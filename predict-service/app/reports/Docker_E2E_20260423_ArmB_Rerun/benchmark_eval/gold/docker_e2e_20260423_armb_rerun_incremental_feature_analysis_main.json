@@ -1,0 +1,102 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+  "artifact_type": "incremental_feature_analysis/main",
+  "source_files": [
+    "table1_incremental_results.csv",
+    "fig6ab_mse_r2_features.png",
+    "results_summary.txt",
+    "analysis_summary_report.txt"
+  ],
+  "chart_type": "line_chart",
+  "primary_entities": [
+    "SVM",
+    "DT",
+    "RF",
+    "KNN",
+    "XGBoost"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum",
+      "fact_type": "feature_subset_optimum",
+      "subject": "DT",
+      "predicate": "feature_subset_optimum",
+      "object": "Sucrose_Degradation",
+      "value": 1,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT optimum subset"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_r2",
+      "fact_type": "best_r2",
+      "subject": "DT",
+      "predicate": "best_r2",
+      "object": "Sucrose_Degradation",
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT best R2"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_mse",
+      "fact_type": "best_mse",
+      "subject": "DT",
+      "predicate": "best_mse",
+      "object": "Sucrose_Degradation",
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT best MSE"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:plateau",
+      "fact_type": "plateau",
+      "subject": "DT",
+      "predicate": "plateau",
+      "object": "Sucrose_Degradation",
+      "value": 1,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT plateau start"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:feature_subset_optimum",
+    "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_r2",
+    "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:best_mse",
+    "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main:plateau"
+  ],
+  "forbidden_inferences": [
+    "Do not assume that more features always improve performance.",
+    "Do not use summary text to override table values."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "claims": []
+}

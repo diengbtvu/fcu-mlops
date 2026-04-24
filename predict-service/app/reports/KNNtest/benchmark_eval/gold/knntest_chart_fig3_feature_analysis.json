@@ -1,0 +1,233 @@
+{
+  "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+  "artifact_type": "chart/fig3_feature_analysis",
+  "source_files": [
+    "best_model_shap_importance.csv",
+    "gra_ranking.json",
+    "summary.json",
+    "table1_incremental_results.csv",
+    "table_correlation_matrix.csv",
+    "table_feature_importance.csv",
+    "fig3_feature_analysis.png"
+  ],
+  "chart_type": "composite_chart",
+  "primary_entities": [
+    "VFA",
+    "Butyrate",
+    "Acetate",
+    "VSS",
+    "Propionate",
+    "Ethanol",
+    "ORP_Low",
+    "ORP_Mid",
+    "COD-O"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:top_feature:gra_score",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "gra_score",
+      "object": "VFA",
+      "value": 0.7931135436956089,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top gra_score feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:ranking:gra_score",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "gra_score",
+      "object": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "gra_score ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:top_feature:importance",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "importance",
+      "object": "VSS",
+      "value": 0.5052222633,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top importance feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:ranking:importance",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "importance",
+      "object": [
+        "VSS",
+        "Acetate",
+        "Butyrate",
+        "VFA",
+        "Propionate",
+        "Ethanol"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "importance ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "mean_abs_shap",
+      "object": "ORP_Low",
+      "value": 0.0374781777,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top mean_abs_shap feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "mean_abs_shap",
+      "object": [
+        "ORP_Low",
+        "Butyrate",
+        "ORP_Mid",
+        "VFA",
+        "Acetate",
+        "COD-O"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "mean_abs_shap ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:top_feature:target_correlation",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "target_correlation",
+      "object": "VFA",
+      "value": 0.7984,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top target correlation feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.9601,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "strongest pair correlation"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:feature_subset_optimum",
+      "fact_type": "feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 9,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "best overall incremental feature count"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:fig3_feature_analysis:best_r2",
+      "fact_type": "best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 0.83014,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "best overall incremental R2"
+        }
+      ],
+      "importance": 2
+    }
+  ],
+  "salient_facts": [
+    "KNNtest:chart:fig3_feature_analysis:top_feature:gra_score",
+    "KNNtest:chart:fig3_feature_analysis:ranking:gra_score",
+    "KNNtest:chart:fig3_feature_analysis:top_feature:importance",
+    "KNNtest:chart:fig3_feature_analysis:ranking:importance",
+    "KNNtest:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+    "KNNtest:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+    "KNNtest:chart:fig3_feature_analysis:top_feature:target_correlation",
+    "KNNtest:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+    "KNNtest:chart:fig3_feature_analysis:feature_subset_optimum",
+    "KNNtest:chart:fig3_feature_analysis:best_r2"
+  ],
+  "forbidden_inferences": [
+    "Do not collapse different feature-analysis lenses into a single causal claim.",
+    "Do not let prose override the structured evidence for each lens."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model.",
+      "claim_type": "freeform",
+      "span_category": "The model performance analysis indicates that KNN is the superior model.",
+      "is_numeric": false,
+      "requires_grounding_from": "The model performance analysis indicates that KNN is the superior model.",
+      "confidence": 0.95,
+      "subject": "Model Performance",
+      "predicate": "is superior",
+      "object": "KNN",
+      "metric": "performance",
+      "value": "superior",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}
