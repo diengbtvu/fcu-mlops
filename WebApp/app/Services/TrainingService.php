@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\Dataset;
 use App\Models\EmailSetting;
 use App\Models\MLModel;
+use App\Support\PredictServiceUrl;
 use App\Models\User;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Process\Process;
@@ -430,12 +432,39 @@ class TrainingService
                 'options' => $safeRequestData
             ]);
 
-            // Call Flask API
-            $apiUrl = config('services.predict_service.url', 'http://predict-service:5000') . '/train/model';
-            
-            $response = Http::timeout(600) // 10 minutes timeout
-                ->withToken(config('app.prediction_api_token', ''))
-                ->post($apiUrl, $requestData);
+            // Call predict-service, with fallbacks for non-Docker/VPS deployments.
+            $response = null;
+            $lastConnectionException = null;
+            $candidateUrls = PredictServiceUrl::urls('/train/model');
+
+            foreach ($candidateUrls as $apiUrl) {
+                try {
+                    $response = Http::timeout(600) // 10 minutes timeout
+                        ->withToken(config('app.prediction_api_token', ''))
+                        ->post($apiUrl, $requestData);
+
+                    if (in_array($response->status(), [404, 502, 503, 504], true)) {
+                        Log::warning('Predict-service training endpoint returned fallback-eligible status.', [
+                            'url' => $apiUrl,
+                            'status' => $response->status(),
+                        ]);
+                        continue;
+                    }
+
+                    break;
+                } catch (ConnectionException $exception) {
+                    $lastConnectionException = $exception;
+
+                    Log::warning('Predict-service training endpoint connection failed.', [
+                        'url' => $apiUrl,
+                        'error' => $exception->getMessage(),
+                    ]);
+                }
+            }
+
+            if ($response === null) {
+                throw $lastConnectionException ?? new \RuntimeException('Predict-service is unavailable.');
+            }
 
             if (!$response->successful()) {
                 Log::error('Training API failed', [
