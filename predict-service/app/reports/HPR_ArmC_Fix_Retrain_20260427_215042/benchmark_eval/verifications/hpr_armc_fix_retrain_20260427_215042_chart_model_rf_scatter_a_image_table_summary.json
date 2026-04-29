@@ -1,0 +1,22 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model achieved an R2 score of 0.7756, indicating a strong correlation between predicted and actual values.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171.",
+      "numeric_delta": 1.8171000000233306e-06
+    }
+  ]
+}

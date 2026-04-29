@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "R2 score of 0.7495",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "claim_text": "RMSE of 0.1325",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse"
+      ],
+      "reason": "Gold value for XGBoost rmse is 0.1324863821.",
+      "numeric_delta": 1.3617900000012506e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:mae",
+      "claim_text": "MAE of 0.0956",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:mae"
+      ],
+      "reason": "Gold value for XGBoost mae is 0.0955930342.",
+      "numeric_delta": 6.965800000008349e-06
+    }
+  ]
+}

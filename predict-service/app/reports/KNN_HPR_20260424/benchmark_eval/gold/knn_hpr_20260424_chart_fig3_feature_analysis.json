@@ -114,7 +114,7 @@
       "subject": "combined_feature_story",
       "predicate": "mean_abs_shap",
       "object": "ORP_Low",
-      "value": 0.0375889842,
+      "value": 0.0383875935,
       "unit": null,
       "evidence": [
         {
@@ -133,8 +133,8 @@
       "predicate": "mean_abs_shap",
       "object": [
         "ORP_Low",
-        "ORP_Mid",
         "Butyrate",
+        "ORP_Mid",
         "VFA",
         "COD-O",
         "Acetate"

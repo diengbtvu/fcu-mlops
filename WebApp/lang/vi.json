@@ -38,6 +38,7 @@
     "updated_at": "Cập nhật lúc",
     "vs": "so với",
     "back_to": "Quay lại :page",
+    "sidebar.ai_api_keys": "Khóa API AI",
     "datasets.training_scope": "Phạm vi huấn luyện",
     "datasets.training_scope_single": "Chỉ huấn luyện model đã chọn (không so sánh)",
     "datasets.training_scope_compare": "Huấn luyện và so sánh toàn bộ model (SVM/DT/RF/KNN/XGBoost)",

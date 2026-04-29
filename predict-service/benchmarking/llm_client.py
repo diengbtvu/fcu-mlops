@@ -4,24 +4,64 @@ import copy
 import json
 import os
 import random
+import re
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
+from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys
 from openai_rate_control import shared_openai_request_gate
+from .claim_alignment import (
+    claims_payload_to_variable_mentions,
+    variable_mentions_to_payload,
+)
 from .prompts import (
     ARM_INSTRUCTIONS,
     build_claim_extraction_prompt,
     build_explanation_prompt,
     build_prompt_context,
+    build_variable_mention_extraction_prompt,
     extract_claim_extraction_context,
     extract_prompt_context,
+    extract_variable_mention_context,
 )
 from .schemas import ArtifactInputs, CANONICAL_CLAIM_TYPES, SUPPORTED_SEMANTIC_LEVELS
 
 OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_BENCHMARK_MODEL = os.getenv("OPENAI_BENCHMARK_MODEL", os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2"))
+DEFAULT_GROQ_CHAT_BASE_URL = "https://api.groq.com/openai/v1"
+DEFAULT_GROQ_BENCHMARK_MODEL = "openai/gpt-oss-120b"
+GROQ_BENCHMARK_MODELS = {
+    "openai/gpt-oss-120b": "GPT-OSS 120B",
+    "llama-3.3-70b-versatile": "Llama 3.3 70B Versatile",
+}
+GROQ_BENCHMARK_MODEL = os.getenv("GROQ_BENCHMARK_MODEL", os.getenv("GROQ_REPORT_MODEL", DEFAULT_GROQ_BENCHMARK_MODEL))
+GROQ_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("GROQ_BENCHMARK_TIMEOUT_SECONDS", "300")))
+GROQ_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("GROQ_BENCHMARK_MAX_RETRIES", "5")))
+GROQ_BENCHMARK_RETRY_FOREVER = str(
+    os.getenv("GROQ_BENCHMARK_RETRY_FOREVER", "1")
+).strip().lower() not in {"0", "false", "no", "off"}
+GROQ_BENCHMARK_MIN_REQUEST_INTERVAL_SECONDS = max(
+    0.0,
+    float(os.getenv("GROQ_BENCHMARK_MIN_REQUEST_INTERVAL_SECONDS", "3")),
+)
+GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS = max(
+    1.0,
+    float(os.getenv("GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS", "3")),
+)
+GROQ_BENCHMARK_MAX_COMPLETION_TOKENS = max(
+    300,
+    int(os.getenv("GROQ_BENCHMARK_MAX_COMPLETION_TOKENS", "700")),
+)
+GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
+    1.0,
+    float(os.getenv("GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS", "3")),
+)
+GROQ_BENCHMARK_RETRY_JITTER_SECONDS = max(
+    0.0,
+    float(os.getenv("GROQ_BENCHMARK_RETRY_JITTER_SECONDS", "0.5")),
+)
 OPENAI_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("OPENAI_BENCHMARK_MAX_RETRIES", "8")))
 OPENAI_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
     1.0,
@@ -36,7 +76,7 @@ OPENAI_BENCHMARK_RETRY_JITTER_SECONDS = max(
     float(os.getenv("OPENAI_BENCHMARK_RETRY_JITTER_SECONDS", "1.0")),
 )
 OPENAI_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OPENAI_BENCHMARK_TIMEOUT_SECONDS", "240")))
-OLLAMA_BENCHMARK_MODEL = os.getenv("OLLAMA_BENCHMARK_MODEL", os.getenv("OLLAMA_REPORT_MODEL", "gemma4:e4b"))
+OLLAMA_BENCHMARK_MODEL = os.getenv("OLLAMA_BENCHMARK_MODEL", os.getenv("OLLAMA_REPORT_MODEL", "gemma2:9b"))
 OLLAMA_BENCHMARK_TIMEOUT_SECONDS = max(60, int(os.getenv("OLLAMA_BENCHMARK_TIMEOUT_SECONDS", "300")))
 OLLAMA_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("OLLAMA_BENCHMARK_MAX_RETRIES", "3")))
 OLLAMA_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
@@ -134,6 +174,111 @@ def _ollama_message_text(message: dict[str, Any]) -> str:
     fallback = message.get("thinking")
     if isinstance(fallback, str) and fallback.strip():
         return fallback.strip()
+    return ""
+
+
+def _groq_chat_completions_url() -> str:
+    base_url = str(
+        os.getenv("GROQ_BASE_URL") or DEFAULT_GROQ_CHAT_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/chat/completions"
+
+
+def _groq_supports_json_schema(model: str) -> bool:
+    return str(model or "").strip().startswith("openai/gpt-oss")
+
+
+def _groq_retry_after_seconds(response: Any) -> float | None:
+    if response is None:
+        return None
+    retry_after = str(getattr(response, "headers", {}).get("Retry-After") or "").strip()
+    if retry_after:
+        try:
+            return max(0.0, float(retry_after))
+        except ValueError:
+            return None
+    try:
+        payload = response.json()
+    except ValueError:
+        return None
+    message = str((payload.get("error") or {}).get("message") or payload.get("message") or "")
+    match = re.search(r"try again in\s+([0-9]+(?:\.[0-9]+)?)s", message, flags=re.IGNORECASE)
+    if not match:
+        return None
+    try:
+        return max(0.0, float(match.group(1)))
+    except ValueError:
+        return None
+
+
+def _response_error_payload(response: Any) -> dict[str, Any]:
+    if response is None:
+        return {}
+    try:
+        payload = response.json()
+    except ValueError:
+        text = str(getattr(response, "text", "") or "").strip()
+        return {"message": text[:1000]} if text else {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _format_http_error(exc: Exception, provider: str) -> str:
+    response = getattr(exc, "response", None)
+    status_code = getattr(response, "status_code", "unknown")
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    message = str(
+        error_payload.get("message")
+        or payload.get("message")
+        or getattr(response, "text", "")
+        or exc
+    ).strip()
+    code = str(error_payload.get("code") or payload.get("code") or "").strip()
+    detail = f"{provider} request failed with HTTP {status_code}"
+    if code:
+        detail += f" ({code})"
+    if message:
+        detail += f": {message[:1000]}"
+    return detail
+
+
+def _is_groq_json_validate_failed(response: Any) -> bool:
+    if response is None or getattr(response, "status_code", None) != 400:
+        return False
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    code = str(error_payload.get("code") or payload.get("code") or "").strip()
+    return code == "json_validate_failed"
+
+
+def _is_groq_rate_limit_error(response: Any) -> bool:
+    if response is None:
+        return False
+    status_code = getattr(response, "status_code", None)
+    if status_code == 429:
+        return True
+    if status_code != 413:
+        return False
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    code = str(error_payload.get("code") or payload.get("code") or "").strip().lower()
+    message = str(error_payload.get("message") or payload.get("message") or "").lower()
+    return code == "rate_limit_exceeded" or "tokens per minute" in message
+
+
+def _chat_message_text(message: dict[str, Any]) -> str:
+    content = message.get("content")
+    if isinstance(content, list):
+        text_parts: list[str] = []
+        for item in content:
+            if not isinstance(item, dict):
+                continue
+            text = item.get("text") or item.get("content") or ""
+            if isinstance(text, str) and text.strip():
+                text_parts.append(text)
+        return "".join(text_parts).strip()
+    if isinstance(content, str):
+        return content.strip()
     return ""
 
 
@@ -285,6 +430,33 @@ class BaseLLMClient(ABC):
     def extract_claims_json(self, prompt: str) -> dict[str, Any]:
         """Return a JSON-like dictionary for the claim-extraction prompt."""
 
+    def extract_variable_mentions_json(self, prompt: str) -> dict[str, Any]:
+        """Return standardized variable mentions for the variable-first Arm C path."""
+        context = extract_variable_mention_context(prompt)
+        claims_payload = self.extract_claims_json(
+            build_claim_extraction_prompt(
+                artifact_id=str(context.get("artifact_id") or ""),
+                arm=str(context.get("arm") or ""),
+                input_condition=str(context.get("input_condition") or ""),
+                semantic_level=str(context.get("semantic_level") or "").strip() or None,
+                explanation_short=str((context.get("explanation") or {}).get("explanation_short") or ""),
+                explanation_full=str((context.get("explanation") or {}).get("explanation_full") or ""),
+                primary_entities=list(context.get("primary_entities") or []),
+                variable_catalog=list(context.get("allowed_variables") or []),
+            )
+        )
+        mentions = claims_payload_to_variable_mentions(
+            claims_payload,
+            artifact_id=str(context.get("artifact_id") or ""),
+        )
+        return variable_mentions_to_payload(
+            mentions,
+            artifact_id=str(context.get("artifact_id") or ""),
+            arm=str(context.get("arm") or ""),
+            input_condition=str(context.get("input_condition") or ""),
+            semantic_level=str(context.get("semantic_level") or "").strip() or None,
+        )
+
     @abstractmethod
     def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
         """Return validator records for the Arm C correction loop."""
@@ -421,7 +593,7 @@ class FixtureLLMClient(BaseLLMClient):
             ]
             short = f"This is a model comparison table with {len(model_names)} models and {len(metric_names)} metrics."
             full = (
-                f"The table compares {', '.join(model_names)}. Metrics include {', '.join(metric_names)}. "
+                f"The model comparison table compares {', '.join(model_names)}. Metrics include {', '.join(metric_names)}. "
                 "Each row reports one model and its corresponding metric values."
             )
             return short, full
@@ -696,10 +868,18 @@ class FixtureLLMClient(BaseLLMClient):
         payload["arm"] = "C"
         payload["input_condition"] = str(context.get("input_condition") or payload.get("input_condition") or "")
         payload["semantic_level"] = None
-        return _normalize_embedded_claims(
+        normalized = _normalize_embedded_claims(
             payload,
             list(correction_context.get("allowed_variables") or []),
         )
+        cache_key = self._cache_key(
+            str(normalized.get("artifact_id") or ""),
+            str(normalized.get("arm") or ""),
+            str(normalized.get("input_condition") or ""),
+            str(normalized.get("semantic_level") or "").strip() or None,
+        )
+        self._cached_generations[cache_key] = copy.deepcopy(normalized)
+        return normalized
 
     def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
         context = extract_prompt_context(prompt)
@@ -751,6 +931,47 @@ class FixtureLLMClient(BaseLLMClient):
             "semantic_level": str(context.get("semantic_level") or "").strip() or None,
             "claims": claims,
         }
+
+    def extract_variable_mentions_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_variable_mention_context(prompt)
+        cache_key = self._cache_key(
+            str(context.get("artifact_id") or ""),
+            str(context.get("arm") or ""),
+            str(context.get("input_condition") or ""),
+            str(context.get("semantic_level") or "").strip() or None,
+        )
+        payload = copy.deepcopy(self._cached_generations.get(cache_key) or {})
+        raw_claims = payload.get("claims")
+        if not isinstance(raw_claims, list):
+            raw_claims = []
+
+        variable_catalog = list(context.get("allowed_variables") or [])
+        claims: list[dict[str, Any]] = []
+        for raw_claim in raw_claims:
+            if not isinstance(raw_claim, dict):
+                continue
+            claim = dict(raw_claim)
+            claim["source_variable_id"] = _source_variable_id_for_claim(claim, variable_catalog)
+            if claim["source_variable_id"]:
+                claims.append(claim)
+
+        mentions = claims_payload_to_variable_mentions(
+            {
+                "artifact_id": str(context.get("artifact_id") or ""),
+                "arm": str(context.get("arm") or ""),
+                "input_condition": str(context.get("input_condition") or ""),
+                "semantic_level": str(context.get("semantic_level") or "").strip() or None,
+                "claims": claims,
+            },
+            artifact_id=str(context.get("artifact_id") or ""),
+        )
+        return variable_mentions_to_payload(
+            mentions,
+            artifact_id=str(context.get("artifact_id") or ""),
+            arm=str(context.get("arm") or ""),
+            input_condition=str(context.get("input_condition") or ""),
+            semantic_level=str(context.get("semantic_level") or "").strip() or None,
+        )
 
     def _full_generation_payload(self, context: dict[str, Any]) -> dict[str, Any]:
         if context.get("chart_asset"):
@@ -1527,8 +1748,16 @@ def _claim_schema() -> dict[str, Any]:
         "anyOf": [
             {"type": "string"},
             {"type": "number"},
-            {"type": "integer"},
             {"type": "boolean"},
+            {"type": "null"},
+        ]
+    }
+    string_array_or_null = {
+        "anyOf": [
+            {
+                "type": "array",
+                "items": {"type": "string"},
+            },
             {"type": "null"},
         ]
     }
@@ -1549,10 +1778,7 @@ def _claim_schema() -> dict[str, Any]:
             "metric": {"type": ["string", "null"]},
             "value": scalar_or_null,
             "unit": {"type": ["string", "null"]},
-            "ordered_items": {
-                "type": "array",
-                "items": {"type": "string"},
-            },
+            "ordered_items": string_array_or_null,
             "feature_count": {"type": ["integer", "null"]},
             "hedged": {"type": "boolean"},
         },
@@ -1574,6 +1800,49 @@ def _claim_schema() -> dict[str, Any]:
             "ordered_items",
             "feature_count",
             "hedged",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _variable_mention_schema() -> dict[str, Any]:
+    scalar_or_null = {
+        "anyOf": [
+            {"type": "string"},
+            {"type": "number"},
+            {"type": "null"},
+        ]
+    }
+    string_array_or_null = {
+        "anyOf": [
+            {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            {"type": "null"},
+        ]
+    }
+    return {
+        "type": "object",
+        "properties": {
+            "mention_id": {"type": "string"},
+            "source_variable_id": {"type": "string"},
+            "evidence_span": {"type": "string"},
+            "stated_value": scalar_or_null,
+            "stated_object": {"type": ["string", "null"]},
+            "stated_ordered_items": string_array_or_null,
+            "stated_feature_count": {"type": ["integer", "null"]},
+            "confidence": {"type": "number"},
+        },
+        "required": [
+            "mention_id",
+            "source_variable_id",
+            "evidence_span",
+            "stated_value",
+            "stated_object",
+            "stated_ordered_items",
+            "stated_feature_count",
+            "confidence",
         ],
         "additionalProperties": False,
     }
@@ -1639,6 +1908,34 @@ def _claim_extraction_schema(
             "input_condition",
             "semantic_level",
             "claims",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _variable_mention_extraction_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "artifact_id": {"type": "string"},
+            "arm": {"type": "string", "enum": allowed_arms},
+            "input_condition": {"type": "string", "enum": allowed_conditions},
+            "semantic_level": _semantic_level_schema(allowed_semantic_levels),
+            "mentions": {
+                "type": "array",
+                "items": _variable_mention_schema(),
+            },
+        },
+        "required": [
+            "artifact_id",
+            "arm",
+            "input_condition",
+            "semantic_level",
+            "mentions",
         ],
         "additionalProperties": False,
     }
@@ -1767,6 +2064,25 @@ def _single_claim_extraction_schema(
             "name": "benchmark_claim_extraction",
             "strict": True,
             "schema": _claim_extraction_schema(
+                allowed_arms,
+                allowed_conditions,
+                allowed_semantic_levels,
+            ),
+        },
+    }
+
+
+def _single_variable_mention_extraction_schema(
+    allowed_arms: list[str],
+    allowed_conditions: list[str],
+    allowed_semantic_levels: list[str] | None = None,
+) -> dict[str, Any]:
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "benchmark_variable_mention_extraction",
+            "strict": True,
+            "schema": _variable_mention_extraction_schema(
                 allowed_arms,
                 allowed_conditions,
                 allowed_semantic_levels,
@@ -2015,6 +2331,41 @@ class OllamaLLMClient(BaseLLMClient):
                     "content": (
                         _build_ollama_json_only_instruction(schema)
                         + " Extract only the listed standardized variables that are explicitly present in the explanation."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "stream": False,
+            "format": schema,
+            "options": {
+                "temperature": 0,
+                "num_predict": OLLAMA_BENCHMARK_JSON_NUM_PREDICT,
+                "num_ctx": OLLAMA_BENCHMARK_NUM_CTX,
+            },
+        }
+        return self._call_ollama(payload)
+
+    def extract_variable_mentions_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_variable_mention_context(prompt)
+        schema = _single_variable_mention_extraction_schema(
+            allowed_arms=[str(context.get("arm") or "A")],
+            allowed_conditions=[str(context.get("input_condition") or "table_only")],
+            allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+            if str(context.get("semantic_level") or "").strip()
+            else None,
+        )["json_schema"]["schema"]
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        _build_ollama_json_only_instruction(schema)
+                        + " Select only listed source_variable_id values explicitly present in the explanation. "
+                        + "Do not convert rank positions into metric values."
                     ),
                 },
                 {
@@ -2420,6 +2771,37 @@ class OpenAILLMClient(BaseLLMClient):
         }
         return self._call_openai(payload)
 
+    def extract_variable_mentions_json(self, prompt: str) -> dict[str, Any]:
+        context = extract_variable_mention_context(prompt)
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You select standardized benchmark variables from explanations. "
+                        "Return strict JSON only. Select only listed source_variable_id values explicitly present in the explanation. "
+                        "Do not convert rank positions into metric values."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            "response_format": _single_variable_mention_extraction_schema(
+                allowed_arms=[str(context.get("arm") or "A")],
+                allowed_conditions=[str(context.get("input_condition") or "table_only")],
+                allowed_semantic_levels=[str(context.get("semantic_level") or "").strip()]
+                if str(context.get("semantic_level") or "").strip()
+                else None,
+            ),
+            "reasoning_effort": "low",
+            "verbosity": "low",
+            "max_completion_tokens": 1800,
+        }
+        return self._call_openai(payload)
+
     def validate_arm_c_json(self, prompt: str) -> dict[str, Any]:
         context = extract_prompt_context(prompt)
         payload = {
@@ -2610,3 +2992,181 @@ class OpenAILLMClient(BaseLLMClient):
             outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
 
         return outputs
+
+
+class GroqLLMClient(OpenAILLMClient):
+    """Groq OpenAI-compatible benchmark client."""
+
+    name = "groq"
+
+    def __init__(
+        self,
+        *,
+        api_key: str | None = None,
+        model: str | None = None,
+        timeout_seconds: int = GROQ_BENCHMARK_TIMEOUT_SECONDS,
+    ) -> None:
+        from dotenv import load_dotenv
+
+        env_path = Path(__file__).resolve().parents[1] / ".env"
+        load_dotenv(dotenv_path=env_path, override=False)
+        resolved_api_keys = parse_groq_api_keys(api_key) or groq_api_keys_from_env()
+        if not resolved_api_keys:
+            raise RuntimeError("GROQ_API_KEY or GROQ_API_KEYS is not configured for the benchmark client.")
+        self.api_key = resolved_api_keys[0]
+        self.api_key_pool = GroqApiKeyPool(resolved_api_keys)
+        self.model_name = str(
+            model
+            or os.getenv("GROQ_BENCHMARK_MODEL")
+            or os.getenv("GROQ_REPORT_MODEL")
+            or GROQ_BENCHMARK_MODEL
+        ).strip()
+        if self.model_name not in GROQ_BENCHMARK_MODELS:
+            allowed = ", ".join(GROQ_BENCHMARK_MODELS)
+            raise RuntimeError(
+                f"Unsupported GROQ_BENCHMARK_MODEL '{self.model_name}'. Supported values: {allowed}."
+            )
+        self.timeout_seconds = max(60, int(timeout_seconds))
+
+    def _prepare_groq_payload(self, payload: dict[str, Any]) -> dict[str, Any]:
+        request_payload = copy.deepcopy(payload)
+        request_payload.pop("verbosity", None)
+        request_payload["temperature"] = 0
+        if request_payload.get("max_completion_tokens") is not None:
+            request_payload["max_completion_tokens"] = min(
+                int(request_payload["max_completion_tokens"]),
+                GROQ_BENCHMARK_MAX_COMPLETION_TOKENS,
+            )
+
+        if not str(self.model_name).startswith("openai/gpt-oss"):
+            request_payload.pop("reasoning_effort", None)
+        elif request_payload.get("reasoning_effort") not in {"low", "medium", "high"}:
+            request_payload["reasoning_effort"] = "low"
+
+        response_format = request_payload.get("response_format")
+        schema = None
+        if isinstance(response_format, dict):
+            json_schema = response_format.get("json_schema")
+            if isinstance(json_schema, dict):
+                schema = json_schema.get("schema")
+        request_payload.pop("response_format", None)
+        if isinstance(schema, dict):
+            messages = list(request_payload.get("messages") or [])
+            if messages:
+                first_message = dict(messages[0])
+                first_message["content"] = (
+                    f"{first_message.get('content', '')} "
+                    f"{_build_ollama_json_only_instruction(schema)}"
+                ).strip()
+                messages[0] = first_message
+                request_payload["messages"] = messages
+        return request_payload
+
+    def _call_openai(self, payload: dict[str, Any]) -> dict[str, Any]:
+        import requests
+        key_pool = getattr(self, "api_key_pool", None)
+        if not isinstance(key_pool, GroqApiKeyPool):
+            key_pool = GroqApiKeyPool(parse_groq_api_keys(getattr(self, "api_key", "")))
+            self.api_key_pool = key_pool
+        request_payload = self._prepare_groq_payload(payload)
+
+        last_error: Exception | None = None
+        attempt = 0
+        while True:
+            attempt += 1
+            key_pool.wait_for_available_key(GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS)
+            key_index, api_key = key_pool.next_key()
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            }
+            try:
+                with shared_openai_request_gate().request_slot(
+                    GROQ_BENCHMARK_MIN_REQUEST_INTERVAL_SECONDS,
+                    GROQ_BENCHMARK_RETRY_JITTER_SECONDS,
+                ):
+                    response = requests.post(
+                        _groq_chat_completions_url(),
+                        headers=headers,
+                        json=request_payload,
+                        timeout=self.timeout_seconds,
+                    )
+                response.raise_for_status()
+                data = response.json()
+                choice = data["choices"][0]
+                message = choice.get("message") or {}
+                parsed = message.get("parsed")
+                if isinstance(parsed, dict):
+                    return parsed
+
+                content = _chat_message_text(message)
+                if not content:
+                    finish_reason = choice.get("finish_reason")
+                    if finish_reason == "length":
+                        raise ValueError(
+                            "Groq benchmark response hit finish_reason='length' before emitting JSON. "
+                            "Increase max_completion_tokens or reduce prompt size."
+                        )
+                    raise ValueError("Groq benchmark response did not contain a parseable JSON payload.")
+                return _extract_json_object(content, "Groq")
+            except requests.HTTPError as exc:
+                last_error = exc
+                status_code = exc.response.status_code if exc.response is not None else None
+                should_retry = (
+                    _is_groq_rate_limit_error(exc.response)
+                    or (status_code is not None and status_code >= 500)
+                    or _is_groq_json_validate_failed(exc.response)
+                )
+                if not should_retry or (
+                    not GROQ_BENCHMARK_RETRY_FOREVER
+                    and attempt >= GROQ_BENCHMARK_MAX_RETRIES
+                ):
+                    raise RuntimeError(_format_http_error(exc, "Groq benchmark")) from exc
+                retry_after_seconds = (
+                    None
+                    if _is_groq_json_validate_failed(exc.response)
+                    else _groq_retry_after_seconds(exc.response)
+                )
+                if _is_groq_rate_limit_error(exc.response):
+                    key_pool.mark_rate_limited(
+                        key_index,
+                        retry_after_seconds or GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS,
+                    )
+            except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
+                last_error = exc
+                if not GROQ_BENCHMARK_RETRY_FOREVER and attempt >= GROQ_BENCHMARK_MAX_RETRIES:
+                    raise
+                retry_after_seconds = None
+
+            has_ready_key = key_pool.has_available_key()
+            wait_seconds = max(
+                retry_after_seconds or 0.0,
+                GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS * attempt,
+                (
+                    0.0
+                    if has_ready_key and key_pool.size > 1
+                    else GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS
+                    if GROQ_BENCHMARK_RETRY_FOREVER
+                    else 0.0
+                ),
+            ) + random.uniform(0.0, GROQ_BENCHMARK_RETRY_JITTER_SECONDS)
+            wait_seconds = min(wait_seconds, GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS)
+            if wait_seconds > 0:
+                shared_openai_request_gate().push_cooldown(wait_seconds)
+            error_text = (
+                _format_http_error(last_error, "Groq benchmark")
+                if isinstance(last_error, requests.HTTPError)
+                else str(last_error)
+            )
+            print(
+                f"⚠️ Benchmark Groq request attempt {attempt}/"
+                f"{'∞' if GROQ_BENCHMARK_RETRY_FOREVER else GROQ_BENCHMARK_MAX_RETRIES} failed: "
+                f"{error_text}. {key_pool.label(key_index)} will rotate if another key is available. "
+                f"Retrying in {wait_seconds:.1f}s."
+            )
+            if wait_seconds > 0:
+                time.sleep(wait_seconds)
+
+        raise RuntimeError(
+            f"Benchmark Groq request failed after {GROQ_BENCHMARK_MAX_RETRIES} attempts: {last_error}"
+        )

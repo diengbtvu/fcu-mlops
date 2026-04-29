@@ -1,0 +1,65 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "According to the Grey Relational Analysis, VFA is the most important feature for predicting HRT 12 -4 h with a score of 0.7931, followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768), and Propionate (0.7596).",
+  "explanation_full": "The Grey Relational Analysis highlights the relative importance of different features in predicting HRT 12 -4 h.  VFA emerges as the most influential feature with a score of 0.7931, indicating its strong correlation with the target variable. Butyrate follows closely with a score of 0.7902, suggesting its significant contribution to the prediction. Acetate (0.7772), VSS (0.7768), and Propionate (0.7596) also demonstrate notable importance.  The analysis provides valuable insights into feature relevance for modeling HRT 12 -4 h.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:top_feature",
+      "claim_text": "VFA is the most important feature for predicting HRT 12 -4 h with a score of 0.7931, followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768), and Propionate (0.7596).",
+      "claim_type": "rank_score",
+      "span_category": "gra::gra_score",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:top_feature",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": 0.7931,
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate"
+      ],
+      "feature_count": 5,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:ranking",
+      "claim_text": "VFA is the most important feature for predicting HRT 12 -4 h with a score of 0.7931, followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768), and Propionate (0.7596).",
+      "claim_type": "rank_score",
+      "span_category": "ranking::gra_score",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:ranking",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": 0.7931,
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate"
+      ],
+      "feature_count": 5,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

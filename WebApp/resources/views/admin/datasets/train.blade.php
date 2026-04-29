@@ -103,6 +103,23 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="llm_provider" class="form-label fw-bold">AI provider</label>
+                                <select name="llm_provider" id="llm_provider" class="form-select">
+                                    <option value="groq" selected>Groq API</option>
+                                    <option value="ollama">Ollama local</option>
+                                    <option value="openai">OpenAI API</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="llm_model" class="form-label fw-bold">AI model for explanations and benchmark</label>
+                                <select name="llm_model" id="llm_model" class="form-select"></select>
+                                <small class="text-muted">Used for AI report explanations and Arm A/B/C benchmark generation.</small>
+                            </div>
+                        </div>
+
                         <!-- Hyperparameters -->
                         <h6 class="border-bottom pb-2 mb-3">{{ __('datasets.hyperparameters') }}</h6>
                         
@@ -263,6 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const modelTypeSelect = document.getElementById('model_type');
     const trainingScopeSelect = document.getElementById('training_scope');
     const modelNameInput = document.getElementById('model_name');
+    const llmProviderSelect = document.getElementById('llm_provider');
+    const llmModelSelect = document.getElementById('llm_model');
     const treeParams = document.getElementById('tree_params');
     const svmParams = document.getElementById('svm_params');
     const knnParams = document.getElementById('knn_params');
@@ -294,6 +313,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let sessionId = null;
     let progressInterval = null;
+
+    const llmModelsByProvider = {
+        groq: [
+            { value: 'openai/gpt-oss-120b', label: 'GPT-OSS 120B' },
+            { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B Versatile' }
+        ],
+        ollama: [
+            { value: 'gemma2:9b', label: 'gemma2:9b' }
+        ],
+        openai: [
+            { value: 'gpt-5.2', label: 'gpt-5.2' }
+        ]
+    };
+
+    function updateLlmModelOptions() {
+        if (!llmProviderSelect || !llmModelSelect) {
+            return;
+        }
+        const provider = llmProviderSelect.value || 'groq';
+        const models = llmModelsByProvider[provider] || [];
+        llmModelSelect.innerHTML = '';
+        models.forEach(function(model) {
+            const option = document.createElement('option');
+            option.value = model.value;
+            option.textContent = model.label;
+            llmModelSelect.appendChild(option);
+        });
+    }
 
     function buildReportAssetUrl(reportInfo, filename) {
         const routePrefixRaw = String(reportInfo?.route_prefix || '').trim();
@@ -455,6 +502,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateModelUI(this.value);
     });
     updateModelUI(modelTypeSelect.value);
+    if (llmProviderSelect) {
+        llmProviderSelect.addEventListener('change', updateLlmModelOptions);
+        updateLlmModelOptions();
+    }
 
     // Function to start progress polling
     function startProgressPolling(sid) {
@@ -533,6 +584,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const modelType = modelTypeSelect.value;
         const trainingScope = trainingScopeSelect ? trainingScopeSelect.value : 'all_models_compare';
+        const llmProvider = llmProviderSelect ? llmProviderSelect.value : 'groq';
+        const llmModel = llmModelSelect ? llmModelSelect.value : '';
         const modelNameMap = {
             random_forest: 'Random Forest',
             xgboost: 'XGBoost',
@@ -546,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ? 'single model mode (no comparison)'
             : 'all-model comparison mode (SVM/DT/RF/KNN/XGBoost)';
         
-        if (!confirm(`Start training ${modelName} model in ${scopeLabel}? This may take several minutes.`)) {
+        if (!confirm(`Start training ${modelName} model in ${scopeLabel} using ${llmProvider}:${llmModel}? This may take several minutes.`)) {
             return;
         }
 

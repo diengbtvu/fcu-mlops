@@ -8,38 +8,40 @@
       "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VSS is the most important feature",
-      "status": "unverifiable",
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "claim_text": "The top three most important features are VFA, Butyrate, and Acetate.",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
-      "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
-      "numeric_delta": null
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:top_feature"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 3
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "VSS as the most critical predictor with an importance score of 0.5052",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "claim_text": "VSS has an importance of 2.",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance"
       ],
       "reason": "Gold value for VSS importance is 0.5052222633.",
-      "numeric_delta": 2.226329999999166e-05
+      "numeric_delta": 1.4947777367000001
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate, Butyrate, and VFA form the next tier of highly influential features",
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:ranking",
+      "claim_text": "The feature importance has a ranking of 2.",
       "status": "unverifiable",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "reason": "No matching numeric fact was found for this claim.",
       "numeric_delta": null
     }
   ]

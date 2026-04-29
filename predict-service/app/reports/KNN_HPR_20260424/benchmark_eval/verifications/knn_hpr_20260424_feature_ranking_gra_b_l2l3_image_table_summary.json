@@ -8,57 +8,27 @@
       "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA exhibits the highest predictive score (0.7931), establishing it as the primary driver in the feature ranking.",
-      "status": "supported",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:VFA"
-      ],
-      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
-      "numeric_delta": 1.3543695608908557e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Butyrate follows closely (0.7902)",
-      "status": "supported",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Butyrate"
-      ],
-      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
-      "numeric_delta": 4.6755017702460044e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate is the third most important (0.7772)",
-      "status": "supported",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Acetate"
-      ],
-      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
-      "numeric_delta": 1.999763680660127e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "VFA, Butyrate, and Acetate are the top three features",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top four most important features for predicting model performance.",
       "status": "contradicted",
       "semantic_level": "L2L3",
       "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:ranking"
+        "KNN_HPR_20260424:feature_ranking/gra:top_feature"
       ],
       "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 3
+      "numeric_delta": 4
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:ranking",
+      "claim_text": "These features likely have a strong influence on the relationships between variables in the dataset, contributing significantly to the overall accuracy of the KNN model with an R² of 0.81717.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
     }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+      "claim_text": "R2 score of 0.73",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.73,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+      "claim_text": "low RMSE (0.14)",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "subject": "SVM",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "metric": "max_abs_residual",
+      "value": 0.14,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+      "evidence_span": "R2 score of 0.73",
+      "stated_value": 0.73,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "evidence_span": "low RMSE (0.14)",
+      "stated_value": 0.14,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

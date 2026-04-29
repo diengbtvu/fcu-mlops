@@ -317,7 +317,7 @@ class AdminControllerTest extends TestCase
                         'input_condition' => 'image_table_summary',
                         'asset_count' => 24,
                         'provider' => 'benchmark_selected',
-                        'model' => 'gemma4:e4b',
+                        'model' => 'gemma2:9b',
                     ],
                     'leaderboard_preview' => [
                         [
@@ -486,7 +486,7 @@ class AdminControllerTest extends TestCase
                         'semantic_level' => null,
                         'asset_count' => 24,
                         'provider' => 'benchmark_selected',
-                        'model' => 'gemma4:e4b',
+                        'model' => 'gemma2:9b',
                     ],
                     'leaderboard_preview' => [
                         [
@@ -531,7 +531,7 @@ class AdminControllerTest extends TestCase
                 ],
             ], 200),
             '*/train/reports/*/benchmark_eval/run_metadata.json' => Http::response([
-                'client_model' => 'gemma4:e4b',
+                'client_model' => 'gemma2:9b',
                 'created_at' => '2026-04-17T00:00:00Z',
             ], 200),
             '*/train/reports/*/benchmark_eval/manifest.jsonl' => Http::response($manifestJsonl, 200),

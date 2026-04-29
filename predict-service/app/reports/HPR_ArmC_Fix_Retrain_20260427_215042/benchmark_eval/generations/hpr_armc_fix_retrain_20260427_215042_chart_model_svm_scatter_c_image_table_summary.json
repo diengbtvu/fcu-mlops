@@ -1,0 +1,219 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model has a high R2 score (0.73) and low RMSE (0.14), indicating good performance in predicting the target variable.",
+  "explanation_full": "Based on the provided scatter plot, the SVM model demonstrates strong predictive capabilities. The R2 score of 0.73 suggests a good fit between the predicted and actual values, while the RMSE of 0.14 indicates relatively low prediction errors.  The plot also visualizes the relationship between predicted and actual values, further supporting the model's effectiveness.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+      "claim_text": "R2 score of 0.73",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.73,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+      "claim_text": "low RMSE (0.14)",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "subject": "SVM",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "metric": "max_abs_residual",
+      "value": 0.14,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "corrected",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "corrected",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The SVM model has a high R2 score (0.73) and low RMSE (0.14), indicating good performance in predicting the target variable.",
+        "draft_explanation_full": "Based on the provided scatter plot, the SVM model demonstrates strong predictive capabilities. The R2 score of 0.73 suggests a good fit between the predicted and actual values, while the RMSE of 0.14 indicates relatively low prediction errors.  The plot also visualizes the relationship between predicted and actual values, further supporting the model's effectiveness.",
+        "draft_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+            "claim_text": "R2 score of 0.73",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+            "subject": "SVM",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.73,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+            "claim_text": "low RMSE (0.14)",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+            "subject": "SVM",
+            "predicate": "max_abs_residual",
+            "object": null,
+            "metric": "max_abs_residual",
+            "value": 0.14,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+            "claim_text": "R2 score of 0.73",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The R2 score is reported as 0.73 in the evidence.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score"
+            ],
+            "grounded_fact_summary": "The SVM model has an R2 score of 0.7324 as reported in the summary.json file."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+            "claim_text": "low RMSE (0.14)",
+            "status": "contradicted",
+            "recommended_action": "edit",
+            "rationale": "The provided evidence states the RMSE is 0.1369, not 0.14.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:rmse"
+            ],
+            "grounded_fact_summary": "The RMSE for the SVM model is 0.1369 according to the evidence."
+          }
+        ],
+        "corrected_explanation_short": "The SVM model has a high R2 score (0.73) and low RMSE (0.14), indicating good performance in predicting the target variable.",
+        "corrected_explanation_full": "Based on the provided scatter plot, the SVM model demonstrates strong predictive capabilities. The R2 score of 0.73 suggests a good fit between the predicted and actual values, while the RMSE of 0.14 indicates relatively low prediction errors.  The plot also visualizes the relationship between predicted and actual values, further supporting the model's effectiveness.",
+        "corrected_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+            "claim_text": "R2 score of 0.73",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+            "subject": "SVM",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.73,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+            "claim_text": "low RMSE (0.14)",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+            "subject": "SVM",
+            "predicate": "max_abs_residual",
+            "object": null,
+            "metric": "max_abs_residual",
+            "value": 0.14,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+            "claim_text": "R2 score of 0.73",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The R2 score is reported as 0.73 in the summary.json file.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score"
+            ],
+            "grounded_fact_summary": "The SVM model has an R2 score of 0.7324 as reported in the summary.json file."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+            "claim_text": "low RMSE (0.14)",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim states 'low RMSE (0.14)' but the evidence packet reports a max_abs_residual of 0.610181. This discrepancy needs to be investigated and clarified.",
+            "matched_fact_ids": [],
+            "grounded_fact_summary": "The provided evidence does not support the claim about RMSE being 0.14."
+          }
+        ],
+        "draft_alignment_issues": [],
+        "corrected_alignment_issues": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 1,
+      "edit": 1
+    }
+  },
+  "parent_draft_hash": "90df505df6d4c47347ab1a4c63becce05ab4d986",
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score",
+      "evidence_span": "R2 score of 0.73",
+      "stated_value": 0.73,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "evidence_span": "low RMSE (0.14)",
+      "stated_value": 0.14,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:claim:1",
+      "claim_text": "KNN with R² = 0.81717 and MSE = 0.012810",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:claim:2",
+      "claim_text": "KNN with R² = 0.81717 and MSE = 0.012810",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "best_mse_KNN",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_mse",
+      "evidence_span": "KNN with R² = 0.81717 and MSE = 0.012810",
+      "stated_value": "0.012810",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "best_r2_KNN",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_r2",
+      "evidence_span": "KNN with R² = 0.81717 and MSE = 0.012810",
+      "stated_value": "0.81717",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

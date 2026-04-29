@@ -1,0 +1,103 @@
+{
+  "status": "success",
+  "best_model": "KNN",
+  "r2": 0.8171678017037467,
+  "mse": 0.012809918378105262,
+  "metrics": {
+    "r2_score": 0.8171678017037467,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642,
+    "rmse": 0.11318090995439674
+  },
+  "top_features": [
+    "VFA",
+    "Butyrate",
+    "Acetate"
+  ],
+  "message": "Training completed. Best model saved.",
+  "gra_ranking": [
+    {
+      "rank": 1,
+      "feature": "VFA",
+      "score": 0.7931135436956089
+    },
+    {
+      "rank": 2,
+      "feature": "Butyrate",
+      "score": 0.7902467550177025
+    },
+    {
+      "rank": 3,
+      "feature": "Acetate",
+      "score": 0.7772199976368066
+    },
+    {
+      "rank": 4,
+      "feature": "VSS",
+      "score": 0.7768076560138514
+    },
+    {
+      "rank": 5,
+      "feature": "Propionate",
+      "score": 0.7595541448908357
+    },
+    {
+      "rank": 6,
+      "feature": "Ethanol",
+      "score": 0.7329323381694035
+    },
+    {
+      "rank": 7,
+      "feature": "COD-O",
+      "score": 0.7183267981481565
+    },
+    {
+      "rank": 8,
+      "feature": "pH",
+      "score": 0.7101968586952534
+    },
+    {
+      "rank": 9,
+      "feature": "ORP_Low",
+      "score": 0.6396185753634854
+    },
+    {
+      "rank": 10,
+      "feature": "ORP_Mid",
+      "score": 0.6216932459109569
+    },
+    {
+      "rank": 11,
+      "feature": "Sucrose_Degradation",
+      "score": 0.5833963988102198
+    }
+  ],
+  "artifacts": {
+    "best_model_path": "/app/ml_model/best_model.pkl",
+    "best_scaler_x_path": "/app/ml_model/best_scaler_X.pkl",
+    "best_scaler_y_path": "/app/ml_model/best_scaler_Y.pkl",
+    "shared_scaler_path": "/app/ml_model/scaler.pkl",
+    "best_model_info_path": "/app/ml_model/best_model_info.txt",
+    "gra_ranking_path": "/app/ml_train/artifacts/gra_ranking.json",
+    "incremental_results_path": "/app/ml_train/artifacts/table1_incremental_results.csv",
+    "shap_values_path": "/app/ml_train/artifacts/best_model_shap_values.npy",
+    "shap_importance_path": "/app/ml_train/artifacts/best_model_shap_importance.csv",
+    "fig3a_gra_ranking_path": "/app/ml_train/artifacts/fig3a_gra_ranking.png",
+    "fig3b_shap_analysis_path": "/app/ml_train/artifacts/fig3b_shap_analysis.png",
+    "fig3_feature_analysis_path": "/app/ml_train/artifacts/fig3_feature_analysis.png",
+    "fig4_univariate_analysis_path": "/app/ml_train/artifacts/fig4_univariate_analysis.png",
+    "fig5_model_comparison_path": "/app/ml_train/artifacts/fig5_model_comparison.png",
+    "fig6ab_mse_r2_features_path": "/app/ml_train/artifacts/fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time_path": "/app/ml_train/artifacts/fig6c_prediction_time.png",
+    "results_summary_text_path": "/app/ml_train/artifacts/results_summary.txt",
+    "summary_path": "/app/ml_train/artifacts/best_model_summary.json",
+    "model_svm_scatter_path": "/app/ml_train/artifacts/model_svm_scatter.png",
+    "model_dt_scatter_path": "/app/ml_train/artifacts/model_dt_scatter.png",
+    "model_rf_scatter_path": "/app/ml_train/artifacts/model_rf_scatter.png",
+    "model_knn_scatter_path": "/app/ml_train/artifacts/model_knn_scatter.png",
+    "model_xgboost_scatter_path": "/app/ml_train/artifacts/model_xgboost_scatter.png"
+  },
+  "best_model_type": "knn",
+  "selected_sheet": "HRT 12 -4 h",
+  "rows_after_preprocessing": 197
+}

@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest model achieved an R2 score of 0.7756, indicating a strong correlation between predicted and actual values.",
+  "explanation_full": "The Random Forest (RF) model demonstrated good performance with an R2 score of 0.7756, meaning it explained 77.56% of the variance in the target variable. The RMSE was 0.1254, indicating the average prediction error was relatively low. Additionally, the correlation between predicted and actual values was high (0.8851). These metrics suggest that the RF model is effective at capturing the underlying patterns in the data.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model achieved an R2 score of 0.7756, indicating a strong correlation between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "R2 score",
+      "object": "0.7756",
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

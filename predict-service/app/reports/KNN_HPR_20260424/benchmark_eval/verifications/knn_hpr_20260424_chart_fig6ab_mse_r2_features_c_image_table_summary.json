@@ -8,85 +8,41 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model achieved the highest R² score (0.83014)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
-      ],
-      "reason": "Gold value for KNN r2_score is 0.83014.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "and lowest MSE (0.011901) when using 9 features",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse",
+      "claim_text": "The KNN model has the best MSE of 0.012810.",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse"
       ],
       "reason": "Gold value for KNN mse is 0.011901.",
-      "numeric_delta": 0.0
+      "numeric_delta": 0.0009090000000000001
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "The RF model performed best with 11 features (R²=0.785537, MSE=0.015026)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
-      ],
-      "reason": "Gold value for RF r2_score is 0.785537.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "The KNN model demonstrated the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+      "claim_text": "The KNN model has the best R² score of 0.81717.",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
       ],
       "reason": "Gold value for KNN r2_score is 0.83014.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "The corresponding feature subset is 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum"
-      ],
-      "reason": "Gold feature_subset_optimum count is 9.",
-      "numeric_delta": 0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "The summary text also indicates that KNN has the best overall performance with R² = 0.81717 and MSE = 0.012810 on the test set",
-      "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:metric:KNN:r2_score"
-      ],
-      "reason": "Gold value for KNN r2_score is 0.83014.",
       "numeric_delta": 0.012970000000000037
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "claim_text": "The KNN model uses a feature subset that is optimal.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     }
   ]
 }

@@ -8,41 +8,41 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA, Butyrate, and Acetate are the most significant predictors for HPR.",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "claim_text": "hpr has a target correlation of 3",
       "status": "unverifiable",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "reason": "No matching numeric fact was found for this claim.",
       "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "VFA's correlation with HPR is 0.7984.",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
-      ],
-      "reason": "Gold value for VFA target_correlation is 0.7984.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "The correlation between VFA and Butyrate is 0.9601.",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "The correlation between Butyrate and VFA is 2",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
       ],
       "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
-      "numeric_delta": 0.0
+      "numeric_delta": 1.0399
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+      "claim_text": "The target correlation of VFA is 2",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 1.2016
     }
   ]
 }

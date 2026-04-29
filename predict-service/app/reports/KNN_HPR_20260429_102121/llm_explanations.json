@@ -1,0 +1,263 @@
+{
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "generated_at": "2026-04-29T02:31:59.347071",
+  "overview": {
+    "en": "",
+    "zh_TW": ""
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "The table compares five models on four error metrics; KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. It shows KNN outperforms others, but values are based on 197 rows and may vary with different data.",
+      "zh_TW": "此表比較五種模型的四項誤差指標，KNN 以 R2 = 0.817、RMSE = 0.113、MSE = 0.0128、MAE = 0.075 最高。結果基於 197 筆資料，若資料變化可能會不同。",
+      "benchmark_payload": {
+        "explanation_short": "KNN achieves the best R2 and lowest errors among the five models.",
+        "explanation_full": "The table compares five models on four error metrics; KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. It shows KNN outperforms others, but values are based on 197 rows and may vary with different data.",
+        "claims": []
+      }
+    },
+    "fig3a_gra_ranking": {
+      "en": "The chart ranks the top five features by Grey Relational Analysis scores: VFA (0.7931), Butyrate (0.7902), Acetate (0.7772), VSS (0.7768) and Propionate (0.7596). Higher scores indicate a stronger relationship to the target, with VFA ranking first.",
+      "zh_TW": "此圖以灰關聯分析分數排列前五名特徵：VFA 0.7931、丁酸 0.7902、醋酸 0.7772、VSS 0.7768、丙酸 0.7596。分數越高表示與目標的關聯越強，VFA 排名最高。",
+      "benchmark_payload": {
+        "explanation_short": "VFA leads the GRA ranking, followed closely by Butyrate and Acetate.",
+        "explanation_full": "The chart ranks the top five features by Grey Relational Analysis scores: VFA (0.7931), Butyrate (0.7902), Acetate (0.7772), VSS (0.7768) and Propionate (0.7596). Higher scores indicate a stronger relationship to the target, with VFA ranking first.",
+        "claims": []
+      }
+    },
+    "fig3b_shap_analysis": {
+      "en": "The SHAP chart shows each feature’s average impact on predictions, with ORP_Low contributing 0.033, followed by Butyrate at 0.0321. Higher values mean the feature pushes the model’s output up or down more strongly.",
+      "zh_TW": "此 SHAP 圖表顯示各特徵對預測的平均影響，ORP_Low 為 0.033，Butyrate 為 0.0321。數值越大表示特徵對模型輸出影響越大。",
+      "benchmark_payload": {
+        "explanation_short": "SHAP highlights ORP_Low and Butyrate as the top impact features.",
+        "explanation_full": "The SHAP chart shows each feature’s average impact on predictions, with ORP_Low contributing 0.033, followed by Butyrate at 0.0321. Higher values mean the feature pushes the model’s output up or down more strongly.",
+        "claims": []
+      }
+    },
+    "fig3_feature_analysis": {
+      "en": "The chart combines three rankings: GRA (top VFA 0.793, Butyrate 0.790, Acetate 0.777), feature importance (VSS 0.505, Acetate 0.12) and SHAP (ORP_Low 0.033, Butyrate 0.032). It shows which variables most influence the KNN model, but scores differ across methods, so no single ranking is definitive.",
+      "zh_TW": "圖表彙整三種排序：GRA 前三名為VFA 0.793、丁酸鹽 0.790、醋酸鹽 0.777；特徵重要性前兩名為VSS 0.505、醋酸鹽 0.12；SHAP 前兩名為ORP_Low 0.033、丁酸鹽 0.032。圖示哪些變數對KNN模型影響最大，但不同方法的分數不完全一致，故無單一絕對排名。",
+      "benchmark_payload": {
+        "explanation_short": "The figure highlights VFA, Butyrate, and Acetate as top features across GRA, importance, and SHAP rankings.",
+        "explanation_full": "The chart combines three rankings: GRA (top VFA 0.793, Butyrate 0.790, Acetate 0.777), feature importance (VSS 0.505, Acetate 0.12) and SHAP (ORP_Low 0.033, Butyrate 0.032). It shows which variables most influence the KNN model, but scores differ across methods, so no single ranking is definitive.",
+        "claims": []
+      }
+    },
+    "fig4_univariate_analysis": {
+      "en": "The chart displays pairwise correlations, with the strongest being Butyrate‑VFA (0.9601) and Acetate‑VFA (0.9428). It also shows each feature's correlation to the target HPR, where VFA leads at 0.7984; remember correlation alone does not imply causation.",
+      "zh_TW": "圖表顯示變數之間的相關係數，最高為丁酸與VFA (0.9601) 及醋酸與VFA (0.9428)。同時列出各特徵與HPR的相關性，VFA最高 (0.7984)，但相關不代表因果。",
+      "benchmark_payload": {
+        "explanation_short": "Shows strongest variable correlations and their link to HPR, highlighting VFA as the top predictor.",
+        "explanation_full": "The chart displays pairwise correlations, with the strongest being Butyrate‑VFA (0.9601) and Acetate‑VFA (0.9428). It also shows each feature's correlation to the target HPR, where VFA leads at 0.7984; remember correlation alone does not imply causation.",
+        "claims": []
+      }
+    },
+    "fig5_model_comparison": {
+      "en": "Figure 5 compares five models; KNN leads with R² = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. The others perform worse, so KNN is the preferred choice, though results may vary on different data.",
+      "zh_TW": "圖5比較五種模型，KNN 以 R² = 0.817、RMSE = 0.113、MSE = 0.0128、MAE = 0.075 最高。其他模型表現較差，選擇 KNN 時仍需留意資料變化可能影響結果。",
+      "benchmark_payload": {
+        "explanation_short": "KNN outperforms other models with the highest R² and lowest errors.",
+        "explanation_full": "Figure 5 compares five models; KNN leads with R² = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. The others perform worse, so KNN is the preferred choice, though results may vary on different data.",
+        "claims": []
+      }
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "Best feature-count step per model -> SVM: n=4, R2=0.779437, MSE=0.015453 | DT: n=9, R2=0.671427, MSE=0.023021 | RF: n=11, R2=0.785537, MSE=0.015026 | KNN: n=9, R2=0.83014, MSE=0.011901 | XGBoost: n=4, R2=0.768407, MSE=0.016226. This shows each model’s optimal number of features and its performance.",
+      "zh_TW": "每個模型的最佳特徵數步驟 → SVM：n=4，R²=0.779437，MSE=0.015453 | DT：n=9，R²=0.671427，MSE=0.023021 | RF：n=11，R²=0.785537，MSE=0.015026 | KNN：n=9，R²=0.83014，MSE=0.011901 | XGBoost：n=4，R²=0.768407，MSE=0.016226。此圖顯示各模型在不同特徵數下的最佳表現。",
+      "benchmark_payload": {
+        "explanation_short": "KNN achieves highest R² (0.83) with 9 features and lowest MSE (0.0119).",
+        "explanation_full": "Best feature-count step per model -> SVM: n=4, R2=0.779437, MSE=0.015453 | DT: n=9, R2=0.671427, MSE=0.023021 | RF: n=11, R2=0.785537, MSE=0.015026 | KNN: n=9, R2=0.83014, MSE=0.011901 | XGBoost: n=4, R2=0.768407, MSE=0.016226. This shows each model’s optimal number of features and its performance.",
+        "claims": []
+      }
+    },
+    "fig6c_prediction_time": {
+      "en": "The chart shows KNN’s predicted HPR over time compared to the actual values, with the true peak at index 130 (value 1.0) and the model’s peak at index 146 (value 0.83). The average absolute timing error is 0.067 and the overall sequence correlation is 0.93, indicating good alignment but a slight delay.",
+      "zh_TW": "圖表比較 KNN 預測的 HPR 時間序列與實際值，實際峰值出現在第130點（值1.0），模型預測峰值在第146點（值0.83）。平均絕對誤差為0.067，序列相關係數0.93，顯示預測趨勢相符但有輕微延遲。",
+      "benchmark_payload": {
+        "explanation_short": "KNN predicts the peak slightly later with good overall correlation.",
+        "explanation_full": "The chart shows KNN’s predicted HPR over time compared to the actual values, with the true peak at index 130 (value 1.0) and the model’s peak at index 146 (value 0.83). The average absolute timing error is 0.067 and the overall sequence correlation is 0.93, indicating good alignment but a slight delay.",
+        "claims": []
+      }
+    },
+    "model_svm_scatter": {
+      "en": "SVM scatter diagnostics -> R2=0.7324, RMSE=0.1369, MAE=0.0946, corr(pred,actual)=0.86576, slope=0.858436, max_abs_residual=0.610181.",
+      "zh_TW": "SVM 散點圖診斷 → R2=0.7324、RMSE=0.1369、MAE=0.0946、預測與實際相關係數=0.86576、斜率=0.858436、最大絕對殘差=0.610181。",
+      "benchmark_payload": {
+        "explanation_short": "SVM model shows moderate fit with R2 0.73 and RMSE 0.14.",
+        "explanation_full": "SVM scatter diagnostics -> R2=0.7324, RMSE=0.1369, MAE=0.0946, corr(pred,actual)=0.86576, slope=0.858436, max_abs_residual=0.610181.",
+        "claims": []
+      }
+    },
+    "model_dt_scatter": {
+      "en": "The scatter plot compares the decision‑tree model’s predictions to actual values; points cluster around the diagonal line, showing R²≈0.56 and correlation 0.79. Prediction errors can be as large as 0.60, so expect some noticeable deviations.",
+      "zh_TW": "此散佈圖比較決策樹模型的預測與實際值，點大致落在對角線附近，R²約為0.56，相關係數0.79。最大誤差可達0.60，使用時需留意可能的明顯偏差。",
+      "benchmark_payload": {
+        "explanation_short": "Scatter plot shows DT predictions vs actuals with R²≈0.56 and up to 0.60 error.",
+        "explanation_full": "The scatter plot compares the decision‑tree model’s predictions to actual values; points cluster around the diagonal line, showing R²≈0.56 and correlation 0.79. Prediction errors can be as large as 0.60, so expect some noticeable deviations.",
+        "claims": []
+      }
+    },
+    "model_rf_scatter": {
+      "en": "The scatter plot compares the random‑forest model’s predictions to actual values, showing a correlation of 0.89 and a slope near 0.85. Overall performance is moderate with R² = 0.78, RMSE = 0.13 and MAE = 0.08, but occasional large errors up to 0.45 exist.",
+      "zh_TW": "此散佈圖顯示隨機森林模型的預測與實際值的相關係數為0.89，斜率約0.85。模型R²為0.78，RMSE 0.13，MAE 0.08，但最大誤差可達0.45，需留意。",
+      "benchmark_payload": {
+        "explanation_short": "Random forest predictions correlate 0.89 with actuals, R² = 0.78.",
+        "explanation_full": "The scatter plot compares the random‑forest model’s predictions to actual values, showing a correlation of 0.89 and a slope near 0.85. Overall performance is moderate with R² = 0.78, RMSE = 0.13 and MAE = 0.08, but occasional large errors up to 0.45 exist.",
+        "claims": []
+      }
+    },
+    "model_knn_scatter": {
+      "en": "The scatter plot shows predicted vs. actual values for the KNN model, with R²≈0.82 and a correlation of 0.91. It indicates good fit but the slope 0.88 and max residual 0.37 suggest some under‑prediction at higher values.",
+      "zh_TW": "此散佈圖比較 KNN 模型的預測值與實際值，R² 約 0.82，相關係數 0.91，顯示整體配適良好。斜率 0.88 且最大絕對殘差 0.37，提醒在較高值時可能有低估情形。",
+      "benchmark_payload": {
+        "explanation_short": "KNN predictions align well with actual values (R²≈0.82, corr≈0.91) but show slight under‑prediction at high range.",
+        "explanation_full": "The scatter plot shows predicted vs. actual values for the KNN model, with R²≈0.82 and a correlation of 0.91. It indicates good fit but the slope 0.88 and max residual 0.37 suggest some under‑prediction at higher values.",
+        "claims": []
+      }
+    },
+    "model_xgboost_scatter": {
+      "en": "The scatter plot compares XGBoost’s predicted values to actual values, showing a correlation of 0.88 and a slope near 0.84, indicating predictions tend to follow the true trend. Overall performance metrics are R² = 0.75, RMSE = 0.13, MAE = 0.10, but some errors reach up to 0.41.",
+      "zh_TW": "此散佈圖比較 XGBoost 的預測值與實際值，相關係數為 0.88，斜率約 0.84，顯示預測大致跟隨真實趨勢。整體指標為 R² = 0.75、RMSE = 0.13、MAE = 0.10，但最大誤差可達 0.41。",
+      "benchmark_payload": {
+        "explanation_short": "XGBoost predictions correlate 0.88 with actual values, achieving R² = 0.75 and RMSE = 0.13.",
+        "explanation_full": "The scatter plot compares XGBoost’s predicted values to actual values, showing a correlation of 0.88 and a slope near 0.84, indicating predictions tend to follow the true trend. Overall performance metrics are R² = 0.75, RMSE = 0.13, MAE = 0.10, but some errors reach up to 0.41.",
+        "claims": []
+      }
+    },
+    "model_comparison_bars": {
+      "en": "The bar chart compares five models on four error metrics; KNN leads with R² = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. It shows that other models perform worse, so KNN is the best choice for this data, though results may vary on new samples.",
+      "zh_TW": "此圖比較五種模型的四項誤差指標，KNN 以 R² = 0.817、RMSE = 0.113、MSE = 0.0128、MAE = 0.075 最高。其他模型表現較差，KNN 為此資料的最佳模型，但在新資料上可能會有變化。",
+      "benchmark_payload": {
+        "explanation_short": "KNN outperforms other models across all four error metrics.",
+        "explanation_full": "The bar chart compares five models on four error metrics; KNN leads with R² = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075. It shows that other models perform worse, so KNN is the best choice for this data, though results may vary on new samples.",
+        "claims": []
+      }
+    },
+    "predicted_vs_actual": {
+      "en": "The chart compares KNN predicted versus actual values, showing R²≈0.817, RMSE≈0.113, MAE≈0.075 and a correlation of 0.907. While overall fit is strong, the largest absolute error reaches about 0.37, so individual predictions can vary noticeably.",
+      "zh_TW": "此圖比較 KNN 的預測值與實際值，R² 約 0.817、RMSE 約 0.113、MAE 約 0.075，且相關係數為 0.907。整體配合度良好，但最大絕對誤差約 0.37，個別預測仍可能有明顯偏差。",
+      "benchmark_payload": {
+        "explanation_short": "KNN predictions achieve good fit with R²≈0.82 and low error metrics.",
+        "explanation_full": "The chart compares KNN predicted versus actual values, showing R²≈0.817, RMSE≈0.113, MAE≈0.075 and a correlation of 0.907. While overall fit is strong, the largest absolute error reaches about 0.37, so individual predictions can vary noticeably.",
+        "claims": []
+      }
+    },
+    "residuals": {
+      "en": "The KNN model achieved R² = 0.8172, RMSE = 0.1132 and MAE = 0.075, with residuals averaging 0.012 and a standard deviation of 0.113; the largest absolute error was 0.367. Predictions correlate strongly with actual values (0.907), but some errors up to 0.37 suggest occasional mis‑predictions.",
+      "zh_TW": "KNN 模型的 R² 為 0.8172，RMSE 為 0.1132，MAE 為 0.075，殘差平均 0.012，標準差 0.113，最大絕對誤差 0.367。預測與實際值相關係數 0.907，顯示整體配合良好，但仍有最高約 0.37 的誤差需留意。",
+      "benchmark_payload": {
+        "explanation_short": "KNN shows good fit with R² 0.817 and low average residuals.",
+        "explanation_full": "The KNN model achieved R² = 0.8172, RMSE = 0.1132 and MAE = 0.075, with residuals averaging 0.012 and a standard deviation of 0.113; the largest absolute error was 0.367. Predictions correlate strongly with actual values (0.907), but some errors up to 0.37 suggest occasional mis‑predictions.",
+        "claims": []
+      }
+    },
+    "feature_importance": {
+      "en": "The chart shows each variable's contribution to the model, with VSS contributing the most (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075) and Propionate (0.058). These scores indicate relative influence, but they do not represent absolute effect sizes.",
+      "zh_TW": "圖表顯示各變數對模型的貢獻度，VSS最高為0.505，其次是Acetate 0.12、Butyrate 0.098、VFA 0.075與Propionate 0.058。這些數值僅代表相對重要性，並非絕對影響大小。",
+      "benchmark_payload": {
+        "explanation_short": "Feature importance chart shows VSS highest, followed by Acetate, Butyrate, VFA, and Propionate.",
+        "explanation_full": "The chart shows each variable's contribution to the model, with VSS contributing the most (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075) and Propionate (0.058). These scores indicate relative influence, but they do not represent absolute effect sizes.",
+        "claims": []
+      }
+    },
+    "correlation_heatmap": {
+      "en": "The heatmap shows how each measured variable relates to others; darker colors indicate stronger positive correlations. Notably, Butyrate and total VFA correlate 0.96, and VFA correlates 0.80 with the target HPR, suggesting these are key predictors.",
+      "zh_TW": "此熱圖以顏色深淺顯示各變數之相關程度，顏色越深代表相關性越高。特別是丁酸與總VFA相關係數0.96，VFA與HPR相關0.80，顯示它們是重要的預測因子。",
+      "benchmark_payload": {
+        "explanation_short": "Butyrate and VFA are strongly linked, and VFA strongly predicts HPR.",
+        "explanation_full": "The heatmap shows how each measured variable relates to others; darker colors indicate stronger positive correlations. Notably, Butyrate and total VFA correlate 0.96, and VFA correlates 0.80 with the target HPR, suggesting these are key predictors.",
+        "claims": []
+      }
+    },
+    "feature_distributions": {
+      "en": "The chart shows each feature’s average (mean) and variability (standard deviation). Ethanol has the highest mean (0.474) and the largest spread (0.253), while VSS has the lowest mean (0.358) with moderate spread.",
+      "zh_TW": "此圖展示每個特徵的平均值與變異程度。Ethanol 平均最高 (0.474) 且變異最大 (0.253)，VSS 平均最低 (0.358) 變異屬中等。",
+      "benchmark_payload": {
+        "explanation_short": "The chart shows each feature’s average and variability, highlighting Ethanol as highest mean and spread.",
+        "explanation_full": "The chart shows each feature’s average (mean) and variability (standard deviation). Ethanol has the highest mean (0.474) and the largest spread (0.253), while VSS has the lowest mean (0.358) with moderate spread.",
+        "claims": []
+      }
+    },
+    "feature_vs_target": {
+      "en": "The chart shows how each measured feature correlates with the target HPR. Strongest links are VFA (0.80), Butyrate (0.78) and Acetate (0.76); note that correlation does not prove cause, so predictions should consider other factors.",
+      "zh_TW": "此圖展示各特徵與目標 HPR 的相關程度。最強相關為 VFA (0.80)、丁酸鹽 (0.78) 與醋酸鹽 (0.76)，但相關性不代表因果，預測時仍需考慮其他因素。",
+      "benchmark_payload": {
+        "explanation_short": "Key features most correlated with HPR are VFA, Butyrate, and Acetate.",
+        "explanation_full": "The chart shows how each measured feature correlates with the target HPR. Strongest links are VFA (0.80), Butyrate (0.78) and Acetate (0.76); note that correlation does not prove cause, so predictions should consider other factors.",
+        "claims": []
+      }
+    },
+    "boxplots": {
+      "en": "The boxplots display the distribution of each measured feature. Ethanol, Acetate, Butyrate, Propionate and VSS have the highest average values, and Ethanol and Butyrate show the greatest spread.",
+      "zh_TW": "箱形圖顯示每個特徵的分佈情形。Ethanol、Acetate、Butyrate、Propionate 與 VSS 的平均值最高，且 Ethanol 與 Butyrate 的變異最大。",
+      "benchmark_payload": {
+        "explanation_short": "Boxplots reveal feature means and variability, highlighting top average and most variable features.",
+        "explanation_full": "The boxplots display the distribution of each measured feature. Ethanol, Acetate, Butyrate, Propionate and VSS have the highest average values, and Ethanol and Butyrate show the greatest spread.",
+        "claims": []
+      }
+    },
+    "time_series": {
+      "en": "The chart compares the actual HPR peak (value 1.0 at index 130) with the KNN‑predicted peak (value 0.83 at index 146). The overall sequence correlation is 0.93, indicating the model follows the true pattern closely, though the predicted peak is slightly delayed.",
+      "zh_TW": "圖表顯示實際 HPR 峰值在第 130 點，值為 1.0，模型預測的峰值在第 146 點，值約 0.83。序列相關係數為 0.93，說明預測趨勢與實際相符，但峰值出現稍晚。",
+      "benchmark_payload": {
+        "explanation_short": "The chart shows actual vs. predicted HPR peaks with high correlation (0.93).",
+        "explanation_full": "The chart compares the actual HPR peak (value 1.0 at index 130) with the KNN‑predicted peak (value 0.83 at index 146). The overall sequence correlation is 0.93, indicating the model follows the true pattern closely, though the predicted peak is slightly delayed.",
+        "claims": []
+      }
+    },
+    "model_comparison_table": {
+      "en": "The table compares five models on four error metrics. KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075, while the other models show lower scores.",
+      "zh_TW": "此表比較五種模型的四項誤差指標。KNN 以 R2 = 0.817、RMSE = 0.113、MSE = 0.0128、MAE = 0.075 最高，其他模型表現較差。",
+      "benchmark_payload": {
+        "explanation_short": "KNN outperforms other models across all listed metrics.",
+        "explanation_full": "The table compares five models on four error metrics. KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075, while the other models show lower scores.",
+        "claims": []
+      }
+    },
+    "feature_importance_table": {
+      "en": "The table lists each chemical’s contribution to the model, with VSS contributing about 0.505, Acetate 0.12, Butyrate 0.097, VFA 0.075, and Propionate 0.058. These scores show VSS is the strongest predictor, but the importance values are modest, so predictions also rely on other factors.",
+      "zh_TW": "此表顯示各化學指標對模型的貢獻度，VSS 約 0.505，醋酸 0.12，丁酸 0.097，VFA 0.075，丙酸 0.058。VSS 為最重要特徵，但其重要性仍屬中等，模型預測仍受其他因素影響。",
+      "benchmark_payload": {
+        "explanation_short": "VSS is the top predictor with importance ~0.505, others contribute less.",
+        "explanation_full": "The table lists each chemical’s contribution to the model, with VSS contributing about 0.505, Acetate 0.12, Butyrate 0.097, VFA 0.075, and Propionate 0.058. These scores show VSS is the strongest predictor, but the importance values are modest, so predictions also rely on other factors.",
+        "claims": []
+      }
+    },
+    "best_model_shap_importance": {
+      "en": "The SHAP table lists each feature’s average impact on the model’s predictions. ORP_Low contributes the most (0.033), followed by Butyrate (0.0321) and ORP_Mid (0.0313).",
+      "zh_TW": "此表顯示各特徵對模型預測的平均影響。ORP_Low 影響最大為 0.033，其次是 Butyrate 0.0321 與 ORP_Mid 0.0313。",
+      "benchmark_payload": {
+        "explanation_short": "ORP_Low, Butyrate, and ORP_Mid are the top three SHAP importance values.",
+        "explanation_full": "The SHAP table lists each feature’s average impact on the model’s predictions. ORP_Low contributes the most (0.033), followed by Butyrate (0.0321) and ORP_Mid (0.0313).",
+        "claims": []
+      }
+    },
+    "descriptive_statistics": {
+      "en": "The table shows average (mean) and variability (standard deviation) for each measured feature. Ethanol, Acetate, Butyrate, Propionate, and VSS have the highest means, while Ethanol and Butyrate also show the largest spreads.",
+      "zh_TW": "此表列出每個特徵的平均值與標準差。Ethanol、Acetate、Butyrate、Propionate 與 VSS 的平均值最高，且 Ethanol 與 Butyrate 的變異最大。",
+      "benchmark_payload": {
+        "explanation_short": "The table lists each feature’s mean and standard deviation, highlighting the highest values.",
+        "explanation_full": "The table shows average (mean) and variability (standard deviation) for each measured feature. Ethanol, Acetate, Butyrate, Propionate, and VSS have the highest means, while Ethanol and Butyrate also show the largest spreads.",
+        "claims": []
+      }
+    },
+    "correlation_matrix": {
+      "en": "The table lists how each measured variable relates to others. The strongest links are Butyrate‑VFA (0.96) and Acetate‑VFA (0.94), while VFA also shows the highest correlation with the target HPR (0.80).",
+      "zh_TW": "此表顯示各測項之相關係數。最高相關為丁酸與VFA (0.9601) 及醋酸與VFA (0.9428)，VFA 與 HPR 的相關度為 0.7984。",
+      "benchmark_payload": {
+        "explanation_short": "Correlation matrix highlights strongest variable relationships and their link to HPR.",
+        "explanation_full": "The table lists how each measured variable relates to others. The strongest links are Butyrate‑VFA (0.96) and Acetate‑VFA (0.94), while VFA also shows the highest correlation with the target HPR (0.80).",
+        "claims": []
+      }
+    },
+    "table1_incremental_results": {
+      "en": "The table shows how model performance (R² and MSE) changes as more features are added. For KNN, the best step uses 9 features achieving R² ≈ 0.83 and MSE ≈ 0.012, indicating higher accuracy with these variables.",
+      "zh_TW": "此表列出隨著加入特徵數量，模型的R²與MSE變化。KNN在使用9個特徵時取得最高R²約0.83、MSE約0.012，顯示此組合表現最佳。",
+      "benchmark_payload": {
+        "explanation_short": "KNN reaches its highest R² (~0.83) and lowest MSE (~0.012) with 9 features.",
+        "explanation_full": "The table shows how model performance (R² and MSE) changes as more features are added. For KNN, the best step uses 9 features achieving R² ≈ 0.83 and MSE ≈ 0.012, indicating higher accuracy with these variables.",
+        "claims": []
+      }
+    }
+  }
+}

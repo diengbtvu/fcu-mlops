@@ -633,6 +633,7 @@
     "sidebar.model_management": "Model Management",
     "sidebar.dataset_management": "Dataset Management",
     "sidebar.email_settings": "Email Settings",
+    "sidebar.ai_api_keys": "AI API Keys",
     "sidebar.my_profile": "My Profile",
     "sidebar.logout": "Logout",
     "sidebar.system_name": "Hydrogen Production Rate Prediction System",

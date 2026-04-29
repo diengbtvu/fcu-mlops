@@ -8,75 +8,29 @@
       "artifact_id": "KNN_HPR_20260424:chart:residuals",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "KNN's residuals show a low standard deviation (0.1125)",
-      "status": "supported",
+      "claim_id": "rmse_knn",
+      "claim_text": "The KNN model shows the lowest RMSE (0.113)",
+      "status": "contradicted",
       "semantic_level": "L2L3",
       "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:residuals:metric:KNN:residual_std"
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:rmse"
       ],
-      "reason": "Gold value for KNN residual_std is 0.112518.",
-      "numeric_delta": 1.8000000000004124e-05
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 0.00018090995439673518
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:residuals",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "KNN's residuals show a strong correlation (0.9073) with actual values",
-      "status": "unverifiable",
+      "claim_id": "r2_knn",
+      "claim_text": "The KNN model shows the highest R2 (0.82)",
+      "status": "contradicted",
       "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:residuals",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "the mean absolute residual for KNN is 0.0750",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:residuals",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "mean absolute residual for DT (0.1086)",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:residuals",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "mean absolute residual for SVM (0.0946)",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:residuals",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "KNN... making it the most robust choice.",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
-      "numeric_delta": null
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.002832198296253252
     }
   ]
 }

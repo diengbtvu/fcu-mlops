@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Dataset;
+use App\Models\EmailSetting;
 use App\Models\MLModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -332,6 +333,23 @@ class TrainingService
         return false;
     }
 
+    private function configuredGroqApiKeys(): array
+    {
+        $rawValue = (string) EmailSetting::get('groq_api_keys', '');
+        $items = preg_split('/[\s,;]+/', $rawValue) ?: [];
+        $keys = [];
+
+        foreach ($items as $item) {
+            $key = trim((string) $item);
+            if ($key === '' || in_array($key, $keys, true)) {
+                continue;
+            }
+            $keys[] = $key;
+        }
+
+        return $keys;
+    }
+
     /**
      * Train model using Flask API (Alternative to executeTrainingProcess)
      * 
@@ -365,6 +383,18 @@ class TrainingService
                 'dataset_id' => $dataset->DatasetId,
                 'session_id' => $options['session_id'] ?? null  // Pass session ID for progress tracking
             ];
+            if (!empty($options['llm_provider'])) {
+                $requestData['llm_provider'] = $options['llm_provider'];
+            }
+            if (!empty($options['llm_model'])) {
+                $requestData['llm_model'] = $options['llm_model'];
+            }
+            if (($requestData['llm_provider'] ?? null) === 'groq') {
+                $groqApiKeys = $this->configuredGroqApiKeys();
+                if (!empty($groqApiKeys)) {
+                    $requestData['groq_api_keys'] = $groqApiKeys;
+                }
+            }
 
             // Add model-specific parameters
             $modelType = $options['model_type'] ?? 'random_forest';
@@ -387,11 +417,17 @@ class TrainingService
             }
 
             // Log training start
+            $safeRequestData = $requestData;
+            if (isset($safeRequestData['groq_api_keys'])) {
+                $safeRequestData['groq_api_key_count'] = count((array) $safeRequestData['groq_api_keys']);
+                unset($safeRequestData['groq_api_keys']);
+            }
+
             Log::info('Training via API started', [
                 'dataset_id' => $dataset->DatasetId,
                 'user_id' => $user->UserId,
                 'session_id' => $options['session_id'] ?? null,
-                'options' => $requestData
+                'options' => $safeRequestData
             ]);
 
             // Call Flask API

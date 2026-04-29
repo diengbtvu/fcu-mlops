@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model is the best performing model for predicting HRT 12 -4 h outcomes.",
+  "explanation_full": "A K-Nearest Neighbors (KNN) model has been trained to predict outcomes related to HRT 12 -4 h. This model achieved the highest accuracy among various models tested.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:metric:VSS:importance",
+      "claim_text": "The importance of VSS is 2.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:metric:VSS:importance",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:metric:VSS:importance",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": 2,
+      "metric": "importance",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -8,8 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model has an R2 score of 0.7756, indicating a good fit to the data.",
       "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
@@ -17,62 +17,6 @@
       ],
       "reason": "Gold value for RF r2_score is 0.7756018171.",
       "numeric_delta": 1.8171000000233306e-06
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "a Root Mean Squared Error (RMSE) of 0.1254",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse"
-      ],
-      "reason": "Gold value for RF rmse is 0.125388154.",
-      "numeric_delta": 1.1846000000009793e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "and a Mean Absolute Error (MAE) of 0.0836",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:mae"
-      ],
-      "reason": "Gold value for RF mae is 0.0835569234.",
-      "numeric_delta": 4.3076599999997134e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "the correlation between predicted and actual values was 0.88511",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
-      ],
-      "reason": "Gold value for RF pred_actual_correlation is 0.88511.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "the linear fit slope was 0.848822",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:linear_fit_slope"
-      ],
-      "reason": "Gold value for RF linear_fit_slope is 0.848822.",
-      "numeric_delta": 0.0
     }
   ]
 }

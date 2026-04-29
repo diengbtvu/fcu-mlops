@@ -8,85 +8,37 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA, Butyrate, and Acetate are the top three features contributing to the model's predictions",
-      "status": "contradicted",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "shap mean_abs_shap",
+      "status": "unverifiable",
       "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature"
-      ],
-      "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 3
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "VFA exhibits the highest mean absolute SHAP value",
-      "status": "contradicted",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature"
-      ],
-      "reason": "Gold top feature for mean_abs_shap is ORP_Low.",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
       "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "The ranking of importance is: VFA > Butyrate > Acetate > COD-O > ORP_Low > ORP_Mid",
-      "status": "contradicted",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "ORP_Low mean_abs_shap",
+      "status": "unverifiable",
       "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking"
-      ],
-      "reason": "Gold ranking orders VFA after Butyrate.",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
       "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "VFA has the highest mean absolute SHAP value (0.0298)",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "shap mean_abs_shap",
+      "status": "unverifiable",
       "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
-      ],
-      "reason": "Gold value for VFA mean_abs_shap is 0.0298303953.",
-      "numeric_delta": 3.039529999999957e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "Butyrate (0.0304) and Acetate (0.0266) follow VFA in terms of mean_abs_shap",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:Butyrate:mean_abs_shap"
-      ],
-      "reason": "Gold value for Butyrate mean_abs_shap is 0.0304246981.",
-      "numeric_delta": 2.4698100000001416e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "Acetate has a mean absolute SHAP value of 0.0266",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:Acetate:mean_abs_shap"
-      ],
-      "reason": "Gold value for Acetate mean_abs_shap is 0.0266095146.",
-      "numeric_delta": 9.514599999999734e-06
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     }
   ]
 }

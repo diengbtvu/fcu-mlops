@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:max_abs_residual",
+      "claim_text": "The model has a max absolute residual of 0.113.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:max_abs_residual"
+      ],
+      "reason": "Gold value for KNN max_abs_residual is 0.367254.",
+      "numeric_delta": 0.25425400000000004
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:pred_actual_correlation",
+      "claim_text": "The model has a predicted actual correlation of 0.817.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 0.09030100000000008
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "claim_text": "The model has an R2 score of 0.817.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    }
+  ]
+}

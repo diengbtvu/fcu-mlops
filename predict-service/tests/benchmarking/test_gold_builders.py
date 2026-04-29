@@ -123,7 +123,12 @@ def test_prediction_diagnostics_skip_none_values(tmp_path: Path) -> None:
     shutil.copytree(FIXTURE_BUNDLE, bundle_dir)
 
     asset_evidence_path = bundle_dir / "asset_evidence.json"
-    asset_evidence = json.loads(asset_evidence_path.read_text())
+    asset_evidence_payload = json.loads(asset_evidence_path.read_text())
+    asset_evidence = (
+        asset_evidence_payload.get("assets")
+        if isinstance(asset_evidence_payload, dict)
+        else asset_evidence_payload
+    )
     for item in asset_evidence:
         if item.get("key") != "model_svm_scatter":
             continue
@@ -133,7 +138,12 @@ def test_prediction_diagnostics_skip_none_values(tmp_path: Path) -> None:
         break
     else:
         raise AssertionError("Fixture asset model_svm_scatter not found.")
-    asset_evidence_path.write_text(json.dumps(asset_evidence, ensure_ascii=False, indent=2))
+    if isinstance(asset_evidence_payload, dict):
+        asset_evidence_payload["assets"] = asset_evidence
+        output_payload = asset_evidence_payload
+    else:
+        output_payload = asset_evidence
+    asset_evidence_path.write_text(json.dumps(output_payload, ensure_ascii=False, indent=2))
 
     records = build_manifest(bundle_dir)
     gold_artifacts = build_gold_artifacts(bundle_dir, records)

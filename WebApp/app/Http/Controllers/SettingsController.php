@@ -11,6 +11,8 @@ use App\Models\EmailSetting;
 
 class SettingsController extends Controller
 {
+    private const GROQ_KEYS_SETTING = 'groq_api_keys';
+
     /**
      * Hiển thị trang cấu hình email
      */
@@ -64,6 +66,115 @@ class SettingsController extends Controller
             return redirect()->route('admin.settings.email')
                 ->with('error', 'Failed to update settings: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Hiển thị trang cấu hình AI API keys
+     */
+    public function aiSettings()
+    {
+        $groqKeys = $this->normalizeGroqKeys(EmailSetting::get(self::GROQ_KEYS_SETTING, ''));
+        $maskedGroqKeys = [];
+        foreach ($groqKeys as $index => $key) {
+            $maskedGroqKeys[] = [
+                'index' => $index,
+                'label' => $this->maskApiKey($key),
+            ];
+        }
+
+        return view('admin.settings.ai', [
+            'groqKeyCount' => count($groqKeys),
+            'maskedGroqKeys' => $maskedGroqKeys,
+        ]);
+    }
+
+    /**
+     * Cập nhật AI API keys
+     */
+    public function updateAi(Request $request)
+    {
+        $request->validate([
+            'groq_api_keys' => 'nullable|string|max:20000',
+            'clear_groq_api_keys' => 'nullable|boolean',
+            'delete_groq_key_index' => 'nullable|integer|min:0',
+        ]);
+
+        try {
+            $existingKeys = $this->normalizeGroqKeys(EmailSetting::get(self::GROQ_KEYS_SETTING, ''));
+
+            if ($request->boolean('clear_groq_api_keys')) {
+                $groqKeys = [];
+            } elseif ($request->filled('delete_groq_key_index')) {
+                $deleteIndex = (int) $request->input('delete_groq_key_index');
+                if (array_key_exists($deleteIndex, $existingKeys)) {
+                    unset($existingKeys[$deleteIndex]);
+                }
+                $groqKeys = array_values($existingKeys);
+            } elseif ($request->filled('groq_api_keys')) {
+                $newKeys = $this->normalizeGroqKeys($request->input('groq_api_keys'));
+                $groqKeys = $this->mergeGroqKeys($existingKeys, $newKeys);
+            } else {
+                $groqKeys = $existingKeys;
+            }
+
+            EmailSetting::set(
+                self::GROQ_KEYS_SETTING,
+                implode("\n", $groqKeys),
+                [
+                    'type' => 'textarea',
+                    'group' => 'ai',
+                    'description' => 'Groq API key pool used by report explanations and benchmark evaluation',
+                    'is_encrypted' => true,
+                ]
+            );
+
+            $message = $request->filled('delete_groq_key_index')
+                ? 'Groq API key removed.'
+                : 'AI API key settings updated successfully.';
+
+            return redirect()->route('admin.settings.ai')->with('success', $message);
+        } catch (\Exception $e) {
+            return redirect()->route('admin.settings.ai')
+                ->with('error', 'Failed to update AI API keys: ' . $e->getMessage());
+        }
+    }
+
+    private function normalizeGroqKeys(?string $rawValue): array
+    {
+        $items = preg_split('/[\s,;]+/', (string) $rawValue) ?: [];
+        $keys = [];
+        foreach ($items as $item) {
+            $key = trim((string) $item);
+            if ($key === '' || in_array($key, $keys, true)) {
+                continue;
+            }
+            $keys[] = $key;
+        }
+        return $keys;
+    }
+
+    private function mergeGroqKeys(array $existingKeys, array $newKeys): array
+    {
+        $keys = [];
+        foreach (array_merge($existingKeys, $newKeys) as $key) {
+            $key = trim((string) $key);
+            if ($key === '' || in_array($key, $keys, true)) {
+                continue;
+            }
+            $keys[] = $key;
+        }
+        return $keys;
+    }
+
+    private function maskApiKey(string $key): string
+    {
+        $key = trim($key);
+        if ($key === '') {
+            return '';
+        }
+        $prefix = substr($key, 0, min(7, strlen($key)));
+        $suffix = strlen($key) > 4 ? substr($key, -4) : '';
+        return $suffix !== '' ? $prefix . '...' . $suffix : $prefix . '...';
     }
 
     /**

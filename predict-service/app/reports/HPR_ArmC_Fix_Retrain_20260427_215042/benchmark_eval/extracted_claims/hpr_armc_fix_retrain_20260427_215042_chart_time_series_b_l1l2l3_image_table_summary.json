@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:mean_abs_gap",
+      "claim_text": "The mean absolute gap between the predicted and actual values is 0.066591, indicating a good agreement between the two.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:mean_abs_gap",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": 0.066591,
+      "metric": "mean_abs_gap",
+      "value": 0.066591,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:sequence_correlation",
+      "claim_text": "The sequence correlation coefficient is 0.931488, suggesting a strong linear relationship between the predicted and actual HPR values over time.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:sequence_correlation",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:time_series:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": 0.931488,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

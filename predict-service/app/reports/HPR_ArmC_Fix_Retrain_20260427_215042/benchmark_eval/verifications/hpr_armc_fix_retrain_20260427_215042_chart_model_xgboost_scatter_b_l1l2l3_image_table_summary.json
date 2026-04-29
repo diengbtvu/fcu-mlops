@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model demonstrates a strong positive relationship with the actual values, as evidenced by the R2 score of 0.7495 and a slope of 0.8387 in the scatter plot.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "claim_text": "The scatter plot reveals a clear linear trend with a slope of 0.8387.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+      "numeric_delta": 1.6000000000016e-05
+    }
+  ]
+}

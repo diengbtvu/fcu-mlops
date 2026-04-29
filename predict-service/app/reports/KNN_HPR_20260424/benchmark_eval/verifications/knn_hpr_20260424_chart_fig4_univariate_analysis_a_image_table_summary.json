@@ -8,36 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "Butyrate vs VFA at 0.9601",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
-      ],
-      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Acetate vs VFA at 0.9428",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate vs VFA:correlation"
-      ],
-      "reason": "Gold value for Acetate vs VFA correlation is 0.9428.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate and Butyrate exhibit a strong correlation of 0.8651",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "claim_text": "hpr has a target correlation of 3",
       "status": "unverifiable",
       "semantic_level": null,
       "matched_fact_ids": [],
@@ -48,43 +20,29 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "VFA shows the highest correlation at 0.7984",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "The correlation between Butyrate and VFA is 2",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 1.0399
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+      "claim_text": "The target correlation of VFA is 2",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
       ],
       "reason": "Gold value for VFA target_correlation is 0.7984.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "Butyrate (0.7827)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate:target_correlation"
-      ],
-      "reason": "Gold value for Butyrate target_correlation is 0.7827.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "Acetate (0.7641)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate:target_correlation"
-      ],
-      "reason": "Gold value for Acetate target_correlation is 0.7641.",
-      "numeric_delta": 0.0
+      "numeric_delta": 1.2016
     }
   ]
 }

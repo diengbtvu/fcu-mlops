@@ -240,7 +240,7 @@
       "subject": "RF",
       "predicate": "mae",
       "object": null,
-      "value": 0.0835569233768243,
+      "value": 0.08355692337682429,
       "unit": null,
       "evidence": [
         {
@@ -696,7 +696,7 @@
       "subject": "KNN",
       "predicate": "mae",
       "object": "RF",
-      "value": 0.008533835885467883,
+      "value": 0.00853383588546787,
       "unit": null,
       "evidence": [
         {

@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model shows the best performance with an R2 score of 0.817, indicating a strong correlation between predicted and actual values. The residuals are generally clustered around zero, suggesting good model fit.",
+  "explanation_full": "The KNN model achieved the highest R2 score (0.817) among all tested models, demonstrating a strong correlation between its predictions and the actual HPR values. This indicates that the KNN model effectively captures the underlying patterns in the data. The residual analysis plot further supports this finding, showing that the residuals are primarily clustered around zero, suggesting a good fit of the model to the data.  While other models like RF and SVM also performed reasonably well, KNN outperformed them in terms of R2 score and residual distribution. This suggests that KNN is a suitable choice for predicting HPR based on the provided dataset.",
+  "claims": [
+    {
+      "claim_id": "claim1",
+      "claim_text": "KNN model shows the best performance with an R2 score of 0.817, indicating a strong correlation between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "model performance",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "KNN",
+      "predicate": "achieved",
+      "object": "R2 score of 0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim2",
+      "claim_text": "The residuals are generally clustered around zero, suggesting good model fit.",
+      "claim_type": "freeform",
+      "span_category": "Residual Analysis",
+      "is_numeric": false,
+      "requires_grounding_from": "residual analysis plot",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "Residuals",
+      "predicate": "are clustered",
+      "object": "around zero",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": true
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

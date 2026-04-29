@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Decision Tree model shows a moderate R2 of 0.56, indicating a fair fit to the data. The RMSE and MAE are 0.1755 and 0.1086 respectively, suggesting some room for improvement in prediction accuracy.  The slope of the linear fit is 0.80, indicating a positive relationship between actual and predicted values.",
+  "explanation_full": "The Decision Tree (DT) model exhibits a moderate R2 score of 0.56, signifying that it captures approximately 56% of the variance in the target variable. This suggests a fair fit to the data but indicates potential for further improvement. The RMSE of 0.1755 and MAE of 0.1086 quantify the average prediction error, highlighting areas where the model could be refined.  The linear fit slope of 0.80 indicates a positive relationship between actual and predicted values, suggesting that as actual values increase, predicted values tend to increase proportionally. Analyzing the scatter plot's distribution of residuals and potential outliers can provide further insights into the model's performance and areas for optimization.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

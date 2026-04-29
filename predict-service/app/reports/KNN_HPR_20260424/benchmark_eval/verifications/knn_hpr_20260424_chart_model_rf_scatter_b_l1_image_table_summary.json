@@ -8,8 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model has a high R2 score of 0.7756, indicating a strong relationship between predicted and actual values.",
       "status": "supported",
       "semantic_level": "L1",
       "matched_fact_ids": [
@@ -22,8 +22,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "its Root Mean Squared Error (RMSE) is 0.1254",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse",
+      "claim_text": "The low RMSE (0.1254) suggests accurate predictions.",
       "status": "supported",
       "semantic_level": "L1",
       "matched_fact_ids": [
@@ -31,20 +31,6 @@
       ],
       "reason": "Gold value for RF rmse is 0.125388154.",
       "numeric_delta": 1.1846000000009793e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "the Mean Absolute Error (MAE) is 0.0836",
-      "status": "supported",
-      "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:mae"
-      ],
-      "reason": "Gold value for RF mae is 0.0835569234.",
-      "numeric_delta": 4.3076599999997134e-05
     }
   ]
 }

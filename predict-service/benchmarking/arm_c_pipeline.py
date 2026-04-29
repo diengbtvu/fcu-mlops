@@ -7,7 +7,11 @@ import time
 from collections import Counter
 from typing import Any
 
-from .claim_extractor import normalize_generation
+from .claim_alignment import (
+    build_claims_from_mentions,
+    claims_payload_to_variable_mentions,
+    normalize_variable_mentions,
+)
 from .llm_client import BaseLLMClient
 from .prompts import (
     build_arm_c_corrector_prompt,
@@ -15,12 +19,16 @@ from .prompts import (
     build_arm_c_validator_prompt,
     build_claim_extraction_prompt,
     build_prompt_context,
+    build_variable_mention_extraction_prompt,
 )
 from .schemas import (
     ArmCTrace,
     ArmCValidationRecord,
     ArtifactInputs,
+    Claim,
+    ClaimAlignmentIssue,
     CorrectionIteration,
+    ExtractedVariableMention,
     ExplanationOutput,
     GoldArtifact,
 )
@@ -133,18 +141,59 @@ def _extract_claims_payload(
     explanation_payload: dict[str, Any],
     variable_catalog: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    return client.extract_claims_json(
-        build_claim_extraction_prompt(
-            artifact_id=inputs.record.artifact_id,
-            arm="C",
-            input_condition=input_condition,
-            semantic_level=None,
-            explanation_short=str(explanation_payload.get("explanation_short") or ""),
-            explanation_full=str(explanation_payload.get("explanation_full") or ""),
-            primary_entities=inputs.record.primary_entities,
-            variable_catalog=variable_catalog,
+    mention_payload: dict[str, Any] | None = None
+    extractor = getattr(client, "extract_variable_mentions_json", None)
+    if callable(extractor):
+        mention_payload = extractor(
+            build_variable_mention_extraction_prompt(
+                artifact_id=inputs.record.artifact_id,
+                arm="C",
+                input_condition=input_condition,
+                semantic_level=None,
+                explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                primary_entities=inputs.record.primary_entities,
+                variable_catalog=variable_catalog,
+            )
         )
+
+    if mention_payload is None:
+        legacy_payload = client.extract_claims_json(
+            build_claim_extraction_prompt(
+                artifact_id=inputs.record.artifact_id,
+                arm="C",
+                input_condition=input_condition,
+                semantic_level=None,
+                explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                primary_entities=inputs.record.primary_entities,
+                variable_catalog=variable_catalog,
+            )
+        )
+        mentions = claims_payload_to_variable_mentions(
+            legacy_payload,
+            artifact_id=inputs.record.artifact_id,
+        )
+    else:
+        mentions = normalize_variable_mentions(
+            mention_payload,
+            artifact_id=inputs.record.artifact_id,
+        )
+
+    claims, issues = build_claims_from_mentions(
+        mentions=mentions,
+        variable_catalog=variable_catalog,
+        artifact_id=inputs.record.artifact_id,
     )
+    return {
+        "artifact_id": inputs.record.artifact_id,
+        "arm": "C",
+        "input_condition": input_condition,
+        "semantic_level": None,
+        "claims": [claim.to_dict() for claim in claims],
+        "extracted_variable_mentions": [mention.to_dict() for mention in mentions],
+        "claim_alignment_issues": [issue.to_dict() for issue in issues],
+    }
 
 
 def _normalize_output(
@@ -157,29 +206,92 @@ def _normalize_output(
     correction_trace: ArmCTrace | None = None,
     parent_draft_hash: str | None = None,
 ) -> ExplanationOutput:
-    merged_payload = {
-        **explanation_payload,
-        "claims": list(claims_payload.get("claims") or []),
-        "generation_stage": generation_stage,
-        "parent_draft_hash": parent_draft_hash,
-    }
-    normalized = normalize_generation(
-        payload=merged_payload,
+    def _as_int(value: Any) -> int | None:
+        try:
+            return int(float(value)) if value is not None and str(value).strip() else None
+        except (TypeError, ValueError):
+            return None
+
+    claims: list[Claim] = []
+    for index, item in enumerate(list(claims_payload.get("claims") or []), start=1):
+        if isinstance(item, Claim):
+            claims.append(item)
+            continue
+        if not isinstance(item, dict):
+            continue
+        claims.append(
+            Claim(
+                claim_id=str(item.get("claim_id") or f"{inputs.record.artifact_id}:claim:{index}"),
+                claim_text=str(item.get("claim_text") or "").strip(),
+                claim_type=str(item.get("claim_type") or "freeform").strip() or "freeform",
+                span_category=str(item.get("span_category") or "sentence"),
+                is_numeric=bool(item.get("is_numeric")),
+                requires_grounding_from=str(item.get("requires_grounding_from") or "table/json"),
+                confidence=float(item.get("confidence") or 0.75),
+                source_variable_id=str(item.get("source_variable_id") or "").strip() or None,
+                subject=str(item.get("subject") or "").strip() or None,
+                predicate=str(item.get("predicate") or "").strip() or None,
+                object=item.get("object"),
+                metric=str(item.get("metric") or "").strip() or None,
+                value=item.get("value"),
+                unit=str(item.get("unit") or "").strip() or None,
+                ordered_items=[
+                    str(value).strip()
+                    for value in list(item.get("ordered_items") or [])
+                    if str(value).strip()
+                ],
+                feature_count=_as_int(item.get("feature_count")),
+                hedged=bool(item.get("hedged")),
+            )
+        )
+    return ExplanationOutput(
         artifact_id=inputs.record.artifact_id,
         arm="C",
         input_condition=input_condition,
-    )
-    return ExplanationOutput(
-        artifact_id=normalized.artifact_id,
-        arm=normalized.arm,
-        input_condition=normalized.input_condition,
-        explanation_short=normalized.explanation_short,
-        explanation_full=normalized.explanation_full,
-        claims=normalized.claims,
-        semantic_level=normalized.semantic_level,
+        explanation_short=str(explanation_payload.get("explanation_short") or "").strip(),
+        explanation_full=str(
+            explanation_payload.get("explanation_full") or explanation_payload.get("explanation_short") or ""
+        ).strip(),
+        claims=claims,
+        semantic_level=None,
         generation_stage=generation_stage,
         correction_trace=correction_trace,
         parent_draft_hash=parent_draft_hash,
+        claim_alignment_issues=[
+            issue
+            if isinstance(issue, ClaimAlignmentIssue)
+            else ClaimAlignmentIssue(
+                issue_id=str(issue.get("issue_id") or f"alignment-{index}"),
+                issue_type=str(issue.get("issue_type") or "alignment_issue"),
+                message=str(issue.get("message") or ""),
+                source_variable_id=str(issue.get("source_variable_id") or "").strip() or None,
+                mention_id=str(issue.get("mention_id") or "").strip() or None,
+                claim_id=str(issue.get("claim_id") or "").strip() or None,
+                action=str(issue.get("action") or "warn"),
+            )
+            for index, issue in enumerate(list(claims_payload.get("claim_alignment_issues") or []), start=1)
+            if isinstance(issue, (ClaimAlignmentIssue, dict))
+        ],
+        extracted_variable_mentions=[
+            mention
+            if isinstance(mention, ExtractedVariableMention)
+            else ExtractedVariableMention(
+                mention_id=str(mention.get("mention_id") or f"mention-{index}"),
+                source_variable_id=str(mention.get("source_variable_id") or ""),
+                evidence_span=str(mention.get("evidence_span") or ""),
+                stated_value=mention.get("stated_value"),
+                stated_object=str(mention.get("stated_object") or "").strip() or None,
+                stated_ordered_items=[
+                    str(item)
+                    for item in list(mention.get("stated_ordered_items") or [])
+                    if str(item).strip()
+                ],
+                stated_feature_count=_as_int(mention.get("stated_feature_count")),
+                confidence=float(mention.get("confidence") or 0.75),
+            )
+            for index, mention in enumerate(list(claims_payload.get("extracted_variable_mentions") or []), start=1)
+            if isinstance(mention, (ExtractedVariableMention, dict))
+        ],
     )
 
 
@@ -351,6 +463,10 @@ def _return_draft_output(
         ),
         corrected_claims=corrected_output.claims if corrected_output is not None else [],
         corrected_validations=corrected_validations or [],
+        draft_alignment_issues=draft_output.claim_alignment_issues,
+        corrected_alignment_issues=(
+            corrected_output.claim_alignment_issues if corrected_output is not None else []
+        ),
     )
     return ExplanationOutput(
         artifact_id=draft_output.artifact_id,
@@ -366,6 +482,8 @@ def _return_draft_output(
             selected_generation_stage="draft",
         ),
         parent_draft_hash=draft_hash,
+        claim_alignment_issues=draft_output.claim_alignment_issues,
+        extracted_variable_mentions=draft_output.extracted_variable_mentions,
     )
 
 
@@ -467,11 +585,21 @@ def run_arm_c_pipeline(
                 )
             )
         )
+        corrected_claims_payload = _run_with_retries(
+            step_label=f"corrected claim extraction for {inputs.record.artifact_id}",
+            operation=lambda: _extract_claims_payload(
+                client=client,
+                inputs=inputs,
+                input_condition=input_condition,
+                explanation_payload=corrected_payload,
+                variable_catalog=variable_catalog,
+            ),
+        )
         corrected_output = _normalize_output(
             inputs=inputs,
             input_condition=input_condition,
             explanation_payload=corrected_payload,
-            claims_payload=corrected_payload,
+            claims_payload=corrected_claims_payload,
             generation_stage="corrected",
             parent_draft_hash=draft_hash,
         )
@@ -505,6 +633,8 @@ def run_arm_c_pipeline(
             corrected_explanation_full=corrected_output.explanation_full,
             corrected_claims=corrected_output.claims,
             corrected_validations=corrected_validations,
+            draft_alignment_issues=draft_output.claim_alignment_issues,
+            corrected_alignment_issues=corrected_output.claim_alignment_issues,
         )
         if corrected_output.claims and corrected_validations:
             if _validation_quality(corrected_validations) < _validation_quality(draft_validations):
@@ -523,6 +653,8 @@ def run_arm_c_pipeline(
                     generation_stage="corrected",
                     correction_trace=trace,
                     parent_draft_hash=draft_hash,
+                    claim_alignment_issues=corrected_output.claim_alignment_issues,
+                    extracted_variable_mentions=corrected_output.extracted_variable_mentions,
                 )
         trace = _build_trace(
             iteration=iteration,
@@ -539,6 +671,8 @@ def run_arm_c_pipeline(
             generation_stage="draft",
             correction_trace=trace,
             parent_draft_hash=draft_hash,
+            claim_alignment_issues=draft_output.claim_alignment_issues,
+            extracted_variable_mentions=draft_output.extracted_variable_mentions,
         )
 
     return _return_draft_output(

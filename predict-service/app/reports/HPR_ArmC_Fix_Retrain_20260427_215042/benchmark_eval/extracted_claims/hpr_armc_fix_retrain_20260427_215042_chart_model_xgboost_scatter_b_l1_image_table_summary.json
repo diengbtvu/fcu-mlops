@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The R2 score of 0.7495 indicates that 74.95% of the variance in the target variable can be explained by the model's predictions.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": "0.7495",
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "claim_text": "The slope of 0.8387 suggests a strong linear relationship, meaning that for every unit increase in the input, the predicted output increases by 0.8387 units.",
+      "claim_type": "metric_value",
+      "span_category": "Linear Fit Slope",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "subject": "XGBoost",
+      "predicate": "linear_fit_slope",
+      "object": "0.8387",
+      "metric": "linear_fit_slope",
+      "value": 0.8387,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

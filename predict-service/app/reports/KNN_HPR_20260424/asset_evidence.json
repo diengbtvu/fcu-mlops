@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T01:31:48.311200",
+  "generated_at": "2026-04-24T06:47:26.811925",
   "report_id": "KNN_HPR_20260424",
   "best_model": "KNN",
   "assets": [
@@ -154,27 +154,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [
@@ -196,7 +196,7 @@
         "best_model_summary.json",
         "summary.json"
       ],
-      "result_text": "SHAP importance -> ORP_Low=0.0376 | ORP_Mid=0.0312 | Butyrate=0.0304 | VFA=0.0298 | COD-O=0.0288.",
+      "result_text": "SHAP importance -> ORP_Low=0.0384 | Butyrate=0.0325 | ORP_Mid=0.0288 | VFA=0.0279 | COD-O=0.0278.",
       "evidence": {
         "feature_story": {
           "top_gra_features": [
@@ -255,27 +255,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [
@@ -300,7 +300,7 @@
         "table_correlation_matrix.csv",
         "table_feature_importance.csv"
       ],
-      "result_text": "GRA ranking -> VFA=0.7931 | Butyrate=0.7902 | Acetate=0.7772 | VSS=0.7768 | Propionate=0.7596. Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577. SHAP importance -> ORP_Low=0.0376 | ORP_Mid=0.0312 | Butyrate=0.0304 | VFA=0.0298 | COD-O=0.0288. Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112. Best feature-count step per model -> SVM: n=4, R2=0.779437, MSE=0.015453 | DT: n=9, R2=0.671427, MSE=0.023021 | RF: n=11, R2=0.785537, MSE=0.015026 | KNN: n=9, R2=0.83014, MSE=0.011901 | XGBoost: n=4, R2=0.768407, MSE=0.016226.",
+      "result_text": "GRA ranking -> VFA=0.7931 | Butyrate=0.7902 | Acetate=0.7772 | VSS=0.7768 | Propionate=0.7596. Feature importance -> VSS=0.5052 | Acetate=0.12 | Butyrate=0.097 | VFA=0.0748 | Propionate=0.0577. SHAP importance -> ORP_Low=0.0384 | Butyrate=0.0325 | ORP_Mid=0.0288 | VFA=0.0279 | COD-O=0.0278. Strongest correlations -> Butyrate vs VFA=0.9601 | Acetate vs VFA=0.9428 | Acetate vs Butyrate=0.8651 | Ethanol vs Propionate=0.8548 | Ethanol vs VFA=0.8486. Top HPR correlations -> VFA=0.7984 | Butyrate=0.7827 | Acetate=0.7641 | VSS=0.7062 | Ethanol=0.6112. Best feature-count step per model -> SVM: n=4, R2=0.779437, MSE=0.015453 | DT: n=9, R2=0.671427, MSE=0.023021 | RF: n=11, R2=0.785537, MSE=0.015026 | KNN: n=9, R2=0.83014, MSE=0.011901 | XGBoost: n=4, R2=0.768407, MSE=0.016226.",
       "evidence": {
         "feature_story": {
           "top_gra_features": [
@@ -359,27 +359,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [
@@ -1958,27 +1958,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [
@@ -2559,27 +2559,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [
@@ -2601,7 +2601,7 @@
         "best_model_summary.json",
         "summary.json"
       ],
-      "result_text": "SHAP importance -> ORP_Low=0.0376 | ORP_Mid=0.0312 | Butyrate=0.0304 | VFA=0.0298 | COD-O=0.0288.",
+      "result_text": "SHAP importance -> ORP_Low=0.0384 | Butyrate=0.0325 | ORP_Mid=0.0288 | VFA=0.0279 | COD-O=0.0278.",
       "evidence": {
         "feature_story": {
           "top_gra_features": [
@@ -2660,27 +2660,27 @@
           "top_shap_features": [
             {
               "feature": "ORP_Low",
-              "mean_abs_shap": 0.0375889842
-            },
-            {
-              "feature": "ORP_Mid",
-              "mean_abs_shap": 0.0311763862
+              "mean_abs_shap": 0.0383875935
             },
             {
               "feature": "Butyrate",
-              "mean_abs_shap": 0.0304246981
+              "mean_abs_shap": 0.0325165311
+            },
+            {
+              "feature": "ORP_Mid",
+              "mean_abs_shap": 0.0287668552
             },
             {
               "feature": "VFA",
-              "mean_abs_shap": 0.0298303953
+              "mean_abs_shap": 0.0279185723
             },
             {
               "feature": "COD-O",
-              "mean_abs_shap": 0.0287579076
+              "mean_abs_shap": 0.0278008909
             },
             {
               "feature": "Acetate",
-              "mean_abs_shap": 0.0266095146
+              "mean_abs_shap": 0.0275888151
             }
           ],
           "top_features_summary": [

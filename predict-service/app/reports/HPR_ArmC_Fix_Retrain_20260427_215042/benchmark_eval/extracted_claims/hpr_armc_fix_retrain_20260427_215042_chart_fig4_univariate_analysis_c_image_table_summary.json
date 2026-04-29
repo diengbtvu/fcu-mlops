@@ -1,0 +1,69 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:claim:1",
+      "claim_text": "The KNN model achieved the highest R2 score (0.81717) and lowest RMSE (0.11318), indicating strong predictive accuracy.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "missing_object",
+      "message": "Entity variable mention did not include a stated object.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "claim_id": null,
+      "action": "warn"
+    },
+    {
+      "issue_id": "alignment-2",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:metric:VFA::target_correlation",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:metric:VFA::target_correlation",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation",
+      "evidence_span": "The KNN model achieved the highest R2 score (0.81717) and lowest RMSE (0.11318), indicating strong predictive accuracy.",
+      "stated_value": 0.81717,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:metric:VFA::target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:metric:VFA::target_correlation",
+      "evidence_span": "The report also highlights the top correlated features with HPR, such as VFA, Butyrate, Acetate, VSS, and Ethanol, which contribute significantly to the model's predictive power.",
+      "stated_value": null,
+      "stated_object": "VFA",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

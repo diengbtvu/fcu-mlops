@@ -8,8 +8,36 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "an R2 score of 0.7756",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:max_abs_residual",
+      "claim_text": "The Random Forest model demonstrates strong predictive performance with a high R2 score of 0.7756 and low RMSE (0.1254). The scatter plot reveals a tight cluster of data points around the regression line, indicating accurate predictions.  Further analysis of residuals shows an even distribution around zero, suggesting no systematic bias in the model's performance.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:max_abs_residual"
+      ],
+      "reason": "Gold value for RF max_abs_residual is 0.450808.",
+      "numeric_delta": 0.325408
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
+      "claim_text": "The Random Forest model exhibits strong predictive capabilities as demonstrated by its high R2 score of 0.7756 and low RMSE (0.1254). This indicates a strong correlation between predicted and actual values, with minimal error in the model's predictions.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
+      ],
+      "reason": "Gold value for RF pred_actual_correlation is 0.88511.",
+      "numeric_delta": 0.7597099999999999
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model exhibits strong predictive capabilities as demonstrated by its high R2 score of 0.7756 and low RMSE (0.1254). This indicates a strong correlation between predicted and actual values, with minimal error in the model's predictions.",
       "status": "supported",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
@@ -22,29 +50,13 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "a strong correlation of 0.88511 between predicted and actual values",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:linear_fit_slope",
+      "claim_text": "The scatter plot visually confirms this accuracy, showcasing data points clustered closely around the regression line.  Residual analysis further supports the model's performance by revealing an even distribution of residuals around zero. This suggests that there is no systematic bias in the model's predictions, indicating a reliable and unbiased model.",
+      "status": "unverifiable",
       "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
-      ],
-      "reason": "Gold value for RF pred_actual_correlation is 0.88511.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Mean Absolute Residual (0.0836)",
-      "status": "contradicted",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:max_abs_residual"
-      ],
-      "reason": "Gold value for RF max_abs_residual is 0.450808.",
-      "numeric_delta": 0.367208
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
     }
   ]
 }

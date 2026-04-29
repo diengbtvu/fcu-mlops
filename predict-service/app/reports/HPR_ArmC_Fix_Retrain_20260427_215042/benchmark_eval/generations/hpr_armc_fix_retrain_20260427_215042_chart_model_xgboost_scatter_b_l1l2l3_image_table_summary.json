@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model effectively predicts the target variable with an R2 score of 0.7495, indicating a strong positive correlation between predicted and actual values. The scatter plot reveals a clear linear trend with a slope of 0.8387.",
+  "explanation_full": "The XGBoost model demonstrates a strong positive relationship with the actual values, as evidenced by the R2 score of 0.7495 and a slope of 0.8387 in the scatter plot. This indicates that 74.95% of the variance in the target variable can be explained by the model's predictions. The linear trend observed in the scatter plot suggests that for every unit increase in the input, the predicted output increases by 0.8387 units.  The RMSE of 0.1325 and MAE of 0.0956 further confirm the model's accuracy in predicting the target variable. The combination of a high R2 score, a clear linear trend, and low error metrics suggests that the XGBoost model is effective at capturing the relationship between the input and output variables.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model demonstrates a strong positive relationship with the actual values, as evidenced by the R2 score of 0.7495 and a slope of 0.8387 in the scatter plot.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": "0.7495",
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "claim_text": "The scatter plot reveals a clear linear trend with a slope of 0.8387.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "subject": "XGBoost",
+      "predicate": "linear_fit_slope",
+      "object": "0.8387",
+      "metric": "linear_fit_slope",
+      "value": 0.8387,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -8,57 +8,29 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The sequence diagnostics for the KNN model indicate that the actual peak value observed was 1.0 at index 130.",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "claim_text": "The KNN model predicts a peak hydrogen production (HPR) value of 1.0 at sample index 130.",
       "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
-      ],
-      "reason": "Gold value for KNN actual_peak_index is 130.0.",
-      "numeric_delta": 129.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "In contrast, the model predicted a peak value of 0.8299 at a different index, 146.",
-      "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
-      ],
-      "reason": "Gold value for KNN predicted_peak_index is 146.0.",
-      "numeric_delta": 145.1701
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Furthermore, the diagnostics report a mean absolute gap of 0.0666",
-      "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
       ],
       "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
-      "numeric_delta": 9.000000000009e-06
+      "numeric_delta": 129.933409
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "and a sequence correlation of 0.9315",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "claim_text": "The predicted peak is therefore delayed by 16 samples and has a lower value than the actual peak.",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
       ],
       "reason": "Gold value for KNN sequence_correlation is 0.931488.",
-      "numeric_delta": 1.2000000000012001e-05
+      "numeric_delta": 15.068512
     }
   ]
 }

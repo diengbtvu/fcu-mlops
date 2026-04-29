@@ -8,43 +8,37 @@
       "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA is the top feature with a score of 0.7931",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:Acetate",
+      "claim_text": "Acetate::gra_score",
+      "status": "unverifiable",
       "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:VFA"
-      ],
-      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
-      "numeric_delta": 1.3543695608908557e-05
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Butyrate ranks second with a score of 0.7902",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:Butyrate",
+      "claim_text": "Butyrate::gra_score",
+      "status": "unverifiable",
       "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Butyrate"
-      ],
-      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
-      "numeric_delta": 4.6755017702460044e-05
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate at 0.7772",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:VFA",
+      "claim_text": "VFA::gra_score",
+      "status": "unverifiable",
       "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Acetate"
-      ],
-      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
-      "numeric_delta": 1.999763680660127e-05
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     }
   ]
 }

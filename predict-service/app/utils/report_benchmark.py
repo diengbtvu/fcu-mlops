@@ -17,6 +17,7 @@ from benchmarking.chart_reporting import (
     PER_CHART_JSON_FILENAME,
     write_per_chart_benchmark_outputs,
 )
+from groq_key_pool import parse_groq_api_keys
 from benchmarking.manifest import build_manifest
 from benchmarking.schemas import SUPPORTED_SEMANTIC_LEVELS
 from benchmarking.selection import BENCHMARK_SELECTED_FILENAME, build_selected_benchmark_explanations
@@ -60,13 +61,14 @@ PHASE1_CORE_BUNDLE_FILES = (
 )
 
 
-def _benchmark_client_name() -> str:
+def _benchmark_client_name(provider_override: str | None = None) -> str:
     client_name = str(
-        os.getenv("BENCHMARK_LLM_CLIENT")
+        provider_override
+        or os.getenv("BENCHMARK_LLM_CLIENT")
         or os.getenv("REPORT_LLM_PROVIDER")
         or "openai"
     ).strip().lower()
-    if client_name in {"fixture", "openai", "ollama"}:
+    if client_name in {"fixture", "openai", "ollama", "groq"}:
         return client_name
     return "openai"
 
@@ -509,6 +511,9 @@ def run_report_benchmark(
     report_info: Dict[str, Any],
     report_root: str | Path | None = None,
     benchmark_dirname: str = BENCHMARK_DIRNAME,
+    llm_provider: str | None = None,
+    llm_model: str | None = None,
+    groq_api_keys: Any | None = None,
 ) -> Dict[str, Any]:
     report_dir = _report_dir(report_info, report_root)
     benchmark_dir = report_dir / benchmark_dirname
@@ -528,6 +533,7 @@ def run_report_benchmark(
     runtime_arms = _benchmark_runtime_arms()
     runtime_conditions = _benchmark_runtime_conditions()
     runtime_levels = _benchmark_runtime_levels()
+    runtime_client = _benchmark_client_name(llm_provider)
 
     started_at = datetime.now().isoformat()
     update_report_benchmark_status(
@@ -577,7 +583,7 @@ def run_report_benchmark(
                 "--output-dir",
                 str(benchmark_dir),
                 "--client",
-                _benchmark_client_name(),
+                runtime_client,
                 "--arms",
                 BENCHMARK_RUNTIME_ARMS,
                 "--conditions",
@@ -602,11 +608,26 @@ def run_report_benchmark(
                     suffix=".log",
                 ) as stderr_handle,
             ):
+                child_env = os.environ.copy()
+                child_env["BENCHMARK_LLM_CLIENT"] = runtime_client
+                if llm_model:
+                    if runtime_client == "groq":
+                        child_env["GROQ_BENCHMARK_MODEL"] = str(llm_model)
+                    elif runtime_client == "openai":
+                        child_env["OPENAI_BENCHMARK_MODEL"] = str(llm_model)
+                    elif runtime_client == "ollama":
+                        child_env["OLLAMA_BENCHMARK_MODEL"] = str(llm_model)
+                if runtime_client == "groq":
+                    key_list = parse_groq_api_keys(groq_api_keys)
+                    if key_list:
+                        child_env["GROQ_API_KEYS"] = ",".join(key_list)
+
                 process = subprocess.Popen(
                     command,
                     stdout=stdout_handle,
                     stderr=stderr_handle,
                     text=True,
+                    env=child_env,
                 )
                 deadline = time.monotonic() + timeout_seconds
                 last_progress_signature: tuple[float, str, tuple[str, ...]] | None = None

@@ -13,6 +13,8 @@ from app.utils.database_utils import DatabaseUtils
 from app.utils.progress_tracker import TrainingProgressTracker
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
 from app.utils.report_explainer import (
+    GROQ_REPORT_MODELS,
+    SUPPORTED_LLM_PROVIDERS,
     generate_report_explanations,
     update_report_explanation_status,
 )
@@ -22,6 +24,7 @@ from app.utils.report_benchmark import (
     update_report_benchmark_status,
 )
 from app.utils.training_report import generate_training_report
+from groq_key_pool import parse_groq_api_keys
 import sys
 import mlflow
 import mlflow.sklearn
@@ -41,6 +44,9 @@ from ml_train.train_pipeline import (
 )
 
 train_bp = Blueprint('train', __name__, url_prefix='/train')
+LLM_MODEL_ALLOWLIST = {
+    "groq": set(GROQ_REPORT_MODELS),
+}
 
 # Try to import swagger decorator
 try:
@@ -72,6 +78,33 @@ def _coerce_float(value: Any, default: float | None = None) -> float | None:
         return float(value)
     except (TypeError, ValueError):
         return default
+
+
+def _resolve_llm_config(data: Dict[str, Any]) -> tuple[str | None, str | None]:
+    provider = str(
+        data.get("llm_provider")
+        or data.get("report_llm_provider")
+        or ""
+    ).strip().lower() or None
+    model = str(
+        data.get("llm_model")
+        or data.get("report_llm_model")
+        or ""
+    ).strip() or None
+
+    if provider is not None and provider not in SUPPORTED_LLM_PROVIDERS:
+        raise ValueError(
+            "llm_provider must be one of: "
+            + ", ".join(sorted(SUPPORTED_LLM_PROVIDERS))
+        )
+    if provider in LLM_MODEL_ALLOWLIST and model:
+        allowed_models = LLM_MODEL_ALLOWLIST[provider]
+        if model not in allowed_models:
+            raise ValueError(
+                f"Unsupported {provider} llm_model. Allowed values: "
+                + ", ".join(sorted(allowed_models))
+            )
+    return provider, model
 
 
 def _resolve_training_input(data: Dict[str, Any]) -> tuple[Any, str]:
@@ -334,6 +367,9 @@ def _start_async_report_explanations(
     runtime: Dict[str, Any],
     source_name: str,
     selected_sheet: str | None,
+    llm_provider: str | None,
+    llm_model: str | None,
+    groq_api_keys: Any | None = None,
 ) -> None:
     started_at = datetime.now().isoformat()
     update_report_explanation_status(
@@ -366,6 +402,9 @@ def _start_async_report_explanations(
                 pipeline_result=pipeline_result,
                 runtime=runtime,
                 report_root=REPORTS_ROOT,
+                llm_provider=llm_provider,
+                llm_model=llm_model,
+                groq_api_keys=groq_api_keys,
             )
             if explanation_payload:
                 report_info["llm_explanations"] = explanation_payload
@@ -384,6 +423,9 @@ def _start_async_report_explanations(
                     run_report_benchmark(
                         report_info=report_info,
                         report_root=REPORTS_ROOT,
+                        llm_provider=llm_provider,
+                        llm_model=llm_model,
+                        groq_api_keys=groq_api_keys,
                     )
                 except Exception as benchmark_error:
                     print(f"⚠️ Async benchmark evaluation failed: {benchmark_error}")
@@ -565,6 +607,16 @@ def train_model():
             data.get("model_name")
             or f"Best_Model_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         ).strip()
+        try:
+            llm_provider, llm_model = _resolve_llm_config(data)
+        except ValueError as config_error:
+            return jsonify({"error": str(config_error)}), 400
+        groq_api_keys = (
+            data.get("groq_api_keys")
+            or data.get("groq_api_key_pool")
+            or data.get("groq_api_key")
+        )
+        groq_api_key_count = len(parse_groq_api_keys(groq_api_keys))
 
         if training_scope not in {"single_model", "all_models_compare"}:
             return jsonify(
@@ -608,6 +660,10 @@ def train_model():
                 mlflow.log_param("sheet_name", sheet_name)
             if dataset_id is not None:
                 mlflow.log_param("dataset_id", dataset_id)
+            if llm_provider:
+                mlflow.log_param("report_llm_provider", llm_provider)
+            if llm_model:
+                mlflow.log_param("report_llm_model", llm_model)
         except Exception as mlflow_error:
             print(f"⚠️ MLflow initialization skipped: {mlflow_error}")
             active_run = None
@@ -684,6 +740,11 @@ def train_model():
                 )
                 if isinstance(report_info, dict):
                     report_info["training_scope"] = "all_models_compare"
+                    report_info["llm_config"] = {
+                        "provider": llm_provider,
+                        "model": llm_model,
+                        "groq_api_key_count": groq_api_key_count if llm_provider == "groq" else 0,
+                    }
                     report_info = _materialize_training_bundle(
                         report_info=report_info,
                         pipeline_result=pipeline_result,
@@ -698,6 +759,9 @@ def train_model():
                         runtime=runtime,
                         source_name=source_name,
                         selected_sheet=resolved_sheet,
+                        llm_provider=llm_provider,
+                        llm_model=llm_model,
+                        groq_api_keys=groq_api_keys,
                     )
                 print(f"📊 Training report generated: {report_info.get('route_prefix')}")
         except Exception as report_error:
@@ -765,6 +829,9 @@ def train_model():
                 "rows_after_preprocessing": pipeline_result["rows_after_preprocessing"],
                 "selected_sheet": resolved_sheet,
                 "source_workflow": "paper_aligned_auto_best",
+                "llm_provider": llm_provider,
+                "llm_model": llm_model,
+                "groq_api_key_count": groq_api_key_count if llm_provider == "groq" else 0,
             },
         }
 

@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The chart compares the performance of different machine learning models on a hydrogen production prediction task. KNN achieves the best performance with an R2 score of 0.81717 and an MSE of 0.012810.",
+  "explanation_full": "This chart visualizes the performance of various machine learning models in predicting hydrogen production.  The models are ranked based on their R2 score, which measures the proportion of variance in the target variable (HPR) explained by the model. KNN emerges as the top-performing model with an R2 score of 0.81717 and an MSE of 0.012810.  The chart also displays the performance metrics for other models, including SVM, DT, RF, and XGBoost, allowing for a direct comparison of their predictive capabilities.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:r2_score",
+      "claim_text": "KNN achieves the best performance with an R2 score of 0.81717 and an MSE of 0.012810.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:mse",
+      "claim_text": "KNN achieves the best performance with an R2 score of 0.81717 and an MSE of 0.012810.",
+      "claim_type": "metric_value",
+      "span_category": "MSE",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:mse",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "0.012810",
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

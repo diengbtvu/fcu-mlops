@@ -3,7 +3,8 @@ from __future__ import annotations
 from collections import defaultdict
 from statistics import mean
 
-from .schemas import ArtifactScore, Claim, ClaimVerification, GoldArtifact
+from .claim_alignment import alignment_metrics
+from .schemas import ArtifactScore, Claim, ClaimAlignmentIssue, ClaimVerification, GoldArtifact
 from .variable_catalog import allowed_variable_facts
 
 STATUS_WEIGHT = {
@@ -27,7 +28,14 @@ def compute_artifact_scores(
     arm: str,
     input_condition: str,
     semantic_level: str | None = None,
+    alignment_issues: list[ClaimAlignmentIssue] | None = None,
+    mention_count: int | None = None,
 ) -> ArtifactScore:
+    diagnostic_metrics = alignment_metrics(
+        alignment_issues or [],
+        claim_count=len(claims),
+        mention_count=mention_count,
+    )
     claim_count = len(verifications)
     if claim_count == 0:
         metrics = {
@@ -39,6 +47,7 @@ def compute_artifact_scores(
             "coverage_of_salient_facts": 0.0,
             "numeric_accuracy": None,
             "numeric_tolerance_accuracy": None,
+            **diagnostic_metrics,
         }
         return ArtifactScore(
             artifact_id=gold.artifact_id,
@@ -117,6 +126,7 @@ def compute_artifact_scores(
             "coverage_of_salient_facts": coverage_of_salient_facts,
             "numeric_accuracy": numeric_accuracy,
             "numeric_tolerance_accuracy": numeric_tolerance_accuracy,
+            **diagnostic_metrics,
         },
         semantic_level=semantic_level,
     )
@@ -137,6 +147,10 @@ def build_leaderboard(scores: list[ArtifactScore]) -> list[dict[str, float | int
         "coverage_of_salient_facts",
         "numeric_accuracy",
         "numeric_tolerance_accuracy",
+        "claim_alignment_error_rate",
+        "missing_value_rate",
+        "unknown_variable_rate",
+        "extraction_drop_rate",
     ]
     for (arm, condition, semantic_level), entries in grouped.items():
         row: dict[str, float | int | str | None] = {

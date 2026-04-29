@@ -8,79 +8,57 @@
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model achieved the best performance metrics, with an R2 score of 0.81717",
-      "status": "unverifiable",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "status": "contradicted",
       "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap"
+      ],
+      "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
+      "numeric_delta": 0.750409
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "an RMSE of 0.11318",
-      "status": "unverifiable",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "status": "contradicted",
       "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
+      ],
+      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+      "numeric_delta": 0.818488
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "outperforming other models like RF (R2: 0.7756) and XGBoost (R2: 0.7495)",
-      "status": "unverifiable",
-      "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "Numeric claim is missing a numeric value.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "the actual peak value was 1.0 at index 130",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
       "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index"
       ],
       "reason": "Gold value for KNN actual_peak_index is 130.0.",
-      "numeric_delta": 129.0
+      "numeric_delta": 129.887
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "the model predicted a value of 0.8299 at index 146",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
       "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index"
       ],
       "reason": "Gold value for KNN predicted_peak_index is 146.0.",
-      "numeric_delta": 145.1701
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "The sequence correlation achieved by KNN was 0.931488",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
-      ],
-      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
-      "numeric_delta": 0.0
+      "numeric_delta": 145.887
     }
   ]
 }

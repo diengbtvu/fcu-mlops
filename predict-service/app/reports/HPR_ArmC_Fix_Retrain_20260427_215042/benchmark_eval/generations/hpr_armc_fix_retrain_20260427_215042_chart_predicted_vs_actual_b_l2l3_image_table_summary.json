@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
+  "explanation_full": "The predicted vs actual chart visualizes the performance of different machine learning models in predicting HPR values. The KNN model demonstrated the best overall performance with an R2 score of 0.817 and an RMSE of 0.113. This signifies a strong correlation between predicted and actual HPR values, indicating that the KNN model effectively captures the underlying patterns in the data.  While other models like RF and SVM also showed decent performance, KNN outperformed them significantly. The chart provides a clear visual representation of these model comparisons, allowing for easy assessment of their relative strengths.",
+  "claims": [
+    {
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113)",
+      "claim_type": "metric_value",
+      "span_category": "R2 and RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "predicted_vs_actual chart",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "KNN",
+      "predicate": "achieved",
+      "object": "highest R2 score (0.817) and lowest RMSE (0.113)",
+      "metric": "r2_and_rmse",
+      "value": "0.817, 0.113",
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

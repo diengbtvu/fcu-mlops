@@ -3,5 +3,25 @@
   "arm": "C",
   "input_condition": "image_table_summary",
   "semantic_level": null,
-  "claims": []
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_knn_scatter:metric:KNN:r2_score",
+      "claim_text": "The KNN model achieves a high R2 score of 0.817, suggesting a strong positive correlation between its predictions and the actual values.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_knn_scatter:metric:KNN:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_knn_scatter:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": 0.817,
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
 }

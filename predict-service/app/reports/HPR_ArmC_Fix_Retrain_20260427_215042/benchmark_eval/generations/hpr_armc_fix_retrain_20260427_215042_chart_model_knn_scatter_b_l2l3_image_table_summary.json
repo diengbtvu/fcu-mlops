@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieves high accuracy with an R2 score of 0.8172, indicating a strong relationship between predicted and actual values. The low RMSE (0.1132) and MAE (0.075) further demonstrate its effectiveness in capturing the underlying data patterns.",
+  "explanation_full": "The KNN model exhibits excellent performance in predicting the target variable, as evidenced by its high R2 score of 0.8172. This signifies a strong correlation between the predicted and actual values, meaning that the model effectively captures the underlying relationships within the data.  Furthermore, the low RMSE (0.1132) and MAE (0.075) values highlight the model's accuracy in generating predictions close to the true values. The scatter plot visualization provides a clear visual representation of this strong correlation between predicted and actual values. The KNN model effectively leverages the provided data to generate accurate and reliable predictions, making it a suitable choice for this prediction task.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

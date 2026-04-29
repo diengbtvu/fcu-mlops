@@ -8,60 +8,12 @@
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model's superior performance (R2=0.817)",
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for HPR.",
       "status": "unverifiable",
       "semantic_level": "L2L3",
       "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "strong sequence correlation (0.931)",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "VFA, Butyrate, and Acetate are the top three features most correlated with HPR",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No feature_subset_optimum fact found.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "R2: 0.817",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "RMSE: 0.113",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
+      "reason": "Numeric claim is missing a numeric value.",
       "numeric_delta": null
     }
   ]

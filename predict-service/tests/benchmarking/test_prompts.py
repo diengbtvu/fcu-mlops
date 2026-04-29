@@ -10,6 +10,7 @@ from benchmarking.prompts import (
     build_arm_c_validator_prompt,
     build_claim_extraction_prompt,
     build_explanation_prompt,
+    build_variable_mention_extraction_prompt,
 )
 from benchmarking.variable_catalog import build_variable_catalog
 
@@ -139,3 +140,28 @@ def test_claim_extraction_prompt_has_strict_json_contract() -> None:
     assert "JSON OUTPUT CONTRACT" in prompt
     assert "Do not put the answer in hidden thinking" in prompt
     assert "claims: []" in prompt
+
+
+def test_variable_mention_prompt_separates_mentions_from_claim_schema() -> None:
+    prompt = build_variable_mention_extraction_prompt(
+        artifact_id="artifact-1",
+        arm="C",
+        input_condition="table_only",
+        semantic_level=None,
+        explanation_short="KNN is best.",
+        explanation_full="KNN has the highest R2 score of 0.92.",
+        primary_entities=["KNN"],
+        variable_catalog=[
+            {
+                "source_variable_id": "artifact-1:model_comparison/main:metric:KNN:r2_score",
+                "fact_type": "metric_value",
+                "subject": "KNN",
+                "predicate": "r2_score",
+            }
+        ],
+    )
+
+    assert "mentions" in prompt
+    assert "source_variable_id" in prompt
+    assert "Do not emit claim_type" in prompt
+    assert "Do not convert rank positions into score values" in prompt

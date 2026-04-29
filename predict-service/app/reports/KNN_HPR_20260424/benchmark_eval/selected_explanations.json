@@ -1,129 +1,129 @@
 {
   "provider": "benchmark_selected",
-  "model": "gemma4:e4b",
-  "generated_at": "2026-04-24T02:17:26.989254+00:00",
+  "model": "gemma2:9b",
+  "generated_at": "2026-04-24T09:17:13.907501+00:00",
   "selection_method": "best_leaderboard_row",
-  "selected_arm": "A",
+  "selected_arm": "C",
   "selected_condition": "image_table_summary",
   "selected_semantic_level": null,
   "selected_row": {
-    "arm": "A",
+    "arm": "C",
     "input_condition": "image_table_summary",
     "semantic_level": null,
     "artifact_count": 24,
-    "claim_count": 137,
-    "fact_precision": 0.7242559523809524,
-    "fact_recall": 0.46944444444444444,
-    "fact_f1": 0.545077258235153,
-    "unsupported_claim_rate": 0.19224537037037037,
-    "contradiction_rate": 0.08349867724867725,
-    "coverage_of_salient_facts": 0.40069444444444446,
-    "numeric_accuracy": 0.7850694444444445,
-    "numeric_tolerance_accuracy": 0.7850694444444445
+    "claim_count": 76,
+    "fact_precision": 0.3541666666666667,
+    "fact_recall": 0.14583333333333334,
+    "fact_f1": 0.19163359788359788,
+    "unsupported_claim_rate": 0.3159722222222222,
+    "contradiction_rate": 0.3298611111111111,
+    "coverage_of_salient_facts": 0.125,
+    "numeric_accuracy": 0.3939393939393939,
+    "numeric_tolerance_accuracy": 0.3939393939393939
   },
   "overview": {
-    "en": "The model comparison table shows that the KNN model yielded the best performance metrics, achieving an R² score of 0.8172 and an RMSE of 0.1132. This outperforms the RF model (R²: 0.7756, RMSE: 0.1254) and the XGBoost model (R²: 0.7495, RMSE: 0.1325). Furthermore, the KNN model has the lowest Mean Squared Error (MSE) at 0.0128, indicating the smallest average squared prediction error compared to other models.\n\nBased on the model comparison chart, the KNN model demonstrated superior performance across key metrics, achieving an R2 score of 0.8172, the lowest Root Mean Square Error (RMSE) of 0.1132, and the lowest Mean Squared Error (MSE) of 0.01281. In contrast, the DT model showed the lowest R2 score at 0.5605, and the SVM model had the highest RMSE at 0.1369. These metrics indicate that KNN is the best-performing model for predicting HPR among the tested algorithms.\n\nThe model comparison chart clearly indicates that KNN is the winning model, achieving an R2 score of 0.8172, the lowest RMSE of 0.1132, and the lowest MAE of 0.075. When compared to other models like RF (R2=0.7756) and XGBoost (R2=0.7495), KNN demonstrates superior predictive performance across all metrics. This finding is consistently supported by the associated table data, which ranks KNN's metrics as the best performing set.",
+    "en": "The KNN model outperformed other models such as SVM, DT, RF, and XGBoost based on the R2 score and MSE metrics. It achieved an R2 score of 0.81717 and an MSE of 0.012810, suggesting a strong correlation between predicted and actual hydrogen production values. This indicates that KNN is effective in capturing the relationships between input features and hydrogen production.\n\nBased on the provided chart 'Figure 5 - Model comparison', the KNN model outperformed other models such as SVM, DT, RF, and XGBoost in predicting hydrogen production (HPR).  It achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810, suggesting a strong correlation between predicted and actual HPR values. This indicates that KNN is the most effective model for this specific dataset.\n\nBased on the provided chart 'Model comparison bars', the KNN model demonstrated superior performance in predicting hydrogen production compared to other models. It achieved the highest R² score of 0.817, indicating a strong correlation between predicted and actual values. Additionally, it had the lowest MSE (0.0128), signifying smaller prediction errors. This suggests that KNN is the most effective model for this specific task.",
     "zh_TW": ""
   },
   "assets": {
     "metrics_overview": {
-      "en": "The model comparison table shows that the KNN model yielded the best performance metrics, achieving an R² score of 0.8172 and an RMSE of 0.1132. This outperforms the RF model (R²: 0.7756, RMSE: 0.1254) and the XGBoost model (R²: 0.7495, RMSE: 0.1325). Furthermore, the KNN model has the lowest Mean Squared Error (MSE) at 0.0128, indicating the smallest average squared prediction error compared to other models.",
+      "en": "The KNN model outperformed other models such as SVM, DT, RF, and XGBoost based on the R2 score and MSE metrics. It achieved an R2 score of 0.81717 and an MSE of 0.012810, suggesting a strong correlation between predicted and actual hydrogen production values. This indicates that KNN is effective in capturing the relationships between input features and hydrogen production.",
       "zh_TW": ""
     },
     "model_comparison_table": {
-      "en": "The model comparison table shows that the KNN model yielded the best performance metrics, achieving an R² score of 0.8172 and an RMSE of 0.1132. This outperforms the RF model (R²: 0.7756, RMSE: 0.1254) and the XGBoost model (R²: 0.7495, RMSE: 0.1325). Furthermore, the KNN model has the lowest Mean Squared Error (MSE) at 0.0128, indicating the smallest average squared prediction error compared to other models.",
+      "en": "The KNN model outperformed other models such as SVM, DT, RF, and XGBoost based on the R2 score and MSE metrics. It achieved an R2 score of 0.81717 and an MSE of 0.012810, suggesting a strong correlation between predicted and actual hydrogen production values. This indicates that KNN is effective in capturing the relationships between input features and hydrogen production.",
       "zh_TW": ""
     },
     "table1_incremental_results": {
-      "en": "The model performance comparison section indicates that the KNN model achieved the best performance metrics among the tested models. Specifically, KNN reported an R² score of 0.81717 and a Mean Squared Error (MSE) of 0.012810. This performance is superior to other models like RF (R²=0.77560, MSE=0.015722) and XGBoost (R²=0.74948, MSE=0.017553), suggesting KNN is the best benchmark model for this prediction task.",
+      "en": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset that includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. Incremental feature analysis shows that adding more features generally leads to improved performance.",
       "zh_TW": ""
     },
     "gra_ranking": {
-      "en": "Based on the feature ranking analysis, VFA was identified as the most important feature with a score of 0.7931, closely followed by Butyrate at 0.7902 and Acetate at 0.7772. The ranking continues with VSS (0.7768), Propionate (0.7596), and Ethanol (0.7329). These scores indicate the relative predictive power of each chemical feature in the context of the model's performance.",
+      "en": "The grey relational analysis identified VFA, Butyrate, Acetate, and VSS as the most important features based on their scores. These features may be influential in predicting model performance.",
       "zh_TW": ""
     },
     "fig3a_gra_ranking": {
-      "en": "Based on the chart evidence (Figure 3A - Grey relational ranking), the feature importance ranking is as follows: VFA has the highest score (0.7931), followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768), and Propionate (0.7596). The GRA ranking results are explicitly stated as: VFA=0.7931 | Butyrate=0.7902 | Acetate=0.7772 | VSS=0.7768 | Propionate=0.7596.",
+      "en": "According to the Grey Relational Ranking analysis, VFA, Butyrate, Acetate, VSS, and Propionate are identified as the top five most influential features in determining the performance of the KNN model. This indicates that these features play a significant role in explaining the relationship between HRT conditions and microbial community composition.",
       "zh_TW": ""
     },
     "fig3b_shap_analysis": {
-      "en": "Based on the SHAP analysis in Figure 3B, the feature ORP_Low exhibits the largest mean absolute SHAP value at 0.0376, indicating its strongest influence on the model's predictions. This is followed by ORP_Mid (0.0312), Butyrate (0.0304), VFA (0.0298), COD-O (0.0288), and Acetate (0.0266). These values quantify the average magnitude of each feature's contribution to the model's output, providing a direct measure of feature importance derived from the chart evidence.",
+      "en": "The SHAP analysis presented in Figure 3B highlights the importance of various features in predicting model outcomes.  VFA, Butyrate, and Acetate emerge as the top three most influential features, followed by ORP_Low, COD-O, and ORP_Mid. This suggests that these factors play a significant role in shaping the model's predictions.",
       "zh_TW": ""
     },
     "fig3_feature_analysis": {
-      "en": "The analysis of feature correlations reveals that the strongest relationship is between Butyrate and VFA, with a correlation coefficient of 0.9601. Following this, Acetate shows a very strong correlation with VFA at 0.9428. Other notable correlations include Acetate vs. Butyrate (0.8651) and Ethanol vs. Propionate (0.8548). These findings suggest that VFA, Butyrate, and Acetate are highly interconnected metabolic features, which is further supported by the GRA ranking placing VFA, Butyrate, and Acetate among the top three features.",
+      "en": "The validation records show that several claims have been made about the values in the data, but these values do not match the actual values provided in the JSON data. For example, the claim 'The gra_score of combined_feature_story is 3' is incorrect as the actual value is 0.7931135436956089. Similarly, claims about the ranking of features and other metrics need to be revised based on the actual data provided.",
       "zh_TW": ""
     },
     "fig4_univariate_analysis": {
-      "en": "The univariate analysis in Figure 4 shows the strongest correlations are between Butyrate and VFA at 0.9601, followed closely by Acetate and VFA at 0.9428. Furthermore, Acetate and Butyrate exhibit a strong correlation of 0.8651. When correlating with HPR, VFA shows the highest correlation at 0.7984, followed by Butyrate (0.7827) and Acetate (0.7641). These findings indicate strong linear relationships between these metabolites and the target variable HPR.",
+      "en": "The provided JSON payload represents an analysis summary report for a machine learning model predicting hydrogen production (HPR). The report contains key information about the dataset, selected model metrics, correlations between features and HPR, and a performance comparison of various benchmark models. It highlights the KNN model as the best performer with an R2 score of 0.81717 and an MSE of 0.012810. The report also includes details about the dataset size, number of features, and target variable. This information is valuable for understanding the model's performance and identifying important factors influencing hydrogen production prediction.",
       "zh_TW": ""
     },
     "fig5_model_comparison": {
-      "en": "Based on the model comparison chart, the KNN model demonstrated superior performance across key metrics, achieving an R2 score of 0.8172, the lowest Root Mean Square Error (RMSE) of 0.1132, and the lowest Mean Squared Error (MSE) of 0.01281. In contrast, the DT model showed the lowest R2 score at 0.5605, and the SVM model had the highest RMSE at 0.1369. These metrics indicate that KNN is the best-performing model for predicting HPR among the tested algorithms.",
+      "en": "Based on the provided chart 'Figure 5 - Model comparison', the KNN model outperformed other models such as SVM, DT, RF, and XGBoost in predicting hydrogen production (HPR).  It achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810, suggesting a strong correlation between predicted and actual HPR values. This indicates that KNN is the most effective model for this specific dataset.",
       "zh_TW": ""
     },
     "fig6ab_mse_r2_features": {
-      "en": "The incremental feature analysis shows that for the KNN model, the highest R² score (0.83014) and lowest MSE (0.011901) were achieved when using 9 features, corresponding to the feature subset 'VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low'. This indicates that adding the 9th feature provided the optimal balance of predictive power and model simplicity for KNN, as confirmed by the 'best_step_per_model' summary.",
+      "en": "The provided JSON payload contains a comprehensive summary of the results obtained from a machine learning experiment. The summary encompasses several key aspects:\n\n* **Feature Ranking:** A grey relational analysis was conducted to rank the importance of different features. This analysis reveals that VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, and ORP_Mid are the most influential features.\n\n* **Model Performance:** The performance of various machine learning models (KNN, RF, XGBoost, SVM, DT) is evaluated based on their R² score and Mean Squared Error (MSE). The KNN model emerges as the best performer with an R² score of 0.81717 and an MSE of 0.012810.\n\n* **Incremental Feature Analysis:** This analysis demonstrates how the performance of the models changes as more features are added. It highlights the impact of each feature on the overall model accuracy.\n\nThe summary also includes a table summarizing the results of the incremental feature analysis, showing the R² and MSE values for different numbers of features used in the models.\n\nOverall, this JSON payload provides a concise and informative overview of the machine learning experiment's findings, enabling stakeholders to quickly understand the key insights and performance metrics achieved.",
       "zh_TW": ""
     },
     "fig6c_prediction_time": {
-      "en": "The sequence diagnostics for the KNN model indicate that the actual peak value observed was 1.0 at index 130. In contrast, the model predicted a peak value of 0.8299 at a different index, 146. Furthermore, the diagnostics report a mean absolute gap of 0.0666 and a sequence correlation of 0.9315, suggesting a relatively strong correlation between the predicted and actual sequence patterns.",
+      "en": "The chart 'Figure 6C - Prediction over time' visualizes the predicted hydrogen production (HPR) values from the KNN model compared to the actual observed values.  The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak occurred at index 130 with a value of 1.0. The chart also shows the sequence correlation between predicted and actual values, which is 0.931488, indicating a strong positive linear relationship.  The mean absolute gap between predicted and actual HPR values is 0.066591, suggesting that the KNN model performs reasonably well in predicting the overall trend of HPR over time.",
       "zh_TW": ""
     },
     "model_svm_scatter": {
-      "en": "According to the model metrics provided for the SVM, the model achieved an R2 score of 0.7324, an RMSE of 0.1369, and an MAE of 0.0946. These values are directly observable from the table comparison data. The scatter plot also indicates a correlation between predicted and actual values of 0.86576, suggesting a strong linear relationship. The linear fit slope was calculated to be 0.858436, providing a quantitative measure of the relationship shown in the chart.",
+      "en": "Based on the provided scatter plot, the SVM model demonstrates strong predictive capabilities. The R2 score of 0.73 suggests a good fit between the predicted and actual values, while the RMSE of 0.14 indicates relatively low prediction errors.  The plot also visualizes the relationship between predicted and actual values, showing a generally positive correlation.",
       "zh_TW": ""
     },
     "model_dt_scatter": {
-      "en": "The scatter plot diagnostics for the Decision Tree (DT) model indicate an R2 score of 0.5605, an RMSE of 0.1755, and a Mean Absolute Error (MAE) of 0.1086. Furthermore, the correlation between predicted and actual values is 0.7872, and the linear fit slope is 0.8028. These metrics provide a quantitative assessment of the DT model's performance on the dataset.",
+      "en": "The provided scatter plot visualizes the performance of the Decision Tree (DT) model. The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.  Further analysis of the metrics like RMSE (0.1755), MAE (0.1086), and the prediction-actual correlation (0.787) can provide a more comprehensive understanding of the model's performance.",
       "zh_TW": ""
     },
     "model_rf_scatter": {
-      "en": "The Random Forest (RF) model's performance metrics, as shown in the scatter plot diagnostics, indicate an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836. Furthermore, the correlation between predicted and actual values is 0.88511, and the linear fit slope is 0.848822. These metrics suggest a strong predictive capability for the RF model based on the provided scatter plot analysis.",
+      "en": "The provided scatter plot visualizes the predictions of the Random Forest model against the actual values. The model achieves an R2 score of 0.7756, which suggests a strong correlation between predicted and actual values. Additionally, the plot shows that the data points generally follow a linear trend, further supporting the effectiveness of the Random Forest model.",
       "zh_TW": ""
     },
     "model_knn_scatter": {
-      "en": "The KNN model demonstrates strong performance metrics, achieving an R2 score of 0.8172, an RMSE of 0.1132, and a correlation coefficient of 0.9073 when comparing predictions to actual values. Furthermore, the linear fit slope is 0.8798, indicating a strong positive linear relationship between predicted and actual outcomes. These metrics suggest that KNN is a highly effective model for this prediction task, as evidenced by the scatter plot diagnostics.",
+      "en": "The KNN model achieves a high R2 score of 0.817, suggesting a strong positive correlation between its predictions and the actual values. This indicates that the model effectively captures the underlying relationship in the data. Additionally, the RMSE of 0.113 and MAE of 0.075 further demonstrate the model's accuracy in predicting the target variable.",
       "zh_TW": ""
     },
     "model_xgboost_scatter": {
-      "en": "The scatter plot diagnostics for the XGBoost model indicate an R2 score of 0.7495, suggesting a moderate fit to the data. The Root Mean Squared Error (RMSE) is 0.1325, and the Mean Absolute Error (MAE) is 0.0956. Furthermore, the correlation between predicted and actual values is 0.875024, and the linear fit slope is 0.838684. These metrics provide a quantitative assessment of the model's predictive performance based on the scatter plot visualization.",
+      "en": "The XGBoost model demonstrated a strong performance with an R2 score of 0.7495, suggesting a good fit to the provided data.  Additional metrics such as RMSE (0.1325) and MAE (0.0956) further support this finding.",
       "zh_TW": ""
     },
     "model_comparison_bars": {
-      "en": "The model comparison chart clearly indicates that KNN is the winning model, achieving an R2 score of 0.8172, the lowest RMSE of 0.1132, and the lowest MAE of 0.075. When compared to other models like RF (R2=0.7756) and XGBoost (R2=0.7495), KNN demonstrates superior predictive performance across all metrics. This finding is consistently supported by the associated table data, which ranks KNN's metrics as the best performing set.",
+      "en": "Based on the provided chart 'Model comparison bars', the KNN model demonstrated superior performance in predicting hydrogen production compared to other models. It achieved the highest R² score of 0.817, indicating a strong correlation between predicted and actual values. Additionally, it had the lowest MSE (0.0128), signifying smaller prediction errors. This suggests that KNN is the most effective model for this specific task.",
       "zh_TW": ""
     },
     "predicted_vs_actual": {
-      "en": "The 'Predicted versus actual chart' diagnostics indicate that the KNN model is the best performer, achieving an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. This performance surpasses other benchmark models, such as RF (R2=0.7756) and XGBoost (R2=0.7495). The correlation between predicted and actual values is high at 0.9073, suggesting a strong linear relationship. The residual mean is positive at 0.0122, and the standard deviation is 0.1125, providing a quantitative overview of the model's predictive accuracy.",
+      "en": "Based on the provided chart 'predicted_vs_actual', the KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting HPR values. It achieved an R2 score of 0.817, signifying a strong correlation between predicted and actual HPR values. Additionally, its RMSE of 0.113 indicates low prediction error. These results suggest that the KNN model is effective at capturing the relationship between input features and HPR in this dataset.",
       "zh_TW": ""
     },
     "residuals": {
-      "en": "The residual analysis chart indicates that the KNN model performed best among the tested algorithms, achieving an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. The correlation between predicted and actual values is high at 0.9073, suggesting a strong linear relationship. Compared to other models, KNN shows the lowest RMSE and highest R2, indicating superior predictive accuracy for HPR.",
+      "en": "Based on the provided chart, the KNN model demonstrates strong predictive capabilities.  The R2 score of 0.817 indicates that the model explains 81.7% of the variance in the target variable. The RMSE (Root Mean Squared Error) of 0.113 suggests that the model's predictions are relatively close to the actual values. Additionally, the residuals plot shows a random distribution around zero, indicating that the model captures the underlying trend in the data effectively. These findings suggest that the KNN model is a suitable choice for this prediction task.",
       "zh_TW": ""
     },
     "feature_importance": {
-      "en": "Based on the feature importance chart, VSS exhibits the highest importance score at 0.5052, significantly outranking other features. Acetate follows with an importance score of 0.12, and Butyrate has a score of 0.097. These values suggest that VSS is the most influential feature in the model's predictions, followed by Acetate and Butyrate in descending order of importance.",
+      "en": "According to the provided chart, the most important features for predicting HRT 12 -4 h are VFA, Butyrate, and Acetate. This information is derived from a KNN model trained on relevant data.",
       "zh_TW": ""
     },
     "correlation_heatmap": {
-      "en": "The correlation heatmap reveals that the strongest correlation is between Butyrate and VFA, with a value of 0.9601. Following this, Acetate and VFA show a strong correlation of 0.9428, and Acetate and Butyrate correlate at 0.8651. Furthermore, the top correlations with HPR include VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641), indicating these are key predictors.",
+      "en": "The correlation heatmap visualizes the relationships between HPR (Hydrogen Production Rate) and other variables in the dataset.  Strong positive correlations are indicated by darker colors, while weaker correlations appear lighter. The strongest correlations with HPR are observed with VFA (0.7984), Butyrate (0.7827), Acetate (0.7641), VSS (0.7062), and Ethanol (0.6112). This suggests that these variables have a significant influence on HPR.  Further analysis of these relationships could provide valuable insights into the factors driving hydrogen production.",
       "zh_TW": ""
     },
     "feature_distributions": {
-      "en": "Based on the feature distributions chart, Ethanol shows the highest mean value at 0.4736, followed by Acetate (0.4465) and Butyrate (0.4287). Furthermore, Ethanol also has the largest standard deviation (0.2528), indicating the greatest variability in its measured values compared to other features like pH (0.1267) and VSS (0.1538). This suggests Ethanol is both highly represented on average and highly variable across the dataset.",
+      "en": "According to the chart 'Feature distributions', Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465) and Butyrate (0.4287).",
       "zh_TW": ""
     },
     "feature_vs_target": {
-      "en": "The correlation matrix data shows that the strongest correlation is between Butyrate and VFA, with a value of 0.9601. Following this, Acetate and VFA exhibit a strong correlation of 0.9428. Other notable correlations include Acetate vs Butyrate at 0.8651, and Ethanol vs Propionate at 0.8548. These findings indicate strong linear relationships between these specific pairs of features.",
+      "en": "This analysis provides valuable information for optimizing fermentation processes and maximizing hydrogen yield.",
       "zh_TW": ""
     },
     "boxplots": {
-      "en": "Based on the boxplots and descriptive statistics, Ethanol shows the highest mean value at 0.4736, followed by Acetate (0.4465) and Butyrate (0.4287). Furthermore, Ethanol also has the largest standard deviation (0.2528), indicating the greatest variability in its measured values compared to other features like pH or VSS. These findings are directly observable from the provided distribution statistics.",
+      "en": "The boxplot shows that Ethanol, Acetate, and Butyrate have the highest mean values among the listed features.",
       "zh_TW": ""
     },
     "time_series": {
-      "en": "The KNN model was the winning model based on the provided metrics, achieving an R2 score of 0.81717, an RMSE of 0.11318, an MSE of 0.01281, and an MAE of 0.07502. Comparing it to other models, KNN outperformed RF (R2: 0.7756), XGBoost (R2: 0.7495), SVM (R2: 0.7324), and DT (R2: 0.5605). In the sequence diagnostics, the actual peak value was 1.0 at index 130, and the KNN model predicted a value of 0.8299 at index 146. The sequence correlation for KNN was 0.9315.",
+      "en": "Based on the provided chart and summary text, the KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting hydrogen production. It achieved an R2 score of 0.817 and an RMSE of 0.113, suggesting a strong correlation between predicted and actual hydrogen production values. The chart visualizes the time-series data and model predictions, further supporting the KNN model's effectiveness.",
       "zh_TW": ""
     }
   }

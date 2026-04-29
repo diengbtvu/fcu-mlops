@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "claim_text": "The mean of Ethanol is 2.38.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 1.9064178876
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "claim_text": "The std of Ethanol is 0.38.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.2528296374.",
+      "numeric_delta": 0.12717036260000003
+    }
+  ]
+}

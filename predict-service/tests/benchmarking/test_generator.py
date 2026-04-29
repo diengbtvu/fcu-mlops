@@ -113,6 +113,108 @@ def test_generate_explanations_runs_arm_c_correction_pipeline() -> None:
     assert all(item.status != "contradicted" for item in iteration.corrected_validations)
 
 
+class _ArmCVariableMentionClient:
+    source_variable_id = "fixture_bundle:model_comparison/main:metric:KNN:r2_score"
+
+    def generate_explanation_json(self, prompt: str) -> dict[str, object]:
+        return {
+            "artifact_id": "fixture_bundle:model_comparison/main",
+            "arm": "C",
+            "input_condition": "table_only",
+            "semantic_level": None,
+            "explanation_short": "KNN achieved R2 score of 0.70.",
+            "explanation_full": "KNN achieved R2 score of 0.70.",
+        }
+
+    def extract_variable_mentions_json(self, prompt: str) -> dict[str, object]:
+        value = 0.92 if "0.92" in prompt else 0.70
+        return {
+            "artifact_id": "fixture_bundle:model_comparison/main",
+            "arm": "C",
+            "input_condition": "table_only",
+            "semantic_level": None,
+            "mentions": [
+                {
+                    "mention_id": "mention-1",
+                    "source_variable_id": self.source_variable_id,
+                    "evidence_span": f"KNN achieved R2 score of {value}.",
+                    "stated_value": value,
+                    "stated_object": None,
+                    "stated_ordered_items": [],
+                    "stated_feature_count": None,
+                    "confidence": 1.0,
+                }
+            ],
+        }
+
+    def validate_arm_c_json(self, prompt: str) -> dict[str, object]:
+        from benchmarking.prompts import extract_prompt_context
+
+        context = extract_prompt_context(prompt)
+        claims = list(context.get("claims") or [])
+        supported = any(isinstance(claim, dict) and claim.get("value") == 0.92 for claim in claims)
+        return {
+            "artifact_id": "fixture_bundle:model_comparison/main",
+            "arm": "C",
+            "input_condition": "table_only",
+            "validation_records": [
+                {
+                    "claim_id": "claim-1",
+                    "claim_text": "KNN achieved R2 score.",
+                    "status": "supported" if supported else "contradicted",
+                    "recommended_action": "keep" if supported else "edit",
+                    "rationale": "Fixture validator response.",
+                    "matched_fact_ids": [self.source_variable_id],
+                    "grounded_fact_summary": "KNN r2_score=0.920000.",
+                }
+            ],
+        }
+
+    def correct_arm_c_json(self, prompt: str) -> dict[str, object]:
+        return {
+            "artifact_id": "fixture_bundle:model_comparison/main",
+            "arm": "C",
+            "input_condition": "table_only",
+            "semantic_level": None,
+            "explanation_short": "KNN achieved R2 score of 0.92.",
+            "explanation_full": "KNN achieved R2 score of 0.92.",
+            "claims": [
+                {
+                    "claim_id": "malicious-embedded-claim",
+                    "claim_text": "The best subset uses 5 features.",
+                    "claim_type": "feature_subset_optimum",
+                    "source_variable_id": "fixture_bundle:model_comparison/main:metric:KNN:r2_score",
+                    "feature_count": 5,
+                }
+            ],
+        }
+
+
+def test_arm_c_reextracts_claims_from_corrected_text_and_ignores_embedded_claims() -> None:
+    bundle_dir = Path(__file__).resolve().parent / "fixtures" / "sample_bundle"
+    records = build_manifest(bundle_dir)
+    gold_artifacts = build_gold_artifacts(bundle_dir, records)
+    inputs = load_artifact_inputs(records[0], bundle_dir)
+
+    outputs = generate_explanations(
+        inputs=inputs,
+        gold=gold_artifacts[0],
+        arms=["C"],
+        conditions=["table_only"],
+        client=_ArmCVariableMentionClient(),
+    )
+
+    assert len(outputs) == 1
+    output = outputs[0]
+    assert output.generation_stage == "corrected"
+    assert len(output.claims) == 1
+    assert output.claims[0].claim_type == "metric_value"
+    assert output.claims[0].source_variable_id == _ArmCVariableMentionClient.source_variable_id
+    assert output.claims[0].value == 0.92
+    assert output.claims[0].feature_count is None
+    assert output.extracted_variable_mentions
+
+
 class _ArmCDraftOnlyClient:
     def __init__(self) -> None:
         self.corrector_calls = 0

@@ -8,69 +8,41 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA, Butyrate, and Acetate are among the top features contributing to the model's predictions",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, ORP_Low, COD-O, and ORP_Mid are the top features influencing model predictions.",
       "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature"
       ],
       "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 3
+      "numeric_delta": 6
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "VFA showing the highest importance",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "ORP_Low is a metric value.",
       "status": "unverifiable",
       "semantic_level": null,
       "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "reason": "Numeric claim is missing a numeric value.",
       "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "The top features identified by their mean absolute SHAP values are VFA (0.0298), Butyrate (0.0304), and Acetate (0.0266)",
-      "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
-      ],
-      "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 3
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "The feature importance ranking from the chart also highlights VFA, Butyrate, and Acetate as the top three features",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "The ranking of features based on mean_abs_shap is VFA, Butyrate, Acetate, ORP_Low, COD-O, and ORP_Mid.",
       "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking"
       ],
       "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 3
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "VFA having the highest value among the listed features in the table",
-      "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
-      ],
-      "reason": "Gold feature_subset_optimum count is 0.",
-      "numeric_delta": 1
+      "numeric_delta": 6
     }
   ]
 }

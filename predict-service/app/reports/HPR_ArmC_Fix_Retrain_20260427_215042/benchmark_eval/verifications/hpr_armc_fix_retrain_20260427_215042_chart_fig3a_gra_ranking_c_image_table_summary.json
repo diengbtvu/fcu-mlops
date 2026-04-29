@@ -1,0 +1,58 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:claim:1",
+      "claim_text": "According to the Grey Relational Analysis, VFA, Butyrate, Acetate, VSS, and Propionate are the top 5 most important features for predicting model performance.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:top_feature"
+      ],
+      "reason": "Gold top feature for gra_score is VFA.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:claim:2",
+      "claim_text": "The Grey Relational Ranking analysis highlights the importance of various features in predicting model performance.  VFA, Butyrate, Acetate, VSS, and Propionate emerge as the top five most influential features, suggesting their significant contribution to the model's accuracy.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:claim:3",
+      "claim_text": "The Grey Relational Ranking analysis highlights the importance of various features in predicting model performance.  VFA, Butyrate, Acetate, VSS, and Propionate emerge as the top five most influential features, suggesting their significant contribution to the model's accuracy.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:claim:4",
+      "claim_text": "The Grey Relational Ranking analysis highlights the importance of various features in predicting model performance.  VFA, Butyrate, Acetate, VSS, and Propionate emerge as the top five most influential features, suggesting their significant contribution to the model's accuracy.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

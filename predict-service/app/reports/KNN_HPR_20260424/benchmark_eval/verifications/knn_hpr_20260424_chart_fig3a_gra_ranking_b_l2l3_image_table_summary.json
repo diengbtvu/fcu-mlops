@@ -8,8 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "VFA is the most significant predictor with a score of 0.7931.",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "claim_text": "VFA is the most important feature for predicting model performance.",
       "status": "supported",
       "semantic_level": "L2L3",
       "matched_fact_ids": [
@@ -22,20 +22,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "VFA, Butyrate, and Acetate are consistently identified as the most critical variables influencing the model's performance.",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "VFA is the top feature according to GRA, followed by Butyrate and Acetate.",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "claim_text": "VFA is ranked first in importance.",
       "status": "contradicted",
       "semantic_level": "L2L3",
       "matched_fact_ids": [

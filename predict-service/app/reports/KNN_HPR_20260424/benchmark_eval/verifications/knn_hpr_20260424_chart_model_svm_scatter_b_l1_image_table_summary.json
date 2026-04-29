@@ -8,15 +8,29 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The SVM model achieved an R2 score of 0.7324",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "claim_text": "The SVM model has a high R2 score of 0.73, indicating a good fit to the data.",
+      "status": "contradicted",
       "semantic_level": "L1",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
       ],
       "reason": "Gold value for SVM r2_score is 0.7324097475.",
-      "numeric_delta": 9.747499999934739e-06
+      "numeric_delta": 0.0024097475000000035
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:rmse",
+      "claim_text": "The RMSE is 0.14, suggesting relatively low prediction errors.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:rmse"
+      ],
+      "reason": "Gold value for SVM rmse is 0.1369247591.",
+      "numeric_delta": 0.003075240900000026
     }
   ]
 }

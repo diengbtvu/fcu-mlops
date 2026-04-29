@@ -8,67 +8,15 @@
       "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "KNN's strong performance is highlighted by its low residual standard deviation (0.1125)",
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
       "status": "supported",
       "semantic_level": "L2L3",
       "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:residual_std"
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
       ],
-      "reason": "Gold value for KNN residual_std is 0.112518.",
-      "numeric_delta": 1.8000000000004124e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "KNN's strong performance is highlighted by its high correlation (0.9073) with actual values.",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "KNN model demonstrates robust predictive accuracy, boasting a correlation coefficient of 0.9073 between predicted and actual values.",
-      "status": "supported",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:pred_actual_correlation"
-      ],
-      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
-      "numeric_delta": 1.0000000000287557e-06
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "its residual standard deviation of 0.1125 suggests that the model's errors are consistently small relative to the data spread.",
-      "status": "supported",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:residual_std"
-      ],
-      "reason": "Gold value for KNN residual_std is 0.112518.",
-      "numeric_delta": 1.8000000000004124e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "KNN's lower mean absolute residual (0.075) indicates a tighter fit to the actual data points, making it the most reliable predictor among the tested algorithms.",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
     }
   ]
 }

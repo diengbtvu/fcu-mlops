@@ -3,5 +3,62 @@
   "arm": "C",
   "input_condition": "image_table_summary",
   "semantic_level": null,
-  "verifications": []
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top ranked features for grey relational analysis.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:feature_ranking/gra:top_feature"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 4
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:Acetate",
+      "claim_text": "Acetate has a gra_score of 2.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Acetate"
+      ],
+      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+      "numeric_delta": 1.2227800023631934
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:Butyrate",
+      "claim_text": "Butyrate has a gra_score of 2.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:feature_ranking/gra:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 1.2097532449822976
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:rank_score:VFA",
+      "claim_text": "VFA has a gra_score of 2.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:feature_ranking/gra:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.206886456304391
+    }
+  ]
 }

@@ -1,0 +1,22 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:claim:1",
+      "claim_text": "The KNN model achieved the highest R2 score (0.81717) and lowest RMSE (0.11318), indicating strong predictive accuracy.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig4_univariate_analysis:top_feature:target_correlation"
+      ],
+      "reason": "Gold top feature for target_correlation is VFA.",
+      "numeric_delta": null
+    }
+  ]
+}

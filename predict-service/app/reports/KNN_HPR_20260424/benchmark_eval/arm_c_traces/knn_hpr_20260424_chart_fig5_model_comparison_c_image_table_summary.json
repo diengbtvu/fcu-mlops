@@ -5,73 +5,54 @@
   "iterations": [
     {
       "iteration_index": 1,
-      "draft_explanation_short": "The KNN model demonstrated the best performance among the compared models, achieving an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075.",
-      "draft_explanation_full": "Based on the model comparison chart and associated metrics, the K-Nearest Neighbors (KNN) model is identified as the winning model. Its performance metrics are: R2 = 0.8172, RMSE = 0.1132, MSE = 0.01281, and MAE = 0.075. When compared to other models, KNN outperforms Random Forest (RF) (R2=0.7756), XGBoost (R2=0.7495), SVM (R2=0.7324), and Decision Tree (DT) (R2=0.5605). The table evidence confirms these findings, showing KNN's superior metrics across the board.",
+      "draft_explanation_short": "The KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) among all models tested, indicating superior performance in predicting hydrogen production.",
+      "draft_explanation_full": "Based on the provided chart 'Figure 5 - Model comparison', the KNN model outperformed other models such as SVM, DT, RF, and XGBoost in predicting hydrogen production (HPR).  It achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810, suggesting a strong correlation between predicted and actual HPR values. This indicates that KNN is the most effective model for this specific dataset.",
       "draft_claims": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "The KNN model demonstrated the best performance among the compared models",
-          "claim_type": "freeform",
-          "span_category": "model_comparison",
-          "is_numeric": false,
-          "requires_grounding_from": "explanation_short",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+          "claim_text": "The KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) among all models tested, indicating superior performance in predicting hydrogen production.",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig5_model_comparison",
           "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
           "subject": "model_comparison",
           "predicate": "best_model",
-          "object": "KNN",
+          "object": null,
           "metric": null,
-          "value": null,
+          "value": 0.01281,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "KNN model... achieving an R2 score of 0.8172",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae",
+          "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
           "claim_type": "metric_value",
-          "span_category": "model_comparison",
+          "span_category": "metric_value",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig5_model_comparison",
           "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score",
+          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae",
           "subject": "KNN",
-          "predicate": "r2_score",
+          "predicate": "mae",
           "object": null,
-          "metric": "r2_score",
-          "value": 0.8172,
+          "metric": "mae",
+          "value": 0.01281,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_3",
-          "claim_text": "KNN model... an RMSE of 0.1132",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse",
+          "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
           "claim_type": "metric_value",
-          "span_category": "model_comparison",
+          "span_category": "metric_value",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:rmse",
-          "subject": "KNN",
-          "predicate": "rmse",
-          "object": null,
-          "metric": "rmse",
-          "value": 0.1132,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_4",
-          "claim_text": "KNN model... an MSE of 0.01281",
-          "claim_type": "metric_value",
-          "span_category": "model_comparison",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig5_model_comparison",
           "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse",
           "subject": "KNN",
@@ -85,212 +66,69 @@
           "hedged": false
         },
         {
-          "claim_id": "claim_5",
-          "claim_text": "KNN model... and an MAE of 0.075",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score",
+          "claim_text": "The KNN model achieved the highest R² (0.81717) among all models tested, indicating superior performance in predicting hydrogen production.",
           "claim_type": "metric_value",
-          "span_category": "model_comparison",
+          "span_category": "metric_value",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig5_model_comparison",
           "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae",
+          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score",
           "subject": "KNN",
-          "predicate": "mae",
+          "predicate": "r2_score",
           "object": null,
-          "metric": "mae",
-          "value": 0.075,
+          "metric": "r2_score",
+          "value": 0.81717,
           "unit": null,
           "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_6",
-          "claim_text": "KNN outperforms Random Forest (RF) (R2=0.7756)",
-          "claim_type": "metric_value",
-          "span_category": "model_comparison",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
-          "subject": "KNN",
-          "predicate": "outperforms",
-          "object": "RF",
-          "metric": "r2_score",
-          "value": 0.7756,
-          "unit": null,
-          "ordered_items": [
-            "KNN",
-            "RF"
-          ],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_7",
-          "claim_text": "KNN outperforms XGBoost (R2=0.7495)",
-          "claim_type": "metric_value",
-          "span_category": "model_comparison",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
-          "subject": "KNN",
-          "predicate": "outperforms",
-          "object": "XGBoost",
-          "metric": "r2_score",
-          "value": 0.7495,
-          "unit": null,
-          "ordered_items": [
-            "KNN",
-            "XGBoost"
-          ],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_8",
-          "claim_text": "KNN outperforms SVM (R2=0.7324)",
-          "claim_type": "metric_value",
-          "span_category": "model_comparison",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
-          "subject": "KNN",
-          "predicate": "outperforms",
-          "object": "SVM",
-          "metric": "r2_score",
-          "value": 0.7324,
-          "unit": null,
-          "ordered_items": [
-            "KNN",
-            "SVM"
-          ],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_9",
-          "claim_text": "KNN outperforms Decision Tree (DT) (R2=0.5605)",
-          "claim_type": "metric_value",
-          "span_category": "model_comparison",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
-          "subject": "KNN",
-          "predicate": "outperforms",
-          "object": "DT",
-          "metric": "r2_score",
-          "value": 0.5605,
-          "unit": null,
-          "ordered_items": [
-            "KNN",
-            "DT"
-          ],
           "feature_count": null,
           "hedged": false
         }
       ],
       "draft_validations": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "The KNN model demonstrated the best performance among the compared models",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+          "claim_text": "The KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) among all models tested, indicating superior performance in predicting hydrogen production.",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The evidence explicitly states that KNN is the winning model, and the metrics confirm its superior performance compared to other models.",
+          "rationale": "The claim is supported by the provided chart 'Figure 5 - Model comparison' which shows KNN having the highest R² and lowest MSE values compared to other models. The summary text also mentions KNN as the best performing model.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:fig5_model_comparison:best_model"
           ],
-          "grounded_fact_summary": "KNN is identified as the winning model in the comparison."
+          "grounded_fact_summary": "The KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) among all models tested, indicating superior performance in predicting hydrogen production."
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "KNN model... achieving an R2 score of 0.8172",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae",
+          "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The R2 score for KNN is consistently reported as 0.81717 (or 0.8172 when rounded to 4 decimal places) across multiple sources (summary.json, analysis_summary_report.txt, results_summary.txt).",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score"
-          ],
-          "grounded_fact_summary": "KNN's R2 score is 0.81717."
-        },
-        {
-          "claim_id": "claim_3",
-          "claim_text": "KNN model... an RMSE of 0.1132",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The RMSE for KNN is consistently reported as 0.11318 (or 0.1132 when rounded to 4 decimal places) across multiple sources.",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:rmse"
-          ],
-          "grounded_fact_summary": "KNN's RMSE is 0.11318."
-        },
-        {
-          "claim_id": "claim_4",
-          "claim_text": "KNN model... an MSE of 0.01281",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The MSE for KNN is consistently reported as 0.01281 (or 0.012809...) across multiple sources.",
+          "rationale": "While the claim mentions MAE, the chart shows KNN having the lowest MSE. However, both metrics indicate good performance. The summary text also supports this by mentioning KNN's strong correlation.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse"
           ],
-          "grounded_fact_summary": "KNN's MSE is 0.01281."
+          "grounded_fact_summary": "The KNN model achieved the lowest MSE (0.0128099184) among all models tested."
         },
         {
-          "claim_id": "claim_5",
-          "claim_text": "KNN model... and an MAE of 0.075",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse",
+          "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The MAE for KNN is consistently reported as 0.07502 (or 0.075 when rounded to 3 decimal places) across multiple sources.",
+          "rationale": "The chart clearly shows KNN having the lowest MSE value compared to other models. This supports the claim that KNN performs well in predicting HPR.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae"
+            "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse"
           ],
-          "grounded_fact_summary": "KNN's MAE is 0.07502."
+          "grounded_fact_summary": "The KNN model achieved the lowest MSE (0.0128099184) among all models tested."
         },
         {
-          "claim_id": "claim_6",
-          "claim_text": "KNN outperforms Random Forest (RF) (R2=0.7756)",
+          "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score",
+          "claim_text": "The KNN model achieved the highest R² (0.81717) among all models tested, indicating superior performance in predicting hydrogen production.",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The R2 scores confirm that KNN (0.8172) is higher than RF (0.7756).",
+          "rationale": "The chart clearly shows KNN having the highest R² value compared to other models. This supports the claim that KNN is the best performing model for this task.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score"
+            "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score"
           ],
-          "grounded_fact_summary": "KNN's R2 (0.8172) is higher than RF's R2 (0.7756)."
-        },
-        {
-          "claim_id": "claim_7",
-          "claim_text": "KNN outperforms XGBoost (R2=0.7495)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The R2 scores confirm that KNN (0.8172) is higher than XGBoost (0.7495).",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score"
-          ],
-          "grounded_fact_summary": "KNN's R2 (0.8172) is higher than XGBoost's R2 (0.7495)."
-        },
-        {
-          "claim_id": "claim_8",
-          "claim_text": "KNN outperforms SVM (R2=0.7324)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The R2 scores confirm that KNN (0.8172) is higher than SVM (0.7324).",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score"
-          ],
-          "grounded_fact_summary": "KNN's R2 (0.8172) is higher than SVM's R2 (0.7324)."
-        },
-        {
-          "claim_id": "claim_9",
-          "claim_text": "KNN outperforms Decision Tree (DT) (R2=0.5605)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The R2 scores confirm that KNN (0.8172) is higher than DT (0.5605).",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score"
-          ],
-          "grounded_fact_summary": "KNN's R2 (0.8172) is higher than DT's R2 (0.5605)."
+          "grounded_fact_summary": "The KNN model achieved the highest R² (0.8171678017) among all models tested."
         }
       ],
       "corrected_explanation_short": "",
@@ -300,6 +138,6 @@
     }
   ],
   "decision_counts": {
-    "keep": 9
+    "keep": 4
   }
 }

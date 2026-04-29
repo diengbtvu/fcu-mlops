@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model predicts HPR with high accuracy (R2=0.817) and a low mean absolute error (MAE=0.075). The predicted peak value is slightly lower than the actual peak, indicating potential underestimation.",
+  "explanation_full": "The KNN model demonstrates strong performance in predicting Hydrogen Production Rate (HPR), achieving an R2 score of 0.817 and a low Mean Absolute Error (MAE) of 0.075.  This suggests that the model captures the underlying trends in HPR effectively. However, the predicted peak value is slightly lower than the actual peak observed in the data. This could indicate potential underestimation by the model at the peak point. Further investigation into the factors contributing to this discrepancy might be beneficial for refining the model's predictions.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

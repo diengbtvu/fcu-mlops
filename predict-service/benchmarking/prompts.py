@@ -9,6 +9,8 @@ PROMPT_CONTEXT_START = "BEGIN_CONTEXT_JSON"
 PROMPT_CONTEXT_END = "END_CONTEXT_JSON"
 CLAIM_EXTRACTION_CONTEXT_START = "BEGIN_CLAIM_EXTRACTION_JSON"
 CLAIM_EXTRACTION_CONTEXT_END = "END_CLAIM_EXTRACTION_JSON"
+VARIABLE_MENTION_CONTEXT_START = "BEGIN_VARIABLE_MENTION_EXTRACTION_JSON"
+VARIABLE_MENTION_CONTEXT_END = "END_VARIABLE_MENTION_EXTRACTION_JSON"
 
 JSON_ONLY_CONTRACT = (
     "JSON OUTPUT CONTRACT:\n"
@@ -541,4 +543,57 @@ def extract_claim_extraction_context(prompt: str) -> dict[str, Any]:
     if start_index == -1 or end_index == -1:
         raise ValueError("Claim extraction prompt does not contain context markers.")
     payload = prompt[start_index + len(CLAIM_EXTRACTION_CONTEXT_START) : end_index].strip()
+    return json.loads(payload)
+
+
+def build_variable_mention_extraction_prompt(
+    *,
+    artifact_id: str,
+    arm: str,
+    input_condition: str,
+    explanation_short: str,
+    explanation_full: str,
+    primary_entities: list[str],
+    variable_catalog: list[dict[str, Any]],
+    semantic_level: str | None = None,
+) -> str:
+    payload = {
+        "artifact_id": artifact_id,
+        "arm": arm,
+        "input_condition": input_condition,
+        "semantic_level": semantic_level,
+        "primary_entities": primary_entities,
+        "allowed_variables": variable_catalog,
+        "explanation": {
+            "explanation_short": explanation_short,
+            "explanation_full": explanation_full,
+        },
+    }
+    return (
+        "You are selecting standardized benchmark variables explicitly mentioned in one ML explanation.\n"
+        f"{JSON_ONLY_CONTRACT}"
+        "Required top-level keys: artifact_id, arm, input_condition, semantic_level, mentions.\n"
+        "Each mention must include: mention_id, source_variable_id, evidence_span, stated_value, "
+        "stated_object, stated_ordered_items, stated_feature_count, confidence.\n"
+        "Rules:\n"
+        "- Select only source_variable_id values listed in allowed_variables.\n"
+        "- Return one mention per stated variable; if one sentence states R2 and MSE, return two mentions.\n"
+        "- Do not emit claim_type, subject, predicate, metric, unit, fact_type, or value_kind.\n"
+        "- Do not infer missing values from allowed_variables.\n"
+        "- Do not convert rank positions into score values; a rank position is not a GRA score.\n"
+        "- If the explanation only says an entity is top-ranked, fill stated_object and leave stated_value null.\n"
+        "- If a variable is absent from the explanation, omit it.\n"
+        "- Prefer omission over guesswork.\n"
+        f"{VARIABLE_MENTION_CONTEXT_START}\n"
+        f"{json.dumps(payload, ensure_ascii=False, indent=2)}\n"
+        f"{VARIABLE_MENTION_CONTEXT_END}\n"
+    )
+
+
+def extract_variable_mention_context(prompt: str) -> dict[str, Any]:
+    start_index = prompt.find(VARIABLE_MENTION_CONTEXT_START)
+    end_index = prompt.find(VARIABLE_MENTION_CONTEXT_END)
+    if start_index == -1 or end_index == -1:
+        raise ValueError("Variable mention extraction prompt does not contain context markers.")
+    payload = prompt[start_index + len(VARIABLE_MENTION_CONTEXT_START) : end_index].strip()
     return json.loads(payload)

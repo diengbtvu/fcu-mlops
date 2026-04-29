@@ -8,74 +8,56 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model is the best performing model for predicting HPR",
-      "status": "unverifiable",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "claim_text": "The mean absolute gap between predicted and actual HPR values is 0.170106.",
+      "status": "contradicted",
       "semantic_level": "L1",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+      ],
+      "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
+      "numeric_delta": 0.10351500000000001
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "KNN achieving an R2 score of 0.81717",
-      "status": "unverifiable",
-      "semantic_level": "L1",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "KNN achieving an RMSE of 0.11318",
-      "status": "unverifiable",
-      "semantic_level": "L1",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "KNN achieving an MSE of 0.012810",
-      "status": "unverifiable",
-      "semantic_level": "L1",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "KNN performance is superior to other benchmark models like RF (R2: 0.7756) and XGBoost (R2: 0.7495)",
-      "status": "unverifiable",
-      "semantic_level": "L1",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "sequence diagnostics for KNN show a high sequence correlation of 0.931488",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "claim_text": "The sequence correlation between predicted and actual HPR values is 0.89.",
+      "status": "contradicted",
       "semantic_level": "L1",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
       ],
       "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+      "numeric_delta": 0.04148799999999997
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "claim_text": "The actual peak HPR value occurs at index 130.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+      ],
+      "reason": "Gold value for KNN actual_peak_index is 130.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "claim_text": "The predicted peak HPR value occurs at index 146.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+      ],
+      "reason": "Gold value for KNN predicted_peak_index is 146.0.",
       "numeric_delta": 0.0
     }
   ]

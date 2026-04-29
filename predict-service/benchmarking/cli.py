@@ -12,7 +12,7 @@ from .chart_reporting import write_per_chart_benchmark_outputs
 from .generator import generate_explanations
 from .gold_builders import build_gold_artifacts
 from .io_utils import bundle_workspace, ensure_output_layout, slugify, write_csv_rows, write_json, write_jsonl
-from .llm_client import FixtureLLMClient, OllamaLLMClient, OpenAILLMClient
+from .llm_client import FixtureLLMClient, GroqLLMClient, OllamaLLMClient, OpenAILLMClient
 from .manifest import build_manifest, load_artifact_inputs
 from .metrics import build_leaderboard, compute_artifact_scores
 from .schemas import SUPPORTED_ARMS, SUPPORTED_CONDITIONS, SUPPORTED_SEMANTIC_LEVELS
@@ -72,7 +72,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--client",
-        choices=("fixture", "openai", "ollama"),
+        choices=("fixture", "openai", "ollama", "groq"),
         default="fixture",
         help="LLM client for benchmark generations. Default: fixture.",
     )
@@ -144,6 +144,8 @@ def _build_llm_client(client_name: str) -> Any:
         return OpenAILLMClient()
     if client_name == "ollama":
         return OllamaLLMClient()
+    if client_name == "groq":
+        return GroqLLMClient()
     raise ValueError(f"Unsupported benchmark client: {client_name}")
 
 
@@ -250,6 +252,12 @@ def _persist_generation_outputs(
             "input_condition": generation.input_condition,
             "semantic_level": generation.semantic_level,
             "claims": [claim.to_dict() for claim in generation.claims],
+            "claim_alignment_issues": [
+                issue.to_dict() for issue in getattr(generation, "claim_alignment_issues", [])
+            ],
+            "extracted_variable_mentions": [
+                mention.to_dict() for mention in getattr(generation, "extracted_variable_mentions", [])
+            ],
         },
     )
     verifications = verify_claims(
@@ -277,6 +285,8 @@ def _persist_generation_outputs(
             arm=generation.arm,
             input_condition=generation.input_condition,
             semantic_level=generation.semantic_level,
+            alignment_issues=list(getattr(generation, "claim_alignment_issues", []) or []),
+            mention_count=len(list(getattr(generation, "extracted_variable_mentions", []) or [])) or None,
         )
     )
 

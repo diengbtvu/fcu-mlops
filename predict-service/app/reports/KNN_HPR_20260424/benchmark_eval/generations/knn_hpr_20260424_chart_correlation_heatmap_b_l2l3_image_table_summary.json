@@ -2,77 +2,25 @@
   "artifact_id": "KNN_HPR_20260424:chart:correlation_heatmap",
   "arm": "B",
   "input_condition": "image_table_summary",
-  "explanation_short": "The strongest correlations observed are between Butyrate and VFA (0.9601), and Acetate and VFA (0.9428), indicating a strong interdependence among these metabolites.",
-  "explanation_full": "At a deeper level, the correlation heatmap reveals highly correlated pairs among the metabolites themselves. Specifically, the correlation between Butyrate and VFA is the strongest at 0.9601, closely followed by Acetate and VFA at 0.9428. This suggests that these metabolites are not independent predictors but are highly co-varying. Furthermore, the top correlations with HPR—VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641)—confirm that these three components are the most influential factors driving HPR production, as detailed in the correlation story.",
+  "explanation_short": "The correlation heatmap reveals strong positive correlations between HPR and VFA (0.7984), Butyrate (0.7827), Acetate (0.7641), VSS (0.7062), and Ethanol (0.6112).",
+  "explanation_full": "The correlation heatmap visualizes the relationships between HPR and other variables in the dataset.  Strong positive correlations are observed between HPR and several key features: \n\n* **VFA:** 0.7984 - A strong positive correlation indicates that as VFA increases, HPR tends to increase as well.\n* **Butyrate:** 0.7827 - Similar to VFA, a high butyrate level is associated with higher HPR.\n* **Acetate:** 0.7641 - Acetate also shows a strong positive correlation with HPR.\n* **VSS:** 0.7062 -  A positive correlation between VSS and HPR suggests that higher levels of volatile suspended solids may contribute to increased HPR.\n* **Ethanol:** 0.6112 - While less pronounced than the others, ethanol still exhibits a positive correlation with HPR.\n\nThese findings suggest that these variables play significant roles in influencing hydrogen production.",
   "claims": [
     {
-      "claim_id": "claim_1",
-      "claim_text": "The correlation between Butyrate and VFA is the strongest at 0.9601",
+      "claim_id": "KNN_HPR_20260424:chart:correlation_heatmap:top_feature:target_correlation",
+      "claim_text": "The correlation heatmap reveals strong positive correlations between HPR and VFA (0.7984), Butyrate (0.7827), Acetate (0.7641), VSS (0.7062), and Ethanol (0.6112).",
       "claim_type": "metric_value",
       "span_category": "correlation",
       "is_numeric": true,
-      "requires_grounding_from": "explanation_short",
+      "requires_grounding_from": "KNN_HPR_20260424:chart:correlation_heatmap",
       "confidence": 1.0,
-      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:ranking:correlation",
-      "subject": "Butyrate vs VFA",
-      "predicate": "correlation",
-      "object": "Butyrate and VFA",
-      "metric": "correlation",
-      "value": 0.9601,
-      "unit": null,
-      "ordered_items": [
-        "Butyrate",
-        "VFA"
-      ],
-      "feature_count": null,
-      "hedged": false
-    },
-    {
-      "claim_id": "claim_2",
-      "claim_text": "Acetate and VFA at 0.9428",
-      "claim_type": "metric_value",
-      "span_category": "correlation",
-      "is_numeric": true,
-      "requires_grounding_from": "explanation_short",
-      "confidence": 1.0,
-      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:ranking:correlation",
-      "subject": "feature_pairs",
-      "predicate": "correlation",
-      "object": "Acetate and VFA",
-      "metric": "correlation",
-      "value": 0.9428,
-      "unit": null,
-      "ordered_items": [
-        "Acetate",
-        "VFA"
-      ],
-      "feature_count": null,
-      "hedged": false
-    },
-    {
-      "claim_id": "claim_3",
-      "claim_text": "VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641)—confirm that these three components are the most influential factors driving HPR production",
-      "claim_type": "metric_value",
-      "span_category": "target_correlation",
-      "is_numeric": true,
-      "requires_grounding_from": "explanation_full",
-      "confidence": 1.0,
-      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:ranking:target_correlation",
+      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:top_feature:target_correlation",
       "subject": "hpr",
       "predicate": "target_correlation",
-      "object": "VFA, Butyrate, and Acetate",
+      "object": "0.7984, 0.7827, 0.7641, 0.7062, 0.6112",
       "metric": "target_correlation",
-      "value": [
-        0.7984,
-        0.7827,
-        0.7641
-      ],
+      "value": "0.7984, 0.7827, 0.7641, 0.7062, 0.6112",
       "unit": null,
-      "ordered_items": [
-        "VFA",
-        "Butyrate",
-        "Acetate"
-      ],
+      "ordered_items": [],
       "feature_count": null,
       "hedged": false
     }

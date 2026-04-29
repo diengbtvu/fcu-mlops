@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 from pathlib import Path
 
 from benchmarking.arm_c_pipeline import build_arm_c_evidence_packet
 from benchmarking.llm_client import FixtureLLMClient
+from benchmarking.llm_client import GroqLLMClient
 from benchmarking.llm_client import OLLAMA_BENCHMARK_JSON_NUM_PREDICT
 from benchmarking.llm_client import OllamaLLMClient
+from benchmarking.llm_client import _claim_schema
+from benchmarking.llm_client import _variable_mention_schema
 from benchmarking.prompts import (
     build_arm_c_draft_prompt,
     build_arm_c_validator_prompt,
@@ -14,6 +18,166 @@ from benchmarking.prompts import (
 from benchmarking.variable_catalog import build_variable_catalog
 from benchmarking.gold_builders import build_gold_artifacts
 from benchmarking.manifest import build_manifest, load_artifact_inputs
+
+
+def _anyof_type_sets(schema: object) -> list[set[str]]:
+    type_sets: list[set[str]] = []
+    if isinstance(schema, dict):
+        any_of = schema.get("anyOf")
+        if isinstance(any_of, list):
+            types = {
+                str(item.get("type"))
+                for item in any_of
+                if isinstance(item, dict) and isinstance(item.get("type"), str)
+            }
+            if types:
+                type_sets.append(types)
+        for value in schema.values():
+            type_sets.extend(_anyof_type_sets(value))
+    elif isinstance(schema, list):
+        for item in schema:
+            type_sets.extend(_anyof_type_sets(item))
+    return type_sets
+
+
+def test_benchmark_schemas_avoid_ambiguous_integer_number_unions() -> None:
+    schemas = [_claim_schema(), _variable_mention_schema()]
+
+    assert all(
+        {"integer", "number"} - type_set
+        for schema in schemas
+        for type_set in _anyof_type_sets(schema)
+    )
+
+
+def test_groq_client_uses_inline_json_for_gpt_oss_model() -> None:
+    client = object.__new__(GroqLLMClient)
+    client.model_name = "openai/gpt-oss-120b"
+
+    response_format = {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "benchmark_claims",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "claims": {"type": "array"},
+                },
+                "required": ["claims"],
+            },
+        },
+    }
+    payload = {
+        "model": "placeholder",
+        "messages": [{"role": "system", "content": "Return JSON only."}],
+        "response_format": response_format,
+        "reasoning_effort": "low",
+        "verbosity": "low",
+    }
+
+    prepared = GroqLLMClient._prepare_groq_payload(client, payload)
+
+    assert "response_format" not in prepared
+    assert prepared["reasoning_effort"] == "low"
+    assert "verbosity" not in prepared
+    assert prepared["temperature"] == 0
+    assert "The JSON must exactly match this schema" in prepared["messages"][0]["content"]
+
+
+def test_groq_client_uses_inline_json_for_llama_model() -> None:
+    client = object.__new__(GroqLLMClient)
+    client.model_name = "llama-3.3-70b-versatile"
+
+    payload = {
+        "model": "placeholder",
+        "messages": [{"role": "system", "content": "Return JSON only."}],
+        "response_format": {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "benchmark_claims",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "artifact_id": {"type": "string"},
+                        "claims": {"type": "array"},
+                    },
+                    "required": ["artifact_id", "claims"],
+                },
+            },
+        },
+        "reasoning_effort": "low",
+        "verbosity": "low",
+    }
+
+    prepared = GroqLLMClient._prepare_groq_payload(client, payload)
+
+    assert "response_format" not in prepared
+    assert "reasoning_effort" not in prepared
+    assert "verbosity" not in prepared
+    assert prepared["temperature"] == 0
+    assert "The JSON must exactly match this schema" in prepared["messages"][0]["content"]
+
+
+def test_groq_client_call_posts_to_openai_compatible_endpoint(monkeypatch) -> None:
+    client = object.__new__(GroqLLMClient)
+    client.api_key = "test-key"
+    client.model_name = "llama-3.3-70b-versatile"
+    client.timeout_seconds = 60
+    captured: dict[str, object] = {}
+
+    class Response:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict[str, object]:
+            return {
+                "choices": [
+                    {
+                        "message": {
+                            "content": (
+                                '{"artifact_id":"artifact-1","arm":"C",'
+                                '"input_condition":"table_only","semantic_level":null,"claims":[]}'
+                            )
+                        }
+                    }
+                ]
+            }
+
+    def fake_post(url: str, **kwargs: object) -> Response:
+        captured["url"] = url
+        captured.update(kwargs)
+        return Response()
+
+    import requests
+
+    monkeypatch.setattr(requests, "post", fake_post)
+    monkeypatch.setattr("benchmarking.llm_client.GROQ_BENCHMARK_MIN_REQUEST_INTERVAL_SECONDS", 0)
+
+    class Gate:
+        @contextmanager
+        def request_slot(self, _min_interval_seconds: float, _jitter_seconds: float = 0.0):
+            yield
+
+        def push_cooldown(self, _delay_seconds: float) -> None:
+            return None
+
+    monkeypatch.setattr("benchmarking.llm_client.shared_openai_request_gate", lambda: Gate())
+
+    response = GroqLLMClient._call_openai(
+        client,
+        {
+            "model": "llama-3.3-70b-versatile",
+            "messages": [{"role": "system", "content": "Return JSON only."}],
+            "response_format": {"type": "json_schema", "json_schema": {"schema": {"type": "object"}}},
+            "reasoning_effort": "low",
+            "verbosity": "low",
+        },
+    )
+
+    assert response["artifact_id"] == "artifact-1"
+    assert str(captured["url"]).endswith("/chat/completions")
+    assert captured["headers"]["Authorization"] == "Bearer test-key"  # type: ignore[index]
+    assert "response_format" not in captured["json"]  # type: ignore[operator]
 
 
 def test_ollama_client_falls_back_to_failed_generation_payload_on_single_pair_errors() -> None:

@@ -8,85 +8,61 @@
       "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "Butyrate vs VFA at 0.9601",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:top_feature:target_correlation",
+      "claim_text": "hpr has a high target correlation",
+      "status": "unverifiable",
       "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
-      ],
-      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
-      "numeric_delta": 0.0
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Acetate vs VFA at 0.9428",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA has a correlation",
+      "status": "unverifiable",
       "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:Acetate vs VFA:correlation"
-      ],
-      "reason": "Gold value for Acetate vs VFA correlation is 0.9428.",
-      "numeric_delta": 0.0
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate vs Butyrate at 0.8651",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation",
+      "claim_text": "VFA has a target correlation",
+      "status": "unverifiable",
       "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:Acetate vs Butyrate:correlation"
-      ],
-      "reason": "Gold value for Acetate vs Butyrate correlation is 0.8651.",
-      "numeric_delta": 0.0
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "VFA exhibits the highest correlation coefficient at 0.7984",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:correlation",
+      "claim_text": "There is a ranking of feature pairs by correlation",
+      "status": "unverifiable",
       "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation"
-      ],
-      "reason": "Gold value for VFA target_correlation is 0.7984.",
-      "numeric_delta": 0.0
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "Butyrate shows a correlation of 0.7827",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:target_correlation",
+      "claim_text": "There is a ranking of hpr by target correlation",
+      "status": "unverifiable",
       "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate:target_correlation"
-      ],
-      "reason": "Gold value for Butyrate target_correlation is 0.7827.",
-      "numeric_delta": 0.0
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "Acetate shows a correlation of 0.7641",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_vs_target:metric:Acetate:target_correlation"
-      ],
-      "reason": "Gold value for Acetate target_correlation is 0.7641.",
-      "numeric_delta": 0.0
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
     }
   ]
 }

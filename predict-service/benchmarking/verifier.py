@@ -216,18 +216,25 @@ def _verification(
     )
 
 
-def _fact_by_source_variable_id(gold: GoldArtifact, claim: Claim) -> list[GroundTruthFact]:
+def _fact_by_source_variable_id(
+    gold: GoldArtifact,
+    claim: Claim,
+    compatible_fact_types: set[str] | None = None,
+) -> list[GroundTruthFact]:
     source_variable_id = str(claim.source_variable_id or "").strip()
     if not source_variable_id:
         return []
-    return [fact for fact in gold.ground_truth_facts if fact.fact_id == source_variable_id]
+    facts = [fact for fact in gold.ground_truth_facts if fact.fact_id == source_variable_id]
+    if compatible_fact_types is not None:
+        facts = [fact for fact in facts if fact.fact_type in compatible_fact_types]
+    return facts
 
 
 def _verify_best_model(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
     candidate = str(claim.object or claim.subject or "").strip()
     if not candidate:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Best-model claim lacks a model name.")
-    facts = _fact_by_source_variable_id(gold, claim) or [
+    facts = _fact_by_source_variable_id(gold, claim, {"best_model"}) or [
         fact for fact in gold.ground_truth_facts if fact.fact_type == "best_model"
     ]
     if not facts:
@@ -245,7 +252,11 @@ def _verify_metric_value(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
     if claim_value is None:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Numeric claim is missing a numeric value.")
 
-    candidate_facts = _fact_by_source_variable_id(gold, claim)
+    candidate_facts = _fact_by_source_variable_id(
+        gold,
+        claim,
+        {"metric_value", "rank_score", "best_r2", "best_mse"},
+    )
     if candidate_facts:
         candidate_facts = [
             fact
@@ -294,7 +305,7 @@ def _verify_ranking(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Ranking claim needs at least two ordered items.")
 
     metric = _metric_alias(claim.metric)
-    candidate_facts = _fact_by_source_variable_id(gold, claim) or [
+    candidate_facts = _fact_by_source_variable_id(gold, claim, {"ranking"}) or [
         fact for fact in gold.ground_truth_facts if fact.fact_type == "ranking"
     ]
     if metric:
@@ -343,7 +354,7 @@ def _verify_top_feature(gold: GoldArtifact, claim: Claim) -> ClaimVerification:
     if not candidate:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Top-feature claim lacks a feature name.")
     metric = _metric_alias(claim.metric or claim.predicate)
-    facts = _fact_by_source_variable_id(gold, claim) or [
+    facts = _fact_by_source_variable_id(gold, claim, {"top_feature"}) or [
         fact for fact in gold.ground_truth_facts if fact.fact_type == "top_feature"
     ]
     if metric:
@@ -370,7 +381,7 @@ def _verify_feature_count_fact(
 ) -> ClaimVerification:
     if claim.feature_count is None:
         return _verification(gold, claim, STATUS_UNVERIFIABLE, reason="Claim lacks a feature count.")
-    facts = _fact_by_source_variable_id(gold, claim) or [
+    facts = _fact_by_source_variable_id(gold, claim, {fact_type}) or [
         fact
         for fact in gold.ground_truth_facts
         if fact.fact_type == fact_type and (claim.subject is None or fact.subject == claim.subject)

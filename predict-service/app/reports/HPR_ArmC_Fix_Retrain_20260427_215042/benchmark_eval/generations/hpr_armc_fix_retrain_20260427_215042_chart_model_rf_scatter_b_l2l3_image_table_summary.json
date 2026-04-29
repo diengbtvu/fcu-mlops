@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest model demonstrates strong performance with a high R2 score and low RMSE, effectively capturing the relationship between predicted and actual values. The scatter plot reveals a positive linear trend with a slope of 0.8488, indicating that as the actual value increases, the predicted value tends to increase proportionally.",
+  "explanation_full": "The Random Forest model exhibits strong predictive capabilities as evidenced by its high R2 score (0.7756) and low RMSE (0.1254). These metrics indicate that the model effectively captures the relationship between the input features and the target variable, resulting in accurate predictions. The scatter plot visualizes this relationship, showcasing a positive linear trend with a slope of 0.8488. This suggests that as the actual value increases, the predicted value tends to increase proportionally.  Furthermore, the model's residuals exhibit minimal spread around the regression line, indicating good overall fit and accuracy. The combination of high R2 score, low RMSE, and positive linear trend highlights the effectiveness of the Random Forest model in capturing the underlying patterns within the data.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

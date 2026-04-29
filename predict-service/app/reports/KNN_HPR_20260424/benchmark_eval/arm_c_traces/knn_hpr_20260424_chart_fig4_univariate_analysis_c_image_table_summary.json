@@ -5,73 +5,92 @@
   "iterations": [
     {
       "iteration_index": 1,
-      "draft_explanation_short": "The strongest correlations found in the univariate analysis are Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When correlating features with HPR, VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641) show the highest correlations.",
-      "draft_explanation_full": "The univariate analysis reveals several strong correlations between pairs of variables. The strongest correlations identified are: Butyrate vs VFA with a correlation of 0.9601, Acetate vs VFA with 0.9428, and Acetate vs Butyrate with 0.8651. Furthermore, when examining the correlation with HPR, the features exhibiting the highest correlation coefficients are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+      "draft_explanation_short": "This report summarizes the analysis of hydrogen production prediction. It includes dataset overview, model performance metrics, top correlated features with HPR, and a comparison of different models.",
+      "draft_explanation_full": "The provided JSON payload represents an analysis summary report for a machine learning model predicting hydrogen production (HPR). The report contains key information about the dataset, selected model metrics, correlations between features and HPR, and a performance comparison of various benchmark models. It highlights the KNN model as the best performer with an R2 score of 0.81717 and an MSE of 0.012810. The report also includes details about the dataset size, number of features, and target variable. This information is valuable for understanding the model's performance and identifying important factors influencing hydrogen production prediction.",
       "draft_claims": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "Butyrate vs VFA with a correlation of 0.9601",
-          "claim_type": "metric_value",
-          "span_category": "Butyrate vs VFA",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "claim_text": "hpr::target_correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "subject": "hpr",
+          "predicate": "target_correlation",
+          "object": null,
+          "metric": "target_correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+          "claim_text": "Butyrate vs VFA::correlation",
+          "claim_type": "metric_value",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
           "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
           "subject": "Butyrate vs VFA",
           "predicate": "correlation",
           "object": null,
           "metric": "correlation",
-          "value": 0.9601,
+          "value": null,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "Acetate vs VFA with 0.9428",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "claim_text": "VFA::target_correlation",
           "claim_type": "metric_value",
-          "span_category": "Acetate vs VFA",
+          "span_category": "metric",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
           "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate vs VFA:correlation",
-          "subject": "Acetate vs VFA",
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "subject": "VFA",
+          "predicate": "target_correlation",
+          "object": null,
+          "metric": "target_correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "claim_text": "ranking::correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "subject": "feature_pairs",
           "predicate": "correlation",
           "object": null,
           "metric": "correlation",
-          "value": 0.9428,
+          "value": null,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_3",
-          "claim_text": "Acetate vs Butyrate with 0.8651",
-          "claim_type": "metric_value",
-          "span_category": "Acetate vs Butyrate",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
+          "claim_text": "ranking::target_correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate vs Butyrate:correlation",
-          "subject": "Acetate vs Butyrate",
-          "predicate": "correlation",
-          "object": null,
-          "metric": "correlation",
-          "value": 0.8651,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_4",
-          "claim_text": "VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641) show the highest correlations",
-          "claim_type": "metric_value",
-          "span_category": "VFA",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
           "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
           "subject": "hpr",
@@ -80,69 +99,229 @@
           "metric": "target_correlation",
           "value": null,
           "unit": null,
-          "ordered_items": [
-            "VFA",
-            "Butyrate",
-            "Acetate"
-          ],
+          "ordered_items": [],
           "feature_count": null,
           "hedged": false
         }
       ],
       "draft_validations": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "Butyrate vs VFA with a correlation of 0.9601",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "claim_text": "hpr::target_correlation",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported because the provided evidence mentions that VFA has a high correlation with HPR, but it doesn't explicitly state that VFA is the top feature. More context or data is needed to confirm this claim fully.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
+          ],
+          "grounded_fact_summary": "The provided evidence suggests that VFA has a high correlation with HPR. However, it doesn't explicitly state that VFA is the top feature."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+          "claim_text": "Butyrate vs VFA::correlation",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The evidence packet explicitly states the strongest correlation is Butyrate vs VFA=0.9601 in the result_text.",
+          "rationale": "The claim is supported because the evidence explicitly states that the correlation between Butyrate and VFA is 0.9601.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
           ],
-          "grounded_fact_summary": "Butyrate vs VFA correlation is 0.9601."
+          "grounded_fact_summary": "The evidence clearly states that the correlation between Butyrate and VFA is 0.9601."
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "Acetate vs VFA with 0.9428",
-          "status": "supported",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "claim_text": "VFA::target_correlation",
+          "status": "partially_supported",
           "recommended_action": "keep",
-          "rationale": "The evidence packet explicitly states Acetate vs VFA=0.9428 in the result_text.",
+          "rationale": "The claim is partially supported because the evidence mentions that VFA has a correlation with HPR, but it doesn't explicitly state the value of this correlation. More context or data is needed to confirm this claim fully.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate vs VFA:correlation"
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
           ],
-          "grounded_fact_summary": "Acetate vs VFA correlation is 0.9428."
+          "grounded_fact_summary": "The provided evidence suggests that VFA has a correlation with HPR, but the specific value of this correlation is not mentioned."
         },
         {
-          "claim_id": "claim_3",
-          "claim_text": "Acetate vs Butyrate with 0.8651",
-          "status": "supported",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "claim_text": "ranking::correlation",
+          "status": "partially_supported",
           "recommended_action": "keep",
-          "rationale": "The evidence packet explicitly states Acetate vs Butyrate=0.8651 in the result_text.",
+          "rationale": "The claim is partially supported because the evidence mentions that there's a ranking of feature pairs based on correlation, but it doesn't provide the specific ranking order. More context or data is needed to confirm this claim fully.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Acetate vs Butyrate:correlation"
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation"
           ],
-          "grounded_fact_summary": "Acetate vs Butyrate correlation is 0.8651."
+          "grounded_fact_summary": "The evidence suggests that there's a ranking of feature pairs based on correlation, but the specific order is not provided."
         },
         {
-          "claim_id": "claim_4",
-          "claim_text": "VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641) show the highest correlations",
-          "status": "supported",
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
+          "claim_text": "ranking::target_correlation",
+          "status": "partially_supported",
           "recommended_action": "keep",
-          "rationale": "The evidence packet's result_text lists VFA=0.7984, Butyrate=0.7827, and Acetate=0.7641 as the top HPR correlations.",
+          "rationale": "The claim is partially supported because the evidence mentions that there's a ranking of features based on their correlation with HPR, but it doesn't provide the specific ranking order. More context or data is needed to confirm this claim fully.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
             "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation"
           ],
-          "grounded_fact_summary": "Top HPR correlations are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641)."
+          "grounded_fact_summary": "The evidence suggests that there's a ranking of features based on their correlation with HPR, but the specific order is not provided."
         }
       ],
-      "corrected_explanation_short": "",
-      "corrected_explanation_full": "",
-      "corrected_claims": [],
-      "corrected_validations": []
+      "corrected_explanation_short": "This report summarizes the analysis of hydrogen production prediction. It includes dataset overview, model performance metrics, top correlated features with HPR, and a comparison of different models.",
+      "corrected_explanation_full": "The provided JSON payload represents an analysis summary report for a machine learning model predicting hydrogen production (HPR). The report contains key information about the dataset, selected model metrics, correlations between features and HPR, and a performance comparison of various benchmark models. It highlights the KNN model as the best performer with an R2 score of 0.81717 and an MSE of 0.012810. The report also includes details about the dataset size, number of features, and target variable. This information is valuable for understanding the model's performance and identifying important factors influencing hydrogen production prediction.",
+      "corrected_claims": [
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "claim_text": "hpr::target_correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "subject": "hpr",
+          "predicate": "target_correlation",
+          "object": null,
+          "metric": "target_correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+          "claim_text": "Butyrate vs VFA::correlation",
+          "claim_type": "metric_value",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+          "subject": "Butyrate vs VFA",
+          "predicate": "correlation",
+          "object": null,
+          "metric": "correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "claim_text": "VFA::target_correlation",
+          "claim_type": "metric_value",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "subject": "VFA",
+          "predicate": "target_correlation",
+          "object": null,
+          "metric": "target_correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "claim_text": "ranking::correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "subject": "feature_pairs",
+          "predicate": "correlation",
+          "object": null,
+          "metric": "correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
+          "claim_text": "ranking::target_correlation",
+          "claim_type": "freeform",
+          "span_category": "metric",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig4_univariate_analysis",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
+          "subject": "hpr",
+          "predicate": "target_correlation",
+          "object": null,
+          "metric": "target_correlation",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+          "claim_text": "hpr::target_correlation",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported because the provided evidence mentions that VFA has a high correlation with HPR, but it doesn't explicitly state that VFA is the top feature. More context or data is needed to confirm this claim fully.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:top_feature:target_correlation",
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
+          ],
+          "grounded_fact_summary": "The provided evidence suggests that VFA has a high correlation with HPR. However, it doesn't explicitly state that VFA is the top feature."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation",
+          "claim_text": "Butyrate vs VFA::correlation",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is supported because the evidence explicitly states that the correlation between Butyrate and VFA is 0.9601.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:Butyrate vs VFA:correlation"
+          ],
+          "grounded_fact_summary": "The evidence clearly states that the correlation between Butyrate and VFA is 0.9601."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation",
+          "claim_text": "VFA::target_correlation",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported because the evidence mentions that VFA has a correlation with HPR, but it doesn't explicitly state the value of this correlation. More context or data is needed to confirm this claim fully.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
+          ],
+          "grounded_fact_summary": "The provided evidence suggests that VFA has a correlation with HPR, but the specific value of this correlation is not mentioned."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation",
+          "claim_text": "ranking::correlation",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported because the evidence mentions that there's a ranking of feature pairs based on correlation, but it doesn't provide the specific ranking order. More context or data is needed to confirm this claim fully.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:correlation"
+          ],
+          "grounded_fact_summary": "The evidence suggests that there's a ranking of feature pairs based on correlation, but the specific order is not provided."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation",
+          "claim_text": "ranking::target_correlation",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported because the evidence mentions that there's a ranking of features based on their correlation with HPR, but it doesn't provide the specific ranking order. More context or data is needed to confirm this claim fully.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig4_univariate_analysis:ranking:target_correlation"
+          ],
+          "grounded_fact_summary": "The evidence suggests that there's a ranking of features based on their correlation with HPR, but the specific order is not provided."
+        }
+      ]
     }
   ],
   "decision_counts": {
-    "keep": 4
+    "keep": 5
   }
 }

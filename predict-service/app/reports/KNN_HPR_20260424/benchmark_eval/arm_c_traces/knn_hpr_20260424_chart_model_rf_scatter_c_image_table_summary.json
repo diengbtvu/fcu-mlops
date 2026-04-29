@@ -5,99 +5,23 @@
   "iterations": [
     {
       "iteration_index": 1,
-      "draft_explanation_short": "The Random Forest (RF) model achieved an R2 score of 0.7756, an RMSE of 0.1254, and an MAE of 0.0836, as shown in the scatter plot diagnostics.",
-      "draft_explanation_full": "The Random Forest (RF) model's performance metrics, derived from the scatter plot diagnostics, indicate an R2 score of 0.7756, a Root Mean Squared Error (RMSE) of 0.1254, and a Mean Absolute Error (MAE) of 0.0836. Additionally, the correlation between predicted and actual values was 0.88511, and the linear fit slope was 0.848822. These values are sourced from the 'model_rf_scatter' chart asset's result text and evidence section.",
+      "draft_explanation_short": "The Random Forest model has an R2 score of 0.7756, indicating a good fit to the data.",
+      "draft_explanation_full": "The provided scatter plot visualizes the predictions of the Random Forest model against the actual values. The model achieves an R2 score of 0.7756, which suggests a strong correlation between predicted and actual values. Additionally, the plot shows that the data points generally follow a linear trend, further supporting the effectiveness of the Random Forest model.",
       "draft_claims": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756",
+          "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+          "claim_text": "The Random Forest model has an R2 score of 0.7756, indicating a good fit to the data.",
           "claim_type": "metric_value",
-          "span_category": "metric_value",
+          "span_category": "R2 Score",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
           "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
           "subject": "RF",
           "predicate": "r2_score",
-          "object": null,
+          "object": 0.7756,
           "metric": "r2_score",
           "value": 0.7756,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_2",
-          "claim_text": "a Root Mean Squared Error (RMSE) of 0.1254",
-          "claim_type": "metric_value",
-          "span_category": "metric_value",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 1.0,
-          "source_variable_id": null,
-          "subject": "RF",
-          "predicate": "RMSE",
-          "object": null,
-          "metric": "rmse",
-          "value": 0.1254,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_3",
-          "claim_text": "and a Mean Absolute Error (MAE) of 0.0836",
-          "claim_type": "metric_value",
-          "span_category": "metric_value",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 1.0,
-          "source_variable_id": null,
-          "subject": "RF",
-          "predicate": "MAE",
-          "object": null,
-          "metric": "mae",
-          "value": 0.0836,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_4",
-          "claim_text": "the correlation between predicted and actual values was 0.88511",
-          "claim_type": "metric_value",
-          "span_category": "metric_value",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
-          "subject": "RF",
-          "predicate": "correlation between predicted and actual values",
-          "object": null,
-          "metric": "pred_actual_correlation",
-          "value": 0.88511,
-          "unit": null,
-          "ordered_items": [],
-          "feature_count": null,
-          "hedged": false
-        },
-        {
-          "claim_id": "claim_5",
-          "claim_text": "the linear fit slope was 0.848822",
-          "claim_type": "metric_value",
-          "span_category": "metric_value",
-          "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 1.0,
-          "source_variable_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:linear_fit_slope",
-          "subject": "RF",
-          "predicate": "linear fit slope",
-          "object": null,
-          "metric": "linear_fit_slope",
-          "value": 0.848822,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
@@ -106,59 +30,15 @@
       ],
       "draft_validations": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756",
+          "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+          "claim_text": "The Random Forest model has an R2 score of 0.7756, indicating a good fit to the data.",
           "status": "supported",
           "recommended_action": "keep",
-          "rationale": "The R2 score for RF is explicitly stated as 0.7756 in the chart result text and model metrics.",
+          "rationale": "The claim is supported by the evidence_packet. The R2 score of 0.7756 for the RF model is present in both the 'summary.json' and 'table_model_comparison.csv' files.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score"
           ],
-          "grounded_fact_summary": "RF R2 score is 0.7756."
-        },
-        {
-          "claim_id": "claim_2",
-          "claim_text": "a Root Mean Squared Error (RMSE) of 0.1254",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The RMSE for RF is reported as 0.1254 in the chart result text and model metrics.",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score"
-          ],
-          "grounded_fact_summary": "RF RMSE is 0.1254."
-        },
-        {
-          "claim_id": "claim_3",
-          "claim_text": "and a Mean Absolute Error (MAE) of 0.0836",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The MAE for RF is reported as 0.0836 in the chart result text and model metrics.",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score"
-          ],
-          "grounded_fact_summary": "RF MAE is 0.0836."
-        },
-        {
-          "claim_id": "claim_4",
-          "claim_text": "the correlation between predicted and actual values was 0.88511",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The correlation (pred,actual) for RF is reported as 0.88511 in the chart result text and model metrics.",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
-          ],
-          "grounded_fact_summary": "RF pred_actual_correlation is 0.88511."
-        },
-        {
-          "claim_id": "claim_5",
-          "claim_text": "the linear fit slope was 0.848822",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The linear fit slope for RF is reported as 0.848822 in the chart result text and model metrics.",
-          "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:linear_fit_slope"
-          ],
-          "grounded_fact_summary": "RF linear_fit_slope is 0.848822."
+          "grounded_fact_summary": "The Random Forest model has an R2 score of 0.7756."
         }
       ],
       "corrected_explanation_short": "",
@@ -168,6 +48,6 @@
     }
   ],
   "decision_counts": {
-    "keep": 5
+    "keep": 1
   }
 }

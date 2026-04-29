@@ -130,8 +130,8 @@ def test_running_progress_payload_uses_live_file_counts(tmp_path: Path) -> None:
     assert payload["progress"] > 40
     assert "4/10" in payload["message"]
     assert payload["current_items"][0] == "generated 5/10"
-    assert payload["current_items"][1] == "verified 4/10"
-    assert payload["current_items"][2].startswith("latest verification:")
+    assert payload["current_items"][1] == "processed 4/10"
+    assert payload["current_items"][-1].startswith("latest verification:")
 
 
 def test_effective_benchmark_timeout_scales_with_expected_runs(monkeypatch) -> None:
@@ -141,3 +141,9 @@ def test_effective_benchmark_timeout_scales_with_expected_runs(monkeypatch) -> N
 
     assert report_benchmark._effective_benchmark_timeout(120) == 5400
     assert report_benchmark._effective_benchmark_timeout(None) == 3600
+
+
+def test_benchmark_client_name_accepts_groq_override() -> None:
+    report_benchmark = _load_report_benchmark_module()
+
+    assert report_benchmark._benchmark_client_name("groq") == "groq"

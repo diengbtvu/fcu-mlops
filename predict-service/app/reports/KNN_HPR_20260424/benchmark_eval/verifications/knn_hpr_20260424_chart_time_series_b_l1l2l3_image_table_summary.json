@@ -8,27 +8,15 @@
       "artifact_id": "KNN_HPR_20260424:chart:time_series",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "KNN is the best model (R2=0.817)",
-      "status": "unverifiable",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:time_series",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "high sequence correlation (0.931)",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "claim_text": "The KNN model achieved the highest R2 score (0.81717) and lowest MSE (0.012810) among all models.",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap"
       ],
-      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
-      "numeric_delta": 0.00048799999999993293
+      "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
+      "numeric_delta": 0.053780999999999995
     }
   ]
 }

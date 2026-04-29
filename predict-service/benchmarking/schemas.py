@@ -149,6 +149,35 @@ class Claim:
 
 
 @dataclass(frozen=True)
+class ExtractedVariableMention:
+    mention_id: str
+    source_variable_id: str
+    evidence_span: str
+    stated_value: float | int | str | None = None
+    stated_object: str | None = None
+    stated_ordered_items: list[str] = field(default_factory=list)
+    stated_feature_count: int | None = None
+    confidence: float = 0.75
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
+class ClaimAlignmentIssue:
+    issue_id: str
+    issue_type: str
+    message: str
+    source_variable_id: str | None = None
+    mention_id: str | None = None
+    claim_id: str | None = None
+    action: str = "warn"
+
+    def to_dict(self) -> dict[str, Any]:
+        return to_primitive(self)
+
+
+@dataclass(frozen=True)
 class ExplanationOutput:
     artifact_id: str
     arm: str
@@ -160,6 +189,8 @@ class ExplanationOutput:
     generation_stage: str | None = None
     correction_trace: "ArmCTrace | None" = None
     parent_draft_hash: str | None = None
+    claim_alignment_issues: list[ClaimAlignmentIssue] = field(default_factory=list)
+    extracted_variable_mentions: list[ExtractedVariableMention] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return to_primitive(self)
@@ -229,6 +260,8 @@ class CorrectionIteration:
     corrected_explanation_full: str
     corrected_claims: list[Claim]
     corrected_validations: list[ArmCValidationRecord]
+    draft_alignment_issues: list[ClaimAlignmentIssue] = field(default_factory=list)
+    corrected_alignment_issues: list[ClaimAlignmentIssue] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return to_primitive(self)

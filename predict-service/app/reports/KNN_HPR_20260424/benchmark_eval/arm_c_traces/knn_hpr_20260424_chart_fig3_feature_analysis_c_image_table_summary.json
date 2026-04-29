@@ -1,233 +1,565 @@
 {
   "mode": "c_llm_validator_corrector",
   "iteration_count": 1,
-  "selected_generation_stage": "draft",
+  "selected_generation_stage": "corrected",
   "iterations": [
     {
       "iteration_index": 1,
-      "draft_explanation_short": "The feature importance analysis shows VSS (0.5052) is the most important feature, followed by Acetate (0.12) and Butyrate (0.097). Correlation analysis indicates the strongest correlations are between Butyrate and VFA (0.9601), and Acetate and VFA (0.9428).",
-      "draft_explanation_full": "Based on the combined feature analysis (Figure 3), the feature importance ranking indicates that VSS has the highest importance score (0.5052), followed by Acetate (0.12) and Butyrate (0.097). For correlation, the strongest relationships identified are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). Furthermore, the incremental feature selection results show that for the KNN model, the best performance (R2=0.8301, MSE=0.0119) was achieved with 9 features, including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low.",
+      "draft_explanation_short": "This table shows the feature importance scores for a machine learning model trained on wastewater data. The features are ranked by their contribution to the model's predictive accuracy.",
+      "draft_explanation_full": "The provided JSON payload contains information about a machine learning model trained on wastewater data. Specifically, it includes a table of feature importances, which indicates the relative contribution of each input feature to the model's predictive performance. The features are ranked from most to least important based on their scores. This information can be valuable for understanding which factors are most influential in predicting outcomes related to wastewater treatment or quality. For example, high importance scores for 'VSS' (Volatile Suspended Solids) and 'Acetate' might suggest that these parameters are crucial for accurately modeling the system behavior. The payload also includes details about the model type ('KNN'), its performance metrics (R-squared, RMSE, etc.), and a comparison with other benchmark models. This comprehensive dataset allows for a deeper understanding of the model's capabilities and limitations in predicting wastewater characteristics.",
       "draft_claims": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "VSS has the highest importance score (0.5052)",
-          "claim_type": "metric_value",
-          "span_category": "VSS",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is 3.",
+          "claim_type": "rank_score",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 0.9,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
-          "subject": "VSS",
-          "predicate": "has highest importance score",
-          "object": 0.5052,
-          "metric": "importance",
-          "value": 0.5052,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": 3,
+          "metric": "gra_score",
+          "value": 3.0,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "Acetate (0.12) and Butyrate (0.097)",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
+          "claim_text": "The importance of combined_feature_story is 3.",
           "claim_type": "metric_value",
-          "span_category": "Acetate",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 0.9,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
+          "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
-          "subject": "Acetate",
-          "predicate": "is second most important",
-          "object": 0.12,
+          "subject": "combined_feature_story",
+          "predicate": "importance",
+          "object": 3,
           "metric": "importance",
-          "value": 0.12,
+          "value": 3.0,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_3",
-          "claim_text": "Butyrate (0.097)",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is 3.",
           "claim_type": "metric_value",
-          "span_category": "Butyrate",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 0.9,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
-          "subject": "Butyrate",
-          "predicate": "is third most important",
-          "object": 0.097,
-          "metric": "importance",
-          "value": 0.097,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "subject": "combined_feature_story",
+          "predicate": "mean_abs_shap",
+          "object": 3,
+          "metric": "mean_abs_shap",
+          "value": 3.0,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_4",
-          "claim_text": "Butyrate vs VFA (0.9601)",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "claim_text": "The target_correlation of combined_feature_story is 3.",
+          "claim_type": "metric_value",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "subject": "combined_feature_story",
+          "predicate": "target_correlation",
+          "object": 3,
+          "metric": "target_correlation",
+          "value": 3.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "claim_text": "The r2_score of KNN is 2.",
+          "claim_type": "metric_value",
+          "span_category": "KNN",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": 2,
+          "metric": "r2_score",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "claim_text": "The feature_subset_optimum of KNN is 2.",
+          "claim_type": "metric_value",
+          "span_category": "KNN",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "subject": "KNN",
+          "predicate": "feature_subset_optimum",
+          "object": 2,
+          "metric": null,
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+          "claim_text": "The correlation of Butyrate vs VFA is 2.",
           "claim_type": "metric_value",
           "span_category": "Butyrate vs VFA",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 0.9,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+          "confidence": 1.0,
           "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
           "subject": "Butyrate vs VFA",
           "predicate": "correlation",
-          "object": 0.9601,
+          "object": 2,
           "metric": "correlation",
-          "value": 0.9601,
+          "value": 2.0,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_5",
-          "claim_text": "Acetate vs VFA (0.9428)",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is ranked 2.",
           "claim_type": "metric_value",
-          "span_category": "Acetate vs VFA",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_short",
-          "confidence": 0.9,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
-          "subject": "Acetate vs VFA",
-          "predicate": "correlation",
-          "object": 0.9428,
-          "metric": "correlation",
-          "value": 0.9428,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": "ranked 2",
+          "metric": "gra_score",
+          "value": null,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_6",
-          "claim_text": "R2=0.8301",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "claim_text": "The importance of combined_feature_story is ranked 2.",
           "claim_type": "metric_value",
-          "span_category": "KNN",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 0.9,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
-          "subject": "KNN",
-          "predicate": "best R2 score",
-          "object": 0.8301,
-          "metric": "r2_score",
-          "value": 0.8301,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "subject": "combined_feature_story",
+          "predicate": "importance",
+          "object": "ranked 2",
+          "metric": "importance",
+          "value": null,
           "unit": null,
           "ordered_items": [],
           "feature_count": null,
           "hedged": false
         },
         {
-          "claim_id": "claim_7",
-          "claim_text": "best performance ... was achieved with 9 features",
-          "claim_type": "feature_subset_optimum",
-          "span_category": "KNN",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is ranked 2.",
+          "claim_type": "metric_value",
+          "span_category": "combined_feature_story",
           "is_numeric": true,
-          "requires_grounding_from": "explanation_full",
-          "confidence": 0.9,
-          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
-          "subject": "KNN",
-          "predicate": "best performance achieved with",
-          "object": 9,
-          "metric": null,
-          "value": 9.0,
-          "unit": "features",
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "subject": "combined_feature_story",
+          "predicate": "mean_abs_shap",
+          "object": "ranked 2",
+          "metric": "mean_abs_shap",
+          "value": null,
+          "unit": null,
           "ordered_items": [],
-          "feature_count": 9,
+          "feature_count": null,
           "hedged": false
         }
       ],
       "draft_validations": [
         {
-          "claim_id": "claim_1",
-          "claim_text": "VSS has the highest importance score (0.5052)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet explicitly states VSS has the highest feature importance score (0.5052) in the 'feature_story' section.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is 3.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the gra_score of combined_feature_story is 0.7931135436956089, not 3.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance"
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score"
           ],
-          "grounded_fact_summary": "VSS has the highest feature importance score (0.5052)."
+          "grounded_fact_summary": "The gra_score of combined_feature_story is 0.7931135436956089."
         },
         {
-          "claim_id": "claim_2",
-          "claim_text": "Acetate (0.12) and Butyrate (0.097)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet lists Acetate (0.12) and Butyrate (0.097) as the second and third most important features, respectively, matching the explanation's values.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is 3.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the mean_abs_shap of combined_feature_story is 0.0383875935, not 3.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance"
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap"
           ],
-          "grounded_fact_summary": "Acetate (0.12) and Butyrate (0.097) are the second and third most important features."
+          "grounded_fact_summary": "The mean_abs_shap of combined_feature_story is 0.0383875935."
         },
         {
-          "claim_id": "claim_3",
-          "claim_text": "Butyrate (0.097)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet lists Butyrate with an importance score of 0.097, confirming its relative ranking.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the ranking of gra_score for combined_feature_story is not explicitly stated.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance"
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score"
           ],
-          "grounded_fact_summary": "Butyrate has an importance score of 0.097."
+          "grounded_fact_summary": "The ranking of gra_score for combined_feature_story is not explicitly stated in the provided data."
         },
         {
-          "claim_id": "claim_4",
-          "claim_text": "Butyrate vs VFA (0.9601)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet's 'correlation_story' lists the strongest correlation as Butyrate vs VFA with a correlation of 0.9601.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the ranking of mean_abs_shap for combined_feature_story is not explicitly stated.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation"
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap"
           ],
-          "grounded_fact_summary": "The strongest correlation is between Butyrate and VFA (0.9601)."
+          "grounded_fact_summary": "The ranking of mean_abs_shap for combined_feature_story is not explicitly stated in the provided data."
         },
         {
-          "claim_id": "claim_5",
-          "claim_text": "Acetate vs VFA (0.9428)",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet's 'correlation_story' lists Acetate vs VFA with a correlation of 0.9428.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "claim_text": "The correlation of Butyrate vs VFA is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the correlation of Butyrate vs VFA is 0.9601, not 2.",
           "matched_fact_ids": [
-            "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation"
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation"
           ],
-          "grounded_fact_summary": "Acetate vs VFA correlation is 0.9428."
+          "grounded_fact_summary": "The correlation of Butyrate vs VFA is 0.9601."
         },
         {
-          "claim_id": "claim_6",
-          "claim_text": "R2=0.8301",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet's 'summary.json' and 'table1_incremental_results.csv' confirm that the KNN model achieved an R2 score of 0.83014 for the optimal feature set.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "claim_text": "The r2_score of KNN is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the r2_score of KNN is 0.83014, not 2.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2"
           ],
-          "grounded_fact_summary": "The KNN model achieved an R2 score of 0.8301."
+          "grounded_fact_summary": "The r2_score of KNN is 0.83014."
         },
         {
-          "claim_id": "claim_7",
-          "claim_text": "best performance ... was achieved with 9 features",
-          "status": "supported",
-          "recommended_action": "keep",
-          "rationale": "The evidence packet's 'summary.json' and 'table1_incremental_results.csv' confirm that the best performance for KNN was achieved with 9 features.",
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "claim_text": "The feature_subset_optimum of KNN is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the feature_subset_optimum of KNN is 9, not 2.",
           "matched_fact_ids": [
             "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum"
           ],
-          "grounded_fact_summary": "The best performance for KNN was achieved with 9 features."
+          "grounded_fact_summary": "The feature_subset_optimum of KNN is 9."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "claim_text": "The importance of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the ranking of importance for combined_feature_story is not explicitly stated.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance"
+          ],
+          "grounded_fact_summary": "The ranking of importance for combined_feature_story is not explicitly stated in the provided data."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "claim_text": "The correlation of Butyrate vs VFA is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the correlation of Butyrate vs VFA is 0.9601, not 2.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation"
+          ],
+          "grounded_fact_summary": "The correlation of Butyrate vs VFA is 0.9601."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "claim_text": "The r2_score of KNN is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided data shows that the r2_score of KNN is 0.83014, not 2.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The r2_score of KNN is 0.83014."
         }
       ],
-      "corrected_explanation_short": "",
-      "corrected_explanation_full": "",
-      "corrected_claims": [],
-      "corrected_validations": []
+      "corrected_explanation_short": "The provided data shows that the gra_score of combined_feature_story is 0.7931135436956089, not 3.",
+      "corrected_explanation_full": "The validation records show that several claims have been made about the values in the data, but these values do not match the actual values provided in the JSON data. For example, the claim 'The gra_score of combined_feature_story is 3' is incorrect as the actual value is 0.7931135436956089. Similarly, claims about the ranking of features and other metrics need to be revised based on the actual data provided.",
+      "corrected_claims": [
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is 3.",
+          "claim_type": "rank_score",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": 3,
+          "metric": "gra_score",
+          "value": 3.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is 3.",
+          "claim_type": "metric_value",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "subject": "combined_feature_story",
+          "predicate": "mean_abs_shap",
+          "object": 3,
+          "metric": "mean_abs_shap",
+          "value": 3.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is ranked 2.",
+          "claim_type": "rank_score",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": "ranked 2",
+          "metric": "gra_score",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is ranked 2.",
+          "claim_type": "metric_value",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "subject": "combined_feature_story",
+          "predicate": "mean_abs_shap",
+          "object": "ranked 2",
+          "metric": "mean_abs_shap",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "claim_text": "The correlation of Butyrate vs VFA is 2.",
+          "claim_type": "metric_value",
+          "span_category": "Butyrate vs VFA",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "subject": "Butyrate vs VFA",
+          "predicate": "correlation",
+          "object": 2,
+          "metric": "correlation",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "claim_text": "The r2_score of KNN is 2.",
+          "claim_type": "metric_value",
+          "span_category": "KNN",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": 2,
+          "metric": "r2_score",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "claim_text": "The feature_subset_optimum of KNN is 2.",
+          "claim_type": "metric_value",
+          "span_category": "KNN",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "subject": "KNN",
+          "predicate": "feature_subset_optimum",
+          "object": 2,
+          "metric": null,
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "claim_text": "The importance of combined_feature_story is ranked 2.",
+          "claim_type": "metric_value",
+          "span_category": "combined_feature_story",
+          "is_numeric": true,
+          "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "confidence": 1.0,
+          "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "subject": "combined_feature_story",
+          "predicate": "importance",
+          "object": "ranked 2",
+          "metric": "importance",
+          "value": 2.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is 3.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data shows that the gra_score of combined_feature_story is 0.7931135436956089, not 3.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score"
+          ],
+          "grounded_fact_summary": "The gra_score of combined_feature_story is 0.7931135436956089."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is 3.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data shows that the mean_abs_shap of combined_feature_story is 0.0383875935, not 3.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap"
+          ],
+          "grounded_fact_summary": "The mean_abs_shap of combined_feature_story is 0.0383875935."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_text": "The gra_score of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data does not explicitly state the ranking of the gra_score for combined_feature_story. It only lists the gra_scores of individual features.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score"
+          ],
+          "grounded_fact_summary": "The JSON data provides the gra_scores of individual features but does not specify the ranking of combined_feature_story's gra_score."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+          "claim_text": "The mean_abs_shap of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data does not explicitly state the ranking of the mean_abs_shap for combined_feature_story. It only lists the mean_abs_shaps of individual features.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap"
+          ],
+          "grounded_fact_summary": "The JSON data provides the mean_abs_shaps of individual features but does not specify the ranking of combined_feature_story's mean_abs_shap."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+          "claim_text": "The correlation of Butyrate vs VFA is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data shows that the target correlation between Butyrate and VFA is 0.7984, not 2.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation"
+          ],
+          "grounded_fact_summary": "The target correlation between Butyrate and VFA is 0.7984."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+          "claim_text": "The r2_score of KNN is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data shows that the r2_score of KNN is 0.83014, not 2.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The r2_score of KNN is 0.83014."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+          "claim_text": "The feature_subset_optimum of KNN is 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data shows that the feature_subset_optimum of KNN is 9, not 2.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum"
+          ],
+          "grounded_fact_summary": "The feature_subset_optimum of KNN is 9."
+        },
+        {
+          "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+          "claim_text": "The importance of combined_feature_story is ranked 2.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The provided JSON data does not explicitly state the ranking of the importance for combined_feature_story. It only lists the importances of individual features.",
+          "matched_fact_ids": [
+            "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance"
+          ],
+          "grounded_fact_summary": "The JSON data provides the importances of individual features but does not specify the ranking of combined_feature_story's importance."
+        }
+      ]
     }
   ],
   "decision_counts": {
-    "keep": 7
+    "edit": 10
   }
 }

@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:r2_score",
+      "claim_text": "KNN achieves the best performance with an R2 score of 0.81717 and an MSE of 0.012810.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 2.198299999922604e-06
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:mse",
+      "claim_text": "KNN achieves the best performance with an R2 score of 0.81717 and an MSE of 0.012810.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.0128099184.",
+      "numeric_delta": 8.16000000000705e-08
+    }
+  ]
+}

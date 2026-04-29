@@ -1,0 +1,98 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:claim:1",
+      "claim_text": "KNN model outperformed other models with an R² score of 0.81717 and MSE of 0.012810 on the test set.",
+      "claim_type": "best_model",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:claim:2",
+      "claim_text": "KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) on the test set",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:claim:3",
+      "claim_text": "KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) on the test set",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:best_model",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:best_model",
+      "evidence_span": "KNN model outperformed other models with an R² score of 0.81717 and MSE of 0.012810 on the test set.",
+      "stated_value": null,
+      "stated_object": "KNN",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:r2_score",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:r2_score",
+      "evidence_span": "KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) on the test set",
+      "stated_value": "0.81717",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:mse",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig5_model_comparison:metric:KNN:mse",
+      "evidence_span": "KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) on the test set",
+      "stated_value": "0.012810",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

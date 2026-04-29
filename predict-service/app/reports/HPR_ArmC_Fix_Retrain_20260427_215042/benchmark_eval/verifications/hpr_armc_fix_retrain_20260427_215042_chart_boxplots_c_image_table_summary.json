@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:claim:1",
+      "claim_text": "Highest mean features -> Ethanol=0.4736 | Acetate=0.4465 | Butyrate=0.4287 | Propionate=0.3675 | VSS=0.3581.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:top_feature:mean"
+      ],
+      "reason": "Gold top feature for mean is Ethanol.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:claim:2",
+      "claim_text": "Highest mean features -> Ethanol=0.4736 | Acetate=0.4465 | Butyrate=0.4287 | Propionate=0.3675 | VSS=0.3581.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 1.7887600000043857e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:claim:3",
+      "claim_text": "Highest std features -> Ethanol=0.2528 | Butyrate=0.2474 | Acetate=0.226 | Propionate=0.2158 | VSS=0.1538.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.2528296374.",
+      "numeric_delta": 2.9637399999948855e-05
+    }
+  ]
+}

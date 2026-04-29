@@ -8,36 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:model_comparison/main",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model achieved the highest R² score of 0.81717",
-      "status": "supported",
-      "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:model_comparison/main:metric:KNN:r2_score"
-      ],
-      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
-      "numeric_delta": 2.1982962532529626e-06
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:model_comparison/main",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "and the lowest RMSE of 0.11318",
-      "status": "supported",
-      "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:model_comparison/main:metric:KNN:rmse"
-      ],
-      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
-      "numeric_delta": 9.099543967355794e-07
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:model_comparison/main",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "indicating superior performance compared to other models like RF (R²=0.7756) and SVM (R²=0.7324)",
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:metric:KNN:mae",
+      "claim_text": "The KNN model achieves the lowest MAE.",
       "status": "unverifiable",
       "semantic_level": "L1",
       "matched_fact_ids": [],
@@ -48,22 +20,34 @@
       "artifact_id": "KNN_HPR_20260424:model_comparison/main",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "KNN model demonstrated the best performance with an R² score of 0.81717 and an RMSE of 0.11318",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:metric:KNN:mse",
+      "claim_text": "The KNN model achieves the lowest MSE.",
+      "status": "unverifiable",
       "semantic_level": "L1",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:model_comparison/main:metric:KNN:r2_score"
-      ],
-      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
-      "numeric_delta": 2.1982962532529626e-06
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
     },
     {
       "artifact_id": "KNN_HPR_20260424:model_comparison/main",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "This surpasses the performance of other models, such as Random Forest (RF) with R²=0.7756 and Support Vector Machine (SVM) with R²=0.7324",
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:metric:KNN:r2_score",
+      "claim_text": "The KNN model achieves the highest R2 score.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 1.1828321982962533
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:metric:KNN:rmse",
+      "claim_text": "The KNN model achieves the lowest RMSE.",
       "status": "unverifiable",
       "semantic_level": "L1",
       "matched_fact_ids": [],

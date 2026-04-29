@@ -8,79 +8,29 @@
       "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The KNN model achieved the highest performance with an R2 score of 0.8172",
+      "claim_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "claim_text": "R2 score of 0.817",
       "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
       ],
       "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
-      "numeric_delta": 3.2198296253338476e-05
+      "numeric_delta": 0.00016780170374675052
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "KNN model... achieving an R2 score of 0.8172",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:rmse",
+      "claim_text": "RMSE of 0.113",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:rmse"
       ],
-      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
-      "numeric_delta": 3.2198296253338476e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "The correlation between predicted and actual values is high at 0.9073",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:pred_actual_correlation"
-      ],
-      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
-      "numeric_delta": 1.0000000000287557e-06
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "The KNN model is the best performer",
-      "status": "unverifiable",
-      "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "Claim type 'freeform' is not yet rule-verified.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "RF (R2=0.7756)",
-      "status": "unverifiable",
-      "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "XGBoost (R2=0.7495)",
-      "status": "unverifiable",
-      "semantic_level": null,
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 0.00018090995439673518
     }
   ]
 }

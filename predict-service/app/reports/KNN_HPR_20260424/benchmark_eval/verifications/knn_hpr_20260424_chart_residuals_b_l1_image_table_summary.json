@@ -3,5 +3,80 @@
   "arm": "B",
   "input_condition": "image_table_summary",
   "semantic_level": "L1",
-  "verifications": []
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:max_abs_residual",
+      "claim_text": "The maximum absolute residual for the KNN model is X.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:pred_actual_correlation",
+      "claim_text": "The predicted-actual correlation for the KNN model is X.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score",
+      "claim_text": "The R-squared score for the KNN model is X.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:p95_abs_residual",
+      "claim_text": "The 95th percentile absolute residual for the KNN model is X.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:p95_abs_residual"
+      ],
+      "reason": "Gold value for KNN p95_abs_residual is 0.252559.",
+      "numeric_delta": 94.747441
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:residual_mean",
+      "claim_text": "The mean residual for the KNN model is X.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:residual_std",
+      "claim_text": "The standard deviation of residuals for the KNN model is X.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
 }

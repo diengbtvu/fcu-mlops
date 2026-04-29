@@ -1,0 +1,60 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:claim:1",
+      "claim_text": "R2 score of 0.817",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:rmse",
+      "mention_id": "m2",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "evidence_span": "R2 score of 0.817",
+      "stated_value": "0.817",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:rmse",
+      "evidence_span": "RMSE (Root Mean Squared Error) was 0.113",
+      "stated_value": "0.113",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

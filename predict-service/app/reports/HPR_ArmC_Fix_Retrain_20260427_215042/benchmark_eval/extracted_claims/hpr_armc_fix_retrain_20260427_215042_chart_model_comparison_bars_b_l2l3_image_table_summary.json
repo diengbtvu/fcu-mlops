@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:best_model",
+      "claim_text": "KNN model achieved the best performance with R2=0.81717 and MSE=0.012810, outperforming other models like RF, XGBoost, SVM, and DT.",
+      "claim_type": "metric_value",
+      "span_category": "fact",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "metric": null,
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:ranking:r2_score",
+      "claim_text": "KNN model achieved the best performance with R2=0.81717 and MSE=0.012810, outperforming other models like RF, XGBoost, SVM, and DT.",
+      "claim_type": "metric_value",
+      "span_category": "fact",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_comparison_bars:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

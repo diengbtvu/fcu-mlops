@@ -8,22 +8,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean values",
-      "status": "contradicted",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean"
-      ],
-      "reason": "Gold top feature for mean is Ethanol.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Ethanol having the highest mean (0.4736)",
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+      "claim_text": "Ethanol has a mean value of 0.4736.",
       "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
@@ -36,8 +22,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Acetate (0.4465)",
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+      "claim_text": "Acetate has a mean value of 0.4465.",
       "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
@@ -50,8 +36,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
       "arm": "C",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "Butyrate (0.4287)",
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+      "claim_text": "Butyrate has a mean value of 0.4287.",
       "status": "supported",
       "semantic_level": null,
       "matched_fact_ids": [
@@ -59,48 +45,6 @@
       ],
       "reason": "Gold value for Butyrate mean is 0.4286702028.",
       "numeric_delta": 2.9797200000014623e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "Ethanol (0.2528)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std"
-      ],
-      "reason": "Gold value for Ethanol std is 0.2528296374.",
-      "numeric_delta": 2.9637399999948855e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_6",
-      "claim_text": "Butyrate (0.2474)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:std"
-      ],
-      "reason": "Gold value for Butyrate std is 0.2473608737.",
-      "numeric_delta": 3.9126299999997505e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
-      "arm": "C",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_7",
-      "claim_text": "Acetate (0.226)",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:std"
-      ],
-      "reason": "Gold value for Acetate std is 0.2259920382.",
-      "numeric_delta": 7.961800000011454e-06
     }
   ]
 }

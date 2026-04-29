@@ -1,0 +1,129 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model achieved an R2 score of 0.7495, indicating a good fit to the data. The RMSE was 0.1325, suggesting reasonable prediction accuracy.",
+  "explanation_full": "Based on the provided scatter plot, the XGBoost model demonstrates a strong correlation between predicted and actual values (correlation coefficient = 0.875).  The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable. The RMSE of 0.1325 indicates an average prediction error of 0.1325 units. These metrics collectively suggest that the XGBoost model is a suitable choice for this task.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:claim:1",
+      "claim_text": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The XGBoost model achieved an R2 score of 0.7495, indicating a good fit to the data. The RMSE was 0.1325, suggesting reasonable prediction accuracy.",
+        "draft_explanation_full": "Based on the provided scatter plot, the XGBoost model demonstrates a strong correlation between predicted and actual values (correlation coefficient = 0.875).  The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable. The RMSE of 0.1325 indicates an average prediction error of 0.1325 units. These metrics collectively suggest that the XGBoost model is a suitable choice for this task.",
+        "draft_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:claim:1",
+            "claim_text": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+            "subject": "XGBoost",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.7495,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:claim:1",
+            "claim_text": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence in the 'summary.json' file, which states that the XGBoost model has an R2 score of 0.7494763102.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+            ],
+            "grounded_fact_summary": "The XGBoost model has an R2 score of 0.7494763102."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": [],
+        "draft_alignment_issues": [
+          {
+            "issue_id": "alignment-1",
+            "issue_type": "unknown_variable",
+            "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+            "mention_id": "m2",
+            "claim_id": null,
+            "action": "drop"
+          }
+        ],
+        "corrected_alignment_issues": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 1
+    }
+  },
+  "parent_draft_hash": "726b1616e42a5da7d576cd7b2f7e39ececff8d26",
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "mention_id": "m2",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "evidence_span": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+      "stated_value": "0.7495",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "evidence_span": "The RMSE of 0.1325 indicates an average prediction error of 0.1325 units.",
+      "stated_value": "0.1325",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

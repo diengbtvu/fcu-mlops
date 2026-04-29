@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model outperforms other models with an R2 score of 0.817 and low RMSE of 0.113.",
+  "explanation_full": "The predicted vs actual chart visualizes the performance of different machine learning models in predicting HPR values. The KNN model demonstrates the strongest performance with an R2 score of 0.817, indicating a high degree of correlation between predicted and actual HPR values.  It also achieves a low RMSE (Root Mean Squared Error) of 0.113, signifying minimal average prediction error. This suggests that the KNN model effectively captures the underlying patterns in the data and provides accurate predictions for HPR.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "claim_text": "R2 score of 0.817",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:max_abs_residual",
+      "claim_text": "low RMSE of 0.113",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:max_abs_residual",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:max_abs_residual",
+      "subject": "KNN",
+      "predicate": "max_abs_residual",
+      "object": "0.113",
+      "metric": "max_abs_residual",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

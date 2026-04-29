@@ -1,0 +1,129 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model has the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating good performance in predicting HPR based on the provided features.",
+  "explanation_full": "Based on the residual analysis chart, the KNN model demonstrates the best predictive performance compared to other models like SVM, DT, RF, and XGBoost. It achieves an R2 score of 0.817, signifying a strong correlation between predicted and actual HPR values. Additionally, its RMSE of 0.113 indicates lower prediction errors. These results suggest that the KNN model effectively captures the relationships between input features and HPR in this dataset.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:claim:1",
+      "claim_text": "R2 score of 0.817",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model has the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating good performance in predicting HPR based on the provided features.",
+        "draft_explanation_full": "Based on the residual analysis chart, the KNN model demonstrates the best predictive performance compared to other models like SVM, DT, RF, and XGBoost. It achieves an R2 score of 0.817, signifying a strong correlation between predicted and actual HPR values. Additionally, its RMSE of 0.113 indicates lower prediction errors. These results suggest that the KNN model effectively captures the relationships between input features and HPR in this dataset.",
+        "draft_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:claim:1",
+            "claim_text": "R2 score of 0.817",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:r2_score",
+            "subject": "KNN",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.817,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:claim:1",
+            "claim_text": "R2 score of 0.817",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence from the 'best_model_summary.json' file, which states that the KNN model has an R2 score of 0.817.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:r2_score"
+            ],
+            "grounded_fact_summary": "The KNN model has an R2 score of 0.817."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": [],
+        "draft_alignment_issues": [
+          {
+            "issue_id": "alignment-1",
+            "issue_type": "unknown_variable",
+            "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:rmse",
+            "mention_id": "m2",
+            "claim_id": null,
+            "action": "drop"
+          }
+        ],
+        "corrected_alignment_issues": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 1
+    }
+  },
+  "parent_draft_hash": "e67d7ef6da7ebe2ce324d69b68b968b3eac5762f",
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:rmse",
+      "mention_id": "m2",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:r2_score",
+      "evidence_span": "R2 score of 0.817",
+      "stated_value": "0.817",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:residuals:metric:KNN:rmse",
+      "evidence_span": "lowest RMSE (0.113)",
+      "stated_value": "0.113",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

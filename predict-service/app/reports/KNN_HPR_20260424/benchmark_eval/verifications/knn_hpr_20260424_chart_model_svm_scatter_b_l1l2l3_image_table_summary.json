@@ -8,71 +8,43 @@
       "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "the SVM model shows a moderate fit (R2=0.7324)",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73, indicating a strong fit to the data.",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
       ],
       "reason": "Gold value for SVM r2_score is 0.7324097475.",
-      "numeric_delta": 9.747499999934739e-06
+      "numeric_delta": 0.0024097475000000035
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "a strong correlation (0.8658) between predictions and actuals",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73 and low RMSE of 0.14.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:max_abs_residual"
+      ],
+      "reason": "Gold value for SVM max_abs_residual is 0.610181.",
+      "numeric_delta": 0.47018099999999996
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73 and low RMSE of 0.14.",
+      "status": "contradicted",
       "semantic_level": "L1L2L3",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
       ],
       "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
-      "numeric_delta": 4.0000000000040004e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "R2 score of 0.7324",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
-      ],
-      "reason": "Gold value for SVM r2_score is 0.7324097475.",
-      "numeric_delta": 9.747499999934739e-06
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "predictions correlate strongly with actual values (correlation=0.8658)",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
-      ],
-      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
-      "numeric_delta": 4.0000000000040004e-05
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "the linear fit slope is 0.8584",
-      "status": "supported",
-      "semantic_level": "L1L2L3",
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:linear_fit_slope"
-      ],
-      "reason": "Gold value for SVM linear_fit_slope is 0.858436.",
-      "numeric_delta": 3.599999999992498e-05
+      "numeric_delta": 0.72576
     }
   ]
 }

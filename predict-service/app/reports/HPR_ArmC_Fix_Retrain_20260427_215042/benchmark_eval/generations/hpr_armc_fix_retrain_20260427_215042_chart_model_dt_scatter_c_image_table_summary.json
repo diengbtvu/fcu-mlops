@@ -1,0 +1,221 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The decision tree model has an R2 score of 0.56, indicating a moderate fit to the data. The maximum absolute residual is 0.597936, suggesting some error in predictions.",
+  "explanation_full": "The provided scatter plot visualizes the performance of a decision tree (DT) model.  The R2 score of 0.56 indicates a moderate fit to the data, meaning the model explains about 56% of the variance in the target variable. The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:1",
+      "claim_text": "The R2 score of 0.56 indicates a moderate fit to the data",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.56,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:2",
+      "claim_text": "The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual",
+      "subject": "DT",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "metric": "max_abs_residual",
+      "value": 0.597936,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "corrected",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "corrected",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The decision tree model has an R2 score of 0.56, indicating a moderate fit to the data. The RMSE is 0.175, suggesting some error in predictions.",
+        "draft_explanation_full": "The provided scatter plot visualizes the performance of a decision tree (DT) model.  The R2 score of 0.56 indicates a moderate fit to the data, meaning the model explains about 56% of the variance in the target variable. The RMSE of 0.175 suggests that there is some error in the model's predictions. Further analysis of the residuals and other metrics can provide more insights into the model's performance.",
+        "draft_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:1",
+            "claim_text": "The R2 score of 0.56 indicates a moderate fit to the data, meaning the model explains about 56% of the variance in the target variable.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+            "subject": "DT",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.56,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:2",
+            "claim_text": "The RMSE of 0.175 suggests that there is some error in the model's predictions.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual",
+            "subject": "DT",
+            "predicate": "max_abs_residual",
+            "object": null,
+            "metric": "max_abs_residual",
+            "value": 0.175,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:1",
+            "claim_text": "The R2 score of 0.56 indicates a moderate fit to the data, meaning the model explains about 56% of the variance in the target variable.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence provided in the 'summary.json' file under the 'DT::r2_score' fact. The value of 0.56 matches the claim.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score"
+            ],
+            "grounded_fact_summary": "The decision tree model has an R2 score of 0.56."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:2",
+            "claim_text": "The RMSE of 0.175 suggests that there is some error in the model's predictions.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "While the claim mentions an RMSE of 0.175, the provided evidence lists a 'max_abs_residual' value of 0.597936. These are different metrics but related. The claim should be revised to reflect the actual max_abs_residual value for accuracy.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual"
+            ],
+            "grounded_fact_summary": "The decision tree model has a maximum absolute residual of 0.597936."
+          }
+        ],
+        "corrected_explanation_short": "The decision tree model has an R2 score of 0.56, indicating a moderate fit to the data. The maximum absolute residual is 0.597936, suggesting some error in predictions.",
+        "corrected_explanation_full": "The provided scatter plot visualizes the performance of a decision tree (DT) model.  The R2 score of 0.56 indicates a moderate fit to the data, meaning the model explains about 56% of the variance in the target variable. The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+        "corrected_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:1",
+            "claim_text": "The R2 score of 0.56 indicates a moderate fit to the data",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+            "subject": "DT",
+            "predicate": "r2_score",
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.56,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:2",
+            "claim_text": "The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual",
+            "subject": "DT",
+            "predicate": "max_abs_residual",
+            "object": null,
+            "metric": "max_abs_residual",
+            "value": 0.597936,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:1",
+            "claim_text": "The R2 score of 0.56 indicates a moderate fit to the data",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence in the 'summary.json' file, which states that the DT model has an R2 score of 0.5604531395.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score"
+            ],
+            "grounded_fact_summary": "The decision tree model has an R2 score of 0.5604531395."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:claim:2",
+            "claim_text": "The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence in the 'summary.json' file, which states that the DT model has a max_abs_residual of 0.597936.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual"
+            ],
+            "grounded_fact_summary": "The decision tree model has a maximum absolute residual of 0.597936."
+          }
+        ],
+        "draft_alignment_issues": [],
+        "corrected_alignment_issues": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 1,
+      "edit": 1
+    }
+  },
+  "parent_draft_hash": "9d8cff1f8298c52ec354d332004c6fa04bdb732d",
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "evidence_span": "The R2 score of 0.56 indicates a moderate fit to the data",
+      "stated_value": "0.56",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual",
+      "evidence_span": "The maximum absolute residual of 0.597936 suggests that there is some error in the model's predictions.",
+      "stated_value": "0.597936",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model with the highest accuracy (81.7%) uses VFA, Butyrate and Acetate as key features for predicting HRT 12 -4 h outcomes.",
+  "explanation_full": "This K-Nearest Neighbors (KNN) model achieved the best performance among various models tested, reaching an accuracy of 81.7% in predicting outcomes related to HRT 12 -4 h.  The top three features driving this prediction are VFA, Butyrate and Acetate. This information can be visualized through feature importance plots and compared with other algorithms' performance. The model's effectiveness is further supported by metrics like RMSE (0.113) and MAE (0.075). While promising, further analysis and validation are needed to fully assess its capabilities in real-world applications.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:top_feature",
+      "claim_text": "VFA, Butyrate and Acetate are key features for predicting HRT 12 -4 h outcomes.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance::importance",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VFA, Butyrate and Acetate",
+      "metric": "importance",
+      "value": -4.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:ranking",
+      "claim_text": "VFA, Butyrate and Acetate are ranked as important features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "ranking::importance",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

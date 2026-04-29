@@ -8,38 +8,26 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "KNN's best performance was found at 9 features",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "claim_text": "KNN feature subset optimum",
+      "status": "contradicted",
       "semantic_level": "L2L3",
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum"
       ],
       "reason": "Gold feature_subset_optimum count is 9.",
-      "numeric_delta": 0
+      "numeric_delta": 6
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
       "arm": "B",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "performance at 4 features",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:ranking:r2_score",
+      "claim_text": "Ranking::r2_score",
       "status": "unverifiable",
       "semantic_level": "L2L3",
       "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
-      "arm": "B",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "R² from 0.7066 to 0.8301",
-      "status": "unverifiable",
-      "semantic_level": "L2L3",
-      "matched_fact_ids": [],
-      "reason": "No matching numeric fact was found for this claim.",
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
       "numeric_delta": null
     }
   ]

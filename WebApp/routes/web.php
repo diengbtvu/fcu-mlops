@@ -124,6 +124,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/settings/email', [SettingsController::class, 'emailSettings'])->name('settings.email');
     Route::put('/settings/email', [SettingsController::class, 'updateEmail'])->name('settings.update-email');
     Route::get('/settings/test-email', [SettingsController::class, 'sendTestEmail'])->name('settings.test-email');
+    Route::get('/settings/ai', [SettingsController::class, 'aiSettings'])->name('settings.ai');
+    Route::put('/settings/ai', [SettingsController::class, 'updateAi'])->name('settings.update-ai');
 
     // Role & Permission management
     Route::get('/roles', [AdminController::class, 'roles'])->name('roles')->middleware('permission:manage_roles');

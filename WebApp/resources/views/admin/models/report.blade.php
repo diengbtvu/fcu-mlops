@@ -224,14 +224,15 @@
     $formatRetryText = function (array $retry): string {
         $attempt = isset($retry['attempt']) ? (int) $retry['attempt'] : 0;
         $maxAttempts = isset($retry['max_attempts']) ? (int) $retry['max_attempts'] : 0;
+        $retryForever = !empty($retry['retry_forever']) || $maxAttempts <= 0;
         $waitSeconds = isset($retry['wait_seconds']) ? round((float) $retry['wait_seconds'], 1) : null;
         $reason = trim((string) ($retry['reason'] ?? ''));
         $statusCode = isset($retry['status_code']) ? (int) $retry['status_code'] : null;
-        if ($attempt <= 0 || $maxAttempts <= 0) {
+        if ($attempt <= 0) {
             return '';
         }
 
-        $parts = ["Retry {$attempt} / {$maxAttempts}"];
+        $parts = ["Retry {$attempt} / " . ($retryForever ? '∞' : (string) $maxAttempts)];
         if ($waitSeconds !== null) {
             $parts[] = "waiting " . number_format($waitSeconds, 1) . "s";
         }
@@ -1098,11 +1099,12 @@
 
         const attempt = Number(retryPayload.attempt || 0);
         const maxAttempts = Number(retryPayload.max_attempts || 0);
-        if (attempt <= 0 || maxAttempts <= 0) {
+        const retryForever = Boolean(retryPayload.retry_forever) || maxAttempts <= 0;
+        if (attempt <= 0) {
             return '';
         }
 
-        const parts = [`Retry ${attempt} / ${maxAttempts}`];
+        const parts = [`Retry ${attempt} / ${retryForever ? '∞' : maxAttempts}`];
         const waitSeconds = Number(retryPayload.wait_seconds);
         if (Number.isFinite(waitSeconds) && waitSeconds > 0) {
             parts.push(`waiting ${waitSeconds.toFixed(1)}s`);

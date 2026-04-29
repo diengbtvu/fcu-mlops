@@ -166,19 +166,20 @@ def test_verifier_maps_prediction_correlation_aliases() -> None:
 
 def test_verifier_ignores_incompatible_source_variable_id_for_numeric_claims() -> None:
     gold = _gold_map()["model_comparison/main"]
+    artifact_id = gold.artifact_id
     claims = [
         Claim(
             claim_id="svm-r2",
-            claim_text="SVM achieved R2=0.88.",
+            claim_text="SVM achieved R2=0.84.",
             claim_type="metric_value",
             span_category="sentence",
             is_numeric=True,
             requires_grounding_from="table/json",
             confidence=0.9,
-            source_variable_id="sample_bundle:model_comparison/main:metric:KNN:r2_score",
+            source_variable_id=f"{artifact_id}:metric:KNN:r2_score",
             subject="SVM",
             metric="r2_score",
-            value=0.88,
+            value=0.84,
         ),
         Claim(
             claim_id="knn-r2-via-ranking-source",
@@ -188,7 +189,7 @@ def test_verifier_ignores_incompatible_source_variable_id_for_numeric_claims() -
             is_numeric=True,
             requires_grounding_from="table/json",
             confidence=0.9,
-            source_variable_id="sample_bundle:model_comparison/main:ranking:r2_score",
+            source_variable_id=f"{artifact_id}:ranking:r2_score",
             subject="KNN",
             metric="r2_score",
             value=0.92,
@@ -197,7 +198,7 @@ def test_verifier_ignores_incompatible_source_variable_id_for_numeric_claims() -
 
     verifications = verify_claims(gold, claims, arm="A", input_condition="table_only")
 
-    assert verifications[0].matched_fact_ids == ["sample_bundle:model_comparison/main:metric:SVM:r2_score"]
+    assert verifications[0].matched_fact_ids == [f"{artifact_id}:metric:SVM:r2_score"]
     assert verifications[0].status == "supported"
-    assert verifications[1].matched_fact_ids == ["sample_bundle:model_comparison/main:metric:KNN:r2_score"]
+    assert verifications[1].matched_fact_ids == [f"{artifact_id}:metric:KNN:r2_score"]
     assert verifications[1].status == "supported"

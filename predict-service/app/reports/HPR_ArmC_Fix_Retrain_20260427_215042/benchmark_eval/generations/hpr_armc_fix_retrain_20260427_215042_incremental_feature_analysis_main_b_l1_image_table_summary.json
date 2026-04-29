@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows the performance of different machine learning models (SVM, DT, RF, KNN, XGBoost) with increasing numbers of features.  KNN performs best with an R2 of 0.817 and MSE of 0.0128.",
+  "explanation_full": "This table presents the incremental feature analysis results for a machine learning model predicting hydrogen production (HPR). The performance of various models (SVM, Decision Tree (DT), Random Forest (RF), KNN, XGBoost) is evaluated with increasing numbers of features.  \n\nThe table shows metrics like R2 and MSE for each model at different feature subsets. Notably, the KNN model achieves the highest R2 (0.817) and lowest MSE (0.0128) when using 11 features.\n\nThis suggests that a combination of 11 features provides the most predictive power for HPR in this context.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "claim_text": "KNN performs best with an MSE of 0.0128.",
+      "claim_type": "metric_value",
+      "span_category": "best_mse",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": "0.0128",
+      "metric": "best_mse",
+      "value": 0.0128,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "claim_text": "KNN achieves the highest R2 of 0.817.",
+      "claim_type": "metric_value",
+      "span_category": "best_r2",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": "0.817",
+      "metric": "best_r2",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

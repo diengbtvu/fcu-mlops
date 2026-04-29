@@ -8,22 +8,96 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_1",
-      "claim_text": "The strongest relationship is between Butyrate and VFA, with a correlation coefficient of 0.9601.",
-      "status": "supported",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:gra_score",
+      "claim_text": "The gra_score of combined_feature_story is 3.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:importance",
+      "claim_text": "The importance of combined_feature_story is 3.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+      "claim_text": "The mean_abs_shap of combined_feature_story is 3.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:top_feature:target_correlation",
+      "claim_text": "The target_correlation of combined_feature_story is 3.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+      "claim_text": "The R2 score of KNN is 0.817.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.01314000000000004
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:feature_subset_optimum",
+      "claim_text": "The feature subset optimum of KNN is 2.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "The correlation of Butyrate vs VFA is 2.",
+      "status": "contradicted",
       "semantic_level": null,
       "matched_fact_ids": [
         "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation"
       ],
       "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
-      "numeric_delta": 0.0
+      "numeric_delta": 1.0399
     },
     {
       "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_2",
-      "claim_text": "Acetate shows a very strong correlation with VFA at 0.9428.",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score",
+      "claim_text": "The gra_score of combined_feature_story is ranked 2.",
       "status": "unverifiable",
       "semantic_level": null,
       "matched_fact_ids": [],
@@ -34,8 +108,8 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_3",
-      "claim_text": "Other notable correlations include Acetate vs. Butyrate (0.8651) and Ethanol vs. Propionate (0.8548).",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:importance",
+      "claim_text": "The importance of combined_feature_story is ranked 2.",
       "status": "unverifiable",
       "semantic_level": null,
       "matched_fact_ids": [],
@@ -46,26 +120,12 @@
       "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
       "arm": "A",
       "input_condition": "image_table_summary",
-      "claim_id": "claim_4",
-      "claim_text": "Other notable correlations include Acetate vs. Butyrate (0.8651) and Ethanol vs. Propionate (0.8548).",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+      "claim_text": "The mean_abs_shap of combined_feature_story is ranked 2.",
       "status": "unverifiable",
       "semantic_level": null,
       "matched_fact_ids": [],
       "reason": "No matching numeric fact was found for this claim.",
-      "numeric_delta": null
-    },
-    {
-      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
-      "arm": "A",
-      "input_condition": "image_table_summary",
-      "claim_id": "claim_5",
-      "claim_text": "VFA, Butyrate, and Acetate are highly interconnected metabolic features, which is further supported by the GRA ranking placing VFA, Butyrate, and Acetate among the top three features.",
-      "status": "supported",
-      "semantic_level": null,
-      "matched_fact_ids": [
-        "KNN_HPR_20260424:chart:fig3_feature_analysis:ranking:gra_score"
-      ],
-      "reason": "Claimed ordering is consistent with the gold ranking.",
       "numeric_delta": null
     }
   ]
