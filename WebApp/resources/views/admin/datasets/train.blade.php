@@ -306,6 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const PREDICT_SERVICE_PUBLIC_URL = '{{ config("services.predict_service.public_url") }}';
     const DATASETS_INDEX_URL = '{{ route($routePrefix . ".datasets.index") }}';
     const REPORT_PAGE_TEMPLATE = '{{ route($routePrefix . ".models.report", ["model" => "__MODEL_ID__"]) }}';
+    const TRAINING_PROGRESS_SESSION_URL = '{{ route("training.progress.session") }}';
+    const TRAINING_PROGRESS_URL_TEMPLATE = '{{ route("training.progress.show", ["sessionId" => "__SESSION_ID__"]) }}';
     const CSRF_TOKEN = '{{ csrf_token() }}';
     
     console.log('PREDICT_SERVICE_URL:', PREDICT_SERVICE_URL);
@@ -340,6 +342,47 @@ document.addEventListener('DOMContentLoaded', function() {
             option.textContent = model.label;
             llmModelSelect.appendChild(option);
         });
+    }
+
+    function buildTrainingProgressUrl(sid) {
+        return TRAINING_PROGRESS_URL_TEMPLATE.replace('__SESSION_ID__', encodeURIComponent(String(sid)));
+    }
+
+    function summarizeResponseBody(rawBody) {
+        return String(rawBody || '')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .slice(0, 240);
+    }
+
+    async function readJsonResponse(response, fallbackMessage) {
+        const rawBody = await response.text();
+        let payload = null;
+
+        if (rawBody.trim()) {
+            try {
+                payload = JSON.parse(rawBody);
+            } catch (error) {
+                const preview = summarizeResponseBody(rawBody);
+                const invalidMessage = response.ok
+                    ? `${fallbackMessage}: server returned a non-JSON response`
+                    : (preview || fallbackMessage);
+                throw new Error(invalidMessage);
+            }
+        }
+
+        if (!response.ok) {
+            const errorMessage = payload && typeof payload === 'object'
+                ? (payload.error || payload.message || '')
+                : '';
+            throw new Error(String(errorMessage || summarizeResponseBody(rawBody) || fallbackMessage));
+        }
+
+        if (!payload || typeof payload !== 'object') {
+            throw new Error(`${fallbackMessage}: empty response`);
+        }
+
+        return payload;
     }
 
     function buildReportAssetUrl(reportInfo, filename) {
@@ -511,8 +554,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function startProgressPolling(sid) {
         progressInterval = setInterval(async function() {
             try {
-                const response = await fetch(`/progress/${sid}`);
-                const data = await response.json();
+                const response = await fetch(buildTrainingProgressUrl(sid), {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await readJsonResponse(response, 'Failed to load training progress');
                 
                 if (data.success && data.progress) {
                     const progress = data.progress;
@@ -609,15 +657,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Generate session ID
             console.log('📝 Generating session ID...');
-            const sessionResponse = await fetch('/progress/generate-session', {
+            const sessionResponse = await fetch(TRAINING_PROGRESS_SESSION_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': CSRF_TOKEN,
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             });
             
             console.log('Session response status:', sessionResponse.status);
-            const sessionData = await sessionResponse.json();
+            const sessionData = await readJsonResponse(sessionResponse, 'Failed to generate training session');
             console.log('Session data:', sessionData);
             
             if (!sessionData.success) {
@@ -660,6 +711,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch(form.action, {
                 method: 'POST',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': CSRF_TOKEN,
                     'X-Requested-With': 'XMLHttpRequest'
@@ -668,25 +720,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             console.log('Training response status:', response.status);
-            
-            if (!response.ok) {
-                let errorMessage = 'Training request failed';
-                const errorBody = await response.text();
 
-                try {
-                    const errorData = JSON.parse(errorBody);
-                    console.error('❌ Training error:', errorData);
-                    errorMessage = errorData.error || errorData.message || errorMessage;
-                } catch (parseError) {
-                    console.error('❌ Training error (non-JSON):', errorBody);
-                    if (errorBody && errorBody.trim()) {
-                        errorMessage = errorBody.trim().slice(0, 500);
-                    }
-                }
-                throw new Error(errorMessage);
-            }
-            
-            const responseData = await response.json();
+            const responseData = await readJsonResponse(response, 'Failed to start training');
             console.log('✅ Training submitted successfully:', responseData);
             
         } catch (error) {
@@ -697,10 +732,6 @@ document.addEventListener('DOMContentLoaded', function() {
             progressModal.hide();
             
             // Stop polling if started
-            if (progressInterval) {
-                clearInterval(progressInterval);
-            }
-            
             if (progressInterval) {
                 clearInterval(progressInterval);
             }

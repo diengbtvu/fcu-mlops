@@ -39,6 +39,7 @@ return [
         'url' => env('PREDICT_SERVICE_URL', 'http://localhost:5000'),
         'public_url' => env('PREDICT_SERVICE_PUBLIC_URL', env('PREDICT_SERVICE_URL', 'http://localhost:5000')),
         'browser_url' => env('PREDICT_SERVICE_BROWSER_URL', ''),
+        'progress_path' => env('TRAINING_PROGRESS_PATH', storage_path('app/training-progress')),
     ],
 
 ];

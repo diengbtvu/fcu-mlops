@@ -9,6 +9,7 @@ use App\Http\Controllers\MLTrainingController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ModelComparisonController;
+use App\Http\Controllers\TrainingProgressController;
 
 // Include test routes for debugging
 if (app()->environment('local')) {
@@ -52,6 +53,14 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPass
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
+Route::middleware(['auth', 'permission:training_model'])->group(function () {
+    Route::post('/training-progress/session', [TrainingProgressController::class, 'generateSession'])
+        ->name('training.progress.session');
+    Route::get('/training-progress/{sessionId}', [TrainingProgressController::class, 'show'])
+        ->where('sessionId', '[A-Za-z0-9-]+')
+        ->name('training.progress.show');
+});
 
 // Admin routes - Now accessible by users with appropriate permissions
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {

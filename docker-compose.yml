@@ -28,6 +28,7 @@ services:
       - laravel_vendor:/var/www/html/vendor
       - laravel_storage:/var/www/html/storage
       - laravel_cache:/var/www/html/bootstrap/cache
+      - training_progress:/var/www/html/storage/app/training-progress:ro
     depends_on:
       - mysql
       - predict-service
