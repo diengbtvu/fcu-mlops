@@ -304,10 +304,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const PREDICT_SERVICE_URL = '{{ config("services.predict_service.url") }}';
     const PREDICT_SERVICE_PUBLIC_URL = '{{ config("services.predict_service.public_url") }}';
-    const DATASETS_INDEX_URL = '{{ route($routePrefix . ".datasets.index") }}';
-    const REPORT_PAGE_TEMPLATE = '{{ route($routePrefix . ".models.report", ["model" => "__MODEL_ID__"]) }}';
-    const TRAINING_PROGRESS_SESSION_URL = '{{ route("training.progress.session") }}';
-    const TRAINING_PROGRESS_URL_TEMPLATE = '{{ route("training.progress.show", ["sessionId" => "__SESSION_ID__"]) }}';
+    const DATASETS_INDEX_URL = '{{ route($routePrefix . ".datasets.index", [], false) }}';
+    const REPORT_PAGE_TEMPLATE = '{{ route($routePrefix . ".models.report", ["model" => "__MODEL_ID__"], false) }}';
+    const TRAINING_PROGRESS_SESSION_URL = '{{ route("training.progress.session", [], false) }}';
+    const TRAINING_PROGRESS_URL_TEMPLATE = '{{ route("training.progress.show", ["sessionId" => "__SESSION_ID__"], false) }}';
     const CSRF_TOKEN = '{{ csrf_token() }}';
     
     console.log('PREDICT_SERVICE_URL:', PREDICT_SERVICE_URL);
