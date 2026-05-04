@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Figure 3A is a grey relational ranking chart with a single axis label and 11 entity names.",
+  "explanation_full": "The chart has a single axis label and 11 entity names: VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. The chart type is a ranking chart. The value ranges are between 0.5834 and 0.7931. The units are not specified. The scale is not specified.",
+  "claims": [],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

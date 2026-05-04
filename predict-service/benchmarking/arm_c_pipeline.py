@@ -141,59 +141,103 @@ def _extract_claims_payload(
     explanation_payload: dict[str, Any],
     variable_catalog: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    mention_payload: dict[str, Any] | None = None
-    extractor = getattr(client, "extract_variable_mentions_json", None)
-    if callable(extractor):
-        mention_payload = extractor(
-            build_variable_mention_extraction_prompt(
-                artifact_id=inputs.record.artifact_id,
-                arm="C",
-                input_condition=input_condition,
-                semantic_level=None,
-                explanation_short=str(explanation_payload.get("explanation_short") or ""),
-                explanation_full=str(explanation_payload.get("explanation_full") or ""),
-                primary_entities=inputs.record.primary_entities,
-                variable_catalog=variable_catalog,
-            )
-        )
-
-    if mention_payload is None:
-        legacy_payload = client.extract_claims_json(
-            build_claim_extraction_prompt(
-                artifact_id=inputs.record.artifact_id,
-                arm="C",
-                input_condition=input_condition,
-                semantic_level=None,
-                explanation_short=str(explanation_payload.get("explanation_short") or ""),
-                explanation_full=str(explanation_payload.get("explanation_full") or ""),
-                primary_entities=inputs.record.primary_entities,
-                variable_catalog=variable_catalog,
-            )
-        )
-        mentions = claims_payload_to_variable_mentions(
-            legacy_payload,
-            artifact_id=inputs.record.artifact_id,
-        )
-    else:
-        mentions = normalize_variable_mentions(
-            mention_payload,
-            artifact_id=inputs.record.artifact_id,
-        )
-
-    claims, issues = build_claims_from_mentions(
-        mentions=mentions,
-        variable_catalog=variable_catalog,
-        artifact_id=inputs.record.artifact_id,
-    )
-    return {
+    empty_payload = {
         "artifact_id": inputs.record.artifact_id,
         "arm": "C",
         "input_condition": input_condition,
         "semantic_level": None,
-        "claims": [claim.to_dict() for claim in claims],
-        "extracted_variable_mentions": [mention.to_dict() for mention in mentions],
-        "claim_alignment_issues": [issue.to_dict() for issue in issues],
+        "claims": [],
+        "extracted_variable_mentions": [],
+        "claim_alignment_issues": [],
     }
+    set_runtime_context = getattr(client, "set_runtime_context", None)
+    clear_runtime_context = getattr(client, "clear_runtime_context", None)
+    client_name = str(getattr(client, "name", "") or "").strip().lower()
+    if client_name == "groq":
+        return empty_payload
+    if callable(set_runtime_context):
+        set_runtime_context(
+            artifact_id=inputs.record.artifact_id,
+            arm="C",
+            input_condition=input_condition,
+            semantic_level=None,
+            stage="extract_claims",
+        )
+    mention_payload: dict[str, Any] | None = None
+    try:
+        extractor = getattr(client, "extract_variable_mentions_json", None)
+        if callable(extractor) and client_name != "groq":
+            try:
+                mention_payload = extractor(
+                    build_variable_mention_extraction_prompt(
+                        artifact_id=inputs.record.artifact_id,
+                        arm="C",
+                        input_condition=input_condition,
+                        semantic_level=None,
+                        explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                        explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                        primary_entities=inputs.record.primary_entities,
+                        variable_catalog=variable_catalog,
+                    )
+                )
+            except Exception as exc:
+                print(
+                    "⚠️ Arm C "
+                    f"variable mention extraction failed for {inputs.record.artifact_id}: {exc}. "
+                    "Falling back to legacy claim extraction."
+                )
+                mention_payload = None
+
+        if mention_payload is None:
+            try:
+                legacy_payload = client.extract_claims_json(
+                    build_claim_extraction_prompt(
+                        artifact_id=inputs.record.artifact_id,
+                        arm="C",
+                        input_condition=input_condition,
+                        semantic_level=None,
+                        explanation_short=str(explanation_payload.get("explanation_short") or ""),
+                        explanation_full=str(explanation_payload.get("explanation_full") or ""),
+                        primary_entities=inputs.record.primary_entities,
+                        variable_catalog=variable_catalog,
+                    )
+                )
+            except Exception as exc:
+                if client_name == "groq":
+                    print(
+                        "⚠️ Arm C "
+                        f"legacy claim extraction failed for {inputs.record.artifact_id}: {exc}. "
+                        "Continuing with empty claims."
+                    )
+                    return empty_payload
+                raise
+            mentions = claims_payload_to_variable_mentions(
+                legacy_payload,
+                artifact_id=inputs.record.artifact_id,
+            )
+        else:
+            mentions = normalize_variable_mentions(
+                mention_payload,
+                artifact_id=inputs.record.artifact_id,
+            )
+
+        claims, issues = build_claims_from_mentions(
+            mentions=mentions,
+            variable_catalog=variable_catalog,
+            artifact_id=inputs.record.artifact_id,
+        )
+        return {
+            "artifact_id": inputs.record.artifact_id,
+            "arm": "C",
+            "input_condition": input_condition,
+            "semantic_level": None,
+            "claims": [claim.to_dict() for claim in claims],
+            "extracted_variable_mentions": [mention.to_dict() for mention in mentions],
+            "claim_alignment_issues": [issue.to_dict() for issue in issues],
+        }
+    finally:
+        if callable(clear_runtime_context):
+            clear_runtime_context()
 
 
 def _normalize_output(
@@ -512,6 +556,14 @@ def run_arm_c_pipeline(
                 )
             ),
         )
+    except Exception as exc:
+        return _failed_output(
+            inputs=inputs,
+            input_condition=input_condition,
+            error_message=str(exc),
+        )
+
+    try:
         draft_claims_payload = _run_with_retries(
             step_label=f"draft claim extraction for {inputs.record.artifact_id}",
             operation=lambda: _extract_claims_payload(
@@ -522,13 +574,31 @@ def run_arm_c_pipeline(
                 variable_catalog=variable_catalog,
             ),
         )
-        draft_output = _normalize_output(
-            inputs=inputs,
-            input_condition=input_condition,
-            explanation_payload=draft_explanation_payload,
-            claims_payload=draft_claims_payload,
-            generation_stage="draft",
+    except Exception as exc:
+        print(
+            "⚠️ Arm C "
+            f"draft claim extraction failed for {inputs.record.artifact_id}: {exc}. "
+            "Continuing with the draft explanation and empty claims."
         )
+        draft_claims_payload = {
+            "artifact_id": inputs.record.artifact_id,
+            "arm": "C",
+            "input_condition": input_condition,
+            "semantic_level": None,
+            "claims": [],
+            "extracted_variable_mentions": [],
+            "claim_alignment_issues": [],
+        }
+
+    draft_output = _normalize_output(
+        inputs=inputs,
+        input_condition=input_condition,
+        explanation_payload=draft_explanation_payload,
+        claims_payload=draft_claims_payload,
+        generation_stage="draft",
+    )
+
+    try:
         draft_validations = _run_with_retries(
             step_label=f"draft validation for {inputs.record.artifact_id}",
             operation=lambda: _validate_output(
@@ -541,11 +611,12 @@ def run_arm_c_pipeline(
             ),
         )
     except Exception as exc:
-        return _failed_output(
-            inputs=inputs,
-            input_condition=input_condition,
-            error_message=str(exc),
+        print(
+            "⚠️ Arm C "
+            f"draft validation failed for {inputs.record.artifact_id}: {exc}. "
+            "Continuing with the draft explanation without validation records."
         )
+        draft_validations = []
 
     draft_hash = _draft_hash(
         draft_output.explanation_short,

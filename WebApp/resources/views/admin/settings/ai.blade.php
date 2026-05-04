@@ -33,22 +33,66 @@
                     <div class="mb-4">
                         <div class="d-flex align-items-center gap-3 flex-wrap mb-2">
                             <span class="badge bg-primary">{{ $groqKeyCount }} Groq key{{ $groqKeyCount === 1 ? '' : 's' }}</span>
+                            <span class="badge bg-success">{{ $activeGroqKeyCount }} active</span>
+                            <span class="badge bg-danger">{{ $blockedGroqKeyCount }} blocked</span>
                         </div>
                         @if(empty($maskedGroqKeys))
                             <div class="text-muted small">No Groq keys are saved in the database yet.</div>
                         @else
                             <div class="list-group">
                                 @foreach($maskedGroqKeys as $maskedKey)
-                                    <div class="list-group-item d-flex align-items-center justify-content-between gap-3">
-                                        <code class="bg-light border rounded px-2 py-1">{{ $maskedKey['label'] }}</code>
-                                        <form action="{{ route('admin.settings.update-ai') }}" method="POST" class="m-0">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="delete_groq_key_index" value="{{ $maskedKey['index'] }}">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                <i class="bi bi-trash"></i> Delete
-                                            </button>
-                                        </form>
+                                    <div class="list-group-item d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                                        <div class="d-flex flex-column gap-2">
+                                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                                <code class="bg-light border rounded px-2 py-1">{{ $maskedKey['label'] }}</code>
+                                                @if($maskedKey['is_blocked'])
+                                                    <span class="badge bg-danger">Blocked</span>
+                                                    @if(!empty($maskedKey['reason']))
+                                                        <span class="badge bg-warning text-dark">{{ $maskedKey['reason'] }}</span>
+                                                    @endif
+                                                    @if(!empty($maskedKey['http_status']))
+                                                        <span class="badge bg-secondary">HTTP {{ $maskedKey['http_status'] }}</span>
+                                                    @endif
+                                                @else
+                                                    <span class="badge bg-success">Active</span>
+                                                @endif
+                                            </div>
+                                            @if($maskedKey['is_blocked'])
+                                                <div class="small text-danger">
+                                                    This key is excluded from new Groq requests.
+                                                </div>
+                                                @if(!empty($maskedKey['blocked_at']))
+                                                    <div class="small text-muted">
+                                                        Blocked at: {{ $maskedKey['blocked_at'] }}
+                                                    </div>
+                                                @endif
+                                                @if(!empty($maskedKey['message']))
+                                                    <div class="small text-muted">
+                                                        {{ $maskedKey['message'] }}
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                                            @if($maskedKey['is_blocked'])
+                                                <form action="{{ route('admin.settings.update-ai') }}" method="POST" class="m-0">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="reactivate_groq_key_hash" value="{{ $maskedKey['hash'] }}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                                        <i class="bi bi-arrow-clockwise"></i> Reactivate
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            <form action="{{ route('admin.settings.update-ai') }}" method="POST" class="m-0">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="delete_groq_key_index" value="{{ $maskedKey['index'] }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -75,7 +119,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <div class="form-text">
-                                Stored encrypted. New keys are merged into the existing pool and duplicates are skipped.
+                                Stored encrypted. New keys are merged into the existing pool and duplicates are skipped. Keys marked blocked are kept for admin review but are excluded from new Groq requests until reactivated.
                             </div>
                         </div>
 

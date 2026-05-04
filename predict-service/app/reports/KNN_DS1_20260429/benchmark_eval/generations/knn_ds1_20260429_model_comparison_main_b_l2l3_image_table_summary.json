@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Benchmark generation failed to produce valid JSON.",
+  "explanation_full": "Benchmark generation failed before producing a grounded explanation. Error: Claim at index 1 is missing claim_text.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": "failed",
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

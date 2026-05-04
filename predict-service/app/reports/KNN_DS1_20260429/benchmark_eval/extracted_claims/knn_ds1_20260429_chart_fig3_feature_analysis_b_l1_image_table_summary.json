@@ -1,0 +1,9 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

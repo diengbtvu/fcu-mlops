@@ -1,0 +1,48 @@
+{
+  "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:model_comparison/main:claim:1",
+      "claim_text": "The KNN model performed best",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:model_comparison/main:claim:2",
+      "claim_text": "an R² score of 0.81717",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 2.1982962532529626e-06
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:model_comparison/main:claim:3",
+      "claim_text": "an MSE of 0.012810",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:model_comparison/main:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.012809918378105262.",
+      "numeric_delta": 8.162189473782944e-08
+    }
+  ]
+}

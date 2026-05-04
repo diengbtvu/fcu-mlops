@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Config;
 use App\Mail\TrainingCompletedMail;
 use App\Models\EmailSetting;
+use App\Support\GroqKeyStatus;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 
 class SettingsController extends Controller
 {
-    private const GROQ_KEYS_SETTING = 'groq_api_keys';
-
     /**
      * Hiển thị trang cấu hình email
      */
@@ -73,17 +72,36 @@ class SettingsController extends Controller
      */
     public function aiSettings()
     {
-        $groqKeys = $this->normalizeGroqKeys(EmailSetting::get(self::GROQ_KEYS_SETTING, ''));
+        $groqKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+        $statusMap = GroqKeyStatus::loadStatusMap();
         $maskedGroqKeys = [];
+        $blockedKeyCount = 0;
+
         foreach ($groqKeys as $index => $key) {
+            $status = GroqKeyStatus::statusForKey($statusMap, $key);
+            $isBlocked = GroqKeyStatus::isBlocked($status);
+            if ($isBlocked) {
+                $blockedKeyCount++;
+            }
+
             $maskedGroqKeys[] = [
                 'index' => $index,
-                'label' => $this->maskApiKey($key),
+                'hash' => GroqKeyStatus::hashKey($key),
+                'label' => GroqKeyStatus::maskKey($key),
+                'is_blocked' => $isBlocked,
+                'status' => $status['status'] ?? 'active',
+                'reason' => $status['reason'] ?? '',
+                'message' => $status['message'] ?? '',
+                'blocked_at' => $status['blocked_at'] ?? '',
+                'updated_at' => $status['updated_at'] ?? '',
+                'http_status' => $status['last_http_status'] ?? null,
             ];
         }
 
         return view('admin.settings.ai', [
             'groqKeyCount' => count($groqKeys),
+            'blockedGroqKeyCount' => $blockedKeyCount,
+            'activeGroqKeyCount' => max(0, count($groqKeys) - $blockedKeyCount),
             'maskedGroqKeys' => $maskedGroqKeys,
         ]);
     }
@@ -97,10 +115,12 @@ class SettingsController extends Controller
             'groq_api_keys' => 'nullable|string|max:20000',
             'clear_groq_api_keys' => 'nullable|boolean',
             'delete_groq_key_index' => 'nullable|integer|min:0',
+            'reactivate_groq_key_hash' => ['nullable', 'regex:/^[a-f0-9]{64}$/i'],
         ]);
 
         try {
-            $existingKeys = $this->normalizeGroqKeys(EmailSetting::get(self::GROQ_KEYS_SETTING, ''));
+            $existingKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+            $statusMap = GroqKeyStatus::loadStatusMap();
 
             if ($request->boolean('clear_groq_api_keys')) {
                 $groqKeys = [];
@@ -111,14 +131,20 @@ class SettingsController extends Controller
                 }
                 $groqKeys = array_values($existingKeys);
             } elseif ($request->filled('groq_api_keys')) {
-                $newKeys = $this->normalizeGroqKeys($request->input('groq_api_keys'));
+                $newKeys = GroqKeyStatus::normalizeKeys($request->input('groq_api_keys'));
                 $groqKeys = $this->mergeGroqKeys($existingKeys, $newKeys);
             } else {
                 $groqKeys = $existingKeys;
             }
 
+            $statusMap = GroqKeyStatus::pruneStatusMap($statusMap, $groqKeys);
+
+            if ($request->filled('reactivate_groq_key_hash')) {
+                unset($statusMap[strtolower((string) $request->input('reactivate_groq_key_hash'))]);
+            }
+
             EmailSetting::set(
-                self::GROQ_KEYS_SETTING,
+                GroqKeyStatus::KEYS_SETTING,
                 implode("\n", $groqKeys),
                 [
                     'type' => 'textarea',
@@ -127,10 +153,15 @@ class SettingsController extends Controller
                     'is_encrypted' => true,
                 ]
             );
+            GroqKeyStatus::saveStatusMap($statusMap);
 
-            $message = $request->filled('delete_groq_key_index')
-                ? 'Groq API key removed.'
-                : 'AI API key settings updated successfully.';
+            if ($request->filled('reactivate_groq_key_hash')) {
+                $message = 'Groq API key reactivated.';
+            } elseif ($request->filled('delete_groq_key_index')) {
+                $message = 'Groq API key removed.';
+            } else {
+                $message = 'AI API key settings updated successfully.';
+            }
 
             return redirect()->route('admin.settings.ai')->with('success', $message);
         } catch (\Exception $e) {
@@ -139,18 +170,27 @@ class SettingsController extends Controller
         }
     }
 
-    private function normalizeGroqKeys(?string $rawValue): array
+    public function internalGroqKeyPool(Request $request)
     {
-        $items = preg_split('/[\s,;]+/', (string) $rawValue) ?: [];
-        $keys = [];
-        foreach ($items as $item) {
-            $key = trim((string) $item);
-            if ($key === '' || in_array($key, $keys, true)) {
-                continue;
-            }
-            $keys[] = $key;
+        $expectedToken = (string) env('JWT_SECRET', '');
+        $providedToken = (string) $request->header('X-Internal-Token', '');
+
+        if ($expectedToken === '' || $providedToken === '' || !hash_equals($expectedToken, $providedToken)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $keys;
+
+        $groqKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+        $statusMap = GroqKeyStatus::loadStatusMap();
+        $activeGroqKeys = GroqKeyStatus::filterUsableKeys($groqKeys, $statusMap);
+
+        return response()->json([
+            'groq_api_keys' => $groqKeys,
+            'active_groq_api_keys' => $activeGroqKeys,
+            'total_keys' => count($groqKeys),
+            'active_keys' => count($activeGroqKeys),
+            'blocked_keys' => max(0, count($groqKeys) - count($activeGroqKeys)),
+            'updated_at' => now()->toIso8601String(),
+        ]);
     }
 
     private function mergeGroqKeys(array $existingKeys, array $newKeys): array
@@ -164,17 +204,6 @@ class SettingsController extends Controller
             $keys[] = $key;
         }
         return $keys;
-    }
-
-    private function maskApiKey(string $key): string
-    {
-        $key = trim($key);
-        if ($key === '') {
-            return '';
-        }
-        $prefix = substr($key, 0, min(7, strlen($key)));
-        $suffix = strlen($key) > 4 ? substr($key, -4) : '';
-        return $suffix !== '' ? $prefix . '...' . $suffix : $prefix . '...';
     }
 
     /**

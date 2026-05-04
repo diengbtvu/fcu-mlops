@@ -1,0 +1,53 @@
+{
+  "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model performed best with an R² of 0.81717 and an MSE of 0.012810. Incremental feature analysis showed that the model's performance improved with the addition of features, with the top features being VFA, Butyrate, and Acetate.",
+  "explanation_full": "{'structure': 'The dataset consists of 197 samples with 11 features. The target variable is HPR.', 'main_findings': \"The KNN model outperformed other models, including RF, XGBoost, SVM, and DT. The incremental feature analysis showed that the model's performance improved with the addition of features, with the top features being VFA, Butyrate, and Acetate.\", 'comparisons': 'The KNN model had a higher R² and lower MSE compared to other models. The RF model had an R² of 0.77560 and an MSE of 0.015722, while the XGBoost model had an R² of 0.74948 and an MSE of 0.017553.', 'trends': \"The model's performance improved with the addition of features, with the top features being VFA, Butyrate, and Acetate. The performance of the model also improved with the increase in the number of features, with the best performance achieved with 11 features.\", 'extremes': 'The DT model had the worst performance, with an R² of 0.56045 and an MSE of 0.030796.', 'takeaways': \"The KNN model is the best benchmark model, with an R² of 0.81717 and an MSE of 0.012810. The incremental feature analysis showed that the model's performance improved with the addition of features, with the top features being VFA, Butyrate, and Acetate.\"}",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model performed best with an R² of 0.81717",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.75,
+      "source_variable_id": "KNN_DS1_20260429:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": null,
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The KNN model performed best with an MSE of 0.012810",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.75,
+      "source_variable_id": "KNN_DS1_20260429:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": null,
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

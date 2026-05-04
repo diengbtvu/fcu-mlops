@@ -95,6 +95,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/models/create', [AdminController::class, 'createModel'])->name('models.create')->middleware('permission:manage_models');
     Route::post('/models', [AdminController::class, 'storeModel'])->name('models.store')->middleware('permission:manage_models');
     Route::get('/models/{model}/report', [AdminController::class, 'showModelReport'])->name('models.report')->middleware('permission:manage_models');
+    Route::post('/models/{model}/report/resume', [AdminController::class, 'resumeModelReportPostProcessing'])->name('models.report.resume')->middleware('permission:manage_models');
     Route::get('/models/{model}/benchmark', [AdminController::class, 'showModelBenchmark'])->name('models.benchmark')->middleware('permission:manage_models');
     Route::get('/models/{model}/edit', [AdminController::class, 'editModel'])->name('models.edit')->middleware('permission:manage_models');
     Route::put('/models/{model}', [AdminController::class, 'updateModel'])->name('models.update')->middleware('permission:manage_models');
@@ -170,6 +171,7 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'user'])->group(functi
     Route::get('/models/create', [UserController::class, 'createModel'])->name('models.create')->middleware('permission:manage_models');
     Route::post('/models', [UserController::class, 'storeModel'])->name('models.store')->middleware('permission:manage_models');
     Route::get('/models/{model}/report', [UserController::class, 'showModelReport'])->name('models.report')->middleware('permission:manage_models');
+    Route::post('/models/{model}/report/resume', [UserController::class, 'resumeModelReportPostProcessing'])->name('models.report.resume')->middleware('permission:manage_models');
     Route::get('/models/{model}/benchmark', [UserController::class, 'showModelBenchmark'])->name('models.benchmark')->middleware('permission:manage_models');
     Route::get('/models/{model}/edit', [UserController::class, 'editModel'])->name('models.edit')->middleware('permission:manage_models');
     Route::put('/models/{model}', [UserController::class, 'updateModel'])->name('models.update')->middleware('permission:manage_models');

@@ -1,0 +1,76 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA has a Grey Relational Analysis score of 0.7931",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.3543695608908557e-05
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate has a Grey Relational Analysis score of 0.7902",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:chart:fig3a_gra_ranking:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 4.6755017702460044e-05
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate has a Grey Relational Analysis score of 0.7772",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:chart:fig3a_gra_ranking:rank_score:Acetate"
+      ],
+      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+      "numeric_delta": 1.999763680660127e-05
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The top 3 features ranked by Grey Relational Analysis are VFA, Butyrate, and Acetate",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "VFA is the top feature according to Grey Relational Analysis",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:chart:fig3a_gra_ranking:top_feature"
+      ],
+      "reason": "Gold top feature for gra_score is VFA.",
+      "numeric_delta": null
+    }
+  ]
+}

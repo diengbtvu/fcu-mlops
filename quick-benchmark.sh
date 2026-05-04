@@ -27,7 +27,7 @@ cd "${SCRIPT_DIR}"
 
 echo "Checking benchmark env in predict-service..."
 docker compose exec -T predict-service sh -lc \
-    'printenv | grep -E "OLLAMA_BENCHMARK|BENCHMARK_LLM_CLIENT" | sort || true'
+    'printenv | grep -E "BENCHMARK_LLM_CLIENT|GROQ_BENCHMARK_MODEL|GROQ_BENCHMARK_TIMEOUT_SECONDS" | sort || true'
 
 if [[ "${MODE}" == "clean" ]]; then
     echo "Removing old benchmark output for ${REPORT_ID}..."
@@ -44,14 +44,11 @@ echo "Running A/B/C benchmark for ${REPORT_ID} (${MODE})..."
 docker compose exec -T predict-service sh -lc "
 set -e
 cd /app
-BENCHMARK_LLM_CLIENT=ollama \
-OLLAMA_BENCHMARK_DISABLE_THINKING=1 \
-OLLAMA_BENCHMARK_JSON_NUM_PREDICT=4096 \
-OLLAMA_BENCHMARK_GENERATION_NUM_PREDICT=2200 \
+BENCHMARK_LLM_CLIENT=groq \
 python scripts/run_benchmark.py \
   --bundle-path 'app/reports/${REPORT_ID}' \
   --output-dir 'app/reports/${REPORT_ID}/benchmark_eval' \
-  --client ollama \
+  --client groq \
   --arms A,B,C \
   --conditions image_table_summary \
   --levels L1,L2L3,L1L2L3 \

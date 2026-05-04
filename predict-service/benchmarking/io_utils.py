@@ -107,6 +107,8 @@ def ensure_output_layout(output_dir: Path) -> dict[str, Path]:
         "verifications": output_dir / "verifications",
         "arm_c_traces": output_dir / "arm_c_traces",
         "scores": output_dir / "scores",
+        "runtime": output_dir / "runtime",
+        "runtime_errors": output_dir / "runtime" / "errors",
     }
     for path in layout.values():
         path.mkdir(parents=True, exist_ok=True)

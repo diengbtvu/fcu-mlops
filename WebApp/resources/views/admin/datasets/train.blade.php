@@ -108,9 +108,8 @@
                                 <label for="llm_provider" class="form-label fw-bold">AI provider</label>
                                 <select name="llm_provider" id="llm_provider" class="form-select">
                                     <option value="groq" selected>Groq API</option>
-                                    <option value="ollama">Ollama local</option>
-                                    <option value="openai">OpenAI API</option>
                                 </select>
+                                <small class="text-muted">Docker deployment uses Groq only.</small>
                             </div>
 
                             <div class="col-md-8">
@@ -320,12 +319,6 @@ document.addEventListener('DOMContentLoaded', function() {
         groq: [
             { value: 'openai/gpt-oss-120b', label: 'GPT-OSS 120B' },
             { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B Versatile' }
-        ],
-        ollama: [
-            { value: 'gemma2:9b', label: 'gemma2:9b' }
-        ],
-        openai: [
-            { value: 'gpt-5.2', label: 'gpt-5.2' }
         ]
     };
 

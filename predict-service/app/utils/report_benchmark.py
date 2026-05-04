@@ -28,7 +28,7 @@ BENCHMARK_SECONDS_PER_GENERATION = max(
     10,
     int(os.getenv("BENCHMARK_SECONDS_PER_GENERATION", "75")),
 )
-BENCHMARK_RUNTIME_RESUME = str(os.getenv("BENCHMARK_RUNTIME_RESUME", "0")).strip().lower() in {
+BENCHMARK_RUNTIME_RESUME = str(os.getenv("BENCHMARK_RUNTIME_RESUME", "1")).strip().lower() in {
     "1",
     "true",
     "yes",
@@ -59,6 +59,7 @@ PHASE1_CORE_BUNDLE_FILES = (
     "fig3a_gra_ranking.png",
     "fig_gra_ranking.png",
 )
+BENCHMARK_RUNTIME_STATUS_FILENAME = "runtime/status.json"
 
 
 def _benchmark_client_name(provider_override: str | None = None) -> str:
@@ -66,11 +67,11 @@ def _benchmark_client_name(provider_override: str | None = None) -> str:
         provider_override
         or os.getenv("BENCHMARK_LLM_CLIENT")
         or os.getenv("REPORT_LLM_PROVIDER")
-        or "openai"
+        or "groq"
     ).strip().lower()
-    if client_name in {"fixture", "openai", "ollama", "groq"}:
+    if client_name in {"fixture", "groq"}:
         return client_name
-    return "openai"
+    return "groq"
 
 
 def _parse_csv_items(raw_value: str) -> list[str]:
@@ -166,6 +167,14 @@ def _reset_benchmark_output_dir(benchmark_dir: Path) -> None:
     benchmark_dir.mkdir(parents=True, exist_ok=True)
 
 
+def _clear_benchmark_runtime_files(benchmark_dir: Path) -> None:
+    runtime_dir = benchmark_dir / "runtime"
+    for filename in ("status.json", "latest_error.json"):
+        path = runtime_dir / filename
+        if path.exists():
+            path.unlink()
+
+
 @contextmanager
 def _staged_runtime_bundle(report_dir: Path) -> Any:
     if BENCHMARK_RUNTIME_SCOPE != "phase1_core":
@@ -193,6 +202,7 @@ def update_report_benchmark_status(
     total_steps: int | None = None,
     current_items: list[str] | None = None,
     output_dir: str | None = None,
+    retry_payload: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     report_dir = _report_dir(report_info, report_root)
     summary_path = report_dir / "summary.json"
@@ -221,6 +231,11 @@ def update_report_benchmark_status(
     for key, value in optional_fields.items():
         if value is not None:
             payload[key] = value
+    if retry_payload is not None:
+        if retry_payload:
+            payload["retry"] = retry_payload
+        else:
+            payload.pop("retry", None)
 
     if summary:
         summary["benchmark_status"] = payload
@@ -373,6 +388,23 @@ def _running_progress_payload(
     gold_count = _count_output_files(benchmark_dir / "gold")
     latest_generation = _latest_output_name(benchmark_dir / "generations")
     latest_verification = _latest_output_name(benchmark_dir / "verifications")
+    runtime_status = _read_json_any(benchmark_dir / BENCHMARK_RUNTIME_STATUS_FILENAME)
+    if not isinstance(runtime_status, dict):
+        runtime_status = {}
+    runtime_retry_payload = runtime_status.get("retry") if isinstance(runtime_status.get("retry"), dict) else {}
+    if runtime_retry_payload:
+        runtime_retry_payload = dict(runtime_retry_payload)
+        debug_file = str(runtime_retry_payload.get("debug_file") or "").strip()
+        if debug_file:
+            try:
+                runtime_retry_payload["debug_file"] = str(
+                    Path(debug_file).resolve().relative_to(benchmark_dir.parent.resolve())
+                )
+            except (ValueError, OSError):
+                pass
+    runtime_message = str(runtime_status.get("message") or "").strip()
+    runtime_artifact = str(runtime_status.get("artifact_id") or "").strip()
+    runtime_stage = str(runtime_status.get("stage") or "").strip()
 
     progress = 20.0
     message = "Running benchmark evaluation on the generated report bundle."
@@ -418,15 +450,25 @@ def _running_progress_payload(
     elif latest_generation:
         current_items[-1] = f"latest generation: {latest_generation}"
 
+    if runtime_artifact:
+        current_items.append(f"artifact {runtime_artifact}")
+    if runtime_stage:
+        current_items.append(runtime_stage.replace("_", " "))
+    if runtime_message:
+        message = runtime_message
+
     if score_count or run_metadata_exists:
         progress = max(progress, 90.0)
         current_items = ["leaderboard", "run metadata", "publishing summary"]
 
-    return {
+    payload = {
         "progress": round(min(90.0, progress), 1),
         "message": message,
         "current_items": current_items,
     }
+    if runtime_retry_payload:
+        payload["retry"] = runtime_retry_payload
+    return payload
 
 
 def publish_benchmark_results(
@@ -529,6 +571,7 @@ def run_report_benchmark(
         benchmark_dir.mkdir(parents=True, exist_ok=True)
     else:
         _reset_benchmark_output_dir(benchmark_dir)
+    _clear_benchmark_runtime_files(benchmark_dir)
 
     runtime_arms = _benchmark_runtime_arms()
     runtime_conditions = _benchmark_runtime_conditions()
@@ -548,6 +591,7 @@ def run_report_benchmark(
         total_steps=3,
         current_items=["bundle manifest", "gold facts", "claim verification"],
         output_dir=benchmark_dirname,
+        retry_payload={},
     )
     update_report_benchmark_status(
         report_info=report_info,
@@ -560,6 +604,7 @@ def run_report_benchmark(
         total_steps=3,
         current_items=["A/B/C generations", "claim verification", "leaderboard scoring"],
         output_dir=benchmark_dirname,
+        retry_payload={},
     )
 
     try:
@@ -610,13 +655,8 @@ def run_report_benchmark(
             ):
                 child_env = os.environ.copy()
                 child_env["BENCHMARK_LLM_CLIENT"] = runtime_client
-                if llm_model:
-                    if runtime_client == "groq":
-                        child_env["GROQ_BENCHMARK_MODEL"] = str(llm_model)
-                    elif runtime_client == "openai":
-                        child_env["OPENAI_BENCHMARK_MODEL"] = str(llm_model)
-                    elif runtime_client == "ollama":
-                        child_env["OLLAMA_BENCHMARK_MODEL"] = str(llm_model)
+                if llm_model and runtime_client == "groq":
+                    child_env["GROQ_BENCHMARK_MODEL"] = str(llm_model)
                 if runtime_client == "groq":
                     key_list = parse_groq_api_keys(groq_api_keys)
                     if key_list:
@@ -654,6 +694,7 @@ def run_report_benchmark(
                             total_steps=3,
                             current_items=list(payload["current_items"]),
                             output_dir=benchmark_dirname,
+                            retry_payload=dict(payload.get("retry") or {}),
                         )
                         last_progress_signature = current_signature
 
@@ -690,6 +731,7 @@ def run_report_benchmark(
             step_index=3,
             total_steps=3,
             output_dir=benchmark_dirname,
+            retry_payload={},
         )
         raise RuntimeError(message) from exc
 
@@ -708,6 +750,7 @@ def run_report_benchmark(
             step_index=3,
             total_steps=3,
             output_dir=benchmark_dirname,
+            retry_payload={},
         )
         raise RuntimeError(message)
 
@@ -722,6 +765,7 @@ def run_report_benchmark(
         total_steps=3,
         current_items=["leaderboard", "run metadata"],
         output_dir=benchmark_dirname,
+        retry_payload={},
     )
     benchmark_summary = publish_benchmark_results(
         report_info=report_info,
@@ -739,5 +783,6 @@ def run_report_benchmark(
         total_steps=3,
         current_items=["leaderboard", "run metadata"],
         output_dir=benchmark_dirname,
+        retry_payload={},
     )
     return benchmark_summary

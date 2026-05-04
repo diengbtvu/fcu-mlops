@@ -15,7 +15,7 @@ import pandas as pd
 import requests
 from benchmarking.schemas import CANONICAL_CLAIM_TYPES
 from dotenv import load_dotenv
-from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys
+from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys, record_blocked_groq_key
 from openai_rate_control import shared_openai_request_gate
 
 DEFAULT_OPENAI_CHAT_BASE_URL = "https://api.openai.com/v1"
@@ -1422,6 +1422,35 @@ def _is_groq_rate_limit_error(response: requests.Response | None) -> bool:
     return code == "rate_limit_exceeded" or "tokens per minute" in message
 
 
+def _groq_error_code(response: requests.Response | None) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("code") or payload.get("code") or "").strip().lower()
+
+
+def _groq_error_message(response: requests.Response | None) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("message") or payload.get("message") or "").strip()
+
+
+def _is_groq_key_blocked_error(response: requests.Response | None) -> bool:
+    if response is None:
+        return False
+    if response.status_code not in {400, 401, 403}:
+        return False
+    code = _groq_error_code(response)
+    message = _groq_error_message(response).lower()
+    if code in {"organization_restricted", "account_restricted", "api_key_restricted", "invalid_api_key"}:
+        return True
+    return (
+        "organization has been restricted" in message
+        or "account has been restricted" in message
+        or "api key has been disabled" in message
+        or "invalid api key" in message
+    )
+
+
 def _report_error_status_code(error: Exception) -> int | None:
     if isinstance(error, requests.HTTPError) and error.response is not None:
         return int(error.response.status_code)
@@ -1566,7 +1595,18 @@ def _call_groq(
     last_error: Exception | None = None
     attempt = 0
     while True:
+        key_pool.refresh_from_laravel()
+        if not key_pool.has_usable_key(ignore_cooldown=True):
+            key_pool.refresh_from_laravel(force=True)
+        if not key_pool.has_usable_key(ignore_cooldown=True):
+            raise RuntimeError(
+                "All configured Groq API keys are marked blocked. "
+                "Open Admin > Settings > AI to reactivate or replace a key."
+            )
         attempt += 1
+        alternate_wait_seconds: float | None = None
+        push_global_cooldown = True
+        use_alternate_wait = False
         key_pool.wait_for_available_key(GROQ_REPORT_MAX_RETRY_WAIT_SECONDS)
         key_index, api_key = key_pool.next_key()
         headers = {
@@ -1605,6 +1645,27 @@ def _call_groq(
         except requests.HTTPError as exc:
             last_error = exc
             status_code = exc.response.status_code if exc.response is not None else None
+            if _is_groq_key_blocked_error(exc.response):
+                key_pool.mark_blocked(key_index)
+                record_blocked_groq_key(
+                    api_key,
+                    reason=_groq_error_code(exc.response) or "blocked",
+                    message=_groq_error_message(exc.response) or _format_http_error(exc, "Groq"),
+                    status_code=status_code,
+                    source="report_explainer",
+                )
+                key_pool.refresh_from_laravel(force=True)
+                if not key_pool.has_usable_key(ignore_cooldown=True):
+                    raise RuntimeError(
+                        "All configured Groq API keys are marked blocked. "
+                        f"Last error: {_format_http_error(exc, 'Groq')}"
+                    ) from exc
+                print(
+                    f"⚠️ {_format_http_error(exc, 'Groq')}. "
+                    f"{key_pool.label(key_index)} was marked blocked and will not be used again in this run."
+                )
+                attempt -= 1
+                continue
             should_retry = (
                 _is_groq_rate_limit_error(exc.response)
                 or (status_code is not None and status_code >= 500)
@@ -1622,26 +1683,38 @@ def _call_groq(
                     key_index,
                     retry_after_seconds or GROQ_REPORT_MAX_RETRY_WAIT_SECONDS,
                 )
+                alternate_wait_seconds = key_pool.next_available_delay(exclude_index=key_index)
+                if (
+                    key_pool.size > 1
+                    and alternate_wait_seconds is not None
+                    and (retry_after_seconds is None or alternate_wait_seconds < retry_after_seconds)
+                ):
+                    push_global_cooldown = False
+                    use_alternate_wait = True
         except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
             last_error = exc
             if not GROQ_REPORT_RETRY_FOREVER and attempt >= GROQ_REPORT_MAX_RETRIES:
                 raise
             retry_after_seconds = None
 
-        has_ready_key = key_pool.has_available_key()
-        wait_seconds = max(
-            retry_after_seconds or 0.0,
-            GROQ_REPORT_RETRY_BACKOFF_SECONDS * attempt,
-            (
-                0.0
-                if has_ready_key and key_pool.size > 1
-                else GROQ_REPORT_MAX_RETRY_WAIT_SECONDS
-                if GROQ_REPORT_RETRY_FOREVER
-                else 0.0
-            ),
-        ) + random.uniform(0.0, GROQ_REPORT_RETRY_JITTER_SECONDS)
-        wait_seconds = min(wait_seconds, GROQ_REPORT_MAX_RETRY_WAIT_SECONDS)
-        if wait_seconds > 0:
+        if use_alternate_wait and alternate_wait_seconds is not None and key_pool.size > 1:
+            wait_seconds = max(0.0, alternate_wait_seconds)
+        else:
+            has_ready_key = key_pool.has_available_key()
+            wait_seconds = max(
+                retry_after_seconds or 0.0,
+                GROQ_REPORT_RETRY_BACKOFF_SECONDS * attempt,
+                (
+                    0.0
+                    if has_ready_key and key_pool.size > 1
+                    else GROQ_REPORT_MAX_RETRY_WAIT_SECONDS
+                    if GROQ_REPORT_RETRY_FOREVER
+                    else 0.0
+                ),
+            ) + random.uniform(0.0, GROQ_REPORT_RETRY_JITTER_SECONDS)
+            if retry_after_seconds is None:
+                wait_seconds = min(wait_seconds, GROQ_REPORT_MAX_RETRY_WAIT_SECONDS)
+        if push_global_cooldown and wait_seconds > 0:
             shared_openai_request_gate().push_cooldown(wait_seconds)
         max_attempts_for_status = 0 if GROQ_REPORT_RETRY_FOREVER else GROQ_REPORT_MAX_RETRIES
         if on_retry is not None:
@@ -1898,7 +1971,8 @@ def _compact_overview_payload(
             4,
             ("n_features", "feature_subset", "KNN_R2", "KNN_MSE", "SVM_R2", "RF_R2", "XGBoost_R2"),
         ),
-    ):
+    )
+    for key, limit, fields in overview_tables:
         compact_rows = _compact_overview_rows(
             report_context.get(key),
             limit=limit,

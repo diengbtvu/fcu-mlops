@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,7 +13,13 @@ from .chart_reporting import write_per_chart_benchmark_outputs
 from .generator import generate_explanations
 from .gold_builders import build_gold_artifacts
 from .io_utils import bundle_workspace, ensure_output_layout, slugify, write_csv_rows, write_json, write_jsonl
-from .llm_client import FixtureLLMClient, GroqLLMClient, OllamaLLMClient, OpenAILLMClient
+from .llm_client import (
+    FixtureLLMClient,
+    GroqLLMClient,
+    OllamaLLMClient,
+    OpenAILLMClient,
+    _failed_generation_payload,
+)
 from .manifest import build_manifest, load_artifact_inputs
 from .metrics import build_leaderboard, compute_artifact_scores
 from .schemas import SUPPORTED_ARMS, SUPPORTED_CONDITIONS, SUPPORTED_SEMANTIC_LEVELS
@@ -313,8 +320,10 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     try:
-        client = _build_llm_client(args.client)
         layout = ensure_output_layout(output_dir)
+        os.environ["BENCHMARK_RUNTIME_STATUS_PATH"] = str(layout["runtime"] / "status.json")
+        os.environ["BENCHMARK_RUNTIME_ERROR_PATH"] = str(layout["runtime"] / "latest_error.json")
+        client = _build_llm_client(args.client)
         with bundle_workspace(bundle_path) as workspace:
             effective_arms = list(arms)
             records = build_manifest(workspace.bundle_dir)
@@ -378,44 +387,75 @@ def main(argv: list[str] | None = None) -> int:
                         else:
                             missing_non_b.setdefault(arm, set()).add(condition)
 
-                    for arm, missing_conditions in missing_non_b.items():
-                        if not missing_conditions:
-                            continue
-                        generated = generate_explanations(
-                            inputs=inputs,
-                            gold=gold,
-                            arms=[arm],
-                            conditions=[condition for condition in conditions if condition in missing_conditions],
-                            client=client,
-                            semantic_levels=levels,
-                        )
-                        for generation in generated:
-                            generation_by_run[
-                                (generation.arm, generation.input_condition, generation.semantic_level)
-                            ] = generation
+                    try:
+                        for arm, missing_conditions in missing_non_b.items():
+                            if not missing_conditions:
+                                continue
+                            generated = generate_explanations(
+                                inputs=inputs,
+                                gold=gold,
+                                arms=[arm],
+                                conditions=[condition for condition in conditions if condition in missing_conditions],
+                                client=client,
+                                semantic_levels=levels,
+                            )
+                            for generation in generated:
+                                generation_by_run[
+                                    (generation.arm, generation.input_condition, generation.semantic_level)
+                                ] = generation
 
-                    for condition, missing_levels in missing_b.items():
-                        if not missing_levels:
-                            continue
-                        generated = generate_explanations(
-                            inputs=inputs,
-                            gold=gold,
-                            arms=["B"],
-                            conditions=[condition],
-                            client=client,
-                            semantic_levels=[level for level in levels if level in missing_levels],
-                        )
-                        for generation in generated:
-                            generation_by_run[
-                                (generation.arm, generation.input_condition, generation.semantic_level)
-                            ] = generation
+                        for condition, missing_levels in missing_b.items():
+                            if not missing_levels:
+                                continue
+                            generated = generate_explanations(
+                                inputs=inputs,
+                                gold=gold,
+                                arms=["B"],
+                                conditions=[condition],
+                                client=client,
+                                semantic_levels=[level for level in levels if level in missing_levels],
+                            )
+                            for generation in generated:
+                                generation_by_run[
+                                    (generation.arm, generation.input_condition, generation.semantic_level)
+                                ] = generation
+                    except Exception as exc:
+                        error_message = str(exc).strip() or "benchmark generation failed"
+                        for arm, condition, semantic_level in requested_runs:
+                            if (arm, condition, semantic_level) in generation_by_run:
+                                continue
+                            generation_by_run[(arm, condition, semantic_level)] = normalize_generation(
+                                _failed_generation_payload(
+                                    artifact_id=record.artifact_id,
+                                    arm=arm,
+                                    input_condition=condition,
+                                    error_message=error_message,
+                                    semantic_level=semantic_level,
+                                ),
+                                artifact_id=record.artifact_id,
+                                arm=arm,
+                                input_condition=condition,
+                                semantic_level=semantic_level,
+                            )
 
                     for run in requested_runs:
                         generation = generation_by_run.get(run)
                         if generation is None:
-                            raise RuntimeError(
-                                "Missing generation output for "
-                                f"{record.artifact_id} / {run[0]} / {run[1]} / {run[2]}"
+                            generation = normalize_generation(
+                                _failed_generation_payload(
+                                    artifact_id=record.artifact_id,
+                                    arm=run[0],
+                                    input_condition=run[1],
+                                    error_message=(
+                                        "Missing generation output for "
+                                        f"{record.artifact_id} / {run[0]} / {run[1]} / {run[2]}"
+                                    ),
+                                    semantic_level=run[2],
+                                ),
+                                artifact_id=record.artifact_id,
+                                arm=run[0],
+                                input_condition=run[1],
+                                semantic_level=run[2],
                             )
                         _persist_generation_outputs(
                             generation=generation,

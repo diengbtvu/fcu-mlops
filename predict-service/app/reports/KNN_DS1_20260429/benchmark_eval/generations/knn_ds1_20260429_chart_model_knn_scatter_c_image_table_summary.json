@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:model_knn_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Arm C correction pipeline failed.",
+  "explanation_full": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used ",
+  "claims": [],
+  "semantic_level": null,
+  "generation_stage": "failed",
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

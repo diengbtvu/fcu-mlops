@@ -1,0 +1,794 @@
+{
+  "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+  "artifact_type": "model_comparison/main",
+  "source_files": [
+    "table_model_comparison.csv",
+    "summary.json",
+    "fig5_model_comparison.png",
+    "fig_model_comparison_bars.png",
+    "results_summary.txt",
+    "analysis_summary_report.txt"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "SVM",
+    "DT",
+    "RF",
+    "KNN",
+    "XGBoost"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:best_model",
+      "fact_type": "best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "value": 0.8171678017037467,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "best model by r2_score = KNN"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.732409747545017,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "SVM r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:SVM:rmse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.13692475905328272,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "SVM rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.018748389641799527,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "SVM mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:SVM:mae",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.09460256693779981,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "SVM mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.5604531394996005,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "DT r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:DT:rmse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1754888111857837,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "DT rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.030796322851399643,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "DT mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:DT:mae",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.10855624704298139,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "DT mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:RF:r2_score",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7756018171353091,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "RF r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:RF:rmse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.12538815399769956,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "RF rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:RF:mse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.01572218916295082,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "RF mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:RF:mae",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.08355692337682427,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "RF mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.8171678017037467,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:KNN:rmse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.11318090995439674,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN rmse"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.012809918378105262,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN mse"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:KNN:mae",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.07502308749135642,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN mae"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:XGBoost:r2_score",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7494763101779772,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "XGBoost r2_score"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:XGBoost:rmse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.13248638205179633,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "XGBoost rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:XGBoost:mse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.017552641429174544,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "XGBoost mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:metric:XGBoost:mae",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.09559303423201744,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "XGBoost mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:ranking:r2_score",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": [
+        "KNN",
+        "RF",
+        "XGBoost",
+        "SVM",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "r2_score ranking"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:ranking:rmse",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "rmse",
+      "object": [
+        "KNN",
+        "RF",
+        "XGBoost",
+        "SVM",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "rmse ranking"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:ranking:mse",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "mse",
+      "object": [
+        "KNN",
+        "RF",
+        "XGBoost",
+        "SVM",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "mse ranking"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:ranking:mae",
+      "fact_type": "ranking",
+      "subject": "model_comparison",
+      "predicate": "mae",
+      "object": [
+        "KNN",
+        "RF",
+        "SVM",
+        "XGBoost",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "mae ranking"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:SVM:r2_score",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "SVM",
+      "value": 0.08475805415872972,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs SVM r2_score gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:SVM:rmse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": "SVM",
+      "value": 0.02374384909888598,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs SVM rmse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:SVM:mse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "SVM",
+      "value": 0.005938471263694265,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs SVM mse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:SVM:mae",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": "SVM",
+      "value": 0.019579479446443393,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs SVM mae gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:DT:r2_score",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "DT",
+      "value": 0.2567146622041462,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs DT r2_score gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:DT:rmse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": "DT",
+      "value": 0.06230790123138695,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs DT rmse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:DT:mse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "DT",
+      "value": 0.01798640447329438,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs DT mse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:DT:mae",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": "DT",
+      "value": 0.033533159551624975,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs DT mae gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:RF:r2_score",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "RF",
+      "value": 0.04156598456843763,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs RF r2_score gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:RF:rmse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": "RF",
+      "value": 0.012207244043302826,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs RF rmse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:RF:mse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "RF",
+      "value": 0.002912270784845558,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs RF mse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:RF:mae",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": "RF",
+      "value": 0.008533835885467855,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs RF mae gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:XGBoost:r2_score",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "XGBoost",
+      "value": 0.06769149152576948,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs XGBoost r2_score gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:XGBoost:rmse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": "XGBoost",
+      "value": 0.019305472097399592,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs XGBoost rmse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:XGBoost:mse",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "XGBoost",
+      "value": 0.0047427230510692815,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs XGBoost mse gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:model_comparison/main:gap:KNN:XGBoost:mae",
+      "fact_type": "pairwise_metric_gap",
+      "subject": "KNN",
+      "predicate": "mae",
+      "object": "XGBoost",
+      "value": 0.020569946740661024,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_model_comparison.csv",
+          "priority": "table/json",
+          "detail": "KNN vs XGBoost mae gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L2L3"
+    }
+  ],
+  "salient_facts": [
+    "KNN_DS1_20260429:model_comparison/main:best_model",
+    "KNN_DS1_20260429:model_comparison/main:metric:KNN:r2_score",
+    "KNN_DS1_20260429:model_comparison/main:metric:KNN:mse",
+    "KNN_DS1_20260429:model_comparison/main:ranking:r2_score"
+  ],
+  "forbidden_inferences": [
+    "Do not claim that the winning model will generalize outside this bundle.",
+    "Do not treat llm_explanations.json as ground truth."
+  ]
+}

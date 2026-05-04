@@ -1,0 +1,50 @@
+{
+  "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:incremental_feature_analysis/main:claim:1",
+      "claim_text": "The KNN model performed best with an R² of 0.81717",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.012969724935705917
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:incremental_feature_analysis/main:claim:2",
+      "claim_text": "and an MSE of 0.012810",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:incremental_feature_analysis/main:best_mse"
+      ],
+      "reason": "Gold value for KNN best_mse is 0.011901056157134797.",
+      "numeric_delta": 0.0009089438428652036
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_DS1_20260429:incremental_feature_analysis/main:claim:3",
+      "claim_text": "with the best performance achieved with 8 features",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 1
+    }
+  ]
+}

@@ -7,10 +7,11 @@ import random
 import re
 import time
 from abc import ABC, abstractmethod
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys
+from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys, record_blocked_groq_key
 from openai_rate_control import shared_openai_request_gate
 from .claim_alignment import (
     claims_payload_to_variable_mentions,
@@ -51,8 +52,8 @@ GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS = max(
     float(os.getenv("GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS", "3")),
 )
 GROQ_BENCHMARK_MAX_COMPLETION_TOKENS = max(
-    300,
-    int(os.getenv("GROQ_BENCHMARK_MAX_COMPLETION_TOKENS", "700")),
+    700,
+    int(os.getenv("GROQ_BENCHMARK_MAX_COMPLETION_TOKENS", "800")),
 )
 GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
     1.0,
@@ -61,6 +62,10 @@ GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
 GROQ_BENCHMARK_RETRY_JITTER_SECONDS = max(
     0.0,
     float(os.getenv("GROQ_BENCHMARK_RETRY_JITTER_SECONDS", "0.5")),
+)
+GROQ_BENCHMARK_MAX_REQUEST_ATTEMPTS = max(
+    1,
+    int(os.getenv("GROQ_BENCHMARK_MAX_REQUEST_ATTEMPTS", "3")),
 )
 OPENAI_BENCHMARK_MAX_RETRIES = max(1, int(os.getenv("OPENAI_BENCHMARK_MAX_RETRIES", "8")))
 OPENAI_BENCHMARK_RETRY_BACKOFF_SECONDS = max(
@@ -100,8 +105,70 @@ OLLAMA_BENCHMARK_JSON_NUM_PREDICT = max(
 OLLAMA_BENCHMARK_DISABLE_THINKING = str(
     os.getenv("OLLAMA_BENCHMARK_DISABLE_THINKING", "1")
 ).strip().lower() not in {"0", "false", "no", "off"}
+BENCHMARK_RUNTIME_STATUS_PATH_ENV = "BENCHMARK_RUNTIME_STATUS_PATH"
+BENCHMARK_RUNTIME_ERROR_PATH_ENV = "BENCHMARK_RUNTIME_ERROR_PATH"
 L1_CLAIM_TYPES = {"metric_value", "rank_score"}
 L2L3_CLAIM_TYPES = {"best_model", "ranking", "top_feature", "feature_subset_optimum", "plateau"}
+
+
+class BenchmarkRequestError(RuntimeError):
+    def __init__(self, message: str, *, debug_payload: dict[str, Any] | None = None) -> None:
+        super().__init__(message)
+        self.debug_payload = dict(debug_payload or {})
+
+
+def _utc_timestamp() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _runtime_status_path() -> Path | None:
+    raw_path = str(os.getenv(BENCHMARK_RUNTIME_STATUS_PATH_ENV) or "").strip()
+    return Path(raw_path) if raw_path else None
+
+
+def _runtime_error_path() -> Path | None:
+    raw_path = str(os.getenv(BENCHMARK_RUNTIME_ERROR_PATH_ENV) or "").strip()
+    return Path(raw_path) if raw_path else None
+
+
+def _write_runtime_json(path: Path | None, payload: dict[str, Any]) -> None:
+    if path is None:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _raw_response_payload(response: Any) -> dict[str, Any]:
+    if response is None:
+        return {}
+    try:
+        payload = response.json()
+    except ValueError:
+        payload = None
+    return payload if isinstance(payload, dict) else {}
+
+
+def _raw_response_snapshot(response: Any) -> dict[str, Any]:
+    if response is None:
+        return {}
+    headers = {}
+    for key, value in dict(getattr(response, "headers", {}) or {}).items():
+        normalized_key = str(key or "").strip()
+        if normalized_key.lower() in {"retry-after", "content-type", "x-request-id"}:
+            headers[normalized_key] = str(value)
+    return {
+        "captured_at": _utc_timestamp(),
+        "status_code": getattr(response, "status_code", None),
+        "headers": headers,
+        "json": _raw_response_payload(response),
+        "text": str(getattr(response, "text", "") or "").strip()[:8000],
+    }
+
+
+def _exception_debug_payload(error: Exception) -> dict[str, Any]:
+    if isinstance(error, BenchmarkRequestError):
+        return dict(error.debug_payload or {})
+    return {}
 
 
 def _as_float(value: Any) -> float:
@@ -156,6 +223,17 @@ def _build_ollama_json_only_instruction(schema: dict[str, Any]) -> str:
             "The JSON must exactly match this schema:",
             compact_schema,
             "If any field is unsupported, keep the JSON valid and use an empty string or empty array.",
+        ]
+    )
+
+
+def _build_groq_json_only_instruction() -> str:
+    return " ".join(
+        [
+            "Return ONLY one valid JSON object.",
+            "The first character of the final answer must be { and the last character must be }.",
+            "Do not output markdown, headings, prose, or reasoning outside JSON.",
+            "If a field has no value, use null or an empty array instead of omitting required keys.",
         ]
     )
 
@@ -266,6 +344,51 @@ def _is_groq_rate_limit_error(response: Any) -> bool:
     return code == "rate_limit_exceeded" or "tokens per minute" in message
 
 
+def _groq_error_code(response: Any) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("code") or payload.get("code") or "").strip().lower()
+
+
+def _groq_error_message(response: Any) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("message") or payload.get("message") or "").strip()
+
+
+def _is_groq_key_blocked_error(response: Any) -> bool:
+    if response is None:
+        return False
+    status_code = getattr(response, "status_code", None)
+    if status_code not in {400, 401, 403}:
+        return False
+    code = _groq_error_code(response)
+    message = _groq_error_message(response).lower()
+    if code in {"organization_restricted", "account_restricted", "api_key_restricted", "invalid_api_key"}:
+        return True
+    return (
+        "organization has been restricted" in message
+        or "account has been restricted" in message
+        or "api key has been disabled" in message
+        or "invalid api key" in message
+    )
+
+
+def _benchmark_error_status_code(error: Exception) -> int | None:
+    response = getattr(error, "response", None)
+    status_code = getattr(response, "status_code", None)
+    return int(status_code) if status_code is not None else None
+
+
+def _benchmark_retry_reason(error: Exception, provider_label: str = "Groq") -> str:
+    status_code = _benchmark_error_status_code(error)
+    if status_code in {413, 429}:
+        return f"{provider_label} rate limit"
+    if status_code is not None and status_code >= 500:
+        return f"{provider_label} server error"
+    return f"{provider_label} request retry"
+
+
 def _chat_message_text(message: dict[str, Any]) -> str:
     content = message.get("content")
     if isinstance(content, list):
@@ -295,6 +418,7 @@ def _failed_generation_payload(
         "arm": arm,
         "input_condition": input_condition,
         "semantic_level": semantic_level,
+        "generation_stage": "failed",
         "explanation_short": "Benchmark generation failed to produce valid JSON.",
         "explanation_full": (
             "Benchmark generation failed before producing a grounded explanation. "
@@ -422,6 +546,46 @@ class BaseLLMClient(ABC):
     name = "base"
     model_name: str | None = None
 
+    def set_runtime_context(self, **context: Any) -> None:
+        self._runtime_context = {
+            str(key): value
+            for key, value in context.items()
+            if value not in (None, "", [], {})
+        }
+
+    def clear_runtime_context(self) -> None:
+        self._runtime_context = {}
+
+    def _runtime_context_payload(self) -> dict[str, Any]:
+        payload = dict(getattr(self, "_runtime_context", {}) or {})
+        if getattr(self, "name", ""):
+            payload.setdefault("client", self.name)
+        if getattr(self, "model_name", None):
+            payload.setdefault("model", self.model_name)
+        return payload
+
+    def _write_runtime_status(self, payload: dict[str, Any]) -> None:
+        status_payload = {
+            "updated_at": _utc_timestamp(),
+            **self._runtime_context_payload(),
+            **payload,
+        }
+        _write_runtime_json(_runtime_status_path(), status_payload)
+
+    def _write_runtime_error(self, payload: dict[str, Any]) -> str | None:
+        error_path = _runtime_error_path()
+        if error_path is None:
+            return None
+        _write_runtime_json(error_path, {
+            "updated_at": _utc_timestamp(),
+            **self._runtime_context_payload(),
+            **payload,
+        })
+        try:
+            return str(error_path.resolve())
+        except OSError:
+            return str(error_path)
+
     @abstractmethod
     def generate_explanation_json(self, prompt: str) -> dict[str, Any]:
         """Return a JSON-like dictionary for the explanation-generation prompt."""
@@ -484,6 +648,13 @@ class BaseLLMClient(ABC):
                 semantic_level=semantic_level,
             )
             try:
+                self.set_runtime_context(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    semantic_level=semantic_level,
+                    stage="generate_explanation",
+                )
                 explanation_payload = self.generate_explanation_json(explanation_prompt)
             except Exception as exc:
                 outputs.append(
@@ -498,6 +669,13 @@ class BaseLLMClient(ABC):
                 continue
 
             try:
+                self.set_runtime_context(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    semantic_level=semantic_level,
+                    stage="extract_claims",
+                )
                 claims_payload = self.extract_claims_json(
                     build_claim_extraction_prompt(
                         artifact_id=inputs.record.artifact_id,
@@ -520,6 +698,7 @@ class BaseLLMClient(ABC):
                 }
 
             outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
+        self.clear_runtime_context()
         return outputs
 
     def metadata(self) -> dict[str, Any]:
@@ -2927,6 +3106,11 @@ class OpenAILLMClient(BaseLLMClient):
         }
         explanations_by_pair: dict[tuple[str, str, str | None], dict[str, Any]] = {}
         try:
+            self.set_runtime_context(
+                artifact_id=inputs.record.artifact_id,
+                stage="generate_batch",
+                requested_runs=len(requested_runs),
+            )
             parsed = self._call_openai(request_payload)
             generations = parsed.get("generations")
             if not isinstance(generations, list):
@@ -2947,6 +3131,13 @@ class OpenAILLMClient(BaseLLMClient):
             if (arm, condition, semantic_level) in explanations_by_pair:
                 continue
             try:
+                self.set_runtime_context(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    semantic_level=semantic_level,
+                    stage="generate_explanation",
+                )
                 explanations_by_pair[(arm, condition, semantic_level)] = self.generate_explanation_json(
                     build_explanation_prompt(
                         inputs=inputs,
@@ -2969,6 +3160,13 @@ class OpenAILLMClient(BaseLLMClient):
         for arm, condition, semantic_level in requested_runs:
             explanation_payload = explanations_by_pair[(arm, condition, semantic_level)]
             try:
+                self.set_runtime_context(
+                    artifact_id=inputs.record.artifact_id,
+                    arm=arm,
+                    input_condition=condition,
+                    semantic_level=semantic_level,
+                    stage="extract_claims",
+                )
                 claims_payload = self.extract_claims_json(
                     build_claim_extraction_prompt(
                         artifact_id=inputs.record.artifact_id,
@@ -2991,6 +3189,7 @@ class OpenAILLMClient(BaseLLMClient):
                 }
             outputs.append(_merge_explanation_and_claims(explanation_payload, claims_payload))
 
+        self.clear_runtime_context()
         return outputs
 
 
@@ -3033,9 +3232,12 @@ class GroqLLMClient(OpenAILLMClient):
         request_payload.pop("verbosity", None)
         request_payload["temperature"] = 0
         if request_payload.get("max_completion_tokens") is not None:
+            completion_cap = GROQ_BENCHMARK_MAX_COMPLETION_TOKENS
+            if self.model_name == "llama-3.3-70b-versatile":
+                completion_cap = min(completion_cap, 600)
             request_payload["max_completion_tokens"] = min(
                 int(request_payload["max_completion_tokens"]),
-                GROQ_BENCHMARK_MAX_COMPLETION_TOKENS,
+                completion_cap,
             )
 
         if not str(self.model_name).startswith("openai/gpt-oss"):
@@ -3056,7 +3258,7 @@ class GroqLLMClient(OpenAILLMClient):
                 first_message = dict(messages[0])
                 first_message["content"] = (
                     f"{first_message.get('content', '')} "
-                    f"{_build_ollama_json_only_instruction(schema)}"
+                    f"{_build_groq_json_only_instruction()}"
                 ).strip()
                 messages[0] = first_message
                 request_payload["messages"] = messages
@@ -3071,9 +3273,111 @@ class GroqLLMClient(OpenAILLMClient):
         request_payload = self._prepare_groq_payload(payload)
 
         last_error: Exception | None = None
+        last_response: Any = None
         attempt = 0
+        effective_max_attempts = (
+            GROQ_BENCHMARK_MAX_REQUEST_ATTEMPTS
+            if GROQ_BENCHMARK_RETRY_FOREVER
+            else max(GROQ_BENCHMARK_MAX_RETRIES, GROQ_BENCHMARK_MAX_REQUEST_ATTEMPTS)
+        )
+
+        def _emit_retry_runtime_status(
+            *,
+            key_label: str,
+            wait_seconds: float,
+            error: Exception,
+            response: Any = None,
+        ) -> None:
+            error_text = (
+                _format_http_error(error, "Groq benchmark")
+                if isinstance(error, requests.HTTPError)
+                else str(error)
+            )
+            retry_payload: dict[str, Any] = {
+                "attempt": int(attempt),
+                "max_attempts": int(effective_max_attempts),
+                "retry_forever": bool(GROQ_BENCHMARK_RETRY_FOREVER),
+                "wait_seconds": round(float(wait_seconds), 1),
+                "reason": _benchmark_retry_reason(error, provider_label="Groq benchmark"),
+                "key_label": key_label,
+            }
+            status_code = _benchmark_error_status_code(error)
+            if status_code is not None:
+                retry_payload["status_code"] = status_code
+            if error_text:
+                retry_payload["error_message"] = error_text[:500]
+            debug_file = self._write_runtime_error(
+                {
+                    "status": "retrying",
+                    "retry": retry_payload,
+                    "error_message": error_text,
+                    "raw_response": _raw_response_snapshot(response),
+                }
+            )
+            if debug_file:
+                retry_payload["debug_file"] = debug_file
+            self._write_runtime_status(
+                {
+                    "status": "retrying",
+                    "stage": str(self._runtime_context_payload().get("stage") or "benchmark_request"),
+                    "message": (
+                        f"{retry_payload['reason']} while generating benchmark output. "
+                        f"Retry {attempt}/{effective_max_attempts} in {wait_seconds:.1f}s."
+                    ),
+                    "retry": retry_payload,
+                }
+            )
+
+        def _raise_terminal_error(error: Exception, *, key_label: str, response: Any = None) -> None:
+            error_text = (
+                _format_http_error(error, "Groq benchmark")
+                if isinstance(error, requests.HTTPError)
+                else str(error)
+            )
+            debug_payload: dict[str, Any] = {
+                "attempt": int(attempt),
+                "max_attempts": int(effective_max_attempts),
+                "retry_forever": bool(GROQ_BENCHMARK_RETRY_FOREVER),
+                "reason": _benchmark_retry_reason(error, provider_label="Groq benchmark"),
+                "key_label": key_label,
+                "error_message": error_text,
+            }
+            status_code = _benchmark_error_status_code(error)
+            if status_code is not None:
+                debug_payload["status_code"] = status_code
+            debug_file = self._write_runtime_error(
+                {
+                    "status": "failed",
+                    "retry": debug_payload,
+                    "error_message": error_text,
+                    "raw_response": _raw_response_snapshot(response),
+                }
+            )
+            if debug_file:
+                debug_payload["debug_file"] = debug_file
+            self._write_runtime_status(
+                {
+                    "status": "failed",
+                    "stage": str(self._runtime_context_payload().get("stage") or "benchmark_request"),
+                    "message": error_text[:500],
+                    "retry": debug_payload,
+                }
+            )
+            raise BenchmarkRequestError(error_text, debug_payload=debug_payload) from error
+
         while True:
+            key_pool.refresh_from_laravel()
+            if not key_pool.has_usable_key(ignore_cooldown=True):
+                key_pool.refresh_from_laravel(force=True)
+            if not key_pool.has_usable_key(ignore_cooldown=True):
+                raise RuntimeError(
+                    "All configured Groq API keys are marked blocked. "
+                    "Open Admin > Settings > AI to reactivate or replace a key."
+                )
             attempt += 1
+            alternate_wait_seconds: float | None = None
+            push_global_cooldown = True
+            use_alternate_wait = False
             key_pool.wait_for_available_key(GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS)
             key_index, api_key = key_pool.next_key()
             headers = {
@@ -3091,12 +3395,14 @@ class GroqLLMClient(OpenAILLMClient):
                         json=request_payload,
                         timeout=self.timeout_seconds,
                     )
+                last_response = response
                 response.raise_for_status()
                 data = response.json()
                 choice = data["choices"][0]
                 message = choice.get("message") or {}
                 parsed = message.get("parsed")
                 if isinstance(parsed, dict):
+                    self._write_runtime_status({"status": "running", "message": "", "retry": {}})
                     return parsed
 
                 content = _chat_message_text(message)
@@ -3108,20 +3414,74 @@ class GroqLLMClient(OpenAILLMClient):
                             "Increase max_completion_tokens or reduce prompt size."
                         )
                     raise ValueError("Groq benchmark response did not contain a parseable JSON payload.")
-                return _extract_json_object(content, "Groq")
+                try:
+                    parsed_payload = _extract_json_object(content, "Groq")
+                except ValueError as exc:
+                    finish_reason = choice.get("finish_reason")
+                    if finish_reason == "length":
+                        raise ValueError(
+                            "Groq benchmark response hit finish_reason='length' before emitting complete JSON. "
+                            "Increase max_completion_tokens or reduce prompt size."
+                        ) from exc
+                    raise
+                self._write_runtime_status({"status": "running", "message": "", "retry": {}})
+                return parsed_payload
             except requests.HTTPError as exc:
                 last_error = exc
+                last_response = exc.response
                 status_code = exc.response.status_code if exc.response is not None else None
+                runtime_stage = str(self._runtime_context_payload().get("stage") or "").strip().lower()
+                if _is_groq_key_blocked_error(exc.response):
+                    key_pool.mark_blocked(key_index)
+                    record_blocked_groq_key(
+                        api_key,
+                        reason=_groq_error_code(exc.response) or "blocked",
+                        message=_groq_error_message(exc.response) or _format_http_error(exc, "Groq benchmark"),
+                        status_code=status_code,
+                        source="benchmarking",
+                    )
+                    key_pool.refresh_from_laravel(force=True)
+                    if not key_pool.has_usable_key(ignore_cooldown=True):
+                        raise RuntimeError(
+                            "All configured Groq API keys are marked blocked. "
+                            f"Last error: {_format_http_error(exc, 'Groq benchmark')}"
+                        ) from exc
+                    self._write_runtime_status(
+                        {
+                            "status": "running",
+                            "stage": str(self._runtime_context_payload().get("stage") or "benchmark_request"),
+                            "message": (
+                                f"{key_pool.label(key_index)} was marked blocked after "
+                                f"{_format_http_error(exc, 'Groq benchmark')}"
+                            )[:500],
+                            "retry": {},
+                        }
+                    )
+                    print(
+                        f"⚠️ {_format_http_error(exc, 'Groq benchmark')}. "
+                        f"{key_pool.label(key_index)} was marked blocked and will not be used again in this run."
+                    )
+                    attempt -= 1
+                    continue
+                if runtime_stage == "extract_claims" and (
+                    _is_groq_rate_limit_error(exc.response)
+                    or _is_groq_json_validate_failed(exc.response)
+                ):
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=exc.response)
+                if status_code in {413, 429}:
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=exc.response)
                 should_retry = (
                     _is_groq_rate_limit_error(exc.response)
                     or (status_code is not None and status_code >= 500)
                     or _is_groq_json_validate_failed(exc.response)
                 )
-                if not should_retry or (
+                if not should_retry:
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=exc.response)
+                if attempt >= effective_max_attempts or (
                     not GROQ_BENCHMARK_RETRY_FOREVER
                     and attempt >= GROQ_BENCHMARK_MAX_RETRIES
                 ):
-                    raise RuntimeError(_format_http_error(exc, "Groq benchmark")) from exc
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=exc.response)
                 retry_after_seconds = (
                     None
                     if _is_groq_json_validate_failed(exc.response)
@@ -3132,41 +3492,68 @@ class GroqLLMClient(OpenAILLMClient):
                         key_index,
                         retry_after_seconds or GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS,
                     )
+                    alternate_wait_seconds = key_pool.next_available_delay(exclude_index=key_index)
+                    if (
+                        key_pool.size > 1
+                        and alternate_wait_seconds is not None
+                        and (retry_after_seconds is None or alternate_wait_seconds < retry_after_seconds)
+                    ):
+                        push_global_cooldown = False
+                        use_alternate_wait = True
             except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
                 last_error = exc
-                if not GROQ_BENCHMARK_RETRY_FOREVER and attempt >= GROQ_BENCHMARK_MAX_RETRIES:
-                    raise
+                if attempt >= effective_max_attempts or (
+                    not GROQ_BENCHMARK_RETRY_FOREVER
+                    and attempt >= GROQ_BENCHMARK_MAX_RETRIES
+                ):
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=last_response)
+                runtime_stage = str(self._runtime_context_payload().get("stage") or "").strip().lower()
+                if runtime_stage == "extract_claims" and isinstance(
+                    exc,
+                    (ValueError, KeyError, json.JSONDecodeError),
+                ):
+                    _raise_terminal_error(exc, key_label=key_pool.label(key_index), response=last_response)
                 retry_after_seconds = None
 
-            has_ready_key = key_pool.has_available_key()
-            wait_seconds = max(
-                retry_after_seconds or 0.0,
-                GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS * attempt,
-                (
-                    0.0
-                    if has_ready_key and key_pool.size > 1
-                    else GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS
-                    if GROQ_BENCHMARK_RETRY_FOREVER
-                    else 0.0
-                ),
-            ) + random.uniform(0.0, GROQ_BENCHMARK_RETRY_JITTER_SECONDS)
-            wait_seconds = min(wait_seconds, GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS)
-            if wait_seconds > 0:
+            if use_alternate_wait and alternate_wait_seconds is not None and key_pool.size > 1:
+                wait_seconds = max(0.0, alternate_wait_seconds)
+            else:
+                has_ready_key = key_pool.has_available_key()
+                wait_seconds = max(
+                    retry_after_seconds or 0.0,
+                    GROQ_BENCHMARK_RETRY_BACKOFF_SECONDS * attempt,
+                    (
+                        0.0
+                        if has_ready_key and key_pool.size > 1
+                        else GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS
+                        if GROQ_BENCHMARK_RETRY_FOREVER
+                        else 0.0
+                    ),
+                ) + random.uniform(0.0, GROQ_BENCHMARK_RETRY_JITTER_SECONDS)
+                if retry_after_seconds is None:
+                    wait_seconds = min(wait_seconds, GROQ_BENCHMARK_MAX_RETRY_WAIT_SECONDS)
+            if push_global_cooldown and wait_seconds > 0:
                 shared_openai_request_gate().push_cooldown(wait_seconds)
             error_text = (
                 _format_http_error(last_error, "Groq benchmark")
                 if isinstance(last_error, requests.HTTPError)
                 else str(last_error)
             )
+            _emit_retry_runtime_status(
+                key_label=key_pool.label(key_index),
+                wait_seconds=wait_seconds,
+                error=last_error,
+                response=last_response,
+            )
             print(
                 f"⚠️ Benchmark Groq request attempt {attempt}/"
-                f"{'∞' if GROQ_BENCHMARK_RETRY_FOREVER else GROQ_BENCHMARK_MAX_RETRIES} failed: "
+                f"{effective_max_attempts if GROQ_BENCHMARK_RETRY_FOREVER else GROQ_BENCHMARK_MAX_RETRIES} failed: "
                 f"{error_text}. {key_pool.label(key_index)} will rotate if another key is available. "
                 f"Retrying in {wait_seconds:.1f}s."
             )
             if wait_seconds > 0:
                 time.sleep(wait_seconds)
 
-        raise RuntimeError(
-            f"Benchmark Groq request failed after {GROQ_BENCHMARK_MAX_RETRIES} attempts: {last_error}"
+        raise BenchmarkRequestError(
+            f"Benchmark Groq request failed after {effective_max_attempts} attempts: {last_error}"
         )

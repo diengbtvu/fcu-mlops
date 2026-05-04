@@ -54,8 +54,6 @@ services:
       - .env.docker
     environment:
       - LARAVEL_API_URL=http://nginx/api
-    depends_on:
-      - ollama
     volumes:
         - ./predict-service:/app
         - ./WebApp:/var/www/html:ro
@@ -65,17 +63,6 @@ services:
         - training_progress:/app/training_progress
     ports:
       - "5000:5000"
-    networks:
-      - app-network
-
-  ollama:
-    image: ollama/ollama:latest
-    restart: unless-stopped
-    environment:
-      - OLLAMA_HOST=0.0.0.0:11434
-    volumes:
-      - /usr/share/ollama/.ollama:/root/.ollama
-    gpus: all
     networks:
       - app-network
 

@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table contains 11 rows and 11 columns, with column names including n_features, feature_subset, and model metrics such as R2 and MSE for each of the 5 models: SVM, DT, RF, KNN, and XGBoost.",
+  "explanation_full": "{'table_structure': {'rows': 11, 'columns': 11, 'column_names': ['n_features', 'feature_subset', 'SVM_R2', 'SVM_MSE', 'DT_R2', 'DT_MSE', 'RF_R2', 'RF_MSE', 'KNN_R2', 'KNN_MSE', 'XGBoost_R2', 'XGBoost_MSE']}, 'entity_names': ['SVM', 'DT', 'RF', 'KNN', 'XGBoost'], 'metric_names': ['R2', 'MSE'], 'value_ranges': {'n_features': '1-11', 'R2': '-0.015548-0.821983', 'MSE': '0.012472557-0.071153136'}, 'units': None, 'scale': None}",
+  "claims": [],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

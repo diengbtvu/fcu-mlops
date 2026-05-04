@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The artifact is a feature ranking table with 11 primary entities and their corresponding scores.",
+  "explanation_full": "The table has 11 rows, each representing a primary entity, with columns for rank, feature, and score. The primary entities are VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. The scores range from 0.5834 to 0.7931. The table is accompanied by two chart files, fig3a_gra_ranking.png and fig_gra_ranking.png, which are not described in detail due to the L1 semantic level.",
+  "claims": [],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

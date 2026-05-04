@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
+use App\Services\TrainingService;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -226,6 +227,24 @@ class AdminController extends Controller
     public function showModelReport(MLModel $model)
     {
         return view('admin.models.report', $this->buildModelReportViewData($model));
+    }
+
+    public function resumeModelReportPostProcessing(Request $request, MLModel $model)
+    {
+        $result = app(TrainingService::class)->resumeReportPostProcessing(
+            $model,
+            Auth::user(),
+            $request->only(['llm_model'])
+        );
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json($result, ($result['success'] ?? false) ? 202 : 500);
+        }
+
+        return redirect()->route('admin.models.report', $model)->with(
+            ($result['success'] ?? false) ? 'success' : 'error',
+            (string) ($result['message'] ?? $result['error'] ?? 'Unable to resume report post-processing.')
+        );
     }
 
     public function showModelBenchmark(MLModel $model)
@@ -2008,6 +2027,8 @@ class AdminController extends Controller
                 'benchmark_per_chart_json' => 'benchmark_eval/scores/per_chart_benchmark.json',
                 'benchmark_per_chart_csv' => 'benchmark_eval/scores/per_chart_benchmark.csv',
                 'benchmark_selected_explanations' => 'benchmark_eval/selected_explanations.json',
+                'benchmark_runtime_status' => 'benchmark_eval/runtime/status.json',
+                'benchmark_runtime_error' => 'benchmark_eval/runtime/latest_error.json',
             ];
 
             foreach ($conventionalBenchmarkFiles as $key => $filename) {

@@ -1,0 +1,22 @@
+{
+  "updated_at": "2026-04-29T16:55:47.031865+00:00",
+  "artifact_id": "KNN_DS1_20260429:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "stage": "extract_claims",
+  "client": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "status": "failed",
+  "message": "Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98674, Requested 1690. Please try again in 5m14.496s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+  "retry": {
+    "attempt": 1,
+    "max_attempts": 3,
+    "retry_forever": true,
+    "reason": "Groq benchmark rate limit",
+    "key_label": "Groq key 5/5",
+    "error_message": "Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98674, Requested 1690. Please try again in 5m14.496s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "status_code": 429,
+    "debug_file": "/app/app/reports/KNN_DS1_20260429/benchmark_eval/runtime/latest_error.json"
+  }
+}

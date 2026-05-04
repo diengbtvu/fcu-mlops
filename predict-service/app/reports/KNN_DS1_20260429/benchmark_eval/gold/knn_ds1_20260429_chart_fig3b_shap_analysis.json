@@ -1,0 +1,181 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis",
+  "artifact_type": "chart/fig3b_shap_analysis",
+  "source_files": [
+    "best_model_shap_importance.csv",
+    "best_model_summary.json",
+    "summary.json",
+    "fig3b_shap_analysis.png"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "ORP_Low",
+    "Butyrate",
+    "ORP_Mid",
+    "COD-O",
+    "VFA",
+    "Acetate"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:top_feature",
+      "fact_type": "top_feature",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": "ORP_Low",
+      "value": 0.0348483051,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top mean_abs_shap feature"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:ranking",
+      "fact_type": "ranking",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": [
+        "ORP_Low",
+        "Butyrate",
+        "ORP_Mid",
+        "COD-O",
+        "VFA",
+        "Acetate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "mean_abs_shap ranking"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.0348483051,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "ORP_Low mean_abs_shap"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:Butyrate:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.031753484,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "Butyrate mean_abs_shap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:ORP_Mid:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "ORP_Mid",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.0308705993,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "ORP_Mid mean_abs_shap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:COD-O:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "COD-O",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.0291976557,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "COD-O mean_abs_shap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "VFA",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.0277711427,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "VFA mean_abs_shap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:Acetate:mean_abs_shap",
+      "fact_type": "metric_value",
+      "subject": "Acetate",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "value": 0.0271478171,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "Acetate mean_abs_shap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "KNN_DS1_20260429:chart:fig3b_shap_analysis:top_feature",
+    "KNN_DS1_20260429:chart:fig3b_shap_analysis:ranking",
+    "KNN_DS1_20260429:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret feature scores as causal proof.",
+    "Do not let summary prose override feature ranking values."
+  ]
+}

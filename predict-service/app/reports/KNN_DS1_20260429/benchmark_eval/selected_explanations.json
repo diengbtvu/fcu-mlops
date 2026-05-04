@@ -1,0 +1,134 @@
+{
+  "provider": "benchmark_selected",
+  "model": "llama-3.3-70b-versatile",
+  "generated_at": "2026-04-29T16:55:47.102848+00:00",
+  "selection_method": "best_leaderboard_row",
+  "selected_arm": "C",
+  "selected_condition": "image_table_summary",
+  "selected_semantic_level": null,
+  "selected_row": {
+    "arm": "C",
+    "input_condition": "image_table_summary",
+    "semantic_level": null,
+    "artifact_count": 24,
+    "claim_count": 13,
+    "fact_precision": 0.1111111111111111,
+    "fact_recall": 0.07222222222222222,
+    "fact_f1": 0.08680555555555555,
+    "unsupported_claim_rate": 0.013888888888888888,
+    "contradiction_rate": 0.041666666666666664,
+    "coverage_of_salient_facts": 0.041666666666666664,
+    "numeric_accuracy": 0.75,
+    "numeric_tolerance_accuracy": 0.75,
+    "claim_alignment_error_rate": 0.0,
+    "missing_value_rate": 0.0,
+    "unknown_variable_rate": 0.0,
+    "extraction_drop_rate": 0.0
+  },
+  "overview": {
+    "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.\n\nArm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used\n\nArm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+    "zh_TW": ""
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.",
+      "zh_TW": ""
+    },
+    "model_comparison_table": {
+      "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.",
+      "zh_TW": ""
+    },
+    "table1_incremental_results": {
+      "en": "The results of the incremental feature analysis showed that the KNN model's performance improved with the addition of features. The model's R² increased from 0.644858 with 1 feature to 0.821983 with 8 features, and the MSE decreased from 0.024882 with 1 feature to 0.012472 with 8 features. The best performance was achieved with 8 features, which included VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, and pH. The results also showed that the KNN model outperformed the other models, including RF, XGBoost, SVM, and DT, in terms of R² and MSE.",
+      "zh_TW": ""
+    },
+    "gra_ranking": {
+      "en": "According to the grey relational analysis feature ranking, the top 5 features are VFA, Butyrate, Acetate, VSS, and Propionate, with scores of 0.7931, 0.7902, 0.7772, 0.7768, and 0.7596, respectively. The feature ranking suggests that VFA and Butyrate are the most closely related to the target variable, followed by Acetate, VSS, and Propionate.",
+      "zh_TW": ""
+    },
+    "fig3a_gra_ranking": {
+      "en": "The grey relational analysis ranks the features based on their correlation with the target variable. The top features are VFA, Butyrate, and Acetate, with scores of 0.7931, 0.7902, and 0.7772 respectively. These features are followed by VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. The KNN model performs best with an R² score of 0.81717 and an MSE of 0.012810.",
+      "zh_TW": ""
+    },
+    "fig3b_shap_analysis": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "fig3_feature_analysis": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "fig4_univariate_analysis": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "fig5_model_comparison": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "fig6c_prediction_time": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_svm_scatter": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_dt_scatter": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_rf_scatter": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_knn_scatter": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_xgboost_scatter": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "model_comparison_bars": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "predicted_vs_actual": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "residuals": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "feature_importance": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "correlation_heatmap": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "feature_distributions": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "feature_vs_target": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "boxplots": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "time_series": {
+      "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    }
+  }
+}

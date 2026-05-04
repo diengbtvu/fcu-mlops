@@ -1,0 +1,7 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": []
+}

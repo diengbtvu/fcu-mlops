@@ -228,6 +228,7 @@
         $waitSeconds = isset($retry['wait_seconds']) ? round((float) $retry['wait_seconds'], 1) : null;
         $reason = trim((string) ($retry['reason'] ?? ''));
         $statusCode = isset($retry['status_code']) ? (int) $retry['status_code'] : null;
+        $keyLabel = trim((string) ($retry['key_label'] ?? ''));
         if ($attempt <= 0) {
             return '';
         }
@@ -241,6 +242,9 @@
         }
         if ($statusCode !== null) {
             $parts[] = "HTTP {$statusCode}";
+        }
+        if ($keyLabel !== '') {
+            $parts[] = $keyLabel;
         }
 
         return implode(' • ', $parts);
@@ -377,6 +381,15 @@
         }
         return min(100, $progress * 0.7);
     };
+    $benchmarkRuntimeErrorAsset = is_array($reportAssets['benchmark_runtime_error'] ?? null)
+        ? $reportAssets['benchmark_runtime_error']
+        : [];
+    $resumePostProcessingUrl = route($routeNamespace . '.models.report.resume', $model);
+    $canResumePostProcessing = !empty($reportAssets) && (
+        $benchmarkStatus !== 'success'
+        || empty($benchmarkSummary)
+        || empty($llmExplanations)
+    );
     $pipelineStatus = '';
     $pipelineStage = '';
     $pipelineTitle = '';
@@ -452,6 +465,14 @@
     $pipelineStageLabel = $pipelineStage === 'benchmark' ? 'Benchmark evaluation' : 'AI explanations';
     $pipelineShouldPoll = !empty($summaryPublicUrl) && ($shouldPollLlm || $shouldPollBenchmark);
     $benchmarkDetailUrl = route($routeNamespace . '.models.benchmark', $model);
+    $pipelineDebugUrl = '';
+    if (
+        $pipelineStage === 'benchmark'
+        && !empty($benchmarkRetryPayload['debug_file'] ?? null)
+        && !empty($benchmarkRuntimeErrorAsset['url'] ?? null)
+    ) {
+        $pipelineDebugUrl = (string) $benchmarkRuntimeErrorAsset['url'];
+    }
 @endphp
 
 <div class="row">
@@ -462,6 +483,14 @@
         <a href="{{ $benchmarkDetailUrl }}" class="btn btn-outline-dark ms-2">
             <i class="bi bi-clipboard-data"></i> View Benchmark Details
         </a>
+        @if($canResumePostProcessing)
+            <form method="POST" action="{{ $resumePostProcessingUrl }}" class="d-inline ms-2">
+                @csrf
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-repeat"></i> Continue Post-processing
+                </button>
+            </form>
+        @endif
         @if($bundleAsset)
             <a href="{{ $bundleAsset['url'] }}" class="btn btn-primary ms-2" target="_blank" rel="noopener">
                 <i class="bi bi-download"></i> Download Training ZIP
@@ -687,6 +716,11 @@
         <div class="small text-warning mt-1" id="pipelineProgressRetry">
             {{ $pipelineRetryText }}
         </div>
+        <div class="small text-muted mt-1 {{ $pipelineDebugUrl === '' ? 'd-none' : '' }}" id="pipelineProgressDebug">
+            @if($pipelineDebugUrl !== '')
+                <a href="{{ $pipelineDebugUrl }}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>
+            @endif
+        </div>
         @if($pipelinePendingTooLong)
             <div class="small mt-2">Open the predict-service logs on the server to inspect the active pipeline phase in detail.</div>
         @endif
@@ -704,6 +738,11 @@
             @endif
         </div>
         <div class="small text-warning mt-1" id="pipelineProgressRetry">{{ $pipelineRetryText }}</div>
+        <div class="small text-muted mt-1 {{ $pipelineDebugUrl === '' ? 'd-none' : '' }}" id="pipelineProgressDebug">
+            @if($pipelineDebugUrl !== '')
+                <a href="{{ $pipelineDebugUrl }}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>
+            @endif
+        </div>
     </div>
 @elseif(empty($llmExplanations) && !empty($reportAssets) && empty($benchmarkSummary))
     <div class="alert alert-secondary">
@@ -1082,11 +1121,16 @@
     const metaEl = document.getElementById('pipelineProgressMeta');
     const itemsEl = document.getElementById('pipelineProgressItems');
     const retryEl = document.getElementById('pipelineProgressRetry');
+    const debugEl = document.getElementById('pipelineProgressDebug');
     const summaryUrl = alertBox.dataset.summaryUrl;
     if (!summaryUrl) {
         return;
     }
     let stopped = false;
+    const initialDebugUrl = debugEl ? (() => {
+        const link = debugEl.querySelector('a');
+        return link ? String(link.getAttribute('href') || '').trim() : '';
+    })() : '';
 
     const setAlertClass = (className) => {
         alertBox.className = className;
@@ -1120,7 +1164,33 @@
             parts.push(`HTTP ${statusCode}`);
         }
 
+        const keyLabel = String(retryPayload.key_label || '').trim();
+        if (keyLabel !== '') {
+            parts.push(keyLabel);
+        }
+
         return parts.join(' • ');
+    };
+
+    const resolveDebugUrl = (state) => {
+        if (!state || state.stage !== 'benchmark') {
+            return '';
+        }
+
+        const debugFile = String((state.retry && state.retry.debug_file) || '').trim();
+        if (debugFile === '') {
+            return '';
+        }
+
+        if (/^https?:\/\//i.test(debugFile)) {
+            return debugFile;
+        }
+
+        if (initialDebugUrl !== '') {
+            return initialDebugUrl;
+        }
+
+        return '';
     };
 
     const normalizeStatus = (payload) => {
@@ -1174,6 +1244,7 @@
                 stepIndex: Number(llmPayload.step_index || 0),
                 totalSteps: Number(llmPayload.total_steps || 0),
                 items: Array.isArray(llmPayload.current_items) ? llmPayload.current_items.filter(Boolean) : [],
+                retry: llmPayload.retry,
                 retryText: formatRetryText(llmPayload.retry),
                 delayed: false,
             };
@@ -1190,6 +1261,7 @@
                 stepIndex: Number(benchmarkPayload.step_index || 0),
                 totalSteps: Number(benchmarkPayload.total_steps || 0),
                 items: Array.isArray(benchmarkPayload.current_items) ? benchmarkPayload.current_items.filter(Boolean) : [],
+                retry: benchmarkPayload.retry,
                 retryText: formatRetryText(benchmarkPayload.retry),
                 delayed: false,
             };
@@ -1207,6 +1279,7 @@
                 stepIndex: Number(llmPayload.step_index || 0),
                 totalSteps: Number(llmPayload.total_steps || 0),
                 items: Array.isArray(llmPayload.current_items) ? llmPayload.current_items.filter(Boolean) : [],
+                retry: llmPayload.retry,
                 retryText: formatRetryText(llmPayload.retry),
                 delayed,
             };
@@ -1224,6 +1297,7 @@
                 stepIndex: Number(benchmarkPayload.step_index || 0),
                 totalSteps: Number(benchmarkPayload.total_steps || 0),
                 items: Array.isArray(benchmarkPayload.current_items) ? benchmarkPayload.current_items.filter(Boolean) : [],
+                retry: benchmarkPayload.retry,
                 retryText: formatRetryText(benchmarkPayload.retry),
                 delayed,
             };
@@ -1240,6 +1314,7 @@
                 stepIndex: 0,
                 totalSteps: 0,
                 items: [],
+                retry: null,
                 retryText: '',
                 delayed: false,
             };
@@ -1279,6 +1354,16 @@
         }
         if (retryEl) {
             retryEl.textContent = state.retryText;
+        }
+        if (debugEl) {
+            const debugUrl = resolveDebugUrl(state);
+            if (debugUrl !== '') {
+                debugEl.classList.remove('d-none');
+                debugEl.innerHTML = `<a href="${debugUrl}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>`;
+            } else {
+                debugEl.classList.add('d-none');
+                debugEl.textContent = '';
+            }
         }
 
         if (state.status === 'success') {

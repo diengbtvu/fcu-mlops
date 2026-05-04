@@ -14,7 +14,6 @@ from app.utils.progress_tracker import TrainingProgressTracker
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
 from app.utils.report_explainer import (
     GROQ_REPORT_MODELS,
-    SUPPORTED_LLM_PROVIDERS,
     generate_report_explanations,
     update_report_explanation_status,
 )
@@ -84,19 +83,16 @@ def _resolve_llm_config(data: Dict[str, Any]) -> tuple[str | None, str | None]:
     provider = str(
         data.get("llm_provider")
         or data.get("report_llm_provider")
-        or ""
-    ).strip().lower() or None
+        or "groq"
+    ).strip().lower() or "groq"
     model = str(
         data.get("llm_model")
         or data.get("report_llm_model")
         or ""
     ).strip() or None
 
-    if provider is not None and provider not in SUPPORTED_LLM_PROVIDERS:
-        raise ValueError(
-            "llm_provider must be one of: "
-            + ", ".join(sorted(SUPPORTED_LLM_PROVIDERS))
-        )
+    if provider != "groq":
+        raise ValueError("llm_provider must be 'groq'.")
     if provider in LLM_MODEL_ALLOWLIST and model:
         allowed_models = LLM_MODEL_ALLOWLIST[provider]
         if model not in allowed_models:
@@ -347,6 +343,200 @@ def _reconcile_report_summary_state(report_dir: str) -> None:
                 current_items=["leaderboard", "run metadata"],
                 output_dir="benchmark_eval",
             )
+
+
+def _report_dir_for_id(report_id: str) -> str:
+    normalized_report_id = str(report_id or "").strip()
+    if not normalized_report_id:
+        raise ValueError("Training report metadata is missing report_id.")
+    return os.path.join(REPORTS_ROOT, normalized_report_id)
+
+
+def _load_existing_report_bundle(report_id: str) -> tuple[str, Dict[str, Any], Dict[str, Any]]:
+    report_dir = _report_dir_for_id(report_id)
+    summary_path = os.path.join(report_dir, "summary.json")
+    summary = _read_report_summary(summary_path)
+    report_info: Dict[str, Any] = {
+        "report_id": report_id,
+        "route_prefix": f"/train/reports/{report_id}",
+        "files": dict(summary.get("files") or {}),
+    }
+    if isinstance(summary.get("selected_benchmark_explanations"), dict):
+        report_info["selected_benchmark_explanations"] = summary["selected_benchmark_explanations"]
+    return report_dir, summary, report_info
+
+
+def _resume_pipeline_result_from_summary(report_dir: str, summary: Dict[str, Any]) -> Dict[str, Any]:
+    files = dict(summary.get("files") or {})
+    best_model_summary = _read_report_summary(
+        os.path.join(report_dir, str(files.get("best_model_summary") or ""))
+    )
+    gra_payload = _read_report_summary(
+        os.path.join(report_dir, str(files.get("gra_ranking") or ""))
+    )
+
+    metrics = summary.get("selected_model_metrics")
+    if not isinstance(metrics, dict) or not metrics:
+        metrics = best_model_summary.get("metrics")
+    if not isinstance(metrics, dict) or not metrics:
+        metrics = {
+            "r2_score": best_model_summary.get("r2"),
+            "mse": best_model_summary.get("mse"),
+            "mae": best_model_summary.get("mae"),
+            "rmse": best_model_summary.get("rmse"),
+        }
+
+    gra_ranking = gra_payload.get("ranking")
+    if not isinstance(gra_ranking, list):
+        gra_ranking = best_model_summary.get("gra_ranking")
+    if not isinstance(gra_ranking, list):
+        gra_ranking = []
+
+    top_features = summary.get("top_features")
+    if not isinstance(top_features, list):
+        top_features = best_model_summary.get("top_features")
+    if not isinstance(top_features, list):
+        top_features = []
+
+    selected_sheet = (
+        summary.get("selected_sheet")
+        or best_model_summary.get("selected_sheet")
+        or best_model_summary.get("sheet_name")
+    )
+
+    return {
+        "best_model": (
+            summary.get("selected_model_name")
+            or best_model_summary.get("best_model")
+            or best_model_summary.get("model_name")
+        ),
+        "selected_sheet": selected_sheet,
+        "rows_after_preprocessing": (
+            summary.get("rows_after_preprocessing")
+            or best_model_summary.get("rows_after_preprocessing")
+            or best_model_summary.get("total_samples")
+        ),
+        "top_features": top_features,
+        "metrics": metrics,
+        "gra_ranking": gra_ranking,
+    }
+
+
+def _start_async_report_post_processing_resume(
+    report_info: Dict[str, Any],
+    pipeline_result: Dict[str, Any],
+    llm_provider: str | None,
+    llm_model: str | None,
+    groq_api_keys: Any | None = None,
+) -> None:
+    report_id = str(report_info.get("report_id") or "").strip()
+    report_dir = _report_dir_for_id(report_id)
+    llm_path = os.path.join(report_dir, "llm_explanations.json")
+    leaderboard_path = os.path.join(report_dir, "benchmark_eval", "scores", "leaderboard.json")
+
+    def _runner() -> None:
+        llm_exists = os.path.exists(llm_path)
+        try:
+            if not llm_exists:
+                started_at = datetime.now().isoformat()
+                update_report_explanation_status(
+                    report_info=report_info,
+                    status="pending",
+                    message="AI explanations are queued and will resume shortly.",
+                    report_root=REPORTS_ROOT,
+                    started_at=started_at,
+                    progress=0,
+                    phase="queued",
+                )
+                update_report_benchmark_status(
+                    report_info=report_info,
+                    status="pending",
+                    message="Benchmark evaluation is queued and will resume after AI explanations finish.",
+                    report_root=REPORTS_ROOT,
+                    started_at=started_at,
+                    progress=0,
+                    phase="queued",
+                    step_index=1,
+                    total_steps=3,
+                    current_items=["waiting for AI explanations"],
+                    output_dir="benchmark_eval",
+                    retry_payload={},
+                )
+                explanation_payload = generate_report_explanations(
+                    report_info=report_info,
+                    pipeline_result=pipeline_result,
+                    runtime=None,
+                    report_root=REPORTS_ROOT,
+                    llm_provider=llm_provider,
+                    llm_model=llm_model,
+                    groq_api_keys=groq_api_keys,
+                )
+                if explanation_payload:
+                    report_info["llm_explanations"] = explanation_payload
+            else:
+                update_report_explanation_status(
+                    report_info=report_info,
+                    status="success",
+                    message="AI explanations generated successfully.",
+                    report_root=REPORTS_ROOT,
+                    progress=100,
+                    phase="completed",
+                )
+
+            if os.path.exists(leaderboard_path):
+                publish_benchmark_results(
+                    report_info=report_info,
+                    report_root=REPORTS_ROOT,
+                    benchmark_dirname="benchmark_eval",
+                )
+                update_report_benchmark_status(
+                    report_info=report_info,
+                    status="success",
+                    message="Benchmark evaluation completed successfully.",
+                    report_root=REPORTS_ROOT,
+                    progress=100,
+                    phase="completed",
+                    step_index=3,
+                    total_steps=3,
+                    current_items=["leaderboard", "run metadata"],
+                    output_dir="benchmark_eval",
+                    retry_payload={},
+                )
+                return
+
+            run_report_benchmark(
+                report_info=report_info,
+                report_root=REPORTS_ROOT,
+                llm_provider=llm_provider,
+                llm_model=llm_model,
+                groq_api_keys=groq_api_keys,
+            )
+            print(f"🔁 Report post-processing resumed for {report_id}")
+        except Exception as exc:
+            if not llm_exists:
+                update_report_explanation_status(
+                    report_info=report_info,
+                    status="error",
+                    message=str(exc),
+                    report_root=REPORTS_ROOT,
+                    phase="error",
+                )
+            else:
+                update_report_benchmark_status(
+                    report_info=report_info,
+                    status="error",
+                    message=str(exc),
+                    report_root=REPORTS_ROOT,
+                    progress=100,
+                    phase="error",
+                    step_index=3,
+                    total_steps=3,
+                    output_dir="benchmark_eval",
+                    retry_payload={},
+                )
+            print(f"⚠️ Report post-processing resume failed for {report_id}: {exc}")
+
+    threading.Thread(target=_runner, daemon=True).start()
 
 
 def _build_progress_callback(session_id: str | None) -> Any:
@@ -866,6 +1056,74 @@ def train_model():
             'success': False,
             'error': f'Training failed: {str(e)}'
         }), 500
+
+
+@train_bp.route('/report-post-processing/resume', methods=['POST'])
+def resume_report_post_processing():
+    data = _get_request_data()
+    report_id = str(data.get("report_id") or "").strip()
+    if not report_id:
+        return jsonify({
+            "success": False,
+            "error": "Missing required field: report_id",
+        }), 400
+
+    try:
+        report_dir = _report_dir_for_id(report_id)
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+
+    if not os.path.isdir(report_dir):
+        return jsonify({
+            "success": False,
+            "error": f"Report directory not found: {report_id}",
+        }), 404
+
+    _reconcile_report_summary_state(report_dir)
+    report_dir, summary, report_info = _load_existing_report_bundle(report_id)
+
+    llm_config = summary.get("llm_config") if isinstance(summary.get("llm_config"), dict) else {}
+    request_llm_data = dict(data)
+    if "llm_provider" not in request_llm_data and llm_config.get("provider"):
+        request_llm_data["llm_provider"] = llm_config.get("provider")
+    if "llm_model" not in request_llm_data and llm_config.get("model"):
+        request_llm_data["llm_model"] = llm_config.get("model")
+
+    try:
+        llm_provider, llm_model = _resolve_llm_config(request_llm_data)
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+
+    pipeline_result = _resume_pipeline_result_from_summary(report_dir, summary)
+    if not str(pipeline_result.get("best_model") or "").strip():
+        return jsonify({
+            "success": False,
+            "error": "The saved report bundle is missing best-model metadata required to resume post-processing.",
+        }), 400
+
+    leaderboard_path = os.path.join(report_dir, "benchmark_eval", "scores", "leaderboard.json")
+    llm_path = os.path.join(report_dir, "llm_explanations.json")
+    if os.path.exists(leaderboard_path) and os.path.exists(llm_path):
+        return jsonify({
+            "success": True,
+            "status": "completed",
+            "report_id": report_id,
+            "message": "Report post-processing is already completed.",
+        }), 200
+
+    _start_async_report_post_processing_resume(
+        report_info=report_info,
+        pipeline_result=pipeline_result,
+        llm_provider=llm_provider,
+        llm_model=llm_model,
+        groq_api_keys=data.get("groq_api_keys"),
+    )
+    return jsonify({
+        "success": True,
+        "status": "queued",
+        "report_id": report_id,
+        "message": "Report post-processing resume started.",
+    }), 202
 
 
 @train_bp.route('/reports/<report_id>/<path:filename>', methods=['GET'])
