@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:best_model",
+      "claim_text": "KNN outperforms other models with an R2 score of 0.817 and lowest MSE of 0.0128.",
+      "claim_type": "metric_value",
+      "span_category": "best_model",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "metric": null,
+      "value": 0.0128,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:ranking:r2_score",
+      "claim_text": "KNN outperforms other models with an R2 score of 0.817 and lowest MSE of 0.0128.",
+      "claim_type": "metric_value",
+      "span_category": "ranking",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

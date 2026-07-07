@@ -1,0 +1,7 @@
+{
+  "artifact_id": "TEST_arm_c:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": []
+}

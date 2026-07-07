@@ -1,0 +1,18 @@
+{
+  "artifact_id": "a3",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "The table summarizes the key findings from the analysis, highlighting the most important variables and their statistical significance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'summary' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

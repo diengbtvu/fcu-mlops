@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:residuals",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_id",
+      "claim_text": "The table summarizes the performance of different models, with KNN showing the best results.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "KNN",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN",
+      "confidence": 0.95,
+      "subject": "Model Performance Comparison",
+      "predicate": "showing the best results",
+      "object": "KNN",
+      "metric": "performance",
+      "value": "high",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

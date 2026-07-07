@@ -1,0 +1,56 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:top_feature:mean",
+      "claim_text": "The highest mean values are observed for Ethanol (0.4736) and Acetate (0.4465)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:ranking:mean",
+      "claim_text": "The highest mean values are observed for Ethanol (0.4736) and Acetate (0.4465)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:top_feature:std",
+      "claim_text": "The highest standard deviations are seen in Ethanol (0.2528) and Butyrate (0.2474)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:ranking:std",
+      "claim_text": "The highest standard deviations are seen in Ethanol (0.2528) and Butyrate (0.2474)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

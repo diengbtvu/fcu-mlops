@@ -1,0 +1,93 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The strongest correlations are observed between Butyrate and VFA (0.9601), and the top predictor for HPR is VFA (0.7984), suggesting VFA is a critical factor.",
+  "explanation_full": "Focusing on the correlation data, the strongest relationship is between Butyrate and VFA (0.9601), indicating a very high degree of co-variation between these two components. Among the features predicting HPR, VFA shows the highest correlation (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641). This suggests that VFA is the most influential single feature for predicting HPR, while the relationship between Butyrate and VFA is exceptionally strong, potentially indicating redundancy or a primary driver effect.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The strongest relationship is between Butyrate and VFA (0.9601)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_vs_target:ranking:correlation",
+      "subject": "Butyrate",
+      "predicate": "correlation",
+      "object": "VFA",
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Among the features predicting HPR, VFA shows the highest correlation (0.7984)",
+      "claim_type": "metric_value",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_vs_target:top_feature:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": "HPR",
+      "metric": "target_correlation",
+      "value": 0.7984,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate (0.7827) and Acetate (0.7641)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_vs_target:ranking:target_correlation",
+      "subject": "Butyrate",
+      "predicate": "target_correlation",
+      "object": "HPR",
+      "metric": "target_correlation",
+      "value": 0.7827,
+      "unit": null,
+      "ordered_items": [
+        "Butyrate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "Acetate (0.7641)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_vs_target:ranking:target_correlation",
+      "subject": "Acetate",
+      "predicate": "target_correlation",
+      "object": "HPR",
+      "metric": "target_correlation",
+      "value": 0.7641,
+      "unit": null,
+      "ordered_items": [
+        "Acetate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
+  "explanation_full": "The KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting HPR values based on various fermentation parameters. It achieved an R2 score of 0.817, signifying a strong correlation between predicted and actual HPR values. Additionally, its RMSE of 0.113 indicates low prediction error. This suggests that KNN is the most effective model for predicting HPR in this dataset.",
+  "claims": [
+    {
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "model_performance",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

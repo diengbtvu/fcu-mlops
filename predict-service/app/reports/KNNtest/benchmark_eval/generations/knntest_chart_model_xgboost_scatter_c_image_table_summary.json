@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model shows strong performance with an R2 of 0.7495 and a correlation of 0.875024, suggesting good predictive power, though the maximum residual of 0.410478 indicates some variability.",
+  "explanation_full": "The XGBoost model demonstrates strong predictive performance, evidenced by an R2 score of 0.7495 and a high correlation of 0.875024 between predicted and actual values. The RMSE of 0.1325 and MAE of 0.0956 further quantify this strong fit. However, the diagnostics also reveal that the maximum absolute residual reached 0.410478, suggesting that while the model is generally accurate, there are instances of significant error. This variability should be considered when interpreting the model's overall reliability.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The XGBoost model achieved an R2 score of 0.7495.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "R2 score",
+      "object": 0.7495,
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values for XGBoost was 0.875024.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "correlation (pred, actual)",
+      "object": 0.875024,
+      "metric": "correlation",
+      "value": 0.875024,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The maximum absolute residual for XGBoost was 0.410478.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "XGBoost",
+      "predicate": "max absolute residual",
+      "object": 0.410478,
+      "metric": "max_abs_residual",
+      "value": 0.410478,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

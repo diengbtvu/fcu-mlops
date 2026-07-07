@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Analyzing Random Forest's feature importance is recommended to understand which variables drive predictions.",
+  "explanation_full": "Since Random Forest is the best model, analyzing its feature importance scores is highly recommended. This will tell you which input variables are driving the predictions, providing crucial business insights beyond just the prediction accuracy.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

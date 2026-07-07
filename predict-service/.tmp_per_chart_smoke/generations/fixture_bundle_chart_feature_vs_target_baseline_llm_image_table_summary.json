@@ -1,0 +1,67 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_vs_target",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79.",
+  "explanation_full": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81.",
+  "claims": [
+    {
+      "claim_id": "baseline-top-target-feature",
+      "claim_text": "pH is the top feature by target_correlation.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "pH",
+      "predicate": null,
+      "object": "pH",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-target-ranking",
+      "claim_text": "The target_correlation ordering is pH > Propionate > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.82,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "pH",
+        "Propionate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-top-pair",
+      "claim_text": "pH vs VFA has correlation=0.86.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.84,
+      "subject": "pH vs VFA",
+      "predicate": null,
+      "object": null,
+      "metric": "correlation",
+      "value": 0.86,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

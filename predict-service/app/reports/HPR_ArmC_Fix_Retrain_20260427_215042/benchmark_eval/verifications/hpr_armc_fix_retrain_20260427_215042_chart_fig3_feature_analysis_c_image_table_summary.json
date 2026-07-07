@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:1",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score"
+      ],
+      "reason": "Gold top feature for gra_score is VFA.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:2",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.01314000000000004
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:3",
+      "claim_text": "For detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Ranking claim needs at least two ordered items.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VFA and Sucrose_Degradation are the most influential features, with VFA having a mean absolute SHAP value of 0.017 and Sucrose_Degradation having 0.0032.",
+  "explanation_full": "The SHAP analysis demonstrates that VFA and Sucrose_Degradation are the most influential features, with VFA having a mean absolute SHAP value of 0.017 and Sucrose_Degradation having 0.0032. These two features are the primary drivers of the model's predictions. Furthermore, the analysis highlights COD-O as a top feature, while other measured parameters like ORP_Mid, Ethanol, VSS, and pH show negligible impact (mean absolute SHAP of 0.0).",
+  "claims": [],
+  "semantic_level": "L1L2L3"
+}

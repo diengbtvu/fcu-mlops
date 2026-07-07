@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "The mean absolute SHAP value of ORP_Low is 2.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.0383875935.",
+      "numeric_delta": 1.9616124065
+    }
+  ]
+}

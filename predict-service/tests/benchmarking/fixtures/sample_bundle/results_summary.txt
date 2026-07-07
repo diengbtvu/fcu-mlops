@@ -1,0 +1,1 @@
+KNN is the strongest model in this synthetic bundle, and the incremental table peaks around six features before flattening.

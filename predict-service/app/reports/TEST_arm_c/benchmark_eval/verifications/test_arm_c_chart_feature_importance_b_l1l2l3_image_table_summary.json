@@ -1,0 +1,86 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most critical feature (0.5052)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The top three features identified in the table are VSS, Acetate, and Butyrate.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VSS exhibits the highest feature importance score at 0.5052",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The top three features are VSS (0.5052), Acetate (0.1200), and Butyrate (0.0970)",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "VSS's importance (0.5052) is significantly higher than the next feature, Acetate (0.1200)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "the top three: VSS, Acetate, and Butyrate",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

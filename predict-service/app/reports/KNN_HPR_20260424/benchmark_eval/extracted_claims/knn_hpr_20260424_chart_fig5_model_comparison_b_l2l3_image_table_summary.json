@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+      "claim_text": "KNN model achieved the best performance",
+      "claim_type": "freeform",
+      "span_category": "best_model",
+      "is_numeric": false,
+      "requires_grounding_from": "model_comparison",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717",
+      "claim_type": "metric_value",
+      "span_category": "ranking::r2_score",
+      "is_numeric": true,
+      "requires_grounding_from": "model_comparison",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

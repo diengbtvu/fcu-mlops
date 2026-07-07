@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig5_model_comparison",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The chart compares the performance of five models (DT, KNN, RF, XGBoost, SVM) using various metrics (R2, RMSE, MSE, MAE). The models are listed on the Y-axis, and the metrics are displayed across the X-axis.",
+  "explanation_full": "The chart, titled \"Figure 5 - Model comparison,\" compares the performance of five machine learning models: DT, KNN, RF, XGBoost, and SVM. The metrics used for comparison are R2, RMSE, MSE, and MAE. The models are listed vertically, and the corresponding metric values are displayed horizontally. The values represent the model's performance on the benchmark test set, with R2, RMSE, MSE, and MAE being the measured metrics. The scale and units are implied by the metric definitions (e.g., R2 is a correlation coefficient, RMSE/MSE/MAE are error metrics). The data shows the calculated values for each model across the four metrics, allowing for a direct comparison of model performance across these metrics. The data is structured as a matrix where rows represent models and columns represent metrics/scores (R2, RMSE, MSE, MAE).",
+  "claims": [],
+  "semantic_level": "L1"
+}

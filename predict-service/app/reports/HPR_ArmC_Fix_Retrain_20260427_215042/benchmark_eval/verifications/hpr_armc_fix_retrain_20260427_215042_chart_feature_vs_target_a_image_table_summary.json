@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "claim_text": "hpr has a target correlation of 0.7984",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA has a correlation of 0.7827",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.1774
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:VFA:target_correlation",
+      "claim_text": "VFA has a target_correlation of 0.7984",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

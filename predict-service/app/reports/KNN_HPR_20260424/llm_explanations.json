@@ -1,0 +1,1355 @@
+{
+  "provider": "ollama",
+  "model": "gemma2:9b",
+  "generated_at": "2026-04-24T07:29:16.319023",
+  "overview": {
+    "en": "This report analyzes the performance of various machine learning models on predicting [Target Variable] using a dataset containing [Dataset Scope]. The winning model, KNN, achieved an R2 score of 0.817 and an MSE of 0.0128, outperforming other models like RF (R2=0.776), XGBoost (R2=0.749), SVM (R2=0.732), and DT (R2=0.560).  Feature importance analysis reveals that VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low are the most influential features for prediction. This is consistent with SHAP values and correlation analysis, which highlight these features' strong relationships with the target variable.  The incremental feature table demonstrates that adding more features initially improves model performance but eventually plateaus, suggesting a point of diminishing returns. While this report provides valuable insights into model performance and feature importance, it's important to note that the dataset may not fully capture all relevant factors influencing [Target Variable], potentially limiting the generalizability of these findings.",
+    "zh_TW": "本報告分析了各種機器學習模型在預測[目標變數]方面的表現，使用包含[資料集範圍]的資料集。獲勝模型 KNN 的 R2 分數為 0.817，MSE 為 0.0128，優於其他模型，例如 RF (R2=0.776)、XGBoost (R2=0.749)、SVM (R2=0.732) 和 DT (R2=0.560)。 特徵重要性分析表明，VFA、丁酸、乙酸鹽、VSS、丙酸、乙醇、COD-O、pH 和 ORP_Low 是影響預測最重要的特徵。這與 SHAP 值和相關性分析一致，後者強調了這些特徵與目標變數之間的強關係。 增量特徵表表明，添加更多特徵最初會提高模型性能，但最終趨於穩定，表明回報遞減點。儘管本報告提供了有關模型性能和特徵重要性的寶貴見解，但需要注意的是，資料集可能無法完全捕捉到所有影響[目標變數] 的相關因素，這可能會限制這些發現的普遍性。"
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "Trained metrics overview",
+      "zh_TW": "訓練指標總覽",
+      "benchmark_payload": {
+        "explanation_short": "KNN is the winning model with R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075.",
+        "explanation_full": "Trained metrics overview",
+        "claims": [
+          {
+            "claim_id": "winning_model",
+            "claim_text": "KNN is the winning model.",
+            "claim_type": "metric_value",
+            "span_category": "best_model",
+            "is_numeric": true,
+            "requires_grounding_from": "benchmark_models_sorted",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "winning_model",
+            "object": null,
+            "metric": "R2 score",
+            "value": 0.8172,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "r2_score",
+            "claim_text": "KNN has an R2 score of 0.8172.",
+            "claim_type": "metric_value",
+            "span_category": "best_model",
+            "is_numeric": true,
+            "requires_grounding_from": "benchmark_models_sorted",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "R2 score",
+            "object": 0.8172,
+            "metric": "R2 score",
+            "value": 0.8172,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "rmse",
+            "claim_text": "KNN has an RMSE of 0.1132.",
+            "claim_type": "metric_value",
+            "span_category": "best_model",
+            "is_numeric": true,
+            "requires_grounding_from": "benchmark_models_sorted",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "RMSE",
+            "object": 0.1132,
+            "metric": "RMSE",
+            "value": 0.1132,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "mse",
+            "claim_text": "KNN has an MSE of 0.01281.",
+            "claim_type": "metric_value",
+            "span_category": "best_model",
+            "is_numeric": true,
+            "requires_grounding_from": "benchmark_models_sorted",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "MSE",
+            "object": 0.01281,
+            "metric": "MSE",
+            "value": 0.01281,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "mae",
+            "claim_text": "KNN has an MAE of 0.075.",
+            "claim_type": "metric_value",
+            "span_category": "best_model",
+            "is_numeric": true,
+            "requires_grounding_from": "benchmark_models_sorted",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "MAE",
+            "object": 0.075,
+            "metric": "MAE",
+            "value": 0.075,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3a_gra_ranking": {
+      "en": "Figure 3A - Grey relational ranking",
+      "zh_TW": "圖 3A - 灰色關聯排序",
+      "benchmark_payload": {
+        "explanation_short": "The figure shows the grey relational ranking of features based on their correlation with HPR. VFA, Butyrate, Acetate, and VSS are the top four most important features.",
+        "explanation_full": "Figure 3A - Grey relational ranking",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "claim_text": "VFA is the most important feature for predicting HPR.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": true,
+            "requires_grounding_from": "fig3a_gra_ranking.png",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "most important for predicting",
+            "object": "HPR",
+            "metric": "grey relational ranking score",
+            "value": 0.7931135436956089,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "c2",
+            "claim_text": "The grey relational ranking method identifies the most relevant features for predicting HPR.",
+            "claim_type": "ranking",
+            "span_category": "methodology",
+            "is_numeric": false,
+            "requires_grounding_from": "fig3a_gra_ranking.png",
+            "confidence": 0.85,
+            "subject": "grey relational ranking method",
+            "predicate": "identifies",
+            "object": "most relevant features for predicting HPR",
+            "metric": "relevance",
+            "value": null,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3b_shap_analysis": {
+      "en": "Figure 3B - SHAP analysis",
+      "zh_TW": "圖 3B - SHAP 分析",
+      "benchmark_payload": {
+        "explanation_short": "SHAP importance values show the contribution of each feature to the model's predictions. The top features are VFA, Butyrate, ORP_Low, ORP_Mid, and Acetate.",
+        "explanation_full": "Figure 3B - SHAP analysis",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "claim_text": "VFA is the most important feature for predicting HPR.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": true,
+            "requires_grounding_from": "best_model_summary.json",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "most important for predicting HPR",
+            "object": "HPR",
+            "metric": "SHAP importance values",
+            "value": 0.7931135436956089,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "c2",
+            "claim_text": "The model relies more on VFA and Butyrate than other features.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": true,
+            "requires_grounding_from": "best_model_summary.json",
+            "confidence": 0.85,
+            "subject": "VFA and Butyrate",
+            "predicate": "rely more on than other features",
+            "object": "other features",
+            "metric": "SHAP importance values",
+            "value": 0.7931135436956089,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3_feature_analysis": {
+      "en": "Figure 3: Feature Importance Analysis.",
+      "zh_TW": "圖 3：特徵重要性分析。",
+      "benchmark_payload": {
+        "explanation_short": "This figure shows the importance of different features in predicting hydrogen production. The higher the bar, the more important the feature is.",
+        "explanation_full": "Figure 3: Feature Importance Analysis.",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "claim_text": "VFA, Butyrate, Acetate, and VSS are the most important features for predicting hydrogen production.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": false,
+            "requires_grounding_from": "fig3_feature_analysis",
+            "confidence": 0.95,
+            "subject": "VFA, Butyrate, Acetate, and VSS",
+            "predicate": "are the most important features for predicting hydrogen production.",
+            "object": null,
+            "metric": "importance_ranking",
+            "value": 1,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS"
+            ],
+            "feature_count": 4,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig4_univariate_analysis": {
+      "en": "Figure 4 - Univariate analysis",
+      "zh_TW": "圖 4 - 單變量分析",
+      "benchmark_payload": {
+        "explanation_short": "This chart visualizes the univariate relationships between each feature and the target variable (HPR) using a scatter plot. The strength of the correlation is indicated by the density of points around the regression line.",
+        "explanation_full": "Figure 4 - Univariate analysis",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "claim_text": "VFA (Volatile Fatty Acids) has the strongest positive correlation with HPR.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "correlation",
+            "is_numeric": true,
+            "requires_grounding_from": "fig4_univariate_analysis.png",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "has a strong positive correlation with",
+            "object": "HPR",
+            "metric": "correlation coefficient",
+            "value": 0.7984,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "HPR"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig5_model_comparison": {
+      "en": "Figure 5 - Model comparison",
+      "zh_TW": "圖表 5 - 模型比較",
+      "benchmark_payload": {
+        "explanation_short": "The KNN model outperforms other models in terms of R2 and RMSE.",
+        "explanation_full": "Figure 5 - Model comparison",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "claim_text": "KNN model has the highest R2 score among all models.",
+            "claim_type": "metric_value",
+            "span_category": "model_performance",
+            "is_numeric": true,
+            "requires_grounding_from": "fig5_model_comparison.png",
+            "confidence": 0.95,
+            "subject": "KNN model",
+            "predicate": "has R2 score",
+            "object": "highest among all models",
+            "metric": "R2 score",
+            "value": 0.8172,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "c2",
+            "claim_text": "KNN model has the lowest RMSE among all models.",
+            "claim_type": "metric_value",
+            "span_category": "model_performance",
+            "is_numeric": true,
+            "requires_grounding_from": "fig5_model_comparison.png",
+            "confidence": 0.95,
+            "subject": "KNN model",
+            "predicate": "has RMSE",
+            "object": "lowest among all models",
+            "metric": "RMSE",
+            "value": 0.1132,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "Figure 6A/B - MSE and R² vs feature count",
+      "zh_TW": "圖表 6A/B - MSE 和 R² 與特徵數量",
+      "benchmark_payload": {
+        "explanation_short": "Best feature-count step per model -> SVM: n=4, R2=0.779437, MSE=0.015453 | DT: n=9, R2=0.671427, MSE=0.023021 | RF: n=11, R2=0.785537, MSE=0.015026 | KNN: n=9, R2=0.83014, MSE=0.011901 | XGBoost: n=4, R2=0.768407, MSE=0.016226.",
+        "explanation_full": "Figure 6A/B - MSE and R² vs feature count",
+        "claims": [
+          {
+            "claim_id": "best_feature_count",
+            "claim_text": "The best feature count for each model is shown in the table below.",
+            "claim_type": "best_model",
+            "span_category": "table",
+            "is_numeric": false,
+            "requires_grounding_from": "table1_incremental_results.csv",
+            "confidence": 0.95,
+            "subject": "best_feature_count",
+            "predicate": "shown in the table below",
+            "object": "table1_incremental_results.csv",
+            "metric": "r2_score",
+            "value": 0.8171678017037467,
+            "unit": "",
+            "ordered_items": [
+              "SVM",
+              "DT",
+              "RF",
+              "KNN",
+              "XGBoost"
+            ],
+            "feature_count": 4,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig6c_prediction_time": {
+      "en": "Figure 6C - Prediction over time",
+      "zh_TW": "圖 6C - 預測時間趨勢",
+      "benchmark_payload": {
+        "explanation_short": "This chart visualizes the predicted hydrogen production (HPR) values over time, comparing them to actual measurements. The KNN model's predictions are shown in blue, while the actual data points are represented by red circles.",
+        "explanation_full": "Figure 6C - Prediction over time",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "The KNN model accurately predicts hydrogen production (HPR) over time.",
+            "claim_type": "metric_value",
+            "span_category": "prediction_accuracy",
+            "is_numeric": true,
+            "requires_grounding_from": "model_metrics.winning_model_sequence_diagnostics.sequence_correlation",
+            "confidence": 0.931488,
+            "subject": "KNN model",
+            "predicate": "predicts",
+            "object": "hydrogen production (HPR) over time",
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [
+              "KNN model",
+              "predicts",
+              "hydrogen production (HPR) over time"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_svm_scatter": {
+      "en": "SVM scatter plot",
+      "zh_TW": "SVM 散點圖",
+      "benchmark_payload": {
+        "explanation_short": "The SVM model's performance is visualized in this scatter plot. The points represent individual data samples, with the x-axis showing the predicted HPR values and the y-axis showing the actual HPR values.",
+        "explanation_full": "SVM scatter plot",
+        "claims": [
+          {
+            "claim_id": "best_model",
+            "claim_text": "SVM is the best performing model with an R2 score of 0.7324.",
+            "claim_type": "best_model",
+            "span_category": "R2 Score",
+            "is_numeric": true,
+            "requires_grounding_from": "model_comparison_table",
+            "confidence": 1.0,
+            "subject": "SVM model",
+            "predicate": "has R2 score of",
+            "object": "0.7324",
+            "metric": "R2 Score",
+            "value": "0.7324",
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          },
+          {
+            "claim_id": "high_r2",
+            "claim_text": "The SVM model has a high R2 score of 0.7324.",
+            "claim_type": "freeform",
+            "span_category": "R2 Score",
+            "is_numeric": true,
+            "requires_grounding_from": "model_comparison_table",
+            "confidence": 1.0,
+            "subject": "SVM model",
+            "predicate": "has R2 score of",
+            "object": "0.7324",
+            "metric": "R2 Score",
+            "value": "0.7324",
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_dt_scatter": {
+      "en": "Decision tree scatter plot",
+      "zh_TW": "決策樹散點圖",
+      "benchmark_payload": {
+        "explanation_short": "The decision tree model's performance is visualized here. The x-axis shows the actual HPR values, and the y-axis shows the predicted HPR values.  A strong positive correlation between actual and predicted values indicates good model performance.",
+        "explanation_full": "Decision tree scatter plot",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "The decision tree model has a moderate positive correlation between actual and predicted HPR values.",
+            "claim_type": "freeform",
+            "span_category": "prediction_story",
+            "is_numeric": false,
+            "requires_grounding_from": "model_metrics",
+            "confidence": 0.85,
+            "subject": "Decision Tree Model",
+            "predicate": "correlation with actual HPR values",
+            "object": "Moderate positive correlation",
+            "metric": "R² = 0.56",
+            "value": "0.56",
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_rf_scatter": {
+      "en": "Random forest scatter plot",
+      "zh_TW": "隨機森林散點圖",
+      "benchmark_payload": {
+        "explanation_short": "The random forest model shows a strong positive correlation between predicted and actual hydrogen production (HPR) values. The R-squared value of 0.7756 indicates that the model explains 77.56% of the variance in HPR.  The scatter plot reveals a generally good fit with most data points clustered closely around the diagonal line, suggesting accurate predictions.",
+        "explanation_full": "Random forest scatter plot",
+        "claims": [
+          {
+            "claim_id": "best_model",
+            "claim_text": "The random forest model achieves the second-highest R2 score among all models considered, indicating its strong predictive performance for hydrogen production.",
+            "claim_type": "best_model",
+            "span_category": "model_comparison",
+            "is_numeric": false,
+            "requires_grounding_from": "model_comparison",
+            "confidence": 0.95,
+            "subject": "random forest model",
+            "predicate": "achieves the second-highest R2 score among all models considered",
+            "object": "hydrogen production",
+            "metric": "R2 score",
+            "value": "0.7756",
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "good_fit",
+            "claim_text": "The scatter plot demonstrates a good fit between predicted and actual HPR values, with most data points clustered closely around the diagonal line.",
+            "claim_type": "best_model",
+            "span_category": "scatter_plot_analysis",
+            "is_numeric": false,
+            "requires_grounding_from": "scatter_plot_analysis",
+            "confidence": 0.98,
+            "subject": "random forest model",
+            "predicate": "demonstrates a good fit between predicted and actual HPR values",
+            "object": "scatter plot",
+            "metric": "R2 score",
+            "value": "0.7756",
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_knn_scatter": {
+      "en": "KNN scatter plot",
+      "zh_TW": "KNN 散點圖",
+      "benchmark_payload": {
+        "explanation_short": "The KNN model predicts hydrogen production (HPR) based on a set of features. This scatter plot visualizes the relationship between the predicted and actual HPR values.",
+        "explanation_full": "KNN scatter plot",
+        "claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "The KNN model demonstrates a strong correlation between predicted and actual HPR values.",
+            "claim_type": "freeform",
+            "span_category": "prediction_accuracy",
+            "is_numeric": false,
+            "requires_grounding_from": "model_metrics",
+            "confidence": 0.95,
+            "subject": "KNN model performance",
+            "predicate": "demonstrates a strong correlation between predicted and actual HPR values",
+            "object": "predicted and actual HPR values",
+            "metric": "r2_score",
+            "value": 0.8171678017,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_xgboost_scatter": {
+      "en": "XGBoost scatter plot",
+      "zh_TW": "XGBoost 散點圖",
+      "benchmark_payload": {
+        "explanation_short": "This scatter plot visualizes the predictions made by the XGBoost model against the actual HPR values. The closer the points are to the diagonal line, the better the model's performance.",
+        "explanation_full": "XGBoost scatter plot",
+        "claims": [
+          {
+            "claim_id": "best_model",
+            "claim_text": "XGBoost is a strong contender for predicting HPR.",
+            "claim_type": "freeform",
+            "span_category": "prediction_story",
+            "is_numeric": false,
+            "requires_grounding_from": "model_comparison_table",
+            "confidence": 0.85,
+            "subject": "XGBoost model",
+            "predicate": "predicts HPR well",
+            "object": "HPR",
+            "metric": "r2_score",
+            "value": 0.7495,
+            "unit": "",
+            "ordered_items": [
+              "XGBoost",
+              "predicts HPR well"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_comparison_bars": {
+      "en": "Model comparison bars",
+      "zh_TW": "模型比較圖表",
+      "benchmark_payload": {
+        "explanation_short": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.8172, RMSE=0.1132, MSE=0.01281, MAE=0.075 | RF: R2=0.7756, RMSE=0.1254, MSE=0.01572, MAE=0.0836 | XGBoost: R2=0.7495, RMSE=0.1325, MSE=0.01755, MAE=0.0956 | SVM: R2=0.7324, RMSE=0.1369, MSE=0.01875, MAE=0.0946 | DT: R2=0.5605, RMSE=0.1755, MSE=0.0308, MAE=0.1086.",
+        "explanation_full": "Model comparison bars",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "KNN is the best performing model for predicting hydrogen production.",
+            "claim_type": "best_model",
+            "span_category": "Model Comparison",
+            "is_numeric": false,
+            "requires_grounding_from": "benchmark_metrics",
+            "confidence": 0.95,
+            "subject": "KNN",
+            "predicate": "outperforms",
+            "object": "other models",
+            "metric": "R2 score",
+            "value": "0.8172",
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "predicted_vs_actual": {
+      "en": "Predicted versus actual chart",
+      "zh_TW": "預測與實際圖表",
+      "benchmark_payload": {
+        "explanation_short": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+        "explanation_full": "Predicted versus actual chart",
+        "claims": [
+          {
+            "claim_id": "r2",
+            "claim_text": "R2=0.8172",
+            "claim_type": "metric_value",
+            "span_category": "performance",
+            "is_numeric": true,
+            "requires_grounding_from": "model_metrics",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "has R2 score of",
+            "object": "0.8172",
+            "metric": "R2",
+            "value": 0.8172,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 0,
+            "hedged": false
+          },
+          {
+            "claim_id": "rmse",
+            "claim_text": "RMSE=0.1132",
+            "claim_type": "metric_value",
+            "span_category": "performance",
+            "is_numeric": true,
+            "requires_grounding_from": "model_metrics",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "has RMSE of",
+            "object": "0.1132",
+            "metric": "RMSE",
+            "value": 0.1132,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 0,
+            "hedged": false
+          },
+          {
+            "claim_id": "mae",
+            "claim_text": "MAE=0.075",
+            "claim_type": "metric_value",
+            "span_category": "performance",
+            "is_numeric": true,
+            "requires_grounding_from": "model_metrics",
+            "confidence": 1.0,
+            "subject": "KNN model",
+            "predicate": "has MAE of",
+            "object": "0.075",
+            "metric": "MAE",
+            "value": 0.075,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 0,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "residuals": {
+      "en": "Residual analysis chart",
+      "zh_TW": "殘差分析圖表",
+      "benchmark_payload": {
+        "explanation_short": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+        "explanation_full": "Residual analysis chart",
+        "claims": [
+          {
+            "claim_id": "residual_mean",
+            "claim_text": "The mean residual is 0.012229.",
+            "claim_type": "metric_value",
+            "span_category": "Residual Analysis",
+            "is_numeric": true,
+            "requires_grounding_from": "residual_analysis_chart",
+            "confidence": 1.0,
+            "subject": "KNN Model Residuals",
+            "predicate": "mean",
+            "object": "0.012229",
+            "metric": "residual_mean",
+            "value": 0.012229,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          },
+          {
+            "claim_id": "residual_std",
+            "claim_text": "The standard deviation of residuals is 0.112518.",
+            "claim_type": "metric_value",
+            "span_category": "Residual Analysis",
+            "is_numeric": true,
+            "requires_grounding_from": "residual_analysis_chart",
+            "confidence": 1.0,
+            "subject": "KNN Model Residuals",
+            "predicate": "standard deviation",
+            "object": "0.112518",
+            "metric": "residual_std",
+            "value": 0.112518,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          },
+          {
+            "claim_id": "max_abs_residual",
+            "claim_text": "The maximum absolute residual is 0.367254.",
+            "claim_type": "metric_value",
+            "span_category": "Residual Analysis",
+            "is_numeric": true,
+            "requires_grounding_from": "residual_analysis_chart",
+            "confidence": 1.0,
+            "subject": "KNN Model Residuals",
+            "predicate": "maximum absolute residual",
+            "object": "0.367254",
+            "metric": "max_abs_residual",
+            "value": 0.367254,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          },
+          {
+            "claim_id": "corr_pred_actual",
+            "claim_text": "The correlation between predicted and actual values is 0.907301.",
+            "claim_type": "metric_value",
+            "span_category": "Residual Analysis",
+            "is_numeric": true,
+            "requires_grounding_from": "residual_analysis_chart",
+            "confidence": 1.0,
+            "subject": "KNN Model Residuals",
+            "predicate": "correlation",
+            "object": "0.907301",
+            "metric": "corr_pred_actual",
+            "value": 0.907301,
+            "unit": "",
+            "ordered_items": [],
+            "feature_count": 1,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_importance": {
+      "en": "Feature importance chart",
+      "zh_TW": "特徵重要性圖表",
+      "benchmark_payload": {
+        "explanation_short": "The chart shows the relative importance of each feature in predicting hydrogen production (HPR). VFA, Butyrate, and Acetate are the top three most important features.",
+        "explanation_full": "Feature importance chart",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "claim_text": "VFA is the most important feature for predicting HPR.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": false,
+            "requires_grounding_from": "model_output",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "most important for predicting HPR",
+            "object": "HPR",
+            "metric": "importance",
+            "value": "high",
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "c2",
+            "claim_text": "Butyrate and Acetate are also important features for predicting HPR.",
+            "claim_type": "ranking",
+            "span_category": "feature_importance",
+            "is_numeric": false,
+            "requires_grounding_from": "model_output",
+            "confidence": 0.85,
+            "subject": "Butyrate and Acetate",
+            "predicate": "important for predicting HPR",
+            "object": "HPR",
+            "metric": "importance",
+            "value": "medium",
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "correlation_heatmap": {
+      "en": "Correlation heatmap",
+      "zh_TW": "相關性熱圖",
+      "benchmark_payload": {
+        "explanation_short": "This chart visualizes the correlations between different features in the dataset. Darker colors indicate stronger positive correlations, while lighter colors indicate weaker or negative correlations.",
+        "explanation_full": "Correlation heatmap",
+        "claims": [
+          {
+            "claim_id": "correlation_heatmap_1",
+            "claim_text": "The correlation heatmap shows that VFA is strongly correlated with Butyrate (0.96) and Acetate (0.94).",
+            "claim_type": "best_model",
+            "span_category": "correlation_heatmap",
+            "is_numeric": true,
+            "requires_grounding_from": "correlation_heatmap",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "correlated with",
+            "object": "Butyrate and Acetate",
+            "metric": "correlation coefficient",
+            "value": "0.96 and 0.94",
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate"
+            ],
+            "feature_count": 3,
+            "hedged": false
+          },
+          {
+            "claim_id": "correlation_heatmap_2",
+            "claim_text": "Ethanol and Propionate also show a strong positive correlation (0.85).",
+            "claim_type": "best_model",
+            "span_category": "correlation_heatmap",
+            "is_numeric": true,
+            "requires_grounding_from": "correlation_heatmap",
+            "confidence": 0.9,
+            "subject": "Ethanol",
+            "predicate": "correlated with",
+            "object": "Propionate",
+            "metric": "correlation coefficient",
+            "value": "0.85",
+            "unit": "",
+            "ordered_items": [
+              "Ethanol",
+              "Propionate"
+            ],
+            "feature_count": 2,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_distributions": {
+      "en": "Feature distributions",
+      "zh_TW": "特徵分布",
+      "benchmark_payload": {
+        "explanation_short": "The chart shows the distribution of each feature in the dataset.",
+        "explanation_full": "Feature distributions",
+        "claims": [
+          {
+            "claim_id": "feature_distributions",
+            "claim_text": "The chart shows the distribution of each feature in the dataset.",
+            "claim_type": "freeform",
+            "span_category": "description",
+            "is_numeric": false,
+            "requires_grounding_from": "fig_feature_distributions.png",
+            "confidence": 1.0,
+            "subject": "feature_distributions",
+            "predicate": "shows",
+            "object": "distribution of each feature in the dataset",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_vs_target": {
+      "en": "Feature vs target chart",
+      "zh_TW": "特徵與目標圖表",
+      "benchmark_payload": {
+        "explanation_short": "This chart visualizes the correlation between each feature and the target variable (HPR). Stronger correlations are indicated by longer lines.",
+        "explanation_full": "Feature vs target chart",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "claim_text": "VFA (Volatile Fatty Acids) is strongly correlated with HPR.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "positive",
+            "is_numeric": true,
+            "requires_grounding_from": "correlation_matrix",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "correlated with",
+            "object": "HPR",
+            "metric": "correlation",
+            "value": "0.7984",
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "correlated with",
+              "HPR"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "boxplots": {
+      "en": "Feature boxplots",
+      "zh_TW": "特徵箱形圖",
+      "benchmark_payload": {
+        "explanation_short": "This chart shows the distribution of each feature in our dataset. The boxes represent the interquartile range (IQR), with the median marked by a line inside. Whiskers extend to 1.5 times the IQR, showing potential outliers.",
+        "explanation_full": "Feature boxplots",
+        "claims": [
+          {
+            "claim_id": "highest_mean",
+            "claim_text": "Ethanol has the highest mean value among all features.",
+            "claim_type": "best_model",
+            "span_category": "distribution_story",
+            "is_numeric": true,
+            "requires_grounding_from": "descriptive_statistics_sample",
+            "confidence": 1.0,
+            "subject": "Ethanol",
+            "predicate": "mean value",
+            "object": "highest among all features",
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [
+              "Ethanol",
+              "Acetate",
+              "Butyrate",
+              "Propionate",
+              "VSS"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "highest_std",
+            "claim_text": "Ethanol has the highest standard deviation among all features.",
+            "claim_type": "best_model",
+            "span_category": "distribution_story",
+            "is_numeric": true,
+            "requires_grounding_from": "descriptive_statistics_sample",
+            "confidence": 1.0,
+            "subject": "Ethanol",
+            "predicate": "standard deviation",
+            "object": "highest among all features",
+            "metric": "std",
+            "value": 0.2528,
+            "unit": null,
+            "ordered_items": [
+              "Ethanol",
+              "Butyrate",
+              "Acetate",
+              "Propionate",
+              "VSS"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "time_series": {
+      "en": "Time-series chart",
+      "zh_TW": "時間序列圖表",
+      "benchmark_payload": {
+        "explanation_short": "The time series plot visualizes the predicted and actual hydrogen production (HPR) values over time. The model's performance can be assessed by comparing the predicted curve to the actual data points.",
+        "explanation_full": "Time-series chart",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "The KNN model accurately predicts the trend of hydrogen production over time.",
+            "claim_type": "metric_value",
+            "span_category": "sequence_story",
+            "is_numeric": true,
+            "requires_grounding_from": "time_series_chart",
+            "confidence": 0.95,
+            "subject": "KNN model",
+            "predicate": "predicts",
+            "object": "trend of hydrogen production over time",
+            "metric": "sequence_correlation",
+            "value": "0.931488",
+            "unit": "",
+            "ordered_items": [
+              "KNN model",
+              "trend of hydrogen production over time"
+            ],
+            "feature_count": 197,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_comparison_table": {
+      "en": "Model comparison table",
+      "zh_TW": "模型比較表",
+      "benchmark_payload": {
+        "explanation_short": "A table comparing the performance of different machine learning models on a hydrogen production prediction task.",
+        "explanation_full": "Model comparison table",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "KNN model achieved the highest R2 score (0.8172) among all models.",
+            "claim_type": "metric_value",
+            "span_category": "model_performance",
+            "is_numeric": true,
+            "requires_grounding_from": "model_comparison_table",
+            "confidence": 0.95,
+            "subject": "KNN model",
+            "predicate": "achieved the highest R2 score",
+            "object": "0.8172",
+            "metric": "R2 score",
+            "value": 0.8172,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "2",
+            "claim_text": "The DT model had the lowest R2 score (0.5605) among all models.",
+            "claim_type": "metric_value",
+            "span_category": "model_performance",
+            "is_numeric": true,
+            "requires_grounding_from": "model_comparison_table",
+            "confidence": 0.95,
+            "subject": "DT model",
+            "predicate": "had the lowest R2 score",
+            "object": "0.5605",
+            "metric": "R2 score",
+            "value": 0.5605,
+            "unit": "",
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "XGBoost",
+              "SVM",
+              "DT"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_importance_table": {
+      "en": "Feature importance table",
+      "zh_TW": "特徵重要性表",
+      "benchmark_payload": {
+        "explanation_short": "The feature importance table shows the relative contribution of each feature to the model's predictions. VFA, Butyrate, and Acetate are the top three most important features.",
+        "explanation_full": "Feature importance table",
+        "claims": [
+          {
+            "claim_id": "feature_importance",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most important features for predicting hydrogen production.",
+            "claim_type": "ranking",
+            "span_category": "Feature Importance",
+            "is_numeric": false,
+            "requires_grounding_from": "feature_importance_table",
+            "confidence": 0.95,
+            "subject": "VFA, Butyrate, and Acetate",
+            "predicate": "are the top three most important features for predicting hydrogen production.",
+            "object": "hydrogen production",
+            "metric": "Feature Importance",
+            "value": "Top Three",
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "best_model_shap_importance": {
+      "en": "SHAP importance table",
+      "zh_TW": "SHAP 重要性表",
+      "benchmark_payload": {
+        "explanation_short": "The SHAP values show the contribution of each feature to the model's prediction.  VFA, Butyrate, and ORP_Low are the most important features.",
+        "explanation_full": "SHAP importance table",
+        "claims": [
+          {
+            "claim_id": "1",
+            "claim_text": "VFA is the most important feature for predicting HPR.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "SHAP values",
+            "is_numeric": true,
+            "requires_grounding_from": "best_model_shap_importance.csv",
+            "confidence": 0.95,
+            "subject": "VFA",
+            "predicate": "most important feature for predicting HPR",
+            "object": "HPR",
+            "metric": "SHAP value",
+            "value": 0.7931135436956089,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "2",
+            "claim_text": "The model relies heavily on VFA and Butyrate for its predictions.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "SHAP values",
+            "is_numeric": true,
+            "requires_grounding_from": "best_model_shap_importance.csv",
+            "confidence": 0.95,
+            "subject": "VFA and Butyrate",
+            "predicate": "rely heavily on for predictions",
+            "object": "model",
+            "metric": "SHAP value",
+            "value": 0.7931135436956089,
+            "unit": "",
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate"
+            ],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "descriptive_statistics": {
+      "en": "Descriptive statistics table",
+      "zh_TW": "描述性統計表",
+      "benchmark_payload": {
+        "explanation_short": "This table shows the mean, standard deviation, minimum, and maximum values for each feature in the dataset.",
+        "explanation_full": "Descriptive statistics table",
+        "claims": [
+          {
+            "claim_id": "descriptive_statistics_mean",
+            "claim_text": "The dataset contains descriptive statistics for each numerical feature.",
+            "claim_type": "freeform",
+            "span_category": "descriptive_statistics",
+            "is_numeric": false,
+            "requires_grounding_from": "table_descriptive_statistics.csv",
+            "confidence": 1.0,
+            "subject": "descriptive_statistics",
+            "predicate": "contains descriptive statistics for each numerical feature",
+            "object": "numerical features",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "descriptive_statistics_stddev",
+            "claim_text": "The dataset contains the standard deviation for each numerical feature.",
+            "claim_type": "freeform",
+            "span_category": "descriptive_statistics",
+            "is_numeric": false,
+            "requires_grounding_from": "table_descriptive_statistics.csv",
+            "confidence": 1.0,
+            "subject": "dataset",
+            "predicate": "contains the standard deviation for each numerical feature",
+            "object": "numerical features",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "descriptive_statistics_min",
+            "claim_text": "The dataset contains the minimum value for each numerical feature.",
+            "claim_type": "freeform",
+            "span_category": "descriptive_statistics",
+            "is_numeric": false,
+            "requires_grounding_from": "table_descriptive_statistics.csv",
+            "confidence": 1.0,
+            "subject": "dataset",
+            "predicate": "contains the minimum value for each numerical feature",
+            "object": "numerical features",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "descriptive_statistics_max",
+            "claim_text": "The dataset contains the maximum value for each numerical feature.",
+            "claim_type": "freeform",
+            "span_category": "descriptive_statistics",
+            "is_numeric": false,
+            "requires_grounding_from": "table_descriptive_statistics.csv",
+            "confidence": 1.0,
+            "subject": "dataset",
+            "predicate": "contains the maximum value for each numerical feature",
+            "object": "numerical features",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "correlation_matrix": {
+      "en": "Correlation matrix table",
+      "zh_TW": "相關矩陣表",
+      "benchmark_payload": {
+        "explanation_short": "This table shows the pairwise correlations between all features in the dataset.",
+        "explanation_full": "Correlation matrix table",
+        "claims": [
+          {
+            "claim_id": "correlation_matrix_definition",
+            "claim_text": "The correlation matrix shows the pairwise correlations between all features in the dataset.",
+            "claim_type": "freeform",
+            "span_category": "DEFINITION",
+            "is_numeric": false,
+            "requires_grounding_from": "table_correlation_matrix.csv",
+            "confidence": 1.0,
+            "subject": "Correlation Matrix",
+            "predicate": "shows",
+            "object": "pairwise correlations between all features in the dataset",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "table1_incremental_results": {
+      "en": "table1_incremental_results.csv",
+      "zh_TW": "增量結果表1.csv",
+      "benchmark_payload": {
+        "explanation_short": "Incremental feature analysis table showing the R2 and MSE for each model at different numbers of features.",
+        "explanation_full": "table1_incremental_results.csv",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "claim_text": "The KNN model achieves the highest R2 score (0.8301) when using 9 features.",
+            "claim_type": "metric_value",
+            "span_category": "table1_incremental_results",
+            "is_numeric": true,
+            "requires_grounding_from": "table1_incremental_results",
+            "confidence": 0.95,
+            "subject": "KNN model",
+            "predicate": "achieves highest R2 score",
+            "object": "0.8301",
+            "metric": "R2",
+            "value": 0.8301,
+            "unit": "",
+            "ordered_items": [
+              "KNN model",
+              "achieves highest R2 score",
+              "0.8301"
+            ],
+            "feature_count": 9,
+            "hedged": false
+          }
+        ]
+      }
+    }
+  }
+}

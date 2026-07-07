@@ -1,0 +1,45 @@
+{
+  "artifact_id": "KNNtest:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best performing model, showing strong predictive power (R2=0.8172) and low error (MAE=0.075). The prediction diagnostics confirm a strong correlation (0.9073) between predicted and actual values.",
+  "explanation_full": "Observations show that the KNN model significantly outperforms all other benchmark models, evidenced by its highest R2 score (0.8172) and lowest MAE (0.075). The prediction diagnostics further confirm this strength, reporting a high correlation coefficient of 0.9073 between predicted and actual values. The residuals are also well-behaved, with a low residual mean (0.012229) and a standard deviation of 0.112518. This suggests that KNN provides a reliable and accurate prediction overview.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The model's performance is superior compared to other models.",
+      "claim_type": "comparison",
+      "span_category": "comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "comparison",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "is superior to",
+      "object": "other models",
+      "metric": "performance",
+      "value": "superior",
+      "unit": "comparison",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The model achieved a low error rate.",
+      "claim_type": "quantification",
+      "span_category": "quantification",
+      "is_numeric": true,
+      "requires_grounding_from": "quantification",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "achieved",
+      "object": "low error rate",
+      "metric": "error_rate",
+      "value": "low",
+      "unit": "qualitative",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

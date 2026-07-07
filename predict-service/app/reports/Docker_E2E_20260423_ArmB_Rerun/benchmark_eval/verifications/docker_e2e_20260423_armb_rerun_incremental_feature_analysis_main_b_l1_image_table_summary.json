@@ -1,0 +1,32 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "DT's best R² is shown.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "DT's best MSE is shown.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

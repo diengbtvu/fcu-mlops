@@ -1,0 +1,102 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "artifact_type": "incremental_feature_analysis/main",
+  "source_files": [
+    "table1_incremental_results.csv",
+    "fig6ab_mse_r2_features.png",
+    "results_summary.txt",
+    "analysis_summary_report.txt"
+  ],
+  "chart_type": "line_chart",
+  "primary_entities": [
+    "SVM",
+    "DT",
+    "RF",
+    "KNN",
+    "XGBoost"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:feature_subset_optimum",
+      "fact_type": "feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 9,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN optimum subset"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "fact_type": "best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 0.8301397249357059,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best R2"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "fact_type": "best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 0.011901056157134797,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best MSE"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:plateau",
+      "fact_type": "plateau",
+      "subject": "KNN",
+      "predicate": "plateau",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 9,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN plateau start"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    }
+  ],
+  "salient_facts": [
+    "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:feature_subset_optimum",
+    "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+    "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+    "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:plateau"
+  ],
+  "forbidden_inferences": [
+    "Do not assume that more features always improve performance.",
+    "Do not use summary text to override table values."
+  ]
+}

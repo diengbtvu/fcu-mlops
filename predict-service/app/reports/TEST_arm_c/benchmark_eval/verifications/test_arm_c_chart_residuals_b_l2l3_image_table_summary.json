@@ -1,0 +1,84 @@
+{
+  "artifact_id": "TEST_arm_c:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN's residuals show a low mean (0.0122) and standard deviation (0.1125), indicating consistent and small prediction errors across the dataset.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN's residuals show a low mean (0.0122) and standard deviation (0.1125), indicating consistent and small prediction errors across the dataset.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN model demonstrates strong diagnostic performance with a residual mean of 0.0122 and a standard deviation of 0.1125.",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:residual_mean"
+      ],
+      "reason": "Gold value for KNN residual_mean is 0.012229.",
+      "numeric_delta": 2.8999999999999512e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN model demonstrates strong diagnostic performance with a residual mean of 0.0122 and a standard deviation of 0.1125.",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:residuals:metric:KNN:residual_std"
+      ],
+      "reason": "Gold value for KNN residual_std is 0.112518.",
+      "numeric_delta": 1.8000000000004124e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "DT model shows a higher residual standard deviation (0.1745), implying greater inconsistency in its predictions.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "The high correlation between predicted and actual values (0.9073) further validates KNN's robust fit.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

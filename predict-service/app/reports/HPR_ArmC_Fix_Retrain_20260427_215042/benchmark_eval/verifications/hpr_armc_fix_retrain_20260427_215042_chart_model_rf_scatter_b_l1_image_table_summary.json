@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The model achieves a strong R2 score of 0.7756, signifying that 77.56% of the variance in the target variable can be explained by the model's predictions.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171.",
+      "numeric_delta": 1.8171000000233306e-06
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:rmse",
+      "claim_text": "Additionally, the low RMSE (Root Mean Squared Error) of 0.1254 indicates that the model's predictions are close to the actual values on average.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:rmse"
+      ],
+      "reason": "Gold value for RF rmse is 0.125388154.",
+      "numeric_delta": 1.1846000000009793e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:linear_fit_slope",
+      "claim_text": "The plot also shows a positive linear relationship between predicted and actual values, with a slope of 0.8488, suggesting that as the actual value increases, the predicted value tends to increase proportionally.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:linear_fit_slope"
+      ],
+      "reason": "Gold value for RF linear_fit_slope is 0.848822.",
+      "numeric_delta": 2.199999999996649e-05
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "claim_text": "The KNN model with 11 features achieves the lowest MSE (0.013) on the test set.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse"
+      ],
+      "reason": "Gold value for KNN best_mse is 0.011901056157134797.",
+      "numeric_delta": 0.0010989438428652028
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "claim_text": "The KNN model with 11 features achieves the highest R2 (0.817) on the test set.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.013139724935705921
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "The KNN model achieves the best performance with 11 features.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 2
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+      "claim_text": "Adding more features beyond a certain point does not significantly improve model performance.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

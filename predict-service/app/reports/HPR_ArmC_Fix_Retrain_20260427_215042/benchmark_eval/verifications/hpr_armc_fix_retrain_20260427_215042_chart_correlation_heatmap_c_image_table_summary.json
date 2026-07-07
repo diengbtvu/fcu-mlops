@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:1",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation"
+      ],
+      "reason": "Gold top feature for target_correlation is VFA.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:2",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.1774
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:3",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the superior model, achieving the highest R² score (0.81717)",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the lowest RMSE (0.11318)",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:model_comparison/main:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "This performance is significantly better than DT (R²=0.56045) and RF (R²=0.77560)",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:model_comparison/main:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171353091.",
+      "numeric_delta": 1.8171353091123166e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN maintains the lowest MSE (0.012810)",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:model_comparison/main:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.012809918378105262.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

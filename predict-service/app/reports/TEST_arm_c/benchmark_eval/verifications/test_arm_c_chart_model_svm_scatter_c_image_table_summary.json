@@ -1,0 +1,120 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The SVM model achieved an R2 score of 0.7324",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 9.747499999934739e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "an RMSE of 0.1369",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:rmse"
+      ],
+      "reason": "Gold value for SVM rmse is 0.1369247591.",
+      "numeric_delta": 2.4759099999993595e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "a correlation between predicted and actual values of 0.8658",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 4.0000000000040004e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "R2 score of 0.7324",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 9.747499999934739e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "a Root Mean Squared Error (RMSE) of 0.1369",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:rmse"
+      ],
+      "reason": "Gold value for SVM rmse is 0.1369247591.",
+      "numeric_delta": 2.4759099999993595e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "a Mean Absolute Error (MAE) of 0.0946",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:mae"
+      ],
+      "reason": "Gold value for SVM mae is 0.0946025669.",
+      "numeric_delta": 2.5669000000005937e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "the correlation coefficient between predicted and actual values is 0.8658",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 4.0000000000040004e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "the linear fit slope is 0.8584",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:linear_fit_slope"
+      ],
+      "reason": "Gold value for SVM linear_fit_slope is 0.858436.",
+      "numeric_delta": 3.599999999992498e-05
+    }
+  ]
+}

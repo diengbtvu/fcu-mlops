@@ -1,0 +1,14 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Benchmark generation failed to produce valid JSON.",
+  "explanation_full": "Benchmark generation failed before producing a grounded explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

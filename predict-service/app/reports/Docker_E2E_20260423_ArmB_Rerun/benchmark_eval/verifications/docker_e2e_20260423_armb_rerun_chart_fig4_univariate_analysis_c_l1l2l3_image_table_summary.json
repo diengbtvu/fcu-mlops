@@ -1,0 +1,64 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Sucrose_Degradation shows a correlation of 0.9999 with HPR",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA (0.9991)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0008000000000000229
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "COD-O (0.9963)",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0036000000000000476
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The correlation between ORP_Mid and HPR is -0.9964",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 1.9963
+    }
+  ]
+}

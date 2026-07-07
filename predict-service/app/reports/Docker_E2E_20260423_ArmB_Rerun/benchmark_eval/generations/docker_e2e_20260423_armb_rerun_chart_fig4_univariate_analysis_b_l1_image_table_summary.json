@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Benchmark generation failed to produce valid JSON.",
+  "explanation_full": "Benchmark generation failed before producing a grounded explanation. Error: Ollama benchmark response did not contain a valid JSON object.",
+  "claims": [],
+  "semantic_level": "L1"
+}

@@ -1,0 +1,132 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig3a_gra_ranking",
+  "artifact_type": "chart/fig3a_gra_ranking",
+  "source_files": [
+    "gra_ranking.json",
+    "summary.json"
+  ],
+  "chart_type": "ranking_chart",
+  "primary_entities": [
+    "pH",
+    "Propionate",
+    "VFA",
+    "Butyrate"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:top_feature",
+      "fact_type": "top_feature",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": "pH",
+      "value": 0.91,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "top GRA feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:ranking",
+      "fact_type": "ranking",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": [
+        "pH",
+        "Propionate",
+        "VFA",
+        "Butyrate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "GRA rank ordering"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:rank_score:pH",
+      "fact_type": "rank_score",
+      "subject": "pH",
+      "predicate": "gra_score",
+      "object": 1,
+      "value": 0.91,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "pH GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:rank_score:Propionate",
+      "fact_type": "rank_score",
+      "subject": "Propionate",
+      "predicate": "gra_score",
+      "object": 2,
+      "value": 0.83,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Propionate GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:rank_score:VFA",
+      "fact_type": "rank_score",
+      "subject": "VFA",
+      "predicate": "gra_score",
+      "object": 3,
+      "value": 0.81,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "VFA GRA score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "fact_type": "rank_score",
+      "subject": "Butyrate",
+      "predicate": "gra_score",
+      "object": 4,
+      "value": 0.79,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "gra_ranking.json",
+          "priority": "table/json",
+          "detail": "Butyrate GRA score"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "fixture_bundle:chart:fig3a_gra_ranking:top_feature",
+    "fixture_bundle:chart:fig3a_gra_ranking:ranking"
+  ],
+  "forbidden_inferences": [
+    "Do not treat GRA rank as proof of causality.",
+    "Do not let summary prose override ranking JSON."
+  ]
+}

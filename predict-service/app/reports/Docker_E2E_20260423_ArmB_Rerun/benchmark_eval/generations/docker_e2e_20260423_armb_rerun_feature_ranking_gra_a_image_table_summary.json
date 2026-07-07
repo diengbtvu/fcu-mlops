@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The feature ranking analysis shows that Sucrose_Degradation, VFA, and COD-O are the top three features, followed by Butyrate and VSS.",
+  "explanation_full": "The GREY RELATIONAL ANALYSIS (GRA) feature ranking identifies Sucrose_Degradation (0.9998) as the most important feature, followed closely by VFA (0.9994) and COD-O (0.9990). The ranking continues with Butyrate (0.9671) and VSS (0.9634). The summary text provides these scores, indicating a clear hierarchy of feature importance for the model. The model performance section also highlights that the Decision Tree (DT) model achieved an R² of 1.00000, suggesting high predictive accuracy.",
+  "claims": [],
+  "semantic_level": null
+}

@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:predicted_vs_actual",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:predicted_vs_actual",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The model performance analysis indicates that KNN is the superior model.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

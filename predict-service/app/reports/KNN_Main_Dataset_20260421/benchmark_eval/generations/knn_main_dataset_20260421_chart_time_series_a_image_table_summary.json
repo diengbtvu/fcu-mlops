@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:time_series",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest performance metrics, including an R2 score of 0.81717 and the lowest Mean Squared Error (MSE) of 0.012810.",
+  "explanation_full": "The KNN model was identified as the best benchmark model, achieving an R2 score of 0.81717, a Root Mean Squared Error (RMSE) of 0.11318, and a Mean Absolute Error (MAE) of 0.07502. When comparing model performance, KNN significantly outperformed other models like RF (R2: 0.775602) and DT (R2: 0.560453). Furthermore, the top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641), indicating their strong predictive power for the target variable.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R2 score",
+      "object": "0.817168",
+      "metric": "r2_score",
+      "value": 0.817168,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA, Butyrate, and Acetate.",
+      "claim_type": "top_feature",
+      "span_category": "feature_correlation",
+      "is_numeric": false,
+      "requires_grounding_from": "analysis_summary_report.txt",
+      "confidence": 1.0,
+      "subject": "HPR",
+      "predicate": "is highly correlated with",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN model has the lowest Mean Squared Error (MSE) of 0.012810.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has MSE",
+      "object": "0.012810",
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

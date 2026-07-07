@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:feature_ranking/gra",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VFA is the most important feature for predicting the target variable, followed closely by Butyrate and Acetate.",
+  "explanation_full": "The Grey Relational Analysis (GRA) indicates that VFA is the most influential feature, achieving a score of 0.7931. Butyrate ranks second with a score of 0.7902, and Acetate follows closely at 0.7772. The top five features—VFA, Butyrate, Acetate, VSS, and Propionate—all have scores above 0.75. Furthermore, the model performance section highlights that the KNN model achieved the highest R² value (0.81717) and the lowest MSE (0.012810) on the test set. This suggests that the combination of these features provides strong predictive power.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most important feature.",
+      "claim_type": "Feature Importance",
+      "span_category": "VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "gra_ranking",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931135436956089,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate ranks second with a score of 0.7902.",
+      "claim_type": "Feature Ranking",
+      "span_category": "Butyrate",
+      "is_numeric": false,
+      "requires_grounding_from": "gra_ranking",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "ranks second",
+      "object": "0.7902",
+      "metric": "gra_score",
+      "value": 0.7902467550177025,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The KNN model achieved the highest R² value of 0.81717.",
+      "claim_type": "Model Performance",
+      "span_category": "KNN",
+      "is_numeric": false,
+      "requires_grounding_from": "summary_text",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved the highest R² value",
+      "object": 0.81717,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

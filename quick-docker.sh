@@ -17,7 +17,7 @@ usage() {
 Usage: ./quick-docker.sh [command]
 
 Commands:
-  up       Start services (default)
+  up       Start services and rebuild changed images (default)
   fresh    Fresh deploy (reset DB/volumes)
   build    Rebuild images (no cache)
   stop     Stop containers

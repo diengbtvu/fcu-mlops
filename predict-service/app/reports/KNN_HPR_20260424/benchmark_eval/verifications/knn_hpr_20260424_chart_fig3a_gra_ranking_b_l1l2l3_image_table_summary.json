@@ -1,0 +1,74 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "claim_text": "The top feature is gra with a score of 3.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+      "claim_text": "Acetate has a gra score of 2.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate"
+      ],
+      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+      "numeric_delta": 1.2227800023631934
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "claim_text": "Butyrate has a gra score of 2.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 1.2097532449822976
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA",
+      "claim_text": "VFA has a gra score of 2.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.206886456304391
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "claim_text": "The ranking of gra is 2.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

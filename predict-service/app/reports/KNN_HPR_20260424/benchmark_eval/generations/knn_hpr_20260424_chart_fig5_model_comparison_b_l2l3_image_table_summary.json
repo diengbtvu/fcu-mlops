@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model achieved the best performance with an R2 score of 0.81717 and MSE of 0.012810, outperforming other models like RF, XGBoost, SVM, and DT.",
+  "explanation_full": "The analysis reveals that the KNN model demonstrates superior performance compared to other benchmark models in predicting hydrogen production (HPR).  It achieved the highest R2 score of 0.81717 and the lowest MSE of 0.012810, indicating a strong correlation between predicted and actual HPR values. While RF, XGBoost, SVM, and DT models also showed promising results, KNN consistently outperformed them across various performance metrics. This suggests that KNN is a suitable model for predicting HPR based on the provided dataset and features.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+      "claim_text": "KNN model achieved the best performance",
+      "claim_type": "freeform",
+      "span_category": "best_model",
+      "is_numeric": false,
+      "requires_grounding_from": "model_comparison",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717",
+      "claim_type": "metric_value",
+      "span_category": "ranking::r2_score",
+      "is_numeric": true,
+      "requires_grounding_from": "model_comparison",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig5_model_comparison:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

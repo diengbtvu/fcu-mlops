@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The model achieved a high sequence correlation of 0.931488, indicating a strong overall match to the real-world trend, though the predicted peak value (0.829894) was lower than the actual peak (1.0).",
+  "explanation_full": "This chart, titled 'Figure 6C - Prediction over time,' provides a detailed diagnostic of how well the best-performing model, KNN, predicted the system's behavior over time. It shows that the actual peak value occurred at index 130 with a value of 1.0, while the model predicted a peak at index 146 with a value of 0.829894. The model achieved a high sequence correlation of 0.931488, indicating a strong overall match to the real-world trend. A practical caution is that while the model is highly correlated, there is still a noticeable gap between the actual peak (1.0) and the predicted peak (0.829894), suggesting that the model might underestimate the maximum potential value.\n\nIn summary, the model is very good at tracking the general trend, but users should be aware that the predicted peak value might be slightly lower than the actual maximum observed value.",
+  "claims": [
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The actual peak value occurred at index 130 with a value of 1.0.",
+      "claim_type": "factual",
+      "span_category": "value",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "actual peak value",
+      "predicate": "occurred at",
+      "object": "index 130",
+      "metric": "index",
+      "value": 130.0,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model predicted a peak at index 146 with a value of 0.829894.",
+      "claim_type": "factual",
+      "span_category": "value",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "model predicted peak",
+      "predicate": "occurred at",
+      "object": "index 146",
+      "metric": "index",
+      "value": 146.0,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model achieved a sequence correlation of 0.931488.",
+      "claim_type": "factual",
+      "span_category": "correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "fig6c_prediction_time",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "achieved",
+      "object": 0.931488,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": "null",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

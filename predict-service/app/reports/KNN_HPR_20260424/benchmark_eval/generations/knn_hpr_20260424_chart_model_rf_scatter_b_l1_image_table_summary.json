@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest model has a high R2 score of 0.7756, indicating a strong relationship between predicted and actual values. The low RMSE (0.1254) suggests accurate predictions.",
+  "explanation_full": "The provided scatter plot visualizes the performance of the Random Forest model.  It demonstrates a strong positive correlation between the predicted and actual values, as evidenced by the high R2 score of 0.7756. This indicates that the model effectively captures the underlying relationship in the data. Additionally, the low RMSE value of 0.1254 suggests that the model's predictions are close to the actual values on average. The plot also shows a relatively tight cluster of points around the diagonal line, further supporting the accuracy of the model.  The model's performance can be further assessed by examining the individual data points and their distribution around the regression line.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model has a high R2 score of 0.7756, indicating a strong relationship between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "model_rf_scatter",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": "0.7756",
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse",
+      "claim_text": "The low RMSE (0.1254) suggests accurate predictions.",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "model_rf_scatter",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse",
+      "subject": "RF",
+      "predicate": "rmse",
+      "object": "0.1254",
+      "metric": "rmse",
+      "value": 0.1254,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

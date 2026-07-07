@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model exhibits a strong correlation between predicted and actual values (R2=0.8172) with low prediction errors (RMSE=0.1132). The scatter plot reveals a tight clustering of data points around the diagonal, indicating good predictive performance.",
+  "explanation_full": "The KNN model demonstrates high accuracy in predicting the target variable as evidenced by its R2 score of 0.8172, which signifies a strong positive linear relationship between predicted and actual values.  This indicates that the model effectively captures the underlying trend in the data. The RMSE of 0.1132 further supports this claim by highlighting the relatively small average difference between predicted and actual values. Examining the scatter plot, we observe a tight clustering of data points around the diagonal line representing perfect prediction, visually confirming the model's strong predictive capabilities.  The residuals exhibit minimal dispersion, suggesting that the KNN model accurately captures both the magnitude and direction of the relationship between the input features and the target variable.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

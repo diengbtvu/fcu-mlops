@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:top_feature",
+      "claim_text": "VFA, Butyrate and Acetate are key features for predicting HRT 12 -4 h outcomes.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance::importance",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VFA, Butyrate and Acetate",
+      "metric": "importance",
+      "value": -4.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:ranking",
+      "claim_text": "VFA, Butyrate and Acetate are ranked as important features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "ranking::importance",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_importance:ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

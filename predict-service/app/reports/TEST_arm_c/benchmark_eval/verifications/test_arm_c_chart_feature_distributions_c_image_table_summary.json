@@ -1,0 +1,118 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_distributions",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean values.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:top_feature:mean"
+      ],
+      "reason": "Gold top feature for mean is Ethanol.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol has the highest mean (0.4736).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 1.7887600000043857e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate has the second highest mean (0.4465).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Acetate:mean"
+      ],
+      "reason": "Gold value for Acetate mean is 0.4465350188.",
+      "numeric_delta": 3.5018800000008454e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Butyrate has the third highest mean (0.4287).",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Butyrate:mean"
+      ],
+      "reason": "Gold value for Butyrate mean is 0.4286702028.",
+      "numeric_delta": 2.9797200000014623e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Ethanol (0.2528), Butyrate (0.2474), and Acetate (0.226) exhibit the highest variability (standard deviation).",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Ethanol has a standard deviation of 0.2528.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.2528296374.",
+      "numeric_delta": 2.9637399999948855e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "Butyrate has a standard deviation of 0.2474.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Butyrate:std"
+      ],
+      "reason": "Gold value for Butyrate std is 0.2473608737.",
+      "numeric_delta": 3.9126299999997505e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "Acetate has a standard deviation of 0.226.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_distributions:metric:Acetate:std"
+      ],
+      "reason": "Gold value for Acetate std is 0.2259920382.",
+      "numeric_delta": 7.961800000011454e-06
+    }
+  ]
+}

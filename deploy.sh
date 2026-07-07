@@ -158,6 +158,11 @@ clear_laravel_cache_safely() {
     fi
 }
 
+clear_laravel_bootstrap_cache() {
+    compose exec -T laravel-webapp sh -lc \
+        "find /var/www/html/bootstrap/cache -maxdepth 1 -type f -name '*.php' ! -name '.gitignore' -delete"
+}
+
 is_valid_laravel_app_key() {
     local key="$1"
     if [[ "$key" != base64:* ]]; then
@@ -214,6 +219,12 @@ if [ ! -f "WebApp/.env" ]; then
     echo -e "${YELLOW}Copying .env.docker to WebApp/.env...${NC}"
     cp .env.docker WebApp/.env
 fi
+
+# Docker deployment now runs Groq-only LLM workflows.
+upsert_env_value ".env.docker" "REPORT_LLM_PROVIDER" "groq"
+upsert_env_value ".env.docker" "BENCHMARK_LLM_CLIENT" "groq"
+upsert_env_value "WebApp/.env" "REPORT_LLM_PROVIDER" "groq"
+upsert_env_value "WebApp/.env" "BENCHMARK_LLM_CLIENT" "groq"
 
 # Ensure APP_KEY is valid for Laravel encryption/session cookies
 APP_KEY_VALUE="$(get_env_value "WebApp/.env" "APP_KEY")"
@@ -312,7 +323,14 @@ fi
 
 # Start containers
 echo -e "${YELLOW}Starting Docker containers...${NC}"
-compose up -d
+if [ "$BUILD" = true ] || [ "$FRESH" = true ]; then
+    compose up -d --remove-orphans
+else
+    # Default startup still uses cached layers, but it rebuilds services whose
+    # Docker context changed so dependency edits (for example requirements.txt)
+    # are picked up automatically.
+    compose up -d --build --remove-orphans
+fi
 
 # Ensure mounted directories are writable by predict-service runtime user
 echo -e "${YELLOW}Ensuring predict-service volume permissions...${NC}"
@@ -355,6 +373,7 @@ fi
 
 # Clear cached config/routes/views so updated .env is applied
 echo -e "${YELLOW}Clearing Laravel caches...${NC}"
+clear_laravel_bootstrap_cache
 compose exec -T laravel-webapp php artisan config:clear
 compose exec -T laravel-webapp php artisan route:clear
 compose exec -T laravel-webapp php artisan view:clear

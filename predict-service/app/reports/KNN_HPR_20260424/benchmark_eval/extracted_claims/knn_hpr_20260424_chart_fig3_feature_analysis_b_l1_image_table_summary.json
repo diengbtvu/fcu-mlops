@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+      "claim_text": "KNN::r2_score",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA::correlation",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Sucrose_Degradation and VFA as the most influential features",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA showing an importance of 0.9023",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 4.31589999994042e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA is shown to have a significant importance score of 0.9023",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 4.31589999994042e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Sucrose_Degradation contributes with a score of 0.0832",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 0.8190956841000001
+    }
+  ]
+}

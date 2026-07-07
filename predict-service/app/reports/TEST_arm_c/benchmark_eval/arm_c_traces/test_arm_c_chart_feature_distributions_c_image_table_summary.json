@@ -1,0 +1,271 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "Ethanol, Acetate, and Butyrate exhibit the highest mean values among the features. Regarding standard deviation, Ethanol, Butyrate, and Acetate show the highest variability.",
+      "draft_explanation_full": "The feature distributions indicate that Ethanol, Acetate, and Butyrate have the highest mean values. Specifically, Ethanol has the highest mean (0.4736), followed by Acetate (0.4465), and then Butyrate (0.4287). For standard deviation, Ethanol (0.2528), Butyrate (0.2474), and Acetate (0.226) exhibit the highest variability. These statistics are derived from the 'table_descriptive_statistics.csv' artifact.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean values.",
+          "claim_type": "top_feature",
+          "span_category": "feature",
+          "is_numeric": false,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:top_feature:mean",
+          "subject": "distribution",
+          "predicate": "mean",
+          "object": "distribution",
+          "metric": "mean",
+          "value": null,
+          "unit": null,
+          "ordered_items": [
+            "Ethanol",
+            "Acetate",
+            "Butyrate"
+          ],
+          "feature_count": 3,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "Ethanol has the highest mean (0.4736).",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Ethanol:mean",
+          "subject": "Ethanol",
+          "predicate": "mean",
+          "object": 0.4736,
+          "metric": "mean",
+          "value": 0.4736,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "Acetate has the second highest mean (0.4465).",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Acetate:mean",
+          "subject": "Acetate",
+          "predicate": "mean",
+          "object": 0.4465,
+          "metric": "mean",
+          "value": 0.4465,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "Butyrate has the third highest mean (0.4287).",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Butyrate:mean",
+          "subject": "Butyrate",
+          "predicate": "mean",
+          "object": 0.4287,
+          "metric": "mean",
+          "value": 0.4287,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "Ethanol (0.2528), Butyrate (0.2474), and Acetate (0.226) exhibit the highest variability (standard deviation).",
+          "claim_type": "metric_value",
+          "span_category": "feature",
+          "is_numeric": false,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:top_feature:std",
+          "subject": "distribution",
+          "predicate": "std",
+          "object": null,
+          "metric": "std",
+          "value": null,
+          "unit": null,
+          "ordered_items": [
+            "Ethanol",
+            "Butyrate",
+            "Acetate"
+          ],
+          "feature_count": 3,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "Ethanol has a standard deviation of 0.2528.",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Ethanol:std",
+          "subject": "Ethanol",
+          "predicate": "std",
+          "object": 0.2528,
+          "metric": "std",
+          "value": 0.2528,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "Butyrate has a standard deviation of 0.2474.",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Butyrate:std",
+          "subject": "Butyrate",
+          "predicate": "std",
+          "object": 0.2474,
+          "metric": "std",
+          "value": 0.2474,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "Acetate has a standard deviation of 0.226.",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:feature_distributions:metric:Acetate:std",
+          "subject": "Acetate",
+          "predicate": "std",
+          "object": 0.226,
+          "metric": "std",
+          "value": 0.226,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "Ethanol, Acetate, and Butyrate have the highest mean values.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim correctly identifies the top three features by mean based on the evidence packet's summary text and validated facts.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:top_feature:mean"
+          ],
+          "grounded_fact_summary": "Ethanol, Acetate, and Butyrate have the highest mean values."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "Ethanol has the highest mean (0.4736).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.4736) is a correct rounding of the grounded value (0.4735821124).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Ethanol:mean"
+          ],
+          "grounded_fact_summary": "Ethanol has the highest mean value (0.4736)."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "Acetate has the second highest mean (0.4465).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.4465) is a correct rounding of the grounded value (0.4465350188).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Acetate:mean"
+          ],
+          "grounded_fact_summary": "Acetate has the second highest mean value (0.4465)."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "Butyrate has the third highest mean (0.4287).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.4287) is a correct rounding of the grounded value (0.4286702028).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Butyrate:mean"
+          ],
+          "grounded_fact_summary": "Butyrate has the third highest mean value (0.4287)."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "Ethanol (0.2528), Butyrate (0.2474), and Acetate (0.226) exhibit the highest variability (standard deviation).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim correctly identifies the top three features by standard deviation, and the values are correctly rounded from the evidence.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:top_feature:std"
+          ],
+          "grounded_fact_summary": "Ethanol, Butyrate, and Acetate have the highest standard deviation."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "Ethanol has a standard deviation of 0.2528.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.2528) is a correct rounding of the grounded value (0.2528296374).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Ethanol:std"
+          ],
+          "grounded_fact_summary": "Ethanol has a standard deviation of 0.2528."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "Butyrate has a standard deviation of 0.2474.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.2474) is a correct rounding of the grounded value (0.2473608737).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Butyrate:std"
+          ],
+          "grounded_fact_summary": "Butyrate has a standard deviation of 0.2474."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "Acetate has a standard deviation of 0.226.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim's value (0.226) is a correct rounding of the grounded value (0.2259920382).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:feature_distributions:metric:Acetate:std"
+          ],
+          "grounded_fact_summary": "Acetate has a standard deviation of 0.226."
+        }
+      ],
+      "corrected_explanation_short": "",
+      "corrected_explanation_full": "",
+      "corrected_claims": [],
+      "corrected_validations": []
+    }
+  ],
+  "decision_counts": {
+    "keep": 8
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_1",
+      "claim_text": "The XGBoost scatter plot shows a strong positive correlation between predicted and actual values.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_2",
+      "claim_text": "The linear fit line has a slope of 0.839.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Slope' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_3",
+      "claim_text": "The model's overall performance is summarized by an R² score of 0.7495.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'R-squared' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:model_xgboost_scatter",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "claim_4",
+      "claim_text": "The largest absolute residual error was 0.4105.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Residual Error' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

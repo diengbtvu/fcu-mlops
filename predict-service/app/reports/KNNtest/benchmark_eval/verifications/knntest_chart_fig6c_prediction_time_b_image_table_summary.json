@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Comparison' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three features correlated with HPR.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Fact Extraction' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The KNN model showed a sequence correlation of 0.931488.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Metric Reporting' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

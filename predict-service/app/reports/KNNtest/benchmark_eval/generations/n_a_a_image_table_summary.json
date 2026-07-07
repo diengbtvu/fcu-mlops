@@ -1,0 +1,8 @@
+{
+  "artifact_id": "N/A",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The content provides a high-level, interpretive summary of model performance data, lacking specific claims or quantifiable facts to extract.",
+  "explanation_full": "The provided text is a meta-analysis or interpretation guide, not a data-rich document containing specific claims, metrics, or factual statements that can be grounded. It discusses the *process* of analyzing model performance (e.g., 'The data presents comparative results...', 'The model associated with the highest and most consistent performance metrics should be prioritized...'). Since there are no concrete claims, metrics, or source data to extract, the 'claims' array is empty.",
+  "claims": []
+}

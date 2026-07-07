@@ -1,0 +1,83 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved its best performance (R²=0.8301, MSE=0.0119) with 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 4.0000000000040004e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN is the superior model, achieving the highest R² (0.8172) and the lowest MSE (0.0128).",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "RF performed best with 11 features.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.785537.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "SVM achieved its best performance (R²=0.7794, MSE=0.0154) with 4 features (VFA -> Butyrate -> Acetate -> VSS).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.779437.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The feature importance ranking suggests that VFA, Butyrate, and Acetate are the most influential features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "KNN achieved the highest R² of 0.8172 and the lowest MSE of 0.0128 on the full test set.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    }
+  ]
+}

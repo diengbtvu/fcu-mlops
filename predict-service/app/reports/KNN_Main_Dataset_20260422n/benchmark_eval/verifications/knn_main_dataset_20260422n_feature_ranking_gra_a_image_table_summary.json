@@ -1,0 +1,44 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the top-ranked feature in the GRA.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:feature_ranking/gra:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.3543695608908557e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the highest R² score of 0.81717.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate is the second-ranked feature, with a score of 0.7902.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:feature_ranking/gra:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 4.6755017702460044e-05
+    }
+  ]
+}

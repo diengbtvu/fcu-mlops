@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNNtest:chart:time_series",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved a sequence correlation of 0.931488.",
+      "claim_type": "metric",
+      "span_category": "sequence_correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "sequence_story",
+      "confidence": 1.0,
+      "subject": "KNN model",
+      "predicate": "achieved",
+      "object": "0.931488",
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

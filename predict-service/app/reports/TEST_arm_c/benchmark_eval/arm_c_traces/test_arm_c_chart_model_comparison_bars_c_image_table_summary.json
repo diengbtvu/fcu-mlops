@@ -1,0 +1,558 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The KNN model demonstrated the best performance across the benchmark metrics, achieving an R2 score of 0.8172, RMSE of 0.1132, MSE of 0.01281, and MAE of 0.075.",
+      "draft_explanation_full": "The model comparison chart indicates that the KNN model achieved the highest performance metrics compared to RF, XGBoost, SVM, and DT. Specifically, KNN recorded an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. For comparison, RF scored R2=0.7756, XGBoost scored R2=0.7495, SVM scored R2=0.7324, and DT scored R2=0.5605. The table evidence confirms these findings, showing KNN's superior metrics across all listed models.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model demonstrated the best performance across the benchmark metrics",
+          "claim_type": "freeform",
+          "span_category": "model_comparison",
+          "is_numeric": false,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:best_model",
+          "subject": "model_comparison",
+          "predicate": "best_model",
+          "object": "KNN",
+          "metric": null,
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN recorded an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN recorded an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:rmse",
+          "subject": "KNN",
+          "predicate": "rmse",
+          "object": null,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN recorded an MSE of 0.01281",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mse",
+          "subject": "KNN",
+          "predicate": "mse",
+          "object": null,
+          "metric": "mse",
+          "value": 0.01281,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN recorded an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mae",
+          "subject": "KNN",
+          "predicate": "mae",
+          "object": null,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "RF scored R2=0.7756",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:RF:r2_score",
+          "subject": "RF",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7756,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "XGBoost scored R2=0.7495",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:XGBoost:r2_score",
+          "subject": "XGBoost",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7495,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "SVM scored R2=0.7324",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:SVM:r2_score",
+          "subject": "SVM",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7324,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "DT scored R2=0.5605",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:DT:r2_score",
+          "subject": "DT",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.5605,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model demonstrated the best performance across the benchmark metrics",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence explicitly states KNN is the winning model based on the summary.json payload and the best_model fact.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:best_model"
+          ],
+          "grounded_fact_summary": "KNN is the winning model."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN recorded an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.8172, while the grounded fact from summary.json is 0.8171678017. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN R2 score is 0.8171678017."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN recorded an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.1132, while the grounded fact from summary.json is 0.11318091. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:rmse"
+          ],
+          "grounded_fact_summary": "KNN RMSE is 0.11318091."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN recorded an MSE of 0.01281",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.01281, while the grounded fact from summary.json is 0.0128099184. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mse"
+          ],
+          "grounded_fact_summary": "KNN MSE is 0.0128099184."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN recorded an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.075, while the grounded fact from summary.json is 0.0750230875. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mae"
+          ],
+          "grounded_fact_summary": "KNN MAE is 0.0750230875."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "RF scored R2=0.7756",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.7756, while the grounded fact from summary.json is 0.7756018171. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:RF:r2_score"
+          ],
+          "grounded_fact_summary": "RF R2 score is 0.7756018171."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "XGBoost scored R2=0.7495",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.7495, while the grounded fact from summary.json is 0.7494763102. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:XGBoost:r2_score"
+          ],
+          "grounded_fact_summary": "XGBoost R2 score is 0.7494763102."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "SVM scored R2=0.7324",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.7324, while the grounded fact from summary.json is 0.7324097475. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:SVM:r2_score"
+          ],
+          "grounded_fact_summary": "SVM R2 score is 0.7324097475."
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "DT scored R2=0.5605",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.5605, while the grounded fact from summary.json is 0.5604531395. This is a minor rounding difference, but the exact value should be used.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:DT:r2_score"
+          ],
+          "grounded_fact_summary": "DT R2 score is 0.5604531395."
+        }
+      ],
+      "corrected_explanation_short": "The KNN model demonstrated the best performance across the benchmark metrics, achieving an R2 score of 0.8172, RMSE of 0.1132, MSE of 0.01281, and MAE of 0.075.",
+      "corrected_explanation_full": "The model comparison chart indicates that the KNN model achieved the highest performance metrics compared to RF, XGBoost, SVM, and DT. Specifically, KNN recorded an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. For comparison, RF scored R2=0.7756, XGBoost scored R2=0.7495, SVM scored R2=0.7324, and DT scored R2=0.5605. The table evidence confirms these findings, showing KNN's superior metrics across all listed models.",
+      "corrected_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model demonstrated the best performance across the benchmark metrics",
+          "claim_type": "freeform",
+          "span_category": "model_comparison",
+          "is_numeric": false,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:best_model",
+          "subject": "model_comparison",
+          "predicate": "best_model",
+          "object": "KNN",
+          "metric": null,
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN recorded an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN recorded an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:rmse",
+          "subject": "KNN",
+          "predicate": "rmse",
+          "object": null,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN recorded an MSE of 0.01281",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mse",
+          "subject": "KNN",
+          "predicate": "mse",
+          "object": null,
+          "metric": "mse",
+          "value": 0.01281,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN recorded an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mae",
+          "subject": "KNN",
+          "predicate": "mae",
+          "object": null,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "RF scored R2=0.7756",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:RF:r2_score",
+          "subject": "RF",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7756,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "XGBoost scored R2=0.7495",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:XGBoost:r2_score",
+          "subject": "XGBoost",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7495,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "SVM scored R2=0.7324",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:SVM:r2_score",
+          "subject": "SVM",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.7324,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "DT scored R2=0.5605",
+          "claim_type": "metric_value",
+          "span_category": "model_comparison",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_comparison_bars:metric:DT:r2_score",
+          "subject": "DT",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.5605,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model demonstrated the best performance across the benchmark metrics",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The evidence packet explicitly states KNN is the winning model, and the explanation confirms this.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:best_model"
+          ],
+          "grounded_fact_summary": "KNN is the winning model based on benchmark metrics."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "KNN recorded an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.8172, while the grounded fact is 0.8171678017. This is a minor rounding difference, but the source variable ID is incorrect for the claim's context.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN's R2 score is 0.8171678017."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "KNN recorded an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.1132, while the grounded fact is 0.11318091. This is a minor rounding difference, but the source variable ID is incorrect for the claim's context.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:rmse"
+          ],
+          "grounded_fact_summary": "KNN's RMSE is 0.11318091."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "KNN recorded an MSE of 0.01281",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.01281, while the grounded fact is 0.0128099184. This is a minor rounding difference, but the source variable ID is incorrect for the claim's context.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mse"
+          ],
+          "grounded_fact_summary": "KNN's MSE is 0.0128099184."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "KNN recorded an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim rounds the value to 0.075, while the grounded fact is 0.0750230875. This is a minor rounding difference, but the source variable ID is incorrect for the claim's context.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_comparison_bars:metric:KNN:mae"
+          ],
+          "grounded_fact_summary": "KNN's MAE is 0.0750230875."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "RF scored R2=0.7756",
+          "status": "contradicted",
+          "recommended_action": "edit",
+          "rationale": "The claim references a source variable ID for RF's R2 score that does not exist in the validated facts. The correct R2 score for RF is available in the evidence packet.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "RF's R2 score is 0.7756018171."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "XGBoost scored R2=0.7495",
+          "status": "contradicted",
+          "recommended_action": "edit",
+          "rationale": "The claim references a source variable ID for XGBoost's R2 score that does not exist in the validated facts. The correct R2 score for XGBoost is available in the evidence packet.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "XGBoost's R2 score is 0.7494763102."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "SVM scored R2=0.7324",
+          "status": "contradicted",
+          "recommended_action": "edit",
+          "rationale": "The claim references a source variable ID for SVM's R2 score that does not exist in the validated facts. The correct R2 score for SVM is available in the evidence packet.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "SVM's R2 score is 0.7324097475."
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "DT scored R2=0.5605",
+          "status": "contradicted",
+          "recommended_action": "edit",
+          "rationale": "The claim references a source variable ID for DT's R2 score that does not exist in the validated facts. The correct R2 score for DT is available in the evidence packet.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "DT's R2 score is 0.5604531395."
+        }
+      ]
+    }
+  ],
+  "decision_counts": {
+    "keep": 1,
+    "edit": 8
+  }
+}

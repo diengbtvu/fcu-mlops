@@ -1,0 +1,63 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "RF diagnostics show a strong overall fit.",
+  "explanation_full": "RF reaches R2=0.880000, pred_actual_correlation=0.860000, and linear_fit_slope=0.840000.",
+  "claims": [
+    {
+      "claim_id": "r2",
+      "claim_text": "RF has r2_score=0.880000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.88,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "correlation",
+      "claim_text": "RF has pred_actual_correlation=0.860000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.94,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.86,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "third-metric",
+      "claim_text": "RF has linear_fit_slope=0.840000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "RF",
+      "predicate": null,
+      "object": null,
+      "metric": "linear_fit_slope",
+      "value": 0.84,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The model comparison table shows that DT, RF, and KNN models achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), while SVM and XGBoost scored 0.0 for R².",
+  "explanation_full": "The model performance comparison table indicates that the Decision Tree (DT), Random Forest (RF), and K-Nearest Neighbors (KNN) models all achieved perfect performance metrics, including an R² score of 1.0 and zero values for RMSE, MSE, and MAE. Conversely, the Support Vector Machine (SVM) model scored 0.0 for R², with an RMSE of 0.0875 and an MAE of 0.0872. XGBoost also scored 0.0 for R², showing a very low RMSE of 2.73e-07 and an MAE of 2.73e-07. Overall, DT, RF, and KNN significantly outperformed SVM and XGBoost based on these metrics.",
+  "claims": [],
+  "semantic_level": "L1L2L3"
+}

@@ -1,0 +1,52 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Random Forest (RF) outperformed SVM and GB, achieving 0.98 in Accuracy, F1-Score, and AUC, compared to 0.97 and 0.96 respectively.",
+  "explanation_full": "Comparing the models, Random Forest (RF) achieved the highest metrics (0.98) compared to Support Vector Machine (SVM) (0.97) and Gradient Boosting (GB) (0.96). This consistent superiority across all metrics confirms RF's status as the best model.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Random Forest (RF) outperformed SVM and GB, achieving 0.98 in Accuracy, F1-Score, and AUC, compared to 0.97 and 0.96 respectively.",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Accuracy",
+        "F1-Score",
+        "AUC"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Random Forest (RF) achieved the highest metrics (0.98) compared to Support Vector Machine (SVM) (0.97) and Gradient Boosting (GB) (0.96).",
+      "claim_type": "rank_score",
+      "span_category": "model_comparison",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": "gra_score",
+      "value": 0.98,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3"
+}

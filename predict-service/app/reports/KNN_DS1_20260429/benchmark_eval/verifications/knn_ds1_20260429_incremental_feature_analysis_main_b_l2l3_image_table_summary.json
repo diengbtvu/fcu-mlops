@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim-1",
+      "claim_text": "KNN model performs best with R² = 0.81717 and MSE = 0.012810",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim lacks a feature count.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim-2",
+      "claim_text": "Top correlated features with HPR are VFA, Butyrate, and Acetate",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Top-feature claim lacks a feature name.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_DS1_20260429:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim-3",
+      "claim_text": "The model performance improves as the number of features increases, with the best performance achieved when all 11 features are used",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_DS1_20260429:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 2
+    }
+  ]
+}

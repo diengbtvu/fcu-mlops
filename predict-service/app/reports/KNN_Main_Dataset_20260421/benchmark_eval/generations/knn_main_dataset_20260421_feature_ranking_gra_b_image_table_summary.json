@@ -1,0 +1,66 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VFA is the most important feature, followed by Butyrate and Acetate, and KNN performed best with an R² of 0.81717.",
+  "explanation_full": "The feature ranking analysis clearly identifies VFA as the most influential feature (score: 0.7931), followed by Butyrate (0.7902) and Acetate (0.7772). Regarding model performance, the KNN model demonstrated superior performance, achieving an R² of 0.81717 and an MSE of 0.012810. The incremental feature analysis suggests that the model benefits from a larger feature set, as the KNN score increased from 0.644858 (1 feature) to 0.817859 (11 features). These findings suggest that VFA, Butyrate, and Acetate are key predictors, and incorporating all available features maximizes model accuracy.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most influential feature.",
+      "claim_type": "rank_score",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most influential feature",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the best R² score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R² score",
+      "object": 0.81717,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The KNN score increased from 0.644858 (1 feature) to 0.817859 (11 features).",
+      "claim_type": "metric_value",
+      "span_category": "incremental_feature_analysis",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "score change",
+      "object": 0.817859,
+      "metric": "knn_score",
+      "value": 0.817859,
+      "unit": null,
+      "ordered_items": [
+        "1",
+        "11"
+      ],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ]
+}

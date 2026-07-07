@@ -1,0 +1,72 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, ORP_Low, COD-O, and ORP_Mid are the top features influencing model predictions.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "shap::mean_abs_shap",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 6,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "ORP_Low is a metric value.",
+      "claim_type": "metric_value",
+      "span_category": "ORP_Low::mean_abs_shap",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "The ranking of features based on mean_abs_shap is VFA, Butyrate, Acetate, ORP_Low, COD-O, and ORP_Mid.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "ranking::mean_abs_shap",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "ORP_Low",
+        "COD-O",
+        "ORP_Mid"
+      ],
+      "feature_count": 6,
+      "hedged": false
+    }
+  ]
+}

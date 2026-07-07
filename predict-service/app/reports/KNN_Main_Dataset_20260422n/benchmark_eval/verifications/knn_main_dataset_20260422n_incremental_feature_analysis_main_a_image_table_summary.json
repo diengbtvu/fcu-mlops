@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:incremental_feature_analysis/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:incremental_feature_analysis/main",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "The average value for 'Category A' is higher than 'Category B'.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

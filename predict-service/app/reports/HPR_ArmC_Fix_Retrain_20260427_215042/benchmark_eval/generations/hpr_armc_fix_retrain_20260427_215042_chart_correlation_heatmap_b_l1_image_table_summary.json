@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The correlation heatmap shows the strength and direction of relationships between different variables.  Strong positive correlations are indicated by warmer colors, while negative correlations are shown in cooler colors.",
+  "explanation_full": "This correlation heatmap visualizes the relationships between various variables measured in the dataset. The color intensity represents the strength of the correlation: \n\n* **Warmer colors (red to yellow):** Indicate strong positive correlations, meaning that as one variable increases, the other tends to increase as well.\n* **Cooler colors (blue to green):** Indicate negative correlations, where an increase in one variable is associated with a decrease in the other. \n\nThe heatmap highlights key relationships such as the strong positive correlation between VFA and HPR, suggesting that higher levels of volatile fatty acids are associated with increased hydrogen production.  Similarly, butyrate, acetate, and VSS also show strong positive correlations with HPR.\n\nThis visualization provides a quick overview of the dataset's structure and helps identify potential influential factors related to hydrogen production.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "claim_text": "The correlation between Butyrate and VFA is 2.",
+      "claim_type": "metric_value",
+      "span_category": "correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "claim_text": "The target correlation of VFA is 2.",
+      "claim_type": "metric_value",
+      "span_category": "target_correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "KNN is the best model",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No best-model fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C2",
+      "claim_text": "KNN achieved the lowest MAE",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C3",
+      "claim_text": "KNN also achieved the lowest MSE",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C4",
+      "claim_text": "KNN maintained the lowest RMSE",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig6ab_mse_r2_features",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C5",
+      "claim_text": "Linear Regression consistently showed the highest error values across all metrics",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

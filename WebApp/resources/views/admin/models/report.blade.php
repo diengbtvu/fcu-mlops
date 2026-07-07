@@ -25,9 +25,40 @@
     $trainedAt = $model->CreatedDate ?? $model->created_at;
     $inlineTables = is_array($inlineTables ?? null) ? $inlineTables : [];
     $llmExplanations = is_array($llmExplanations ?? null) ? $llmExplanations : [];
+    $selectedBenchmarkExplanations = is_array($selectedBenchmarkExplanations ?? null)
+        ? $selectedBenchmarkExplanations
+        : [];
     $llmExplanationStatus = is_array($summary['llm_explanations_status'] ?? null)
         ? $summary['llm_explanations_status']
         : [];
+    $benchmarkSummary = is_array($summary['benchmark_summary'] ?? null)
+        ? $summary['benchmark_summary']
+        : [];
+    $benchmarkStatusPayload = is_array($summary['benchmark_status'] ?? null)
+        ? $summary['benchmark_status']
+        : [];
+    $benchmarkSelectableRows = is_array($benchmarkSelectableRows ?? null)
+        ? $benchmarkSelectableRows
+        : [];
+    $benchmarkDisplayedRow = is_array($benchmarkDisplayedRow ?? null)
+        ? $benchmarkDisplayedRow
+        : [];
+    $benchmarkDefaultDisplayRow = is_array($benchmarkDefaultDisplayRow ?? null)
+        ? $benchmarkDefaultDisplayRow
+        : [];
+    $benchmarkDisplayOverrideActive = !empty($benchmarkDisplayOverrideActive);
+    $benchmarkDisplayedRowKey = trim((string) ($benchmarkDisplayedRowKey ?? ''));
+    $benchmarkSelectableRowsByArm = [];
+    foreach ($benchmarkSelectableRows as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+        $arm = trim((string) ($row['arm'] ?? ''));
+        if ($arm === '') {
+            continue;
+        }
+        $benchmarkSelectableRowsByArm[$arm][] = $row;
+    }
     $explanationAssets = is_array($llmExplanations['assets'] ?? null) ? $llmExplanations['assets'] : [];
     $explanationLocale = str_starts_with(app()->getLocale(), 'zh') ? 'zh_TW' : 'en';
     $resolveExplanation = function (string $key) use ($explanationAssets, $explanationLocale): string {
@@ -42,6 +73,13 @@
 
     $keyLabels = [
         'training_bundle_zip' => 'Training Bundle ZIP',
+        'benchmark_manifest' => 'Benchmark Manifest JSONL',
+        'benchmark_run_metadata' => 'Benchmark Run Metadata JSON',
+        'benchmark_leaderboard_json' => 'Benchmark Leaderboard JSON',
+        'benchmark_leaderboard_csv' => 'Benchmark Leaderboard CSV',
+        'benchmark_per_chart_json' => 'Benchmark Per-chart JSON',
+        'benchmark_per_chart_csv' => 'Benchmark Per-chart CSV',
+        'benchmark_selected_explanations' => 'Benchmark-selected Explanations JSON',
         'llm_explanations' => 'AI Explanations JSON',
         'summary' => 'Summary JSON',
         'best_model_summary' => 'Best Model Summary JSON',
@@ -135,6 +173,13 @@
         'results_summary',
         'analysis_summary',
         'summary',
+        'benchmark_selected_explanations',
+        'benchmark_leaderboard_json',
+        'benchmark_leaderboard_csv',
+        'benchmark_per_chart_json',
+        'benchmark_per_chart_csv',
+        'benchmark_run_metadata',
+        'benchmark_manifest',
         'best_model_summary',
         'table1_incremental_results',
         'model_comparison_table',
@@ -176,6 +221,38 @@
     $llmCurrentItems = is_array($llmExplanationStatus['current_items'] ?? null)
         ? array_values(array_filter(array_map('strval', $llmExplanationStatus['current_items'])))
         : [];
+    $formatRetryText = function (array $retry): string {
+        $attempt = isset($retry['attempt']) ? (int) $retry['attempt'] : 0;
+        $maxAttempts = isset($retry['max_attempts']) ? (int) $retry['max_attempts'] : 0;
+        $retryForever = !empty($retry['retry_forever']) || $maxAttempts <= 0;
+        $waitSeconds = isset($retry['wait_seconds']) ? round((float) $retry['wait_seconds'], 1) : null;
+        $reason = trim((string) ($retry['reason'] ?? ''));
+        $statusCode = isset($retry['status_code']) ? (int) $retry['status_code'] : null;
+        $keyLabel = trim((string) ($retry['key_label'] ?? ''));
+        if ($attempt <= 0) {
+            return '';
+        }
+
+        $parts = ["Retry {$attempt} / " . ($retryForever ? '∞' : (string) $maxAttempts)];
+        if ($waitSeconds !== null) {
+            $parts[] = "waiting " . number_format($waitSeconds, 1) . "s";
+        }
+        if ($reason !== '') {
+            $parts[] = $reason;
+        }
+        if ($statusCode !== null) {
+            $parts[] = "HTTP {$statusCode}";
+        }
+        if ($keyLabel !== '') {
+            $parts[] = $keyLabel;
+        }
+
+        return implode(' • ', $parts);
+    };
+    $llmRetryPayload = is_array($llmExplanationStatus['retry'] ?? null)
+        ? $llmExplanationStatus['retry']
+        : [];
+    $llmRetryText = $formatRetryText($llmRetryPayload);
     $llmStartedAt = null;
     $llmPendingTooLong = false;
     if ($llmStatus === 'pending' && !empty($llmExplanationStatus['started_at'])) {
@@ -200,6 +277,202 @@
         || ($llmStatus === 'success' && empty($llmExplanations))
         || $recentlyTrainedWithoutExplanations
     );
+    $benchmarkStatus = strtolower(trim((string) ($benchmarkStatusPayload['status'] ?? '')));
+    $benchmarkStatusMessage = trim((string) ($benchmarkStatusPayload['message'] ?? ''));
+    $benchmarkProgress = (float) ($benchmarkStatusPayload['progress'] ?? 0);
+    $benchmarkProgress = max(0, min(100, $benchmarkProgress));
+    $benchmarkPhase = trim((string) ($benchmarkStatusPayload['phase'] ?? ''));
+    $benchmarkStepIndex = isset($benchmarkStatusPayload['step_index']) ? (int) $benchmarkStatusPayload['step_index'] : null;
+    $benchmarkTotalSteps = isset($benchmarkStatusPayload['total_steps']) ? (int) $benchmarkStatusPayload['total_steps'] : null;
+    $benchmarkCurrentItems = is_array($benchmarkStatusPayload['current_items'] ?? null)
+        ? array_values(array_filter(array_map('strval', $benchmarkStatusPayload['current_items'])))
+        : [];
+    $benchmarkRetryPayload = is_array($benchmarkStatusPayload['retry'] ?? null)
+        ? $benchmarkStatusPayload['retry']
+        : [];
+    $benchmarkRetryText = $formatRetryText($benchmarkRetryPayload);
+    $benchmarkStartedAt = null;
+    $benchmarkPendingTooLong = false;
+    if ($benchmarkStatus === 'pending' && !empty($benchmarkStatusPayload['started_at'])) {
+        try {
+            $benchmarkStartedAt = \Carbon\Carbon::parse($benchmarkStatusPayload['started_at']);
+            $benchmarkPendingTooLong = $benchmarkStartedAt->lt(now()->subMinutes(5));
+        } catch (\Throwable $e) {
+            $benchmarkStartedAt = null;
+        }
+    }
+    $recentlyTrainedWithoutBenchmark = false;
+    if (empty($benchmarkSummary) && $trainedAt) {
+        try {
+            $recentlyTrainedWithoutBenchmark = \Carbon\Carbon::parse($trainedAt)->gt(now()->subMinutes(15));
+        } catch (\Throwable $e) {
+            $recentlyTrainedWithoutBenchmark = false;
+        }
+    }
+    $shouldPollBenchmark = !empty($summaryPublicUrl) && (
+        $benchmarkStatus === 'pending'
+        || ($benchmarkStatus === 'success' && empty($benchmarkSummary))
+        || ($benchmarkStatus === '' && $recentlyTrainedWithoutBenchmark)
+    );
+    $benchmarkPreviewRows = is_array($benchmarkSummary['leaderboard_preview'] ?? null)
+        ? $benchmarkSummary['leaderboard_preview']
+        : [];
+    $benchmarkVisibleArms = ['A', 'B', 'C', 'D'];
+    $benchmarkPreviewRows = array_values(array_filter(
+        $benchmarkPreviewRows,
+        fn ($row) => in_array((string) ($row['arm'] ?? ''), $benchmarkVisibleArms, true)
+    ));
+    $benchmarkBestOverall = is_array($benchmarkSummary['best_overall'] ?? null)
+        ? $benchmarkSummary['best_overall']
+        : [];
+    if (!in_array((string) ($benchmarkBestOverall['arm'] ?? ''), $benchmarkVisibleArms, true)) {
+        $benchmarkBestOverall = is_array($benchmarkPreviewRows[0] ?? null) ? $benchmarkPreviewRows[0] : [];
+    }
+    $benchmarkSelectedRow = is_array($benchmarkSummary['selected_explanations'] ?? null)
+        ? $benchmarkSummary['selected_explanations']
+        : [];
+    $formatBenchmarkRowLabel = function (array $row): string {
+        $parts = [];
+        $arm = trim((string) ($row['arm'] ?? ''));
+        $condition = trim((string) ($row['input_condition'] ?? ''));
+        $semanticLevel = trim((string) ($row['semantic_level'] ?? ''));
+        if ($arm !== '') {
+            $parts[] = $arm;
+        }
+        if ($condition !== '') {
+            $parts[] = $condition;
+        }
+        if ($semanticLevel !== '') {
+            $parts[] = $semanticLevel;
+        }
+        return !empty($parts) ? implode(' · ', $parts) : 'n/a';
+    };
+    $benchmarkBestOverallLabel = $formatBenchmarkRowLabel($benchmarkBestOverall);
+    $benchmarkSelectedRowLabel = $formatBenchmarkRowLabel($benchmarkSelectedRow);
+    $benchmarkDisplayedRowLabel = $formatBenchmarkRowLabel($benchmarkDisplayedRow);
+    $benchmarkDefaultDisplayRowLabel = $formatBenchmarkRowLabel($benchmarkDefaultDisplayRow);
+    $benchmarkSelectionDiffers = !empty($benchmarkBestOverall) && !empty($benchmarkSelectedRow)
+        && (
+            (string) ($benchmarkBestOverall['arm'] ?? '') !== (string) ($benchmarkSelectedRow['arm'] ?? '')
+            || (string) ($benchmarkBestOverall['input_condition'] ?? '') !== (string) ($benchmarkSelectedRow['input_condition'] ?? '')
+            || (string) ($benchmarkBestOverall['semantic_level'] ?? '') !== (string) ($benchmarkSelectedRow['semantic_level'] ?? '')
+        );
+    $benchmarkWarnings = is_array($benchmarkSummary['warnings'] ?? null)
+        ? array_values(array_filter(array_map('strval', $benchmarkSummary['warnings'])))
+        : [];
+    $benchmarkDisplayGenerationCount = !empty($benchmarkPreviewRows) && !empty($benchmarkSummary['artifact_count'])
+        ? count($benchmarkPreviewRows) * (int) ($benchmarkSummary['artifact_count'] ?? 0)
+        : (int) ($benchmarkSummary['generation_count'] ?? 0);
+    $benchmarkLeaderboardJson = $reportAssets['benchmark_leaderboard_json'] ?? null;
+    $benchmarkLeaderboardCsv = $reportAssets['benchmark_leaderboard_csv'] ?? null;
+    $benchmarkPerChartJson = $reportAssets['benchmark_per_chart_json'] ?? null;
+    $benchmarkPerChartCsv = $reportAssets['benchmark_per_chart_csv'] ?? null;
+    $rawLlmExplanationsExist = is_array($summary['llm_explanations'] ?? null) && !empty($summary['llm_explanations']);
+    $hasBenchmarkLifecycleInView = !empty($benchmarkStatusPayload)
+        || !empty($benchmarkSummary)
+        || !empty($selectedBenchmarkExplanations);
+    $awaitingBenchmarkSelection = empty($llmExplanations)
+        && ($llmStatus === 'success' || $rawLlmExplanationsExist)
+        && in_array($benchmarkStatus, ['', 'pending'], true);
+    $pipelineScaleProgress = function (string $stage, float $progress): float {
+        $progress = max(0, min(100, $progress));
+        if ($stage === 'benchmark') {
+            return min(100, 70 + ($progress * 0.3));
+        }
+        return min(100, $progress * 0.7);
+    };
+    $benchmarkRuntimeErrorAsset = is_array($reportAssets['benchmark_runtime_error'] ?? null)
+        ? $reportAssets['benchmark_runtime_error']
+        : [];
+    $resumePostProcessingUrl = route($routeNamespace . '.models.report.resume', $model);
+    $canResumePostProcessing = !empty($reportAssets) && (
+        $benchmarkStatus !== 'success'
+        || empty($benchmarkSummary)
+        || empty($llmExplanations)
+    );
+    $pipelineStatus = '';
+    $pipelineStage = '';
+    $pipelineTitle = '';
+    $pipelineStatusMessage = '';
+    $pipelineProgress = 0.0;
+    $pipelinePhase = '';
+    $pipelineStepIndex = null;
+    $pipelineTotalSteps = null;
+    $pipelineCurrentItems = [];
+    $pipelineRetryText = '';
+    $pipelinePendingTooLong = false;
+
+    if ($llmStatus === 'error') {
+        $pipelineStatus = 'error';
+        $pipelineStage = 'llm';
+        $pipelineTitle = 'Report post-processing failed';
+        $pipelineStatusMessage = $llmStatusMessage !== '' ? $llmStatusMessage : 'The AI explanation step failed on the server.';
+        $pipelineProgress = $pipelineScaleProgress('llm', $llmProgress);
+        $pipelinePhase = $llmPhase;
+        $pipelineStepIndex = $llmStepIndex;
+        $pipelineTotalSteps = $llmTotalSteps;
+        $pipelineCurrentItems = $llmCurrentItems;
+        $pipelineRetryText = $llmRetryText;
+    } elseif ($benchmarkStatus === 'error') {
+        $pipelineStatus = 'error';
+        $pipelineStage = 'benchmark';
+        $pipelineTitle = 'Report post-processing failed';
+        $pipelineStatusMessage = $benchmarkStatusMessage !== '' ? $benchmarkStatusMessage : 'The benchmark step failed on the server.';
+        $pipelineProgress = $pipelineScaleProgress('benchmark', $benchmarkProgress);
+        $pipelinePhase = $benchmarkPhase;
+        $pipelineStepIndex = $benchmarkStepIndex;
+        $pipelineTotalSteps = $benchmarkTotalSteps;
+        $pipelineCurrentItems = $benchmarkCurrentItems;
+        $pipelineRetryText = $benchmarkRetryText;
+    } elseif (
+        $llmStatus === 'pending'
+        || (($llmStatus === '' || $llmStatus === 'success') && empty($llmExplanations) && !empty($reportAssets) && !$hasBenchmarkLifecycleInView)
+        || $recentlyTrainedWithoutExplanations
+    ) {
+        $pipelineStatus = 'pending';
+        $pipelineStage = 'llm';
+        $pipelinePendingTooLong = $llmPendingTooLong;
+        $pipelineTitle = $llmPendingTooLong
+            ? 'Report post-processing is delayed'
+            : 'Report post-processing is running';
+        $pipelineStatusMessage = $llmStatusMessage !== '' ? $llmStatusMessage : 'The AI explanation step is starting in the background.';
+        $pipelineProgress = $pipelineScaleProgress('llm', $llmProgress);
+        $pipelinePhase = $llmPhase;
+        $pipelineStepIndex = $llmStepIndex;
+        $pipelineTotalSteps = $llmTotalSteps;
+        $pipelineCurrentItems = $llmCurrentItems;
+        $pipelineRetryText = $llmRetryText;
+    } elseif (
+        $benchmarkStatus === 'pending'
+        || (($benchmarkStatus === '' || $benchmarkStatus === 'success') && empty($benchmarkSummary) && $hasBenchmarkLifecycleInView)
+        || ($hasBenchmarkLifecycleInView && $recentlyTrainedWithoutBenchmark)
+    ) {
+        $pipelineStatus = 'pending';
+        $pipelineStage = 'benchmark';
+        $pipelinePendingTooLong = $benchmarkPendingTooLong;
+        $pipelineTitle = $benchmarkPendingTooLong
+            ? 'Report post-processing is delayed'
+            : 'Report post-processing is running';
+        $pipelineStatusMessage = $benchmarkStatusMessage !== '' ? $benchmarkStatusMessage : 'The benchmark step is waiting for the generated report bundle.';
+        $pipelineProgress = $pipelineScaleProgress('benchmark', $benchmarkProgress);
+        $pipelinePhase = $benchmarkPhase;
+        $pipelineStepIndex = $benchmarkStepIndex;
+        $pipelineTotalSteps = $benchmarkTotalSteps;
+        $pipelineCurrentItems = $benchmarkCurrentItems;
+        $pipelineRetryText = $benchmarkRetryText;
+    }
+
+    $pipelineStageLabel = $pipelineStage === 'benchmark' ? 'Benchmark evaluation' : 'AI explanations';
+    $pipelineShouldPoll = !empty($summaryPublicUrl) && ($shouldPollLlm || $shouldPollBenchmark);
+    $benchmarkDetailUrl = route($routeNamespace . '.models.benchmark', $model);
+    $pipelineDebugUrl = '';
+    if (
+        $pipelineStage === 'benchmark'
+        && !empty($benchmarkRetryPayload['debug_file'] ?? null)
+        && !empty($benchmarkRuntimeErrorAsset['url'] ?? null)
+    ) {
+        $pipelineDebugUrl = (string) $benchmarkRuntimeErrorAsset['url'];
+    }
 @endphp
 
 <div class="row">
@@ -207,6 +480,17 @@
         <a href="{{ route($routeNamespace . '.models') }}" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> {{ __('back') }} {{ __('nav.models') }}
         </a>
+        <a href="{{ $benchmarkDetailUrl }}" class="btn btn-outline-dark ms-2">
+            <i class="bi bi-clipboard-data"></i> View Benchmark Details
+        </a>
+        @if($canResumePostProcessing)
+            <form method="POST" action="{{ $resumePostProcessingUrl }}" class="d-inline ms-2">
+                @csrf
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-repeat"></i> Continue Post-processing
+                </button>
+            </form>
+        @endif
         @if($bundleAsset)
             <a href="{{ $bundleAsset['url'] }}" class="btn btn-primary ms-2" target="_blank" rel="noopener">
                 <i class="bi bi-download"></i> Download Training ZIP
@@ -219,6 +503,73 @@
     <div class="alert alert-primary">
         <div class="fw-bold mb-1">AI Report Overview</div>
         <div style="white-space: pre-line;">{{ $overviewExplanation }}</div>
+    </div>
+@endif
+
+@if(!empty($selectedBenchmarkExplanations))
+    <div class="alert {{ $benchmarkDisplayOverrideActive ? 'alert-info' : 'alert-success' }}">
+        <div class="fw-bold mb-1">
+            {{ $benchmarkDisplayOverrideActive ? 'Displaying manually selected benchmark explanations' : 'Displaying benchmark-selected explanations' }}
+        </div>
+        <div class="small">
+            @if(!empty($benchmarkDisplayedRow))
+                The report is currently rendering: {{ $benchmarkDisplayedRowLabel }}
+            @elseif(!empty($benchmarkSelectedRow))
+                The report is currently rendering: {{ $benchmarkSelectedRowLabel }}
+            @endif
+            @if($benchmarkDisplayOverrideActive && !empty($benchmarkSelectedRow))
+                . The saved website default row remains: {{ $benchmarkSelectedRowLabel }}.
+            @elseif(!$benchmarkDisplayOverrideActive)
+                .
+            @endif
+        </div>
+    </div>
+@endif
+
+@if(!empty($benchmarkSelectableRows))
+    <div class="card mb-3">
+        <div class="card-header bg-light">
+            <strong><i class="bi bi-funnel"></i> Displayed Benchmark Arm</strong>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ route($routeNamespace . '.models.report', $model) }}" class="row g-2 align-items-end">
+                <div class="col-lg-7">
+                    <label for="benchmarkRowSelect" class="form-label mb-1">Displayed benchmark row</label>
+                    <select id="benchmarkRowSelect" name="benchmark_row" class="form-select">
+                        <option value="">Automatic (website default)</option>
+                        @foreach($benchmarkSelectableRowsByArm as $arm => $rows)
+                            <optgroup label="Arm {{ $arm }}">
+                                @foreach($rows as $row)
+                                    <option value="{{ $row['row_key'] ?? '' }}" @selected($benchmarkDisplayedRowKey === (string) ($row['row_key'] ?? ''))>
+                                        {{ $row['label'] ?? $formatBenchmarkRowLabel($row) }}
+                                    </option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    <div class="form-text">
+                        Choose which benchmark arm/row to preview on this page. This only changes the current report view.
+                    </div>
+                </div>
+                <div class="col-lg-auto">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+                @if($benchmarkDisplayOverrideActive)
+                    <div class="col-lg-auto">
+                        <a href="{{ route($routeNamespace . '.models.report', $model) }}" class="btn btn-outline-secondary">Reset</a>
+                    </div>
+                @endif
+            </form>
+        </div>
+    </div>
+@endif
+
+@if($awaitingBenchmarkSelection)
+    <div class="alert alert-info">
+        <div class="fw-bold mb-1">Waiting for benchmark comparison before showing explanations</div>
+        <div class="small">
+            The raw AI explanation has been generated, but the report will only render explanation text after benchmark comparison across the configured arms finishes and the winning explanation is selected.
+        </div>
     </div>
 @endif
 
@@ -321,63 +672,216 @@
     </div>
 @endif
 
-@if(($llmStatus === 'pending' || ($llmStatus === '' && empty($llmExplanations) && !empty($reportAssets)) || ($llmStatus === 'success' && empty($llmExplanations))) && !empty($reportAssets))
+@if($pipelineStatus === 'pending' && !empty($reportAssets))
     <div
-        class="alert {{ $llmPendingTooLong ? 'alert-warning' : 'alert-info' }}"
-        id="llmProgressAlert"
+        class="alert {{ $pipelinePendingTooLong ? 'alert-warning' : 'alert-info' }}"
+        id="pipelineProgressAlert"
         data-summary-url="{{ $summaryPublicUrl }}"
-        data-should-poll="{{ $shouldPollLlm ? 'true' : 'false' }}"
+        data-should-poll="{{ $pipelineShouldPoll ? 'true' : 'false' }}"
     >
         <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="fw-bold" id="llmProgressTitle">
-                {{ $llmPendingTooLong ? 'AI explanations are delayed' : 'AI explanations are being generated' }}
+            <div class="fw-bold" id="pipelineProgressTitle">
+                {{ $pipelineTitle }}
             </div>
-            <div class="small fw-bold" id="llmProgressPercent">{{ number_format($llmProgress, 0) }}%</div>
+            <div class="small fw-bold" id="pipelineProgressPercent">{{ number_format($pipelineProgress, 0) }}%</div>
         </div>
         <div class="progress" style="height: 10px;">
             <div
-                id="llmProgressBar"
-                class="progress-bar {{ $llmPendingTooLong ? 'bg-warning' : 'progress-bar-striped progress-bar-animated' }}"
+                id="pipelineProgressBar"
+                class="progress-bar {{ $pipelinePendingTooLong ? 'bg-warning' : 'progress-bar-striped progress-bar-animated' }}"
                 role="progressbar"
-                style="width: {{ $llmProgress }}%;"
-                aria-valuenow="{{ (int) round($llmProgress) }}"
+                style="width: {{ $pipelineProgress }}%;"
+                aria-valuenow="{{ (int) round($pipelineProgress) }}"
                 aria-valuemin="0"
                 aria-valuemax="100"
             ></div>
         </div>
-        <div class="small mt-2" id="llmProgressMessage">
-            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The AI explanation job is starting in the background.' }}
+        <div class="small mt-2" id="pipelineProgressMessage">
+            {{ $pipelineStatusMessage !== '' ? $pipelineStatusMessage : 'The report post-processing pipeline is starting in the background.' }}
         </div>
-        <div class="small text-muted mt-1" id="llmProgressMeta">
-            @if($llmStepIndex && $llmTotalSteps)
-                Step {{ $llmStepIndex }} / {{ $llmTotalSteps }}
-                @if($llmPhase !== '')
-                    • {{ ucfirst($llmPhase) }}
-                @endif
-            @elseif($llmPhase !== '')
-                {{ ucfirst($llmPhase) }}
+        <div class="small text-muted mt-1" id="pipelineProgressMeta">
+            Phase {{ $pipelineStage === 'benchmark' ? '2 / 2' : '1 / 2' }} • {{ $pipelineStageLabel }}
+            @if($pipelineStepIndex && $pipelineTotalSteps)
+                • Step {{ $pipelineStepIndex }} / {{ $pipelineTotalSteps }}
+            @endif
+            @if($pipelinePhase !== '')
+                • {{ ucfirst($pipelinePhase) }}
             @endif
         </div>
-        <div class="small text-muted mt-1" id="llmProgressItems">
-            @if(!empty($llmCurrentItems))
-                {{ implode(' • ', $llmCurrentItems) }}
+        <div class="small text-muted mt-1" id="pipelineProgressItems">
+            @if(!empty($pipelineCurrentItems))
+                {{ implode(' • ', $pipelineCurrentItems) }}
             @endif
         </div>
-        @if($llmPendingTooLong)
-            <div class="small mt-2">Open the predict-service logs on the server to check the exact OpenAI/API error.</div>
+        <div class="small text-warning mt-1" id="pipelineProgressRetry">
+            {{ $pipelineRetryText }}
+        </div>
+        <div class="small text-muted mt-1 {{ $pipelineDebugUrl === '' ? 'd-none' : '' }}" id="pipelineProgressDebug">
+            @if($pipelineDebugUrl !== '')
+                <a href="{{ $pipelineDebugUrl }}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>
+            @endif
+        </div>
+        @if($pipelinePendingTooLong)
+            <div class="small mt-2">Open the predict-service logs on the server to inspect the active pipeline phase in detail.</div>
         @endif
     </div>
-@elseif($llmStatus === 'error' && !empty($reportAssets))
-    <div class="alert alert-danger">
-        <div class="fw-bold mb-1">AI explanations failed</div>
-        <div class="small">
-            {{ $llmStatusMessage !== '' ? $llmStatusMessage : 'The explanation job failed on the server.' }}
+@elseif($pipelineStatus === 'error' && !empty($reportAssets))
+    <div class="alert alert-danger" id="pipelineProgressAlert" data-summary-url="{{ $summaryPublicUrl }}" data-should-poll="false">
+        <div class="fw-bold mb-1" id="pipelineProgressTitle">{{ $pipelineTitle !== '' ? $pipelineTitle : 'Report post-processing failed' }}</div>
+        <div class="small" id="pipelineProgressMessage">
+            {{ $pipelineStatusMessage !== '' ? $pipelineStatusMessage : 'The report post-processing pipeline failed on the server.' }}
+        </div>
+        <div class="small text-muted mt-1" id="pipelineProgressMeta">
+            Phase {{ $pipelineStage === 'benchmark' ? '2 / 2' : '1 / 2' }} • {{ $pipelineStageLabel }}
+            @if($pipelinePhase !== '')
+                • {{ ucfirst($pipelinePhase) }}
+            @endif
+        </div>
+        <div class="small text-warning mt-1" id="pipelineProgressRetry">{{ $pipelineRetryText }}</div>
+        <div class="small text-muted mt-1 {{ $pipelineDebugUrl === '' ? 'd-none' : '' }}" id="pipelineProgressDebug">
+            @if($pipelineDebugUrl !== '')
+                <a href="{{ $pipelineDebugUrl }}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>
+            @endif
         </div>
     </div>
-@elseif(empty($llmExplanations) && !empty($reportAssets))
+@elseif(empty($llmExplanations) && !empty($reportAssets) && empty($benchmarkSummary))
     <div class="alert alert-secondary">
-        <div class="fw-bold mb-1">AI explanations are unavailable</div>
-        <div class="small">The report does not currently include explanation output, and no active background explanation status was found.</div>
+        <div class="fw-bold mb-1">Report post-processing is unavailable</div>
+        <div class="small">The report does not currently include explanation or benchmark output, and no active post-processing status was found.</div>
+    </div>
+@endif
+
+@if(!empty($benchmarkSummary))
+    <div class="card mb-3">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <strong><i class="bi bi-speedometer2"></i> Benchmark Evaluation</strong>
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                @if(!empty($benchmarkSummary['generated_at']))
+                    <div class="small">{{ $benchmarkSummary['generated_at'] }}</div>
+                @endif
+                <a href="{{ $benchmarkDetailUrl }}" class="btn btn-light btn-sm">
+                    <i class="bi bi-box-arrow-up-right"></i> Open Full Benchmark
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row g-3 mb-3">
+                <div class="col-lg-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-muted small mb-1">Top Benchmark Score</div>
+                        @if(!empty($benchmarkBestOverall))
+                            <div class="fw-bold">{{ $benchmarkBestOverallLabel }}</div>
+                            <div class="small mt-2">
+                                Fact F1={{ number_format((float) ($benchmarkBestOverall['fact_f1'] ?? 0), 3) }},
+                                Precision={{ number_format((float) ($benchmarkBestOverall['fact_precision'] ?? 0), 3) }},
+                                Recall={{ number_format((float) ($benchmarkBestOverall['fact_recall'] ?? 0), 3) }}
+                            </div>
+                        @else
+                            <div class="text-muted small">No leaderboard rows were written.</div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-muted small mb-1">Website Default Row</div>
+                        @if(!empty($benchmarkSelectedRow))
+                            <div class="fw-bold">{{ $benchmarkSelectedRowLabel }}</div>
+                            <div class="small mt-2">
+                                Asset count={{ (int) ($benchmarkSelectedRow['asset_count'] ?? 0) }},
+                                Provider={{ $benchmarkSelectedRow['provider'] ?? 'n/a' }},
+                                Model={{ $benchmarkSelectedRow['model'] ?? 'n/a' }}
+                                @if(!empty($benchmarkSelectedRow['selection_method']))
+                                    , Selection={{ $benchmarkSelectedRow['selection_method'] }}
+                                @endif
+                            </div>
+                        @else
+                            <div class="text-muted small">No benchmark-selected explanation payload was available in this run.</div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-muted small mb-1">Run Summary</div>
+                        <div class="small">
+                            Artifacts: {{ (int) ($benchmarkSummary['artifact_count'] ?? 0) }}<br>
+                            Generations: {{ $benchmarkDisplayGenerationCount }}<br>
+                            Rows: {{ !empty($benchmarkPreviewRows) ? count($benchmarkPreviewRows) : (int) ($benchmarkSummary['row_count'] ?? 0) }}
+                            @if(!empty($benchmarkDisplayedRow))
+                                <br>Currently displaying: {{ $benchmarkDisplayedRowLabel }}
+                            @endif
+                            @if(!empty($benchmarkSelectedRow))
+                                <br>Website default: {{ $benchmarkSelectedRowLabel }}
+                            @endif
+                            @if($benchmarkSelectionDiffers)
+                                <br>Top score remains: {{ $benchmarkBestOverallLabel }}
+                            @endif
+                        </div>
+                        <div class="mt-2">
+                            @if($benchmarkLeaderboardJson)
+                                <a href="{{ $benchmarkLeaderboardJson['url'] }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm me-2 mb-2">Leaderboard JSON</a>
+                            @endif
+                            @if($benchmarkLeaderboardCsv)
+                                <a href="{{ $benchmarkLeaderboardCsv['url'] }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm me-2 mb-2">Leaderboard CSV</a>
+                            @endif
+                            @if($benchmarkPerChartJson)
+                                <a href="{{ $benchmarkPerChartJson['url'] }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm me-2 mb-2">Per-chart JSON</a>
+                            @endif
+                            @if($benchmarkPerChartCsv)
+                                <a href="{{ $benchmarkPerChartCsv['url'] }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm mb-2">Per-chart CSV</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if(!empty($benchmarkPreviewRows))
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr>
+                                <th>Display</th>
+                                <th>Arm</th>
+                                <th>Condition</th>
+                                <th>Level</th>
+                                <th>Fact F1</th>
+                                <th>Precision</th>
+                                <th>Unsupported</th>
+                                <th>Coverage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($benchmarkPreviewRows as $row)
+                                <tr>
+                                    <td>
+                                        @if($benchmarkDisplayedRowKey !== '' && $benchmarkDisplayedRowKey === (($row['arm'] ?? '') . '|' . ($row['input_condition'] ?? '') . '|' . ((string) ($row['semantic_level'] ?? '') !== '' ? (string) ($row['semantic_level'] ?? '') : '-')))
+                                            <span class="badge bg-primary">Current</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $row['arm'] ?? 'n/a' }}</td>
+                                    <td>{{ $row['input_condition'] ?? 'n/a' }}</td>
+                                    <td>{{ $row['semantic_level'] ?? '-' }}</td>
+                                    <td>{{ number_format((float) ($row['fact_f1'] ?? 0), 3) }}</td>
+                                    <td>{{ number_format((float) ($row['fact_precision'] ?? 0), 3) }}</td>
+                                    <td>{{ number_format((float) ($row['unsupported_claim_rate'] ?? 0), 3) }}</td>
+                                    <td>{{ number_format((float) ($row['coverage_of_salient_facts'] ?? 0), 3) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+
+            @if(!empty($benchmarkWarnings))
+                <div class="alert alert-light border mb-0">
+                    <div class="fw-bold mb-1">Benchmark Warnings</div>
+                    <div class="small">
+                        @foreach($benchmarkWarnings as $warning)
+                            <div>{{ $warning }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
     </div>
 @endif
 
@@ -602,67 +1106,270 @@
 @endsection
 
 @section('scripts')
-@if($shouldPollLlm)
+@if($pipelineShouldPoll)
 <script>
 (() => {
-    const alertBox = document.getElementById('llmProgressAlert');
+    const alertBox = document.getElementById('pipelineProgressAlert');
     if (!alertBox || alertBox.dataset.shouldPoll !== 'true') {
         return;
     }
 
+    const titleEl = document.getElementById('pipelineProgressTitle');
+    const percentEl = document.getElementById('pipelineProgressPercent');
+    const barEl = document.getElementById('pipelineProgressBar');
+    const messageEl = document.getElementById('pipelineProgressMessage');
+    const metaEl = document.getElementById('pipelineProgressMeta');
+    const itemsEl = document.getElementById('pipelineProgressItems');
+    const retryEl = document.getElementById('pipelineProgressRetry');
+    const debugEl = document.getElementById('pipelineProgressDebug');
     const summaryUrl = alertBox.dataset.summaryUrl;
     if (!summaryUrl) {
         return;
     }
-
-    const titleEl = document.getElementById('llmProgressTitle');
-    const percentEl = document.getElementById('llmProgressPercent');
-    const barEl = document.getElementById('llmProgressBar');
-    const messageEl = document.getElementById('llmProgressMessage');
-    const metaEl = document.getElementById('llmProgressMeta');
-    const itemsEl = document.getElementById('llmProgressItems');
-
     let stopped = false;
+    const initialDebugUrl = debugEl ? (() => {
+        const link = debugEl.querySelector('a');
+        return link ? String(link.getAttribute('href') || '').trim() : '';
+    })() : '';
 
     const setAlertClass = (className) => {
         alertBox.className = className;
     };
 
-    const updateDom = (statusPayload, hasExplanations) => {
-        const status = String(statusPayload.status || '').toLowerCase();
-        const progress = Math.max(0, Math.min(100, Number(statusPayload.progress || 0)));
-        const phase = String(statusPayload.phase || '').trim();
-        const stepIndex = Number(statusPayload.step_index || 0);
-        const totalSteps = Number(statusPayload.total_steps || 0);
-        const items = Array.isArray(statusPayload.current_items) ? statusPayload.current_items.filter(Boolean) : [];
-        const message = String(statusPayload.message || '').trim();
+    const formatRetryText = (retryPayload) => {
+        if (!retryPayload || typeof retryPayload !== 'object') {
+            return '';
+        }
+
+        const attempt = Number(retryPayload.attempt || 0);
+        const maxAttempts = Number(retryPayload.max_attempts || 0);
+        const retryForever = Boolean(retryPayload.retry_forever) || maxAttempts <= 0;
+        if (attempt <= 0) {
+            return '';
+        }
+
+        const parts = [`Retry ${attempt} / ${retryForever ? '∞' : maxAttempts}`];
+        const waitSeconds = Number(retryPayload.wait_seconds);
+        if (Number.isFinite(waitSeconds) && waitSeconds > 0) {
+            parts.push(`waiting ${waitSeconds.toFixed(1)}s`);
+        }
+
+        const reason = String(retryPayload.reason || '').trim();
+        if (reason !== '') {
+            parts.push(reason);
+        }
+
+        const statusCode = Number(retryPayload.status_code || 0);
+        if (statusCode > 0) {
+            parts.push(`HTTP ${statusCode}`);
+        }
+
+        const keyLabel = String(retryPayload.key_label || '').trim();
+        if (keyLabel !== '') {
+            parts.push(keyLabel);
+        }
+
+        return parts.join(' • ');
+    };
+
+    const resolveDebugUrl = (state) => {
+        if (!state || state.stage !== 'benchmark') {
+            return '';
+        }
+
+        const debugFile = String((state.retry && state.retry.debug_file) || '').trim();
+        if (debugFile === '') {
+            return '';
+        }
+
+        if (/^https?:\/\//i.test(debugFile)) {
+            return debugFile;
+        }
+
+        if (initialDebugUrl !== '') {
+            return initialDebugUrl;
+        }
+
+        return '';
+    };
+
+    const normalizeStatus = (payload) => {
+        return payload && typeof payload === 'object' ? payload : {};
+    };
+
+    const clampProgress = (value) => {
+        const progress = Number(value || 0);
+        return Math.max(0, Math.min(100, Number.isFinite(progress) ? progress : 0));
+    };
+
+    const scaleProgress = (stage, progress) => {
+        if (stage === 'benchmark') {
+            return Math.min(100, 70 + (clampProgress(progress) * 0.3));
+        }
+        return Math.min(100, clampProgress(progress) * 0.7);
+    };
+
+    const isPendingTooLong = (payload) => {
+        if (String(payload.status || '').toLowerCase() !== 'pending') {
+            return false;
+        }
+        const startedAt = String(payload.started_at || '').trim();
+        if (!startedAt) {
+            return false;
+        }
+        const timestamp = Date.parse(startedAt);
+        if (Number.isNaN(timestamp)) {
+            return false;
+        }
+        return timestamp < (Date.now() - (5 * 60 * 1000));
+    };
+
+    const derivePipelineState = (summary) => {
+        const llmPayload = normalizeStatus(summary.llm_explanations_status);
+        const benchmarkPayload = normalizeStatus(summary.benchmark_status);
+        const llmStatus = String(llmPayload.status || '').toLowerCase();
+        const benchmarkStatus = String(benchmarkPayload.status || '').toLowerCase();
+        const hasLlmData = !!summary.llm_explanations || !!summary.selected_benchmark_explanations;
+        const hasBenchmarkSummary = !!summary.benchmark_summary;
+        const hasBenchmarkLifecycle = Object.keys(benchmarkPayload).length > 0 || hasBenchmarkSummary || !!summary.selected_benchmark_explanations;
+
+        if (llmStatus === 'error') {
+            return {
+                status: 'error',
+                stage: 'llm',
+                title: 'Report post-processing failed',
+                message: String(llmPayload.message || '').trim() || 'The AI explanation step failed on the server.',
+                progress: scaleProgress('llm', llmPayload.progress),
+                phase: String(llmPayload.phase || '').trim(),
+                stepIndex: Number(llmPayload.step_index || 0),
+                totalSteps: Number(llmPayload.total_steps || 0),
+                items: Array.isArray(llmPayload.current_items) ? llmPayload.current_items.filter(Boolean) : [],
+                retry: llmPayload.retry,
+                retryText: formatRetryText(llmPayload.retry),
+                delayed: false,
+            };
+        }
+
+        if (benchmarkStatus === 'error') {
+            return {
+                status: 'error',
+                stage: 'benchmark',
+                title: 'Report post-processing failed',
+                message: String(benchmarkPayload.message || '').trim() || 'The benchmark step failed on the server.',
+                progress: scaleProgress('benchmark', benchmarkPayload.progress),
+                phase: String(benchmarkPayload.phase || '').trim(),
+                stepIndex: Number(benchmarkPayload.step_index || 0),
+                totalSteps: Number(benchmarkPayload.total_steps || 0),
+                items: Array.isArray(benchmarkPayload.current_items) ? benchmarkPayload.current_items.filter(Boolean) : [],
+                retry: benchmarkPayload.retry,
+                retryText: formatRetryText(benchmarkPayload.retry),
+                delayed: false,
+            };
+        }
+
+        if (llmStatus === 'pending' || (!hasLlmData && !hasBenchmarkSummary && !hasBenchmarkLifecycle)) {
+            const delayed = isPendingTooLong(llmPayload);
+            return {
+                status: 'pending',
+                stage: 'llm',
+                title: delayed ? 'Report post-processing is delayed' : 'Report post-processing is running',
+                message: String(llmPayload.message || '').trim() || 'The AI explanation step is starting in the background.',
+                progress: scaleProgress('llm', llmPayload.progress),
+                phase: String(llmPayload.phase || '').trim(),
+                stepIndex: Number(llmPayload.step_index || 0),
+                totalSteps: Number(llmPayload.total_steps || 0),
+                items: Array.isArray(llmPayload.current_items) ? llmPayload.current_items.filter(Boolean) : [],
+                retry: llmPayload.retry,
+                retryText: formatRetryText(llmPayload.retry),
+                delayed,
+            };
+        }
+
+        if (benchmarkStatus === 'pending' || (hasBenchmarkLifecycle && !hasBenchmarkSummary)) {
+            const delayed = isPendingTooLong(benchmarkPayload);
+            return {
+                status: 'pending',
+                stage: 'benchmark',
+                title: delayed ? 'Report post-processing is delayed' : 'Report post-processing is running',
+                message: String(benchmarkPayload.message || '').trim() || 'The benchmark step is waiting for the generated report bundle.',
+                progress: scaleProgress('benchmark', benchmarkPayload.progress),
+                phase: String(benchmarkPayload.phase || '').trim(),
+                stepIndex: Number(benchmarkPayload.step_index || 0),
+                totalSteps: Number(benchmarkPayload.total_steps || 0),
+                items: Array.isArray(benchmarkPayload.current_items) ? benchmarkPayload.current_items.filter(Boolean) : [],
+                retry: benchmarkPayload.retry,
+                retryText: formatRetryText(benchmarkPayload.retry),
+                delayed,
+            };
+        }
+
+        if (hasBenchmarkSummary || (hasLlmData && !hasBenchmarkLifecycle)) {
+            return {
+                status: 'success',
+                stage: 'benchmark',
+                title: 'AI explanations and benchmark completed',
+                message: 'Reloading the report to display the final benchmark-selected results.',
+                progress: 100,
+                phase: 'completed',
+                stepIndex: 0,
+                totalSteps: 0,
+                items: [],
+                retry: null,
+                retryText: '',
+                delayed: false,
+            };
+        }
+
+        return null;
+    };
+
+    const updateDom = (summary) => {
+        const state = derivePipelineState(summary);
+        if (!state) {
+            if (messageEl) {
+                messageEl.textContent = 'Waiting for the combined pipeline status from the server...';
+            }
+            return;
+        }
 
         if (percentEl) {
-            percentEl.textContent = `${Math.round(progress)}%`;
+            percentEl.textContent = `${Math.round(state.progress)}%`;
         }
         if (barEl) {
-            barEl.style.width = `${progress}%`;
-            barEl.setAttribute('aria-valuenow', String(Math.round(progress)));
+            barEl.style.width = `${state.progress}%`;
+            barEl.setAttribute('aria-valuenow', String(Math.round(state.progress)));
         }
         if (messageEl) {
-            messageEl.textContent = message || 'The AI explanation job is running.';
+            messageEl.textContent = state.message;
         }
         if (metaEl) {
-            const stepText = stepIndex > 0 && totalSteps > 0 ? `Step ${stepIndex} / ${totalSteps}` : '';
-            const phaseText = phase ? `${phase.charAt(0).toUpperCase()}${phase.slice(1)}` : '';
-            metaEl.textContent = [stepText, phaseText].filter(Boolean).join(' • ');
+            const phaseLabel = state.stage === 'benchmark' ? 'Phase 2 / 2' : 'Phase 1 / 2';
+            const stageLabel = state.stage === 'benchmark' ? 'Benchmark evaluation' : 'AI explanations';
+            const stepText = state.stepIndex > 0 && state.totalSteps > 0 ? `Step ${state.stepIndex} / ${state.totalSteps}` : '';
+            const phaseText = state.phase ? `${state.phase.charAt(0).toUpperCase()}${state.phase.slice(1)}` : '';
+            metaEl.textContent = [phaseLabel, stageLabel, stepText, phaseText].filter(Boolean).join(' • ');
         }
         if (itemsEl) {
-            itemsEl.textContent = items.join(' • ');
+            itemsEl.textContent = state.items.join(' • ');
+        }
+        if (retryEl) {
+            retryEl.textContent = state.retryText;
+        }
+        if (debugEl) {
+            const debugUrl = resolveDebugUrl(state);
+            if (debugUrl !== '') {
+                debugEl.classList.remove('d-none');
+                debugEl.innerHTML = `<a href="${debugUrl}" target="_blank" rel="noopener">Open latest benchmark raw error JSON</a>`;
+            } else {
+                debugEl.classList.add('d-none');
+                debugEl.textContent = '';
+            }
         }
 
-        if (status === 'success' && hasExplanations) {
+        if (state.status === 'success') {
             setAlertClass('alert alert-success');
             if (titleEl) {
-                titleEl.textContent = 'AI explanations completed';
-            }
-            if (messageEl) {
-                messageEl.textContent = message || 'Reloading the report to display the new explanations.';
+                titleEl.textContent = state.title;
             }
             if (barEl) {
                 barEl.className = 'progress-bar bg-success';
@@ -673,10 +1380,10 @@
             return;
         }
 
-        if (status === 'error') {
+        if (state.status === 'error') {
             setAlertClass('alert alert-danger');
             if (titleEl) {
-                titleEl.textContent = 'AI explanations failed';
+                titleEl.textContent = state.title;
             }
             if (barEl) {
                 barEl.className = 'progress-bar bg-danger';
@@ -686,11 +1393,13 @@
         }
 
         if (titleEl) {
-            titleEl.textContent = 'AI explanations are being generated';
+            titleEl.textContent = state.title;
         }
-        setAlertClass('alert alert-info');
+        setAlertClass(state.delayed ? 'alert alert-warning' : 'alert alert-info');
         if (barEl) {
-            barEl.className = 'progress-bar progress-bar-striped progress-bar-animated';
+            barEl.className = state.delayed
+                ? 'progress-bar bg-warning'
+                : 'progress-bar progress-bar-striped progress-bar-animated';
         }
     };
 
@@ -705,10 +1414,10 @@
                 throw new Error(`HTTP ${response.status}`);
             }
             const summary = await response.json();
-            updateDom(summary.llm_explanations_status || {}, !!summary.llm_explanations);
+            updateDom(summary);
         } catch (error) {
-            if (messageEl) {
-                messageEl.textContent = 'Waiting for the explanation status from the server...';
+            if (!stopped && messageEl) {
+                messageEl.textContent = 'Waiting for the combined pipeline status from the server...';
             }
         }
 

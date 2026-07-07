@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "claim_text": "The importance of VSS is 2.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": 2,
+      "metric": "importance",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

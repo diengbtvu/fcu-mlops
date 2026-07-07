@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_vs_target",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The correlation between pH and TDS is exceptionally high, with r ≈ 0.98.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between pH and DO is very strong, with r ≈ 0.97.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The correlation between TDS and DO is also very strong, with r ≈ 0.97.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_vs_target",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "The high multicollinearity among pH, TDS, and DO should be addressed before building predictive models.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig5_model_comparison",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN leads the chart-level model comparison.",
+  "explanation_full": "KNN leads this model-comparison chart with R2=0.920000. The R2 ordering is KNN > RF > SVM.",
+  "claims": [
+    {
+      "claim_id": "best-model",
+      "claim_text": "KNN is the best model in the chart comparison.",
+      "claim_type": "best_model",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "KNN",
+      "predicate": null,
+      "object": "KNN",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "best-r2",
+      "claim_text": "KNN achieved R2=0.920000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.92,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "ranking",
+      "claim_text": "The R2 ranking is KNN > RF > SVM.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [
+        "KNN",
+        "RF",
+        "SVM"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

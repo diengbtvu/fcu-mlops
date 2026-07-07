@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model exhibits a strong positive linear relationship between predicted and actual values, with an R2 score of 0.7495 and a slope of 0.8387. The residuals are generally centered around zero, indicating minimal bias in the model's predictions.",
+  "explanation_full": "The XGBoost model demonstrates a strong positive linear relationship between predicted and actual values, as evidenced by its R2 score of 0.7495 and slope of 0.8387. This indicates that higher actual values tend to correspond with higher predicted values.  Furthermore, the residuals are centered around zero, suggesting minimal bias in the model's predictions. The scatter plot visualization reinforces this observation, showing a clear upward trend in the data points aligned with the diagonal line. Additionally, the relatively low RMSE of 0.1325 further supports the accuracy and reliability of the model's predictions.  The model captures the general trend of the data effectively, but it's important to note that there might be some instances where the model deviates from this linear relationship. Further analysis could explore these deviations and potential sources of error.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

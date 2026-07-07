@@ -1,0 +1,80 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:top_feature:mean",
+      "claim_text": "The distribution has a mean value.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "claim_text": "Ethanol has a mean value.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "claim_text": "Ethanol has a standard deviation.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:ranking:mean",
+      "claim_text": "The distribution has a mean ranking.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:ranking:std",
+      "claim_text": "The distribution has a standard deviation ranking.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:top_feature:std",
+      "claim_text": "The distribution has a standard deviation.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

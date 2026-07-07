@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "claim_text": "KNN performs best with an MSE of 0.0128.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse"
+      ],
+      "reason": "Gold value for KNN best_mse is 0.011901056157134797.",
+      "numeric_delta": 0.000898943842865204
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "claim_text": "KNN achieves the highest R2 of 0.817.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.013139724935705921
+    }
+  ]
+}

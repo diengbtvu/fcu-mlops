@@ -1,0 +1,153 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_importance",
+  "artifact_type": "chart/feature_importance",
+  "source_files": [
+    "best_model_summary.json",
+    "summary.json",
+    "table_feature_importance.csv"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "VSS",
+    "pH",
+    "Propionate",
+    "VFA",
+    "Butyrate"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:top_feature",
+      "fact_type": "top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VSS",
+      "value": 0.52,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "top importance feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:ranking",
+      "fact_type": "ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": [
+        "VSS",
+        "pH",
+        "Propionate",
+        "VFA",
+        "Butyrate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "importance ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:metric:VSS:importance",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.52,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VSS importance"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:metric:pH:importance",
+      "fact_type": "metric_value",
+      "subject": "pH",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.33,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "pH importance"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:metric:Propionate:importance",
+      "fact_type": "metric_value",
+      "subject": "Propionate",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.24,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Propionate importance"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:metric:VFA:importance",
+      "fact_type": "metric_value",
+      "subject": "VFA",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.18,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VFA importance"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "fixture_bundle:chart:feature_importance:metric:Butyrate:importance",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.11,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Butyrate importance"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "fixture_bundle:chart:feature_importance:top_feature",
+    "fixture_bundle:chart:feature_importance:ranking",
+    "fixture_bundle:chart:feature_importance:metric:VSS:importance"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret feature scores as causal proof.",
+    "Do not let summary prose override feature ranking values."
+  ]
+}

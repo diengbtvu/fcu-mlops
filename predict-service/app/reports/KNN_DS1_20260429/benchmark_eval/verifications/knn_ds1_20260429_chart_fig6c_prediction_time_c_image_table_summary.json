@@ -1,0 +1,7 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig6c_prediction_time",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": []
+}

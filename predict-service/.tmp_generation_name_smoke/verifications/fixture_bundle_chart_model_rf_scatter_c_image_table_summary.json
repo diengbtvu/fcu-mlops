@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "r2",
+      "claim_text": "RF has r2_score=0.880000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_rf_scatter:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.88.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "correlation",
+      "claim_text": "RF has pred_actual_correlation=0.860000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
+      ],
+      "reason": "Gold value for RF pred_actual_correlation is 0.86.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_rf_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "third-metric",
+      "claim_text": "RF has linear_fit_slope=0.840000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_rf_scatter:metric:RF:linear_fit_slope"
+      ],
+      "reason": "Gold value for RF linear_fit_slope is 0.84.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

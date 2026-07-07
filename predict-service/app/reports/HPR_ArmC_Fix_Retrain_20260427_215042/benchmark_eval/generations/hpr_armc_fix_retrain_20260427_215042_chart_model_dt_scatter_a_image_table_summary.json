@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Decision Tree model has an R2 score of 0.56, indicating a moderate fit to the data.",
+  "explanation_full": "The Decision Tree (DT) model shows a moderate correlation with the actual values, as indicated by an R2 score of 0.56. This means that approximately 56% of the variance in the target variable is explained by the model's predictions. The RMSE and MAE are 0.1755 and 0.1086 respectively, indicating moderate prediction accuracy.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "claim_text": "The Decision Tree model has an R2 score of 0.56, indicating a moderate fit to the data.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": "0.56",
+      "metric": "r2_score",
+      "value": 0.56,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

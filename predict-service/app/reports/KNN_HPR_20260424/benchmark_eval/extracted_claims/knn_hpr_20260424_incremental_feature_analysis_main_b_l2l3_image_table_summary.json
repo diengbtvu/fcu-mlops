@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "Increasing the number of features used in the KNN model leads to a consistent improvement in both R² and MSE.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "TEXT",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+      "claim_text": "The most significant gains are observed when moving from 3 to 4 features and again from 8 to 9 features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "TEXT",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+      "subject": "KNN",
+      "predicate": "plateau",
+      "object": null,
+      "metric": null,
+      "value": 9.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ]
+}

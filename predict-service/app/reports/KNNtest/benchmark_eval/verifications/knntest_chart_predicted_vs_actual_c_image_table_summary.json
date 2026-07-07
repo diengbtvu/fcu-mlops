@@ -1,0 +1,73 @@
+{
+  "artifact_id": "KNNtest:chart:predicted_vs_actual",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_PERFORMANCE' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_COMPARISON' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved an RMSE of 0.1132.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_PERFORMANCE' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN achieved an MAE of 0.075.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_PERFORMANCE' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "KNN performed better than RF (R2=0.7756).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_COMPARISON' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "KNN performed better than XGBoost (R2=0.7495).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'MODEL_COMPARISON' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

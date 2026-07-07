@@ -1,0 +1,59 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "gra-top",
+      "claim_text": "pH is the top feature by gra_score.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3_feature_analysis:top_feature:gra_score"
+      ],
+      "reason": "Gold top feature for gra_score is pH.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "importance-top",
+      "claim_text": "VSS is the top feature by importance.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3_feature_analysis:top_feature:importance"
+      ],
+      "reason": "Gold top feature for importance is VSS.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "shap-top",
+      "claim_text": "ORP_Low is the top feature by mean_abs_shap.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3_feature_analysis:top_feature:mean_abs_shap"
+      ],
+      "reason": "Gold top feature for mean_abs_shap is ORP_Low.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "target-correlation-top",
+      "claim_text": "pH is the top feature by target_correlation.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3_feature_analysis:top_feature:target_correlation"
+      ],
+      "reason": "Gold top feature for target_correlation is pH.",
+      "numeric_delta": null
+    }
+  ]
+}

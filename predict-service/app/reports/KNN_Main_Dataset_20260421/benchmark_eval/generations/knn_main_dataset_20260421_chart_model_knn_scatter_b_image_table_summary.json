@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN shows strong performance with an R2 of 0.8172 and an RMSE of 0.1132, indicating high predictive accuracy.",
+  "explanation_full": "Observations show that the KNN model achieved an R2 score of 0.8172 and a low RMSE of 0.1132. The correlation between predicted and actual values is also high at 0.9073. These results suggest that KNN is a robust model for this dataset. The linear fit slope of 0.8798 further confirms a strong linear relationship. However, the maximum absolute residual of 0.3673 suggests that some predictions deviate significantly from the actual values, which should be noted.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R2 score",
+      "object": "0.8172",
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN had the lowest RMSE of 0.1132.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has lowest RMSE",
+      "object": "0.1132",
+      "metric": "rmse",
+      "value": 0.1132,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The correlation between predicted and actual values for KNN is 0.9073.",
+      "claim_type": "metric_value",
+      "span_category": "prediction_story",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "correlation (pred, actual)",
+      "object": "0.9073",
+      "metric": "pred_actual_correlation",
+      "value": 0.9073,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

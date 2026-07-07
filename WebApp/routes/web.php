@@ -9,6 +9,7 @@ use App\Http\Controllers\MLTrainingController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ModelComparisonController;
+use App\Http\Controllers\TrainingProgressController;
 
 // Include test routes for debugging
 if (app()->environment('local')) {
@@ -53,6 +54,14 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
 
+Route::middleware(['auth', 'permission:training_model'])->group(function () {
+    Route::post('/training-progress/session', [TrainingProgressController::class, 'generateSession'])
+        ->name('training.progress.session');
+    Route::get('/training-progress/{sessionId}', [TrainingProgressController::class, 'show'])
+        ->where('sessionId', '[A-Za-z0-9-]+')
+        ->name('training.progress.show');
+});
+
 // Admin routes - Now accessible by users with appropriate permissions
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -86,6 +95,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/models/create', [AdminController::class, 'createModel'])->name('models.create')->middleware('permission:manage_models');
     Route::post('/models', [AdminController::class, 'storeModel'])->name('models.store')->middleware('permission:manage_models');
     Route::get('/models/{model}/report', [AdminController::class, 'showModelReport'])->name('models.report')->middleware('permission:manage_models');
+    Route::post('/models/{model}/report/resume', [AdminController::class, 'resumeModelReportPostProcessing'])->name('models.report.resume')->middleware('permission:manage_models');
+    Route::get('/models/{model}/benchmark', [AdminController::class, 'showModelBenchmark'])->name('models.benchmark')->middleware('permission:manage_models');
     Route::get('/models/{model}/edit', [AdminController::class, 'editModel'])->name('models.edit')->middleware('permission:manage_models');
     Route::put('/models/{model}', [AdminController::class, 'updateModel'])->name('models.update')->middleware('permission:manage_models');
     Route::delete('/models/{model}', [AdminController::class, 'deleteModel'])->name('models.delete')->middleware('permission:manage_models');
@@ -123,6 +134,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/settings/email', [SettingsController::class, 'emailSettings'])->name('settings.email');
     Route::put('/settings/email', [SettingsController::class, 'updateEmail'])->name('settings.update-email');
     Route::get('/settings/test-email', [SettingsController::class, 'sendTestEmail'])->name('settings.test-email');
+    Route::get('/settings/ai', [SettingsController::class, 'aiSettings'])->name('settings.ai');
+    Route::put('/settings/ai', [SettingsController::class, 'updateAi'])->name('settings.update-ai');
 
     // Role & Permission management
     Route::get('/roles', [AdminController::class, 'roles'])->name('roles')->middleware('permission:manage_roles');
@@ -158,6 +171,8 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'user'])->group(functi
     Route::get('/models/create', [UserController::class, 'createModel'])->name('models.create')->middleware('permission:manage_models');
     Route::post('/models', [UserController::class, 'storeModel'])->name('models.store')->middleware('permission:manage_models');
     Route::get('/models/{model}/report', [UserController::class, 'showModelReport'])->name('models.report')->middleware('permission:manage_models');
+    Route::post('/models/{model}/report/resume', [UserController::class, 'resumeModelReportPostProcessing'])->name('models.report.resume')->middleware('permission:manage_models');
+    Route::get('/models/{model}/benchmark', [UserController::class, 'showModelBenchmark'])->name('models.benchmark')->middleware('permission:manage_models');
     Route::get('/models/{model}/edit', [UserController::class, 'editModel'])->name('models.edit')->middleware('permission:manage_models');
     Route::put('/models/{model}', [UserController::class, 'updateModel'])->name('models.update')->middleware('permission:manage_models');
     Route::delete('/models/{model}', [UserController::class, 'deleteModel'])->name('models.delete')->middleware('permission:manage_models');

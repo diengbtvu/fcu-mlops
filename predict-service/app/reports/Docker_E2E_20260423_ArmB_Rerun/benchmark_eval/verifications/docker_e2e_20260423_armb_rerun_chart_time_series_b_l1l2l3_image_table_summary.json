@@ -1,0 +1,74 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "DT model was selected as the best benchmark model",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "DT model achieved perfect metrics (R2=1.0, MSE=0.0)",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:time_series:metric:DT:mean_abs_gap"
+      ],
+      "reason": "Gold value for DT mean_abs_gap is 0.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "DT model achieved perfect predictive performance",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "DT model showed a perfect sequence correlation of 1.0",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:time_series:metric:DT:sequence_correlation"
+      ],
+      "reason": "Gold value for DT sequence_correlation is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Sucrose_Degradation, VFA, and COD-O are the top correlated features with HPR",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:time_series:metric:DT:mean_abs_gap"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 3
+    }
+  ]
+}

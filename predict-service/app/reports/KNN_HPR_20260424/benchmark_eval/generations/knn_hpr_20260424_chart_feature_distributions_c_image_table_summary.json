@@ -1,0 +1,272 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol, Acetate, and Butyrate have the highest mean feature values.",
+  "explanation_full": "According to the chart 'Feature distributions', Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465) and Butyrate (0.4287).",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+      "claim_text": "Ethanol has a mean value of 0.4736.",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+      "claim_text": "Acetate has a mean value of 0.4465.",
+      "claim_type": "metric_value",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+      "subject": "Acetate",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4465,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+      "claim_text": "Butyrate has a mean value of 0.4287.",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+      "subject": "Butyrate",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4287,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "corrected",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "corrected",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "Ethanol, Acetate, and Butyrate have the highest mean feature values.",
+        "draft_explanation_full": "According to the chart 'Feature distributions', Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465) and Butyrate (0.4287).",
+        "draft_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+            "claim_text": "distribution mean is 3",
+            "claim_type": "metric_value",
+            "span_category": "distribution",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+            "subject": "distribution",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 3.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "claim_text": "Ethanol mean is 0.4736",
+            "claim_type": "metric_value",
+            "span_category": "Ethanol",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "subject": "Ethanol",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std",
+            "claim_text": "Ethanol std is 0.1387",
+            "claim_type": "metric_value",
+            "span_category": "Ethanol",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std",
+            "subject": "Ethanol",
+            "predicate": "std",
+            "object": null,
+            "metric": "std",
+            "value": 0.1387,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+            "claim_text": "distribution mean is 3",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The chart shows that the highest mean feature value is Ethanol, not a general distribution mean of 3.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+              "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean"
+            ],
+            "grounded_fact_summary": "The chart shows that Ethanol has the highest mean value (0.4736) among all features."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "claim_text": "Ethanol mean is 0.4736",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The chart clearly shows that the mean value for Ethanol is 0.4736.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean"
+            ],
+            "grounded_fact_summary": "The chart shows that Ethanol has a mean value of 0.4736."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std",
+            "claim_text": "Ethanol std is 0.1387",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The chart shows that the standard deviation for Ethanol is 0.2528, not 0.1387.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:std"
+            ],
+            "grounded_fact_summary": "The chart shows that Ethanol has a standard deviation of 0.2528."
+          }
+        ],
+        "corrected_explanation_short": "Ethanol, Acetate, and Butyrate have the highest mean feature values.",
+        "corrected_explanation_full": "According to the chart 'Feature distributions', Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465) and Butyrate (0.4287).",
+        "corrected_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "claim_text": "Ethanol has a mean value of 0.4736.",
+            "claim_type": "metric_value",
+            "span_category": "Ethanol",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "subject": "Ethanol",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4736,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+            "claim_text": "Acetate has a mean value of 0.4465.",
+            "claim_type": "metric_value",
+            "span_category": "Acetate",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+            "subject": "Acetate",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4465,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+            "claim_text": "Butyrate has a mean value of 0.4287.",
+            "claim_type": "metric_value",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+            "subject": "Butyrate",
+            "predicate": "mean",
+            "object": null,
+            "metric": "mean",
+            "value": 0.4287,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean",
+            "claim_text": "Ethanol has a mean value of 0.4736.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence provided in the 'table_descriptive_statistics.csv' file, where Ethanol's mean value is listed as 0.4735821124.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:feature_distributions:metric:Ethanol:mean"
+            ],
+            "grounded_fact_summary": "The claim is supported by the fact that Ethanol has a mean value of 0.4735821124 according to the 'table_descriptive_statistics.csv' file."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Acetate:mean",
+            "claim_text": "Acetate has a mean value of 0.4465.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence provided in the 'table_descriptive_statistics.csv' file, where Acetate's mean value is listed as 0.4465.",
+            "matched_fact_ids": [],
+            "grounded_fact_summary": "No matching fact found."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:feature_distributions:metric:Butyrate:mean",
+            "claim_text": "Butyrate has a mean value of 0.4287.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence provided in the 'table_descriptive_statistics.csv' file, where Butyrate's mean value is listed as 0.4287.",
+            "matched_fact_ids": [],
+            "grounded_fact_summary": "No matching fact found."
+          }
+        ]
+      }
+    ],
+    "decision_counts": {
+      "edit": 2,
+      "keep": 1
+    }
+  },
+  "parent_draft_hash": "26ce2a57113c049ea6a2db82a2693db8c2350b33"
+}

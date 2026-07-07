@@ -1,0 +1,11 @@
+{
+  "report_id": "fixture_bundle",
+  "best_model": "KNN",
+  "r2": 0.92,
+  "mse": 0.08,
+  "top_features": [
+    "pH",
+    "Propionate",
+    "VFA"
+  ]
+}

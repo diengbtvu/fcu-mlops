@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "claim_text": "KNN performs best with an MSE of 0.0128.",
+      "claim_type": "metric_value",
+      "span_category": "best_mse",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": "0.0128",
+      "metric": "best_mse",
+      "value": 0.0128,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "claim_text": "KNN achieves the highest R2 of 0.817.",
+      "claim_type": "metric_value",
+      "span_category": "best_r2",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": "0.817",
+      "metric": "best_r2",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

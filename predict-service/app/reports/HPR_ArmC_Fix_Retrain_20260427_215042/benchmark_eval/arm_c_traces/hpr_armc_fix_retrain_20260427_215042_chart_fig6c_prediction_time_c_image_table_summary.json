@@ -1,0 +1,268 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The mean absolute gap between predicted and actual values is 0.066591.",
+      "draft_explanation_full": "The chart 'Figure 6C - Prediction over time' visualizes the KNN model's prediction of HPR values against the actual observed values.  The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.  The mean absolute gap between predicted and actual values is 0.066591, suggesting a relatively good performance in capturing the overall trend of HPR over time.",
+      "draft_claims": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:1",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+          "subject": "KNN",
+          "predicate": "predicted_peak_index",
+          "object": null,
+          "metric": "predicted_peak_index",
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:2",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+          "subject": "KNN",
+          "predicate": "actual_peak_index",
+          "object": null,
+          "metric": "actual_peak_index",
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:3",
+          "claim_text": "The mean absolute gap between predicted and actual values is 0.066591.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "mean_abs_gap",
+          "object": null,
+          "metric": "mean_abs_gap",
+          "value": 0.066591,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:4",
+          "claim_text": "The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+          "subject": "KNN",
+          "predicate": "sequence_correlation",
+          "object": null,
+          "metric": "sequence_correlation",
+          "value": 0.931488,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:1",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states that the KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The provided evidence shows that the predicted peak index is 146, but the actual peak value is not explicitly stated in the evidence. Therefore, the claim is partially supported.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The KNN model predicts a peak HPR value at index 146."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:2",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states that the KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The provided evidence shows that the predicted peak index is 146, but the actual peak value is not explicitly stated in the evidence. Therefore, the claim is partially supported.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak index is 130."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:3",
+          "claim_text": "The mean absolute gap between predicted and actual values is 0.066591.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim states that the mean absolute gap between predicted and actual values is 0.066591. The provided evidence shows a value of 0.066591 for this metric.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+          ],
+          "grounded_fact_summary": "The mean absolute gap between predicted and actual values is 0.066591."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:4",
+          "claim_text": "The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim states that the sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship. The provided evidence shows a value of 0.931488 for this metric.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+          ],
+          "grounded_fact_summary": "The sequence correlation between predicted and actual values is 0.931488."
+        }
+      ],
+      "corrected_explanation_short": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The mean absolute gap between predicted and actual values is 0.066591, indicating a relatively good performance in capturing the overall trend of HPR over time.",
+      "corrected_explanation_full": "The chart 'Figure 6C - Prediction over time' visualizes the KNN model's prediction of HPR values against the actual observed values.  The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.  The mean absolute gap between predicted and actual values is 0.066591, suggesting a relatively good performance in capturing the overall trend of HPR over time.",
+      "corrected_claims": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:1",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+          "subject": "KNN",
+          "predicate": "predicted_peak_index",
+          "object": null,
+          "metric": "predicted_peak_index",
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:2",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+          "subject": "KNN",
+          "predicate": "actual_peak_index",
+          "object": null,
+          "metric": "actual_peak_index",
+          "value": 1.0,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:3",
+          "claim_text": "The mean absolute gap between predicted and actual values is 0.066591, suggesting a relatively good performance in capturing the overall trend of HPR over time.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+          "subject": "KNN",
+          "predicate": "mean_abs_gap",
+          "object": null,
+          "metric": "mean_abs_gap",
+          "value": 0.066591,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:4",
+          "claim_text": "The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+          "subject": "KNN",
+          "predicate": "sequence_correlation",
+          "object": null,
+          "metric": "sequence_correlation",
+          "value": 0.931488,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:1",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states that the KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The provided evidence shows that the predicted peak index is 146, but the actual peak value is not mentioned in the evidence. Therefore, the claim is partially supported.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+          ],
+          "grounded_fact_summary": "The KNN model predicts a peak HPR value at index 146."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:2",
+          "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim states that the KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0. The provided evidence shows that the predicted peak index is 146, but the actual peak value is not mentioned in the evidence. Therefore, the claim is partially supported.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+          ],
+          "grounded_fact_summary": "The actual peak index is 130."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:3",
+          "claim_text": "The mean absolute gap between predicted and actual values is 0.066591, suggesting a relatively good performance in capturing the overall trend of HPR over time.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim states that the mean absolute gap between predicted and actual values is 0.066591, suggesting a relatively good performance in capturing the overall trend of HPR over time. The provided evidence shows that the mean absolute gap is indeed 0.066591.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+          ],
+          "grounded_fact_summary": "The mean absolute gap between predicted and actual values is 0.066591."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:4",
+          "claim_text": "The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim states that the sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship. The provided evidence shows that the sequence correlation is indeed 0.931488.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+          ],
+          "grounded_fact_summary": "The sequence correlation between predicted and actual values is 0.931488."
+        }
+      ],
+      "draft_alignment_issues": [],
+      "corrected_alignment_issues": []
+    }
+  ],
+  "decision_counts": {
+    "edit": 2,
+    "keep": 2
+  }
+}

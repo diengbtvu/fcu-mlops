@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The correlation heatmap shows the strength and direction of relationships between different variables.  Strong positive correlations are indicated by warmer colors, while negative correlations are shown in cooler colors.",
+  "explanation_full": "This correlation heatmap visualizes the relationships between various factors influencing hydrogen production (HPR). The color intensity represents the strength of the correlation: \n\n* **Warmer colors** indicate strong positive correlations, meaning that as one variable increases, the other tends to increase as well.  \n* **Cooler colors** represent negative correlations, where an increase in one variable is associated with a decrease in the other.\n\nFor example, VFA (Volatile Fatty Acids) and Butyrate show a very strong positive correlation (dark red), suggesting that higher levels of both are linked to increased HPR.  Similarly, Acetate and Ethanol also exhibit a strong positive relationship. \n\nThis heatmap provides a quick overview of the key relationships within the dataset, highlighting potential drivers and dependencies influencing hydrogen production.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA::correlation",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:correlation_heatmap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "claim_text": "VFA::target_correlation",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:correlation_heatmap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

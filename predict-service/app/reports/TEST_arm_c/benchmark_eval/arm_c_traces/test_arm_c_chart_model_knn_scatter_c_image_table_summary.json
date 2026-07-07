@@ -1,0 +1,285 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "The KNN model achieved an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075, with a correlation between predicted and actual values of 0.9073.",
+      "draft_explanation_full": "The KNN model's performance metrics, derived from the KNN scatter plot diagnostics, show an R2 score of 0.8172, an RMSE of 0.1132, and an MAE of 0.075. Furthermore, the correlation between predicted and actual values is 0.9073, and the linear fit slope is 0.8798. These metrics indicate the model's performance based on the scatter plot analysis.",
+      "draft_claims": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": null,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "and an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": null,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "with a correlation between predicted and actual values of 0.9073",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_short",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation",
+          "subject": "KNN",
+          "predicate": "pred_actual_correlation",
+          "object": null,
+          "metric": "pred_actual_correlation",
+          "value": 0.9073,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "an R2 score of 0.8172",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.8172,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "an RMSE of 0.1132",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "KNN",
+          "predicate": "RMSE",
+          "object": null,
+          "metric": "rmse",
+          "value": 0.1132,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "an MAE of 0.075",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": null,
+          "subject": "KNN",
+          "predicate": "MAE",
+          "object": null,
+          "metric": "mae",
+          "value": 0.075,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "the correlation between predicted and actual values is 0.9073",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation",
+          "subject": "KNN",
+          "predicate": "pred_actual_correlation",
+          "object": null,
+          "metric": "pred_actual_correlation",
+          "value": 0.9073,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "the linear fit slope is 0.8798",
+          "claim_type": "metric_value",
+          "span_category": "metric_value",
+          "is_numeric": true,
+          "requires_grounding_from": "explanation_full",
+          "confidence": 1.0,
+          "source_variable_id": "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope",
+          "subject": "KNN",
+          "predicate": "linear_fit_slope",
+          "object": null,
+          "metric": "linear_fit_slope",
+          "value": 0.8798,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "claim_1",
+          "claim_text": "The KNN model achieved an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.8172) is a rounded version of the grounded value (0.8171678017), which is acceptable for rounding, but the claim text should reflect the precision of the source evidence.",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN R2 score is 0.8171678017."
+        },
+        {
+          "claim_id": "claim_2",
+          "claim_text": "an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.1132) is a rounded version of the grounded value (0.11318090995439674).",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "KNN RMSE is 0.11318090995439674."
+        },
+        {
+          "claim_id": "claim_3",
+          "claim_text": "and an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.075) is a rounded version of the grounded value (0.07502308749135642).",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "KNN MAE is 0.07502308749135642."
+        },
+        {
+          "claim_id": "claim_4",
+          "claim_text": "with a correlation between predicted and actual values of 0.9073",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.9073) is a rounded version of the grounded value (0.907301).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation"
+          ],
+          "grounded_fact_summary": "KNN pred_actual_correlation is 0.907301."
+        },
+        {
+          "claim_id": "claim_5",
+          "claim_text": "an R2 score of 0.8172",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.8172) is a rounded version of the grounded value (0.8171678017).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score"
+          ],
+          "grounded_fact_summary": "KNN R2 score is 0.8171678017."
+        },
+        {
+          "claim_id": "claim_6",
+          "claim_text": "an RMSE of 0.1132",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.1132) is a rounded version of the grounded value (0.11318090995439674).",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "KNN RMSE is 0.11318090995439674."
+        },
+        {
+          "claim_id": "claim_7",
+          "claim_text": "an MAE of 0.075",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.075) is a rounded version of the grounded value (0.07502308749135642).",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "KNN MAE is 0.07502308749135642."
+        },
+        {
+          "claim_id": "claim_8",
+          "claim_text": "the correlation between predicted and actual values is 0.9073",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.9073) is a rounded version of the grounded value (0.907301).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation"
+          ],
+          "grounded_fact_summary": "KNN pred_actual_correlation is 0.907301."
+        },
+        {
+          "claim_id": "claim_9",
+          "claim_text": "the linear fit slope is 0.8798",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim value (0.8798) is a rounded version of the grounded value (0.879798).",
+          "matched_fact_ids": [
+            "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope"
+          ],
+          "grounded_fact_summary": "KNN linear_fit_slope is 0.879798."
+        }
+      ],
+      "corrected_explanation_short": "",
+      "corrected_explanation_full": "",
+      "corrected_claims": [],
+      "corrected_validations": []
+    }
+  ],
+  "decision_counts": {
+    "edit": 9
+  }
+}

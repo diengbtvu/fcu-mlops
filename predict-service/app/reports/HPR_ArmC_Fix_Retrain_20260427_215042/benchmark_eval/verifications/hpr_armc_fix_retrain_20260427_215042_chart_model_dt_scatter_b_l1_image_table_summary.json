@@ -1,0 +1,64 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual",
+      "claim_text": "The Decision Tree model has a moderate R2 score of 0.56, indicating a fair fit to the data.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:max_abs_residual"
+      ],
+      "reason": "Gold value for DT max_abs_residual is 0.597936.",
+      "numeric_delta": 0.03793599999999997
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:pred_actual_correlation",
+      "claim_text": "The Decision Tree model has a moderate R2 score of 0.56, indicating a fair fit to the data.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:pred_actual_correlation"
+      ],
+      "reason": "Gold value for DT pred_actual_correlation is 0.787161.",
+      "numeric_delta": 0.22716099999999995
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score",
+      "claim_text": "The Decision Tree model has a moderate R2 score of 0.56, indicating a fair fit to the data.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531395.",
+      "numeric_delta": 0.00045313949999992165
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:linear_fit_slope",
+      "claim_text": "The Decision Tree model has a moderate R2 score of 0.56, indicating a fair fit to the data.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_dt_scatter:metric:DT:linear_fit_slope"
+      ],
+      "reason": "Gold value for DT linear_fit_slope is 0.802783.",
+      "numeric_delta": 0.24278299999999997
+    }
+  ]
+}

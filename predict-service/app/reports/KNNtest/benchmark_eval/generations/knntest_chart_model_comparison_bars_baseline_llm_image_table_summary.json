@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:model_comparison_bars",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model is the best predictor for HPR, achieving an R² of 0.8172, outperforming other models like RF (R²=0.7756).",
+  "explanation_full": "This chart compares how well different machine learning models predict the target variable, which is Hydrogen Production Rate (HPR). The models tested include KNN, RF, XGBoost, SVM, and DT. The key metric here is R² (R-squared), which measures how much of the variation in the target variable is explained by the model; a value closer to 1 is better. According to the results, the KNN model performed the best, achieving an R² of 0.8172, which is significantly higher than the next best model, RF (R²=0.7756). This suggests that KNN is the most reliable method for predicting HPR based on the input features. A practical caution is that while KNN performs well, its performance relies heavily on the quality and relevance of all input features; if any feature is noisy or irrelevant, the prediction accuracy could drop.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved an R² of 0.8172 for HPR prediction.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "model_comparison_bars",
+      "confidence": 1.0,
+      "subject": "KNN model",
+      "predicate": "achieved R²",
+      "object": "0.8172",
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "RF model achieved an R² of 0.7756 for HPR prediction.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "model_comparison_bars",
+      "confidence": 1.0,
+      "subject": "RF model",
+      "predicate": "achieved R²",
+      "object": "0.7756",
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN model outperformed RF model in predicting HPR.",
+      "claim_type": "comparison",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "model_comparison_bars",
+      "confidence": 1.0,
+      "subject": "KNN model",
+      "predicate": "outperformed",
+      "object": "RF model",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

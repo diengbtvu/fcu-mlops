@@ -1,0 +1,44 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:rank_score:Acetate",
+      "claim_text": "Acetate::gra_score",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:rank_score:Butyrate",
+      "claim_text": "Butyrate::gra_score",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:rank_score:VFA",
+      "claim_text": "VFA::gra_score",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

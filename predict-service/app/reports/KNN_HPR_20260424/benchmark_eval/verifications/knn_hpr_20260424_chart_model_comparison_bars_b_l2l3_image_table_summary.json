@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:best_model",
+      "claim_text": "KNN outperforms other models with an R2 of 0.81717 and MSE of 0.012810, indicating the best fit to the data.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:ranking:r2_score",
+      "claim_text": "KNN achieves the highest R2 score (0.81717) and lowest MSE (0.012810) among all benchmark models.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "claim_text": "The KNN model predicts a peak hydrogen production (HPR) value of 1.0 at sample index 130.",
+      "claim_type": "metric_value",
+      "span_category": "prediction",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": null,
+      "metric": "mean_abs_gap",
+      "value": 130.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "claim_text": "The predicted peak is therefore delayed by 16 samples and has a lower value than the actual peak.",
+      "claim_type": "metric_value",
+      "span_category": "prediction",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "metric": "sequence_correlation",
+      "value": 16.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

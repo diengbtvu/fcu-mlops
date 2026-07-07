@@ -324,6 +324,8 @@ class DatasetController extends Controller
             'training_method' => 'nullable|in:process,api',
             'training_scope' => 'nullable|in:single_model,all_models_compare',
             'model_name' => 'nullable|string|max:255',
+            'llm_provider' => 'nullable|in:groq',
+            'llm_model' => 'nullable|string|max:128',
             'session_id' => 'nullable|string', // Session ID for progress tracking
             // Tree-based model parameters (RF, XGBoost, DT)
             'n_estimators' => 'nullable|integer|min:10|max:1000',
@@ -351,6 +353,8 @@ class DatasetController extends Controller
             'random_state' => $request->input('random_state', 42),
             'session_id' => $request->input('session_id'), // Pass session ID
             'selected_sheet' => $dataset->SelectedSheet,
+            'llm_provider' => $request->input('llm_provider', 'groq'),
+            'llm_model' => $request->input('llm_model'),
         ];
 
         // Add model-specific parameters

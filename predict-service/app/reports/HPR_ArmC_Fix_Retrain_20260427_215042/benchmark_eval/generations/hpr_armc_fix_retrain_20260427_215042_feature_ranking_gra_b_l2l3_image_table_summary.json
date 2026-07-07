@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VFA, Butyrate, Acetate, VSS are the top four most important features for predicting model performance.  The model with the highest R-squared value is KNN.",
+  "explanation_full": "Based on the Grey Relational Analysis, VFA, Butyrate, Acetate, and VSS are the top four most important features for predicting model performance. The KNN model achieved the highest R-squared value of 0.81717, indicating a strong correlation between the input features and the predicted output.  This suggests that these features play a crucial role in determining the model's accuracy.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top four most important features for predicting model performance.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:top_feature",
+      "subject": "VFA, Butyrate, Acetate, and VSS",
+      "predicate": "are the top four most important features for predicting model performance.",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 4,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:model_knn_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best model, showing an R2 of 0.8172 and the lowest RMSE of 0.1132, with a strong correlation of 0.9073.",
+  "explanation_full": "The KNN model is the best performer, evidenced by its R2 score of 0.8172 and its lowest RMSE of 0.1132. Furthermore, the prediction-actual correlation is strong at 0.9073, and the linear fit slope is 0.8798. These metrics collectively confirm KNN's superior predictive capability compared to other models. The analysis should also note the maximum absolute residual of 0.3673, indicating the range of prediction errors.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the best model.",
+      "claim_type": "best_model",
+      "span_category": "model_metrics",
+      "is_numeric": false,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "is the best model",
+      "object": "KNN",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R2 score",
+      "object": "0.8172",
+      "metric": "r2_score",
+      "value": 0.8172,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN had the lowest RMSE of 0.1132.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has lowest RMSE",
+      "object": "0.1132",
+      "metric": "rmse",
+      "value": 0.1132,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "artifact_id": "TEST_arm_c:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The performance metrics consistently improve as more features are added, with KNN showing the highest R² of 0.8178 when all 11 features are used.",
+  "explanation_full": "Focusing on the incremental feature analysis table, the progression from 1 to 11 features reveals a clear pattern of performance enhancement across models. Specifically, the KNN model achieves its peak performance with an R² of 0.8178 and an MSE of 0.01276 when all 11 features are included. This improvement is noticeable across all models, indicating that the feature set is highly informative for predicting the target variable, with the final set yielding the best results.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieves its peak performance with an R² of 0.8178 and an MSE of 0.01276 when all 11 features are included.",
+      "claim_type": "metric_value",
+      "span_category": "performance_metric",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:incremental_feature_analysis/main:plateau",
+      "subject": "KNN",
+      "predicate": "achieves peak performance",
+      "object": "0.8178",
+      "metric": "r2_score",
+      "value": 0.8178,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

@@ -1,0 +1,76 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "the SVM model shows moderate performance with an R2 of 0.7324",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 9.747499999934739e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "supported by a strong correlation of 0.8658",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 4.0000000000040004e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "an average prediction error (MAE) of 0.0946",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "evidenced by an R2 score of 0.7324 from the table",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 9.747499999934739e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "showing a strong correlation of 0.8658 between predictions and actuals",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 4.0000000000040004e-05
+    }
+  ]
+}

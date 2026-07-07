@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "r2",
+      "claim_text": "XGBoost has r2_score=0.860000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.86.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "correlation",
+      "claim_text": "XGBoost has pred_actual_correlation=0.840000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+      ],
+      "reason": "Gold value for XGBoost pred_actual_correlation is 0.84.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "third-metric",
+      "claim_text": "XGBoost has linear_fit_slope=0.820000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.82.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

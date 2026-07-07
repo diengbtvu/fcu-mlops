@@ -1,0 +1,258 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "According to the SHAP analysis in Figure 3B, VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+  "explanation_full": "The SHAP analysis presented in Figure 3B highlights the importance of various features in predicting HRT.  VFA, Butyrate, and Acetate emerge as the top three most influential features based on their mean absolute SHAP values. This suggests that these features play a significant role in determining the outcome of HRT.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:1",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "According to the SHAP analysis in Figure 3B, VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+        "draft_explanation_full": "The SHAP analysis presented in Figure 3B highlights the importance of various features in predicting HRT.  VFA, Butyrate, and Acetate emerge as the top three most influential features based on their mean absolute SHAP values. This suggests that these features play a significant role in determining the outcome of HRT.",
+        "draft_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:1",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+            "subject": "shap",
+            "predicate": "mean_abs_shap",
+            "object": "VFA, Butyrate, and Acetate",
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:2",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+            "subject": "ORP_Low",
+            "predicate": "mean_abs_shap",
+            "object": null,
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:1",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is partially supported because while the SHAP analysis does show VFA, Butyrate, and Acetate as being among the top features, it doesn't explicitly state they are the top three. The ranking provided in the evidence is not complete.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:ranking"
+            ],
+            "grounded_fact_summary": "The evidence shows that VFA, Butyrate, and Acetate are among the top features according to the SHAP analysis. However, it doesn't explicitly state they are the top three."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:2",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is partially supported because while the SHAP analysis does show VFA, Butyrate, and Acetate as being among the top features, it doesn't explicitly state they are the top three. The ranking provided in the evidence is not complete.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:ranking"
+            ],
+            "grounded_fact_summary": "The evidence shows that VFA, Butyrate, and Acetate are among the top features according to the SHAP analysis. However, it doesn't explicitly state they are the top three."
+          }
+        ],
+        "corrected_explanation_short": "According to the SHAP analysis in Figure 3B, VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+        "corrected_explanation_full": "The SHAP analysis presented in Figure 3B highlights the importance of various features in predicting HRT.  VFA, Butyrate, and Acetate emerge as the top three most influential features based on their mean absolute SHAP values. This suggests that these features play a significant role in determining the outcome of HRT.",
+        "corrected_claims": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:1",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+            "subject": "shap",
+            "predicate": "mean_abs_shap",
+            "object": "VFA, Butyrate, and Acetate",
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:2",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 1.0,
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+            "subject": "ORP_Low",
+            "predicate": "mean_abs_shap",
+            "object": null,
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:1",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is partially supported because while the SHAP analysis does show VFA, Butyrate, and Acetate as being among the top features, it doesn't explicitly state they are the top three. The ranking provided in the evidence is not complete.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:ranking"
+            ],
+            "grounded_fact_summary": "The SHAP analysis in Figure 3B shows that VFA, Butyrate, and Acetate are among the top features influencing HRT prediction. However, the exact ranking is not provided in the evidence."
+          },
+          {
+            "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:claim:2",
+            "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "Similar to claim 1, the evidence shows VFA, Butyrate, and Acetate as influential features but doesn't explicitly state they are the top three. The ranking provided in the evidence is not complete.",
+            "matched_fact_ids": [
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+              "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:ranking"
+            ],
+            "grounded_fact_summary": "The SHAP analysis in Figure 3B shows that VFA, Butyrate, and Acetate are among the top features influencing HRT prediction. However, the exact ranking is not provided in the evidence."
+          }
+        ],
+        "draft_alignment_issues": [
+          {
+            "issue_id": "alignment-1",
+            "issue_type": "missing_value",
+            "message": "Numeric variable mention did not include a parseable numeric value.",
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+            "mention_id": "m2",
+            "claim_id": null,
+            "action": "warn"
+          }
+        ],
+        "corrected_alignment_issues": [
+          {
+            "issue_id": "alignment-1",
+            "issue_type": "missing_value",
+            "message": "Numeric variable mention did not include a parseable numeric value.",
+            "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+            "mention_id": "m2",
+            "claim_id": null,
+            "action": "warn"
+          }
+        ]
+      }
+    ],
+    "decision_counts": {
+      "keep": 2
+    }
+  },
+  "parent_draft_hash": "29c0f1aa221817399d1d683b4e0a9d17bb0dfd26",
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "missing_value",
+      "message": "Numeric variable mention did not include a parseable numeric value.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "mention_id": "m2",
+      "claim_id": null,
+      "action": "warn"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+      "evidence_span": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+      "stated_value": null,
+      "stated_object": "VFA, Butyrate, and Acetate",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "evidence_span": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT.",
+      "stated_value": null,
+      "stated_object": "ORP_Low",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

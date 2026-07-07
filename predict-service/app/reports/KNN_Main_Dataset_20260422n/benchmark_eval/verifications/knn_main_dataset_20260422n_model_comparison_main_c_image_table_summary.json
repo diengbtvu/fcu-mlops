@@ -1,0 +1,57 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the best performing model.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the highest R² score (0.81717) and the lowest RMSE (0.11318) in the test set.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN demonstrated the lowest MSE (0.012810) and MAE (0.07502).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:model_comparison/main:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.012809918378105262.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:model_comparison/main",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "RF performed well with an R² of 0.77560, but KNN's metrics consistently outperform all other benchmark models.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:model_comparison/main:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171353091.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

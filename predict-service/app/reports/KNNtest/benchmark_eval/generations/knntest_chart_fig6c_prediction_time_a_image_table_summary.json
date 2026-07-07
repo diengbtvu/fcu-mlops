@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest performance metrics, with an R2 score of 0.81717 and an RMSE of 0.11318, outperforming all other benchmark models.",
+  "explanation_full": "The analysis summary report indicates that the KNN model is the best benchmark model for predicting HPR, achieving an R2 score of 0.81717, an RMSE of 0.11318, and an MSE of 0.012810. Furthermore, the top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641). The model comparison section confirms KNN's superior performance compared to RF (R2: 0.775602), XGBoost (R2: 0.749476), and DT (R2: 0.560453). The sequence diagnostics also show a high sequence correlation of 0.931488 for the KNN model.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "claim_type": "Comparison",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has R2 score",
+      "object": 0.817168,
+      "metric": "r2_score",
+      "value": 0.817168,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+      "claim_type": "Fact Extraction",
+      "span_category": "Feature Correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is top correlated feature with HPR",
+      "object": 0.7984,
+      "metric": "correlation coefficient",
+      "value": 0.7984,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN model has an RMSE of 0.113181.",
+      "claim_type": "Metric Reporting",
+      "span_category": "Model Performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has RMSE",
+      "object": 0.113181,
+      "metric": "rmse",
+      "value": 0.113181,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+n_features,feature_subset,KNN_R2,KNN_MSE,RF_R2,RF_MSE,SVM_R2,SVM_MSE
+1,pH,0.50,0.40,0.45,0.44,0.30,0.60
+2,pH -> Propionate,0.75,0.20,0.65,0.25,0.50,0.33
+3,pH -> Propionate -> VFA,0.89,0.11,0.80,0.18,0.62,0.28
+4,pH -> Propionate -> VFA -> Butyrate,0.90,0.10,0.82,0.16,0.65,0.26
+5,pH -> Propionate -> VFA -> Butyrate -> VSS,0.91,0.09,0.86,0.12,0.70,0.22
+6,pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol,0.92,0.08,0.87,0.11,0.72,0.20
+7,pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate,0.919,0.081,0.87,0.11,0.73,0.19
+8,pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O,0.918,0.082,0.88,0.10,0.74,0.18

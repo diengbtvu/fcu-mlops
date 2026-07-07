@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the top feature influencing the model's predictions.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has highest mean absolute SHAP value",
+      "object": "0.02848447610559807",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate is the second most influential feature.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "Butyrate",
+      "predicate": "has second highest mean absolute SHAP value",
+      "object": "0.03228471580444983",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Acetate is among the top three features.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "is a top three feature",
+      "object": "0.02847876565915048",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

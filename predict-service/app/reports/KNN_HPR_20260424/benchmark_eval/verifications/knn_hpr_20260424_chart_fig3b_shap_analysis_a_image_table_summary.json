@@ -1,0 +1,48 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT 12 -4 h.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "ORP_Low has a mean absolute SHAP value of 2.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.0383875935.",
+      "numeric_delta": 1.9616124065
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "The SHAP values show that VFA, Butyrate, and Acetate are ranked among the top features.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 3
+    }
+  ]
+}

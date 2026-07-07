@@ -1,0 +1,60 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "claim_text": "The mean absolute gap between actual and predicted HPR values.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "claim_text": "The sequence correlation between actual and predicted HPR values.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "claim_text": "The index of the actual peak HPR value.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+      ],
+      "reason": "Gold value for KNN actual_peak_index is 130.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "claim_text": "The index of the predicted peak HPR value.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+      ],
+      "reason": "Gold value for KNN predicted_peak_index is 146.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

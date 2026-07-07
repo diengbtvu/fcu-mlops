@@ -1,0 +1,98 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the winning model.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 2.198299999922604e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved an R2 score of 0.817.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.746669641202516e-12
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved an RMSE of 0.113.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 4.5603298914898005e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN achieved an MSE of 0.012810.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.0128099184.",
+      "numeric_delta": 2.189480020897694e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "KNN achieved an MAE of 0.075.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.0750230875.",
+      "numeric_delta": 8.643599724855733e-12
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "The model performance ranking is KNN > RF > XGBoost > SVM > DT.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:ranking:r2_score"
+      ],
+      "reason": "Claimed ordering is consistent with the gold ranking.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "DT has the lowest R2 score (0.560).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:model_comparison_bars:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531395.",
+      "numeric_delta": 3.994582442601313e-13
+    }
+  ]
+}

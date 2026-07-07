@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "SHAP importance plot for the best KNN model.",
+  "explanation_full": "SHAP importance plot for the best KNN model.",
+  "claims": [],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

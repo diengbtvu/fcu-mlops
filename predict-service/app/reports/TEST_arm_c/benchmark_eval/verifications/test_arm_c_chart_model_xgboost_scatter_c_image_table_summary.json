@@ -1,0 +1,78 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The XGBoost model achieved an R2 score of 0.7495",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "a correlation between predicted and actual values of 0.8750",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+      ],
+      "reason": "Gold value for XGBoost pred_actual_correlation is 0.875024.",
+      "numeric_delta": 2.4000000000024002e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "show an R2 score of 0.7495",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "the correlation between predicted and actual values is 0.8750",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+      ],
+      "reason": "Gold value for XGBoost pred_actual_correlation is 0.875024.",
+      "numeric_delta": 2.4000000000024002e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_xgboost_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "the linear fit slope is 0.8387",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+      "numeric_delta": 1.6000000000016e-05
+    }
+  ]
+}

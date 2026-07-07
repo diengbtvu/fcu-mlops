@@ -1,0 +1,74 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The feature ranking analysis identifies Sucrose_Degradation, VFA, and COD-O as the top three features, which are the most critical predictors in the dataset.",
+  "explanation_full": "The GREY RELATIONAL ANALYSIS (GRA) feature ranking clearly establishes the hierarchy of feature importance. Sucrose_Degradation is the most influential feature (0.9998), followed by VFA (0.9994) and COD-O (0.9990). These top three features are significantly more important than the subsequent features like Butyrate (0.9671) and VSS (0.9634). The overall model performance section further supports the reliability of the feature set, noting that the Decision Tree (DT) model achieved perfect R² and MSE scores.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Sucrose_Degradation is the most influential feature (0.9998)",
+      "claim_type": "rank_score",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra:top_feature",
+      "subject": "Sucrose_Degradation",
+      "predicate": "most influential",
+      "object": "0.9998",
+      "metric": "gra_score",
+      "value": 0.9998,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "VFA (0.9994) and COD-O (0.9990)",
+      "claim_type": "metric_value",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra:ranking",
+      "subject": "VFA",
+      "predicate": "followed by",
+      "object": "COD-O",
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "COD-O"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Sucrose_Degradation, VFA, and COD-O as the top three features",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra:top_feature",
+      "subject": "Sucrose_Degradation",
+      "predicate": "top three features",
+      "object": "VFA, COD-O",
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Sucrose_Degradation",
+        "VFA",
+        "COD-O"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3"
+}

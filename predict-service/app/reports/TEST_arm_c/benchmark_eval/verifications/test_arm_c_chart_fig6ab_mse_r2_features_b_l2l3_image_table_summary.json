@@ -1,0 +1,48 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieves its best performance with 9 features (R²=0.83014, MSE=0.01190)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "RF shows the best overall performance at n=11 (R²=0.78554, MSE=0.01503)",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.785537.",
+      "numeric_delta": 2.9999999999752447e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "SVM and XGBoost both identify n=4 as their optimal feature count",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

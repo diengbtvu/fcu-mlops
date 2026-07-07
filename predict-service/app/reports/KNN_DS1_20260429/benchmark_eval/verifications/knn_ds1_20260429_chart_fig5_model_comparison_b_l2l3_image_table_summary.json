@@ -1,0 +1,7 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig5_model_comparison",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": []
+}

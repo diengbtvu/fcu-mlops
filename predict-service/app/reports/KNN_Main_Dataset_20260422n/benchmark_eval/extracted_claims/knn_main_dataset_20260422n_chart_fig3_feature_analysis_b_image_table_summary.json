@@ -1,0 +1,29 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "claim_text": "The combination of VFA, Acetate, and VFA is the most influential set of predictors, as indicated by the consistency across multiple feature importance metrics.",
+      "claim_type": "freeform",
+      "span_category": "VFA, Acetate, VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "multiple_metrics",
+      "confidence": 0.95,
+      "subject": "Feature Importance",
+      "predicate": "is the most influential set of predictors",
+      "object": "VFA, Acetate, VFA",
+      "metric": "consistency",
+      "value": "high",
+      "unit": "consistency",
+      "ordered_items": [
+        "VFA",
+        "Acetate",
+        "VFA"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

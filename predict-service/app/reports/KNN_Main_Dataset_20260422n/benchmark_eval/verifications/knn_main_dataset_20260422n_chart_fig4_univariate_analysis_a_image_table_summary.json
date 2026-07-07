@@ -1,0 +1,84 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The model's performance is robust, with the R-squared value of 0.92, suggesting that the input features explain 92% of the variance in the target variable.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The correlation values for most features against the target variable are high (e.g., pH at 0.91, Temperature at 0.89).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "There are also notable correlations between the input features themselves (e.g., pH and Temperature at 0.88).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Mean Absolute Error (MAE): 0.03.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "maintaining tight control over these two variables is paramount for optimizing the process.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "consider using Regularized Regression (like Ridge or Lasso).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "the combination of pH, Temperature, and pH is the most predictive set.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

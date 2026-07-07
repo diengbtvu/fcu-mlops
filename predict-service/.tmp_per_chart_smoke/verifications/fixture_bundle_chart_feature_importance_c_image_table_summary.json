@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-feature",
+      "claim_text": "VSS is the top feature by importance.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:feature_importance:top_feature"
+      ],
+      "reason": "Gold top feature for importance is VSS.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "ranking",
+      "claim_text": "The importance ordering is VSS > pH > Propionate.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:feature_importance:ranking"
+      ],
+      "reason": "Claimed ordering is consistent with the gold ranking.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-score",
+      "claim_text": "VSS has importance=0.520000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.52.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

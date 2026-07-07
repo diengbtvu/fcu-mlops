@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The chart shows the SHAP importance of features for predicting HRT 12 -4 h. The top features are VFA, Butyrate, and Acetate.",
+  "explanation_full": "The figure displays a bar chart visualizing the SHAP (SHapley Additive exPlanations) importance of various features in predicting HRT 12 -4 h.  VFA, Butyrate, and Acetate are identified as the top three most influential features based on their SHAP values.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "The mean absolute SHAP value of ORP_Low is 2.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": 2,
+      "metric": "mean_abs_shap",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model predicts HPR with high accuracy (R2=0.817) and a low mean absolute error (MAE=0.075).  The predicted peak value is slightly lower than the actual peak, indicating potential underestimation.",
+  "explanation_full": "The chart 'Figure 6C - Prediction over time' visualizes the performance of the KNN model in predicting HPR. The model demonstrates a strong correlation with the actual HPR values (R2=0.817), suggesting a good fit.  The mean absolute error (MAE) is 0.075, indicating that the model's predictions are generally close to the actual values. However, the predicted peak value is slightly lower than the actual peak, which suggests potential underestimation in certain periods. This could be due to various factors such as noise in the data or limitations of the model's ability to capture complex temporal patterns.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

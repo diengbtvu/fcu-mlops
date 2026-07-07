@@ -1,0 +1,342 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the best performance with an R² of 0.8301 and an MSE of 0.0128 using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+  "explanation_full": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset that includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. Incremental feature analysis shows that adding more features generally leads to improved performance.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+      "claim_type": "metric_value",
+      "span_category": "best_r2",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": "0.8301",
+      "metric": "best_r2",
+      "value": 0.8301,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+      "claim_type": "metric_value",
+      "span_category": "best_mse",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": "0.0128",
+      "metric": "best_mse",
+      "value": 0.0128,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+      "claim_type": "metric_value",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": null,
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate",
+        "Ethanol",
+        "COD-O",
+        "pH",
+        "ORP_Low",
+        "ORP_Mid",
+        "Sucrose_Degradation"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "corrected",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "corrected",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model with 11 features achieved the highest R² (0.817) and lowest MSE (0.0128) on the test set. Incremental feature analysis shows that adding more features generally improves performance, with VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation being the most important.",
+        "draft_explanation_full": "The KNN model achieved the best performance in this incremental feature analysis. It reached an R² of 0.817 and an MSE of 0.0128 on the test set.  Incremental feature analysis reveals that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. These findings suggest that a combination of these variables effectively captures the relationships relevant for predicting hydrogen production.",
+        "draft_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "claim_text": "The KNN model with 11 features achieved the highest R² (0.817) and lowest MSE (0.0128) on the test set.",
+            "claim_type": "metric_value",
+            "span_category": "best_mse",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "subject": "KNN",
+            "predicate": "best_mse",
+            "object": "0.0128",
+            "metric": "best_mse",
+            "value": 0.0128,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "claim_text": "The KNN model with 11 features achieved the highest R² (0.817) and lowest MSE (0.0128) on the test set.",
+            "claim_type": "metric_value",
+            "span_category": "best_r2",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "subject": "KNN",
+            "predicate": "best_r2",
+            "object": "0.817",
+            "metric": "best_r2",
+            "value": 0.817,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 11,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "claim_text": "Incremental feature analysis reveals that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "claim_type": "freeform",
+            "span_category": "feature_subset_optimum",
+            "is_numeric": false,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "subject": "KNN",
+            "predicate": "feature_subset_optimum",
+            "object": null,
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate",
+              "Ethanol",
+              "COD-O",
+              "pH",
+              "ORP_Low",
+              "ORP_Mid",
+              "Sucrose_Degradation"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+            "claim_text": "Incremental feature analysis reveals that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "claim_type": "freeform",
+            "span_category": "plateau",
+            "is_numeric": false,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+            "subject": "KNN",
+            "predicate": "plateau",
+            "object": null,
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "claim_text": "The KNN model with 11 features achieved the highest R² (0.817) and lowest MSE (0.0128) on the test set.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is partially supported because while the KNN model achieved a high R² of 0.830 and an MSE of 0.012, it was not explicitly stated that these were achieved with 11 features. The table shows performance for different feature subsets but doesn't clearly indicate which subset corresponds to 11 features.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse"
+            ],
+            "grounded_fact_summary": "The KNN model achieved an R² of 0.8301 and an MSE of 0.0128 with a feature subset that includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "claim_text": "The KNN model with 11 features achieved the highest R² (0.817) and lowest MSE (0.0128) on the test set.",
+            "status": "partially_supported",
+            "recommended_action": "keep",
+            "rationale": "Similar to the previous claim, while the table shows a high R² of 0.8301 achieved by KNN, it doesn't explicitly state that this was with 11 features.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse"
+            ],
+            "grounded_fact_summary": "The KNN model achieved an R² of 0.8301 and an MSE of 0.0128 with a feature subset that includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "claim_text": "Incremental feature analysis reveals that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The table shows that adding more features generally leads to improved performance. The most influential features listed in the claim are also present in the table.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum"
+            ],
+            "grounded_fact_summary": "The table shows that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+            "claim_text": "Incremental feature analysis reveals that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The table shows that adding more features generally leads to improved performance. The most influential features listed in the claim are also present in the table.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:plateau"
+            ],
+            "grounded_fact_summary": "The table shows that adding more features generally leads to improved performance. The most influential features include VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          }
+        ],
+        "corrected_explanation_short": "The KNN model achieved the best performance with an R² of 0.8301 and an MSE of 0.0128 using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+        "corrected_explanation_full": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset that includes VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. Incremental feature analysis shows that adding more features generally leads to improved performance.",
+        "corrected_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+            "claim_type": "metric_value",
+            "span_category": "best_r2",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "subject": "KNN",
+            "predicate": "best_r2",
+            "object": "0.8301",
+            "metric": "best_r2",
+            "value": 0.8301,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+            "claim_type": "metric_value",
+            "span_category": "best_mse",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "subject": "KNN",
+            "predicate": "best_mse",
+            "object": "0.0128",
+            "metric": "best_mse",
+            "value": 0.0128,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "claim_type": "metric_value",
+            "span_category": "feature_subset_optimum",
+            "is_numeric": false,
+            "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "subject": "KNN",
+            "predicate": "feature_subset_optimum",
+            "object": null,
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Butyrate",
+              "Acetate",
+              "VSS",
+              "Propionate",
+              "Ethanol",
+              "COD-O",
+              "pH",
+              "ORP_Low",
+              "ORP_Mid",
+              "Sucrose_Degradation"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence: 'KNN best R2' from table1_incremental_results.csv.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2"
+            ],
+            "grounded_fact_summary": "The KNN model achieved an R² of 0.8301 and a MSE of 0.0128 on the test set using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) on the test set.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence: 'KNN best MSE' from table1_incremental_results.csv.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse"
+            ],
+            "grounded_fact_summary": "The KNN model achieved an R² of 0.8301 and a MSE of 0.0128 on the test set using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+            "claim_text": "The KNN model achieved the highest R² (0.8301) and lowest MSE (0.0128) using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence: 'KNN optimum subset' from table1_incremental_results.csv.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum"
+            ],
+            "grounded_fact_summary": "The KNN model achieved an R² of 0.8301 and a MSE of 0.0128 on the test set using a feature subset including VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation."
+          }
+        ]
+      }
+    ],
+    "decision_counts": {
+      "keep": 4
+    }
+  },
+  "parent_draft_hash": "cd362ffdc0f4f49910d787f29b25c272a623ca95"
+}

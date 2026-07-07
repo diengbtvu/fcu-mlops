@@ -1,0 +1,231 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6c_prediction_time",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model predicts a peak hydrogen production (HPR) value of 0.829894 at index 146, while the actual peak was at index 130 with a value of 1.0. The mean absolute gap between predicted and actual values is 0.066591.",
+  "explanation_full": "The chart 'Figure 6C - Prediction over time' visualizes the predicted hydrogen production (HPR) values from the KNN model compared to the actual observed values.  The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak occurred at index 130 with a value of 1.0. The chart also shows the sequence correlation between predicted and actual values, which is 0.931488, indicating a strong positive linear relationship.  The mean absolute gap between predicted and actual HPR values is 0.066591, suggesting that the KNN model performs reasonably well in predicting the overall trend of HPR over time.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "claim_text": "The mean absolute gap between predicted and actual HPR values is 0.066591.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": 0.066591,
+      "metric": "mean_abs_gap",
+      "value": 0.066591,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "claim_text": "The sequence correlation between predicted and actual values is 0.931488.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": 0.931488,
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "claim_text": "The actual peak was at index 130 with a value of 1.0.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+      "subject": "KNN",
+      "predicate": "actual_peak_index",
+      "object": 130,
+      "metric": "actual_peak_index",
+      "value": 130.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+      "subject": "KNN",
+      "predicate": "predicted_peak_index",
+      "object": 146,
+      "metric": "predicted_peak_index",
+      "value": 146.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model predicts a peak hydrogen production (HPR) value of 0.829894 at index 146, while the actual peak was at index 130 with a value of 1.0. The mean absolute gap between predicted and actual values is 0.066591.",
+        "draft_explanation_full": "The chart 'Figure 6C - Prediction over time' visualizes the predicted hydrogen production (HPR) values from the KNN model compared to the actual observed values.  The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak occurred at index 130 with a value of 1.0. The chart also shows the sequence correlation between predicted and actual values, which is 0.931488, indicating a strong positive linear relationship.  The mean absolute gap between predicted and actual HPR values is 0.066591, suggesting that the KNN model performs reasonably well in predicting the overall trend of HPR over time.",
+        "draft_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "claim_text": "The mean absolute gap between predicted and actual HPR values is 0.066591.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "subject": "KNN",
+            "predicate": "mean_abs_gap",
+            "object": 0.066591,
+            "metric": "mean_abs_gap",
+            "value": 0.066591,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "claim_text": "The sequence correlation between predicted and actual values is 0.931488.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": 0.931488,
+            "metric": "sequence_correlation",
+            "value": 0.931488,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "claim_text": "The actual peak was at index 130 with a value of 1.0.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": 130,
+            "metric": "actual_peak_index",
+            "value": 130.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": 146,
+            "metric": "predicted_peak_index",
+            "value": 146.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap",
+            "claim_text": "The mean absolute gap between predicted and actual HPR values is 0.066591.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence from 'best_model_summary.json' which states that the KNN model has a mean absolute gap of 0.066591.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+            ],
+            "grounded_fact_summary": "The mean absolute gap between predicted and actual HPR values is 0.066591 according to the 'best_model_summary.json' file."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation",
+            "claim_text": "The sequence correlation between predicted and actual values is 0.931488.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence from 'best_model_summary.json' which states that the KNN model has a sequence correlation of 0.931488.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "The sequence correlation between predicted and actual values is 0.931488 according to the 'best_model_summary.json' file."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index",
+            "claim_text": "The actual peak was at index 130 with a value of 1.0.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence from 'best_model_summary.json' which states that the actual peak index for HPR is 130.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "The actual peak was at index 130 with a value of 1.0 according to the 'best_model_summary.json' file."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the provided evidence from 'best_model_summary.json' which states that the KNN model predicts a peak HPR value of 0.829894 at index 146.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "The KNN model predicts a peak HPR value of 0.829894 at index 146 according to the 'best_model_summary.json' file."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 4
+    }
+  },
+  "parent_draft_hash": "c7e08a50e76648d5708dd790c3c225019b5154e5"
+}

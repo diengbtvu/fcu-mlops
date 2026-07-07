@@ -1,0 +1,386 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The feature importance analysis shows that VSS has the highest importance score (0.5052), followed by Acetate (0.12), and then Butyrate (0.097).",
+  "explanation_full": "Based on the feature importance chart and associated data, VSS is identified as the most important feature with an importance score of 0.5052. Acetate follows with an importance of 0.12, and Butyrate has an importance of 0.097. The feature importance ranking also includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VSS has the highest importance score (0.5052)",
+      "claim_type": "metric_value",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:VSS:importance",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.5052,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate follows with an importance of 0.12",
+      "claim_type": "metric_value",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Acetate:importance",
+      "subject": "Acetate",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.12,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate has an importance of 0.097",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Butyrate:importance",
+      "subject": "Butyrate",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.097,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "VSS is identified as the most important feature with an importance score of 0.5052",
+      "claim_type": "metric_value",
+      "span_category": "VSS",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.5052,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_5",
+      "claim_text": "Acetate follows with an importance of 0.12",
+      "claim_type": "metric_value",
+      "span_category": "Acetate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Acetate:importance",
+      "subject": "Acetate",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.12,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_6",
+      "claim_text": "Butyrate has an importance of 0.097",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Butyrate:importance",
+      "subject": "Butyrate",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": 0.097,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_7",
+      "claim_text": "The feature importance ranking also includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411)",
+      "claim_type": "ranking",
+      "span_category": "VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:feature_importance:ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Propionate",
+        "Ethanol"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The feature importance analysis shows that VSS has the highest importance score (0.5052), followed by Acetate (0.12), and then Butyrate (0.097).",
+        "draft_explanation_full": "Based on the feature importance chart and associated data, VSS is identified as the most important feature with an importance score of 0.5052. Acetate follows with an importance of 0.12, and Butyrate has an importance of 0.097. The feature importance ranking also includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411).",
+        "draft_claims": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "VSS has the highest importance score (0.5052)",
+            "claim_type": "metric_value",
+            "span_category": "VSS",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:VSS:importance",
+            "subject": "VSS",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.5052,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Acetate follows with an importance of 0.12",
+            "claim_type": "metric_value",
+            "span_category": "Acetate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Acetate:importance",
+            "subject": "Acetate",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.12,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Butyrate has an importance of 0.097",
+            "claim_type": "metric_value",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_short",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Butyrate:importance",
+            "subject": "Butyrate",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.097,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VSS is identified as the most important feature with an importance score of 0.5052",
+            "claim_type": "metric_value",
+            "span_category": "VSS",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:top_feature",
+            "subject": "feature_importance",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.5052,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Acetate follows with an importance of 0.12",
+            "claim_type": "metric_value",
+            "span_category": "Acetate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Acetate:importance",
+            "subject": "Acetate",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.12,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Butyrate has an importance of 0.097",
+            "claim_type": "metric_value",
+            "span_category": "Butyrate",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:metric:Butyrate:importance",
+            "subject": "Butyrate",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": 0.097,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "The feature importance ranking also includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411)",
+            "claim_type": "ranking",
+            "span_category": "VFA",
+            "is_numeric": true,
+            "requires_grounding_from": "explanation_full",
+            "confidence": 1.0,
+            "source_variable_id": "TEST_arm_c:chart:feature_importance:ranking",
+            "subject": "feature_importance",
+            "predicate": "importance",
+            "object": null,
+            "metric": "importance",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VFA",
+              "Propionate",
+              "Ethanol"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "claim_1",
+            "claim_text": "VSS has the highest importance score (0.5052)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim states VSS has the highest importance score, which is supported by the evidence packet's validated facts and the source data (0.5052222633).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+            ],
+            "grounded_fact_summary": "VSS importance score is 0.5052222633."
+          },
+          {
+            "claim_id": "claim_2",
+            "claim_text": "Acetate follows with an importance of 0.12",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim states Acetate's importance is 0.12, which is consistent with the evidence (0.1199757325).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:ranking"
+            ],
+            "grounded_fact_summary": "Acetate importance is 0.1199757325."
+          },
+          {
+            "claim_id": "claim_3",
+            "claim_text": "Butyrate has an importance of 0.097",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim states Butyrate's importance is 0.097, which is consistent with the evidence (0.0969761328).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:ranking"
+            ],
+            "grounded_fact_summary": "Butyrate importance is 0.0969761328."
+          },
+          {
+            "claim_id": "claim_4",
+            "claim_text": "VSS is identified as the most important feature with an importance score of 0.5052",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim correctly identifies VSS as the most important feature with a score matching the evidence (0.5052222633).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:top_feature"
+            ],
+            "grounded_fact_summary": "VSS is the most important feature with an importance score of 0.5052222633."
+          },
+          {
+            "claim_id": "claim_5",
+            "claim_text": "Acetate follows with an importance of 0.12",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim correctly states Acetate's importance relative to VSS, matching the evidence (0.1199757325).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:ranking"
+            ],
+            "grounded_fact_summary": "Acetate importance is 0.1199757325."
+          },
+          {
+            "claim_id": "claim_6",
+            "claim_text": "Butyrate has an importance of 0.097",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim correctly states Butyrate's importance, matching the evidence (0.0969761328).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:ranking"
+            ],
+            "grounded_fact_summary": "Butyrate importance is 0.0969761328."
+          },
+          {
+            "claim_id": "claim_7",
+            "claim_text": "The feature importance ranking also includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411)",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim lists VFA, Propionate, and Ethanol with values that match the evidence ranking (0.0748037264, 0.0576947792, 0.0410948829).",
+            "matched_fact_ids": [
+              "TEST_arm_c:chart:feature_importance:ranking"
+            ],
+            "grounded_fact_summary": "The ranking includes VFA (0.0748), Propionate (0.0577), and Ethanol (0.0411)."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 7
+    }
+  },
+  "parent_draft_hash": "ecc74974155722a33b012bfc6222e162c531c32d"
+}

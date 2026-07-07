@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The analysis structure is designed to guide the user on how to interpret missing data, covering both feature correlation and model evaluation metrics.",
+  "explanation_full": "The response is highly structured, first addressing the correlation matrix interpretation by focusing on multicollinearity and the need for feature selection. It then addresses model performance by defining and interpreting standard metrics (R-squared, RMSE, MAE). The synthesis section provides actionable, conditional recommendations (e.g., PCA if multicollinearity exists; checking for data leakage if metrics are poor). This detailed, conditional guidance makes the content valuable as a methodological guide rather than a direct analysis.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

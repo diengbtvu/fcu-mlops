@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model demonstrated a strong performance with an R2 score of 0.7495, signifying a good fit to the provided data.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260423:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Arm C correction pipeline failed.",
+  "explanation_full": "Arm C failed before producing a corrected explanation. Error: Ollama benchmark response did not contain a valid JSON object.",
+  "claims": [],
+  "semantic_level": null,
+  "generation_stage": "failed",
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

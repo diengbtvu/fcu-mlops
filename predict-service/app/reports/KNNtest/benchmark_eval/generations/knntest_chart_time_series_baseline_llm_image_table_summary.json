@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNNtest:chart:time_series",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model showed strong time-series performance with a sequence correlation of 0.9315, though the predicted peak timing was slightly shifted from the actual peak timing.",
+  "explanation_full": "The time-series diagnostics show that the KNN model performed well, achieving a sequence correlation of 0.9315. Specifically, the actual peak value was 1.0 at index 130, while the model predicted a value of 0.8299 at index 146. The mean absolute gap was 0.0666, indicating a relatively small average difference between the actual and predicted values. Overall, the model demonstrates a strong ability to track changes over time, suggesting reliable performance in predicting temporal trends. However, the difference in peak timing (actual at 130 vs. predicted at 146) suggests a slight lag or shift in the predicted timing of the peak event, which users should be aware of when interpreting the results.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved a sequence correlation of 0.931488.",
+      "claim_type": "metric",
+      "span_category": "sequence_correlation",
+      "is_numeric": true,
+      "requires_grounding_from": "sequence_story",
+      "confidence": 1.0,
+      "subject": "KNN model",
+      "predicate": "achieved",
+      "object": "0.931488",
+      "metric": "sequence_correlation",
+      "value": 0.931488,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:top_feature:target_correlation",
+      "claim_text": "hpr has a high target correlation",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA has a correlation",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation",
+      "claim_text": "VFA has a target correlation",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:correlation",
+      "claim_text": "There is a ranking of feature pairs by correlation",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:ranking:target_correlation",
+      "claim_text": "There is a ranking of hpr by target correlation",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

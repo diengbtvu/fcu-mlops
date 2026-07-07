@@ -1,0 +1,78 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Sucrose_Degradation is the strongest single predictor of HPR (r=0.9999)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:top_feature:target_correlation"
+      ],
+      "reason": "Gold value for hpr target_correlation is 0.9999.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA and HPR (0.9991)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0008000000000000229
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "COD-O and HPR (0.9963)",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:Sucrose_Degradation:target_correlation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+      "numeric_delta": 0.0036000000000000476
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "ORP_Mid and ORP_Low show strong negative correlations with HPR (-0.9964)",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold value for ORP_Mid vs ORP_Low correlation is 1.0.",
+      "numeric_delta": 1.9964
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The strongest overall correlation is between ORP_Mid and ORP_Low (1.0)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap:metric:ORP_Mid vs ORP_Low:correlation"
+      ],
+      "reason": "Gold value for ORP_Mid vs ORP_Low correlation is 1.0.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top four most important features for predicting model performance.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:top_feature",
+      "subject": "VFA, Butyrate, Acetate, and VSS",
+      "predicate": "are the top four most important features for predicting model performance.",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 4,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

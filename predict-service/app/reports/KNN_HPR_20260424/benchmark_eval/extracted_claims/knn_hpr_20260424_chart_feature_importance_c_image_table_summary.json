@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "claim_text": "The top features are VFA, Butyrate, and Acetate.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "feature_importance::importance",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

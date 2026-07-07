@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The strongest correlations found are ORP_Mid vs ORP_Low (1.0), Sucrose_Degradation vs HPR (0.9999), VFA vs HPR (0.9991), Sucrose_Degradation vs VFA (0.9989), and VFA vs COD-O (0.9974).",
+  "explanation_full": "The correlation heatmap reveals several strong correlations. The strongest correlation is between ORP_Mid and ORP_Low, with a correlation of 1.0. Other highly correlated pairs include Sucrose_Degradation vs HPR (0.9999), VFA vs HPR (0.9991), Sucrose_Degradation vs VFA (0.9989), and VFA vs COD-O (0.9974). Furthermore, the top correlations with HPR are Sucrose_Degradation (0.9999), VFA (0.9991), and COD-O (0.9963).",
+  "claims": [],
+  "semantic_level": "L1"
+}

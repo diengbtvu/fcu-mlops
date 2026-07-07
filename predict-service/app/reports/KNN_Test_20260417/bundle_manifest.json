@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-04-17T01:05:24.115258",
+  "source_name": "/var/www/html/storage/app/public/datasets/3GfqNEflVYxcFnfzno6v4IuUx9pbuHkZ2dOTrhuy.csv",
+  "selected_sheet": null,
+  "best_model": "RF",
+  "best_model_type": "random_forest",
+  "r2": 0.8750672257064577,
+  "mse": 0.007237613323473683,
+  "rows_after_preprocessing": 216,
+  "top_features": [
+    "Acetate",
+    "VSS",
+    "Propionate"
+  ],
+  "report_id": "KNN_Test_20260417",
+  "report_route_prefix": "/train/reports/KNN_Test_20260417"
+}

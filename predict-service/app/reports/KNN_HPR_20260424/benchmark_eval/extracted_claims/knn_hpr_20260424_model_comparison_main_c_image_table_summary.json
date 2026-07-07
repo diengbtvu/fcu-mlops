@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:model_comparison/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "claim_text": "KNN model achieved the highest R2 score (0.81717) and lowest MSE (0.012810) among all models tested, indicating strong performance in predicting hydrogen production.",
+      "claim_type": "metric_value",
+      "span_category": "BEST_MODEL",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "source_variable_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "subject": "KNN",
+      "predicate": "achieved the highest R2 score (0.81717) and lowest MSE (0.012810) among all models tested, indicating strong performance in predicting hydrogen production.",
+      "object": "",
+      "metric": null,
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

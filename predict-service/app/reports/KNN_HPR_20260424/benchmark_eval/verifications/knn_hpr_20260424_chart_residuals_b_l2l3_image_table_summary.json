@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "rmse_knn",
+      "claim_text": "The KNN model shows the lowest RMSE (0.113)",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 0.00018090995439673518
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "r2_knn",
+      "claim_text": "The KNN model shows the highest R2 (0.82)",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.002832198296253252
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN achieved the highest R² score (0.83014)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the lowest MSE (0.011901)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.011901.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN best performance was observed with 9 features (VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "RF best performance was achieved with 11 features",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 2
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "RF yielding an R² of 0.785537 and MSE of 0.015026",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.785537.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "RF yielding an MSE of 0.015026",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:RF:mse"
+      ],
+      "reason": "Gold value for RF mse is 0.015026.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "SVM best combination was 4 features (VFA -> Butyrate -> Acetate -> VSS), yielding R²=0.779437 and MSE=0.015453",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.779437.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "SVM best combination was 4 features (VFA -> Butyrate -> Acetate -> VSS), yielding MSE=0.015453",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:SVM:mse"
+      ],
+      "reason": "Gold value for SVM mse is 0.015453.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "XGBoost performed best with 4 features (VFA -> Butyrate -> Acetate -> VSS), achieving R²=0.768407 and MSE=0.016226",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.768407.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_10",
+      "claim_text": "XGBoost performed best with 4 features (VFA -> Butyrate -> Acetate -> VSS), achieving MSE=0.016226",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:XGBoost:mse"
+      ],
+      "reason": "Gold value for XGBoost mse is 0.016226.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

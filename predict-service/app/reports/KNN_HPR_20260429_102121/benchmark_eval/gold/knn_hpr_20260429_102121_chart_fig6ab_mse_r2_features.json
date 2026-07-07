@@ -1,0 +1,288 @@
+{
+  "artifact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features",
+  "artifact_type": "chart/fig6ab_mse_r2_features",
+  "source_files": [
+    "results_summary.txt",
+    "summary.json",
+    "table1_incremental_results.csv",
+    "fig6ab_mse_r2_features.png"
+  ],
+  "chart_type": "line_chart",
+  "primary_entities": [
+    "SVM",
+    "DT",
+    "RF",
+    "KNN",
+    "XGBoost"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "fact_type": "feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 9,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best feature count"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:best_r2",
+      "fact_type": "best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 0.83014,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best R2"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:best_mse",
+      "fact_type": "best_mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low",
+      "value": 0.011901,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best MSE"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:ranking:r2_score",
+      "fact_type": "ranking",
+      "subject": "incremental_feature_analysis",
+      "predicate": "r2_score",
+      "object": [
+        "KNN",
+        "RF",
+        "SVM",
+        "XGBoost",
+        "DT"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "best-step ranking by r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.779437,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "SVM best-step R2"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.015453,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "SVM best-step MSE"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.671427,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT best-step R2"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.023021,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "DT best-step MSE"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:RF:r2_score",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.785537,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "RF best-step R2"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:RF:mse",
+      "fact_type": "metric_value",
+      "subject": "RF",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.015026,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "RF best-step MSE"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:KNN:r2_score",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.83014,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best-step R2"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:KNN:mse",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.011901,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "KNN best-step MSE"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:XGBoost:r2_score",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.768407,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "XGBoost best-step R2"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:metric:XGBoost:mse",
+      "fact_type": "metric_value",
+      "subject": "XGBoost",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.016226,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table1_incremental_results.csv",
+          "priority": "table/json",
+          "detail": "XGBoost best-step MSE"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+    "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:best_r2",
+    "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:best_mse",
+    "KNN_HPR_20260429_102121:chart:fig6ab_mse_r2_features:ranking:r2_score"
+  ],
+  "forbidden_inferences": [
+    "Do not claim that adding more features always helps every model.",
+    "Do not let prose override the incremental evidence table."
+  ]
+}

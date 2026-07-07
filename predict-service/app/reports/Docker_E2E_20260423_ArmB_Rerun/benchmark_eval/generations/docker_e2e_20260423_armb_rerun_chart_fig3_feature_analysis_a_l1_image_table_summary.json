@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3_feature_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The top features ranked by GRA score are Sucrose_Degradation (0.9998), VFA (0.9994), and COD-O (0.999). VFA has the highest feature importance (0.9023), followed by Sucrose_Degradation (0.0832). The strongest correlations include ORP_Mid vs ORP_Low (1.0) and Sucrose_Degradation vs HPR (0.9999).",
+  "explanation_full": "Based on the combined feature analysis (Figure 3), the top features ranked by GRA score are Sucrose_Degradation (0.9998), VFA (0.9994), and COD-O (0.999). In terms of feature importance, VFA is the most important feature (0.9023), followed by Sucrose_Degradation (0.0832). SHAP importance shows VFA (0.017) as the most influential feature. The strongest correlations identified are ORP_Mid vs ORP_Low (1.0), Sucrose_Degradation vs HPR (0.9999), VFA vs HPR (0.9991), Sucrose_Degradation vs VFA (0.9989), and VFA vs COD-O (0.9974). Furthermore, the incremental feature analysis shows that for DT, RF, and KNN models, using only Sucrose_Degradation (n=1) achieves an R2 of 1.0, while SVM requires 10 features (Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid) to achieve the best performance (R2=0.0, MSE=0.006608).",
+  "claims": [],
+  "semantic_level": "L1"
+}

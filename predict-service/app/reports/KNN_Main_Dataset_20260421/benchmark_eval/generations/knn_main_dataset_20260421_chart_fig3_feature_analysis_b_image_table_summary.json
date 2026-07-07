@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The analysis shows that KNN achieved the best performance (R2=0.8172) compared to other models. Feature importance analysis highlights VSS (0.5052) as the most important feature, followed by Acetate (0.12) and Butyrate (0.097). Furthermore, the best feature subset for KNN was found using 9 features, achieving an R2 of 0.8301, suggesting that VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low are the most predictive features.",
+  "explanation_full": "The overall performance comparison indicates that the KNN model performed best, achieving an R2 score of 0.8172. When examining feature importance, VSS was identified as the most critical feature (importance=0.5052), followed by Acetate (0.12) and Butyrate (0.097). The feature selection process revealed that the optimal subset of features for the KNN model consists of 9 features, yielding an R2 score of 0.8301. These key features are VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, pH, and ORP_Low. This suggests that the combination of these variables provides the strongest predictive power for the model.\n\nIn summary, the model performs best when considering the full set of features, and the most impactful features are V. The analysis suggests that the combination of these variables is key to maximizing predictive accuracy.",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The model performs best when considering the full set of features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "full_set_of_features",
+      "is_numeric": false,
+      "requires_grounding_from": "text",
+      "confidence": 0.95,
+      "subject": "model_performance",
+      "predicate": "is_best_when_considering",
+      "object": "full_set_of_features",
+      "metric": "qualitative",
+      "value": "best",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

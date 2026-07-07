@@ -1,0 +1,50 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:Sucrose_Degradation",
+      "claim_text": "Sucrose_Degradation (Rank 1, Score: 0.9998)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:Sucrose_Degradation"
+      ],
+      "reason": "Gold value for Sucrose_Degradation gra_score is 0.9998167208550294.",
+      "numeric_delta": 1.6720855029350723e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:VFA",
+      "claim_text": "VFA (Rank 2, Score: 0.9994)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.999440391226679.",
+      "numeric_delta": 4.0391226679092895e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:COD-O",
+      "claim_text": "COD-O (Rank 3, Score: 0.9990)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking:rank_score:COD-O"
+      ],
+      "reason": "Gold value for COD-O gra_score is 0.999004932969452.",
+      "numeric_delta": 4.932969452031699e-06
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_id": "TEST_arm_c:chart:correlation_heatmap",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The correlation heatmap shows that Butyrate has the strongest correlation with VFA (0.9601), indicating a strong positive relationship between these two variables.",
+  "explanation_full": "The correlation heatmap reveals several strong relationships among the measured variables. Specifically, the correlation between Butyrate and VFA is the strongest observed at 0.9601, suggesting that as Butyrate concentration increases, VFA concentration tends to increase significantly. Other notable strong correlations include Acetate vs VFA (0.9428) and Acetate vs Butyrate (0.8651). These findings highlight key chemical dependencies within the system that are crucial for understanding the overall process dynamics.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate has the strongest correlation with VFA (0.9601)",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between Butyrate and VFA is the strongest observed at 0.9601",
+      "claim_type": "metric_value",
+      "span_category": "Butyrate vs VFA",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.9601,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

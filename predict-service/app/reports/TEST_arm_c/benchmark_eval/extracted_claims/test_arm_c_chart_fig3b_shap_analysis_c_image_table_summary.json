@@ -1,0 +1,53 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig3b_shap_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0352)",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "validation_records",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": 0.035244838,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top features by mean absolute SHAP value are ORP_Low (0.0352), Butyrate (0.0334), ORP_Mid (0.0296), COD-O (0.0290), VFA (0.0277), and Acetate (0.0265)",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "metric_value",
+      "is_numeric": false,
+      "requires_grounding_from": "validation_records",
+      "confidence": 1.0,
+      "source_variable_id": "TEST_arm_c:chart:fig3b_shap_analysis:ranking",
+      "subject": "shap",
+      "predicate": "ranking",
+      "object": null,
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "ORP_Low",
+        "Butyrate",
+        "ORP_Mid",
+        "COD-O",
+        "VFA",
+        "Acetate"
+      ],
+      "feature_count": 6,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA (0.9601)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate vs VFA (0.9428)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Acetate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Acetate vs VFA correlation is 0.9428.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA (0.7984) showed the highest correlation",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VFA exhibits the highest correlation at 0.7984",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Butyrate (0.7827)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Butyrate:target_correlation"
+      ],
+      "reason": "Gold value for Butyrate target_correlation is 0.7827.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Acetate (0.7641)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Acetate:target_correlation"
+      ],
+      "reason": "Gold value for Acetate target_correlation is 0.7641.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "VSS (0.7062)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VSS:target_correlation"
+      ],
+      "reason": "Gold value for VSS target_correlation is 0.7062.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "Ethanol (0.6112)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Ethanol:target_correlation"
+      ],
+      "reason": "Gold value for Ethanol target_correlation is 0.6112.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "COD-O (0.5946)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:COD-O:target_correlation"
+      ],
+      "reason": "Gold value for COD-O target_correlation is 0.5946.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

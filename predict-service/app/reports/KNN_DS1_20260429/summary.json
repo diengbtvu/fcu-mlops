@@ -1,0 +1,1383 @@
+{
+  "model_name": "KNN_DS1_20260429",
+  "model_type": "knn",
+  "model_label": "KNN",
+  "comparison_enabled": true,
+  "created_at": "2026-04-29T15:09:36.303097",
+  "selected_model_metrics": {
+    "r2_score": 0.8171678017037467,
+    "rmse": 0.11318090995439674,
+    "mse": 0.012809918378105262,
+    "mae": 0.07502308749135642
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.732409747545017,
+      "rmse": 0.13692475905328272,
+      "mse": 0.018748389641799527,
+      "mae": 0.09460256693779981
+    },
+    {
+      "model": "DT",
+      "r2_score": 0.5604531394996005,
+      "rmse": 0.1754888111857837,
+      "mse": 0.030796322851399643,
+      "mae": 0.10855624704298139
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.7756018171353091,
+      "rmse": 0.12538815399769956,
+      "mse": 0.01572218916295082,
+      "mae": 0.08355692337682427
+    },
+    {
+      "model": "KNN",
+      "r2_score": 0.8171678017037467,
+      "rmse": 0.11318090995439674,
+      "mse": 0.012809918378105262,
+      "mae": 0.07502308749135642
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.7494763101779772,
+      "rmse": 0.13248638205179633,
+      "mse": 0.017552641429174544,
+      "mae": 0.09559303423201744
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "predicted_vs_actual": "fig_predicted_vs_actual.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "gra_ranking.json",
+    "analysis_summary": "analysis_summary_report.txt",
+    "summary": "summary.json",
+    "training_bundle_zip": "training_bundle.zip",
+    "best_model": "best_model.pkl",
+    "best_scaler_X": "best_scaler_X.pkl",
+    "best_scaler_Y": "best_scaler_Y.pkl",
+    "scaler": "scaler.pkl",
+    "best_model_info": "best_model_info.txt",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "best_model_shap_values": "best_model_shap_values.npy",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "fig3a_gra_ranking": "fig3a_gra_ranking.png",
+    "fig3b_shap_analysis": "fig3b_shap_analysis.png",
+    "fig3_feature_analysis": "fig3_feature_analysis.png",
+    "fig4_univariate_analysis": "fig4_univariate_analysis.png",
+    "fig5_model_comparison": "fig5_model_comparison.png",
+    "fig6ab_mse_r2_features": "fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time": "fig6c_prediction_time.png",
+    "results_summary": "results_summary.txt",
+    "best_model_summary": "best_model_summary.json",
+    "model_svm_scatter": "model_svm_scatter.png",
+    "model_dt_scatter": "model_dt_scatter.png",
+    "model_rf_scatter": "model_rf_scatter.png",
+    "model_knn_scatter": "model_knn_scatter.png",
+    "model_xgboost_scatter": "model_xgboost_scatter.png",
+    "asset_evidence": "asset_evidence.json",
+    "llm_explanations": "llm_explanations.json",
+    "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+    "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+    "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+    "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+    "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+    "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+    "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+  },
+  "llm_explanations_status": {
+    "status": "success",
+    "message": "AI explanations generated successfully.",
+    "updated_at": "2026-04-29T16:37:48.847662",
+    "started_at": "2026-04-29T15:09:36.494055",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 31,
+    "total_steps": 31,
+    "current_items": [
+      "AI Report Overview"
+    ]
+  },
+  "benchmark_status": {
+    "status": "success",
+    "message": "Benchmark evaluation completed successfully.",
+    "updated_at": "2026-04-29T16:58:18.054373",
+    "started_at": "2026-04-29T16:37:48.885509",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 3,
+    "total_steps": 3,
+    "current_items": [
+      "leaderboard",
+      "run metadata"
+    ],
+    "output_dir": "benchmark_eval"
+  },
+  "llm_explanations": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "generated_at": "2026-04-29T15:14:44.681678",
+    "overview": {
+      "en": "The analysis used 197 samples from the “HRT 12 -4 h” sheet, evaluating five predictive models for hydrogen production. The K‑Nearest Neighbours (KNN) model outperformed the others with an R² of 0.817, RMSE of 0.113, MSE of 0.0128 and MAE of 0.075, surpassing the next best Random Forest (R² ≈ 0.776, RMSE ≈ 0.125). This confirms KNN as the most accurate approach for the given dataset.\n\nFeature importance analysis highlighted VFA, Butyrate and Acetate as the top three predictors, ranking 1‑3 in Grey Relational Analysis (scores 0.793, 0.790 and 0.777). While these metabolites drive the model’s performance, the SHAP values show that other variables such as ORP and COD‑O also influence predictions, so relying solely on the top three features may overlook additional contributing factors.",
+      "zh_TW": "本次分析使用「HRT 12 -4 h」工作表的 197 筆樣本，比較五種氫產量預測模型。K 最近鄰 (KNN) 表現最佳，R² 為 0.817，RMSE 為 0.113，MSE 為 0.0128，MAE 為 0.075，優於次佳的隨機森林 (R² 約 0.776，RMSE 約 0.125)。因此 KNN 被確定為最適模型。\n\n特徵重要性顯示 VFA、丁酸鹽與醋酸鹽分別排名第一至第三（Grey Relational Analysis 分數分別為 0.793、0.790、0.777），是模型的主要驅動因素。但 SHAP 分析亦指出 ORP、COD‑O 等其他變數對預測有顯著影響，僅依賴前三大特徵可能會忽略其他重要資訊。"
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "The table compares five models on four error metrics. KNN leads with R2 ≈ 0.82 and lowest RMSE ≈ 0.11, while the others perform worse.",
+        "zh_TW": "此表列出五種模型的四項指標比較。KNN 以 R2 約 0.82、RMSE 約 0.11 最高，其他模型表現較差。",
+        "benchmark_payload": {
+          "explanation_short": "KNN outperforms other models with the highest R2 and lowest RMSE.",
+          "explanation_full": "The table compares five models on four error metrics. KNN leads with R2 ≈ 0.82 and lowest RMSE ≈ 0.11, while the others perform worse.",
+          "claims": []
+        }
+      },
+      "fig3a_gra_ranking": {
+        "en": "The chart shows the Grey Relational Analysis ranking of features, with VFA highest (0.7931), followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768) and Propionate (0.7596). It helps spot the most related variables, though the scores are close so differences are modest.",
+        "zh_TW": "此圖展示灰關聯分析的特徵排名，VFA最高 (0.7931)，其次是丁酸 (0.7902)、醋酸 (0.7772)、VSS (0.7768) 與丙酸 (0.7596)。可辨識與目標最相關的變數，但分數相近，差異有限。",
+        "benchmark_payload": {
+          "explanation_short": "GRA ranks VFA, Butyrate, Acetate, VSS, and Propionate as the top related features.",
+          "explanation_full": "The chart shows the Grey Relational Analysis ranking of features, with VFA highest (0.7931), followed by Butyrate (0.7902), Acetate (0.7772), VSS (0.7768) and Propionate (0.7596). It helps spot the most related variables, though the scores are close so differences are modest.",
+          "claims": []
+        }
+      },
+      "fig3b_shap_analysis": {
+        "en": "The SHAP chart shows each feature’s contribution to the model’s predictions; higher mean absolute SHAP values mean stronger influence. The top contributors are ORP_Low (0.0348), Butyrate (0.0318), and ORP_Mid (0.0309).",
+        "zh_TW": "此 SHAP 圖表顯示各特徵對模型預測的影響程度，數值越大代表影響越大。排名前三的特徵分別是 ORP_Low (0.0348)、Butyrate (0.0318) 與 ORP_Mid (0.0309)。",
+        "benchmark_payload": {
+          "explanation_short": "ORP_Low, Butyrate, and ORP_Mid are the strongest SHAP contributors.",
+          "explanation_full": "The SHAP chart shows each feature’s contribution to the model’s predictions; higher mean absolute SHAP values mean stronger influence. The top contributors are ORP_Low (0.0348), Butyrate (0.0318), and ORP_Mid (0.0309).",
+          "claims": []
+        }
+      },
+      "fig3_feature_analysis": {
+        "en": "The chart combines three analyses: GRA ranking (top features VFA, Butyrate, Acetate), feature importance (VSS highest), and SHAP values (ORP_Low most influential). It shows that while VFA ranks highest overall, VSS contributes most to model importance, and ORP_Low has the strongest SHAP impact.",
+        "zh_TW": "此圖結合三種分析：GRA 排名（前三特徵 VFA、丁酸、醋酸）、特徵重要性（VSS 最高）以及 SHAP 值（ORP_Low 最具影響）。雖然 VFA 在排名上最高，VSS 對模型貢獻最大，且 ORP_Low 的 SHAP 影響最強。",
+        "benchmark_payload": {
+          "explanation_short": "VFA ranks highest, but VSS has the greatest model importance and ORP_Low leads SHAP impact.",
+          "explanation_full": "The chart combines three analyses: GRA ranking (top features VFA, Butyrate, Acetate), feature importance (VSS highest), and SHAP values (ORP_Low most influential). It shows that while VFA ranks highest overall, VSS contributes most to model importance, and ORP_Low has the strongest SHAP impact.",
+          "claims": []
+        }
+      },
+      "fig4_univariate_analysis": {
+        "en": "Figure 4 shows how each measured variable relates to the target HPR. The strongest links are Butyrate‑VFA (0.96), Acetate‑VFA (0.94) and Acetate‑Butyrate (0.87); VFA correlates 0.80 with HPR, followed by Butyrate (0.78) and Acetate (0.76).",
+        "zh_TW": "圖4展示各變數與目標 HPR 的關聯性。最高相關為丁酸與 VFA (0.96)、醋酸與 VFA (0.94) 及醋酸與丁酸 (0.87)，VFA 與 HPR 的相關係數為 0.80，次之為丁酸 0.78、醋酸 0.76。",
+        "benchmark_payload": {
+          "explanation_short": "Strong correlations link butyrate, acetate, and VFA, with VFA most related to HPR.",
+          "explanation_full": "Figure 4 shows how each measured variable relates to the target HPR. The strongest links are Butyrate‑VFA (0.96), Acetate‑VFA (0.94) and Acetate‑Butyrate (0.87); VFA correlates 0.80 with HPR, followed by Butyrate (0.78) and Acetate (0.76).",
+          "claims": []
+        }
+      },
+      "fig5_model_comparison": {
+        "en": "Figure 5 compares five models on four error metrics. KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075, while the other models show lower scores.",
+        "zh_TW": "圖5比較了五種模型的四項誤差指標。KNN 以 R2 = 0.817、RMSE = 0.113、MSE = 0.0128、MAE = 0.075 最高，其他模型表現較差。",
+        "benchmark_payload": {
+          "explanation_short": "KNN outperforms other models on R2, RMSE, MSE, and MAE.",
+          "explanation_full": "Figure 5 compares five models on four error metrics. KNN leads with R2 = 0.817, RMSE = 0.113, MSE = 0.0128, MAE = 0.075, while the other models show lower scores.",
+          "claims": []
+        }
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "The chart shows each model’s best performance versus number of features. KNN reaches the highest R² (0.83) with 9 features and lowest MSE (0.0119), while other models peak at fewer features.",
+        "zh_TW": "圖表顯示各模型在不同特徵數下的最佳表現。KNN 在 9 個特徵時取得最高 R²（0.83）與最低 MSE（0.0119），其他模型則在較少特徵時達到最佳。",
+        "benchmark_payload": {
+          "explanation_short": "KNN achieves the best R² (0.83) and lowest MSE (0.0119) with 9 features.",
+          "explanation_full": "The chart shows each model’s best performance versus number of features. KNN reaches the highest R² (0.83) with 9 features and lowest MSE (0.0119), while other models peak at fewer features.",
+          "claims": []
+        }
+      },
+      "fig6c_prediction_time": {
+        "en": "The chart shows the KNN model’s predicted values over time compared to the actual peak. It predicts the peak at index 146 with value 0.83 versus the true peak at index 130 with value 1.0, giving a mean absolute gap of 0.067 and correlation 0.93.",
+        "zh_TW": "圖表比較 KNN 模型的預測值與實際峰值，顯示預測峰出現在第 146 個時間點，值約 0.83。實際峰在第 130 點，值為 1.0，平均絕對差 0.067，序列相關係數 0.93。",
+        "benchmark_payload": {
+          "explanation_short": "KNN predicts the peak later (index 146) with value 0.83, actual peak at index 130 value 1.0.",
+          "explanation_full": "The chart shows the KNN model’s predicted values over time compared to the actual peak. It predicts the peak at index 146 with value 0.83 versus the true peak at index 130 with value 1.0, giving a mean absolute gap of 0.067 and correlation 0.93.",
+          "claims": []
+        }
+      },
+      "model_svm_scatter": {
+        "en": "The SVM scatter plot shows predicted versus actual values, with R² = 0.7324 and RMSE = 0.1369. Correlation is 0.87, slope 0.86, and the largest absolute residual is 0.61, indicating occasional bigger errors.",
+        "zh_TW": "此圖呈現 SVM 的預測與實際值散佈，R² 為 0.7324、RMSE 為 0.1369。相關係數 0.87、斜率 0.86，最大絕對殘差 0.61，顯示偶有較大誤差。",
+        "benchmark_payload": {
+          "explanation_short": "SVM model achieves R² 0.73, RMSE 0.14 with moderate correlation and occasional large residuals.",
+          "explanation_full": "The SVM scatter plot shows predicted versus actual values, with R² = 0.7324 and RMSE = 0.1369. Correlation is 0.87, slope 0.86, and the largest absolute residual is 0.61, indicating occasional bigger errors.",
+          "claims": []
+        }
+      },
+      "model_dt_scatter": {
+        "en": "The scatter plot shows the decision‑tree model predictions versus actual values, with R²≈0.56, RMSE≈0.18 and MAE≈0.11. Correlation is 0.79, the fit slope is about 0.80, and the largest error is 0.60, so predictions are moderately accurate but some points deviate.",
+        "zh_TW": "散佈圖顯示決策樹模型的預測與實際值，R² 約 0.56，RMSE 約 0.18，MAE 約 0.11。相關係數 0.79，斜率約 0.80，最大誤差 0.60，顯示預測尚算適中但有些偏差。",
+        "benchmark_payload": {
+          "explanation_short": "Decision‑tree predictions have moderate fit (R²≈0.56) with noticeable errors.",
+          "explanation_full": "The scatter plot shows the decision‑tree model predictions versus actual values, with R²≈0.56, RMSE≈0.18 and MAE≈0.11. Correlation is 0.79, the fit slope is about 0.80, and the largest error is 0.60, so predictions are moderately accurate but some points deviate.",
+          "claims": []
+        }
+      },
+      "model_rf_scatter": {
+        "en": "The scatter plot compares the random‑forest model’s predicted values to the actual values; points near the diagonal indicate good predictions. It achieves R² ≈ 0.78 with RMSE ≈ 0.13, but some errors reach up to 0.45, so predictions can be off for certain cases.",
+        "zh_TW": "此散佈圖比較隨機森林模型的預測值與實際值，接近對角線的點表示預測良好。模型 R² 約 0.78、RMSE 約 0.13，但最大誤差可達 0.45，需留意個別樣本的偏差。",
+        "benchmark_payload": {
+          "explanation_short": "Random forest predictions correlate well with actual values (R² ≈ 0.78) but show occasional large errors.",
+          "explanation_full": "The scatter plot compares the random‑forest model’s predicted values to the actual values; points near the diagonal indicate good predictions. It achieves R² ≈ 0.78 with RMSE ≈ 0.13, but some errors reach up to 0.45, so predictions can be off for certain cases.",
+          "claims": []
+        }
+      },
+      "model_knn_scatter": {
+        "en": "The scatter plot shows predicted vs. actual values for the KNN model, with R² = 0.8172 and a correlation of 0.907. It indicates good fit but the slope 0.88 and max residual 0.37 suggest some under‑prediction at higher values.",
+        "zh_TW": "此散佈圖顯示 KNN 模型的預測值與實測值關係，R² 為 0.8172，相關係數 0.907。斜率 0.88 且最大殘差 0.37，表示在較高值時有輕微低估。",
+        "benchmark_payload": {
+          "explanation_short": "KNN predictions correlate well with actual values (R² = 0.8172, correlation = 0.907) but show slight under‑prediction at higher ranges.",
+          "explanation_full": "The scatter plot shows predicted vs. actual values for the KNN model, with R² = 0.8172 and a correlation of 0.907. It indicates good fit but the slope 0.88 and max residual 0.37 suggest some under‑prediction at higher values.",
+          "claims": []
+        }
+      },
+      "model_xgboost_scatter": {
+        "en": "The scatter plot compares XGBoost predictions to actual values, showing a correlation of 0.875 and a slope near 0.84, indicating predictions generally follow the true trend. Overall fit metrics are R² = 0.7495, RMSE = 0.1325, MAE = 0.0956, but some residuals reach up to 0.41, so individual predictions can be off.",
+        "zh_TW": "此散佈圖比較 XGBoost 的預測與實際值，相關係數為 0.875，斜率約 0.84，顯示預測大致跟隨真實趨勢。整體指標為 R²=0.7495、RMSE=0.1325、MAE=0.0956，但最大殘差達 0.41，個別預測可能誤差較大。",
+        "benchmark_payload": {
+          "explanation_short": "Scatter plot shows XGBoost predictions vs actuals with R² 0.7495 and RMSE 0.1325.",
+          "explanation_full": "The scatter plot compares XGBoost predictions to actual values, showing a correlation of 0.875 and a slope near 0.84, indicating predictions generally follow the true trend. Overall fit metrics are R² = 0.7495, RMSE = 0.1325, MAE = 0.0956, but some residuals reach up to 0.41, so individual predictions can be off.",
+          "claims": []
+        }
+      },
+      "model_comparison_bars": {
+        "en": "The bar chart compares five models on four error metrics; KNN leads with the highest R² (0.817) and lowest errors (RMSE 0.113, MSE 0.0128, MAE 0.075). It shows that the other models perform worse, especially the decision tree with R² 0.56 and higher errors.",
+        "zh_TW": "此圖比較五種模型的四項誤差指標，KNN 以最高 R² (0.817) 及最低 RMSE (0.113)、MSE (0.0128)、MAE (0.075) 領先。其他模型表現較差，尤其決策樹 R² 只有 0.56，誤差較高。",
+        "benchmark_payload": {
+          "explanation_short": "KNN outperforms other models across all error metrics.",
+          "explanation_full": "The bar chart compares five models on four error metrics; KNN leads with the highest R² (0.817) and lowest errors (RMSE 0.113, MSE 0.0128, MAE 0.075). It shows that the other models perform worse, especially the decision tree with R² 0.56 and higher errors.",
+          "claims": []
+        }
+      },
+      "predicted_vs_actual": {
+        "en": "The chart compares KNN predicted values to actual measurements, showing R² = 0.817, RMSE = 0.113, MAE = 0.075 and a correlation of 0.91. Predictions are close overall but can deviate up to 0.37, so individual points should be checked.",
+        "zh_TW": "此圖比較 KNN 的預測值與實測值，R² 為 0.817、RMSE 為 0.113、MAE 為 0.075，且預測與實測相關係數為 0.91。整體預測相當接近，但最大誤差可達 0.37，使用時請留意個別點的偏差。",
+        "benchmark_payload": {
+          "explanation_short": "KNN predictions achieve good fit with R² = 0.817 and low error metrics.",
+          "explanation_full": "The chart compares KNN predicted values to actual measurements, showing R² = 0.817, RMSE = 0.113, MAE = 0.075 and a correlation of 0.91. Predictions are close overall but can deviate up to 0.37, so individual points should be checked.",
+          "claims": []
+        }
+      },
+      "residuals": {
+        "en": "The KNN model achieved R² = 0.817, RMSE = 0.113, and MAE = 0.075 on the test set. Residuals have a mean of 0.012, standard deviation 0.113, max absolute residual 0.367, and prediction‑actual correlation 0.907.",
+        "zh_TW": "KNN 模型的 R² 為 0.817，RMSE 為 0.113，MAE 為 0.075。殘差平均 0.012，標準差 0.113，最大絕對殘差 0.367，預測與實際相關係數 0.907。",
+        "benchmark_payload": {
+          "explanation_short": "KNN predicts with R² 0.817, RMSE 0.113 and MAE 0.075, showing low residual error.",
+          "explanation_full": "The KNN model achieved R² = 0.817, RMSE = 0.113, and MAE = 0.075 on the test set. Residuals have a mean of 0.012, standard deviation 0.113, max absolute residual 0.367, and prediction‑actual correlation 0.907.",
+          "claims": []
+        }
+      },
+      "feature_importance": {
+        "en": "The chart lists each variable’s contribution to the model, showing VSS as the most important (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075) and Propionate (0.058). Higher bars mean the feature influences predictions more, but importance does not imply causation.",
+        "zh_TW": "圖表顯示各變數對模型的貢獻度，VSS 最重要 (0.505)，其次是醋酸 (0.12)、丁酸 (0.098)、揮發性脂肪酸 (0.075) 與丙酸 (0.058)。條形越高代表影響越大，但不代表因果關係。",
+        "benchmark_payload": {
+          "explanation_short": "VSS leads importance, followed by Acetate, Butyrate, VFA, and Propionate.",
+          "explanation_full": "The chart lists each variable’s contribution to the model, showing VSS as the most important (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075) and Propionate (0.058). Higher bars mean the feature influences predictions more, but importance does not imply causation.",
+          "claims": []
+        }
+      },
+      "correlation_heatmap": {
+        "en": "The heatmap shows how each pair of variables moves together; the strongest positive links are Butyrate‑VFA (0.96), Acetate‑VFA (0.94) and Acetate‑Butyrate (0.87). It also highlights which features most relate to the target HPR, led by VFA (0.80) then Butyrate (0.78).",
+        "zh_TW": "熱圖顯示變數間的相關程度，最高正相關為丁酸與VFA (0.9601)、醋酸與VFA (0.9428) 以及醋酸與丁酸 (0.8651)。此外，與目標 HPR 最相關的特徵依序為 VFA (0.7984)、丁酸 (0.7827) 與醋酸 (0.7641)。",
+        "benchmark_payload": {
+          "explanation_short": "Heatmap reveals strongest variable pairs and top features linked to HPR, with correlations up to 0.96.",
+          "explanation_full": "The heatmap shows how each pair of variables moves together; the strongest positive links are Butyrate‑VFA (0.96), Acetate‑VFA (0.94) and Acetate‑Butyrate (0.87). It also highlights which features most relate to the target HPR, led by VFA (0.80) then Butyrate (0.78).",
+          "claims": []
+        }
+      },
+      "feature_distributions": {
+        "en": "The chart shows each feature’s average (mean) and variability (standard deviation) across the data. Ethanol, Acetate, Butyrate, Propionate and VSS have the highest means, while Ethanol, Butyrate, Acetate, Propionate and VSS show the largest spreads.",
+        "zh_TW": "此圖展示各特徵在資料中的平均值與變異程度。Ethanol、Acetate、Butyrate、Propionate 與 VSS 的平均值最高，且這些特徵的標準差也最大，表示變化幅度較大。",
+        "benchmark_payload": {
+          "explanation_short": "Chart shows feature means and variability, highlighting top mean and std features.",
+          "explanation_full": "The chart shows each feature’s average (mean) and variability (standard deviation) across the data. Ethanol, Acetate, Butyrate, Propionate and VSS have the highest means, while Ethanol, Butyrate, Acetate, Propionate and VSS show the largest spreads.",
+          "claims": []
+        }
+      },
+      "feature_vs_target": {
+        "en": "The chart shows how each measured feature correlates with the target (HPR). Strongest links are VFA (0.80), Butyrate (0.78) and Acetate (0.76); remember correlation does not prove cause and may change with new data.",
+        "zh_TW": "此圖展示各特徵與目標值（HPR）的相關程度。最高相關為VFA（0.80）、丁酸鹽（0.78）與醋酸鹽（0.76），但相關性不代表因果，未來資料可能會改變結果。",
+        "benchmark_payload": {
+          "explanation_short": "Chart shows feature‑target correlations, strongest VFA 0.80, Butyrate 0.78, Acetate 0.76.",
+          "explanation_full": "The chart shows how each measured feature correlates with the target (HPR). Strongest links are VFA (0.80), Butyrate (0.78) and Acetate (0.76); remember correlation does not prove cause and may change with new data.",
+          "claims": []
+        }
+      },
+      "boxplots": {
+        "en": "The boxplots show each feature’s average (mean) and variability (standard deviation) across samples. Ethanol has the highest mean (0.474) and standard deviation (0.253), followed by Acetate, Butyrate, Propionate, and VSS.",
+        "zh_TW": "箱形圖顯示每個特徵在樣本中的平均值與變異程度。乙醇的平均值最高 (0.474) 且變異最大 (0.253)，其後依序為醋酸、丁酸、丙酸與懸浮固體。",
+        "benchmark_payload": {
+          "explanation_short": "Ethanol shows the highest mean and variability among the features.",
+          "explanation_full": "The boxplots show each feature’s average (mean) and variability (standard deviation) across samples. Ethanol has the highest mean (0.474) and standard deviation (0.253), followed by Acetate, Butyrate, Propionate, and VSS.",
+          "claims": []
+        }
+      },
+      "time_series": {
+        "en": "The chart shows the KNN model’s predicted time series compared to the actual values, highlighting a peak at index 130 (value 1.0) versus the predicted peak at index 146 (value 0.83). The overall correlation is 0.93, but the average absolute timing error is about 0.067, so predictions are close but slightly delayed.",
+        "zh_TW": "圖表比較 KNN 模型的預測時間序列與實際值，顯示實際峰值在第130點（值1.0），預測峰值在第146點（值0.83）。相關係數為0.93，平均絕對時間誤差約0.067，預測相當接近但略有延遲。",
+        "benchmark_payload": {
+          "explanation_short": "KNN predicts the peak slightly later with high correlation but modest timing error.",
+          "explanation_full": "The chart shows the KNN model’s predicted time series compared to the actual values, highlighting a peak at index 130 (value 1.0) versus the predicted peak at index 146 (value 0.83). The overall correlation is 0.93, but the average absolute timing error is about 0.067, so predictions are close but slightly delayed.",
+          "claims": []
+        }
+      },
+      "model_comparison_table": {
+        "en": "The table compares five models on four error metrics, showing KNN has the highest R² (0.817) and lowest errors. It indicates KNN performs best, but differences are modest and results apply only to this dataset.",
+        "zh_TW": "此表比較五種模型的四項誤差指標，KNN 的 R² 為 0.817 為最高且誤差最小。顯示 KNN 表現最佳，但差異不大，結果僅適用於此資料集。",
+        "benchmark_payload": {
+          "explanation_short": "KNN outperforms other models with the highest R² and lowest error metrics.",
+          "explanation_full": "The table compares five models on four error metrics, showing KNN has the highest R² (0.817) and lowest errors. It indicates KNN performs best, but differences are modest and results apply only to this dataset.",
+          "claims": []
+        }
+      },
+      "feature_importance_table": {
+        "en": "The table lists each feature’s contribution to the model, with VSS contributing the most (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075), and Propionate (0.058). These numbers show which variables most influence predictions, but the importance scores are relative and not absolute effect sizes.",
+        "zh_TW": "此表顯示各特徵對模型的貢獻度，VSS最高為0.505，其次是Acetate 0.12、Butyrate 0.098、VFA 0.075與Propionate 0.058。數值僅代表相對重要性，並非絕對影響大小。",
+        "benchmark_payload": {
+          "explanation_short": "Feature importance shows VSS highest, followed by Acetate, Butyrate, VFA, and Propionate.",
+          "explanation_full": "The table lists each feature’s contribution to the model, with VSS contributing the most (0.505), followed by Acetate (0.12), Butyrate (0.098), VFA (0.075), and Propionate (0.058). These numbers show which variables most influence predictions, but the importance scores are relative and not absolute effect sizes.",
+          "claims": []
+        }
+      },
+      "best_model_shap_importance": {
+        "en": "The SHAP table lists the most influential features for the KNN model: ORP_Low (0.0348), Butyrate (0.0318), ORP_Mid (0.0309), COD‑O (0.0292) and VFA (0.0278). These values show each feature’s average impact on predictions.",
+        "zh_TW": "此 SHAP 表格列出 KNN 模型最重要的特徵及其平均影響值：ORP_Low 0.0348、Butyrate 0.0318、ORP_Mid 0.0309、COD‑O 0.0292、VFA 0.0278。這些數值顯示每個特徵對預測的貢獻。",
+        "benchmark_payload": {
+          "explanation_short": "Key SHAP features for KNN are ORP_Low, Butyrate, ORP_Mid, COD‑O, and VFA with modest impact.",
+          "explanation_full": "The SHAP table lists the most influential features for the KNN model: ORP_Low (0.0348), Butyrate (0.0318), ORP_Mid (0.0309), COD‑O (0.0292) and VFA (0.0278). These values show each feature’s average impact on predictions.",
+          "claims": []
+        }
+      },
+      "descriptive_statistics": {
+        "en": "The table lists each feature’s average (mean) and variability (standard deviation) across the samples. Ethanol has the highest mean (0.474) and also one of the largest spreads (0.253), while VSS shows the lowest mean (0.358) and moderate spread.",
+        "zh_TW": "表格顯示每個特徵在所有樣本中的平均值與標準差。Ethanol 平均最高 0.474，且變異度大；VSS 平均最低 0.358，變異度中等。",
+        "benchmark_payload": {
+          "explanation_short": "The table shows feature means and spreads; Ethanol tops mean, VSS lowest mean.",
+          "explanation_full": "The table lists each feature’s average (mean) and variability (standard deviation) across the samples. Ethanol has the highest mean (0.474) and also one of the largest spreads (0.253), while VSS shows the lowest mean (0.358) and moderate spread.",
+          "claims": []
+        }
+      },
+      "correlation_matrix": {
+        "en": "The table lists how each measured variable moves together. The strongest links are Butyrate‑VFA (0.96) and Acetate‑VFA (0.94); the target HPR is most tied to VFA (0.80).",
+        "zh_TW": "此表顯示各項指標之相關程度，相關係數越接近 1 表示同時變化越強。最高相關為丁酸與總揮發性脂肪酸 0.9601，其次醋酸與總揮發性脂肪酸 0.9428，目標 HPR 與 VFA 相關 0.7984。",
+        "benchmark_payload": {
+          "explanation_short": "Key variables show strong positive links, especially Butyrate‑VFA (0.96) and Acetate‑VFA (0.94).",
+          "explanation_full": "The table lists how each measured variable moves together. The strongest links are Butyrate‑VFA (0.96) and Acetate‑VFA (0.94); the target HPR is most tied to VFA (0.80).",
+          "claims": []
+        }
+      },
+      "table1_incremental_results": {
+        "en": "The table shows how each model’s performance changes as more features are added, listing R² and MSE for each step. For KNN, the best result uses 9 features (R² = 0.830, MSE = 0.0119), indicating the most accurate prediction among models.",
+        "zh_TW": "此表列出隨著特徵數增加，各模型的R²與MSE變化。KNN在使用9個特徵時達到最佳表現，R²為0.830、MSE為0.0119，預測最精確。",
+        "benchmark_payload": {
+          "explanation_short": "KNN achieves the highest R² (0.830) with 9 features, outperforming other models.",
+          "explanation_full": "The table shows how each model’s performance changes as more features are added, listing R² and MSE for each step. For KNN, the best result uses 9 features (R² = 0.830, MSE = 0.0119), indicating the most accurate prediction among models.",
+          "claims": []
+        }
+      }
+    }
+  },
+  "selected_benchmark_explanations": {
+    "provider": "benchmark_selected",
+    "model": "llama-3.3-70b-versatile",
+    "generated_at": "2026-04-29T16:55:47.102848+00:00",
+    "selection_method": "best_leaderboard_row",
+    "selected_arm": "C",
+    "selected_condition": "image_table_summary",
+    "selected_semantic_level": null,
+    "selected_row": {
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "artifact_count": 24,
+      "claim_count": 13,
+      "fact_precision": 0.1111111111111111,
+      "fact_recall": 0.07222222222222222,
+      "fact_f1": 0.08680555555555555,
+      "unsupported_claim_rate": 0.013888888888888888,
+      "contradiction_rate": 0.041666666666666664,
+      "coverage_of_salient_facts": 0.041666666666666664,
+      "numeric_accuracy": 0.75,
+      "numeric_tolerance_accuracy": 0.75,
+      "claim_alignment_error_rate": 0.0,
+      "missing_value_rate": 0.0,
+      "unknown_variable_rate": 0.0,
+      "extraction_drop_rate": 0.0
+    },
+    "overview": {
+      "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.\n\nArm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used\n\nArm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+      "zh_TW": ""
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.",
+        "zh_TW": ""
+      },
+      "model_comparison_table": {
+        "en": "According to the table_model_comparison, the KNN model achieved the highest R² score of 0.81717 and the lowest MSE of 0.012810 among the compared models, including SVM, DT, RF, and XGBoost. The summary_text also confirms that the KNN model is the best model with an R² score of 0.81717 and an MSE of 0.012810.",
+        "zh_TW": ""
+      },
+      "table1_incremental_results": {
+        "en": "The results of the incremental feature analysis showed that the KNN model's performance improved with the addition of features. The model's R² increased from 0.644858 with 1 feature to 0.821983 with 8 features, and the MSE decreased from 0.024882 with 1 feature to 0.012472 with 8 features. The best performance was achieved with 8 features, which included VFA, Butyrate, Acetate, VSS, Propionate, Ethanol, COD-O, and pH. The results also showed that the KNN model outperformed the other models, including RF, XGBoost, SVM, and DT, in terms of R² and MSE.",
+        "zh_TW": ""
+      },
+      "gra_ranking": {
+        "en": "According to the grey relational analysis feature ranking, the top 5 features are VFA, Butyrate, Acetate, VSS, and Propionate, with scores of 0.7931, 0.7902, 0.7772, 0.7768, and 0.7596, respectively. The feature ranking suggests that VFA and Butyrate are the most closely related to the target variable, followed by Acetate, VSS, and Propionate.",
+        "zh_TW": ""
+      },
+      "fig3a_gra_ranking": {
+        "en": "The grey relational analysis ranks the features based on their correlation with the target variable. The top features are VFA, Butyrate, and Acetate, with scores of 0.7931, 0.7902, and 0.7772 respectively. These features are followed by VSS, Propionate, Ethanol, COD-O, pH, ORP_Low, ORP_Mid, and Sucrose_Degradation. The KNN model performs best with an R² score of 0.81717 and an MSE of 0.012810.",
+        "zh_TW": ""
+      },
+      "fig3b_shap_analysis": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "fig3_feature_analysis": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "fig4_univariate_analysis": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "fig5_model_comparison": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "fig6c_prediction_time": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_svm_scatter": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_dt_scatter": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_rf_scatter": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_knn_scatter": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_xgboost_scatter": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "model_comparison_bars": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "predicted_vs_actual": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "residuals": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "feature_importance": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "correlation_heatmap": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvdwqcegra5sz6d7sf87ej` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "feature_distributions": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxy4rmfgcamded5t847vpy` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "feature_vs_target": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcvnm27eqdsxb6x8krj77e9` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "boxplots": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqd0r5whfnhtx6gc47zshw6s` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      },
+      "time_series": {
+        "en": "Arm C failed before producing a corrected explanation. Error: Groq benchmark request failed with HTTP 429 (rate_limit_exceeded): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kqcxhjzzes1tn1yver9jze06` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used",
+        "zh_TW": ""
+      }
+    }
+  },
+  "benchmark_summary": {
+    "generated_at": "2026-04-29T16:55:47.102848+00:00",
+    "artifact_count": 24,
+    "generation_count": 120,
+    "output_dir": "benchmark_eval",
+    "leaderboard_preview": [
+      {
+        "arm": "C",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 24,
+        "claim_count": 13,
+        "fact_precision": 0.1111111111111111,
+        "fact_recall": 0.07222222222222222,
+        "fact_f1": 0.08680555555555555,
+        "unsupported_claim_rate": 0.013888888888888888,
+        "contradiction_rate": 0.041666666666666664,
+        "coverage_of_salient_facts": 0.041666666666666664,
+        "numeric_accuracy": 0.75,
+        "numeric_tolerance_accuracy": 0.75,
+        "claim_alignment_error_rate": 0.0,
+        "missing_value_rate": 0.0,
+        "unknown_variable_rate": 0.0,
+        "extraction_drop_rate": 0.0
+      },
+      {
+        "arm": "A",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 24,
+        "claim_count": 16,
+        "fact_precision": 0.08611111111111111,
+        "fact_recall": 0.07222222222222222,
+        "fact_f1": 0.07685185185185185,
+        "unsupported_claim_rate": 0.03888888888888889,
+        "contradiction_rate": 0.041666666666666664,
+        "coverage_of_salient_facts": 0.041666666666666664,
+        "numeric_accuracy": 0.65,
+        "numeric_tolerance_accuracy": 0.65,
+        "claim_alignment_error_rate": 0.0,
+        "missing_value_rate": 0.0,
+        "unknown_variable_rate": 0.0,
+        "extraction_drop_rate": 0.0
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1L2L3",
+        "artifact_count": 24,
+        "claim_count": 10,
+        "fact_precision": 0.0625,
+        "fact_recall": 0.049999999999999996,
+        "fact_f1": 0.055555555555555546,
+        "unsupported_claim_rate": 0.020833333333333332,
+        "contradiction_rate": 0.041666666666666664,
+        "coverage_of_salient_facts": 0.0,
+        "numeric_accuracy": 0.6666666666666666,
+        "numeric_tolerance_accuracy": 0.6666666666666666,
+        "claim_alignment_error_rate": 0.0,
+        "missing_value_rate": 0.0,
+        "unknown_variable_rate": 0.0,
+        "extraction_drop_rate": 0.0
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1",
+        "artifact_count": 24,
+        "claim_count": 0,
+        "fact_precision": 0.0,
+        "fact_recall": 0.0,
+        "fact_f1": 0.0,
+        "unsupported_claim_rate": 0.0,
+        "contradiction_rate": 0.0,
+        "coverage_of_salient_facts": 0.0,
+        "numeric_accuracy": null,
+        "numeric_tolerance_accuracy": null,
+        "claim_alignment_error_rate": 0.0,
+        "missing_value_rate": 0.0,
+        "unknown_variable_rate": 0.0,
+        "extraction_drop_rate": 0.0
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L2L3",
+        "artifact_count": 24,
+        "claim_count": 8,
+        "fact_precision": 0.027777777777777776,
+        "fact_recall": 0.0,
+        "fact_f1": 0.0,
+        "unsupported_claim_rate": 0.08333333333333333,
+        "contradiction_rate": 0.013888888888888888,
+        "coverage_of_salient_facts": 0.0,
+        "numeric_accuracy": 0.2222222222222222,
+        "numeric_tolerance_accuracy": 0.2222222222222222,
+        "claim_alignment_error_rate": 0.0,
+        "missing_value_rate": 0.0,
+        "unknown_variable_rate": 0.0,
+        "extraction_drop_rate": 0.0
+      }
+    ],
+    "row_count": 5,
+    "artifact_score_count": 120,
+    "warnings": [],
+    "best_overall": {
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "artifact_count": 24,
+      "claim_count": 13,
+      "fact_precision": 0.1111111111111111,
+      "fact_recall": 0.07222222222222222,
+      "fact_f1": 0.08680555555555555,
+      "unsupported_claim_rate": 0.013888888888888888,
+      "contradiction_rate": 0.041666666666666664,
+      "coverage_of_salient_facts": 0.041666666666666664,
+      "numeric_accuracy": 0.75,
+      "numeric_tolerance_accuracy": 0.75,
+      "claim_alignment_error_rate": 0.0,
+      "missing_value_rate": 0.0,
+      "unknown_variable_rate": 0.0,
+      "extraction_drop_rate": 0.0
+    },
+    "per_chart": {
+      "artifact_count": 24,
+      "chart_count": 21,
+      "core_artifact_count": 3,
+      "coverage_gap_count": 0,
+      "coverage_gap_preview": [],
+      "best_preview": [
+        {
+          "artifact_id": "KNN_DS1_20260429:feature_ranking/gra",
+          "artifact_type": "feature_ranking/gra",
+          "artifact_scope": "core_bundle",
+          "asset_key": null,
+          "asset_title": null,
+          "asset_family": null,
+          "chart_type": "ranking_chart",
+          "chart_file": "fig3a_gra_ranking.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Propionate",
+            "Ethanol",
+            "COD-O",
+            "pH",
+            "ORP_Low",
+            "ORP_Mid",
+            "Sucrose_Degradation"
+          ],
+          "source_files": [
+            "gra_ranking.json",
+            "fig3a_gra_ranking.png",
+            "fig_gra_ranking.png",
+            "results_summary.txt"
+          ],
+          "summary_files": [
+            "results_summary.txt"
+          ],
+          "row_rank": 1,
+          "arm": "C",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 0.8,
+          "fact_f1": 0.888888888888889,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 2.676545003932329e-05
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+          "artifact_type": "chart/fig3a_gra_ranking",
+          "artifact_scope": "chart",
+          "asset_key": "fig3a_gra_ranking",
+          "asset_title": "Figure 3A - Grey relational ranking",
+          "asset_family": "feature_ranking",
+          "chart_type": "ranking_chart",
+          "chart_file": "fig3a_gra_ranking.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Propionate"
+          ],
+          "source_files": [
+            "best_model_summary.json",
+            "gra_ranking.json",
+            "results_summary.txt",
+            "summary.json",
+            "fig3a_gra_ranking.png"
+          ],
+          "summary_files": [
+            "results_summary.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 5,
+          "fact_precision": 0.8,
+          "fact_recall": 0.8,
+          "fact_f1": 0.8000000000000002,
+          "unsupported_claim_rate": 0.2,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 1,
+          "top_reasons": [
+            {
+              "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 2.676545003932329e-05
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:model_comparison/main",
+          "artifact_type": "model_comparison/main",
+          "artifact_scope": "core_bundle",
+          "asset_key": null,
+          "asset_title": null,
+          "asset_family": null,
+          "chart_type": "bar_chart",
+          "chart_file": "fig5_model_comparison.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "SVM",
+            "DT",
+            "RF",
+            "KNN",
+            "XGBoost"
+          ],
+          "source_files": [
+            "table_model_comparison.csv",
+            "summary.json",
+            "fig5_model_comparison.png",
+            "fig_model_comparison_bars.png",
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "summary_files": [
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 3,
+          "fact_precision": 0.6666666666666666,
+          "fact_recall": 0.3333333333333333,
+          "fact_f1": 0.4444444444444444,
+          "unsupported_claim_rate": 0.3333333333333333,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 1,
+          "top_reasons": [
+            {
+              "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for KNN mse is 0.012809918378105262.",
+              "count": 1
+            },
+            {
+              "reason": "Claim type 'freeform' is not yet rule-verified.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 1.139959073995396e-06
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:boxplots",
+          "artifact_type": "chart/boxplots",
+          "artifact_scope": "chart",
+          "asset_key": "boxplots",
+          "asset_title": "Feature boxplots",
+          "asset_family": "distribution",
+          "chart_type": "boxplot",
+          "chart_file": "fig_boxplots.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_boxplots.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:correlation_heatmap",
+          "artifact_type": "chart/correlation_heatmap",
+          "artifact_scope": "chart",
+          "asset_key": "correlation_heatmap",
+          "asset_title": "Correlation heatmap",
+          "asset_family": "correlation",
+          "chart_type": "heatmap",
+          "chart_file": "fig_correlation_heatmap.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "Butyrate vs VFA",
+            "Acetate vs VFA",
+            "Acetate vs Butyrate",
+            "Ethanol vs Propionate",
+            "Ethanol vs VFA",
+            "VFA vs HPR",
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Ethanol",
+            "COD-O"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "fig_correlation_heatmap.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:feature_distributions",
+          "artifact_type": "chart/feature_distributions",
+          "artifact_scope": "chart",
+          "asset_key": "feature_distributions",
+          "asset_title": "Feature distributions",
+          "asset_family": "distribution",
+          "chart_type": "distribution_plot",
+          "chart_file": "fig_feature_distributions.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_feature_distributions.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        }
+      ],
+      "hardest_preview": [
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:boxplots",
+          "artifact_type": "chart/boxplots",
+          "artifact_scope": "chart",
+          "asset_key": "boxplots",
+          "asset_title": "Feature boxplots",
+          "asset_family": "distribution",
+          "chart_type": "boxplot",
+          "chart_file": "fig_boxplots.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_boxplots.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:correlation_heatmap",
+          "artifact_type": "chart/correlation_heatmap",
+          "artifact_scope": "chart",
+          "asset_key": "correlation_heatmap",
+          "asset_title": "Correlation heatmap",
+          "asset_family": "correlation",
+          "chart_type": "heatmap",
+          "chart_file": "fig_correlation_heatmap.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "Butyrate vs VFA",
+            "Acetate vs VFA",
+            "Acetate vs Butyrate",
+            "Ethanol vs Propionate",
+            "Ethanol vs VFA",
+            "VFA vs HPR",
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Ethanol",
+            "COD-O"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "fig_correlation_heatmap.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:feature_distributions",
+          "artifact_type": "chart/feature_distributions",
+          "artifact_scope": "chart",
+          "asset_key": "feature_distributions",
+          "asset_title": "Feature distributions",
+          "asset_family": "distribution",
+          "chart_type": "distribution_plot",
+          "chart_file": "fig_feature_distributions.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_feature_distributions.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:feature_importance",
+          "artifact_type": "chart/feature_importance",
+          "artifact_scope": "chart",
+          "asset_key": "feature_importance",
+          "asset_title": "Feature importance chart",
+          "asset_family": "feature_story_importance",
+          "chart_type": "bar_chart",
+          "chart_file": "fig_feature_importance.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "VSS",
+            "Acetate",
+            "Butyrate",
+            "VFA",
+            "Propionate",
+            "Ethanol"
+          ],
+          "source_files": [
+            "best_model_summary.json",
+            "summary.json",
+            "table_feature_importance.csv",
+            "fig_feature_importance.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:feature_vs_target",
+          "artifact_type": "chart/feature_vs_target",
+          "artifact_scope": "chart",
+          "asset_key": "feature_vs_target",
+          "asset_title": "Feature vs target chart",
+          "asset_family": "correlation",
+          "chart_type": "correlation_chart",
+          "chart_file": "fig_feature_vs_target.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "Butyrate vs VFA",
+            "Acetate vs VFA",
+            "Acetate vs Butyrate",
+            "Ethanol vs Propionate",
+            "Ethanol vs VFA",
+            "VFA vs HPR",
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Ethanol",
+            "COD-O"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "table_descriptive_statistics.csv",
+            "fig_feature_vs_target.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "KNN_DS1_20260429:chart:fig3_feature_analysis",
+          "artifact_type": "chart/fig3_feature_analysis",
+          "artifact_scope": "chart",
+          "asset_key": "fig3_feature_analysis",
+          "asset_title": "Figure 3 - Combined feature analysis",
+          "asset_family": "feature_analysis_combined",
+          "chart_type": "composite_chart",
+          "chart_file": "fig3_feature_analysis.png",
+          "bundle_name": "KNN_DS1_20260429",
+          "primary_entities": [
+            "VFA",
+            "Butyrate",
+            "Acetate",
+            "VSS",
+            "Propionate",
+            "Ethanol",
+            "ORP_Low",
+            "ORP_Mid",
+            "COD-O"
+          ],
+          "source_files": [
+            "best_model_shap_importance.csv",
+            "gra_ranking.json",
+            "summary.json",
+            "table1_incremental_results.csv",
+            "table_correlation_matrix.csv",
+            "table_feature_importance.csv",
+            "fig3_feature_analysis.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "claim_alignment_error_rate": 0.0,
+          "missing_value_rate": 0.0,
+          "unknown_variable_rate": 0.0,
+          "extraction_drop_rate": 0.0,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        }
+      ]
+    },
+    "files": {
+      "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+      "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+      "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+      "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+      "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+      "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+      "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+    },
+    "selected_explanations": {
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "semantic_level": null,
+      "asset_count": 25,
+      "provider": "benchmark_selected",
+      "model": "llama-3.3-70b-versatile",
+      "selection_method": "best_leaderboard_row"
+    }
+  }
+}

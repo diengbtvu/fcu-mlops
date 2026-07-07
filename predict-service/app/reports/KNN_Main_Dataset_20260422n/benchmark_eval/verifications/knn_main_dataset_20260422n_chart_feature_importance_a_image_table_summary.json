@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_importance",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 8.194001033245968e-12
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate has an importance of 0.12.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_importance:metric:Acetate:importance"
+      ],
+      "reason": "Gold value for Acetate importance is 0.1199757325.",
+      "numeric_delta": 1.7307849597969494e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Butyrate has an importance of 0.097.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_importance:metric:Butyrate:importance"
+      ],
+      "reason": "Gold value for Butyrate importance is 0.0969761328.",
+      "numeric_delta": 1.999994614365619e-11
+    }
+  ]
+}

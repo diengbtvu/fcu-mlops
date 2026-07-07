@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "The Random Forest model achieved the highest R^2 value (0.999).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C2",
+      "claim_text": "The Random Forest significantly outperforms the Linear Regression model (R^2 = 0.998).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C3",
+      "claim_text": "The features pH, Temperature, and Time show the highest positive correlation coefficients (0.999, 0.999, and 0.999, respectively).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C4",
+      "claim_text": "The Concentration feature shows a strong positive correlation (0.999).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig4_univariate_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "C5",
+      "claim_text": "The interaction terms (pH x Temperature, pH x Time, Temperature x Time) all show very high positive correlation coefficients (0.999).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the winning model.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:best_model"
+      ],
+      "reason": "Gold best model is KNN.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved an R2 score of 0.81717.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 2.198299999922604e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved an MSE of 0.012810.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.0128099184.",
+      "numeric_delta": 8.16000000000705e-08
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN outperformed RF, XGBoost, SVM, and DT.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "RF had an R2 score of 0.77560.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171.",
+      "numeric_delta": 1.8171000000233306e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "XGBoost had an R2 score of 0.74948.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 3.689799999984089e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "SVM had an R2 score of 0.73241.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 2.525000000197508e-07
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "DT had an R2 score of 0.56045.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531395.",
+      "numeric_delta": 3.139499999971207e-06
+    }
+  ]
+}

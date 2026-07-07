@@ -1,0 +1,67 @@
+{
+  "artifact_id": "fixture_bundle:feature_ranking/gra",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The top-ranked features are pH (rank 1, 0.91), Propionate (rank 2, 0.83), and VFA (rank 3, 0.81).",
+  "explanation_full": "The top-ranked features are pH (rank 1, 0.91), Propionate (rank 2, 0.83), and VFA (rank 3, 0.81).",
+  "claims": [
+    {
+      "claim_id": "baseline-top-feature",
+      "claim_text": "pH is the top feature in the GRA ranking.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "pH",
+      "predicate": null,
+      "object": "pH",
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-gra-ranking",
+      "claim_text": "The GRA ordering is pH > Propionate > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.86,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "pH",
+        "Propionate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-gra-score",
+      "claim_text": "pH has gra_score=0.91.",
+      "claim_type": "rank_score",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "pH",
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": 0.91,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

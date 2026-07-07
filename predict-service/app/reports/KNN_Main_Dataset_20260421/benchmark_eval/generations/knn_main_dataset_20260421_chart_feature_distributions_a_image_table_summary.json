@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_distributions",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol, Acetate, and Butyrate exhibit the highest mean feature values, while Ethanol also shows the highest standard deviation.",
+  "explanation_full": "Based on the feature distributions, Ethanol, Acetate, and Butyrate have the highest mean values, with Ethanol having the highest mean (0.4736). Acetate (0.4465) and Butyrate (0.4287) follow closely. Regarding variability, Ethanol also exhibits the highest standard deviation (0.2528), followed by Butyrate (0.2474) and Acetate (0.226). Conversely, pH has the lowest mean (0.2355) and the lowest standard deviation (0.1267) among the listed features.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean feature value (0.4736).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has mean value",
+      "object": "0.4736",
+      "metric": "mean",
+      "value": 0.4735821123781505,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Acetate and Butyrate also have high mean feature values (0.4465 and 0.4287, respectively).",
+      "claim_type": "metric_value",
+      "span_category": "Acetate, Butyrate",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Acetate",
+      "predicate": "has mean value",
+      "object": "0.4465",
+      "metric": "mean",
+      "value": 0.4465350187686395,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "Ethanol also shows the highest standard deviation (0.2528).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "has standard deviation",
+      "object": "0.2528",
+      "metric": "std",
+      "value": 0.25282963738961184,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

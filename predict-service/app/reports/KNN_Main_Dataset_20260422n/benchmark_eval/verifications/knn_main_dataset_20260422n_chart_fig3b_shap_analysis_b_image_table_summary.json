@@ -1,0 +1,42 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low exhibits the highest mean absolute SHAP value (0.0359).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.0359385219.",
+      "numeric_delta": 3.852189999999783e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289) are the next most influential features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "COD-O and Acetate have lower mean absolute SHAP values (0.0258 and 0.0257, respectively).",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

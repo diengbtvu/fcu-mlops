@@ -1,0 +1,108 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:claim:1",
+      "claim_text": "The KNN model emerged as the top performer with an R2 score of 0.81717, suggesting strong predictive capabilities.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:claim:2",
+      "claim_text": "The analysis summary report provides a concise overview of a machine learning model trained to predict hydrogen production (HPR). It details key metrics such as R2 score, RMSE, MSE, and MAE, highlighting the performance of different models.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:claim:3",
+      "claim_text": "The analysis summary report provides a concise overview of a machine learning model trained to predict hydrogen production (HPR). It details key metrics such as R2 score, RMSE, MSE, and MAE, highlighting the performance of different models.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "missing_object",
+      "message": "Entity variable mention did not include a stated object.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "claim_id": null,
+      "action": "warn"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:top_feature:target_correlation",
+      "evidence_span": "The KNN model emerged as the top performer with an R2 score of 0.81717, suggesting strong predictive capabilities.",
+      "stated_value": "0.81717",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "evidence_span": "The analysis summary report provides a concise overview of a machine learning model trained to predict hydrogen production (HPR). It details key metrics such as R2 score, RMSE, MSE, and MAE, highlighting the performance of different models.",
+      "stated_value": null,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:VFA:target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_vs_target:metric:VFA:target_correlation",
+      "evidence_span": "The analysis summary report provides a concise overview of a machine learning model trained to predict hydrogen production (HPR). It details key metrics such as R2 score, RMSE, MSE, and MAE, highlighting the performance of different models.",
+      "stated_value": null,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

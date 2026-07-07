@@ -1,0 +1,61 @@
+{
+  "artifact_id": "fixture_bundle:chart:residuals",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "r2",
+      "claim_text": "KNN has r2_score=0.920000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.92,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "correlation",
+      "claim_text": "KNN has pred_actual_correlation=0.900000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.94,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "pred_actual_correlation",
+      "value": 0.9,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "third-metric",
+      "claim_text": "KNN has residual_std=0.110000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "residual_std",
+      "value": 0.11,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

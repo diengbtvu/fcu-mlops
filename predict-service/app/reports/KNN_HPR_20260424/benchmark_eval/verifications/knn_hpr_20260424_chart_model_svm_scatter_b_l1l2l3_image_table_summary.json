@@ -1,0 +1,50 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73, indicating a strong fit to the data.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 0.0024097475000000035
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73 and low RMSE of 0.14.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:max_abs_residual"
+      ],
+      "reason": "Gold value for SVM max_abs_residual is 0.610181.",
+      "numeric_delta": 0.47018099999999996
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+      "claim_text": "The SVM model demonstrates a robust ability to predict the target variable based on the provided input features. This is evident in its high R2 score of 0.73 and low RMSE of 0.14.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:pred_actual_correlation"
+      ],
+      "reason": "Gold value for SVM pred_actual_correlation is 0.86576.",
+      "numeric_delta": 0.72576
+    }
+  ]
+}

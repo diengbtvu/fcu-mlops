@@ -1,0 +1,64 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the top predictor for HPR (0.7984)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "the strongest feature correlation is Butyrate vs VFA (0.9601)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA as the most significant predictor for HPR, boasting a correlation of 0.7984",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_vs_target",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "correlation matrix highlights an extremely strong relationship between Butyrate and VFA (0.9601)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_vs_target:metric:Butyrate vs VFA:correlation"
+      ],
+      "reason": "Gold value for Butyrate vs VFA correlation is 0.9601.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

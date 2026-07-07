@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:1",
+      "claim_text": "R2 score of 0.73",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475.",
+      "numeric_delta": 0.0024097475000000035
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:claim:2",
+      "claim_text": "low RMSE (0.14)",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_svm_scatter:metric:SVM:max_abs_residual"
+      ],
+      "reason": "Gold value for SVM max_abs_residual is 0.610181.",
+      "numeric_delta": 0.47018099999999996
+    }
+  ]
+}

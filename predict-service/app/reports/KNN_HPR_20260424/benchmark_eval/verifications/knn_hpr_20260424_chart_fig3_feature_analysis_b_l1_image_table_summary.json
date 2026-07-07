@@ -1,0 +1,34 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2",
+      "claim_text": "KNN::r2_score",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig3_feature_analysis:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 1.16986
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA::correlation",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

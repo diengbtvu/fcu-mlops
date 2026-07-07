@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for HPR.",
+      "claim_type": "metric_value",
+      "span_category": "R2 and RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for HPR.",
+      "confidence": 1.0,
+      "source_variable_id": null,
+      "subject": "KNN",
+      "predicate": "achieved",
+      "object": "highest R2 score (0.817) and lowest RMSE (0.113)",
+      "metric": "r2_and_rmse",
+      "value": "0.817 and 0.113",
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

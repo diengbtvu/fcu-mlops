@@ -1,0 +1,50 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The SVM model shows an R2 score of 0.0",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The SVM model exhibits poor performance metrics, achieving an R2 score of 0.0",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The scatter plot diagnostics also show a maximum absolute residual of 0.123558",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter:metric:SVM:max_abs_residual"
+      ],
+      "reason": "Gold value for SVM max_abs_residual is 0.123558.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

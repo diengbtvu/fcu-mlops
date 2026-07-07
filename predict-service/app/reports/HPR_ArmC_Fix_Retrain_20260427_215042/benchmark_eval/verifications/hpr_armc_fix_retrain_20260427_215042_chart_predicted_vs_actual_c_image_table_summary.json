@@ -1,0 +1,22 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:claim:1",
+      "claim_text": "R2 score of 0.817",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    }
+  ]
+}

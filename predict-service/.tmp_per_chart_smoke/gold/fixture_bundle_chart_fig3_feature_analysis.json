@@ -1,0 +1,224 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig3_feature_analysis",
+  "artifact_type": "chart/fig3_feature_analysis",
+  "source_files": [
+    "best_model_shap_importance.csv",
+    "gra_ranking.json",
+    "summary.json",
+    "table1_incremental_results.csv",
+    "table_correlation_matrix.csv",
+    "table_feature_importance.csv"
+  ],
+  "chart_type": "composite_chart",
+  "primary_entities": [
+    "pH",
+    "Propionate",
+    "VFA",
+    "Butyrate",
+    "VSS",
+    "ORP_Low"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:top_feature:gra_score",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "gra_score",
+      "object": "pH",
+      "value": 0.91,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top gra_score feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:ranking:gra_score",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "gra_score",
+      "object": [
+        "pH",
+        "Propionate",
+        "VFA",
+        "Butyrate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "gra_score ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:top_feature:importance",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "importance",
+      "object": "VSS",
+      "value": 0.52,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top importance feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:ranking:importance",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "importance",
+      "object": [
+        "VSS",
+        "pH",
+        "Propionate",
+        "VFA"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "importance ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "mean_abs_shap",
+      "object": "ORP_Low",
+      "value": 0.045,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top mean_abs_shap feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+      "fact_type": "ranking",
+      "subject": "combined_feature_story",
+      "predicate": "mean_abs_shap",
+      "object": [
+        "ORP_Low",
+        "pH",
+        "VFA",
+        "Propionate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "mean_abs_shap ranking"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:top_feature:target_correlation",
+      "fact_type": "top_feature",
+      "subject": "combined_feature_story",
+      "predicate": "target_correlation",
+      "object": "pH",
+      "value": 0.91,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "top target correlation feature"
+        }
+      ],
+      "importance": 3
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:metric:pH vs VFA:correlation",
+      "fact_type": "metric_value",
+      "subject": "pH vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "value": 0.86,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "strongest pair correlation"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:feature_subset_optimum",
+      "fact_type": "feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+      "value": 6,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "best overall incremental feature count"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "fixture_bundle:chart:fig3_feature_analysis:best_r2",
+      "fact_type": "best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+      "value": 0.92,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_shap_importance.csv",
+          "priority": "table/json",
+          "detail": "best overall incremental R2"
+        }
+      ],
+      "importance": 2
+    }
+  ],
+  "salient_facts": [
+    "fixture_bundle:chart:fig3_feature_analysis:top_feature:gra_score",
+    "fixture_bundle:chart:fig3_feature_analysis:ranking:gra_score",
+    "fixture_bundle:chart:fig3_feature_analysis:top_feature:importance",
+    "fixture_bundle:chart:fig3_feature_analysis:ranking:importance",
+    "fixture_bundle:chart:fig3_feature_analysis:top_feature:mean_abs_shap",
+    "fixture_bundle:chart:fig3_feature_analysis:ranking:mean_abs_shap",
+    "fixture_bundle:chart:fig3_feature_analysis:top_feature:target_correlation",
+    "fixture_bundle:chart:fig3_feature_analysis:metric:pH vs VFA:correlation",
+    "fixture_bundle:chart:fig3_feature_analysis:feature_subset_optimum",
+    "fixture_bundle:chart:fig3_feature_analysis:best_r2"
+  ],
+  "forbidden_inferences": [
+    "Do not collapse different feature-analysis lenses into a single causal claim.",
+    "Do not let prose override the structured evidence for each lens."
+  ]
+}

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,9 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Force HTTPS when behind a reverse proxy (Cloudflare Tunnel).
-        if ($this->app->environment('production')) {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+        // Only force HTTPS when the configured public app URL is actually HTTPS.
+        // Local Docker serves plain HTTP on localhost:52025, so forcing HTTPS
+        // there breaks asset URLs with SSL errors.
+        $appUrlScheme = parse_url((string) config('app.url', ''), PHP_URL_SCHEME);
+        if ($this->app->environment('production') && $appUrlScheme === 'https') {
+            URL::forceScheme('https');
         }
 
         // Force Bootstrap pagination views instead of Tailwind default.

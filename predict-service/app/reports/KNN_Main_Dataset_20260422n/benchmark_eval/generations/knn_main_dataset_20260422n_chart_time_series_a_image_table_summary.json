@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:time_series",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest performance metrics, with an R2 score of 0.81717 and an RMSE of 0.11318, outperforming all other benchmark models.",
+  "explanation_full": "The KNN model was identified as the best benchmark model, achieving an R2 score of 0.81717 and a Mean Squared Error (MSE) of 0.012810. When comparing model performance, KNN significantly outperformed DT (R2: 0.56045) and SVM (R2: 0.73241). Furthermore, the top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641), indicating their strong predictive power for Hydrogen Production Rate (HPR).",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "KNN model achieved the highest R2 score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved the highest",
+      "object": "R2 score",
+      "metric": "r2_score",
+      "value": 0.817168,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The top correlated features with HPR are VFA, Butyrate, and Acetate.",
+      "claim_type": "top_feature",
+      "span_category": "feature_correlation",
+      "is_numeric": false,
+      "requires_grounding_from": "analysis_summary_report.txt",
+      "confidence": 1.0,
+      "subject": "HPR",
+      "predicate": "is highly correlated with",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "KNN model had an RMSE of 0.11318.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "summary.json",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "has an RMSE of",
+      "object": null,
+      "metric": "rmse",
+      "value": 0.113181,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

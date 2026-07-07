@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The combined effect of VFA and VFA is important.",
+  "explanation_full": "The interaction term between these two variables further refines the predictive understanding.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

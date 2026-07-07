@@ -1,0 +1,50 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:r2_score",
+      "claim_text": "R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.219830000000812e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:rmse",
+      "claim_text": "RMSE of 0.1132",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 1.9089999999999385e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:mae",
+      "claim_text": "MAE of 0.075",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_knn_scatter:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.0750230875.",
+      "numeric_delta": 2.30875000000047e-05
+    }
+  ]
+}

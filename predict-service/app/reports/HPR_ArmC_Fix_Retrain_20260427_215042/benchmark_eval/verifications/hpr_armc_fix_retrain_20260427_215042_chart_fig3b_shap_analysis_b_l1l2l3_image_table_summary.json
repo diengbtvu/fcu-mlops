@@ -1,0 +1,46 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "The top features are VFA, Butyrate, and Acetate.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "ORP_Low has a mean_abs_shap value of 2.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.036118653.",
+      "numeric_delta": 1.963881347
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "The ranking of features by mean_abs_shap is shown in the plot.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

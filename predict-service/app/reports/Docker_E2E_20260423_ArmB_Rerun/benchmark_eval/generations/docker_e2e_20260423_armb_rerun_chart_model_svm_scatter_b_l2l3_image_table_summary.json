@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model's poor performance is evident across multiple metrics, with an R2 of 0.0 and an MAE of 0.0872, confirming its inadequacy.",
+  "explanation_full": "Focusing on L2-L3 details, the SVM model's metrics confirm its poor predictive capability. Specifically, the R2 score is 0.0, and the Mean Absolute Error (MAE) is 0.0872. The scatter plot diagnostics further highlight this weakness, showing a maximum absolute residual of 0.123558. In contrast, the other models maintain near-perfect scores (R2=1.0, RMSE=0.0), making the SVM model's performance a clear outlier and the primary point of concern.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

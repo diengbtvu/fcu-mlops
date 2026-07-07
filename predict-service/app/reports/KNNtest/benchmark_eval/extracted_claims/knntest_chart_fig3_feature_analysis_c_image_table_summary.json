@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The feature 'VFA' is highly correlated with 'VFA'.",
+      "claim_type": "N/A",
+      "span_category": "N/A",
+      "is_numeric": false,
+      "requires_grounding_from": "N/A",
+      "confidence": 0.9,
+      "subject": "VFA",
+      "predicate": "is highly correlated with",
+      "object": "VFA",
+      "metric": "n/a",
+      "value": "N/A",
+      "unit": "N/A",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

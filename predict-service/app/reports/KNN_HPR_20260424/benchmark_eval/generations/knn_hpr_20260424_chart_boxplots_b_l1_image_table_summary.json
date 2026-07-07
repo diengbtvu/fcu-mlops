@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest R-squared score (0.817) among all benchmark models.",
+  "explanation_full": "The KNN model outperformed other benchmark models like SVM, DT, RF, and XGBoost in predicting the target variable. It achieved an R-squared score of 0.817, which signifies a strong correlation between predicted and actual values.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "claim_text": "The mean of Ethanol is 2.38.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": 2.38,
+      "metric": "mean",
+      "value": 2.38,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "claim_text": "The standard deviation of Ethanol is 0.51.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:boxplots:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": 0.51,
+      "metric": "std",
+      "value": 0.51,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

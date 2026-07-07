@@ -1,0 +1,50 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig4_univariate_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:fig4_univariate_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA has the strongest correlation with HPR (0.7984)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig4_univariate_analysis:metric:VFA:target_correlation"
+      ],
+      "reason": "Gold value for VFA target_correlation is 0.7984.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig4_univariate_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate (0.7827) also show highly significant correlations with HPR",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig4_univariate_analysis:metric:Butyrate:target_correlation"
+      ],
+      "reason": "Gold value for Butyrate target_correlation is 0.7827.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig4_univariate_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate (0.7641) also show highly significant correlations with HPR",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig4_univariate_analysis:metric:Acetate:target_correlation"
+      ],
+      "reason": "Gold value for Acetate target_correlation is 0.7641.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

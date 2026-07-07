@@ -1,0 +1,117 @@
+{
+  "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Butyrate vs VFA=0.9601",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Acetate vs VFA=0.9428",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate vs Butyrate=0.8651",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Ethanol vs Propionate=0.8548",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Ethanol vs VFA=0.8486",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "VFA=0.7984",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "Butyrate=0.7827",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "Acetate=0.7641",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "VSS=0.7062",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig4_univariate_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_10",
+      "claim_text": "Ethanol=0.6112",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

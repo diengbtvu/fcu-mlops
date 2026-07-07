@@ -1,18 +1,88 @@
 from __future__ import annotations
 
+import copy
 import json
 import os
+import random
+import re
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List, Sequence
 
 import numpy as np
 import pandas as pd
 import requests
+from benchmarking.schemas import CANONICAL_CLAIM_TYPES
 from dotenv import load_dotenv
+from groq_key_pool import GroqApiKeyPool, groq_api_keys_from_env, parse_groq_api_keys, record_blocked_groq_key
+from openai_rate_control import shared_openai_request_gate
 
-OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
-OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2")
+DEFAULT_OPENAI_CHAT_BASE_URL = "https://api.openai.com/v1"
+DEFAULT_OPENAI_REPORT_MODEL = "gpt-5.2"
+DEFAULT_OLLAMA_BASE_URL = "http://127.0.0.1:11434"
+DEFAULT_OLLAMA_REPORT_MODEL = "gemma2:9b"
+DEFAULT_OLLAMA_NUM_CTX = 16384
+DEFAULT_GROQ_CHAT_BASE_URL = "https://api.groq.com/openai/v1"
+DEFAULT_GROQ_REPORT_MODEL = "openai/gpt-oss-120b"
+SUPPORTED_LLM_PROVIDERS = {"openai", "ollama", "groq"}
+GROQ_REPORT_MODELS = {
+    "openai/gpt-oss-120b": "GPT-OSS 120B",
+    "llama-3.3-70b-versatile": "Llama 3.3 70B Versatile",
+}
+OPENAI_CHAT_COMPLETIONS_URL = f"{DEFAULT_OPENAI_CHAT_BASE_URL}/chat/completions"
+OPENAI_REPORT_MODEL = os.getenv("OPENAI_REPORT_MODEL", DEFAULT_OPENAI_REPORT_MODEL)
+GROQ_REPORT_MODEL = os.getenv("GROQ_REPORT_MODEL", DEFAULT_GROQ_REPORT_MODEL)
+OPENAI_REPORT_MAX_RETRIES = max(1, int(os.getenv("OPENAI_REPORT_MAX_RETRIES", "8")))
+GROQ_REPORT_MAX_RETRIES = max(1, int(os.getenv("GROQ_REPORT_MAX_RETRIES", "5")))
+GROQ_REPORT_RETRY_FOREVER = str(
+    os.getenv("GROQ_REPORT_RETRY_FOREVER", "1")
+).strip().lower() not in {"0", "false", "no", "off"}
+GROQ_REPORT_MIN_REQUEST_INTERVAL_SECONDS = max(
+    0.0,
+    float(os.getenv("GROQ_REPORT_MIN_REQUEST_INTERVAL_SECONDS", "3")),
+)
+GROQ_REPORT_MAX_RETRY_WAIT_SECONDS = max(
+    1.0,
+    float(os.getenv("GROQ_REPORT_MAX_RETRY_WAIT_SECONDS", "3")),
+)
+OPENAI_REPORT_RETRY_BACKOFF_SECONDS = max(
+    1.0,
+    float(os.getenv("OPENAI_REPORT_RETRY_BACKOFF_SECONDS", "8")),
+)
+GROQ_REPORT_RETRY_BACKOFF_SECONDS = max(
+    1.0,
+    float(os.getenv("GROQ_REPORT_RETRY_BACKOFF_SECONDS", "3")),
+)
+OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS = max(
+    0.0,
+    float(os.getenv("OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS", "6")),
+)
+OPENAI_REPORT_RETRY_JITTER_SECONDS = max(
+    0.0,
+    float(os.getenv("OPENAI_REPORT_RETRY_JITTER_SECONDS", "1.0")),
+)
+GROQ_REPORT_RETRY_JITTER_SECONDS = max(
+    0.0,
+    float(os.getenv("GROQ_REPORT_RETRY_JITTER_SECONDS", "0.5")),
+)
+OPENAI_REPORT_ASSET_BATCH_SIZE = max(1, int(os.getenv("OPENAI_REPORT_ASSET_BATCH_SIZE", "1")))
+OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS = max(
+    2000,
+    int(os.getenv("OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS", "3200")),
+)
+OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS = max(
+    1200,
+    int(os.getenv("OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS", "1800")),
+)
+GROQ_REPORT_ASSET_MAX_COMPLETION_TOKENS = max(
+    500,
+    int(os.getenv("GROQ_REPORT_ASSET_MAX_COMPLETION_TOKENS", "900")),
+)
+GROQ_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS = max(
+    500,
+    int(os.getenv("GROQ_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS", "900")),
+)
 EXPLANATIONS_FILENAME = "llm_explanations.json"
 ASSET_EVIDENCE_FILENAME = "asset_evidence.json"
 STATUS_FILENAME = "llm_explanations_status"
@@ -56,6 +126,158 @@ TABLE_KEYS = {
     "correlation_matrix",
     "table1_incremental_results",
 }
+
+
+def _provider_display_name(provider: str) -> str:
+    if provider == "groq":
+        return "Groq"
+    if provider == "ollama":
+        return "Ollama"
+    return "OpenAI"
+
+
+def _get_llm_provider(provider_override: str | None = None) -> str:
+    provider = str(
+        provider_override
+        or os.getenv("REPORT_LLM_PROVIDER")
+        or os.getenv("LLM_PROVIDER")
+        or "openai"
+    ).strip().lower()
+    if provider not in SUPPORTED_LLM_PROVIDERS:
+        supported = ", ".join(sorted(SUPPORTED_LLM_PROVIDERS))
+        raise RuntimeError(
+            f"Unsupported REPORT_LLM_PROVIDER '{provider}'. Supported values: {supported}."
+        )
+    return provider
+
+
+def _get_report_model(provider: str, model_override: str | None = None) -> str:
+    if model_override and str(model_override).strip():
+        model = str(model_override).strip()
+        if provider == "groq" and model not in GROQ_REPORT_MODELS:
+            allowed = ", ".join(GROQ_REPORT_MODELS)
+            raise RuntimeError(
+                f"Unsupported Groq report model '{model}'. Supported values: {allowed}."
+            )
+        return model
+    if provider == "groq":
+        model = str(
+            os.getenv("GROQ_REPORT_MODEL")
+            or os.getenv("REPORT_LLM_MODEL")
+            or os.getenv("LLM_MODEL")
+            or DEFAULT_GROQ_REPORT_MODEL
+        ).strip()
+        if model not in GROQ_REPORT_MODELS:
+            allowed = ", ".join(GROQ_REPORT_MODELS)
+            raise RuntimeError(
+                f"Unsupported Groq report model '{model}'. Supported values: {allowed}."
+            )
+    elif provider == "ollama":
+        model = str(
+            os.getenv("OLLAMA_REPORT_MODEL")
+            or os.getenv("REPORT_LLM_MODEL")
+            or os.getenv("LLM_MODEL")
+            or DEFAULT_OLLAMA_REPORT_MODEL
+        ).strip()
+    else:
+        model = str(
+            os.getenv("OPENAI_REPORT_MODEL")
+            or os.getenv("REPORT_LLM_MODEL")
+            or os.getenv("LLM_MODEL")
+            or DEFAULT_OPENAI_REPORT_MODEL
+        ).strip()
+
+    if not model:
+        raise RuntimeError(
+            f"{_provider_display_name(provider)} report model is not configured."
+        )
+    return model
+
+
+def _get_openai_chat_completions_url() -> str:
+    base_url = str(
+        os.getenv("OPENAI_BASE_URL") or DEFAULT_OPENAI_CHAT_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/chat/completions"
+
+
+def _get_openai_api_key() -> str:
+    return str(os.getenv("OPENAI_API_KEY") or "").strip()
+
+
+def _get_groq_chat_completions_url() -> str:
+    base_url = str(
+        os.getenv("GROQ_BASE_URL") or DEFAULT_GROQ_CHAT_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/chat/completions"
+
+
+def _get_groq_api_keys(api_keys_override: Any | None = None) -> List[str]:
+    override_keys = parse_groq_api_keys(api_keys_override)
+    if override_keys:
+        return override_keys
+    return groq_api_keys_from_env()
+
+
+def _groq_supports_json_schema(model: str) -> bool:
+    return str(model or "").strip().startswith("openai/gpt-oss")
+
+
+def _needs_inline_json_schema_instruction(provider: str, model: str) -> bool:
+    if provider == "ollama":
+        return True
+    if provider == "groq":
+        return True
+    return False
+
+
+def _get_ollama_chat_url() -> str:
+    base_url = str(
+        os.getenv("OLLAMA_BASE_URL") or DEFAULT_OLLAMA_BASE_URL
+    ).strip().rstrip("/")
+    return f"{base_url}/api/chat"
+
+
+def _get_ollama_num_ctx() -> int:
+    raw_value = str(os.getenv("OLLAMA_NUM_CTX") or DEFAULT_OLLAMA_NUM_CTX).strip()
+    try:
+        value = int(raw_value)
+    except ValueError:
+        value = DEFAULT_OLLAMA_NUM_CTX
+    return max(4096, value)
+
+
+def _extract_json_object(raw_content: str, provider: str) -> Dict[str, Any]:
+    candidates: List[str] = []
+    stripped = raw_content.strip()
+    if stripped:
+        candidates.append(stripped)
+
+        if stripped.startswith("```") and stripped.endswith("```"):
+            lines = stripped.splitlines()
+            if len(lines) >= 3:
+                fenced_body = "\n".join(lines[1:-1]).strip()
+                if fenced_body:
+                    candidates.append(fenced_body)
+
+        start = stripped.find("{")
+        end = stripped.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            embedded_json = stripped[start:end + 1].strip()
+            if embedded_json:
+                candidates.append(embedded_json)
+
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+
+    raise ValueError(
+        f"{_provider_display_name(provider)} response did not contain a valid JSON object."
+    )
 
 
 def _read_json(path: Path) -> Dict[str, Any]:
@@ -766,6 +988,7 @@ def _build_prompt_payload(
     descriptive_stats_df = _read_csv(report_dir / str(files.get("descriptive_statistics", "")))
     correlation_df = _read_csv(report_dir / str(files.get("correlation_matrix", "")))
     incremental_df = _read_csv(report_dir / str(files.get("table1_incremental_results", "")))
+    best_model_summary = _read_json(report_dir / str(files.get("best_model_summary", "")))
     analysis_summary_excerpt = _read_text_excerpt(report_dir / str(files.get("analysis_summary", "")))
     results_summary_excerpt = _read_text_excerpt(report_dir / str(files.get("results_summary", "")))
 
@@ -781,14 +1004,29 @@ def _build_prompt_payload(
     incremental_records = _safe_records(incremental_df, limit=11)
     benchmark_records = _sort_model_rows(_safe_records(model_comparison_df, limit=6))
 
+    summary_metrics = best_model_summary.get("metrics") if isinstance(best_model_summary, dict) else {}
+    if not isinstance(summary_metrics, dict):
+        summary_metrics = {}
+    if not summary_metrics and isinstance(best_model_summary, dict):
+        summary_metrics = {
+            "r2_score": best_model_summary.get("r2"),
+            "mse": best_model_summary.get("mse"),
+            "mae": best_model_summary.get("mae"),
+            "rmse": best_model_summary.get("rmse"),
+        }
+
     report_context = {
         "report_id": report_info.get("report_id"),
-        "best_model": pipeline_result.get("best_model"),
+        "best_model": pipeline_result.get("best_model") or best_model_summary.get("best_model"),
         "selected_sheet": pipeline_result.get("selected_sheet"),
-        "rows_after_preprocessing": pipeline_result.get("rows_after_preprocessing"),
-        "top_features": pipeline_result.get("top_features"),
-        "metrics": pipeline_result.get("metrics", {}),
-        "gra_ranking": pipeline_result.get("gra_ranking", [])[:8],
+        "rows_after_preprocessing": (
+            pipeline_result.get("rows_after_preprocessing")
+            or best_model_summary.get("rows_after_preprocessing")
+            or best_model_summary.get("total_samples")
+        ),
+        "top_features": pipeline_result.get("top_features") or best_model_summary.get("top_features"),
+        "metrics": pipeline_result.get("metrics") or summary_metrics,
+        "gra_ranking": (pipeline_result.get("gra_ranking") or best_model_summary.get("gra_ranking") or [])[:8],
         "dataset_columns": dataset_columns,
         "model_comparison_table": benchmark_records,
         "feature_importance_table": _safe_records(feature_importance_df, limit=8),
@@ -817,14 +1055,14 @@ def _build_prompt_payload(
         ),
         "audience": "non-technical website users",
         "style_rules": [
-            "Write one medium-length paragraph per asset.",
+            "Write one concise paragraph per asset.",
             "Keep the explanation concrete and friendly.",
             "Avoid heavy jargon. If a term matters, explain it in simple words.",
             "Do not mention OpenAI, prompting, or the model itself in the explanations.",
             "Do not invent numbers or trends that are not in the provided data.",
             "For each asset, clearly cover: what it shows, how to read it, the main takeaway, and one practical caution or limitation when relevant.",
             "Use concrete numbers, ranks, or feature names whenever they are available in the provided evidence.",
-            "Make the explanation detailed enough that a non-technical reader can understand why the chart or table matters.",
+            "Keep the explanation short enough to fit in a compact chart caption.",
         ],
         "languages": ["en", "zh_TW"],
         "assets": explainable_assets,
@@ -834,11 +1072,203 @@ def _build_prompt_payload(
     }
 
 
+def _asset_scoped_report_context(report_context: Dict[str, Any]) -> Dict[str, Any]:
+    """Keep per-asset explanation prompts small; global context is only for overview."""
+    if not isinstance(report_context, dict):
+        return {}
+    compact: Dict[str, Any] = {}
+    for key in (
+        "report_id",
+        "best_model",
+        "selected_sheet",
+        "rows_after_preprocessing",
+        "metrics",
+    ):
+        value = report_context.get(key)
+        if value not in (None, "", [], {}):
+            compact[key] = value
+    return compact
+
+
 def _chunk_assets(items: List[Dict[str, Any]], chunk_size: int) -> List[List[Dict[str, Any]]]:
     return [items[index:index + chunk_size] for index in range(0, len(items), chunk_size)]
 
 
-def _build_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
+def _report_claim_schema() -> Dict[str, Any]:
+    scalar_or_null = {
+        "anyOf": [
+            {"type": "string"},
+            {"type": "number"},
+            {"type": "boolean"},
+            {"type": "null"},
+        ]
+    }
+    string_array_or_null = {
+        "anyOf": [
+            {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            {"type": "null"},
+        ]
+    }
+    return {
+        "type": "object",
+        "properties": {
+            "claim_id": {"type": "string"},
+            "claim_text": {"type": "string"},
+            "claim_type": {"type": "string", "enum": list(CANONICAL_CLAIM_TYPES)},
+            "span_category": {"type": "string"},
+            "is_numeric": {"type": "boolean"},
+            "requires_grounding_from": {"type": "string"},
+            "confidence": {"type": "number"},
+            "subject": {"type": ["string", "null"]},
+            "predicate": {"type": ["string", "null"]},
+            "object": scalar_or_null,
+            "metric": {"type": ["string", "null"]},
+            "value": scalar_or_null,
+            "unit": {"type": ["string", "null"]},
+            "ordered_items": string_array_or_null,
+            "feature_count": {"type": ["integer", "null"]},
+            "hedged": {"type": "boolean"},
+        },
+        "required": [
+            "claim_id",
+            "claim_text",
+            "claim_type",
+            "span_category",
+            "is_numeric",
+            "requires_grounding_from",
+            "confidence",
+            "subject",
+            "predicate",
+            "object",
+            "metric",
+            "value",
+            "unit",
+            "ordered_items",
+            "feature_count",
+            "hedged",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _report_benchmark_payload_schema() -> Dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "explanation_short": {"type": "string"},
+            "explanation_full": {"type": "string"},
+            "claims": {
+                "type": "array",
+                "items": _report_claim_schema(),
+            },
+        },
+        "required": [
+            "explanation_short",
+            "explanation_full",
+            "claims",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _normalize_benchmark_payload(
+    asset_key: str,
+    raw_payload: Any,
+    english_text: str,
+) -> Dict[str, Any]:
+    if not isinstance(raw_payload, dict):
+        raise ValueError(f"Asset '{asset_key}' is missing benchmark_payload.")
+
+    explanation_short = str(raw_payload.get("explanation_short") or "").strip()
+    explanation_full = str(raw_payload.get("explanation_full") or "").strip()
+    claims = raw_payload.get("claims")
+
+    if not explanation_short:
+        explanation_short = english_text.split(".")[0].strip() or english_text
+    if not explanation_full:
+        explanation_full = english_text
+    if not isinstance(claims, list):
+        claims = []
+    normalized_claims = []
+    for claim in claims:
+        if isinstance(claim, dict):
+            claim = dict(claim)
+            if not isinstance(claim.get("ordered_items"), list):
+                claim["ordered_items"] = []
+        normalized_claims.append(_json_safe_value(claim))
+
+    return {
+        "explanation_short": explanation_short,
+        "explanation_full": english_text,
+        "claims": normalized_claims,
+    }
+
+
+def _normalize_asset_explanation_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    asset_key = str(item.get("key") or "").strip()
+    if not asset_key:
+        raise ValueError("OpenAI explanation response omitted the asset key.")
+
+    english_text = str(item.get("en") or "").strip()
+    raw_benchmark_payload = item.get("benchmark_payload")
+    if not english_text and isinstance(raw_benchmark_payload, dict):
+        english_text = str(
+            raw_benchmark_payload.get("explanation_full")
+            or raw_benchmark_payload.get("explanation_short")
+            or ""
+        ).strip()
+    if not english_text:
+        raise ValueError(f"Asset '{asset_key}' returned an empty English explanation.")
+
+    return {
+        "en": english_text,
+        "zh_TW": str(item.get("zh_TW") or "").strip(),
+        "benchmark_payload": _normalize_benchmark_payload(
+            asset_key=asset_key,
+            raw_payload=raw_benchmark_payload,
+            english_text=english_text,
+        ),
+    }
+
+
+def _build_response_schema(
+    explainable_keys: List[str],
+    *,
+    include_overview: bool = False,
+) -> Dict[str, Any]:
+    properties: Dict[str, Any] = {
+        "assets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {"type": "string", "enum": explainable_keys},
+                    "en": {"type": "string"},
+                    "zh_TW": {"type": "string"},
+                    "benchmark_payload": _report_benchmark_payload_schema(),
+                },
+                "required": ["key", "en", "zh_TW", "benchmark_payload"],
+                "additionalProperties": False,
+            },
+        },
+    }
+    required = ["assets"]
+
+    if include_overview:
+        properties["overview"] = {
+            "type": "object",
+            "properties": {
+                "en": {"type": "string"},
+                "zh_TW": {"type": "string"},
+            },
+            "required": ["en", "zh_TW"],
+            "additionalProperties": False,
+        }
+        required.insert(0, "overview")
+
     return {
         "type": "json_schema",
         "json_schema": {
@@ -846,31 +1276,8 @@ def _build_response_schema(explainable_keys: List[str]) -> Dict[str, Any]:
             "strict": True,
             "schema": {
                 "type": "object",
-                "properties": {
-                    "overview": {
-                        "type": "object",
-                        "properties": {
-                            "en": {"type": "string"},
-                            "zh_TW": {"type": "string"},
-                        },
-                        "required": ["en", "zh_TW"],
-                        "additionalProperties": False,
-                    },
-                    "assets": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "key": {"type": "string", "enum": explainable_keys},
-                                "en": {"type": "string"},
-                                "zh_TW": {"type": "string"},
-                            },
-                            "required": ["key", "en", "zh_TW"],
-                            "additionalProperties": False,
-                        },
-                    },
-                },
-                "required": ["overview", "assets"],
+                "properties": properties,
+                "required": required,
                 "additionalProperties": False,
             },
         },
@@ -903,83 +1310,806 @@ def _build_overview_response_schema() -> Dict[str, Any]:
     }
 
 
-def _call_openai(payload: Dict[str, Any], api_key: str) -> Dict[str, Any]:
-    response = requests.post(
-        OPENAI_CHAT_COMPLETIONS_URL,
-        headers={
+def _build_ollama_json_only_instruction(
+    response_schema: Dict[str, Any],
+    *,
+    allowed_keys: List[str] | None = None,
+) -> str:
+    schema = response_schema["json_schema"]["schema"]
+    compact_schema = json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
+    instructions = [
+        "Return ONLY one valid JSON object.",
+        "Do not output markdown, explanations, headings, or prose outside JSON.",
+        "The JSON must exactly match this schema:",
+        compact_schema,
+        "If any field is uncertain, use an empty string or an empty array, but keep the JSON valid.",
+    ]
+    if allowed_keys:
+        instructions.append(
+            "Allowed asset keys for this request: " + ", ".join(allowed_keys) + "."
+        )
+        instructions.append(
+            "Include every listed key exactly once in the assets array."
+        )
+    return " ".join(instructions)
+
+
+def _report_retry_after_seconds(response: requests.Response | None) -> float | None:
+    if response is None:
+        return None
+
+    retry_after = str(response.headers.get("Retry-After") or "").strip()
+    if not retry_after:
+        return None
+
+    try:
+        return max(0.0, float(retry_after))
+    except ValueError:
+        return None
+
+
+def _groq_retry_after_seconds(response: requests.Response | None) -> float | None:
+    retry_after = _report_retry_after_seconds(response)
+    if retry_after is not None:
+        return retry_after
+    if response is None:
+        return None
+    try:
+        payload = response.json()
+    except ValueError:
+        return None
+    message = str((payload.get("error") or {}).get("message") or payload.get("message") or "")
+    match = re.search(r"try again in\s+([0-9]+(?:\.[0-9]+)?)s", message, flags=re.IGNORECASE)
+    if not match:
+        return None
+    try:
+        return max(0.0, float(match.group(1)))
+    except ValueError:
+        return None
+
+
+def _response_error_payload(response: requests.Response | None) -> Dict[str, Any]:
+    if response is None:
+        return {}
+    try:
+        payload = response.json()
+    except ValueError:
+        text = str(getattr(response, "text", "") or "").strip()
+        return {"message": text[:1000]} if text else {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _format_http_error(exc: requests.HTTPError, provider: str) -> str:
+    response = exc.response
+    status_code = response.status_code if response is not None else "unknown"
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    message = str(
+        error_payload.get("message")
+        or payload.get("message")
+        or getattr(response, "text", "")
+        or exc
+    ).strip()
+    code = str(error_payload.get("code") or payload.get("code") or "").strip()
+    detail = f"{provider} request failed with HTTP {status_code}"
+    if code:
+        detail += f" ({code})"
+    if message:
+        detail += f": {message[:1000]}"
+    return detail
+
+
+def _is_groq_json_validate_failed(response: requests.Response | None) -> bool:
+    if response is None or response.status_code != 400:
+        return False
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    code = str(error_payload.get("code") or payload.get("code") or "").strip()
+    return code == "json_validate_failed"
+
+
+def _is_groq_rate_limit_error(response: requests.Response | None) -> bool:
+    if response is None:
+        return False
+    if response.status_code == 429:
+        return True
+    if response.status_code != 413:
+        return False
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    code = str(error_payload.get("code") or payload.get("code") or "").strip().lower()
+    message = str(error_payload.get("message") or payload.get("message") or "").lower()
+    return code == "rate_limit_exceeded" or "tokens per minute" in message
+
+
+def _groq_error_code(response: requests.Response | None) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("code") or payload.get("code") or "").strip().lower()
+
+
+def _groq_error_message(response: requests.Response | None) -> str:
+    payload = _response_error_payload(response)
+    error_payload = payload.get("error") if isinstance(payload.get("error"), dict) else {}
+    return str(error_payload.get("message") or payload.get("message") or "").strip()
+
+
+def _is_groq_key_blocked_error(response: requests.Response | None) -> bool:
+    if response is None:
+        return False
+    if response.status_code not in {400, 401, 403}:
+        return False
+    code = _groq_error_code(response)
+    message = _groq_error_message(response).lower()
+    if code in {"organization_restricted", "account_restricted", "api_key_restricted", "invalid_api_key"}:
+        return True
+    return (
+        "organization has been restricted" in message
+        or "account has been restricted" in message
+        or "api key has been disabled" in message
+        or "invalid api key" in message
+    )
+
+
+def _report_error_status_code(error: Exception) -> int | None:
+    if isinstance(error, requests.HTTPError) and error.response is not None:
+        return int(error.response.status_code)
+    return None
+
+
+def _report_retry_reason(error: Exception, provider_label: str = "OpenAI") -> str:
+    status_code = _report_error_status_code(error)
+    if status_code in {413, 429}:
+        return f"{provider_label} rate limit"
+    if status_code is not None and status_code >= 500:
+        return f"{provider_label} server error"
+    return f"{provider_label} request retry"
+
+
+def _format_retry_status_message(
+    scope_label: str,
+    attempt: int,
+    max_attempts: int,
+    wait_seconds: float,
+    error: Exception,
+    provider_label: str = "OpenAI",
+) -> str:
+    reason = _report_retry_reason(error, provider_label=provider_label)
+    status_code = _report_error_status_code(error)
+    status_text = f"HTTP {status_code}" if status_code is not None else "request error"
+    max_attempts_text = "∞" if int(max_attempts) <= 0 else str(int(max_attempts))
+    return (
+        f"{reason} while {scope_label}. "
+        f"Retry {attempt}/{max_attempts_text} in {wait_seconds:.1f}s ({status_text})."
+    )
+
+
+def _build_retry_payload(
+    scope_label: str,
+    attempt: int,
+    max_attempts: int,
+    wait_seconds: float,
+    error: Exception,
+    provider_label: str = "OpenAI",
+) -> Dict[str, Any]:
+    payload: Dict[str, Any] = {
+        "scope": scope_label,
+        "attempt": int(attempt),
+        "max_attempts": int(max_attempts),
+        "retry_forever": int(max_attempts) <= 0,
+        "wait_seconds": round(float(wait_seconds), 1),
+        "reason": _report_retry_reason(error, provider_label=provider_label),
+    }
+    status_code = _report_error_status_code(error)
+    if status_code is not None:
+        payload["status_code"] = status_code
+    return payload
+
+
+def _call_openai(
+    payload: Dict[str, Any],
+    api_key: str,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
+) -> Dict[str, Any]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+
+    last_error: Exception | None = None
+    for attempt in range(1, OPENAI_REPORT_MAX_RETRIES + 1):
+        try:
+            with shared_openai_request_gate().request_slot(
+                OPENAI_REPORT_MIN_REQUEST_INTERVAL_SECONDS,
+                OPENAI_REPORT_RETRY_JITTER_SECONDS,
+            ):
+                response = requests.post(
+                    _get_openai_chat_completions_url(),
+                    headers=headers,
+                    json=payload,
+                    timeout=180,
+                )
+            response.raise_for_status()
+            data = response.json()
+            choice = data["choices"][0]
+            content = choice["message"]["content"]
+            if not isinstance(content, str):
+                raise ValueError("OpenAI response did not contain a text JSON payload.")
+            if not content.strip():
+                raise ValueError(
+                    "OpenAI response returned empty content "
+                    f"(finish_reason={choice.get('finish_reason')!r})."
+                )
+            return _extract_json_object(content, "openai")
+        except requests.HTTPError as exc:
+            last_error = exc
+            status_code = exc.response.status_code if exc.response is not None else None
+            should_retry = status_code == 429 or (status_code is not None and status_code >= 500)
+            if not should_retry or attempt >= OPENAI_REPORT_MAX_RETRIES:
+                raise
+            retry_after_seconds = _report_retry_after_seconds(exc.response)
+        except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
+            last_error = exc
+            if attempt >= OPENAI_REPORT_MAX_RETRIES:
+                raise
+            retry_after_seconds = None
+
+        wait_seconds = max(
+            retry_after_seconds or 0.0,
+            OPENAI_REPORT_RETRY_BACKOFF_SECONDS * attempt,
+        ) + random.uniform(0.0, OPENAI_REPORT_RETRY_JITTER_SECONDS)
+        shared_openai_request_gate().push_cooldown(wait_seconds)
+        if on_retry is not None:
+            on_retry(attempt, OPENAI_REPORT_MAX_RETRIES, wait_seconds, last_error)
+        print(
+            f"⚠️ OpenAI request attempt {attempt}/{OPENAI_REPORT_MAX_RETRIES} failed: "
+            f"{last_error}. Retrying in {wait_seconds:.1f}s."
+        )
+        time.sleep(wait_seconds)
+
+    raise RuntimeError(f"OpenAI request failed after {OPENAI_REPORT_MAX_RETRIES} attempts: {last_error}")
+
+
+def _chat_message_content(message: Dict[str, Any]) -> str:
+    content = message.get("content")
+    if isinstance(content, list):
+        text_parts: List[str] = []
+        for item in content:
+            if not isinstance(item, dict):
+                continue
+            text = item.get("text") or item.get("content") or ""
+            if isinstance(text, str) and text.strip():
+                text_parts.append(text)
+        return "".join(text_parts).strip()
+    if isinstance(content, str):
+        return content.strip()
+    return ""
+
+
+def _call_groq(
+    payload: Dict[str, Any],
+    api_keys: Any,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
+) -> Dict[str, Any]:
+    key_pool = GroqApiKeyPool(parse_groq_api_keys(api_keys))
+    last_error: Exception | None = None
+    attempt = 0
+    while True:
+        key_pool.refresh_from_laravel()
+        if not key_pool.has_usable_key(ignore_cooldown=True):
+            key_pool.refresh_from_laravel(force=True)
+        if not key_pool.has_usable_key(ignore_cooldown=True):
+            raise RuntimeError(
+                "All configured Groq API keys are marked blocked. "
+                "Open Admin > Settings > AI to reactivate or replace a key."
+            )
+        attempt += 1
+        alternate_wait_seconds: float | None = None
+        push_global_cooldown = True
+        use_alternate_wait = False
+        key_pool.wait_for_available_key(GROQ_REPORT_MAX_RETRY_WAIT_SECONDS)
+        key_index, api_key = key_pool.next_key()
+        headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-        },
-        json=payload,
-        timeout=180,
-    )
-    response.raise_for_status()
-    data = response.json()
-    choice = data["choices"][0]
-    content = choice["message"]["content"]
-    if not isinstance(content, str):
-        raise ValueError("OpenAI response did not contain a text JSON payload.")
-    if not content.strip():
-        raise ValueError(
-            "OpenAI response returned empty content "
-            f"(finish_reason={choice.get('finish_reason')!r})."
+        }
+        try:
+            with shared_openai_request_gate().request_slot(
+                GROQ_REPORT_MIN_REQUEST_INTERVAL_SECONDS,
+                GROQ_REPORT_RETRY_JITTER_SECONDS,
+            ):
+                response = requests.post(
+                    _get_groq_chat_completions_url(),
+                    headers=headers,
+                    json=payload,
+                    timeout=300,
+                )
+            response.raise_for_status()
+            data = response.json()
+            choice = data["choices"][0]
+            message = choice.get("message") or {}
+            parsed = message.get("parsed")
+            if isinstance(parsed, dict):
+                return parsed
+
+            content = _chat_message_content(message)
+            if not content:
+                finish_reason = choice.get("finish_reason")
+                if finish_reason == "length":
+                    raise ValueError(
+                        "Groq response hit finish_reason='length' before emitting JSON. "
+                        "Increase max_completion_tokens or reduce prompt size."
+                    )
+                raise ValueError("Groq response did not contain a text JSON payload.")
+            return _extract_json_object(content, "groq")
+        except requests.HTTPError as exc:
+            last_error = exc
+            status_code = exc.response.status_code if exc.response is not None else None
+            if _is_groq_key_blocked_error(exc.response):
+                key_pool.mark_blocked(key_index)
+                record_blocked_groq_key(
+                    api_key,
+                    reason=_groq_error_code(exc.response) or "blocked",
+                    message=_groq_error_message(exc.response) or _format_http_error(exc, "Groq"),
+                    status_code=status_code,
+                    source="report_explainer",
+                )
+                key_pool.refresh_from_laravel(force=True)
+                if not key_pool.has_usable_key(ignore_cooldown=True):
+                    raise RuntimeError(
+                        "All configured Groq API keys are marked blocked. "
+                        f"Last error: {_format_http_error(exc, 'Groq')}"
+                    ) from exc
+                print(
+                    f"⚠️ {_format_http_error(exc, 'Groq')}. "
+                    f"{key_pool.label(key_index)} was marked blocked and will not be used again in this run."
+                )
+                attempt -= 1
+                continue
+            should_retry = (
+                _is_groq_rate_limit_error(exc.response)
+                or (status_code is not None and status_code >= 500)
+                or _is_groq_json_validate_failed(exc.response)
+            )
+            if not should_retry or (not GROQ_REPORT_RETRY_FOREVER and attempt >= GROQ_REPORT_MAX_RETRIES):
+                raise RuntimeError(_format_http_error(exc, "Groq")) from exc
+            retry_after_seconds = (
+                None
+                if _is_groq_json_validate_failed(exc.response)
+                else _groq_retry_after_seconds(exc.response)
+            )
+            if _is_groq_rate_limit_error(exc.response):
+                key_pool.mark_rate_limited(
+                    key_index,
+                    retry_after_seconds or GROQ_REPORT_MAX_RETRY_WAIT_SECONDS,
+                )
+                alternate_wait_seconds = key_pool.next_available_delay(exclude_index=key_index)
+                if (
+                    key_pool.size > 1
+                    and alternate_wait_seconds is not None
+                    and (retry_after_seconds is None or alternate_wait_seconds < retry_after_seconds)
+                ):
+                    push_global_cooldown = False
+                    use_alternate_wait = True
+        except (requests.RequestException, ValueError, KeyError, json.JSONDecodeError) as exc:
+            last_error = exc
+            if not GROQ_REPORT_RETRY_FOREVER and attempt >= GROQ_REPORT_MAX_RETRIES:
+                raise
+            retry_after_seconds = None
+
+        if use_alternate_wait and alternate_wait_seconds is not None and key_pool.size > 1:
+            wait_seconds = max(0.0, alternate_wait_seconds)
+        else:
+            has_ready_key = key_pool.has_available_key()
+            wait_seconds = max(
+                retry_after_seconds or 0.0,
+                GROQ_REPORT_RETRY_BACKOFF_SECONDS * attempt,
+                (
+                    0.0
+                    if has_ready_key and key_pool.size > 1
+                    else GROQ_REPORT_MAX_RETRY_WAIT_SECONDS
+                    if GROQ_REPORT_RETRY_FOREVER
+                    else 0.0
+                ),
+            ) + random.uniform(0.0, GROQ_REPORT_RETRY_JITTER_SECONDS)
+            if retry_after_seconds is None:
+                wait_seconds = min(wait_seconds, GROQ_REPORT_MAX_RETRY_WAIT_SECONDS)
+        if push_global_cooldown and wait_seconds > 0:
+            shared_openai_request_gate().push_cooldown(wait_seconds)
+        max_attempts_for_status = 0 if GROQ_REPORT_RETRY_FOREVER else GROQ_REPORT_MAX_RETRIES
+        if on_retry is not None:
+            on_retry(attempt, max_attempts_for_status, wait_seconds, last_error)
+        error_text = (
+            _format_http_error(last_error, "Groq")
+            if isinstance(last_error, requests.HTTPError)
+            else str(last_error)
         )
-    return json.loads(content)
+        print(
+            f"⚠️ Groq request attempt {attempt}/"
+            f"{'∞' if GROQ_REPORT_RETRY_FOREVER else GROQ_REPORT_MAX_RETRIES} failed: "
+            f"{error_text}. {key_pool.label(key_index)} will rotate if another key is available. "
+            f"Retrying in {wait_seconds:.1f}s."
+        )
+        if wait_seconds > 0:
+            time.sleep(wait_seconds)
+
+    raise RuntimeError(f"Groq request failed after {GROQ_REPORT_MAX_RETRIES} attempts: {last_error}")
+
+
+def _call_ollama(payload: Dict[str, Any]) -> Dict[str, Any]:
+    def _post(chat_payload: Dict[str, Any]) -> Dict[str, Any]:
+        response = requests.post(
+            _get_ollama_chat_url(),
+            headers={"Content-Type": "application/json"},
+            json=chat_payload,
+            timeout=300,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    def _repair(raw_content: str, original_payload: Dict[str, Any]) -> Dict[str, Any]:
+        repair_payload = {
+            "model": original_payload["model"],
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "Convert the provided content into one valid JSON object only. "
+                        "Do not add markdown or commentary."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        _build_ollama_json_only_instruction(
+                            {
+                                "json_schema": {
+                                    "schema": original_payload["format"],
+                                }
+                            }
+                        )
+                        + "\n\nContent to convert:\n"
+                        + raw_content
+                    ),
+                },
+            ],
+            "stream": False,
+            "format": original_payload["format"],
+            "options": {
+                "temperature": 0,
+                "num_predict": max(
+                    int((original_payload.get("options") or {}).get("num_predict") or 2400),
+                    2400,
+                ),
+                "num_ctx": max(
+                    int((original_payload.get("options") or {}).get("num_ctx") or _get_ollama_num_ctx()),
+                    8192,
+                ),
+            },
+        }
+        repair_data = _post(repair_payload)
+        repair_content = ((repair_data.get("message") or {}).get("content") or "").strip()
+        if not repair_content:
+            raise ValueError("Ollama repair response returned empty content.")
+        return _extract_json_object(repair_content, "ollama")
+
+    last_error: Exception | None = None
+    for attempt_index in range(3):
+        request_payload = copy.deepcopy(payload)
+        if attempt_index > 0 and request_payload.get("messages"):
+            retry_message = (
+                "Your previous response was empty or invalid. "
+                "Return only one valid JSON object that matches the requested schema."
+            )
+            first_message = dict(request_payload["messages"][0])
+            first_message["content"] = f"{first_message.get('content', '')} {retry_message}".strip()
+            request_payload["messages"][0] = first_message
+
+        try:
+            data = _post(request_payload)
+            message = data.get("message") or {}
+            content = message.get("content")
+            if not isinstance(content, str):
+                raise ValueError("Ollama response did not contain a text JSON payload.")
+            if not content.strip():
+                raise ValueError("Ollama response returned empty content.")
+            try:
+                return _extract_json_object(content, "ollama")
+            except ValueError:
+                return _repair(content, request_payload)
+        except Exception as exc:
+            last_error = exc
+
+    if last_error is not None:
+        raise last_error
+    raise ValueError("Ollama request failed for an unknown reason.")
+
+
+def _call_llm(
+    provider: str,
+    payload: Dict[str, Any],
+    api_key: Any | None = None,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
+) -> Dict[str, Any]:
+    if provider == "ollama":
+        return _call_ollama(payload)
+    if provider == "groq":
+        if not api_key:
+            raise RuntimeError("GROQ_API_KEY or GROQ_API_KEYS is not configured on the predict-service server.")
+        return _call_groq(payload, api_key, on_retry=on_retry)
+    if provider == "openai":
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
+        return _call_openai(payload, api_key, on_retry=on_retry)
+    raise RuntimeError(f"Unsupported LLM provider: {provider}")
+
+
+def _build_llm_request_payload(
+    provider: str,
+    model: str,
+    messages: List[Dict[str, str]],
+    response_schema: Dict[str, Any],
+    *,
+    max_completion_tokens: int,
+    reasoning_effort: str = "low",
+    verbosity: str = "low",
+) -> Dict[str, Any]:
+    if provider == "ollama":
+        return {
+            "model": model,
+            "messages": messages,
+            "stream": False,
+            "format": response_schema["json_schema"]["schema"],
+            "options": {
+                "temperature": 0,
+                "num_predict": int(max_completion_tokens),
+                "num_ctx": _get_ollama_num_ctx(),
+            },
+        }
+
+    if provider == "groq":
+        request_payload: Dict[str, Any] = {
+            "model": model,
+            "messages": messages,
+            "temperature": 0,
+            "max_completion_tokens": int(max_completion_tokens),
+        }
+        if str(model).startswith("openai/gpt-oss") and reasoning_effort in {"low", "medium", "high"}:
+            request_payload["reasoning_effort"] = reasoning_effort
+        return request_payload
+
+    return {
+        "model": model,
+        "messages": messages,
+        "response_format": response_schema,
+        "reasoning_effort": reasoning_effort,
+        "verbosity": verbosity,
+        "max_completion_tokens": max_completion_tokens,
+    }
+
+
+def _truncate_for_prompt(value: Any, max_chars: int = 360) -> str:
+    text = str(value or "").strip()
+    if len(text) <= max_chars:
+        return text
+    return text[: max(0, max_chars - 3)].rstrip() + "..."
+
+
+def _compact_overview_rows(
+    rows: Any,
+    *,
+    limit: int,
+    fields: Sequence[str],
+) -> List[Dict[str, Any]]:
+    compact_rows: List[Dict[str, Any]] = []
+    if not isinstance(rows, list):
+        return compact_rows
+    for row in rows[:limit]:
+        if not isinstance(row, dict):
+            continue
+        compact: Dict[str, Any] = {}
+        for field in fields:
+            value = row.get(field)
+            if value in (None, "", [], {}):
+                continue
+            compact[field] = _truncate_for_prompt(value, 90) if isinstance(value, str) else value
+        if not compact:
+            for field, value in list(row.items())[:4]:
+                if value not in (None, "", [], {}):
+                    compact[str(field)] = _truncate_for_prompt(value, 90) if isinstance(value, str) else value
+        if compact:
+            compact_rows.append(compact)
+    return compact_rows
+
+
+def _compact_overview_payload(
+    prompt_payload: Dict[str, Any],
+    asset_map: Dict[str, Dict[str, Any]],
+) -> Dict[str, Any]:
+    report_context = dict(prompt_payload.get("report_context") or {})
+    compact_context: Dict[str, Any] = {}
+    for key in (
+        "report_id",
+        "best_model",
+        "selected_sheet",
+        "rows_after_preprocessing",
+        "metrics",
+        "top_features",
+    ):
+        value = report_context.get(key)
+        if value not in (None, "", [], {}):
+            compact_context[key] = value
+
+    overview_tables = (
+        (
+            "model_comparison_table",
+            5,
+            ("model", "r2_score", "rmse", "mse", "mae"),
+        ),
+        (
+            "gra_ranking",
+            5,
+            ("rank", "feature", "score", "grade", "value"),
+        ),
+        (
+            "feature_importance_table",
+            5,
+            ("feature", "importance", "rank", "value"),
+        ),
+        (
+            "shap_importance_table",
+            5,
+            ("feature", "mean_abs_shap", "importance", "rank", "value"),
+        ),
+        (
+            "target_correlations",
+            5,
+            ("feature", "target", "correlation", "value"),
+        ),
+        (
+            "incremental_feature_table",
+            4,
+            ("n_features", "feature_subset", "KNN_R2", "KNN_MSE", "SVM_R2", "RF_R2", "XGBoost_R2"),
+        ),
+    )
+    for key, limit, fields in overview_tables:
+        compact_rows = _compact_overview_rows(
+            report_context.get(key),
+            limit=limit,
+            fields=fields,
+        )
+        if compact_rows:
+            compact_context[key] = compact_rows
+
+    if report_context.get("results_summary_excerpt"):
+        compact_context["results_summary_excerpt"] = _truncate_for_prompt(
+            report_context.get("results_summary_excerpt"),
+            360,
+        )
+    if report_context.get("analysis_summary_excerpt"):
+        compact_context["analysis_summary_excerpt"] = _truncate_for_prompt(
+            report_context.get("analysis_summary_excerpt"),
+            360,
+        )
+
+    evidence_lookup = {
+        str(item.get("key") or ""): item
+        for item in list(prompt_payload.get("asset_evidence") or [])
+        if isinstance(item, dict) and str(item.get("key") or "").strip()
+    }
+    compact_assets: List[Dict[str, Any]] = []
+    for asset in list(prompt_payload.get("assets") or []):
+        if not isinstance(asset, dict):
+            continue
+        key = str(asset.get("key") or "").strip()
+        if not key:
+            continue
+        explanation = asset_map.get(key) or {}
+        evidence = evidence_lookup.get(key) or {}
+        benchmark_payload = explanation.get("benchmark_payload")
+        generated = _truncate_for_prompt(
+            explanation.get("en")
+            or (
+                benchmark_payload.get("explanation_short")
+                if isinstance(benchmark_payload, dict)
+                else ""
+            )
+            or evidence.get("result_text"),
+            140,
+        )
+        if generated:
+            compact_assets.append(
+                {
+                    "key": key,
+                    "title": _truncate_for_prompt(asset.get("title") or evidence.get("title") or key, 80),
+                    "summary": generated,
+                }
+            )
+
+    priority_assets = {
+        "metrics_overview",
+        "model_comparison_table",
+        "fig5_model_comparison",
+        "feature_importance",
+        "feature_importance_table",
+        "fig3a_gra_ranking",
+        "gra_ranking",
+        "fig3b_shap_analysis",
+        "predicted_vs_actual",
+        "residuals",
+        "time_series",
+    }
+    compact_assets.sort(
+        key=lambda item: (
+            0 if str(item.get("key") or "") in priority_assets else 1,
+            str(item.get("key") or ""),
+        )
+    )
+    compact_assets = compact_assets[:10]
+
+    return {
+        "task": "Write one compact whole-report overview for a non-technical reader.",
+        "audience": prompt_payload.get("audience"),
+        "languages": prompt_payload.get("languages"),
+        "report_context": _json_safe_value(compact_context),
+        "asset_summaries": _json_safe_value(compact_assets),
+        "style_rules": [
+            "Write one cohesive overview in each language.",
+            "Use exactly 2 short paragraphs in each language, returned as one string with one newline between paragraphs.",
+            "Paragraph 1 summarizes dataset scope, winning model, and model-comparison metrics.",
+            "Paragraph 2 summarizes feature story and the most important caution.",
+            "Synthesize the report; do not list every chart.",
+            "Use concrete numbers, model names, feature names, ranks, and metrics only when supplied.",
+            "Do not use bullet lists.",
+        ],
+    }
 
 
 def _generate_global_overview(
     prompt_payload: Dict[str, Any],
-    api_key: str,
+    asset_map: Dict[str, Dict[str, Any]],
+    provider: str,
+    model: str,
+    api_key: Any | None = None,
+    on_retry: Callable[[int, int, float, Exception], None] | None = None,
 ) -> Dict[str, str]:
-    overview_payload = {
-        "task": (
-            "Write one comprehensive report overview for a non-technical reader. "
-            "This overview must synthesize the whole report, using the full report context and the asset_evidence list together."
-        ),
-        "audience": prompt_payload.get("audience"),
-        "languages": prompt_payload.get("languages"),
-        "assets": prompt_payload.get("assets"),
-        "report_context": prompt_payload.get("report_context"),
-        "asset_evidence": prompt_payload.get("asset_evidence"),
-        "style_rules": [
-            "Write one cohesive overview in each language.",
-            "Use exactly 3 paragraphs in each language, returned as a single string with newline breaks between paragraphs.",
-            "Paragraph 1 must explain the dataset scope, the winning model, and the main model-comparison results with concrete metrics.",
-            "Paragraph 2 must explain the feature story across GRA, feature importance, SHAP, and correlation results, including where the methods agree or disagree.",
-            "Paragraph 3 must explain what the incremental feature table and the rest of the report suggest overall, plus the most important caution or limitation for non-technical readers.",
-            "Treat the asset_evidence list as the complete set of explainable charts and tables shown on the website, and synthesize them into one narrative instead of describing only a single figure.",
-            "If multiple charts show the same evidence in different visual forms, merge them into one clear takeaway instead of repeating yourself.",
-            "Use the provided results_summary_excerpt and analysis_summary_excerpt when they help connect the charts and tables into one overall story.",
-            "This overview must mention the report as a whole rather than describing only one figure.",
-            "Use concrete numbers, model names, feature names, ranks, and metrics whenever they are available.",
-            "Make the explanation understandable for a non-technical user without removing important detail.",
-            "Do not use bullet lists.",
-            "Do not invent information that is not present in the supplied evidence.",
-        ],
-    }
+    overview_payload = _compact_overview_payload(prompt_payload, asset_map)
 
-    request_payload = {
-        "model": OPENAI_REPORT_MODEL,
-        "messages": [
-            {
+    response_schema = _build_overview_response_schema()
+    messages = [
+        {
                 "role": "system",
                 "content": (
-                    "You are a bilingual machine-learning report summarizer for non-technical users. "
-                    "Return strict JSON only."
-                ),
-            },
-            {
-                "role": "user",
-                "content": json.dumps(overview_payload, ensure_ascii=False),
-            },
-        ],
-        "response_format": _build_overview_response_schema(),
-        "reasoning_effort": "low",
-        "verbosity": "medium",
-        "max_completion_tokens": 2800,
-    }
+                    _build_ollama_json_only_instruction(response_schema)
+                    if _needs_inline_json_schema_instruction(provider, model)
+                    else (
+                        "You are a bilingual machine-learning report summarizer for non-technical users. "
+                        "Return strict JSON only."
+                )
+            ),
+        },
+        {
+            "role": "user",
+            "content": json.dumps(overview_payload, ensure_ascii=False),
+        },
+    ]
+    request_payload = _build_llm_request_payload(
+        provider=provider,
+        model=model,
+        messages=messages,
+        response_schema=response_schema,
+        max_completion_tokens=(
+            2800
+            if provider == "ollama"
+            else GROQ_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS
+            if provider == "groq"
+            else OPENAI_REPORT_OVERVIEW_MAX_COMPLETION_TOKENS
+        ),
+        reasoning_effort="low",
+        verbosity="medium",
+    )
 
-    parsed = _call_openai(request_payload, api_key)
+    parsed = _call_llm(provider, request_payload, api_key=api_key, on_retry=on_retry)
     overview = parsed.get("overview", {})
     return {
         "en": str(overview.get("en") or "").strip(),
@@ -1013,6 +2143,7 @@ def update_report_explanation_status(
     step_index: int | None = None,
     total_steps: int | None = None,
     current_items: List[str] | None = None,
+    retry_payload: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
@@ -1044,6 +2175,8 @@ def update_report_explanation_status(
         for key, value in optional_fields.items():
             if value is not None:
                 payload[key] = value
+        if retry_payload:
+            payload["retry"] = retry_payload
         summary["llm_explanations_status"] = payload
         summary_path.write_text(
             json.dumps(summary, ensure_ascii=False, indent=2),
@@ -1061,6 +2194,8 @@ def update_report_explanation_status(
             payload["total_steps"] = int(total_steps)
         if current_items is not None:
             payload["current_items"] = list(current_items)
+        if retry_payload:
+            payload["retry"] = retry_payload
 
     report_info["llm_explanations_status"] = payload
     return payload
@@ -1071,12 +2206,24 @@ def generate_report_explanations(
     pipeline_result: Dict[str, Any],
     runtime: Dict[str, Any] | None = None,
     report_root: str | Path | None = None,
+    llm_provider: str | None = None,
+    llm_model: str | None = None,
+    groq_api_keys: Any | None = None,
 ) -> Dict[str, Any] | None:
     env_path = Path(__file__).resolve().parents[2] / ".env"
     load_dotenv(dotenv_path=env_path, override=False)
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
+    provider = _get_llm_provider(llm_provider)
+    provider_label = _provider_display_name(provider)
+    model = _get_report_model(provider, llm_model)
+    api_key: Any | None = None
+    if provider == "openai":
+        api_key = _get_openai_api_key()
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is not configured on the predict-service server.")
+    elif provider == "groq":
+        api_key = _get_groq_api_keys(groq_api_keys)
+        if not api_key:
+            raise RuntimeError("GROQ_API_KEY or GROQ_API_KEYS is not configured on the predict-service server.")
 
     report_id = str(report_info.get("report_id") or "").strip()
     if not report_id:
@@ -1092,12 +2239,18 @@ def generate_report_explanations(
         runtime=runtime,
     )
     all_assets = list(prompt_payload["assets"])
-    asset_batches = _chunk_assets(all_assets, 2)
-    total_steps = len(asset_batches) + 2
+    asset_batches = _chunk_assets(
+        all_assets,
+        1 if provider in {"ollama", "groq"} else OPENAI_REPORT_ASSET_BATCH_SIZE,
+    )
+    total_steps = len(asset_batches) + 3
     update_report_explanation_status(
         report_info=report_info,
         status="pending",
-        message=f"Prepared {len(all_assets)} charts/tables for AI explanation.",
+        message=(
+            f"Prepared {len(all_assets)} charts/tables for AI explanation "
+            f"with {provider_label} ({model})."
+        ),
         report_root=report_root,
         progress=10,
         phase="preparing",
@@ -1106,23 +2259,7 @@ def generate_report_explanations(
         current_items=[str(item.get("title") or item.get("key") or "") for item in all_assets[:2]],
     )
     overview = {"en": "", "zh_TW": ""}
-    asset_map: Dict[str, Dict[str, str]] = {}
-
-    try:
-        update_report_explanation_status(
-            report_info=report_info,
-            status="pending",
-            message="Generating the overall AI overview.",
-            report_root=report_root,
-            progress=20,
-            phase="overview",
-            step_index=2,
-            total_steps=total_steps,
-            current_items=["AI Report Overview"],
-        )
-        overview = _generate_global_overview(prompt_payload, api_key)
-    except Exception as exc:
-        print(f"⚠️ OpenAI global overview generation failed: {exc}")
+    asset_map: Dict[str, Dict[str, Any]] = {}
 
     asset_evidence_lookup = {
         str(item.get("key") or ""): item
@@ -1139,34 +2276,55 @@ def generate_report_explanations(
             for key in batch_keys
             if key in asset_evidence_lookup
         ]
+        batch_payload["report_context"] = _asset_scoped_report_context(
+            dict(prompt_payload.get("report_context") or {})
+        )
         batch_payload["style_rules"] = list(prompt_payload["style_rules"]) + [
-            "For each chart or table, write about 2-4 sentences in each language.",
+            "For each chart or table, write exactly 2 short sentences in each language.",
+            "The English en field must be at most 55 words total.",
+            "The zh_TW field must be at most 120 Traditional Chinese characters total.",
             "For the overview, write about 3-4 sentences in each language.",
             "Do not use bullets. Write complete, readable prose.",
             "Use the per-asset result_text as the authoritative textual summary for that chart or table.",
+            "For each asset, also return benchmark_payload.explanation_short as a one-sentence English summary with at most 22 words.",
+            "For each asset, return benchmark_payload.explanation_full as exactly the same English text you returned in en.",
+            "For this report explanation step, set benchmark_payload.claims to an empty array.",
+            "Do not include claim objects here; the benchmark phase extracts and validates claims separately.",
+            f"Use only these benchmark claim_type values: {', '.join(CANONICAL_CLAIM_TYPES)}.",
+            "Unsupported or weakly grounded claims must be omitted rather than guessed.",
         ]
 
-        response_format = _build_response_schema(batch_keys)
-        request_payload = {
-            "model": OPENAI_REPORT_MODEL,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": (
+        response_format = _build_response_schema(batch_keys, include_overview=False)
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    _build_ollama_json_only_instruction(response_format, allowed_keys=batch_keys)
+                    if _needs_inline_json_schema_instruction(provider, model)
+                    else (
                         "You are a bilingual machine-learning report explainer for non-technical users. "
                         "Return strict JSON only."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(batch_payload, ensure_ascii=False),
-                },
-            ],
-            "response_format": response_format,
-            "reasoning_effort": "low",
-            "verbosity": "low",
-            "max_completion_tokens": 1800,
-        }
+                    )
+                ),
+            },
+            {
+                "role": "user",
+                "content": json.dumps(batch_payload, ensure_ascii=False),
+            },
+        ]
+        request_payload = _build_llm_request_payload(
+            provider=provider,
+            model=model,
+            messages=messages,
+            response_schema=response_format,
+            max_completion_tokens=(
+                GROQ_REPORT_ASSET_MAX_COMPLETION_TOKENS
+                if provider == "groq"
+                else OPENAI_REPORT_ASSET_MAX_COMPLETION_TOKENS
+            ),
+            reasoning_effort="low",
+            verbosity="low",
+        )
 
         current_titles = [str(item.get("title") or item.get("key") or "") for item in asset_batch]
         batch_start_progress = 25 + ((batch_index / max(1, len(asset_batches))) * 65)
@@ -1178,32 +2336,57 @@ def generate_report_explanations(
             report_root=report_root,
             progress=batch_start_progress,
             phase="assets",
-            step_index=batch_index + 3,
+            step_index=batch_index + 2,
             total_steps=total_steps,
             current_items=current_titles,
         )
 
         try:
-            parsed = _call_openai(request_payload, api_key)
+            parsed = _call_llm(
+                provider,
+                request_payload,
+                api_key,
+                on_retry=(
+	                    lambda attempt, max_attempts, wait_seconds, error, batch_index=batch_index, current_titles=current_titles, batch_start_progress=batch_start_progress: update_report_explanation_status(
+	                        report_info=report_info,
+	                        status="pending",
+	                        message=_format_retry_status_message(
+	                            f"generating explanations for batch {batch_index + 1}/{len(asset_batches)}",
+	                            attempt,
+	                            max_attempts,
+	                            wait_seconds,
+	                            error,
+	                            provider_label,
+	                        ),
+	                        report_root=report_root,
+	                        progress=batch_start_progress,
+	                        phase="assets",
+	                        step_index=batch_index + 2,
+	                        total_steps=total_steps,
+                        current_items=current_titles,
+                        retry_payload=_build_retry_payload(
+	                            f"batch {batch_index + 1}/{len(asset_batches)}",
+	                            attempt,
+	                            max_attempts,
+	                            wait_seconds,
+	                            error,
+	                            provider_label,
+	                        ),
+	                    )
+	                    if provider in {"openai", "groq"}
+	                    else None
+	                ),
+	            )
         except Exception as exc:
             raise RuntimeError(
-                f"OpenAI explanation generation failed on batch {batch_index + 1}: {exc}"
+                f"{provider_label} explanation generation failed on batch {batch_index + 1}: {exc}"
             ) from exc
-
-        if batch_index == 0 and not any(overview.values()):
-            overview = {
-                "en": str(parsed.get("overview", {}).get("en") or "").strip(),
-                "zh_TW": str(parsed.get("overview", {}).get("zh_TW") or "").strip(),
-            }
 
         for item in parsed.get("assets", []):
             key = str(item.get("key") or "").strip()
             if not key:
                 continue
-            asset_map[key] = {
-                "en": str(item.get("en") or "").strip(),
-                "zh_TW": str(item.get("zh_TW") or "").strip(),
-            }
+            asset_map[key] = _normalize_asset_explanation_item(item)
 
         update_report_explanation_status(
             report_info=report_info,
@@ -1212,14 +2395,66 @@ def generate_report_explanations(
             report_root=report_root,
             progress=batch_end_progress,
             phase="assets",
-            step_index=batch_index + 3,
+            step_index=batch_index + 2,
             total_steps=total_steps,
             current_items=current_titles,
         )
 
+    try:
+        update_report_explanation_status(
+            report_info=report_info,
+            status="pending",
+            message=f"Generating the overall AI overview with {provider_label}.",
+            report_root=report_root,
+            progress=90,
+            phase="overview",
+            step_index=len(asset_batches) + 2,
+            total_steps=total_steps,
+            current_items=["AI Report Overview"],
+        )
+        overview = _generate_global_overview(
+            prompt_payload,
+            asset_map=asset_map,
+            provider=provider,
+            model=model,
+            api_key=api_key,
+            on_retry=(
+                lambda attempt, max_attempts, wait_seconds, error: update_report_explanation_status(
+                    report_info=report_info,
+                    status="pending",
+	                    message=_format_retry_status_message(
+	                        "generating the overall AI overview",
+	                        attempt,
+	                        max_attempts,
+	                        wait_seconds,
+	                        error,
+	                        provider_label,
+	                    ),
+                    report_root=report_root,
+                    progress=90,
+                    phase="overview",
+                    step_index=len(asset_batches) + 2,
+                    total_steps=total_steps,
+                    current_items=["AI Report Overview"],
+                    retry_payload=_build_retry_payload(
+	                        "overall overview",
+	                        attempt,
+	                        max_attempts,
+	                        wait_seconds,
+	                        error,
+	                        provider_label,
+	                    ),
+	                )
+	                if provider in {"openai", "groq"}
+	                else None
+	            ),
+	        )
+    except Exception as exc:
+        print(f"⚠️ {provider_label} global overview generation failed: {exc}")
+
     explanation_payload = {
-        "provider": "openai",
-        "model": OPENAI_REPORT_MODEL,
+        "provider": provider,
+        "model": model,
         "generated_at": datetime.now().isoformat(),
         "overview": overview,
         "assets": asset_map,

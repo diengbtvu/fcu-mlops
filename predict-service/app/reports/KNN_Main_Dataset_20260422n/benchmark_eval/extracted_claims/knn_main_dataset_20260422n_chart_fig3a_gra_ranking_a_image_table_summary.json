@@ -1,0 +1,25 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The top three predictors are VFA, Acetate, and Acetyl-CoA.",
+      "claim_type": "metric_value",
+      "span_category": "VFA, Acetate,is_numeric",
+      "is_numeric": false,
+      "requires_grounding_from": "VFA, Acetate, and Acetyl-CoA",
+      "confidence": 0.9,
+      "subject": "VFA, Acetate, and Acetyl-CoA",
+      "predicate": "are the top three predictors",
+      "object": "top three predictors",
+      "metric": "are_the_top_three_predictors",
+      "value": "VFA, Acetate, and Acetyl-CoA",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

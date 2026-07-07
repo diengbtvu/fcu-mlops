@@ -1,0 +1,58 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:claim:1",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top ranked features according to Grey Relational Analysis.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:top_feature"
+      ],
+      "reason": "Gold top feature for gra_score is VFA.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:claim:2",
+      "claim_text": "The grey relational analysis feature ranking shows that VFA, Butyrate, Acetate, and VSS are the most important features.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:claim:3",
+      "claim_text": "The grey relational analysis feature ranking shows that VFA, Butyrate, Acetate, and VSS are the most important features.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:feature_ranking/gra:claim:4",
+      "claim_text": "The grey relational analysis feature ranking shows that VFA, Butyrate, Acetate, and VSS are the most important features.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

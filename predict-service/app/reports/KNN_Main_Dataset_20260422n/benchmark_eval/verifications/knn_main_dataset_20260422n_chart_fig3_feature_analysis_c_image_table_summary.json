@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "The model's performance is robust, suggesting that the selection of features is crucial for accurate prediction.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    }
+  ]
+}

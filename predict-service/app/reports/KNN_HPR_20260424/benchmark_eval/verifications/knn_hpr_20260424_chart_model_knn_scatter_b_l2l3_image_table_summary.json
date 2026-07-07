@@ -1,0 +1,7 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_knn_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": []
+}

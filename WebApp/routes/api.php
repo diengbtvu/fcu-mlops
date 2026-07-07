@@ -38,3 +38,5 @@ Route::get('/health', function () {
         'service' => 'Laravel API'
     ]);
 });
+
+Route::get('/internal/groq-key-pool', [\App\Http\Controllers\SettingsController::class, 'internalGroqKeyPool']);

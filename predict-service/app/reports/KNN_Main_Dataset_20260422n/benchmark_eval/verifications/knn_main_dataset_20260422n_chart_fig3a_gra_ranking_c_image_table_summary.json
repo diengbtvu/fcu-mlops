@@ -1,0 +1,72 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA: 0.7931",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.3543695608908557e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate: 0.7902",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 4.6755017702460044e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate: 0.7772",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking:rank_score:Acetate"
+      ],
+      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+      "numeric_delta": 1.999763680660127e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VSS: 0.7768",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking:rank_score:VSS"
+      ],
+      "reason": "Gold value for VSS gra_score is 0.7768076560138514.",
+      "numeric_delta": 7.656013851331522e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Propionate: 0.7596",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3a_gra_ranking:rank_score:Propionate"
+      ],
+      "reason": "Gold value for Propionate gra_score is 0.7595541448908357.",
+      "numeric_delta": 4.585510916432778e-05
+    }
+  ]
+}

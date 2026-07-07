@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "VFA is the most important feature according to the analysis.",
+      "claim_type": "freeform",
+      "span_category": "VFA",
+      "is_numeric": false,
+      "requires_grounding_from": "VFA",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "the analysis",
+      "metric": "ranking",
+      "value": "VFA",
+      "unit": "feature",
+      "ordered_items": [
+        "VFA"
+      ],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

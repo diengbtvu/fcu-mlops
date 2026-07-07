@@ -1,0 +1,36 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The R2 score of 0.7495 indicates that 74.95% of the variance in the target variable can be explained by the model's predictions.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope",
+      "claim_text": "The slope of 0.8387 suggests a strong linear relationship, meaning that for every unit increase in the input, the predicted output increases by 0.8387 units.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:linear_fit_slope"
+      ],
+      "reason": "Gold value for XGBoost linear_fit_slope is 0.838684.",
+      "numeric_delta": 1.6000000000016e-05
+    }
+  ]
+}

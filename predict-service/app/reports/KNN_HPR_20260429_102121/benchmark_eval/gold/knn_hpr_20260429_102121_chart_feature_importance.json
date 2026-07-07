@@ -1,0 +1,181 @@
+{
+  "artifact_id": "KNN_HPR_20260429_102121:chart:feature_importance",
+  "artifact_type": "chart/feature_importance",
+  "source_files": [
+    "best_model_summary.json",
+    "summary.json",
+    "table_feature_importance.csv",
+    "fig_feature_importance.png"
+  ],
+  "chart_type": "bar_chart",
+  "primary_entities": [
+    "VSS",
+    "Acetate",
+    "Butyrate",
+    "VFA",
+    "Propionate",
+    "Ethanol"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:top_feature",
+      "fact_type": "top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VSS",
+      "value": 0.5052222633,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "top importance feature"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:ranking",
+      "fact_type": "ranking",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": [
+        "VSS",
+        "Acetate",
+        "Butyrate",
+        "VFA",
+        "Propionate",
+        "Ethanol"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "importance ranking"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:VSS:importance",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.5052222633,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VSS importance"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:Acetate:importance",
+      "fact_type": "metric_value",
+      "subject": "Acetate",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.1199757325,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Acetate importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:Butyrate:importance",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0969761328,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Butyrate importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:VFA:importance",
+      "fact_type": "metric_value",
+      "subject": "VFA",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0748037264,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "VFA importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:Propionate:importance",
+      "fact_type": "metric_value",
+      "subject": "Propionate",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0576947792,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Propionate importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "KNN_HPR_20260429_102121:chart:feature_importance:metric:Ethanol:importance",
+      "fact_type": "metric_value",
+      "subject": "Ethanol",
+      "predicate": "importance",
+      "object": null,
+      "value": 0.0410948829,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "Ethanol importance"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "KNN_HPR_20260429_102121:chart:feature_importance:top_feature",
+    "KNN_HPR_20260429_102121:chart:feature_importance:ranking",
+    "KNN_HPR_20260429_102121:chart:feature_importance:metric:VSS:importance"
+  ],
+  "forbidden_inferences": [
+    "Do not interpret feature scores as causal proof.",
+    "Do not let summary prose override feature ranking values."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNNtest:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The Random Forest (RF) model shows strong performance with an R2 of 0.7756 and a correlation of 0.88511, suggesting good predictive power, though the maximum residual error was 0.450808.",
+  "explanation_full": "Observations indicate that the Random Forest (RF) model performed well, achieving an R2 score of 0.7756 and a strong correlation of 0.88511 between predicted and actual values. The model's Mean Absolute Error (MAE) was 0.0836, which is relatively low. Interpretation suggests that RF is a strong candidate for this task. However, the diagnostics also show a maximum absolute residual of 0.450808, which represents the largest observed error, suggesting that while overall performance is good, there are specific instances where the model's prediction deviates significantly from the actual value. This caveat should be considered when deploying the model.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Random Forest (RF) model achieved an R2 score of 0.7756.",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "table_model_comparison.csv",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "has R2 score",
+      "object": "0.7756018171353091",
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The correlation between predicted and actual values was 0.88511.",
+      "claim_type": "metric_value",
+      "span_category": "prediction_story",
+      "is_numeric": true,
+      "requires_grounding_from": "model_rf_scatter.png",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "has correlation (pred, actual)",
+      "object": "0.88511",
+      "metric": "corr(pred,actual)",
+      "value": 0.88511,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The maximum absolute residual was 0.450808.",
+      "claim_type": "metric_value",
+      "span_category": "prediction_story",
+      "is_numeric": true,
+      "requires_grounding_from": "model_rf_scatter.png",
+      "confidence": 1.0,
+      "subject": "RF",
+      "predicate": "has max absolute residual",
+      "object": "0.450808",
+      "metric": "max_abs_residual",
+      "value": 0.4508,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

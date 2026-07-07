@@ -1,0 +1,241 @@
+{
+  "mode": "c_llm_validator_corrector",
+  "iteration_count": 1,
+  "selected_generation_stage": "draft",
+  "iterations": [
+    {
+      "iteration_index": 1,
+      "draft_explanation_short": "This is a summary of the model performance for HPR_ArmC_Fix_Retrain_20260427_215042. The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+      "draft_explanation_full": "This document provides a comprehensive summary of the performance evaluation for the HPR_ArmC_Fix_Retrain_20260427_215042 model. The model was trained using KNN algorithm and evaluated based on various metrics such as R2 score, RMSE, MSE, and MAE. \n\nThe KNN model demonstrated the best performance among all tested models with an R2 score of 0.817, indicating a strong correlation between predicted and actual values. It also achieved the lowest RMSE (0.113), signifying minimal prediction errors.  Further analysis reveals that features like VFA, Butyrate, Acetate, and VSS were most influential in driving model predictions. \n\nFor detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.\n\nThis information can be valuable for understanding the model's strengths and limitations, guiding future model development efforts, and making informed decisions based on its predictive capabilities.",
+      "draft_claims": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "claim_type": "top_feature",
+          "span_category": "sentence",
+          "is_numeric": false,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": null,
+          "metric": "gra_score",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:2",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.817,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:3",
+          "claim_text": "For detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.",
+          "claim_type": "ranking",
+          "span_category": "sentence",
+          "is_numeric": false,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": null,
+          "metric": "gra_score",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "draft_validations": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "status": "partially_supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is partially supported by the provided data. The text states that KNN achieved the highest R2 score and lowest RMSE, which aligns with the fact that it has an R2 score of 0.817 and an RMSE of 0.113. However, there's no mention of other models for comparison.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The KNN model achieved an R2 score of 0.817 and an RMSE of 0.113."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:2",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is supported by the provided data. The text explicitly states that KNN achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The KNN model achieved an R2 score of 0.817 and an RMSE of 0.113."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:3",
+          "claim_text": "For detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is supported by the context. The text mentions that there are tables and charts providing further details about feature importance and model comparison.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "There are accompanying tables and charts that provide more information about feature importance and model comparisons."
+        }
+      ],
+      "corrected_explanation_short": "This is a summary of the model performance for HPR_ArmC_Fix_Retrain_20260427_215042. The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+      "corrected_explanation_full": "This document provides a comprehensive summary of the performance evaluation for the HPR_ArmC_Fix_Retrain_20260427_215042 model. The model was trained using KNN algorithm and evaluated based on various metrics such as R2 score, RMSE, MSE, and MAE. \n\nThe KNN model demonstrated the best performance among all tested models with an R2 score of 0.817, indicating a strong correlation between predicted and actual values. It also achieved the lowest RMSE (0.113), signifying minimal prediction errors.  Further analysis reveals that features like VFA, Butyrate, Acetate, and VSS were most influential in driving model predictions. \n\nFor detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.\n\nThis information can be valuable for understanding the model's strengths and limitations, guiding future model development efforts, and making informed decisions based on its predictive capabilities.",
+      "corrected_claims": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "claim_type": "top_feature",
+          "span_category": "sentence",
+          "is_numeric": false,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": null,
+          "metric": "gra_score",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:2",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "claim_type": "metric_value",
+          "span_category": "sentence",
+          "is_numeric": true,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2",
+          "subject": "KNN",
+          "predicate": "r2_score",
+          "object": null,
+          "metric": "r2_score",
+          "value": 0.817,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:3",
+          "claim_text": "For detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.",
+          "claim_type": "ranking",
+          "span_category": "sentence",
+          "is_numeric": false,
+          "requires_grounding_from": "table/json",
+          "confidence": 1.0,
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "subject": "combined_feature_story",
+          "predicate": "gra_score",
+          "object": null,
+          "metric": "gra_score",
+          "value": null,
+          "unit": null,
+          "ordered_items": [],
+          "feature_count": null,
+          "hedged": false
+        }
+      ],
+      "corrected_validations": [
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:1",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "status": "partially_supported",
+          "recommended_action": "edit",
+          "rationale": "The claim is partially supported by the provided data. The table 'table/json' shows that the KNN model achieved an R2 score of 0.817 and an RMSE of 0.113, which are indeed high values. However, it's unclear if these are the highest among all tested models as stated in the claim.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The KNN model achieved an R2 score of 0.817 and an RMSE of 0.113."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:2",
+          "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113).",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is supported by the provided data. The table 'table/json' shows that the KNN model achieved an R2 score of 0.817 and an RMSE of 0.113, which are indeed high values.",
+          "matched_fact_ids": [
+            "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2"
+          ],
+          "grounded_fact_summary": "The KNN model achieved an R2 score of 0.817 and an RMSE of 0.113."
+        },
+        {
+          "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:claim:3",
+          "claim_text": "For detailed insights into feature importance and model comparison with other algorithms, please refer to the accompanying tables and charts.",
+          "status": "supported",
+          "recommended_action": "keep",
+          "rationale": "The claim is supported by the provided context. The document mentions that tables and charts are available for further analysis of feature importance and model comparison.",
+          "matched_fact_ids": [],
+          "grounded_fact_summary": "Tables and charts are available for further analysis."
+        }
+      ],
+      "draft_alignment_issues": [
+        {
+          "issue_id": "alignment-1",
+          "issue_type": "missing_object",
+          "message": "Entity variable mention did not include a stated object.",
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_id": null,
+          "action": "warn"
+        },
+        {
+          "issue_id": "alignment-2",
+          "issue_type": "missing_ordered_items",
+          "message": "Ranking variable mention did not include ordered items.",
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_id": null,
+          "action": "warn"
+        }
+      ],
+      "corrected_alignment_issues": [
+        {
+          "issue_id": "alignment-1",
+          "issue_type": "missing_object",
+          "message": "Entity variable mention did not include a stated object.",
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:top_feature:gra_score",
+          "claim_id": null,
+          "action": "warn"
+        },
+        {
+          "issue_id": "alignment-2",
+          "issue_type": "missing_ordered_items",
+          "message": "Ranking variable mention did not include ordered items.",
+          "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:ranking:gra_score",
+          "claim_id": null,
+          "action": "warn"
+        }
+      ]
+    }
+  ],
+  "decision_counts": {
+    "keep": 3
+  }
+}

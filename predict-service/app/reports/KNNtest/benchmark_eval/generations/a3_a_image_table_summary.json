@@ -1,0 +1,29 @@
+{
+  "artifact_id": "a3",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table summarizes the key findings from the analysis, highlighting the most important variables and their statistical significance. The key variables are identified by their statistical significance, suggesting they are the most important predictors.",
+  "explanation_full": "The table provides a summary of the key findings from the analysis. It summarizes the most important variables and their statistical significance. The key variables are identified by their statistical significance, suggesting they are the most important predictors. This summary helps in quickly identifying the most important predictors for further investigation.",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The table summarizes the key findings from the analysis, highlighting the most important variables and their statistical significance.",
+      "claim_type": "summary",
+      "span_category": "summary",
+      "is_numeric": false,
+      "requires_grounding_from": "table",
+      "confidence": 1.0,
+      "subject": "table",
+      "predicate": "summarizes",
+      "object": "key findings",
+      "metric": "summary",
+      "value": "key findings",
+      "unit": "N/A",
+      "ordered_items": [
+        "N/A"
+      ],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

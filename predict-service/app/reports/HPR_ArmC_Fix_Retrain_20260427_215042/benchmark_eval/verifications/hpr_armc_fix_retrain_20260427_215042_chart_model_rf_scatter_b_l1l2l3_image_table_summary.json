@@ -1,0 +1,64 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:max_abs_residual",
+      "claim_text": "The Random Forest model has a max_abs_residual of 0.1254.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:max_abs_residual"
+      ],
+      "reason": "Gold value for RF max_abs_residual is 0.450808.",
+      "numeric_delta": 0.325408
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:pred_actual_correlation",
+      "claim_text": "The Random Forest model has a pred_actual_correlation of 0.8488.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:pred_actual_correlation"
+      ],
+      "reason": "Gold value for RF pred_actual_correlation is 0.88511.",
+      "numeric_delta": 0.03630999999999995
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model has an r2_score of 0.7756.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171.",
+      "numeric_delta": 1.8171000000233306e-06
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:linear_fit_slope",
+      "claim_text": "The Random Forest model has a linear_fit_slope of 0.8488.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:linear_fit_slope"
+      ],
+      "reason": "Gold value for RF linear_fit_slope is 0.848822.",
+      "numeric_delta": 2.199999999996649e-05
+    }
+  ]
+}

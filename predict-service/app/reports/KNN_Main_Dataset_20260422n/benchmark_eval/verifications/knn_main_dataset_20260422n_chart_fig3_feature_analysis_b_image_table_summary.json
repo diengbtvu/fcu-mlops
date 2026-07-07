@@ -1,0 +1,18 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "C1",
+      "claim_text": "The combination of VFA, Acetate, and VFA is the most influential set of predictors, as indicated by the consistency across multiple feature importance metrics.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

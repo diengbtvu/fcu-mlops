@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:model_comparison/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "claim_text": "KNN achieved the highest R2 score (0.817) and lowest MSE (0.0128) among all models.",
+      "claim_type": "metric_value",
+      "span_category": "BEST_MODEL",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "source_variable_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "subject": "KNN",
+      "predicate": null,
+      "object": "",
+      "metric": null,
+      "value": "",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

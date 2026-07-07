@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+      "claim_text": "Ethanol and Acetate have the highest mean feature values, while pH has the lowest.",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean"
+      ],
+      "reason": "Gold top feature for mean is Ethanol.",
+      "numeric_delta": null
+    }
+  ]
+}

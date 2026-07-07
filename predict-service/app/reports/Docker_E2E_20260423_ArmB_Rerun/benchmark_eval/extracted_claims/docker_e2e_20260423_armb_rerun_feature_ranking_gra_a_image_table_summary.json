@@ -1,0 +1,7 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": []
+}

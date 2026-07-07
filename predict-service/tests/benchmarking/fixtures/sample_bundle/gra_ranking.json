@@ -1,0 +1,22 @@
+[
+  {
+    "rank": 1,
+    "feature": "pH",
+    "score": 0.91
+  },
+  {
+    "rank": 2,
+    "feature": "Propionate",
+    "score": 0.83
+  },
+  {
+    "rank": 3,
+    "feature": "VFA",
+    "score": 0.81
+  },
+  {
+    "rank": 4,
+    "feature": "Butyrate",
+    "score": 0.79
+  }
+]

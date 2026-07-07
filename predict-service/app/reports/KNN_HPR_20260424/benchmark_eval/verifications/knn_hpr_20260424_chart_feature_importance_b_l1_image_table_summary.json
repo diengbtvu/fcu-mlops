@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance",
+      "claim_text": "The importance of VSS is 2.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 1.4947777367000001
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "artifact_id": "TEST_arm_c:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved the highest R² score of 0.817, indicating superior performance compared to other models like RF (0.776) and SVM (0.732).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    },
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN model demonstrated the best performance with an R² score of 0.817",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    },
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN model demonstrated the lowest RMSE of 0.113",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 0.00018090995439673518
+    },
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Random Forest (RF) model (R²=0.776)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.775601817135309.",
+      "numeric_delta": 0.0003981828646910657
+    },
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Support Vector Machine (SVM) model (R²=0.732)",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:SVM:r2_score"
+      ],
+      "reason": "Gold value for SVM r2_score is 0.7324097475450169.",
+      "numeric_delta": 0.0004097475450168808
+    },
+    {
+      "artifact_id": "TEST_arm_c:model_comparison/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "The DT model performed the poorest with an R² of 0.560",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:model_comparison/main:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531394996005.",
+      "numeric_delta": 0.0004531394996004634
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA, Butyrate, and Acetate are the three most important features.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 0.9,
+      "subject": "VFA, Butyrate, and Acetate",
+      "predicate": "are the top three features",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": true
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value among the primary entities.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "has highest mean absolute SHAP value",
+      "object": "0.037478177745186664",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA has a mean absolute SHAP value of 0.02848.",
+      "claim_type": "Feature Importance",
+      "span_category": "Feature",
+      "is_numeric": false,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has mean absolute SHAP value",
+      "object": "0.02848447610559807",
+      "metric": "mean_abs_shap",
+      "value": 0.02848,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

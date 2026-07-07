@@ -1,0 +1,34 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN model achieved the highest R2 score (0.817) and lowest MSE (0.0128) on the test set.",
+  "explanation_full": "The KNN model outperformed other models in terms of R2 score (0.817) and Mean Squared Error (MSE, 0.0128) on the test set. This indicates that KNN is the most accurate model for predicting hydrogen production based on the provided dataset.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:best_model",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest MSE (0.0128) on the test set.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:model_comparison/main:best_model",
+      "subject": "KNN",
+      "predicate": null,
+      "object": "",
+      "metric": null,
+      "value": "",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "top-feature",
+      "claim_text": "VSS is the top feature by importance.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.97,
+      "subject": "VSS",
+      "predicate": null,
+      "object": "VSS",
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "ranking",
+      "claim_text": "The importance ordering is VSS > pH > Propionate.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.92,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VSS",
+        "pH",
+        "Propionate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "top-score",
+      "claim_text": "VSS has importance=0.520000.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "VSS",
+      "predicate": null,
+      "object": null,
+      "metric": "importance",
+      "value": 0.52,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

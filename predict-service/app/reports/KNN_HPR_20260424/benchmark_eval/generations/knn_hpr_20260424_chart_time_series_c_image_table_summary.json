@@ -1,0 +1,353 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:time_series",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+  "explanation_full": "Based on the provided chart and summary text, the KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting hydrogen production. It achieved an R2 score of 0.817 and an RMSE of 0.113, suggesting a strong correlation between predicted and actual hydrogen production values. The chart visualizes the time-series data and model predictions, further supporting the KNN model's effectiveness.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": null,
+      "metric": "mean_abs_gap",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "metric": "sequence_correlation",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+      "subject": "KNN",
+      "predicate": "actual_peak_index",
+      "object": null,
+      "metric": "actual_peak_index",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+      "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+      "subject": "KNN",
+      "predicate": "predicted_peak_index",
+      "object": null,
+      "metric": "predicted_peak_index",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+        "draft_explanation_full": "Based on the provided chart and summary text, the KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting hydrogen production. It achieved an R2 score of 0.817 and an RMSE of 0.113, suggesting a strong correlation between predicted and actual hydrogen production values. The chart visualizes the time-series data and model predictions, further supporting the KNN model's effectiveness.",
+        "draft_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "subject": "KNN",
+            "predicate": "mean_abs_gap",
+            "object": null,
+            "metric": "mean_abs_gap",
+            "value": 0.817,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": null,
+            "metric": "actual_peak_index",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": null,
+            "metric": "predicted_peak_index",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The provided text states that KNN achieved the highest R2 score and lowest RMSE. However, the fact about mean_abs_gap is not mentioned in the summary or chart. It's possible this metric was not included in the analysis.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap"
+            ],
+            "grounded_fact_summary": "The provided data does not contain information about the mean_abs_gap metric for the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on sequence correlation. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "The chart and summary highlight the sequence correlation of the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on actual peak index. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "The chart and summary provide information about the actual peak index of the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on predicted peak index. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "The chart and summary provide information about the predicted peak index of the KNN model."
+          }
+        ],
+        "corrected_explanation_short": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+        "corrected_explanation_full": "Based on the provided chart and summary text, the KNN model outperformed other models like SVM, DT, RF, and XGBoost in predicting hydrogen production. It achieved an R2 score of 0.817 and an RMSE of 0.113, suggesting a strong correlation between predicted and actual hydrogen production values. The chart visualizes the time-series data and model predictions, further supporting the KNN model's effectiveness.",
+        "corrected_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "subject": "KNN",
+            "predicate": "mean_abs_gap",
+            "object": null,
+            "metric": "mean_abs_gap",
+            "value": 0.817,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "subject": "KNN",
+            "predicate": "sequence_correlation",
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "subject": "KNN",
+            "predicate": "actual_peak_index",
+            "object": null,
+            "metric": "actual_peak_index",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "claim_type": "metric_value",
+            "span_category": "metric_value",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:time_series",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "subject": "KNN",
+            "predicate": "predicted_peak_index",
+            "object": null,
+            "metric": "predicted_peak_index",
+            "value": 0.113,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "corrected_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The provided text states that KNN achieved the highest R2 score and lowest RMSE. However, the fact about mean_abs_gap is not mentioned in the summary or chart. It's possible this metric was not included in the analysis.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap"
+            ],
+            "grounded_fact_summary": "The provided data does not contain information about the mean_abs_gap metric for the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on sequence correlation. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
+            ],
+            "grounded_fact_summary": "The chart and summary highlight the sequence correlation of the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on actual peak index. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index"
+            ],
+            "grounded_fact_summary": "The chart and summary provide information about the actual peak index of the KNN model."
+          },
+          {
+            "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+            "claim_text": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all benchmark models, indicating strong predictive performance for hydrogen production.",
+            "status": "partially_supported",
+            "recommended_action": "edit",
+            "rationale": "The claim mentions R2 score and RMSE but the chart and summary focus on predicted peak index. While both are important metrics, the claim needs to be aligned with the provided evidence.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index"
+            ],
+            "grounded_fact_summary": "The chart and summary provide information about the predicted peak index of the KNN model."
+          }
+        ]
+      }
+    ],
+    "decision_counts": {
+      "edit": 4
+    }
+  },
+  "parent_draft_hash": "aadfa32747b20907e6edba44db2fdb1cb5669a0c"
+}

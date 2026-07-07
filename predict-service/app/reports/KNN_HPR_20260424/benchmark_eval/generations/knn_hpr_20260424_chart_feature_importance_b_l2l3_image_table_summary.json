@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_importance",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The chart shows the importance of different features in predicting HRT 12 -4 h. VFA, Butyrate, and Acetate are the most important.",
+  "explanation_full": "This chart visualizes the feature importance for a machine learning model trained on data related to HRT 12 -4 h.  It highlights which input features contribute the most to the model's predictions. The top three most important features are VFA, Butyrate, and Acetate, suggesting these variables have a strong influence on the target variable being predicted. This information can be valuable for understanding the underlying relationships within the data and potentially identifying key drivers of the phenomenon being studied.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "claim_text": "VFA, Butyrate, and Acetate are the most important.",
+      "claim_type": "freeform",
+      "span_category": "ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_importance",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_importance:top_feature",
+      "subject": "feature_importance",
+      "predicate": "importance",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

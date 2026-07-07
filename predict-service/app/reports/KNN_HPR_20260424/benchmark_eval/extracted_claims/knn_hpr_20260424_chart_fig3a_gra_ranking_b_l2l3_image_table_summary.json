@@ -1,0 +1,52 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "claim_text": "VFA is the most important feature for predicting model performance.",
+      "claim_type": "rank_score",
+      "span_category": "gra::gra_score",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:top_feature",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "claim_text": "VFA is ranked first in importance.",
+      "claim_type": "top_feature",
+      "span_category": "ranking::gra_score",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:ranking",
+      "subject": "gra",
+      "predicate": "gra_score",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "VFA",
+        "Butyrate",
+        "Acetate",
+        "VSS",
+        "Propionate"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

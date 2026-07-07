@@ -1,0 +1,43 @@
+{
+  "artifact_id": "KNNtest:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The model's performance is superior compared to other models.",
+      "claim_type": "comparison",
+      "span_category": "comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "comparison",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "is superior to",
+      "object": "other models",
+      "metric": "performance",
+      "value": "superior",
+      "unit": "comparison",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The model achieved a low error rate.",
+      "claim_type": "quantification",
+      "span_category": "quantification",
+      "is_numeric": true,
+      "requires_grounding_from": "quantification",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "achieved",
+      "object": "low error rate",
+      "metric": "error_rate",
+      "value": "low",
+      "unit": "qualitative",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

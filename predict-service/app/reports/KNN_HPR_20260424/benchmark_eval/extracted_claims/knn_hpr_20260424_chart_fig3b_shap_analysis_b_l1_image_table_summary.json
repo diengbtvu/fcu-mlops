@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "claim_text": "The mean absolute SHAP value of ORP_Low is 2.",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap",
+      "subject": "ORP_Low",
+      "predicate": "mean_abs_shap",
+      "object": 2,
+      "metric": "mean_abs_shap",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

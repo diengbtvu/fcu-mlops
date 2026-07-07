@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:residuals",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score",
+      "claim_text": "The R2 score of 0.817 suggests a strong positive correlation between the predicted and actual values.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    }
+  ]
+}

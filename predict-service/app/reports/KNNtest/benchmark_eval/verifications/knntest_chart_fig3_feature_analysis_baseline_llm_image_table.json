@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3_feature_analysis_1",
+      "claim_text": "VFA, Butyrate, and Acetate are consistently identified as the most critical predictors for Hydrogen Production Rate.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3_feature_analysis_2",
+      "claim_text": "VFA is the top feature across all analysis methods.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Ranking' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3_feature_analysis_3",
+      "claim_text": "The strongest correlation is between Butyrate and VFA with a correlation of 0.9601.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3_feature_analysis_4",
+      "claim_text": "VFA ranks highest in the GRA analysis with a score of 0.7931.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Ranking' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table",
+      "claim_id": "fig3_feature_analysis_5",
+      "claim_text": "The KNN model achieved the best performance with 9 features, achieving an R² of 0.83014 and an MSE of 0.011901.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Model Performance' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

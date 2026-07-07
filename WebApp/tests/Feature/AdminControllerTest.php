@@ -288,9 +288,48 @@ class AdminControllerTest extends TestCase
                 'files' => [
                     'summary' => 'summary.json',
                     'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                    'benchmark_leaderboard_json' => 'benchmark_eval/scores/leaderboard.json',
+                    'benchmark_leaderboard_csv' => 'benchmark_eval/scores/leaderboard.csv',
                 ],
                 'benchmark_models' => [
                     ['model' => 'RF', 'r2_score' => 0.91, 'rmse' => 0.05, 'mse' => 0.0025, 'mae' => 0.03],
+                ],
+                'benchmark_status' => [
+                    'status' => 'success',
+                    'message' => 'Benchmark evaluation completed successfully.',
+                    'progress' => 100,
+                    'phase' => 'completed',
+                ],
+                'benchmark_summary' => [
+                    'generated_at' => '2026-04-16T00:00:00Z',
+                    'artifact_count' => 3,
+                    'generation_count' => 30,
+                    'row_count' => 3,
+                    'best_overall' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'fact_f1' => 0.61,
+                        'fact_precision' => 0.91,
+                        'fact_recall' => 0.49,
+                    ],
+                    'selected_explanations' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'asset_count' => 24,
+                        'provider' => 'benchmark_selected',
+                        'model' => 'gemma2:9b',
+                    ],
+                    'leaderboard_preview' => [
+                        [
+                            'arm' => 'A',
+                            'input_condition' => 'image_table_summary',
+                            'fact_f1' => 0.61,
+                            'fact_precision' => 0.91,
+                            'unsupported_claim_rate' => 0.05,
+                            'coverage_of_salient_facts' => 0.82,
+                        ],
+                    ],
+                    'warnings' => [],
                 ],
             ], 200),
         ]);
@@ -312,6 +351,325 @@ class AdminControllerTest extends TestCase
         $response->assertViewIs('admin.models.report');
         $response->assertViewHas('model', $model);
         $response->assertViewHas('reportAssets');
+        $response->assertSee('Benchmark Evaluation');
+        $response->assertSee('Leaderboard JSON');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function admin_report_prefers_selected_benchmark_explanations_when_present()
+    {
+        Http::fake([
+            '*/train/reports/*/summary.json' => Http::response([
+                'selected_model_metrics' => [
+                    'r2_score' => 0.91,
+                    'rmse' => 0.05,
+                    'mse' => 0.0025,
+                    'mae' => 0.03,
+                ],
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                    'benchmark_selected_explanations' => 'benchmark_eval/selected_explanations.json',
+                ],
+                'llm_explanations' => [
+                    'overview' => ['en' => 'Runtime overview should not be used.'],
+                    'assets' => [
+                        'metrics_overview' => ['en' => 'Runtime explanation should not be shown.'],
+                    ],
+                ],
+                'selected_benchmark_explanations' => [
+                    'overview' => ['en' => 'Benchmark-selected overview'],
+                    'assets' => [
+                        'metrics_overview' => ['en' => 'Benchmark-selected explanation should be shown.'],
+                    ],
+                ],
+                'benchmark_status' => [
+                    'status' => 'success',
+                    'message' => 'Benchmark evaluation completed successfully.',
+                    'progress' => 100,
+                    'phase' => 'completed',
+                ],
+                'benchmark_summary' => [
+                    'generated_at' => '2026-04-16T00:00:00Z',
+                    'artifact_count' => 24,
+                    'generation_count' => 216,
+                    'row_count' => 9,
+                    'selected_explanations' => [
+                        'arm' => 'B',
+                        'input_condition' => 'image_table_summary',
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $model = MLModel::factory()->create([
+            'training_report' => [
+                'report_id' => 'rf_test_20260315',
+                'route_prefix' => '/train/reports/rf_test_20260315',
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.models.report', $model));
+
+        $response->assertStatus(200);
+        $response->assertSee('Benchmark-selected overview');
+        $response->assertSee('Benchmark-selected explanation should be shown.');
+        $response->assertDontSee('Runtime explanation should not be shown.');
+        $response->assertSee('Displaying benchmark-selected explanations');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function admin_report_can_preview_a_different_benchmark_row()
+    {
+        $manifestJsonl = implode("\n", [
+            json_encode([
+                'artifact_id' => 'rf_test_20260317:model_comparison/main',
+                'artifact_type' => 'model_comparison/main',
+                'asset_key' => 'fig5_model_comparison',
+            ], JSON_UNESCAPED_SLASHES),
+            '',
+        ]);
+
+        Http::fake([
+            '*/train/reports/*/summary.json' => Http::response([
+                'selected_model_metrics' => [
+                    'r2_score' => 0.91,
+                    'rmse' => 0.05,
+                    'mse' => 0.0025,
+                    'mae' => 0.03,
+                ],
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                    'benchmark_selected_explanations' => 'benchmark_eval/selected_explanations.json',
+                ],
+                'selected_benchmark_explanations' => [
+                    'selected_arm' => 'A',
+                    'selected_condition' => 'image_table_summary',
+                    'selected_semantic_level' => null,
+                    'selected_row' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                    ],
+                    'overview' => ['en' => 'A default overview should not be shown.'],
+                    'assets' => [
+                        'metrics_overview' => ['en' => 'A default explanation should not be shown.'],
+                    ],
+                ],
+                'benchmark_status' => [
+                    'status' => 'success',
+                    'message' => 'Benchmark evaluation completed successfully.',
+                    'progress' => 100,
+                    'phase' => 'completed',
+                ],
+                'benchmark_summary' => [
+                    'generated_at' => '2026-04-17T00:00:00Z',
+                    'artifact_count' => 1,
+                    'generation_count' => 5,
+                    'row_count' => 2,
+                    'best_overall' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'fact_f1' => 0.81,
+                        'fact_precision' => 0.91,
+                        'fact_recall' => 0.74,
+                    ],
+                    'selected_explanations' => [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'asset_count' => 24,
+                        'provider' => 'benchmark_selected',
+                        'model' => 'gemma2:9b',
+                    ],
+                    'leaderboard_preview' => [
+                        [
+                            'arm' => 'A',
+                            'input_condition' => 'image_table_summary',
+                            'semantic_level' => null,
+                            'fact_f1' => 0.81,
+                            'fact_precision' => 0.91,
+                            'unsupported_claim_rate' => 0.05,
+                            'coverage_of_salient_facts' => 0.82,
+                        ],
+                        [
+                            'arm' => 'B',
+                            'input_condition' => 'image_table_summary',
+                            'semantic_level' => 'L1L2L3',
+                            'fact_f1' => 0.78,
+                            'fact_precision' => 0.88,
+                            'unsupported_claim_rate' => 0.11,
+                            'coverage_of_salient_facts' => 0.79,
+                        ],
+                    ],
+                ],
+            ], 200),
+            '*/train/reports/*/benchmark_eval/scores/leaderboard.json' => Http::response([
+                'leaderboard' => [
+                    [
+                        'arm' => 'A',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => null,
+                        'fact_f1' => 0.81,
+                        'fact_precision' => 0.91,
+                        'fact_recall' => 0.74,
+                    ],
+                    [
+                        'arm' => 'B',
+                        'input_condition' => 'image_table_summary',
+                        'semantic_level' => 'L1L2L3',
+                        'fact_f1' => 0.78,
+                        'fact_precision' => 0.88,
+                        'fact_recall' => 0.71,
+                    ],
+                ],
+            ], 200),
+            '*/train/reports/*/benchmark_eval/run_metadata.json' => Http::response([
+                'client_model' => 'gemma2:9b',
+                'created_at' => '2026-04-17T00:00:00Z',
+            ], 200),
+            '*/train/reports/*/benchmark_eval/manifest.jsonl' => Http::response($manifestJsonl, 200),
+            '*/train/reports/*/benchmark_eval/generations/rf_test_20260317_model_comparison_main_b_l1l2l3_image_table_summary.json' => Http::response([
+                'artifact_id' => 'rf_test_20260317:model_comparison/main',
+                'arm' => 'B',
+                'input_condition' => 'image_table_summary',
+                'semantic_level' => 'L1L2L3',
+                'explanation_short' => 'Manual B explanation should be shown.',
+                'explanation_full' => 'Manual B explanation should be shown.',
+            ], 200),
+        ]);
+
+        $model = MLModel::factory()->create([
+            'training_report' => [
+                'report_id' => 'rf_test_20260317',
+                'route_prefix' => '/train/reports/rf_test_20260317',
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.models.report', [
+            'model' => $model,
+            'benchmark_row' => 'B|image_table_summary|L1L2L3',
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertSee('Displaying manually selected benchmark explanations');
+        $response->assertSee('Manual B explanation should be shown.');
+        $response->assertSee('Currently displaying: B · image_table_summary · L1L2L3');
+        $response->assertSee('Website default: A · image_table_summary');
+        $response->assertDontSee('A default explanation should not be shown.');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function admin_report_hides_explanations_until_benchmark_success()
+    {
+        Http::fake([
+            '*/train/reports/*/summary.json' => Http::response([
+                'selected_model_metrics' => [
+                    'r2_score' => 0.91,
+                    'rmse' => 0.05,
+                    'mse' => 0.0025,
+                    'mae' => 0.03,
+                ],
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+                'llm_explanations' => [
+                    'overview' => ['en' => 'Raw explanation should stay hidden.'],
+                    'assets' => [
+                        'metrics_overview' => ['en' => 'Hidden until benchmark finishes.'],
+                    ],
+                ],
+                'benchmark_status' => [
+                    'status' => 'pending',
+                    'message' => 'Benchmark evaluation is running.',
+                    'progress' => 20,
+                    'phase' => 'running',
+                ],
+            ], 200),
+        ]);
+
+        $model = MLModel::factory()->create([
+            'training_report' => [
+                'report_id' => 'rf_test_20260316',
+                'route_prefix' => '/train/reports/rf_test_20260316',
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.models.report', $model));
+
+        $response->assertStatus(200);
+        $response->assertSee('Waiting for benchmark comparison before showing explanations');
+        $response->assertDontSee('Raw explanation should stay hidden.');
+        $response->assertDontSee('Hidden until benchmark finishes.');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function admin_report_shows_openai_retry_details_while_explanations_backoff()
+    {
+        Http::fake([
+            '*/train/reports/*/summary.json' => Http::response([
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+                'llm_explanations_status' => [
+                    'status' => 'pending',
+                    'message' => 'OpenAI rate limit while generating explanations for batch 1/28. Retry 3/8 in 18.0s (HTTP 429).',
+                    'progress' => 25,
+                    'phase' => 'assets',
+                    'step_index' => 3,
+                    'total_steps' => 31,
+                    'current_items' => ['Trained metrics overview'],
+                    'retry' => [
+                        'attempt' => 3,
+                        'max_attempts' => 8,
+                        'wait_seconds' => 18.0,
+                        'reason' => 'OpenAI rate limit',
+                        'status_code' => 429,
+                    ],
+                ],
+                'benchmark_status' => [
+                    'status' => 'pending',
+                    'message' => 'Benchmark evaluation is queued and will start after AI explanations finish.',
+                    'progress' => 0,
+                    'phase' => 'queued',
+                ],
+            ], 200),
+        ]);
+
+        $model = MLModel::factory()->create([
+            'training_report' => [
+                'report_id' => 'rf_test_20260417_retry',
+                'route_prefix' => '/train/reports/rf_test_20260417_retry',
+                'files' => [
+                    'summary' => 'summary.json',
+                    'model_comparison_bars' => 'fig_model_comparison_bars.png',
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.models.report', $model));
+
+        $response->assertStatus(200);
+        $response->assertSee('Retry 3 / 8');
+        $response->assertSee('waiting 18.0s');
+        $response->assertSee('OpenAI rate limit');
+        $response->assertSee('HTTP 429');
     }
 
     #[\PHPUnit\Framework\Attributes\Test]

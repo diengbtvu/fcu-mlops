@@ -1,0 +1,40 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:claim:1",
+      "claim_text": "The RF model achieved an R2 score of 0.7756, which suggests a strong correlation between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7756,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_rf_scatter:metric:RF:r2_score",
+      "evidence_span": "The RF model achieved an R2 score of 0.7756, which suggests a strong correlation between predicted and actual values.",
+      "stated_value": "0.7756",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

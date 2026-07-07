@@ -1,0 +1,69 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:claim:1",
+      "claim_text": "R² = 0.81717",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": null,
+      "metric": "best_r2",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:claim:2",
+      "claim_text": "MSE = 0.012810",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": null,
+      "metric": "best_mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_r2",
+      "evidence_span": "R² = 0.81717",
+      "stated_value": "0.81717",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:best_mse",
+      "evidence_span": "MSE = 0.012810",
+      "stated_value": "0.012810",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

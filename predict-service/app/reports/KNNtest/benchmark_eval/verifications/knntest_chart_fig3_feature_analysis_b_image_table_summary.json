@@ -1,0 +1,106 @@
+{
+  "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the top feature based on GRA ranking.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate is the second top feature based on GRA ranking.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate is the third top feature based on GRA ranking.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VSS has the highest feature importance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Butyrate and VFA have a strong correlation.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Acetate and VFA have a strong correlation.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "The optimal feature set for KNN has 9 features.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "The best performance for KNN was achieved with R2=0.8301 and MSE=0.0119.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3_feature_analysis",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "The optimal feature set for KNN is VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'fact' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
+  "explanation_full": "Based on the provided chart 'Predicted vs Actual', the KNN model demonstrates the best performance in predicting HPR values. It achieves an R2 score of 0.817, signifying a strong correlation between predicted and actual values. Additionally, its RMSE (Root Mean Squared Error) is 0.113, indicating low prediction error compared to other models like SVM, DT, RF, and XGBoost. This suggests that the KNN model effectively captures the underlying patterns in the data and provides accurate predictions for HPR.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "claim_text": "R2 score of 0.817",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:rmse",
+      "claim_text": "RMSE of 0.113",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:rmse",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:rmse",
+      "subject": "KNN",
+      "predicate": "rmse",
+      "object": "0.113",
+      "metric": "rmse",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

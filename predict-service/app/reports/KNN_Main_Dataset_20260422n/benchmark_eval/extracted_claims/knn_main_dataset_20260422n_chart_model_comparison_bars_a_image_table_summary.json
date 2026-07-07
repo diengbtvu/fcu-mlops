@@ -1,0 +1,6 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": []
+}

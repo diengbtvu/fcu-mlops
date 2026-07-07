@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SHAP analysis shows that ORP_Low has the highest mean absolute SHAP value (0.0359), followed by ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289).",
+  "explanation_full": "Based on the SHAP analysis (Figure 3B), the feature with the highest mean absolute SHAP value is ORP_Low (0.0359). This indicates that ORP_Low is the most influential feature among the analyzed variables. Following ORP_Low, ORP_Mid (0.0314), Butyrate (0.0311), and VFA (0.0289) show decreasing levels of importance. The analysis confirms that ORP_Low is the most critical predictor, followed by ORP_Mid, Butyrate, and VFA in descending order of influence.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0359).",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Low",
+      "predicate": "has mean absolute SHAP value",
+      "object": "0.03593852192687529",
+      "metric": "mean_abs_shap",
+      "value": 0.0359,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Mid has a mean absolute SHAP value of 0.0314.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "ORP_Mid",
+      "predicate": "has mean absolute SHAP value",
+      "object": "0.03140316136133221",
+      "metric": "mean_abs_shap",
+      "value": 0.0314,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "VFA has a mean absolute SHAP value of 0.0289.",
+      "claim_type": "metric_value",
+      "span_category": "feature_importance",
+      "is_numeric": true,
+      "requires_grounding_from": "best_model_shap_importance.csv",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "has mean absolute SHAP value",
+      "object": "0.028864181235310555",
+      "metric": "mean_abs_shap",
+      "value": 0.0289,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

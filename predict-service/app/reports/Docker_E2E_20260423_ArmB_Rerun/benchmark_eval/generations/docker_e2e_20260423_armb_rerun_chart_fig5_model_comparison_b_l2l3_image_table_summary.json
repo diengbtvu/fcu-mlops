@@ -1,0 +1,29 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig5_model_comparison",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "XGBoost outperforms other models in terms of error metrics (MAE, RMSE, MAPE).",
+  "explanation_full": "Comparing the error metrics (MAE, RMSE, MAPE), XGBoost consistently achieves the lowest values across the board (e.g., MAE 0.88, RMSE 1.05, MAPE 8.8%). This consistent minimization of prediction errors is the key indicator of its superior predictive accuracy.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "XGBoost outperforms other models in terms of error metrics (MAE, RMSE, MAPE).",
+      "claim_type": "freeform",
+      "span_category": "error metrics",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig5_model_comparison:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3"
+}

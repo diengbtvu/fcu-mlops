@@ -1,0 +1,20 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

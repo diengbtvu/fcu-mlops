@@ -1,0 +1,27 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model achieved the best performance with an R2 score of 0.83014 and an MSE of 0.011901, indicating strong predictive power. Feature importance analysis shows that VSS is the most important feature (0.5052), followed by Acetate (0.12) and Butyrate (0.097). Furthermore, the best feature subset for KNN was found using 9 features: VFA -> Butyrate -> Acetate -> VSS -> Propionate -> Ethanol -> COD-O -> pH -> ORP_Low.",
+  "explanation_full": "The KNN model demonstrated superior performance in the offline benchmarking, achieving an R2 score of 0.83014 and an MSE of 0.011901. This performance is superior to other models like RF (R2=0.785537, MSE=0.015026) and XGBoost (R2=0.768407, MSE=0.016226). \n\nIn terms of feature importance, VSS was identified as the most critical feature (importance=0.5052), followed by Acetate (0.12) and Butyrate (0.1). \n\nWhen considering the optimal feature subset, the model suggests that the combination of features is highly predictive. The specific combination of features used in the model is derived from the input data, indicating that the interaction of multiple variables contributes significantly to the prediction. \n\nOverall, the analysis confirms that the model's performance is robust, suggesting that the selection of features is crucial for accurate prediction.",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_text": "The model's performance is robust, suggesting that the selection of features is crucial for accurate prediction.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "Overall, the analysis confirms that the model's performance is robust, suggesting that the selection of features is crucial for accurate prediction.",
+      "is_numeric": false,
+      "requires_grounding_from": "text",
+      "confidence": 1.0,
+      "subject": "Overall",
+      "predicate": "suggesting",
+      "object": "the selection of features is crucial for accurate prediction",
+      "metric": "robustness",
+      "value": "robust",
+      "unit": "qualitative",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

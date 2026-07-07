@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_dt_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_dt_scatter:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 0.5604531395.",
+      "numeric_delta": 4.6860500000023286e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The Mean Absolute Error (MAE) was 0.1086",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_dt_scatter:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.108556247.",
+      "numeric_delta": 4.375300000000748e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_dt_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "The Root Mean Square Error (RMSE) was 0.1755",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_dt_scatter:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.1754888112.",
+      "numeric_delta": 1.1188799999978238e-05
+    }
+  ]
+}

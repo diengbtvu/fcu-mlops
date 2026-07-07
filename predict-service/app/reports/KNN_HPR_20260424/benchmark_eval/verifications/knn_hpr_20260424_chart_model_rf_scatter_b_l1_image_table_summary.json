@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score",
+      "claim_text": "The Random Forest model has a high R2 score of 0.7756, indicating a strong relationship between predicted and actual values.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:r2_score"
+      ],
+      "reason": "Gold value for RF r2_score is 0.7756018171.",
+      "numeric_delta": 1.8171000000233306e-06
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_rf_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse",
+      "claim_text": "The low RMSE (0.1254) suggests accurate predictions.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_rf_scatter:metric:RF:rmse"
+      ],
+      "reason": "Gold value for RF rmse is 0.125388154.",
+      "numeric_delta": 1.1846000000009793e-05
+    }
+  ]
+}

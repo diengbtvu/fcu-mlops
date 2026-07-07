@@ -1,0 +1,84 @@
+{
+  "artifact_id": "KNNtest:chart:correlation_heatmap",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c1",
+      "claim_text": "Butyrate vs VFA correlation is 0.9601.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c2",
+      "claim_text": "Acetate vs VFA correlation is 0.9428.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c3",
+      "claim_text": "Acetate vs Butyrate correlation is 0.8651.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c4",
+      "claim_text": "VFA correlation with HPR is 0.7984.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c5",
+      "claim_text": "Butyrate correlation with HPR is 0.7827.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c6",
+      "claim_text": "Acetate correlation with HPR is 0.7641.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:correlation_heatmap",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "c7",
+      "claim_text": "Ethanol vs VFA correlation is 0.8486.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Correlation' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

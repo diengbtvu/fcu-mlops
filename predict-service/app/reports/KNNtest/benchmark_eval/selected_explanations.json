@@ -1,0 +1,96 @@
+{
+  "provider": "benchmark_selected",
+  "model": "gemma4:e4b",
+  "generated_at": "2026-04-21T08:56:12.155696+00:00",
+  "selection_method": "best_nonbaseline_leaderboard_row",
+  "selected_arm": "A",
+  "selected_condition": "image_table_summary",
+  "selected_row": {
+    "arm": "A",
+    "input_condition": "image_table_summary",
+    "artifact_count": 24,
+    "claim_count": 84,
+    "fact_precision": 0.10069444444444445,
+    "fact_recall": 0.020833333333333332,
+    "fact_f1": 0.034429824561403505,
+    "unsupported_claim_rate": 0.8576388888888888,
+    "contradiction_rate": 0.0,
+    "coverage_of_salient_facts": 0.052083333333333336,
+    "numeric_accuracy": 0.17261904761904762,
+    "numeric_tolerance_accuracy": 0.17261904761904762
+  },
+  "overview": {
+    "en": "The model comparison results indicate that the KNN model performed best, achieving an R² score of 0.81717 and an RMSE of 0.11318. When comparing performance metrics, the KNN model significantly outperformed the DT model, which had the lowest R² score of 0.56045 and the highest RMSE of 0.17548. Furthermore, the RF model achieved a higher R² (0.77560) than XGBoost (0.74948) and SVM (0.73241), suggesting better overall predictive power among the tested models.\n\nThe model comparison chart and associated data confirm that the KNN model achieved the highest performance across all evaluated metrics. Specifically, KNN reported an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. For comparison, RF achieved the next best R2 score (0.7756), and DT achieved the lowest R2 score (0.5605).\n\nBased on the feature importance table, VSS has the highest importance score at 0.5052. Acetate follows with an importance of 0.1199, and Butyrate is next with 0.0969. VFA is also a significant predictor, scoring 0.0748, while Propionate scores 0.0576. These findings indicate that VSS is the primary driver of the model's predictions, followed by the organic acids Acetate, Butyrate, and VFA.",
+    "zh_TW": ""
+  },
+  "assets": {
+    "metrics_overview": {
+      "en": "The model comparison results indicate that the KNN model performed best, achieving an R² score of 0.81717 and an RMSE of 0.11318. When comparing performance metrics, the KNN model significantly outperformed the DT model, which had the lowest R² score of 0.56045 and the highest RMSE of 0.17548. Furthermore, the RF model achieved a higher R² (0.77560) than XGBoost (0.74948) and SVM (0.73241), suggesting better overall predictive power among the tested models.",
+      "zh_TW": ""
+    },
+    "model_comparison_table": {
+      "en": "The model comparison results indicate that the KNN model performed best, achieving an R² score of 0.81717 and an RMSE of 0.11318. When comparing performance metrics, the KNN model significantly outperformed the DT model, which had the lowest R² score of 0.56045 and the highest RMSE of 0.17548. Furthermore, the RF model achieved a higher R² (0.77560) than XGBoost (0.74948) and SVM (0.73241), suggesting better overall predictive power among the tested models.",
+      "zh_TW": ""
+    },
+    "gra_ranking": {
+      "en": "The Grey Relational Analysis (GRA) indicates that VFA is the most influential feature, achieving a score of 0.7931. Butyrate ranks second with a score of 0.7902, and Acetate follows closely at 0.7772. The top five features—VFA, Butyrate, Acetate, VSS, and Propionate—all have scores above 0.75. Furthermore, the model performance section highlights that the KNN model achieved the highest R² value (0.81717) and the lowest MSE (0.012810) on the test set. This suggests that the combination of these features provides strong predictive power.",
+      "zh_TW": ""
+    },
+    "fig3b_shap_analysis": {
+      "en": "The SHAP analysis (Figure 3B) identifies the most influential features for the model. Based on the mean absolute SHAP values, VFA, Butyrate, and Acetate are the top three features. VFA has the highest mean absolute SHAP value (0.02848), followed by Butyrate (0.03228), and then Acetate (0.02847). Other features like ORP_Low, ORP_Mid, and COD-O also contribute to the prediction, with ORP_Low showing the highest value among the primary entities listed in the chart's result text (0.03747).",
+      "zh_TW": ""
+    },
+    "fig6c_prediction_time": {
+      "en": "The analysis summary report indicates that the KNN model is the best benchmark model for predicting HPR, achieving an R2 score of 0.81717, an RMSE of 0.11318, and an MSE of 0.012810. Furthermore, the top correlated features with HPR are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641). The model comparison section confirms KNN's superior performance compared to RF (R2: 0.775602), XGBoost (R2: 0.749476), and DT (R2: 0.560453). The sequence diagnostics also show a high sequence correlation of 0.931488 for the KNN model.",
+      "zh_TW": ""
+    },
+    "model_svm_scatter": {
+      "en": "The SVM model's performance metrics are clearly presented in the provided data. Specifically, the model achieved an R2 score of 0.7324, indicating a moderate fit to the data. Furthermore, the correlation between predicted and actual values was 0.86576, suggesting a strong positive linear relationship. The Mean Absolute Error (MAE) for SVM was 0.0946, and the Root Mean Square Error (RMSE) was 0.1369. These metrics provide a direct quantitative assessment of the model's predictive accuracy.",
+      "zh_TW": ""
+    },
+    "model_dt_scatter": {
+      "en": "The Decision Tree (DT) model's performance metrics are clearly presented in the scatter plot diagnostics. Specifically, the model achieved an R2 score of 0.5605, indicating a moderate fit to the data. The Root Mean Square Error (RMSE) was 0.1755, and the Mean Absolute Error (MAE) was 0.1086. Furthermore, the correlation between predicted and actual values was 0.787161, and the linear fit slope was 0.802783, suggesting a positive, though not perfect, linear relationship between predictions and actual outcomes.",
+      "zh_TW": ""
+    },
+    "model_rf_scatter": {
+      "en": "The Random Forest (RF) model demonstrated solid performance metrics based on the provided scatter plot diagnostics. Specifically, the model achieved an R2 score of 0.7756, indicating a strong proportion of variance explained. The Root Mean Square Error (RMSE) was 0.1254, and the Mean Absolute Error (MAE) was 0.0836. Furthermore, the correlation between predicted and actual values was 0.88511, and the linear fit slope was 0.848822, suggesting a strong positive linear relationship between predictions and actual outcomes.",
+      "zh_TW": ""
+    },
+    "model_knn_scatter": {
+      "en": "The KNN model demonstrates strong predictive performance, achieving an R2 score of 0.8172. Its Mean Absolute Error (MAE) is notably low at 0.075, suggesting that the model's predictions are close to the actual values. Furthermore, the correlation between predicted and actual values is high, at 0.9073, confirming a strong linear relationship. The linear fit slope is 0.8798, and the maximum absolute residual observed was 0.3673.",
+      "zh_TW": ""
+    },
+    "model_xgboost_scatter": {
+      "en": "The XGBoost model's performance metrics are clearly presented in the scatter plot diagnostics. Specifically, the model achieved an R2 score of 0.7495, indicating a strong proportion of variance explained. The Root Mean Square Error (RMSE) was calculated at 0.1325, and the Mean Absolute Error (MAE) was 0.0956. Furthermore, the correlation between predicted and actual values was 0.875024, suggesting a strong positive linear relationship. The linear fit slope was 0.838684, and the maximum absolute residual observed was 0.410478.",
+      "zh_TW": ""
+    },
+    "model_comparison_bars": {
+      "en": "The model comparison chart and associated data confirm that the KNN model achieved the highest performance across all evaluated metrics. Specifically, KNN reported an R2 score of 0.8172, an RMSE of 0.1132, an MSE of 0.01281, and an MAE of 0.075. For comparison, RF achieved the next best R2 score (0.7756), and DT achieved the lowest R2 score (0.5605).",
+      "zh_TW": ""
+    },
+    "feature_importance": {
+      "en": "Based on the feature importance table, VSS has the highest importance score at 0.5052. Acetate follows with an importance of 0.1199, and Butyrate is next with 0.0969. VFA is also a significant predictor, scoring 0.0748, while Propionate scores 0.0576. These findings indicate that VSS is the primary driver of the model's predictions, followed by the organic acids Acetate, Butyrate, and VFA.",
+      "zh_TW": ""
+    },
+    "correlation_heatmap": {
+      "en": "The correlation heatmap reveals several strong relationships between the measured variables. The strongest pairwise correlations are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When correlating with HPR, VFA exhibits the highest correlation (0.7984), followed by Butyrate (0.7827) and Acetate (0.7641). Other notable correlations include Ethanol vs VFA (0.8486) and Acetate vs Ethanol (0.7876).",
+      "zh_TW": ""
+    },
+    "feature_distributions": {
+      "en": "Based on the feature distributions, Ethanol and Acetate have the highest mean values, with Ethanol having a mean of 0.4736 and Acetate having a mean of 0.4465. Butyrate also shows a high mean of 0.4287. Regarding variability, Ethanol and Butyrate exhibit the highest standard deviations, with Ethanol having a standard deviation of 0.2528 and Butyrate having a standard deviation of 0.2474. Other features like Propionate (mean: 0.3675, std: 0.2158) and VSS (mean: 0.3581, std: 0.1538) show lower means and standard deviations.",
+      "zh_TW": ""
+    },
+    "feature_vs_target": {
+      "en": "The correlation analysis reveals several strong relationships between features. The strongest pairwise correlations are: Butyrate vs VFA (0.9601), Acetate vs VFA (0.9428), and Acetate vs Butyrate (0.8651). When examining the top correlations with the target variable HPR, the strongest correlations are VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641).",
+      "zh_TW": ""
+    },
+    "boxplots": {
+      "en": "The descriptive statistics reveal that Ethanol (mean: 0.4736) and Acetate (mean: 0.4465) have the highest mean concentrations, followed closely by Butyrate (mean: 0.4287). Propionate (mean: 0.3675) and VSS (mean: 0.3581) show lower average levels. Regarding variability, Ethanol exhibits the largest standard deviation (0.2528), followed by Butyrate (0.2474), and then Acetate (0.226). These findings provide a clear quantitative comparison of the central tendency and spread of the key metabolic features.",
+      "zh_TW": ""
+    },
+    "time_series": {
+      "en": "The KNN model demonstrated the strongest performance among benchmark models, achieving an R2 score of 0.81717, an RMSE of 0.11318, and an MAE of 0.07502. Furthermore, the analysis identified VFA (0.7984), Butyrate (0.7827), and Acetate (0.7641) as the top three features most correlated with the target variable HPR. The time-series diagnostics for KNN showed a high sequence correlation of 0.931488, indicating a strong relationship between actual and predicted values.",
+      "zh_TW": ""
+    }
+  }
+}

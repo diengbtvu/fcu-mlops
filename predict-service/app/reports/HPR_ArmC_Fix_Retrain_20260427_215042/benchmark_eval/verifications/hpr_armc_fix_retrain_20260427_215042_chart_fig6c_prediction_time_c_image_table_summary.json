@@ -1,0 +1,64 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:1",
+      "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:predicted_peak_index"
+      ],
+      "reason": "Gold value for KNN predicted_peak_index is 146.0.",
+      "numeric_delta": 145.0
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:2",
+      "claim_text": "The KNN model predicts a peak HPR value of 0.829894 at index 146, while the actual peak is at index 130 with a value of 1.0.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:actual_peak_index"
+      ],
+      "reason": "Gold value for KNN actual_peak_index is 130.0.",
+      "numeric_delta": 129.0
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:3",
+      "claim_text": "The mean absolute gap between predicted and actual values is 0.066591.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:mean_abs_gap"
+      ],
+      "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:claim:4",
+      "claim_text": "The sequence correlation between predicted and actual values is 0.931488, indicating a strong positive linear relationship.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6c_prediction_time:metric:KNN:sequence_correlation"
+      ],
+      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

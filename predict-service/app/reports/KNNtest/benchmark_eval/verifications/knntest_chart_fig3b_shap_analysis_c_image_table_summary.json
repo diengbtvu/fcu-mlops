@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value among the primary entities.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Butyrate is the second most important feature among the primary entities.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig3b_shap_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_text_3",
+      "claim_text": "VFA is the third most important feature among the primary entities.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'Feature Importance' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

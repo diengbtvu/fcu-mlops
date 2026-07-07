@@ -3,10 +3,32 @@ services:
     build:
       context: ./WebApp
       dockerfile: dockerfile
+    env_file:
+      - .env.docker
+    command:
+      - sh
+      - -lc
+      - |
+          if [ ! -f /var/www/html/vendor/autoload.php ]; then
+            composer install --no-dev --optimize-autoloader --no-interaction
+          fi
+          attempts=0
+          until php artisan migrate --force --no-interaction; do
+            attempts=$$((attempts + 1))
+            if [ "$$attempts" -ge 20 ]; then
+              echo "Laravel migrations failed after $$attempts attempts."
+              exit 1
+            fi
+            echo "Waiting for database before retrying migrations ($$attempts/20)..."
+            sleep 3
+          done
+          exec /usr/local/sbin/php-fpm
     volumes:
       - ./WebApp:/var/www/html
+      - laravel_vendor:/var/www/html/vendor
       - laravel_storage:/var/www/html/storage
       - laravel_cache:/var/www/html/bootstrap/cache
+      - training_progress:/var/www/html/storage/app/training-progress:ro
     depends_on:
       - mysql
       - predict-service
@@ -76,6 +98,7 @@ networks:
 
 volumes:
   mysql_data:
+  laravel_vendor:
   laravel_storage:
   laravel_cache:
   mlflow_runs:

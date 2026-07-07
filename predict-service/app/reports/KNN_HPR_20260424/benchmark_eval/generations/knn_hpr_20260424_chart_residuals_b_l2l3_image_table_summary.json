@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model shows the lowest RMSE (0.113) and highest R2 (0.82) among all models, indicating good performance in predicting HPR.",
+  "explanation_full": "The residual analysis chart visualizes the difference between predicted and actual HPR values for the KNN model. The KNN model demonstrates the lowest RMSE (0.113) and highest R2 (0.82) among all models, indicating good performance in predicting HPR.  The residuals are generally clustered around zero, suggesting that the model captures the underlying trend in the data well. However, there are some outliers with larger residuals, which may indicate areas where the model could be improved.",
+  "claims": [
+    {
+      "claim_id": "rmse_knn",
+      "claim_text": "The KNN model shows the lowest RMSE (0.113)",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "model_performance",
+      "confidence": 1.0,
+      "source_variable_id": "rmse_knn",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "rmse",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "r2_knn",
+      "claim_text": "The KNN model shows the highest R2 (0.82)",
+      "claim_type": "metric_value",
+      "span_category": "R2",
+      "is_numeric": true,
+      "requires_grounding_from": "model_performance",
+      "confidence": 1.0,
+      "source_variable_id": "r2_knn",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.82,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

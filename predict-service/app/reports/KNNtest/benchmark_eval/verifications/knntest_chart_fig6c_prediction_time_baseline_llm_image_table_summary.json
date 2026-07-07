@@ -1,0 +1,40 @@
+{
+  "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The actual peak value occurred at index 130 with a value of 1.0.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'factual' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model predicted a peak at index 146 with a value of 0.829894.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'factual' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNNtest:chart:fig6c_prediction_time",
+      "arm": "BASELINE_LLM",
+      "input_condition": "image_table_summary",
+      "claim_id": "fig6c_prediction_time",
+      "claim_text": "The model achieved a sequence correlation of 0.931488.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'factual' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

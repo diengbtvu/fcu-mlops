@@ -1,0 +1,92 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "DT, RF, and KNN models achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0)",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "DT",
+        "RF",
+        "KNN"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "DT, RF, and KNN are the best performing models among the tested algorithms.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "model_comparison",
+      "is_numeric": false,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "DT",
+        "RF",
+        "KNN"
+      ],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "SVM model scored 0.0 for R²",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:ranking:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": 0.0,
+      "metric": "r2_score",
+      "value": 0.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_4",
+      "claim_text": "XGBoost also scored 0.0 for R²",
+      "claim_type": "metric_value",
+      "span_category": "model_comparison",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_full",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main:ranking:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": 0.0,
+      "metric": "r2_score",
+      "value": 0.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

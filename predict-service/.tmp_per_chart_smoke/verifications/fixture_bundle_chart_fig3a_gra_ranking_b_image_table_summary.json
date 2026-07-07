@@ -1,0 +1,46 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "fixture_bundle:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-feature",
+      "claim_text": "pH is the top feature in the GRA ranking.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3a_gra_ranking:top_feature"
+      ],
+      "reason": "Gold top feature for gra_score is pH.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "rank-order",
+      "claim_text": "The top GRA ordering is pH > Propionate > VFA.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3a_gra_ranking:ranking"
+      ],
+      "reason": "Claimed ordering is consistent with the gold ranking.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "fixture_bundle:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "top-score",
+      "claim_text": "pH has GRA score 0.910000.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "fixture_bundle:chart:fig3a_gra_ranking:rank_score:pH"
+      ],
+      "reason": "Gold value for pH gra_score is 0.91.",
+      "numeric_delta": 0.0
+    }
+  ]
+}

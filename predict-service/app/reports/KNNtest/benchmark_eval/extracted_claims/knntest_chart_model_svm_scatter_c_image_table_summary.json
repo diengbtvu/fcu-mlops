@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNNtest:chart:model_svm_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The SVM model achieved an R2 score of 0.7324.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "table_model_comparison.csv",
+      "confidence": 1.0,
+      "subject": "SVM",
+      "predicate": "has R2 score",
+      "object": "0.7324097475450169",
+      "metric": "r2_score",
+      "value": 0.7324,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_text_2",
+      "claim_text": "The correlation between predicted and actual values for SVM was 0.86576.",
+      "claim_type": "Metric Value",
+      "span_category": "prediction_story",
+      "is_numeric": true,
+      "requires_grounding_from": "chart/model_svm_scatter",
+      "confidence": 1.0,
+      "subject": "SVM",
+      "predicate": "has correlation (pred, actual)",
+      "object": "0.86576",
+      "metric": "corr(pred,actual)",
+      "value": 0.86576,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The Mean Absolute Error (MAE) for SVM was 0.0946.",
+      "claim_type": "Metric Value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "table_model_comparison.csv",
+      "confidence": 1.0,
+      "subject": "SVM",
+      "predicate": "has MAE",
+      "object": "0.09460256693779986",
+      "metric": "mae",
+      "value": 0.0946,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

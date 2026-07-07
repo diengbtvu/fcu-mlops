@@ -1,0 +1,134 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Propionate exhibits the highest mean feature value (0.3581) and standard deviation (0.1538) among all measured features.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:top_feature:mean"
+      ],
+      "reason": "Gold value for distribution mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Propionate exhibits the highest mean feature value (0.3581) and standard deviation (0.1538) among all measured features.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:top_feature:std"
+      ],
+      "reason": "Gold value for distribution std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Propionate shows the highest mean value at 0.3581",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:top_feature:mean"
+      ],
+      "reason": "Gold value for distribution mean is 0.3580733426.",
+      "numeric_delta": 2.6657399999963083e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Propionate shows the largest standard deviation at 0.1538",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:top_feature:std"
+      ],
+      "reason": "Gold value for distribution std is 0.1537517011.",
+      "numeric_delta": 4.829889999999337e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "Ethanol having a mean of 0.1016 and a standard deviation of 0.1131.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.1015505846.",
+      "numeric_delta": 4.941540000000244e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Ethanol having a mean of 0.1016 and a standard deviation of 0.1131.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.1131220718.",
+      "numeric_delta": 2.2071799999995312e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "pH has a mean of 0.0349 and a standard deviation of 0.1099.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:pH:mean"
+      ],
+      "reason": "Gold value for pH mean is 0.0349481369.",
+      "numeric_delta": 4.8136900000002314e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "pH has a mean of 0.0349 and a standard deviation of 0.1099.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:pH:std"
+      ],
+      "reason": "Gold value for pH std is 0.1099050152.",
+      "numeric_delta": 5.015199999999775e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "Acetate, VSS, and Butyrate follow with means of 0.0546, 0.0293, and 0.0271, respectively",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions:metric:Acetate:mean"
+      ],
+      "reason": "Gold value for Acetate mean is 0.054562786.",
+      "numeric_delta": 3.721400000000069e-05
+    }
+  ]
+}

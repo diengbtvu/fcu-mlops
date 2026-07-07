@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "This is a summary of the results for model HPR_ArmC_Fix_Retrain_20260427_215042. The KNN model performed best with an R² of 0.81717 and an MSE of 0.012810.",
+  "explanation_full": "This JSON payload contains the results for a machine learning model named HPR_ArmC_Fix_Retrain_20260427_215042. The model was trained on data with an input condition of 'image_table_summary' and evaluated at semantic level L2L3. \n\nThe KNN (K-Nearest Neighbors) model achieved the highest performance with an R² score of 0.81717 and an MSE (Mean Squared Error) of 0.012810. This indicates that the KNN model is able to accurately predict the target variable based on the input features.\n\nThe payload also includes:\n* A table summarizing the performance of different models, including SVM, DT (Decision Tree), RF (Random Forest), and XGBoost.\n* A list of feature rankings based on their importance in predicting the target variable.\n* An incremental feature analysis showing how model performance changes as more features are added.\n\nThe payload also includes links to a chart visualizing the MSE and R² values for different models. This visualization can provide a clearer understanding of the relative performance of each model.\n\nOverall, this JSON payload provides a comprehensive summary of the results obtained from training and evaluating the HPR_ArmC_Fix_Retrain_20260427_215042 model.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "claim_text": "KNN::feature_subset_optimum",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "feature_subset_optimum",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:ranking:r2_score",
+      "claim_text": "ranking::r2_score",
+      "claim_type": "freeform",
+      "span_category": "ranking",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:ranking:r2_score",
+      "subject": "incremental_feature_analysis",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

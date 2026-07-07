@@ -51,6 +51,11 @@
                     'route' => 'admin.settings.email',
                     'icon' => 'fas fa-envelope'
                 ],
+                [
+                    'title' => __('sidebar.ai_api_keys'),
+                    'route' => 'admin.settings.ai',
+                    'icon' => 'fas fa-key'
+                ],
             ]" />
         </ul>
     </nav>

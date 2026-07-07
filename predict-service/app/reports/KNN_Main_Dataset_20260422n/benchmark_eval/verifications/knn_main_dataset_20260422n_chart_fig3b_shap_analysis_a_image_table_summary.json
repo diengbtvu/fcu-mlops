@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "ORP_Low has the highest mean absolute SHAP value (0.0359).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis:metric:ORP_Low:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Low mean_abs_shap is 0.0359385219.",
+      "numeric_delta": 3.852189999999783e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "ORP_Mid has a mean absolute SHAP value of 0.0314.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis:metric:ORP_Mid:mean_abs_shap"
+      ],
+      "reason": "Gold value for ORP_Mid mean_abs_shap is 0.0314031614.",
+      "numeric_delta": 3.1613999999999254e-06
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA has a mean absolute SHAP value of 0.0289.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0288641812.",
+      "numeric_delta": 3.5818800000000234e-05
+    }
+  ]
+}

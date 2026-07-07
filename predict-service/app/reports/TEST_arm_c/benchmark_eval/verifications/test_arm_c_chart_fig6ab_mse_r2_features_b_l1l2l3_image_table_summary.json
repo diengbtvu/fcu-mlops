@@ -1,0 +1,140 @@
+{
+  "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN consistently outperforms other models",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "achieving the highest R² (0.83014 at 9 features)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "and lowest MSE (0.011901 at 9 features)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.011901.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Overall, KNN is the best model",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "No best-model fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "followed by RF",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "and DT is the worst performer",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "KNN peaking at 9 features",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "KNN model is the superior performer, achieving the highest R² (0.83014) and lowest MSE (0.011901) when using 9 features",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_9",
+      "claim_text": "The overall benchmark confirms KNN's lead (R²: 0.81717, MSE: 0.012810)",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_10",
+      "claim_text": "KNN peaks at 9 features",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:fig6ab_mse_r2_features:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 0
+    }
+  ]
+}

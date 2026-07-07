@@ -1,0 +1,64 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap",
+      "claim_text": "The mean absolute gap between predicted and actual values is 0.066591.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:mean_abs_gap"
+      ],
+      "reason": "Gold value for KNN mean_abs_gap is 0.066591.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation",
+      "claim_text": "The sequence correlation is 0.931488.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:sequence_correlation"
+      ],
+      "reason": "Gold value for KNN sequence_correlation is 0.931488.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index",
+      "claim_text": "The actual peak value is 1 at index 130.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:actual_peak_index"
+      ],
+      "reason": "Gold value for KNN actual_peak_index is 130.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index",
+      "claim_text": "The predicted peak value is 0.829894 at index 146.",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:time_series:metric:KNN:predicted_peak_index"
+      ],
+      "reason": "Gold value for KNN predicted_peak_index is 146.0.",
+      "numeric_delta": 145.170106
+    }
+  ]
+}

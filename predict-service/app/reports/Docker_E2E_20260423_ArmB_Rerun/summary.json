@@ -1,0 +1,2756 @@
+{
+  "model_name": "Docker_E2E_20260423_ArmB_Rerun",
+  "model_type": "decision_tree",
+  "model_label": "DT",
+  "comparison_enabled": true,
+  "created_at": "2026-04-23T03:08:05.527442",
+  "selected_model_metrics": {
+    "r2_score": 1.0,
+    "rmse": 0.0,
+    "mse": 0.0,
+    "mae": 0.0
+  },
+  "feature_names": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate",
+    "Sucrose_Degradation",
+    "ORP_Mid",
+    "ORP_Low",
+    "VFA",
+    "COD-O"
+  ],
+  "benchmark_models": [
+    {
+      "model": "SVM",
+      "r2_score": 0.0,
+      "rmse": 0.08754576843186937,
+      "mse": 0.007664261570326496,
+      "mae": 0.08724531818264793
+    },
+    {
+      "model": "DT",
+      "r2_score": 1.0,
+      "rmse": 0.0,
+      "mse": 0.0,
+      "mae": 0.0
+    },
+    {
+      "model": "RF",
+      "r2_score": 1.0,
+      "rmse": 0.0,
+      "mse": 0.0,
+      "mae": 0.0
+    },
+    {
+      "model": "KNN",
+      "r2_score": 1.0,
+      "rmse": 0.0,
+      "mse": 0.0,
+      "mae": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "r2_score": 0.0,
+      "rmse": 2.734519455316331e-07,
+      "mse": 7.477596651503524e-14,
+      "mae": 2.734519455316331e-07
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "feature_importance_table": "table_feature_importance.csv",
+    "model_comparison_bars": "fig_model_comparison_bars.png",
+    "residuals": "fig_residuals.png",
+    "feature_importance": "fig_feature_importance.png",
+    "descriptive_statistics": "table_descriptive_statistics.csv",
+    "correlation_matrix": "table_correlation_matrix.csv",
+    "correlation_heatmap": "fig_correlation_heatmap.png",
+    "feature_distributions": "fig_feature_distributions.png",
+    "feature_vs_target": "fig_feature_vs_target.png",
+    "boxplots": "fig_boxplots.png",
+    "time_series": "fig_time_series.png",
+    "gra_ranking": "gra_ranking.json",
+    "analysis_summary": "analysis_summary_report.txt",
+    "summary": "summary.json",
+    "training_bundle_zip": "training_bundle.zip",
+    "best_model": "best_model.pkl",
+    "best_scaler_X": "best_scaler_X.pkl",
+    "best_scaler_Y": "best_scaler_Y.pkl",
+    "scaler": "scaler.pkl",
+    "best_model_info": "best_model_info.txt",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "best_model_shap_values": "best_model_shap_values.npy",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "fig3a_gra_ranking": "fig3a_gra_ranking.png",
+    "fig3b_shap_analysis": "fig3b_shap_analysis.png",
+    "fig3_feature_analysis": "fig3_feature_analysis.png",
+    "fig4_univariate_analysis": "fig4_univariate_analysis.png",
+    "fig5_model_comparison": "fig5_model_comparison.png",
+    "fig6ab_mse_r2_features": "fig6ab_mse_r2_features.png",
+    "fig6c_prediction_time": "fig6c_prediction_time.png",
+    "results_summary": "results_summary.txt",
+    "best_model_summary": "best_model_summary.json",
+    "model_svm_scatter": "model_svm_scatter.png",
+    "model_dt_scatter": "model_dt_scatter.png",
+    "model_rf_scatter": "model_rf_scatter.png",
+    "model_knn_scatter": "model_knn_scatter.png",
+    "model_xgboost_scatter": "model_xgboost_scatter.png",
+    "asset_evidence": "asset_evidence.json",
+    "llm_explanations": "llm_explanations.json",
+    "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+    "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+    "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+    "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+    "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+    "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+    "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+  },
+  "llm_explanations_status": {
+    "status": "success",
+    "message": "AI explanations generated successfully.",
+    "updated_at": "2026-04-23T03:15:06.217210",
+    "started_at": "2026-04-23T03:08:05.606320",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 30,
+    "total_steps": 30,
+    "current_items": [
+      "AI Report Overview"
+    ]
+  },
+  "benchmark_status": {
+    "status": "success",
+    "message": "Benchmark evaluation completed successfully.",
+    "updated_at": "2026-04-23T04:18:34.342785",
+    "started_at": "2026-04-23T03:18:58.427262",
+    "progress": 100.0,
+    "phase": "completed",
+    "step_index": 3,
+    "total_steps": 3,
+    "current_items": [
+      "leaderboard",
+      "run metadata"
+    ],
+    "output_dir": "benchmark_eval"
+  },
+  "llm_explanations": {
+    "provider": "ollama",
+    "model": "gemma4:e4b",
+    "generated_at": "2026-04-23T03:15:06.214308",
+    "overview": {
+      "en": "The analysis of the dataset reveals a strong performance from the machine learning models, with the best model achieving near-perfect predictive accuracy. The feature selection process highlighted the most influential variables, guiding the development of a robust predictive model. The overall findings provide valuable insights into the underlying chemical and biological processes governing the system.",
+      "zh_TW": "數據集的分析顯示機器學習模型表現強勁，最佳模型達到了接近完美的預測準確度。特徵選擇過程突顯了最具影響力的變數，指導了穩健預測模型的開發。總體發現為理解控制系統的潛在化學和生物過程提供了寶貴的見解。"
+    },
+    "assets": {
+      "metrics_overview": {
+        "en": "This table summarizes how well different predictive models performed on the test data. The metrics—R² (R-squared), RMSE (Root Mean Square Error), MSE (Mean Squared Error), and MAE (Mean Absolute Error)—tell us how accurately the models predicted the target variable. The best models, DT, KNN, and RF, all achieved an R² score of 1.0, indicating a perfect fit, while the SVM model showed a higher RMSE of 0.0875 and MSE of 0.00766. Overall, the DT model was identified as the winning model, suggesting it provides the most reliable and accurate predictions for this process.",
+        "zh_TW": "此表格總結了不同預測模型在測試數據上的表現。這些指標——R²（R平方）、RMSE（均方根誤差）、MSE（均方誤差）和MAE（平均絕對誤差）——告訴我們模型預測目標變數的準確程度。表現最好的模型，包括DT、KNN和RF，都達到了1.0的R²分數，這表明擬合度完美；而SVM模型則顯示了較高的RMSE 0.0875和MSE 0.00766。總體而言，DT模型被確定為最佳模型，這表明它為此過程提供了最可靠和準確的預測。",
+        "benchmark_payload": {
+          "explanation_short": "The DT model achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0) across all metrics, making it the best performing model.",
+          "explanation_full": "This table summarizes how well different predictive models performed on the test data. The metrics—R² (R-squared), RMSE (Root Mean Square Error), MSE (Mean Squared Error), and MAE (Mean Absolute Error)—tell us how accurately the models predicted the target variable. The best models, DT, KNN, and RF, all achieved an R² score of 1.0, indicating a perfect fit, while the SVM model showed a higher RMSE of 0.0875 and MSE of 0.00766. Overall, the DT model was identified as the winning model, suggesting it provides the most reliable and accurate predictions for this process.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "DT model achieved an R² score of 1.0, RMSE of 0.0, MSE of 0.0, and MAE of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "KNN model achieved an R² score of 1.0, RMSE of 0.0, MSE of 0.0, and MAE of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "RF model achieved an R² score of 1.0, RMSE of 0.0, MSE of 0.0, and MAE of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "SVM model achieved an R² score of 0.0, RMSE of 0.0875, MSE of 0.00766, and MAE of 0.0872.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "SVM",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "DT model was identified as the winning model.",
+              "claim_type": "best_model",
+              "span_category": "model_summary",
+              "is_numeric": false,
+              "requires_grounding_from": "model_summary",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "is",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3a_gra_ranking": {
+        "en": "This chart, titled 'Grey relational ranking,' helps us understand which chemical measurements are most important for predicting the final outcome. It ranks features based on how strongly they relate to the target variable. The top three features—Sucrose_Degradation (0.9998), VFA (0.9994), and COD-O (0.9990)—show the strongest connections, meaning they are the most reliable indicators. A practical caution is that while these features are highly correlated, other factors not included in this ranking might also play a role in the overall process efficiency.",
+        "zh_TW": "這張名為「灰相關排名」的圖表，幫助我們了解哪些化學測量值對於預測最終結果最重要。它根據特徵與目標變數的相關強度進行排名。排名前三的特徵——蔗糖降解（Sucrose_Degradation，0.9998）、VFA（0.9994）和COD-O（0.9990）——顯示出最強的關聯性，這意味著它們是最可靠的指標。一個實際的注意事項是，雖然這些特徵相關性很高，但未包含在這個排名中的其他因素也可能對整體過程效率起到作用。",
+        "benchmark_payload": {
+          "explanation_short": "The ranking identifies Sucrose_Degradation, VFA, and COD-O as the most important features for prediction.",
+          "explanation_full": "This chart, titled 'Grey relational ranking,' helps us understand which chemical measurements are most important for predicting the final outcome. It ranks features based on how strongly they relate to the target variable. The top three features—Sucrose_Degradation (0.9998), VFA (0.9994), and COD-O (0.9990)—show the strongest connections, meaning they are the most reliable indicators. A practical caution is that while these features are highly correlated, other factors not included in this ranking might also play a role in the overall process efficiency.",
+          "claims": [
+            {
+              "claim_id": "fig3a_gra_ranking_1",
+              "claim_text": "Sucrose_Degradation is the most important feature for prediction with a score of 0.9998.",
+              "claim_type": "ranking",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": true,
+              "requires_grounding_from": "fig3a_gra_ranking",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "is the most important feature",
+              "object": "0.9998",
+              "metric": "score",
+              "value": 0.9998,
+              "unit": "score",
+              "ordered_items": [
+                "Sucrose_Degradation"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3a_gra_ranking_2",
+              "claim_text": "VFA is the second most important feature with a score of 0.9994.",
+              "claim_type": "ranking",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "fig3a_gra_ranking",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the second most important feature",
+              "object": "0.9994",
+              "metric": "score",
+              "value": 0.9994,
+              "unit": "score",
+              "ordered_items": [
+                "VFA"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "fig3a_gra_ranking_3",
+              "claim_text": "COD-O is the third most important feature with a score of 0.9990.",
+              "claim_type": "ranking",
+              "span_category": "COD-O",
+              "is_numeric": true,
+              "requires_grounding_from": "fig3a_gra_ranking",
+              "confidence": 1.0,
+              "subject": "COD-O",
+              "predicate": "is the third most important feature",
+              "object": "0.9990",
+              "metric": "score",
+              "value": 0.999,
+              "unit": "score",
+              "ordered_items": [
+                "COD-O"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3b_shap_analysis": {
+        "en": "This chart, known as a SHAP analysis, helps us understand which factors are most influential in predicting the outcome. It shows that VFA is the most important factor, followed by Sucrose Degradation and ORP_Mid. Specifically, VFA has the highest mean absolute SHAP value (0.017), indicating it has the strongest impact on the prediction. The analysis suggests that VFA is a key driver, but it is important to remember that this chart only shows the relative importance of features and does not prove that a feature *causes* the outcome.",
+        "zh_TW": "這張圖，稱為 SHAP 分析，幫助我們了解哪些因素對預測結果影響最大。它顯示 VFA 是最重要的因素，其次是蔗糖降解（Sucrose Degradation）和 ORP_Mid。具體來說，VFA 的平均絕對 SHAP 值最高（0.017），這表明它對預測具有最強的影響。該分析指出 VFA 是關鍵驅動因素，但重要的是要記住，這張圖只顯示了特徵的相對重要性，並不能證明某個特徵*導致*了結果。",
+        "benchmark_payload": {
+          "explanation_short": "VFA is the most important feature for prediction, followed by Sucrose Degradation and ORP_Mid.",
+          "explanation_full": "This chart, known as a SHAP analysis, helps us understand which factors are most influential in predicting the outcome. It shows that VFA is the most important factor, followed by Sucrose Degradation and ORP_Mid. Specifically, VFA has the highest mean absolute SHAP value (0.017), indicating it has the strongest impact on the prediction. The analysis suggests that VFA is a key driver, but it is important to remember that this chart only shows the relative importance of features and does not prove that a feature *causes* the outcome.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA is the most important feature for prediction.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": false,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the most important feature",
+              "object": "prediction",
+              "metric": "mean_abs_shap",
+              "value": 0.0170417692,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig3_feature_analysis": {
+        "en": "This chart provides a comprehensive analysis of which chemical measurements are most useful for predicting the target outcome. It combines several methods—like feature ranking, feature importance, and correlation analysis—to show the predictive power of different factors. The main takeaway is that the measurements 'Sucrose_Degradation', 'VFA', and 'COD-O' are the most strongly linked to the outcome, with 'Sucrose_Degradation' showing the highest correlation (0.9999). A practical caution is that while multiple models performed well, the analysis suggests that using only 'Sucrose_Degradation' is sufficient for the best performance, as demonstrated by the high R² score of 1.0 across several models.",
+        "zh_TW": "這張圖提供了關於哪些化學測量對於預測目標結果最有用，進行了全面的分析。它結合了多種方法，例如特徵排名、特徵重要性和相關性分析，來展示不同因素的預測能力。主要結論是，'Sucrose_Degradation'、'VFA' 和 'COD-O' 這三個測量與結果的關聯性最強，其中 'Sucrose_Degradation' 的相關性最高（0.9999）。一個實際的注意事項是，雖然多個模型表現良好，但分析顯示僅使用 'Sucrose_Degradation' 就足以達到最佳性能，如多個模型都顯示了 1.0 的 R² 分數。",
+        "benchmark_payload": {
+          "explanation_short": "The analysis shows that Sucrose_Degradation, VFA, and COD-O are the most predictive features, with Sucrose_Degradation having the highest correlation (0.9999).",
+          "explanation_full": "This chart provides a comprehensive analysis of which chemical measurements are most useful for predicting the target outcome. It combines several methods—like feature ranking, feature importance, and correlation analysis—to show the predictive power of different factors. The main takeaway is that the measurements 'Sucrose_Degradation', 'VFA', and 'COD-O' are the most strongly linked to the outcome, with 'Sucrose_Degradation' showing the highest correlation (0.9999). A practical caution is that while multiple models performed well, the analysis suggests that using only 'Sucrose_Degradation' is sufficient for the best performance, as demonstrated by the high R² score of 1.0 across several models.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Sucrose_Degradation is the top feature for predicting the outcome.",
+              "claim_type": "top_feature",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": false,
+              "requires_grounding_from": "gra_ranking",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "is the top feature",
+              "object": "Sucrose_Degradation",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "Sucrose_Degradation"
+              ],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "VFA is the second most important feature.",
+              "claim_type": "ranking",
+              "span_category": "VFA",
+              "is_numeric": false,
+              "requires_grounding_from": "gra_ranking",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the second most important feature",
+              "object": "VFA",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "VFA"
+              ],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The correlation between Sucrose_Degradation and HPR is 0.9999.",
+              "claim_type": "metric_value",
+              "span_category": "Sucrose_Degradation vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "correlation_story",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "correlates with",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.9999,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The best model for prediction is DT, with an R² score of 1.0.",
+              "claim_type": "best_model",
+              "span_category": "DT",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "is the best model",
+              "object": "DT",
+              "metric": null,
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "Using only Sucrose_Degradation is sufficient for the best performance.",
+              "claim_type": "feature_subset_optimum",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": false,
+              "requires_grounding_from": "incremental_story",
+              "confidence": 1.0,
+              "subject": null,
+              "predicate": null,
+              "object": "Sucrose_Degradation",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [
+                "Sucrose_Degradation"
+              ],
+              "feature_count": 1,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig4_univariate_analysis": {
+        "en": "This chart, titled 'Univariate analysis,' helps us understand which factors are most strongly related to the final outcome, which is Hydrogen Production (HPR). It shows the strength of the relationship between each measured factor and HPR. For instance, 'Sucrose_Degradation' has a very strong positive correlation of 0.9999, meaning as this value increases, HPR tends to increase significantly. Similarly, 'VFA' shows a strong positive correlation of 0.9991. The main takeaway is that the process is highly predictable based on these initial measurements, especially 'Sucrose_Degradation' and 'VFA'. A practical caution is that while these correlations are strong, they only show a relationship, not necessarily the cause; other unmeasured factors could still influence the final result.",
+        "zh_TW": "這張標題為「單變量分析」的圖表，幫助我們了解哪些因素與最終的產出（氫氣產生，HPR）關聯性最強。它展示了每個測量因素與HPR之間的關係強度。例如，「Sucrose_Degradation」（蔗糖降解）具有極強的正相關性 0.9999，這意味著當這個數值增加時，HPR也傾向顯著增加。同樣地，「VFA」（揮發性脂肪酸）也顯示出強的正相關性 0.9991。主要的結論是，根據這些初始測量，該過程的預測性非常高，特別是「Sucrose_Degradation」和「VFA」。一個實際的注意事項是，雖然這些相關性很強，但它們僅顯示了關係，不一定代表因果關係；其他未測量的因素仍可能影響最終結果。",
+        "benchmark_payload": {
+          "explanation_short": "The chart shows that Sucrose_Degradation and VFA have very strong positive correlations with HPR, indicating high predictability.",
+          "explanation_full": "This chart, titled 'Univariate analysis,' helps us understand which factors are most strongly related to the final outcome, which is Hydrogen Production (HPR). It shows the strength of the relationship between each measured factor and HPR. For instance, 'Sucrose_Degradation' has a very strong positive correlation of 0.9999, meaning as this value increases, HPR tends to increase significantly. Similarly, 'VFA' shows a strong positive correlation of 0.9991. The main takeaway is that the process is highly predictable based on these initial measurements, especially 'Sucrose_Degradation' and 'VFA'. A practical caution is that while these correlations are strong, they only show a relationship, not necessarily the cause; other unmeasured factors could still influence the final result.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Sucrose_Degradation has a very strong positive correlation of 0.9999 with HPR.",
+              "claim_type": "top_feature",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": true,
+              "requires_grounding_from": "analysis_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "has a correlation of",
+              "object": "0.9999",
+              "metric": "correlation",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "VFA shows a strong positive correlation of 0.9991 with HPR.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "analysis_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "has a correlation of",
+              "object": "0.9991",
+              "metric": "correlation",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "COD-O has a strong positive correlation of 0.9963 with HPR.",
+              "claim_type": "top_feature",
+              "span_category": "COD-O",
+              "is_numeric": true,
+              "requires_grounding_from": "analysis_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "COD-O",
+              "predicate": "has a correlation of",
+              "object": "0.9963",
+              "metric": "correlation",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "ORP_Mid and ORP_Low have a negative correlation of -0.9964 with HPR.",
+              "claim_type": "top_feature",
+              "span_category": "ORP_Mid, ORP_Low",
+              "is_numeric": true,
+              "requires_grounding_from": "analysis_summary_excerpt",
+              "confidence": 1.0,
+              "subject": "ORP_Mid, ORP_Low",
+              "predicate": "have a correlation of",
+              "object": "-0.9964",
+              "metric": "correlation",
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig5_model_comparison": {
+        "en": "This chart compares how well different predictive models can forecast the target variable using the available data. The models tested include DT, KNN, RF, XGBoost, and SVM. The results show that DT, KNN, and RF all achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), indicating they are highly accurate predictors. In contrast, SVM performed poorly with an R² of 0.0, and XGBoost also showed very low performance. The main takeaway is that the DT, KNN, and RF models are excellent choices for this prediction task. A practical caution is that while these models perform perfectly on this test set, real-world data often contains noise and variability, so caution should be used when applying these results to new, unseen data.",
+        "zh_TW": "這張圖比較了不同預測模型預測目標變數的表現。測試的模型包括DT、KNN、RF、XGBoost和SVM。結果顯示，DT、KNN和RF都達到了完美的成績（R²=1.0、RMSE=0.0、MSE=0.0、MAE=0.0），這表明它們是高度準確的預測器。相比之下，SVM的表現不佳，R²為0.0，而XGBoost的表現也極低。主要結論是DT、KNN和RF模型是執行此預測任務的優秀選擇。一個實際的注意事項是，雖然這些模型在這個測試集上表現完美，但現實世界的數據通常包含雜訊和變異性，因此在將這些結果應用於新的、未見過的數據時需要謹慎。",
+        "benchmark_payload": {
+          "explanation_short": "DT, KNN, and RF models achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), indicating high predictive accuracy.",
+          "explanation_full": "This chart compares how well different predictive models can forecast the target variable using the available data. The models tested include DT, KNN, RF, XGBoost, and SVM. The results show that DT, KNN, and RF all achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0), indicating they are highly accurate predictors. In contrast, SVM performed poorly with an R² of 0.0, and XGBoost also showed very low performance. The main takeaway is that the DT, KNN, and RF models are excellent choices for this prediction task. A practical caution is that while these models perform perfectly on this test set, real-world data often contains noise and variability, so caution should be used when applying these results to new, unseen data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "DT, KNN, and RF models all achieved perfect scores (R²=1.0, RMSE=0.0, MSE=0.0, MAE=0.0).",
+              "claim_type": "metric_value",
+              "span_category": "model_performance",
+              "is_numeric": true,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "DT, KNN, and RF models",
+              "predicate": "achieved perfect scores",
+              "object": null,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "SVM performed poorly with an R² of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_performance",
+              "is_numeric": true,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "SVM",
+              "predicate": "performed poorly",
+              "object": null,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "XGBoost also showed very low performance.",
+              "claim_type": "freeform",
+              "span_category": "model_comparison",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "showed very low performance",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "This chart shows how well our prediction model performs (measured by R² and MSE) as we include more chemical measurements (features). The key takeaway is that using only one feature, specifically 'Sucrose_Degradation', results in the best performance across all tested models (DT, RF, KNN), achieving an R² score of 1.0 and an MSE of 0.0. While adding more features, such as 'VFA' and 'COD-O', initially maintains high performance, the best model (DT) consistently performs optimally with just the single 'Sucrose_Degradation' feature. A practical caution is that while more data might seem helpful, this analysis suggests that too many features can confuse the model and potentially hurt its accuracy, making simplicity the best approach.",
+        "zh_TW": "這張圖顯示了隨著我們納入更多化學測量數據（特徵）時，我們的預測模型表現如何（以R²和MSE衡量）。主要的結論是，僅使用一個特徵，即「Sucrose_Degradation」，在所有測試的模型（DT、RF、KNN）中都能達到最佳表現，R²得分為1.0，MSE為0.0。雖然最初加入更多特徵，例如「VFA」和「COD-O」，可以維持高表現，但最佳模型（DT）始終證明僅使用單一「Sucrose_Degradation」特徵即可達到最佳效果。一個實際的注意事項是，雖然更多數據看起來很有幫助，但這個分析表明過多的特徵可能會讓模型混淆並可能損害其準確性，因此簡單化是最好的方法。",
+        "benchmark_payload": {
+          "explanation_short": "The model performs best using only the 'Sucrose_Degradation' feature, achieving an R² of 1.0 and an MSE of 0.0.",
+          "explanation_full": "This chart shows how well our prediction model performs (measured by R² and MSE) as we include more chemical measurements (features). The key takeaway is that using only one feature, specifically 'Sucrose_Degradation', results in the best performance across all tested models (DT, RF, KNN), achieving an R² score of 1.0 and an MSE of 0.0. While adding more features, such as 'VFA' and 'COD-O', initially maintains high performance, the best model (DT) consistently performs optimally with just the single 'Sucrose_Degradation' feature. A practical caution is that while more data might seem helpful, this analysis suggests that too many features can confuse the model and potentially hurt its accuracy, making simplicity the best approach.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The best feature-count step for DT is n=1, using the feature 'Sucrose_Degradation'.",
+              "claim_type": "best_model",
+              "span_category": "feature_subset_optimum",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "best feature-count step",
+              "object": "n=1",
+              "metric": "R2",
+              "value": 1.0,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The best feature-count step for RF is n=1, using the feature 'Sucrose_Degradation'.",
+              "claim_type": "best_model",
+              "span_category": "feature_subset_optimum",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "RF",
+              "predicate": "best feature-count step",
+              "object": "n=1",
+              "metric": "R2",
+              "value": 1.0,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The best feature-count step for KNN is n=1, using the feature 'Sucrose_Degradation'.",
+              "claim_type": "best_model",
+              "span_category": "feature_subset_optimum",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "KNN",
+              "predicate": "best feature-count step",
+              "object": "n=1",
+              "metric": "R2",
+              "value": 1.0,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": 1,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "The best feature-count step for SVM is n=10, using the feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid'.",
+              "claim_type": "best_model",
+              "span_category": "feature_subset_optimum",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "SVM",
+              "predicate": "best feature-count step",
+              "object": "n=10",
+              "metric": "R2",
+              "value": 0.0,
+              "unit": "N/A",
+              "ordered_items": [
+                "Sucrose_Degradation",
+                "VFA",
+                "COD-O",
+                "Butyrate",
+                "VSS",
+                "pH",
+                "Acetate",
+                "Ethanol",
+                "Propionate",
+                "ORP_Mid"
+              ],
+              "feature_count": 10,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "fig6c_prediction_time": {
+        "en": "This chart, titled 'Figure 6C - Prediction over time,' shows how well the model predicts changes in a process over time. The results indicate that the best model, DT, achieved a perfect prediction, with a sequence correlation of 1.0 and a mean absolute gap of 0.0. This means the model accurately tracked the actual process peaks and troughs. A practical caution is that while the model performed perfectly on this test set, real-world processes can be highly variable, so these results should be viewed as highly optimistic.",
+        "zh_TW": "這張標題為「圖 6C - 隨時間的預測」的圖表顯示了模型預測過程隨時間變化的準確性。結果顯示，最佳模型 DT 達到了完美的預測，序列相關係數為 1.0，平均絕對差距為 0.0。這代表模型準確地追蹤了實際過程的峰值和谷值。一個實際的注意事項是，雖然模型在這個測試集上表現完美，但真實世界的過程變數可能很大，因此這些結果應被視為非常樂觀的。",
+        "benchmark_payload": {
+          "explanation_short": "The model achieved a perfect prediction with a sequence correlation of 1.0 and a mean absolute gap of 0.0.",
+          "explanation_full": "This chart, titled 'Figure 6C - Prediction over time,' shows how well the model predicts changes in a process over time. The results indicate that the best model, DT, achieved a perfect prediction, with a sequence correlation of 1.0 and a mean absolute gap of 0.0. This means the model accurately tracked the actual process peaks and troughs. A practical caution is that while the model performed perfectly on this test set, real-world processes can be highly variable, so these results should be viewed as highly optimistic.",
+          "claims": [
+            {
+              "claim_id": "fig6c_prediction_time",
+              "claim_text": "DT sequence diagnostics -> actual_peak_index=2, actual_peak_value=1.0, predicted_peak_index=2, predicted_peak_value=1.0, mean_abs_gap=0.0, sequence_correlation=1.0.",
+              "claim_type": "metric_value",
+              "span_category": "sequence_diagnostics",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "sequence_diagnostics",
+              "object": null,
+              "metric": "sequence_correlation",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_svm_scatter": {
+        "en": "The SVM scatter plot helps us understand how well the model's predictions match the actual results. This specific plot shows that the model's R-squared score is 0.0, meaning its predictions do not explain the variation in the data at all. Furthermore, the Mean Absolute Error (MAE) is 0.0872, indicating that, on average, the model's predictions are off by about 0.0872 units. A practical caution is that the model's predictions range from a minimum of 0.07966 to a maximum of 0.123558, but these predicted values do not correlate with the actual measured values, suggesting the model is not reliable for this task.",
+        "zh_TW": "SVM散点圖有助於我們了解模型的預測與實際結果的匹配程度。此特定圖表顯示，該模型的R平方分數為0.0，這意味著其預測完全無法解釋數據中的變異性。此外，平均絕對誤差（MAE）為0.0872，表明平均而言，模型的預測值偏離實際測量值的程度約為0.0872單位。一個實際的注意事項是，模型的預測值範圍從最低的0.07966到最高的0.123558，但這些預測值與實際測量值之間沒有相關性，這暗示該模型對於此任務並不可靠。",
+        "benchmark_payload": {
+          "explanation_short": "The model's R-squared score is 0.0, indicating that its predictions do not explain the variation in the data at all.",
+          "explanation_full": "The SVM scatter plot helps us understand how well the model's predictions match the actual results. This specific plot shows that the model's R-squared score is 0.0, meaning its predictions do not explain the variation in the data at all. Furthermore, the Mean Absolute Error (MAE) is 0.0872, indicating that, on average, the model's predictions are off by about 0.0872 units. A practical caution is that the model's predictions range from a minimum of 0.07966 to a maximum of 0.123558, but these predicted values do not correlate with the actual measured values, suggesting the model is not reliable for this task.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The model's R-squared score is 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "R2",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "SVM",
+              "predicate": "has R-squared score",
+              "object": 0.0,
+              "metric": "R2",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_dt_scatter": {
+        "en": "Decision tree scatter plot",
+        "zh_TW": "決策樹散點圖",
+        "benchmark_payload": {
+          "explanation_short": "The scatter plot shows that the Decision Tree model achieved a perfect prediction score (R2=1.0) with no errors (RMSE=0.0, MAE=0.0).",
+          "explanation_full": "Decision tree scatter plot",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The Decision Tree model achieved an R2 score of 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "Decision Tree model",
+              "predicate": "achieved",
+              "object": "R2 score of 1.0",
+              "metric": "R2",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The model had zero Root Mean Square Error (RMSE) and Mean Absolute Error (MAE).",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "Decision Tree model",
+              "predicate": "had",
+              "object": "zero RMSE and MAE",
+              "metric": "RMSE/MAE",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_rf_scatter": {
+        "en": "This scatter plot helps us understand how well the Random Forest model's predictions match the actual results. The key metrics show an R-squared (R2) score of 1.0, a Root Mean Square Error (RMSE) of 0.0, and a Mean Absolute Error (MAE) of 0.0. These perfect scores indicate that the model's predictions align almost perfectly with the real-world data, suggesting a very strong predictive capability. However, since the diagnostics show zero residuals and zero maximum absolute residuals, we must be cautious, as this perfect fit might indicate that the model was trained or tested on data that is too simple or limited in scope, and may not perform well on diverse, real-world variations.",
+        "zh_TW": "這個散點圖幫助我們了解隨機森林模型的預測與實際結果的吻合程度。關鍵指標顯示R平方（R2）分數為1.0，均方根誤差（RMSE）為0.0，平均絕對誤差（MAE）為0.0。這些完美的得分表明模型的預測與真實數據幾乎完美吻合，顯示出非常強的預測能力。然而，由於診斷顯示殘差和最大絕對殘差都為零，我們必須謹慎，因為這種完美擬合可能意味著模型是在過於簡單或範圍受限的數據上訓練或測試的，在面對多樣化的真實世界變化時，表現可能不佳。",
+        "benchmark_payload": {
+          "explanation_short": "The model's predictions align almost perfectly with the actual results, showing a very strong predictive capability.",
+          "explanation_full": "This scatter plot helps us understand how well the Random Forest model's predictions match the actual results. The key metrics show an R-squared (R2) score of 1.0, a Root Mean Square Error (RMSE) of 0.0, and a Mean Absolute Error (MAE) of 0.0. These perfect scores indicate that the model's predictions align almost perfectly with the real-world data, suggesting a very strong predictive capability. However, since the diagnostics show zero residuals and zero maximum absolute residuals, we must be cautious, as this perfect fit might indicate that the model was trained or tested on data that is too simple or limited in scope, and may not perform well on diverse, real-world variations.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The Random Forest model achieved an R-squared (R2) score of 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "Random Forest model",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R2",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_knn_scatter": {
+        "en": "This scatter plot is a diagnostic tool used to evaluate how well the KNN model's predictions match the actual observed data. The results show an R-squared (R2) score of 1.0, an RMSE of 0.0, and an MAE of 0.0. These perfect scores indicate that the model's predictions align almost perfectly with the real-world measurements, suggesting extremely high predictive accuracy. However, it is important to note that the diagnostic metrics, such as the mean absolute residual and the correlation between predicted and actual values, are all zero or null, which might suggest that the data used for this specific diagnostic plot was limited or highly uniform, and therefore, the reported perfect scores should be interpreted with caution.",
+        "zh_TW": "這張散點圖是一個診斷工具，用於評估 KNN 模型預測值與實際觀察數據的匹配程度。結果顯示 R平方（R2）分數為 1.0，RMSE 為 0.0，MAE 為 0.0。這些完美的得分表明模型的預測值與真實測量值幾乎完美吻合，暗示了極高的預測準確性。然而，必須注意的是，像平均絕對殘差和預測值與實際值相關性等診斷指標均為零或空值，這可能暗示用於此特定診斷圖的數據有限或高度一致，因此，報告的完美分數應謹慎解讀。",
+        "benchmark_payload": {
+          "explanation_short": "The KNN model achieved perfect diagnostic scores with an R2 of 1.0, RMSE of 0.0, and MAE of 0.0.",
+          "explanation_full": "This scatter plot is a diagnostic tool used to evaluate how well the KNN model's predictions match the actual observed data. The results show an R-squared (R2) score of 1.0, an RMSE of 0.0, and an MAE of 0.0. These perfect scores indicate that the model's predictions align almost perfectly with the real-world measurements, suggesting extremely high predictive accuracy. However, it is important to note that the diagnostic metrics, such as the mean absolute residual and the correlation between predicted and actual values, are all zero or null, which might suggest that the data used for this specific diagnostic plot was limited or highly uniform, and therefore, the reported perfect scores should be interpreted with caution.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The KNN model achieved an R-squared (R2) score of 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "KNN model",
+              "predicate": "achieved",
+              "object": null,
+              "metric": "R2",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_xgboost_scatter": {
+        "en": "The XGBoost scatter plot is a diagnostic chart that helps us understand how well the model's predictions match the actual results. In this specific case, the chart shows that the model's performance metrics, such as R-squared (R2), Root Mean Square Error (RMSE), and Mean Absolute Error (MAE), are all extremely close to zero, indicating a near-perfect fit. However, the diagnostic details also show that the predicted and actual values are all zero, which means the chart cannot provide a meaningful visual assessment of the model's predictive power. Therefore, while the metrics suggest a perfect fit, the chart itself is inconclusive and should not be relied upon for understanding the model's true performance.",
+        "zh_TW": "XGBoost 散點圖是一個診斷圖表，幫助我們了解模型的預測結果與實際結果的吻合程度。在這個特定案例中，圖表顯示模型的性能指標，例如 R 平方（R2）、均方根誤差（RMSE）和平均絕對誤差（MAE），都非常接近零，這表明擬合度接近完美。然而，診斷細節也顯示預測值和實際值都是零，這意味著圖表無法提供有意義的視覺評估。因此，雖然指標暗示了完美的擬合，但圖表本身是無法得出結論的，不應依賴它來了解模型的真實性能。",
+        "benchmark_payload": {
+          "explanation_short": "The diagnostic chart shows that the model's performance metrics are near zero, but the actual and predicted values are also zero, making the chart inconclusive.",
+          "explanation_full": "The XGBoost scatter plot is a diagnostic chart that helps us understand how well the model's predictions match the actual results. In this specific case, the chart shows that the model's performance metrics, such as R-squared (R2), Root Mean Square Error (RMSE), and Mean Absolute Error (MAE), are all extremely close to zero, indicating a near-perfect fit. However, the diagnostic details also show that the predicted and actual values are all zero, which means the chart cannot provide a meaningful visual assessment of the model's predictive power. Therefore, while the metrics suggest a perfect fit, the chart itself is inconclusive and should not be relied upon for understanding the model's true performance.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "XGBoost scatter diagnostics R2 is 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "has R2 score",
+              "object": 0.0,
+              "metric": "r2_score",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_comparison_bars": {
+        "en": "This chart compares how well different machine learning models predict the target outcome using various metrics. The models tested include DT, KNN, RF, XGBoost, and SVM. The key metrics are R² (which measures how well the model fits the data, with 1.0 being perfect), RMSE, MSE, and MAE. The results show that DT, KNN, and RF all achieved a perfect R² score of 1.0, and zero values for RMSE, MSE, and MAE, indicating they are highly accurate predictors. In contrast, SVM performed poorly with an R² of 0.0, and XGBoost also showed a very low R² of 0.0. The main takeaway is that DT, KNN, and RF are the most reliable models for this prediction task. A practical caution is that while these models perform perfectly on the test data, real-world data often contains noise and variability, so their perfect scores should be interpreted with caution.",
+        "zh_TW": "這張圖比較了不同機器學習模型預測目標結果的表現，使用了多種評估指標。測試的模型包括DT、KNN、RF、XGBoost和SVM。關鍵指標包括R²（衡量模型擬合數據的好壞，1.0代表完美），RMSE、MSE和MAE。結果顯示，DT、KNN和RF都達到了完美的R²分數1.0，並且RMSE、MSE和MAE的值為零，這表明它們是高度準確的預測器。相比之下，SVM的表現不佳，R²為0.0，而XGBoost也顯示了非常低的R²為0.0。主要結論是DT、KNN和RF是執行此預測任務最可靠的模型。一個實際的注意事項是，雖然這些模型在測試數據上表現完美，但現實世界的數據通常包含噪音和變異性，因此應謹慎解讀其完美的得分。",
+        "benchmark_payload": {
+          "explanation_short": "DT, KNN, and RF models achieved perfect R² scores of 1.0, while SVM and XGBoost scored 0.0.",
+          "explanation_full": "This chart compares how well different machine learning models predict the target outcome using various metrics. The models tested include DT, KNN, RF, XGBoost, and SVM. The key metrics are R² (which measures how well the model fits the data, with 1.0 being perfect), RMSE, MSE, and MAE. The results show that DT, KNN, and RF all achieved a perfect R² score of 1.0, and zero values for RMSE, MSE, and MAE, indicating they are highly accurate predictors. In contrast, SVM performed poorly with an R² of 0.0, and XGBoost also showed a very low R² of 0.0. The main takeaway is that DT, KNN, and RF are the most reliable models for this prediction task. A practical caution is that while these models perform perfectly on the test data, real-world data often contains noise and variability, so their perfect scores should be interpreted with caution.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "DT, KNN, and RF models all achieved an R² score of 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "DT, KNN, and RF",
+              "predicate": "achieved an R² score of",
+              "object": 1.0,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "SVM model achieved an R² score of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "SVM",
+              "predicate": "achieved an R² score of",
+              "object": 0.0,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "XGBoost model achieved an R² score of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "model_metrics",
+              "is_numeric": true,
+              "requires_grounding_from": "model_metrics",
+              "confidence": 1.0,
+              "subject": "XGBoost",
+              "predicate": "achieved an R² score of",
+              "object": 0.0,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "residuals": {
+        "en": "This chart shows the 'residuals' for the prediction, which essentially measures the difference between what the model predicted and what the actual measured value was. For the best model (DT), the results show a residual mean of 0.0 and a standard deviation of 0.0, indicating that the model's predictions were perfectly aligned with the actual data. This suggests extremely high accuracy. A practical caution is that perfect results might indicate that the model is overfitting the training data and may not perform well on new, real-world samples.",
+        "zh_TW": "此圖顯示預測的『殘差』，本質上衡量的是模型預測值與實際測量值之間的差異。對於最佳模型（DT），結果顯示殘差平均值為 0.0，標準差為 0.0，這表明模型的預測與實際數據完美吻合。這暗示了極高的準確性。一個實際的注意事項是，完美的結果可能表示模型過度擬合了訓練數據，在新的、真實世界的樣本上可能表現不佳。",
+        "benchmark_payload": {
+          "explanation_short": "The residuals for the best model (DT) show a mean and standard deviation of 0.0, indicating perfect prediction accuracy.",
+          "explanation_full": "This chart shows the 'residuals' for the prediction, which essentially measures the difference between what the model predicted and what the actual measured value was. For the best model (DT), the results show a residual mean of 0.0 and a standard deviation of 0.0, indicating that the model's predictions were perfectly aligned with the actual data. This suggests extremely high accuracy. A practical caution is that perfect results might indicate that the model is overfitting the training data and may not perform well on new, real-world samples.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "DT prediction diagnostics show a residual mean of 0.0 and a residual standard deviation of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "residual_mean",
+              "is_numeric": true,
+              "requires_grounding_from": "prediction_story",
+              "confidence": 1.0,
+              "subject": "DT",
+              "predicate": "show",
+              "object": null,
+              "metric": "residual_mean",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_importance": {
+        "en": "This chart shows which factors, or 'features,' were most influential in predicting the final outcome. The most important factors are VFA (0.9023) and Sucrose_Degradation (0.0832). This means that changes in these two factors have the biggest impact on the prediction. A practical caution is that while these features are highly important, the model's performance on these specific features might not reflect their true, real-world significance without further testing.",
+        "zh_TW": "此圖顯示了哪些因素，或稱「特徵」，對預測最終結果影響最大。最重要的因素是 VFA (0.9023) 和 Sucrose_Degradation (0.0832)。這意味著這兩個因素的變化對預測的影響最大。一個實際的注意事項是，雖然這些特徵非常重要，但模型在這些特定特徵上的表現，在沒有進一步測試的情況下，可能無法反映它們真正的、現實世界的意義。",
+        "benchmark_payload": {
+          "explanation_short": "VFA and Sucrose_Degradation are the most influential features in predicting the outcome.",
+          "explanation_full": "This chart shows which factors, or 'features,' were most influential in predicting the final outcome. The most important factors are VFA (0.9023) and Sucrose_Degradation (0.0832). This means that changes in these two factors have the biggest impact on the prediction. A practical caution is that while these features are highly important, the model's performance on these specific features might not reflect their true, real-world significance without further testing.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA is the most important feature with an importance score of 0.9023.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "is the most important feature",
+              "object": "0.9023",
+              "metric": "importance",
+              "value": 0.9022956841,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Sucrose_Degradation is the second most important feature with an importance score of 0.0832.",
+              "claim_type": "top_feature",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "is the second most important feature",
+              "object": "0.0832",
+              "metric": "importance",
+              "value": 0.0831673377,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "correlation_heatmap": {
+        "en": "This chart, called a correlation heatmap, helps us understand how different factors in the process relate to each other. Essentially, it shows if two measurements tend to increase or decrease together. For example, the data shows a very strong positive relationship between Sucrose_Degradation and HPR (0.9999), meaning that as one increases, the other tends to increase almost perfectly. Similarly, VFA and HPR also show a strong positive link (0.9991). However, there is also a strong negative relationship between Sucrose_Degradation and ORP_Mid (-0.9973), suggesting that when Sucrose_Degradation goes up, ORP_Mid tends to go down. The main takeaway is that Sucrose_Degradation and VFA are highly predictive of HPR, and understanding these relationships is crucial for optimizing the process. A practical caution is that correlation does not prove causation; while these factors are strongly linked, other unmeasured variables might be the true cause of the observed pattern.",
+        "zh_TW": "這張名為相關性熱力圖的圖表，幫助我們了解過程中不同的因素之間是如何相互關聯的。本質上，它顯示了兩個測量值是否傾向於一起增加或一起減少。例如，數據顯示 Sucrose_Degradation 和 HPR 之間存在非常強的正相關性 (0.9999)，這意味著當一個增加時，另一個也幾乎完美地傾向於增加。同樣地，VFA 和 HPR 也顯示出強的正相關連結 (0.9991)。然而，Sucrose_Degradation 和 ORP_Mid 之間也存在強的負相關性 (-0.9973)，這表明當 Sucrose_Degradation 上升時，ORP_Mid 傾向於下降。主要的結論是，Sucrose_Degradation 和 VFA 對 HPR 具有高度的預測性，了解這些關係對於優化過程至關重要。一個實際的注意事項是，相關性並不等於因果關係；雖然這些因素關聯性很強，但其他未測量的變數可能是觀察到的模式的真正原因。",
+        "benchmark_payload": {
+          "explanation_short": "The heatmap reveals that Sucrose_Degradation and VFA are highly correlated with HPR, suggesting they are key predictive factors.",
+          "explanation_full": "This chart, called a correlation heatmap, helps us understand how different factors in the process relate to each other. Essentially, it shows if two measurements tend to increase or decrease together. For example, the data shows a very strong positive relationship between Sucrose_Degradation and HPR (0.9999), meaning that as one increases, the other tends to increase almost perfectly. Similarly, VFA and HPR also show a strong positive link (0.9991). However, there is also a strong negative relationship between Sucrose_Degradation and ORP_Mid (-0.9973), suggesting that when Sucrose_Degradation goes up, ORP_Mid tends to go down. The main takeaway is that Sucrose_Degradation and VFA are highly predictive of HPR, and understanding these relationships is crucial for optimizing the process. A practical caution is that correlation does not prove causation; while these factors are strongly linked, other unmeasured variables might be the true cause of the observed pattern.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Sucrose_Degradation 和 HPR 之間存在非常強的正相關性",
+              "claim_type": "metric_value",
+              "span_category": "Sucrose_Degradation vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "與...相關",
+              "object": "HPR",
+              "metric": "相關係數",
+              "value": 0.9999,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "VFA 和 HPR 也顯示出強的正相關連結",
+              "claim_type": "metric_value",
+              "span_category": "VFA vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "與...相關",
+              "object": "HPR",
+              "metric": "相關係數",
+              "value": 0.9991,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Sucrose_Degradation 和 ORP_Mid 之間存在強的負相關性",
+              "claim_type": "metric_value",
+              "span_category": "Sucrose_Degradation vs ORP_Mid",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "與...相關",
+              "object": "ORP_Mid",
+              "metric": "相關係數",
+              "value": -0.9973,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_distributions": {
+        "en": "This chart shows the typical range and central tendency for the key chemical measurements used in the analysis. For instance, Propionate has the highest average value (0.3581), while Ethanol has a moderate average (0.1016). The chart also indicates the variability of these measurements; Propionate shows the highest spread (standard deviation of 0.1538), meaning its values can vary the most. A practical caution is that while some features like Propionate show high variability, others like pH have a relatively narrow range, which might limit the scope of predictions if the real-world process deviates significantly from the observed data range.",
+        "zh_TW": "此圖顯示了分析中使用的關鍵化學測量值的典型範圍和中心趨勢。例如，丙酸丙酯（Propionate）的平均值最高（0.3581），而乙醇（Ethanol）的平均值適中（0.1016）。圖表還顯示了這些測量值的變異性；丙酸丙酯的變異性最高（標準差為0.1538），這意味著其數值變化最大。一個實際的注意事項是，雖然像丙酸丙酯這樣的特徵顯示出高變異性，但像pH值這樣的特徵範圍相對較窄，如果實際的過程偏離了觀察到的數據範圍，可能會限制預測的範圍。",
+        "benchmark_payload": {
+          "explanation_short": "The chart displays the average values and variability (standard deviation) for various chemical features, showing Propionate has the highest mean and highest spread.",
+          "explanation_full": "This chart shows the typical range and central tendency for the key chemical measurements used in the analysis. For instance, Propionate has the highest average value (0.3581), while Ethanol has a moderate average (0.1016). The chart also indicates the variability of these measurements; Propionate shows the highest spread (standard deviation of 0.1538), meaning its values can vary the most. A practical caution is that while some features like Propionate show high variability, others like pH have a relatively narrow range, which might limit the scope of predictions if the real-world process deviates significantly from the observed data range.",
+          "claims": [
+            {
+              "claim_id": "feature_distributions_mean_propionate",
+              "claim_text": "Propionate has the highest average value among the measured features, at 0.3581.",
+              "claim_type": "top_feature",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has highest mean",
+              "object": "0.3581",
+              "metric": "mean",
+              "value": 0.3581,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "feature_distributions_std_propionate",
+              "claim_text": "Propionate exhibits the highest variability, with a standard deviation of 0.1538.",
+              "claim_type": "top_feature",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has highest standard deviation",
+              "object": "0.1538",
+              "metric": "std",
+              "value": 0.1538,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_vs_target": {
+        "en": "This chart helps us understand which measured factors (features) are most related to the final outcome, which is Hydrogen Production Rate (HPR). The correlation value tells us the strength and direction of this relationship: a value close to +1 means they increase together, and a value close to -1 means one increases while the other decreases. For example, Sucrose_Degradation has a very strong positive correlation of 0.9999 with HPR, suggesting that as this feature increases, HPR tends to increase significantly. Similarly, VFA shows a strong positive correlation of 0.9991 with HPR. However, ORP_Mid and ORP_Low show a strong negative correlation of -0.9964 with HPR, meaning that as these values increase, HPR tends to decrease. The main takeaway is that Sucrose_Degradation, VFA, and COD-O are highly predictive of HPR, while ORP_Mid and ORP_Low are inversely related. A practical caution is that while these correlations are strong, they do not guarantee perfect prediction, and other unmeasured factors could influence the actual HPR.",
+        "zh_TW": "這張圖幫助我們了解哪些測量的因素（特徵）與最終的產出，即氫氣產率（HPR），相關性最強。相關係數告訴我們這種關係的強度和方向：接近+1的值表示它們會一起增加，而接近-1的值表示一個增加而另一個減少。舉例來說，Sucrose_Degradation與HPR有極強的正相關性，達到0.9999，這表明隨著此特徵的增加，HPR傾向顯著增加。同樣地，VFA也顯示出0.9991的強正相關性。然而，ORP_Mid和ORP_Low與HPR則顯示出-0.9964的強負相關性，這意味著當這些值增加時，HPR傾向減少。主要的結論是，Sucrose_Degradation、VFA和COD-O是HPR的高度預測因子，而ORP_Mid和ORP_Low則呈反比關係。一個實際的注意事項是，雖然這些相關性很強，但它們不能保證完美的預測，其他未測量的因素也可能影響實際的HPR。",
+        "benchmark_payload": {
+          "explanation_short": "Sucrose_Degradation, VFA, and COD-O show very strong positive correlations with HPR, while ORP_Mid and ORP_Low show strong negative correlations.",
+          "explanation_full": "This chart helps us understand which measured factors (features) are most related to the final outcome, which is Hydrogen Production Rate (HPR). The correlation value tells us the strength and direction of this relationship: a value close to +1 means they increase together, and a value close to -1 means one increases while the other decreases. For example, Sucrose_Degradation has a very strong positive correlation of 0.9999 with HPR, suggesting that as this feature increases, HPR tends to increase significantly. Similarly, VFA shows a strong positive correlation of 0.9991 with HPR. However, ORP_Mid and ORP_Low show a strong negative correlation of -0.9964 with HPR, meaning that as these values increase, HPR tends to decrease. The main takeaway is that Sucrose_Degradation, VFA, and COD-O are highly predictive of HPR, while ORP_Mid and ORP_Low are inversely related. A practical caution is that while these correlations are strong, they do not guarantee perfect prediction, and other unmeasured factors could influence the actual HPR.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Sucrose_Degradation has a very strong positive correlation of 0.9999 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "has correlation with",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.9999,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "VFA shows a strong positive correlation of 0.9991 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "has correlation with",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": 0.9991,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "ORP_Mid and ORP_Low show a strong negative correlation of -0.9964 with HPR.",
+              "claim_type": "metric_value",
+              "span_category": "correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "ORP_Mid and ORP_Low",
+              "predicate": "have correlation with",
+              "object": "HPR",
+              "metric": "correlation",
+              "value": -0.9964,
+              "unit": "",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Sucrose_Degradation, VFA, and COD-O are highly predictive of HPR.",
+              "claim_type": "top_feature",
+              "span_category": "feature_importance",
+              "is_numeric": false,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation, VFA, and COD-O",
+              "predicate": "are highly predictive of",
+              "object": "HPR",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "boxplots": {
+        "en": "This chart, titled 'Feature boxplots,' provides a visual overview of the distribution for several key chemical measurements. It helps us understand the typical range and spread of the data for each feature. For instance, Propionate has the highest average value (mean of 0.3581), while Ethanol has a slightly lower average (0.1016). The chart also shows the variability, or spread, of the data; Propionate also has the largest spread (standard deviation of 0.1538), indicating that its measurements vary the most. A practical caution is that while this chart shows the data spread, it doesn't tell us which features are most important for predicting the final outcome, so we must combine this view with other analysis.",
+        "zh_TW": "這張標題為「特徵箱形圖」的圖表，提供了幾個關鍵化學測量數據的分布概覽。它幫助我們了解每個特徵的典型範圍和分散程度。例如，丙酸丙酯的平均值最高（平均值為 0.3581），而乙醇的平均值稍低（0.1016）。圖表也顯示了數據的變異性，即分散程度；丙酸丙酯的變異性也最大（標準差為 0.1538），這表明其測量值變化最大。一個實際的注意事項是，雖然此圖表顯示了數據的分散情況，但它並不能告訴我們哪些特徵對於預測最終結果最重要，因此我們必須將此視圖與其他分析結合使用。",
+        "benchmark_payload": {
+          "explanation_short": "The boxplots chart shows the distribution and variability of key chemical features, with Propionate having the highest mean and standard deviation.",
+          "explanation_full": "This chart, titled 'Feature boxplots,' provides a visual overview of the distribution for several key chemical measurements. It helps us understand the typical range and spread of the data for each feature. For instance, Propionate has the highest average value (mean of 0.3581), while Ethanol has a slightly lower average (0.1016). The chart also shows the variability, or spread, of the data; Propionate also has the largest spread (standard deviation of 0.1538), indicating that its measurements vary the most. A practical caution is that while this chart shows the data spread, it doesn't tell us which features are most important for predicting the final outcome, so we must combine this view with other analysis.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Propionate has the highest mean value among the features, at 0.3581.",
+              "claim_type": "metric_value",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has the highest mean value",
+              "object": "0.3581",
+              "metric": "mean",
+              "value": 0.3581,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Ethanol has a mean value of 0.1016.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has a mean value",
+              "object": "0.1016",
+              "metric": "mean",
+              "value": 0.1016,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "Propionate has the largest spread, with a standard deviation of 0.1538.",
+              "claim_type": "metric_value",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has the largest spread",
+              "object": "0.1538",
+              "metric": "standard deviation",
+              "value": 0.1538,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Ethanol has a standard deviation of 0.1131.",
+              "claim_type": "metric_value",
+              "span_category": "Ethanol",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Ethanol",
+              "predicate": "has a standard deviation",
+              "object": "0.1131",
+              "metric": "standard deviation",
+              "value": 0.1131,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "time_series": {
+        "en": "This chart shows how well the predictive model tracks changes over time, which is crucial for understanding dynamic processes. The results indicate an extremely high sequence correlation of 1.0, meaning the model's predictions perfectly match the actual trends observed in the data. Furthermore, the predicted peak value is 1.0, matching the actual peak value, and the mean absolute gap is 0.0, suggesting the model is highly accurate and reliable for forecasting. A practical caution is that while the performance is perfect in this test, real-world systems can be affected by unforeseen variables not included in the training data, so continuous monitoring is necessary.",
+        "zh_TW": "此圖顯示預測模型追蹤時間變化（趨勢）的準確性，這對於理解動態過程至關重要。結果顯示序列相關係數達到 1.0，這代表模型的預測與數據中實際觀察到的趨勢完美吻合。此外，預測的峰值值為 1.0，與實際峰值值一致，且平均絕對差距為 0.0，表明該模型在預測方面極為準確和可靠。實用上的注意事項是，雖然測試中的表現是完美的，但現實世界的系統可能會受到訓練數據中未包含的不可預見變數的影響，因此需要持續監控。",
+        "benchmark_payload": {
+          "explanation_short": "The model demonstrates perfect tracking of time-series data with a sequence correlation of 1.0.",
+          "explanation_full": "This chart shows how well the predictive model tracks changes over time, which is crucial for understanding dynamic processes. The results indicate an extremely high sequence correlation of 1.0, meaning the model's predictions perfectly match the actual trends observed in the data. Furthermore, the predicted peak value is 1.0, matching the actual peak value, and the mean absolute gap is 0.0, suggesting the model is highly accurate and reliable for forecasting. A practical caution is that while the performance is perfect in this test, real-world systems can be affected by unforeseen variables not included in the training data, so continuous monitoring is necessary.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The sequence correlation is 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "sequence_correlation",
+              "is_numeric": true,
+              "requires_grounding_from": "sequence_story",
+              "confidence": 1.0,
+              "subject": "model",
+              "predicate": "has",
+              "object": null,
+              "metric": "sequence_correlation",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "model_comparison_table": {
+        "en": "This table compares how well different predictive models performed using various metrics. The models tested include DT, KNN, RF, XGBoost, and SVM. The key metrics are R² (which measures how well the model explains the data, with 1.0 being perfect), RMSE, MSE, and MAE. In this test, DT, KNN, and RF all achieved a perfect R² score of 1.0, and zero values for RMSE, MSE, and MAE, indicating they performed flawlessly. In contrast, SVM showed an R² of 0.0, and XGBoost had an R² of 0.0, suggesting these models were not effective for this prediction task. The main takeaway is that DT, KNN, and RF are highly reliable models for predicting the target variable. A practical caution is that while these models performed perfectly on this test set, real-world data often contains noise and variability, so their performance should be validated on diverse, unseen data.",
+        "zh_TW": "這張表比較了不同預測模型使用各種指標的表現。測試的模型包括DT、KNN、RF、XGBoost和SVM。關鍵指標包括R²（衡量模型解釋數據的好壞，1.0為完美）、RMSE、MSE和MAE。在這次測試中，DT、KNN和RF都達到了完美的R²分數1.0，並且RMSE、MSE和MAE為零，這表明它們表現完美。相比之下，SVM的R²為0.0，而XGBoost的R²也是0.0，這暗示這些模型對於此預測任務並不太有效。主要的結論是DT、KNN和RF是預測目標變數的高度可靠模型。一個實際的注意事項是，雖然這些模型在這個測試集上表現完美，但現實世界的數據通常包含雜訊和變異性，因此應在多樣化、未見過的數據上驗證其性能。",
+        "benchmark_payload": {
+          "explanation_short": "DT, KNN, and RF models achieved perfect R² scores of 1.0, while SVM and XGBoost scored 0.0.",
+          "explanation_full": "This table compares how well different predictive models performed using various metrics. The models tested include DT, KNN, RF, XGBoost, and SVM. The key metrics are R² (which measures how well the model explains the data, with 1.0 being perfect), RMSE, MSE, and MAE. In this test, DT, KNN, and RF all achieved a perfect R² score of 1.0, and zero values for RMSE, MSE, and MAE, indicating they performed flawlessly. In contrast, SVM showed an R² of 0.0, and XGBoost had an R² of 0.0, suggesting these models were not effective for this prediction task. The main takeaway is that DT, KNN, and RF are highly reliable models for predicting the target variable. A practical caution is that while these models performed perfectly on this test set, real-world data often contains noise and variability, so their performance should be validated on diverse, unseen data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "DT, KNN, and RF models all achieved an R² score of 1.0.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "DT, KNN, and RF",
+              "predicate": "achieved an R² score of",
+              "object": 1.0,
+              "metric": "R²",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "SVM and XGBoost models both achieved an R² score of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "SVM and XGBoost",
+              "predicate": "achieved an R² score of",
+              "object": 0.0,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "DT, KNN, and RF models showed zero values for RMSE, MSE, and MAE.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE, MSE, MAE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "DT, KNN, and RF",
+              "predicate": "showed zero values for",
+              "object": null,
+              "metric": "RMSE, MSE, MAE",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "SVM model had an RMSE of 0.0875 and an MSE of 0.00766.",
+              "claim_type": "metric_value",
+              "span_category": "RMSE, MSE",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "SVM model",
+              "predicate": "had an RMSE of",
+              "object": 0.0875,
+              "metric": "RMSE",
+              "value": 0.0875,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_5",
+              "claim_text": "XGBoost model had an R² score of 0.0.",
+              "claim_type": "metric_value",
+              "span_category": "R²",
+              "is_numeric": true,
+              "requires_grounding_from": "model_comparison_table",
+              "confidence": 1.0,
+              "subject": "XGBoost model",
+              "predicate": "had an R² score of",
+              "object": 0.0,
+              "metric": "R²",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "feature_importance_table": {
+        "en": "This table shows which factors (features) were most influential in predicting the outcome. According to the data, VFA was the most important factor, with an importance score of 0.9023. Sucrose_Degradation was the second most important, followed by ORP_Mid. Features like Ethanol, VSS, pH, and Acetate were shown to have zero importance in this model. This suggests that while many factors were measured, only VFA and Sucrose_Degradation provided significant predictive power. A practical caution is that the model might be overly reliant on a few key features, potentially missing the impact of other variables that are not included or are too weak to be detected.",
+        "zh_TW": "此表顯示了哪些因素（特徵）對預測結果影響最大。根據數據，VFA 是最重要的因素，其重要性分數為 0.9023。Sucrose_Degradation 是第二重要的，其次是 ORP_Mid。像 Ethanol、VSS、pH 和 Acetate 等特徵顯示出零重要性。這表明雖然測量了許多因素，但只有 VFA 和 Sucrose_Degradation 提供了顯著的預測能力。一個實際的注意事項是，模型可能過度依賴少數幾個關鍵特徵，可能會忽略其他未包含或太弱而被忽略的變數的影響。",
+        "benchmark_payload": {
+          "explanation_short": "VFA was the most important feature for predicting the outcome, followed by Sucrose_Degradation.",
+          "explanation_full": "This table shows which factors (features) were most influential in predicting the outcome. According to the data, VFA was the most important factor, with an importance score of 0.9023. Sucrose_Degradation was the second most important, followed by ORP_Mid. Features like Ethanol, VSS, pH, and Acetate were shown to have zero importance in this model. This suggests that while many factors were measured, only VFA and Sucrose_Degradation provided significant predictive power. A practical caution is that the model might be overly reliant on a few key features, potentially missing the impact of other variables that are not included or are too weak to be detected.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA was the most important factor in predicting the outcome.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "was the most important factor",
+              "object": "VFA",
+              "metric": "importance",
+              "value": 0.9022956841,
+              "unit": "score",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Sucrose_Degradation was the second most important factor.",
+              "claim_type": "ranking",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "was the second most important factor",
+              "object": "Sucrose_Degradation",
+              "metric": "importance",
+              "value": 0.0831673377,
+              "unit": "score",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "ORP_Mid was the third most important factor.",
+              "claim_type": "ranking",
+              "span_category": "ORP_Mid",
+              "is_numeric": true,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "ORP_Mid",
+              "predicate": "was the third most important factor",
+              "object": "ORP_Mid",
+              "metric": "importance",
+              "value": 0.0145369782,
+              "unit": "score",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Ethanol, VSS, pH, and Acetate were shown to have zero importance in this model.",
+              "claim_type": "freeform",
+              "span_category": "Ethanol, VSS, pH, and Acetate",
+              "is_numeric": false,
+              "requires_grounding_from": "feature_importance_table",
+              "confidence": 1.0,
+              "subject": "Ethanol, VSS, pH, and Acetate",
+              "predicate": "had zero importance",
+              "object": null,
+              "metric": null,
+              "value": 0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "best_model_shap_importance": {
+        "en": "This table shows which chemical measurements (features) were most important in predicting the final outcome. It uses SHAP values to quantify how much each feature contributed to the prediction. According to the data, VFA was the most influential feature, with a mean absolute SHAP value of 0.017. Sucrose_Degradation was the second most important, followed by ORP_Mid. This suggests that VFA is the primary driver of the prediction, while other features like Ethanol, VSS, pH, Acetate, and Butyrate had no measurable impact. When interpreting this, remember that SHAP values show relative importance, and the model's prediction relies heavily on VFA.",
+        "zh_TW": "此表顯示了哪些化學測量（特徵）對於預測最終結果最重要。它使用 SHAP 值來量化每個特徵對預測的貢獻程度。根據數據，VFA 是最具影響力的特徵，其平均絕對 SHAP 值為 0.017。Sucrose_Degradation 是第二重要的，其次是 ORP_Mid。這表明 VFA 是預測的主要驅動因素，而乙醇、VSS、pH、乙酸酯和丁酸等其他特徵則沒有可測量的影響。解讀時請記住，SHAP 值顯示的是相對重要性，模型的預測高度依賴 VFA。",
+        "benchmark_payload": {
+          "explanation_short": "VFA was the most influential feature in predicting the outcome, followed by Sucrose_Degradation and ORP_Mid.",
+          "explanation_full": "This table shows which chemical measurements (features) were most important in predicting the final outcome. It uses SHAP values to quantify how much each feature contributed to the prediction. According to the data, VFA was the most influential feature, with a mean absolute SHAP value of 0.017. Sucrose_Degradation was the second most important, followed by ORP_Mid. This suggests that VFA is the primary driver of the prediction, while other features like Ethanol, VSS, pH, Acetate, and Butyrate had no measurable impact. When interpreting this, remember that SHAP values show relative importance, and the model's prediction relies heavily on VFA.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "VFA was the most influential feature in predicting the outcome.",
+              "claim_type": "top_feature",
+              "span_category": "VFA",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "was the most influential feature",
+              "object": "VFA",
+              "metric": "mean_abs_shap",
+              "value": 0.0170417692,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Sucrose_Degradation was the second most important feature.",
+              "claim_type": "ranking",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "was the second most important feature",
+              "object": "Sucrose_Degradation",
+              "metric": "mean_abs_shap",
+              "value": 0.0031923829,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "ORP_Mid was the third most important feature.",
+              "claim_type": "ranking",
+              "span_category": "ORP_Mid",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "ORP_Mid",
+              "predicate": "was the third most important feature",
+              "object": "ORP_Mid",
+              "metric": "mean_abs_shap",
+              "value": 0.0008423039,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Ethanol, VSS, pH, Acetate, and Butyrate had no measurable impact on the prediction.",
+              "claim_type": "top_feature",
+              "span_category": "Ethanol, VSS, pH, Acetate, Butyrate",
+              "is_numeric": false,
+              "requires_grounding_from": "best_model_shap_importance",
+              "confidence": 1.0,
+              "subject": "Ethanol, VSS, pH, Acetate, Butyrate",
+              "predicate": "had no measurable impact",
+              "object": null,
+              "metric": "mean_abs_shap",
+              "value": 0.0,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "descriptive_statistics": {
+        "en": "This table provides a statistical overview of the key measurements used in the analysis, such as pH, VSS, and various chemical compounds. It shows the average (mean), the typical spread of the data (standard deviation), and the range (minimum and maximum) for each feature. For instance, Propionate has the highest average value (0.3581) and the largest spread (standard deviation of 0.1538), suggesting it varies the most across samples. Conversely, pH has a low average (0.0349) but a relatively large spread (standard deviation of 0.1099). The main takeaway is that while some features, like Propionate, show high variability, others like Sucrose_Degradation have a smaller average and standard deviation, indicating more consistent measurements. A practical caution is that relying solely on these averages might mask important differences between specific samples, so always consider the full range of values (min to max) when interpreting the data.",
+        "zh_TW": "這張表提供了分析中使用的關鍵測量指標的統計概覽，例如 pH 值、VSS 和各種化學化合物。它顯示了每個特徵的平均值（mean）、數據的典型分散程度（標準差，std）以及範圍（最小值和最大值）。舉例來說，丙酸丙酯（Propionate）的平均值最高（0.3581）且分散度最大（標準差為 0.1538），這表明它在不同樣本間的變化最大。相反地，pH 值平均值較低（0.0349），但相對分散度較大（標準差為 0.1099）。主要重點是，雖然有些特徵，如丙酸丙酯，顯示出高變異性，但其他特徵如蔗糖降解（Sucrose_Degradation）平均值和標準差較小，這代表測量更穩定。一個實際的注意事項是，僅依賴這些平均值可能會掩蓋特定樣本之間的重要差異，因此在解讀數據時，應始終考慮完整的數值範圍（最小值到最大值）。",
+        "benchmark_payload": {
+          "explanation_short": "The table summarizes the average, spread, and range of key measured features like pH and Propionate.",
+          "explanation_full": "This table provides a statistical overview of the key measurements used in the analysis, such as pH, VSS, and various chemical compounds. It shows the average (mean), the typical spread of the data (standard deviation), and the range (minimum and maximum) for each feature. For instance, Propionate has the highest average value (0.3581) and the largest spread (standard deviation of 0.1538), suggesting it varies the most across samples. Conversely, pH has a low average (0.0349) but a relatively large spread (standard deviation of 0.1099). The main takeaway is that while some features, like Propionate, show high variability, others like Sucrose_Degradation have a smaller average and standard deviation, indicating more consistent measurements. A practical caution is that relying solely on these averages might mask important differences between specific samples, so always consider the full range of values (min to max) when interpreting the data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Propionate has the highest mean value at 0.3581.",
+              "claim_type": "metric_value",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has mean value",
+              "object": null,
+              "metric": "mean",
+              "value": 0.3581,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "Propionate has the largest standard deviation at 0.1538.",
+              "claim_type": "metric_value",
+              "span_category": "Propionate",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Propionate",
+              "predicate": "has standard deviation",
+              "object": null,
+              "metric": "std",
+              "value": 0.1538,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "pH has a low average of 0.0349.",
+              "claim_type": "metric_value",
+              "span_category": "pH",
+              "is_numeric": true,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "pH",
+              "predicate": "has mean value",
+              "object": null,
+              "metric": "mean",
+              "value": 0.0349,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_4",
+              "claim_text": "Sucrose_Degradation has a smaller average and standard deviation, indicating more consistent measurements.",
+              "claim_type": "freeform",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": false,
+              "requires_grounding_from": "descriptive_statistics_table",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "shows",
+              "object": null,
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "correlation_matrix": {
+        "en": "This table shows how related different measurements are to each other, which helps us understand which factors might influence the final result (HPR). For example, the correlation between Sucrose_Degradation and HPR is 0.9999, indicating a very strong positive relationship: as one increases, the other tends to increase significantly. Similarly, VFA and HPR have a strong positive correlation of 0.9991. A practical caution is that while these correlations are strong, they do not prove that one factor *causes* the change in another; they only show they move together.",
+        "zh_TW": "此表格顯示了不同測量值之間彼此之間的相關性，這有助於我們了解哪些因素可能影響最終結果（HPR）。例如，Sucrose_Degradation 與 HPR 的相關係數為 0.9999，這表明存在非常強的正相關關係：當一個增加時，另一個傾向於顯著增加。同樣地，VFA 和 HPR 具有 0.9991 的強正相關。一個實際的注意事項是，雖然這些相關性很強，但它們並不能證明一個因素*導致*另一個因素的變化；它們只顯示它們是共同變動的。",
+        "benchmark_payload": {
+          "explanation_short": "The correlation matrix shows strong positive relationships between Sucrose_Degradation and HPR (0.9999), and VFA and HPR (0.9991).",
+          "explanation_full": "This table shows how related different measurements are to each other, which helps us understand which factors might influence the final result (HPR). For example, the correlation between Sucrose_Degradation and HPR is 0.9999, indicating a very strong positive relationship: as one increases, the other tends to increase significantly. Similarly, VFA and HPR have a strong positive correlation of 0.9991. A practical caution is that while these correlations are strong, they do not prove that one factor *causes* the change in another; they only show they move together.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "Sucrose_Degradation 與 HPR 的相關係數為 0.9999",
+              "claim_type": "metric_value",
+              "span_category": "Sucrose_Degradation vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "與 HPR 的相關係數",
+              "object": "0.9999",
+              "metric": "correlation",
+              "value": 0.9999,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "VFA 與 HPR 的相關係數為 0.9991",
+              "claim_type": "metric_value",
+              "span_category": "VFA vs HPR",
+              "is_numeric": true,
+              "requires_grounding_from": "asset_evidence",
+              "confidence": 1.0,
+              "subject": "VFA",
+              "predicate": "與 HPR 的相關係數",
+              "object": "0.9991",
+              "metric": "correlation",
+              "value": 0.9991,
+              "unit": "N/A",
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      },
+      "table1_incremental_results": {
+        "en": "This table shows how adding more information (features) affects the prediction accuracy of different machine learning models. Essentially, it tests if including extra data points helps the model predict the target variable better. For the Decision Tree (DT), Random Forest (RF), and K-Nearest Neighbors (KNN) models, the prediction accuracy (R² score) remained perfect (1.0) even when adding up to 11 features, suggesting that the initial feature, Sucrose_Degradation, is highly predictive. However, the Support Vector Machine (SVM) model showed that its best performance was achieved using only 10 features, while the XGBoost model struggled regardless of the features used. Overall, the initial feature, Sucrose_Degradation, is extremely powerful, and the DT, RF, and KNN models are highly robust to additional data.",
+        "zh_TW": "這張表展示了加入更多資訊（特徵）如何影響不同機器學習模型的預測準確度。本質上，它測試了是否包含額外的數據點有助於模型更好地預測目標變數。對於決策樹（DT）、隨機森林（RF）和K近鄰（KNN）模型，即使加入了多達11個特徵，其預測準確度（R²分數）仍保持完美（1.0），這表明初始特徵Sucrose_Degradation具有高度的預測力。然而，支持向量機（SVM）模型顯示，其最佳表現僅使用10個特徵時達到，而XGBoost模型無論使用哪些特徵都表現不佳。總體而言，初始特徵Sucrose_Degradation極具威力，而DT、RF和KNN模型對額外的數據非常穩健。",
+        "benchmark_payload": {
+          "explanation_short": "The initial feature, Sucrose_Degradation, is highly predictive, and the DT, RF, and KNN models are highly robust to additional data.",
+          "explanation_full": "This table shows how adding more information (features) affects the prediction accuracy of different machine learning models. Essentially, it tests if including extra data points helps the model predict the target variable better. For the Decision Tree (DT), Random Forest (RF), and K-Nearest Neighbors (KNN) models, the prediction accuracy (R² score) remained perfect (1.0) even when adding up to 11 features, suggesting that the initial feature, Sucrose_Degradation, is highly predictive. However, the Support Vector Machine (SVM) model showed that its best performance was achieved using only 10 features, while the XGBoost model struggled regardless of the features used. Overall, the initial feature, Sucrose_Degradation, is extremely powerful, and the DT, RF, and KNN models are highly robust to additional data.",
+          "claims": [
+            {
+              "claim_id": "claim_1",
+              "claim_text": "The Decision Tree (DT), Random Forest (RF), and K-Nearest Neighbors (KNN) models maintained a perfect prediction accuracy (R² score of 1.0) even when incorporating up to 11 features.",
+              "claim_type": "metric_value",
+              "span_category": "R² score",
+              "is_numeric": true,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "DT, RF, and KNN models",
+              "predicate": "maintained",
+              "object": "R² score of 1.0",
+              "metric": "R² score",
+              "value": 1.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_2",
+              "claim_text": "The Support Vector Machine (SVM) model achieved its best performance with 10 features, resulting in an R² score of 0.0.",
+              "claim_type": "best_model",
+              "span_category": "SVM",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "SVM model",
+              "predicate": "best performance with",
+              "object": "10 features",
+              "metric": "R² score",
+              "value": 0.0,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            },
+            {
+              "claim_id": "claim_3",
+              "claim_text": "The initial feature, Sucrose_Degradation, is highly predictive, as it was the best single feature for DT, RF, and KNN models.",
+              "claim_type": "top_feature",
+              "span_category": "Sucrose_Degradation",
+              "is_numeric": false,
+              "requires_grounding_from": "results_summary.txt",
+              "confidence": 1.0,
+              "subject": "Sucrose_Degradation",
+              "predicate": "is highly predictive",
+              "object": "initial feature",
+              "metric": null,
+              "value": null,
+              "unit": null,
+              "ordered_items": [],
+              "feature_count": null,
+              "hedged": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "selected_benchmark_explanations": {
+    "provider": "benchmark_selected",
+    "model": "gemma4:e4b",
+    "generated_at": "2026-04-23T04:18:34.308652+00:00",
+    "selection_method": "best_leaderboard_row",
+    "selected_arm": "A",
+    "selected_condition": "image_table_summary",
+    "selected_semantic_level": "L1L2L3",
+    "selected_row": {
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "semantic_level": "L1L2L3",
+      "artifact_count": 3,
+      "claim_count": 17,
+      "fact_precision": 0.8333333333333334,
+      "fact_recall": 0.3888888888888889,
+      "fact_f1": 0.5,
+      "unsupported_claim_rate": 0.0,
+      "contradiction_rate": 0.16666666666666666,
+      "coverage_of_salient_facts": 0.4722222222222222,
+      "numeric_accuracy": 0.8333333333333334,
+      "numeric_tolerance_accuracy": 0.8333333333333334
+    },
+    "overview": {
+      "en": "The incremental feature analysis table shows the performance metrics (R² and MSE) for various feature subsets and model types (SVM, DT, RF, KNN, XGBoost). For all models, the best performance is consistently observed when using only 1 feature (Sucrose_Degradation). For DT, RF, and KNN, using n=1 feature results in R²=1.0 and MSE=0.0. For SVM and XGBoost, the R² remains 0.0 across all feature counts, and the MSE values are non-zero (e.g., SVM MSE at n=1 is 0.0099993796). This pattern holds true up to 11 features, indicating that adding more features does not improve the performance of these models, and in the case of SVM and XGBoost, the performance remains poor regardless of the feature count. The summary text confirms this, stating that DT, RF, and KNN all achieve R²=1.0 and MSE=0.0 with n=1 feature, while SVM and XGBoost have R²=0.0 and non-zero MSEs across all steps. The model metrics also confirm that DT, RF, and KNN are the best performing models with R²=1.0 and MSE=0.0, outperforming SVM and XGBoost (R²=0.0). The best step per model summary explicitly states that DT, RF, and KNN all have their best performance at n=1 feature.\n\nIn summary, the analysis strongly suggests that the single feature 'Sucrose_Degradation' is sufficient to achieve perfect prediction (R²=1.0, MSE=0.0) using DT, RF, and KNN, while SVM and XGBoost fail to achieve high performance regardless of the number of features included. The best model overall is DT, with R²=1.0 and MSE=0.0, based on the model metrics section of the results summary and the best step per model summary in the chart evidence. This conclusion is directly supported by the table evidence (table1_incremental_results.csv) and the chart evidence (fig6ab_mse_r2_features.png). The model performance section of the results summary text also corroborates this finding, listing DT, RF, and KNN with R²=1.0 and MSE=0.0, and SVM and XGBoost with R²=0.0 and non-zero MSEs.\n\nThe table 'table1_incremental_results' details the performance metrics (R² and MSE) for various machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of features increases from 1 to 11, using the feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid -> ORP_Low'.\n\nAcross all feature subsets (n_features 1 through 11):\n- DT, RF, and KNN consistently achieve an R² score of 1.0 and an MSE of 0.0.\n- SVM consistently achieves an R² score of 0.0, with MSE values ranging from 0.00999937964675071 (1 feature) to 0.006607876482459992 (10 features).\n- XGBoost consistently achieves an R² score of 0.0, with MSE values remaining very small (e.g., 7.477596651503524e-14).\n\nIn summary, the performance of DT, RF, and KNN remains perfect (R²=1.0, MSE=0.0) regardless of the feature set size, while SVM and XGBoost maintain an R² of 0.0 across all tested feature subsets.",
+      "zh_TW": ""
+    },
+    "assets": {
+      "table1_incremental_results": {
+        "en": "The table 'table1_incremental_results' details the performance metrics (R² and MSE) for various machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of features increases from 1 to 11, using the feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid -> ORP_Low'.\n\nAcross all feature subsets (n_features 1 through 11):\n- DT, RF, and KNN consistently achieve an R² score of 1.0 and an MSE of 0.0.\n- SVM consistently achieves an R² score of 0.0, with MSE values ranging from 0.00999937964675071 (1 feature) to 0.006607876482459992 (10 features).\n- XGBoost consistently achieves an R² score of 0.0, with MSE values remaining very small (e.g., 7.477596651503524e-14).\n\nIn summary, the performance of DT, RF, and KNN remains perfect (R²=1.0, MSE=0.0) regardless of the feature set size, while SVM and XGBoost maintain an R² of 0.0 across all tested feature subsets.",
+        "zh_TW": ""
+      },
+      "fig6ab_mse_r2_features": {
+        "en": "The incremental feature analysis table shows the performance metrics (R² and MSE) for various feature subsets and model types (SVM, DT, RF, KNN, XGBoost). For all models, the best performance is consistently observed when using only 1 feature (Sucrose_Degradation). For DT, RF, and KNN, using n=1 feature results in R²=1.0 and MSE=0.0. For SVM and XGBoost, the R² remains 0.0 across all feature counts, and the MSE values are non-zero (e.g., SVM MSE at n=1 is 0.0099993796). This pattern holds true up to 11 features, indicating that adding more features does not improve the performance of these models, and in the case of SVM and XGBoost, the performance remains poor regardless of the feature count. The summary text confirms this, stating that DT, RF, and KNN all achieve R²=1.0 and MSE=0.0 with n=1 feature, while SVM and XGBoost have R²=0.0 and non-zero MSEs across all steps. The model metrics also confirm that DT, RF, and KNN are the best performing models with R²=1.0 and MSE=0.0, outperforming SVM and XGBoost (R²=0.0). The best step per model summary explicitly states that DT, RF, and KNN all have their best performance at n=1 feature.\n\nIn summary, the analysis strongly suggests that the single feature 'Sucrose_Degradation' is sufficient to achieve perfect prediction (R²=1.0, MSE=0.0) using DT, RF, and KNN, while SVM and XGBoost fail to achieve high performance regardless of the number of features included. The best model overall is DT, with R²=1.0 and MSE=0.0, based on the model metrics section of the results summary and the best step per model summary in the chart evidence. This conclusion is directly supported by the table evidence (table1_incremental_results.csv) and the chart evidence (fig6ab_mse_r2_features.png). The model performance section of the results summary text also corroborates this finding, listing DT, RF, and KNN with R²=1.0 and MSE=0.0, and SVM and XGBoost with R²=0.0 and non-zero MSEs.",
+        "zh_TW": ""
+      },
+      "feature_distributions": {
+        "en": "Based on the feature distributions, Propionate shows the highest mean value at 0.3581 and the largest standard deviation at 0.1538. Other features also show notable distributions, with Ethanol having a mean of 0.1016 and a standard deviation of 0.1131. pH has a mean of 0.0349 and a standard deviation of 0.1099. Acetate, VSS, and Butyrate follow with means of 0.0546, 0.0293, and 0.0271, respectively, and standard deviations of 0.1023, 0.1018, and 0.1013. These statistics indicate the central tendency and variability of the measured chemical components.",
+        "zh_TW": ""
+      }
+    }
+  },
+  "benchmark_summary": {
+    "generated_at": "2026-04-23T04:18:34.308652+00:00",
+    "artifact_count": 23,
+    "generation_count": 115,
+    "output_dir": "benchmark_eval",
+    "leaderboard_preview": [
+      {
+        "arm": "C",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1",
+        "artifact_count": 7,
+        "claim_count": 30,
+        "fact_precision": 0.5795918367346938,
+        "fact_recall": 0.55,
+        "fact_f1": 0.5555919337431943,
+        "unsupported_claim_rate": 0.1727891156462585,
+        "contradiction_rate": 0.10476190476190476,
+        "coverage_of_salient_facts": 0.4642857142857143,
+        "numeric_accuracy": 0.7666666666666667,
+        "numeric_tolerance_accuracy": 0.7666666666666667
+      },
+      {
+        "arm": "A",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 9,
+        "claim_count": 36,
+        "fact_precision": 0.5518518518518518,
+        "fact_recall": 0.5740740740740741,
+        "fact_f1": 0.5515151515151515,
+        "unsupported_claim_rate": 0.14814814814814814,
+        "contradiction_rate": 0.18888888888888888,
+        "coverage_of_salient_facts": 0.5555555555555556,
+        "numeric_accuracy": 0.6333333333333333,
+        "numeric_tolerance_accuracy": 0.6333333333333333
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1",
+        "artifact_count": 23,
+        "claim_count": 69,
+        "fact_precision": 0.5282608695652173,
+        "fact_recall": 0.5521739130434783,
+        "fact_f1": 0.524120082815735,
+        "unsupported_claim_rate": 0.13405797101449274,
+        "contradiction_rate": 0.12028985507246377,
+        "coverage_of_salient_facts": 0.42391304347826086,
+        "numeric_accuracy": 0.7098039215686275,
+        "numeric_tolerance_accuracy": 0.7098039215686275
+      },
+      {
+        "arm": "C",
+        "input_condition": "image_table_summary",
+        "semantic_level": null,
+        "artifact_count": 8,
+        "claim_count": 22,
+        "fact_precision": 0.5416666666666666,
+        "fact_recall": 0.5416666666666666,
+        "fact_f1": 0.5125,
+        "unsupported_claim_rate": 0.16666666666666666,
+        "contradiction_rate": 0.041666666666666664,
+        "coverage_of_salient_facts": 0.5,
+        "numeric_accuracy": 0.7888888888888889,
+        "numeric_tolerance_accuracy": 0.7888888888888889
+      },
+      {
+        "arm": "A",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1L2L3",
+        "artifact_count": 3,
+        "claim_count": 17,
+        "fact_precision": 0.8333333333333334,
+        "fact_recall": 0.3888888888888889,
+        "fact_f1": 0.5,
+        "unsupported_claim_rate": 0.0,
+        "contradiction_rate": 0.16666666666666666,
+        "coverage_of_salient_facts": 0.4722222222222222,
+        "numeric_accuracy": 0.8333333333333334,
+        "numeric_tolerance_accuracy": 0.8333333333333334
+      },
+      {
+        "arm": "B",
+        "input_condition": "image_table_summary",
+        "semantic_level": "L1L2L3",
+        "artifact_count": 23,
+        "claim_count": 72,
+        "fact_precision": 0.48188405797101447,
+        "fact_recall": 0.4108695652173913,
+        "fact_f1": 0.4289042585717777,
+        "unsupported_claim_rate": 0.13768115942028986,
+        "contradiction_rate": 0.16304347826086957,
+        "coverage_of_salient_facts": 0.37681159420289856,
+        "numeric_accuracy": 0.8052083333333333,
+        "numeric_tolerance_accuracy": 0.8052083333333333
+      }
+    ],
+    "row_count": 11,
+    "artifact_score_count": 115,
+    "warnings": [
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:model_comparison/main (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:feature_ranking/gra (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig3_feature_analysis (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig4_univariate_analysis (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig5_model_comparison (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:fig6c_prediction_time (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_dt_scatter (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_rf_scatter (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_knn_scatter (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:residuals (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:boxplots (A/image_table_summary).",
+      "Missing selected generation for Docker_E2E_20260423_ArmB_Rerun:chart:time_series (A/image_table_summary)."
+    ],
+    "best_overall": {
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "semantic_level": "L1",
+      "artifact_count": 7,
+      "claim_count": 30,
+      "fact_precision": 0.5795918367346938,
+      "fact_recall": 0.55,
+      "fact_f1": 0.5555919337431943,
+      "unsupported_claim_rate": 0.1727891156462585,
+      "contradiction_rate": 0.10476190476190476,
+      "coverage_of_salient_facts": 0.4642857142857143,
+      "numeric_accuracy": 0.7666666666666667,
+      "numeric_tolerance_accuracy": 0.7666666666666667
+    },
+    "per_chart": {
+      "artifact_count": 23,
+      "chart_count": 20,
+      "core_artifact_count": 3,
+      "coverage_gap_count": 15,
+      "coverage_gap_preview": [
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:correlation_heatmap",
+          "asset_key": "correlation_heatmap",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+          "asset_key": "feature_distributions",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+          "asset_key": "feature_importance",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+          "asset_key": "feature_vs_target",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3_feature_analysis",
+          "asset_key": "fig3_feature_analysis",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+          "asset_key": "fig3a_gra_ranking",
+          "artifact_scope": "chart",
+          "missing_rows": [
+            {
+              "arm": "A",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            },
+            {
+              "arm": "C",
+              "input_condition": "image_table_summary",
+              "semantic_level": null
+            }
+          ]
+        }
+      ],
+      "best_preview": [
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_rf_scatter",
+          "artifact_type": "chart/model_rf_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_rf_scatter",
+          "asset_title": "Random forest scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_rf_scatter.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "RF"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_rf_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 2,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for RF r2_score is 1.0.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for RF max_abs_residual is 0.0.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for RF r2_score is 1.0.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 0.0
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_svm_scatter",
+          "artifact_type": "chart/model_svm_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_svm_scatter",
+          "asset_title": "SVM scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_svm_scatter.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "SVM"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_svm_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 3,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 3,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for SVM r2_score is 0.0.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for SVM max_abs_residual is 0.123558.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for SVM r2_score is 0.0.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 0.0
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+          "artifact_type": "chart/boxplots",
+          "artifact_scope": "chart",
+          "asset_key": "boxplots",
+          "asset_title": "Feature boxplots",
+          "asset_family": "distribution",
+          "chart_type": "boxplot",
+          "chart_file": "fig_boxplots.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_boxplots.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Propionate mean is 0.3580733426.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for Propionate std is 0.1537517011.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for Propionate mean is 0.3580733426.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 3.747814999997823e-05
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_distributions",
+          "artifact_type": "chart/feature_distributions",
+          "artifact_scope": "chart",
+          "asset_key": "feature_distributions",
+          "asset_title": "Feature distributions",
+          "asset_family": "distribution",
+          "chart_type": "distribution_plot",
+          "chart_file": "fig_feature_distributions.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "pH",
+            "VSS",
+            "Ethanol",
+            "Acetate",
+            "Propionate",
+            "Butyrate"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_descriptive_statistics.csv",
+            "fig_feature_distributions.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 2,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Propionate mean is 0.3580733426.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for Propionate std is 0.1537517011.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for Propionate mean is 0.3580733426.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 3.747814999997823e-05
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3a_gra_ranking",
+          "artifact_type": "chart/fig3a_gra_ranking",
+          "artifact_scope": "chart",
+          "asset_key": "fig3a_gra_ranking",
+          "asset_title": "Figure 3A - Grey relational ranking",
+          "asset_family": "feature_ranking",
+          "chart_type": "ranking_chart",
+          "chart_file": "fig3a_gra_ranking.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "Sucrose_Degradation",
+            "VFA",
+            "COD-O",
+            "Butyrate",
+            "VSS"
+          ],
+          "source_files": [
+            "best_model_summary.json",
+            "gra_ranking.json",
+            "results_summary.txt",
+            "summary.json",
+            "fig3a_gra_ranking.png"
+          ],
+          "summary_files": [
+            "results_summary.txt"
+          ],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 3,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 3,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Sucrose_Degradation gra_score is 0.9998167208550294.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for VFA gra_score is 0.999440391226679.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for COD-O gra_score is 0.999004932969452.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for Sucrose_Degradation gra_score is 0.9998167208550294.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 2.068168372015844e-05
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+          "artifact_type": "chart/fig3b_shap_analysis",
+          "artifact_scope": "chart",
+          "asset_key": "fig3b_shap_analysis",
+          "asset_title": "Figure 3B - SHAP analysis",
+          "asset_family": "feature_story_shap",
+          "chart_type": "bar_chart",
+          "chart_file": "fig3b_shap_analysis.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "VFA",
+            "Sucrose_Degradation",
+            "ORP_Mid",
+            "Ethanol",
+            "VSS",
+            "pH"
+          ],
+          "source_files": [
+            "best_model_shap_importance.csv",
+            "best_model_summary.json",
+            "summary.json",
+            "fig3b_shap_analysis.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 1.0,
+          "fact_f1": 1.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+              "count": 2
+            },
+            {
+              "reason": "Gold value for Sucrose_Degradation mean_abs_shap is 0.0031923829.",
+              "count": 2
+            }
+          ],
+          "top_reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+          "top_reason_count": 2,
+          "mean_numeric_delta": 2.4693149999999945e-05
+        }
+      ],
+      "hardest_preview": [
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3_feature_analysis",
+          "artifact_type": "chart/fig3_feature_analysis",
+          "artifact_scope": "chart",
+          "asset_key": "fig3_feature_analysis",
+          "asset_title": "Figure 3 - Combined feature analysis",
+          "asset_family": "feature_analysis_combined",
+          "chart_type": "composite_chart",
+          "chart_file": "fig3_feature_analysis.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "Sucrose_Degradation",
+            "VFA",
+            "COD-O",
+            "Butyrate",
+            "VSS",
+            "ORP_Mid",
+            "Ethanol",
+            "pH",
+            "ORP_Low"
+          ],
+          "source_files": [
+            "best_model_shap_importance.csv",
+            "gra_ranking.json",
+            "summary.json",
+            "table1_incremental_results.csv",
+            "table_correlation_matrix.csv",
+            "table_feature_importance.csv",
+            "fig3_feature_analysis.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 0,
+          "fact_precision": 0.0,
+          "fact_recall": 0.0,
+          "fact_f1": 0.0,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": null,
+          "numeric_tolerance_accuracy": null,
+          "supported_claim_count": 0,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [],
+          "top_reason": null,
+          "top_reason_count": 0,
+          "mean_numeric_delta": null
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+          "artifact_type": "chart/model_xgboost_scatter",
+          "artifact_scope": "chart",
+          "asset_key": "model_xgboost_scatter",
+          "asset_title": "XGBoost scatter plot",
+          "asset_family": "prediction_scatter",
+          "chart_type": "scatter_plot",
+          "chart_file": "model_xgboost_scatter.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "XGBoost"
+          ],
+          "source_files": [
+            "summary.json",
+            "table_model_comparison.csv",
+            "model_xgboost_scatter.png"
+          ],
+          "summary_files": [],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": null,
+          "claim_count": 2,
+          "fact_precision": 0.5,
+          "fact_recall": 0.5,
+          "fact_f1": 0.5,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.5,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 0.5,
+          "numeric_tolerance_accuracy": 0.5,
+          "supported_claim_count": 1,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 1,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for XGBoost r2_score is 0.0.",
+              "count": 1
+            },
+            {
+              "reason": "Gold value for XGBoost mae is 2.735e-07.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for XGBoost r2_score is 0.0.",
+          "top_reason_count": 1,
+          "mean_numeric_delta": 1.36499986325
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:incremental_feature_analysis/main",
+          "artifact_type": "incremental_feature_analysis/main",
+          "artifact_scope": "core_bundle",
+          "asset_key": null,
+          "asset_title": null,
+          "asset_family": null,
+          "chart_type": "line_chart",
+          "chart_file": "fig6ab_mse_r2_features.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "SVM",
+            "DT",
+            "RF",
+            "KNN",
+            "XGBoost"
+          ],
+          "source_files": [
+            "table1_incremental_results.csv",
+            "fig6ab_mse_r2_features.png",
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "summary_files": [
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1L2L3",
+          "claim_count": 4,
+          "fact_precision": 0.5,
+          "fact_recall": 0.5,
+          "fact_f1": 0.5,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.5,
+          "coverage_of_salient_facts": 0.5,
+          "numeric_accuracy": 0.5,
+          "numeric_tolerance_accuracy": 0.5,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 2,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for DT best_r2 is 1.0.",
+              "count": 3
+            },
+            {
+              "reason": "Gold value for DT best_mse is 0.0.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for DT best_r2 is 1.0.",
+          "top_reason_count": 3,
+          "mean_numeric_delta": 0.5
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6ab_mse_r2_features",
+          "artifact_type": "chart/fig6ab_mse_r2_features",
+          "artifact_scope": "chart",
+          "asset_key": "fig6ab_mse_r2_features",
+          "asset_title": "Figure 6A/B - MSE and R² vs feature count",
+          "asset_family": "incremental_feature_analysis_chart",
+          "chart_type": "line_chart",
+          "chart_file": "fig6ab_mse_r2_features.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "SVM",
+            "DT",
+            "RF",
+            "KNN",
+            "XGBoost"
+          ],
+          "source_files": [
+            "results_summary.txt",
+            "summary.json",
+            "table1_incremental_results.csv",
+            "fig6ab_mse_r2_features.png"
+          ],
+          "summary_files": [
+            "results_summary.txt"
+          ],
+          "row_rank": 1,
+          "arm": "A",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1L2L3",
+          "claim_count": 4,
+          "fact_precision": 1.0,
+          "fact_recall": 0.3333333333333333,
+          "fact_f1": 0.5,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.0,
+          "coverage_of_salient_facts": 0.25,
+          "numeric_accuracy": 1.0,
+          "numeric_tolerance_accuracy": 1.0,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 0,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for DT mse is 0.0.",
+              "count": 3
+            },
+            {
+              "reason": "Gold value for DT feature_subset_optimum is 1.0.",
+              "count": 1
+            }
+          ],
+          "top_reason": "Gold value for DT mse is 0.0.",
+          "top_reason_count": 3,
+          "mean_numeric_delta": 0.0
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:model_comparison/main",
+          "artifact_type": "model_comparison/main",
+          "artifact_scope": "core_bundle",
+          "asset_key": null,
+          "asset_title": null,
+          "asset_family": null,
+          "chart_type": "bar_chart",
+          "chart_file": "fig5_model_comparison.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "SVM",
+            "DT",
+            "RF",
+            "KNN",
+            "XGBoost"
+          ],
+          "source_files": [
+            "table_model_comparison.csv",
+            "summary.json",
+            "fig5_model_comparison.png",
+            "fig_model_comparison_bars.png",
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "summary_files": [
+            "results_summary.txt",
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "B",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 10,
+          "fact_precision": 0.4,
+          "fact_recall": 1.0,
+          "fact_f1": 0.5714285714285715,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.6,
+          "coverage_of_salient_facts": 1.0,
+          "numeric_accuracy": 0.4,
+          "numeric_tolerance_accuracy": 0.4,
+          "supported_claim_count": 4,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 6,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for DT r2_score is 1.0.",
+              "count": 3
+            },
+            {
+              "reason": "Gold value for DT rmse is 0.0.",
+              "count": 3
+            },
+            {
+              "reason": "Gold value for DT mae is 0.0.",
+              "count": 3
+            }
+          ],
+          "top_reason": "Gold value for DT r2_score is 1.0.",
+          "top_reason_count": 3,
+          "mean_numeric_delta": 0.7634700000000001
+        },
+        {
+          "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_vs_target",
+          "artifact_type": "chart/feature_vs_target",
+          "artifact_scope": "chart",
+          "asset_key": "feature_vs_target",
+          "asset_title": "Feature vs target chart",
+          "asset_family": "correlation",
+          "chart_type": "correlation_chart",
+          "chart_file": "fig_feature_vs_target.png",
+          "bundle_name": "Docker_E2E_20260423_ArmB_Rerun",
+          "primary_entities": [
+            "ORP_Mid vs ORP_Low",
+            "Sucrose_Degradation vs HPR",
+            "VFA vs HPR",
+            "Sucrose_Degradation vs VFA",
+            "VFA vs COD-O",
+            "Sucrose_Degradation vs ORP_Mid",
+            "Sucrose_Degradation",
+            "VFA",
+            "ORP_Mid",
+            "ORP_Low",
+            "COD-O",
+            "Butyrate"
+          ],
+          "source_files": [
+            "analysis_summary_report.txt",
+            "summary.json",
+            "table_correlation_matrix.csv",
+            "table_descriptive_statistics.csv",
+            "fig_feature_vs_target.png"
+          ],
+          "summary_files": [
+            "analysis_summary_report.txt"
+          ],
+          "row_rank": 1,
+          "arm": "C",
+          "input_condition": "image_table_summary",
+          "semantic_level": "L1",
+          "claim_count": 3,
+          "fact_precision": 0.6666666666666666,
+          "fact_recall": 0.5,
+          "fact_f1": 0.5714285714285715,
+          "unsupported_claim_rate": 0.0,
+          "contradiction_rate": 0.3333333333333333,
+          "coverage_of_salient_facts": 0.0,
+          "numeric_accuracy": 0.6666666666666666,
+          "numeric_tolerance_accuracy": 0.6666666666666666,
+          "supported_claim_count": 2,
+          "partially_supported_claim_count": 0,
+          "contradicted_claim_count": 1,
+          "unverifiable_claim_count": 0,
+          "top_reasons": [
+            {
+              "reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+              "count": 3
+            }
+          ],
+          "top_reason": "Gold value for Sucrose_Degradation target_correlation is 0.9999.",
+          "top_reason_count": 3,
+          "mean_numeric_delta": 0.00146666666666669
+        }
+      ]
+    },
+    "files": {
+      "benchmark_manifest": "benchmark_eval/manifest.jsonl",
+      "benchmark_run_metadata": "benchmark_eval/run_metadata.json",
+      "benchmark_leaderboard_json": "benchmark_eval/scores/leaderboard.json",
+      "benchmark_leaderboard_csv": "benchmark_eval/scores/leaderboard.csv",
+      "benchmark_per_chart_json": "benchmark_eval/scores/per_chart_benchmark.json",
+      "benchmark_per_chart_csv": "benchmark_eval/scores/per_chart_benchmark.csv",
+      "benchmark_selected_explanations": "benchmark_eval/selected_explanations.json"
+    },
+    "selected_explanations": {
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "asset_count": 3,
+      "provider": "benchmark_selected",
+      "model": "gemma4:e4b"
+    }
+  }
+}

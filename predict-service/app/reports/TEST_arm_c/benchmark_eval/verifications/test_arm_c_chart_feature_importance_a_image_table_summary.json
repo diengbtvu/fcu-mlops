@@ -1,0 +1,106 @@
+{
+  "artifact_id": "TEST_arm_c:chart:feature_importance",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS has the highest importance (0.5052)",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VSS has an importance of 0.5052",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VSS:importance"
+      ],
+      "reason": "Gold value for VSS importance is 0.5052222633.",
+      "numeric_delta": 2.226329999999166e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate has an importance of 0.12",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:Acetate:importance"
+      ],
+      "reason": "Gold value for Acetate importance is 0.1199757325.",
+      "numeric_delta": 2.4267499999994224e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "Butyrate has an importance of 0.10",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:Butyrate:importance"
+      ],
+      "reason": "Gold value for Butyrate importance is 0.0969761328.",
+      "numeric_delta": 0.003023867200000002
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "VFA has an importance of 0.07",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.0748037264.",
+      "numeric_delta": 0.0048037264
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "Propionate has an importance of 0.06",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:metric:Propionate:importance"
+      ],
+      "reason": "Gold value for Propionate importance is 0.0576947792.",
+      "numeric_delta": 0.0023052208000000005
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "The feature importance ranking is VSS, Acetate, Butyrate, VFA, Propionate, Ethanol, ORP_Low, ORP_Mid, pH, Sucrose_Degradation, COD-O",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:feature_importance:ranking"
+      ],
+      "reason": "At least one ranked item is absent from the gold ranking.",
+      "numeric_delta": null
+    }
+  ]
+}

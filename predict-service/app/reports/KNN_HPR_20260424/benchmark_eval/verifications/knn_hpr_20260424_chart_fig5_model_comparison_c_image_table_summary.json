@@ -1,0 +1,62 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:best_model",
+      "claim_text": "The KNN model achieved the highest R² (0.81717) and lowest MSE (0.012810) among all models tested, indicating superior performance in predicting hydrogen production.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae",
+      "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.0750230875.",
+      "numeric_delta": 0.0622130875
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse",
+      "claim_text": "The KNN model achieved the lowest MSE (0.012810) among all models tested, suggesting a strong correlation between predicted and actual HPR values.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.0128099184.",
+      "numeric_delta": 8.16000000000705e-08
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig5_model_comparison",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score",
+      "claim_text": "The KNN model achieved the highest R² (0.81717) among all models tested, indicating superior performance in predicting hydrogen production.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig5_model_comparison:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 2.198299999922604e-06
+    }
+  ]
+}

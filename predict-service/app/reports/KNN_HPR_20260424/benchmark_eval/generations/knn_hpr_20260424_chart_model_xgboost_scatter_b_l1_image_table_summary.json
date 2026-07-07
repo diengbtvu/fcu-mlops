@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model achieves a high R2 score of 0.7495, indicating a strong correlation between predicted and actual values. The RMSE is 0.1325, suggesting relatively low prediction errors.",
+  "explanation_full": "The XGBoost model demonstrates strong performance in predicting the target variable. Its R2 score of 0.7495 signifies a high degree of correlation between the predicted and actual values, indicating that the model captures the underlying trend in the data effectively.  Furthermore, the RMSE of 0.1325 suggests relatively low prediction errors, meaning the model's predictions are close to the true values on average. This performance is supported by the scatter plot visualization, which shows a generally tight clustering of predicted and actual values around the diagonal line.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model achieves a high R2 score of 0.7495, indicating a strong correlation between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "XGBoost::r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": "0.7495",
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "claim_text": "The RMSE is 0.1325, suggesting relatively low prediction errors.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "XGBoost::rmse",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "subject": "XGBoost",
+      "predicate": "rmse",
+      "object": "0.1325",
+      "metric": "rmse",
+      "value": 0.1325,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

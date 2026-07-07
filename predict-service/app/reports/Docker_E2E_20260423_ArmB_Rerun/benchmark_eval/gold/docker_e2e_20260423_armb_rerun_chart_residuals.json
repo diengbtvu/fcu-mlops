@@ -1,0 +1,260 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+  "artifact_type": "chart/residuals",
+  "source_files": [
+    "best_model_summary.json",
+    "summary.json",
+    "table_model_comparison.csv",
+    "fig_residuals.png"
+  ],
+  "chart_type": "residual_plot",
+  "primary_entities": [
+    "DT"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT r2_score"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:rmse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT rmse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:mse",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT mse"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:mae",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT mae"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_mean",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "residual_mean",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT residual_mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_std",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "residual_std",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT residual_std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:mean_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "mean_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT mean_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:max_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT max_abs_residual"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:p95_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "p95_abs_residual",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT p95_abs_residual"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:actual_min",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "actual_min",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT actual_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:actual_max",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "actual_max",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT actual_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:predicted_min",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "predicted_min",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT predicted_min"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:predicted_max",
+      "fact_type": "metric_value",
+      "subject": "DT",
+      "predicate": "predicted_max",
+      "object": null,
+      "value": 0.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "DT predicted_max"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_mean",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_std",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:p95_abs_residual",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:max_abs_residual"
+  ],
+  "forbidden_inferences": [
+    "Do not read diagnostic plots as guarantees for every individual prediction.",
+    "Do not let narrative prose override the diagnostic metrics."
+  ]
+}

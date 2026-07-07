@@ -626,6 +626,7 @@
     "sidebar.model_management": "模型管理",
     "sidebar.dataset_management": "資料集管理",
     "sidebar.email_settings": "電子郵件設定",
+    "sidebar.ai_api_keys": "AI API 金鑰",
     "sidebar.my_profile": "我的個人資料",
     "sidebar.logout": "登出",
     "sidebar.system_name": "產氫速率預測系統",

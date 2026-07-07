@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN is the best performing model, showing strong predictive power (R2=0.8172, RMSE=0.1132), while the residuals analysis indicates a high correlation (0.9073) between predictions and actual values.",
+  "explanation_full": "Observations show that the KNN model significantly outperforms other benchmark models, achieving the highest R2 score (0.8172) and the lowest RMSE (0.1132). The residual analysis further confirms the model's strength, reporting a high correlation of 0.9073 between predicted and actual values. This suggests that the model captures the underlying relationship in the data effectively. However, the residual standard deviation of 0.1125 suggests a moderate spread of errors, which should be considered when interpreting the model's generalizability.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model achieved the highest performance metrics, with an R^2 of 0.8172.",
+      "claim_type": "metric_value",
+      "span_category": "R^2",
+      "is_numeric": true,
+      "requires_grounding_from": "R^2",
+      "confidence": 0.95,
+      "subject": "KNN",
+      "predicate": "achieved the highest performance metrics",
+      "object": "R^2",
+      "metric": "r^2",
+      "value": 0.8172,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The model's performance is characterized by a low Root Mean Square Error (RMSE) of 0.1132.",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "RMSE",
+      "confidence": 0.95,
+      "subject": "model's performance",
+      "predicate": "is characterized by",
+      "object": "RMSE",
+      "metric": "rmse",
+      "value": 0.1132,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The model's performance is characterized by a low Root Mean Square Error (RMSE) of 0.1132.",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "RMSE",
+      "confidence": 0.95,
+      "subject": "model's performance",
+      "predicate": "is characterized by",
+      "object": "RMSE",
+      "metric": "rmse",
+      "value": 0.1132,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

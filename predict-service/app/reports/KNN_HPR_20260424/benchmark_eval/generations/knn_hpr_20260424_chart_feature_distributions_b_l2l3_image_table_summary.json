@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol and Acetate have the highest mean feature values, while pH has the lowest.",
+  "explanation_full": "The distribution of features across different variables shows that Ethanol and Acetate have the highest average feature values (0.4736 and 0.4465 respectively), indicating they are more prominent in the dataset. Conversely, pH exhibits the lowest average value (0.2355), suggesting it plays a less significant role compared to other features.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+      "claim_text": "Ethanol and Acetate have the highest mean feature values, while pH has the lowest.",
+      "claim_type": "top_feature",
+      "span_category": "distribution::mean",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_distributions:top_feature:mean",
+      "subject": "distribution",
+      "predicate": "mean",
+      "object": "distribution",
+      "metric": "mean",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

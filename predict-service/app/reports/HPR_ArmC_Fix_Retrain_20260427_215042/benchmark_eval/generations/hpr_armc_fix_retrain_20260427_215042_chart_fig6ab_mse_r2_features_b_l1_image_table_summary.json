@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "This is a summary of the results for model HPR_ArmC_Fix_Retrain_20260427_215042. The best performing model is KNN with an R² of 0.81717 and an MSE of 0.012810.",
+  "explanation_full": "This JSON payload contains the results for a machine learning model named HPR_ArmC_Fix_Retrain_20260427_215042. The model was trained on data and evaluated using various metrics. \n\nThe best performing model is KNN with an R² of 0.81717 and an MSE of 0.012810. This indicates that the KNN model is able to accurately predict the target variable based on the input features.\n\nThe payload also includes information about other models, such as SVM, DT, RF, and XGBoost, along with their performance metrics. Additionally, there's a breakdown of feature importance based on grey relational analysis, showing which features contribute most to the model's predictions. \n\nFinally, the payload provides links to charts and summary text files that offer further insights into the model's performance and results.\n\nThis information can be used to understand the effectiveness of different models, identify important features, and make informed decisions about deploying the model in a real-world setting.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_mse",
+      "claim_text": "KNN has the best mse of 0.012810.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_mse",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": 0.01281,
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_r2",
+      "claim_text": "KNN has the best r2 score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_r2",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig6ab_mse_r2_features:best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": 0.81717,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

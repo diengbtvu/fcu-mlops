@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "rmse_knn",
+      "claim_text": "The KNN model shows the lowest RMSE (0.113)",
+      "claim_type": "metric_value",
+      "span_category": "RMSE",
+      "is_numeric": true,
+      "requires_grounding_from": "model_performance",
+      "confidence": 1.0,
+      "source_variable_id": "rmse_knn",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "rmse",
+      "value": 0.113,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "r2_knn",
+      "claim_text": "The KNN model shows the highest R2 (0.82)",
+      "claim_type": "metric_value",
+      "span_category": "R2",
+      "is_numeric": true,
+      "requires_grounding_from": "model_performance",
+      "confidence": 1.0,
+      "source_variable_id": "r2_knn",
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.82,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

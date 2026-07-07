@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "This model uses KNN to predict HPR based on various wastewater parameters. It achieves an R2 score of 0.817, indicating a strong correlation between the input features and the target variable.",
+  "explanation_full": "The model 'HPR_ArmC_Fix_Retrain_20260427_215042' was trained using the KNN algorithm to predict HPR (Hydraulic Performance Ratio) based on several wastewater parameters. The model achieved a high R2 score of 0.817, demonstrating a strong correlation between the input features and the target variable. This suggests that the selected features effectively capture the underlying patterns influencing HPR.  The top performing features include VFA (Volatile Fatty Acids), Butyrate, Acetate, VSS (Volatile Suspended Solids), and Propionate. These parameters are commonly used in wastewater treatment processes and their influence on HPR is well-established. The model's performance outperforms other benchmark models such as SVM, DT, RF, and XGBoost, indicating its effectiveness in predicting HPR based on the provided dataset. Further analysis of feature importance can provide insights into the relative contribution of each parameter to the prediction accuracy.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2",
+      "claim_text": "KNN achieves an R2 score of 0.817.",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:best_r2",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "0.817",
+      "metric": "r2_score",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "claim_text": "The correlation between Butyrate and VFA is 2.",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3_feature_analysis:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": "2",
+      "metric": "correlation",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

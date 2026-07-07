@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model achieved an R2 score of 0.7324, indicating a good fit to the data.",
+  "explanation_full": "Based on the scatter plot, the SVM model demonstrates a strong correlation between predicted and actual values (R2=0.7324). The RMSE is 0.1369, suggesting relatively low prediction errors.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "claim_text": "R2 score of 0.7324",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": "0.7324",
+      "metric": "r2_score",
+      "value": 0.7324,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

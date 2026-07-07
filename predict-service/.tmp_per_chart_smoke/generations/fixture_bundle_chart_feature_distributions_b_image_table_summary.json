@@ -1,0 +1,67 @@
+{
+  "artifact_id": "fixture_bundle:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol has the highest mean in the sample summary.",
+  "explanation_full": "Ethanol has the highest mean, while Butyrate has the highest std. The leading mean ordering is Ethanol > Propionate > VFA.",
+  "claims": [
+    {
+      "claim_id": "top-mean",
+      "claim_text": "Ethanol is the top feature by mean.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.95,
+      "subject": "Ethanol",
+      "predicate": null,
+      "object": "Ethanol",
+      "metric": "mean",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "mean-ranking",
+      "claim_text": "The mean ordering is Ethanol > Propionate > VFA.",
+      "claim_type": "ranking",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.89,
+      "subject": "ordering",
+      "predicate": null,
+      "object": null,
+      "metric": "mean",
+      "value": null,
+      "unit": null,
+      "ordered_items": [
+        "Ethanol",
+        "Propionate",
+        "VFA"
+      ],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "top-std",
+      "claim_text": "Butyrate is the top feature by std.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "Butyrate",
+      "predicate": null,
+      "object": "Butyrate",
+      "metric": "std",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The XGBoost model exhibits a strong positive correlation with the actual values, as evidenced by the R2 score of 0.7495 and a slope of 0.8387 in the scatter plot. The residuals are generally small, indicating good predictive performance.",
+  "explanation_full": "The XGBoost model demonstrates a strong positive relationship with the actual values, as seen in the scatter plot.  The R2 score of 0.7495 indicates that 74.95% of the variance in the target variable can be explained by the model's predictions. The slope of 0.8387 suggests a strong linear relationship, meaning that for every unit increase in the input, the predicted output increases by 0.8387 units.  The residuals are generally small, indicating good predictive performance. This is further supported by the RMSE of 0.1325 and MAE of 0.0956. The model's ability to accurately capture the trend in the data suggests its potential for reliable predictions.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

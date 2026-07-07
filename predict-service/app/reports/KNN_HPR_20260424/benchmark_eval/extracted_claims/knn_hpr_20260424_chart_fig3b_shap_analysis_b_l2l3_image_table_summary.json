@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "claim_text": "VFA, Butyrate, and Acetate are the top three most influential features for predicting HRT 12 -4 h.",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "shap::mean_abs_shap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:top_feature",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "mean_abs_shap",
+      "value": -4.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "claim_text": "VFA, Butyrate, and Acetate are the most influential features in predicting HRT 12 -4 h.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "shap::mean_abs_shap",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:fig3b_shap_analysis:ranking",
+      "subject": "shap",
+      "predicate": "mean_abs_shap",
+      "object": "VFA, Butyrate, and Acetate",
+      "metric": "mean_abs_shap",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ]
+}

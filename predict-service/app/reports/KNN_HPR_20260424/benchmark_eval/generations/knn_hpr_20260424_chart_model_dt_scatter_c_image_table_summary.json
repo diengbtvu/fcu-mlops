@@ -1,0 +1,84 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_dt_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The decision tree model has an R2 score of 0.56, indicating a moderate fit to the data.",
+  "explanation_full": "The provided scatter plot visualizes the performance of the Decision Tree (DT) model. The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.  Further analysis of the metrics like RMSE (0.1755), MAE (0.1086), and the prediction-actual correlation (0.787) can provide a more comprehensive understanding of the model's performance.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+      "claim_text": "The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.",
+      "claim_type": "metric_value",
+      "span_category": "R2 Score",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+      "subject": "DT",
+      "predicate": "r2_score",
+      "object": 0.56,
+      "metric": "r2_score",
+      "value": 0.56,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": "draft",
+  "correction_trace": {
+    "mode": "c_llm_validator_corrector",
+    "iteration_count": 1,
+    "selected_generation_stage": "draft",
+    "iterations": [
+      {
+        "iteration_index": 1,
+        "draft_explanation_short": "The decision tree model has an R2 score of 0.56, indicating a moderate fit to the data.",
+        "draft_explanation_full": "The provided scatter plot visualizes the performance of the Decision Tree (DT) model. The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.  Further analysis of the metrics like RMSE (0.1755), MAE (0.1086), and the prediction-actual correlation (0.787) can provide a more comprehensive understanding of the model's performance.",
+        "draft_claims": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+            "claim_text": "The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.",
+            "claim_type": "metric_value",
+            "span_category": "R2 Score",
+            "is_numeric": true,
+            "requires_grounding_from": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+            "confidence": 1.0,
+            "source_variable_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+            "subject": "DT",
+            "predicate": "r2_score",
+            "object": 0.56,
+            "metric": "r2_score",
+            "value": 0.56,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ],
+        "draft_validations": [
+          {
+            "claim_id": "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score",
+            "claim_text": "The R2 score of 0.56 suggests a moderate correlation between predicted and actual values.",
+            "status": "supported",
+            "recommended_action": "keep",
+            "rationale": "The claim is supported by the evidence in the 'summary.json' file, which states that the DT model has an R2 score of 0.5604531395.",
+            "matched_fact_ids": [
+              "KNN_HPR_20260424:chart:model_dt_scatter:metric:DT:r2_score"
+            ],
+            "grounded_fact_summary": "The Decision Tree model has an R2 score of 0.5604531395."
+          }
+        ],
+        "corrected_explanation_short": "",
+        "corrected_explanation_full": "",
+        "corrected_claims": [],
+        "corrected_validations": []
+      }
+    ],
+    "decision_counts": {
+      "keep": 1
+    }
+  },
+  "parent_draft_hash": "1b698c29ccceab132ca156d31c5d148146087dbf"
+}

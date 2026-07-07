@@ -1,0 +1,297 @@
+{
+  "artifact_id": "KNNtest:chart:model_svm_scatter",
+  "artifact_type": "chart/model_svm_scatter",
+  "source_files": [
+    "summary.json",
+    "table_model_comparison.csv",
+    "model_svm_scatter.png"
+  ],
+  "chart_type": "scatter_plot",
+  "primary_entities": [
+    "SVM"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:r2_score",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": null,
+      "value": 0.7324097475,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM r2_score"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:rmse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": null,
+      "value": 0.1369247591,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM rmse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:mse",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mse",
+      "object": null,
+      "value": 0.0187483896,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mse"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:mae",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mae",
+      "object": null,
+      "value": 0.0946025669,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mae"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "pred_actual_correlation",
+      "object": null,
+      "value": 0.86576,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM pred_actual_correlation"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:linear_fit_slope",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "linear_fit_slope",
+      "object": null,
+      "value": 0.858436,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM linear_fit_slope"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:linear_fit_intercept",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "linear_fit_intercept",
+      "object": null,
+      "value": 0.043311,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM linear_fit_intercept"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:residual_mean",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "residual_mean",
+      "object": null,
+      "value": -0.009581,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM residual_mean"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:residual_std",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "residual_std",
+      "object": null,
+      "value": 0.136589,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM residual_std"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:mean_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "mean_abs_residual",
+      "object": null,
+      "value": 0.094603,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM mean_abs_residual"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:max_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "max_abs_residual",
+      "object": null,
+      "value": 0.610181,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM max_abs_residual"
+        }
+      ],
+      "importance": 2
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:p95_abs_residual",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "p95_abs_residual",
+      "object": null,
+      "value": 0.200011,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM p95_abs_residual"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:actual_min",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "actual_min",
+      "object": null,
+      "value": 0.051602,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM actual_min"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:actual_max",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "actual_max",
+      "object": null,
+      "value": 0.954908,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM actual_max"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:predicted_min",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "predicted_min",
+      "object": null,
+      "value": -0.011806,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM predicted_min"
+        }
+      ],
+      "importance": 1
+    },
+    {
+      "fact_id": "KNNtest:chart:model_svm_scatter:metric:SVM:predicted_max",
+      "fact_type": "metric_value",
+      "subject": "SVM",
+      "predicate": "predicted_max",
+      "object": null,
+      "value": 0.819254,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "summary.json",
+          "priority": "table/json",
+          "detail": "SVM predicted_max"
+        }
+      ],
+      "importance": 1
+    }
+  ],
+  "salient_facts": [
+    "KNNtest:chart:model_svm_scatter:metric:SVM:r2_score",
+    "KNNtest:chart:model_svm_scatter:metric:SVM:pred_actual_correlation",
+    "KNNtest:chart:model_svm_scatter:metric:SVM:linear_fit_slope",
+    "KNNtest:chart:model_svm_scatter:metric:SVM:max_abs_residual"
+  ],
+  "forbidden_inferences": [
+    "Do not read diagnostic plots as guarantees for every individual prediction.",
+    "Do not let narrative prose override the diagnostic metrics."
+  ]
+}

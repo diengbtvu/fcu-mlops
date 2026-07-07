@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:r2_score",
+      "claim_text": "R2 score of 0.81717",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:r2_score",
+      "subject": "KNN",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:mse",
+      "claim_text": "MSE of 0.012810",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:mse",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_comparison_bars:metric:KNN:mse",
+      "subject": "KNN",
+      "predicate": "mse",
+      "object": "0.012810",
+      "metric": "mse",
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

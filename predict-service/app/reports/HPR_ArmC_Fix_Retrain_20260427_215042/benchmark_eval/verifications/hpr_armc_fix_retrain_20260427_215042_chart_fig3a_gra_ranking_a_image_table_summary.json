@@ -1,0 +1,64 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:top_feature",
+      "claim_text": "VFA is the most important feature based on Grey Relational Analysis.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 1.3543695608908557e-05
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:Acetate",
+      "claim_text": "Acetate has a gra_score of 0.689.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:Acetate"
+      ],
+      "reason": "Gold value for Acetate gra_score is 0.7772199976368066.",
+      "numeric_delta": 0.08821999763680666
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "claim_text": "Butyrate has a gra_score of 0.689.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:Butyrate"
+      ],
+      "reason": "Gold value for Butyrate gra_score is 0.7902467550177025.",
+      "numeric_delta": 0.10124675501770253
+    },
+    {
+      "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:VFA",
+      "claim_text": "VFA has a gra_score of 0.793.",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "HPR_ArmC_Fix_Retrain_20260427_215042:chart:fig3a_gra_ranking:rank_score:VFA"
+      ],
+      "reason": "Gold value for VFA gra_score is 0.7931135436956089.",
+      "numeric_delta": 0.00011354369560889754
+    }
+  ]
+}

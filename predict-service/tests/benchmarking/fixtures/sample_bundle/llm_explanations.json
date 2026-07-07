@@ -1,0 +1,1543 @@
+{
+  "provider": "fixture",
+  "model": "fixture-client",
+  "generated_at": "2026-04-16T00:00:00Z",
+  "overview": {
+    "en": "Baseline evidence only. This file exists so the benchmark can confirm it is not used as ground truth."
+  },
+  "assets": {
+    "model_comparison_table": {
+      "en": "KNN is the winner with R2=0.92, RMSE=0.282843, MSE=0.08, and MAE=0.2. RF (R2=0.88) is next and SVM (R2=0.84) is the weakest.",
+      "benchmark_payload": {
+        "explanation_short": "KNN is the winner with R2=0.92, RMSE=0.282843, MSE=0.08, and MAE=0.2.",
+        "explanation_full": "KNN is the winner with R2=0.92, RMSE=0.282843, MSE=0.08, and MAE=0.2. RF (R2=0.88) is next and SVM (R2=0.84) is the weakest.",
+        "claims": [
+          {
+            "claim_id": "baseline-best-model",
+            "claim_text": "KNN is the best model in the comparison.",
+            "claim_type": "best_model",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "KNN",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-r2_score",
+            "claim_text": "KNN achieved r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking",
+            "claim_text": "The model ranking by R2 is KNN > RF > SVM.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "SVM"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "table1_incremental_results": {
+      "en": "KNN peaks at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+      "benchmark_payload": {
+        "explanation_short": "KNN peaks at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+        "explanation_full": "KNN peaks at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+        "claims": [
+          {
+            "claim_id": "baseline-feature-optimum",
+            "claim_text": "KNN reaches its best subset at 6 features.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": null,
+            "value": 6,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 6,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-best-r2",
+            "claim_text": "KNN reaches R2=0.92 at its best step.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking",
+            "claim_text": "The best-step R2 ranking is KNN > RF > SVM.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.8,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "SVM"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3a_gra_ranking": {
+      "en": "The top-ranked features are pH (rank 1, 0.91), Propionate (rank 2, 0.83), and VFA (rank 3, 0.81).",
+      "benchmark_payload": {
+        "explanation_short": "The top-ranked features are pH (rank 1, 0.91), Propionate (rank 2, 0.83), and VFA (rank 3, 0.81).",
+        "explanation_full": "The top-ranked features are pH (rank 1, 0.91), Propionate (rank 2, 0.83), and VFA (rank 3, 0.81).",
+        "claims": [
+          {
+            "claim_id": "baseline-top-feature",
+            "claim_text": "pH is the top feature in the GRA ranking.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-gra-ranking",
+            "claim_text": "The GRA ordering is pH > Propionate > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "pH",
+              "Propionate",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-gra-score",
+            "claim_text": "pH has gra_score=0.91.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "pH",
+            "predicate": null,
+            "object": null,
+            "metric": "gra_score",
+            "value": 0.91,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3b_shap_analysis": {
+      "en": "This SHAP chart ranks which inputs mattered most on average. ORP_Low=0.045, pH=0.041, VFA=0.036, Propionate=0.031, and COD-O=0.027.",
+      "benchmark_payload": {
+        "explanation_short": "This SHAP chart ranks which inputs mattered most on average.",
+        "explanation_full": "This SHAP chart ranks which inputs mattered most on average. ORP_Low=0.045, pH=0.041, VFA=0.036, Propionate=0.031, and COD-O=0.027.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-mean_abs_shap",
+            "claim_text": "ORP_Low is the top feature by mean_abs_shap.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "ORP_Low",
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking-mean_abs_shap",
+            "claim_text": "The mean_abs_shap ordering is ORP_Low > pH > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "ORP_Low",
+              "pH",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-metric-mean_abs_shap",
+            "claim_text": "ORP_Low has mean_abs_shap=0.045.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "ORP_Low",
+            "predicate": null,
+            "object": null,
+            "metric": "mean_abs_shap",
+            "value": 0.045,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig3_feature_analysis": {
+      "en": "The combined feature chart shows pH is top by gra_score, VSS is top by importance, ORP_Low is top by mean_abs_shap, and pH is also top by target_correlation.",
+      "benchmark_payload": {
+        "explanation_short": "The combined feature chart shows pH is top by gra_score, VSS is top by importance, ORP_Low is top by mean_abs_shap, and pH is also top by target_correlation.",
+        "explanation_full": "The combined feature chart shows pH is top by gra_score, VSS is top by importance, ORP_Low is top by mean_abs_shap, and pH is also top by target_correlation.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-gra_score",
+            "claim_text": "pH is the top feature by gra_score.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "gra_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-importance",
+            "claim_text": "VSS is the top feature by importance.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "VSS",
+            "metric": "importance",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-mean_abs_shap",
+            "claim_text": "ORP_Low is the top feature by mean_abs_shap.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "ORP_Low",
+            "metric": "mean_abs_shap",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-target_correlation",
+            "claim_text": "pH is the top feature by target_correlation.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig4_univariate_analysis": {
+      "en": "The strongest feature-to-target pattern is pH at 0.91, followed by Propionate at 0.83 and VFA at 0.81. The strongest pairwise correlation is pH vs VFA=0.86.",
+      "benchmark_payload": {
+        "explanation_short": "The strongest feature-to-target pattern is pH at 0.91, followed by Propionate at 0.83 and VFA at 0.81.",
+        "explanation_full": "The strongest feature-to-target pattern is pH at 0.91, followed by Propionate at 0.83 and VFA at 0.81. The strongest pairwise correlation is pH vs VFA=0.86.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-target-feature",
+            "claim_text": "pH is the top feature by target_correlation.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-pair",
+            "claim_text": "pH vs VFA has correlation=0.86.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.8,
+            "subject": "pH vs VFA",
+            "predicate": null,
+            "object": null,
+            "metric": "correlation",
+            "value": 0.86,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig5_model_comparison": {
+      "en": "Winning model: KNN. KNN leads with R2=0.92, while RF (R2=0.88) and SVM (R2=0.84) follow.",
+      "benchmark_payload": {
+        "explanation_short": "Winning model: KNN.",
+        "explanation_full": "Winning model: KNN. KNN leads with R2=0.92, while RF (R2=0.88) and SVM (R2=0.84) follow.",
+        "claims": [
+          {
+            "claim_id": "baseline-best-model",
+            "claim_text": "KNN is the best model in the comparison.",
+            "claim_type": "best_model",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "KNN",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-r2_score",
+            "claim_text": "KNN achieved r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking",
+            "claim_text": "The model ranking by R2 is KNN > RF > SVM.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "SVM"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "KNN reaches its best at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+      "benchmark_payload": {
+        "explanation_short": "KNN reaches its best at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+        "explanation_full": "KNN reaches its best at n=6 (R²=0.92, MSE=0.08), while RF at n=8 (R²=0.88, MSE=0.1) and SVM at n=8 (R²=0.74, MSE=0.18).",
+        "claims": [
+          {
+            "claim_id": "baseline-feature-optimum",
+            "claim_text": "KNN reaches its best subset at 6 features.",
+            "claim_type": "feature_subset_optimum",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": null,
+            "value": 6,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": 6,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-best-r2",
+            "claim_text": "KNN reaches R2=0.92 at its best step.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking",
+            "claim_text": "The best-step R2 ranking is KNN > RF > SVM.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.8,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "SVM"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "fig6c_prediction_time": {
+      "en": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+      "benchmark_payload": {
+        "explanation_short": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+        "explanation_full": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+        "claims": [
+          {
+            "claim_id": "baseline-sequence_correlation",
+            "claim_text": "KNN has sequence_correlation=0.89.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.89,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-mean_abs_gap",
+            "claim_text": "KNN has mean_abs_gap=0.08.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "mean_abs_gap",
+            "value": 0.08,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-actual_peak_index",
+            "claim_text": "KNN has actual_peak_index=15.0.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "actual_peak_index",
+            "value": 15.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-predicted_peak_index",
+            "claim_text": "KNN has predicted_peak_index=16.0.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "predicted_peak_index",
+            "value": 16.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_svm_scatter": {
+      "en": "SVM scatter diagnostics report R2=0.84, corr(pred,actual)=0.81, slope=0.8, and max_abs_residual=0.39.",
+      "benchmark_payload": {
+        "explanation_short": "SVM scatter diagnostics report R2=0.84, corr(pred,actual)=0.81, slope=0.8, and max_abs_residual=0.39.",
+        "explanation_full": "SVM scatter diagnostics report R2=0.84, corr(pred,actual)=0.81, slope=0.8, and max_abs_residual=0.39.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "SVM has r2_score=0.84.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "SVM",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.84,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "SVM has pred_actual_correlation=0.81.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "SVM",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.81,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-linear_fit_slope",
+            "claim_text": "SVM has linear_fit_slope=0.8.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "SVM",
+            "predicate": null,
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.8,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_dt_scatter": {
+      "en": "DT scatter diagnostics report R2=0.78, corr(pred,actual)=0.76, slope=0.74, and max_abs_residual=0.42.",
+      "benchmark_payload": {
+        "explanation_short": "DT scatter diagnostics report R2=0.78, corr(pred,actual)=0.76, slope=0.74, and max_abs_residual=0.42.",
+        "explanation_full": "DT scatter diagnostics report R2=0.78, corr(pred,actual)=0.76, slope=0.74, and max_abs_residual=0.42.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "DT has r2_score=0.78.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "DT",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.78,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "DT has pred_actual_correlation=0.76.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "DT",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.76,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-linear_fit_slope",
+            "claim_text": "DT has linear_fit_slope=0.74.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "DT",
+            "predicate": null,
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.74,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_rf_scatter": {
+      "en": "RF scatter diagnostics report R2=0.88, corr(pred,actual)=0.86, slope=0.84, and max_abs_residual=0.31.",
+      "benchmark_payload": {
+        "explanation_short": "RF scatter diagnostics report R2=0.88, corr(pred,actual)=0.86, slope=0.84, and max_abs_residual=0.31.",
+        "explanation_full": "RF scatter diagnostics report R2=0.88, corr(pred,actual)=0.86, slope=0.84, and max_abs_residual=0.31.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "RF has r2_score=0.88.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "RF",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.88,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "RF has pred_actual_correlation=0.86.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "RF",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.86,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-linear_fit_slope",
+            "claim_text": "RF has linear_fit_slope=0.84.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "RF",
+            "predicate": null,
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.84,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_knn_scatter": {
+      "en": "KNN scatter diagnostics report R2=0.92, corr(pred,actual)=0.9, slope=0.89, and max_abs_residual=0.24.",
+      "benchmark_payload": {
+        "explanation_short": "KNN scatter diagnostics report R2=0.92, corr(pred,actual)=0.9, slope=0.89, and max_abs_residual=0.24.",
+        "explanation_full": "KNN scatter diagnostics report R2=0.92, corr(pred,actual)=0.9, slope=0.89, and max_abs_residual=0.24.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "KNN has r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "KNN has pred_actual_correlation=0.9.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.9,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-linear_fit_slope",
+            "claim_text": "KNN has linear_fit_slope=0.89.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.89,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_xgboost_scatter": {
+      "en": "XGBoost scatter diagnostics report R2=0.86, corr(pred,actual)=0.84, slope=0.82, and max_abs_residual=0.34.",
+      "benchmark_payload": {
+        "explanation_short": "XGBoost scatter diagnostics report R2=0.86, corr(pred,actual)=0.84, slope=0.82, and max_abs_residual=0.34.",
+        "explanation_full": "XGBoost scatter diagnostics report R2=0.86, corr(pred,actual)=0.84, slope=0.82, and max_abs_residual=0.34.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "XGBoost has r2_score=0.86.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "XGBoost",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.86,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "XGBoost has pred_actual_correlation=0.84.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "XGBoost",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.84,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-linear_fit_slope",
+            "claim_text": "XGBoost has linear_fit_slope=0.82.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "XGBoost",
+            "predicate": null,
+            "object": null,
+            "metric": "linear_fit_slope",
+            "value": 0.82,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "model_comparison_bars": {
+      "en": "Winning model: KNN. KNN leads with R2=0.92, while RF (R2=0.88) and SVM (R2=0.84) follow.",
+      "benchmark_payload": {
+        "explanation_short": "Winning model: KNN.",
+        "explanation_full": "Winning model: KNN. KNN leads with R2=0.92, while RF (R2=0.88) and SVM (R2=0.84) follow.",
+        "claims": [
+          {
+            "claim_id": "baseline-best-model",
+            "claim_text": "KNN is the best model in the comparison.",
+            "claim_type": "best_model",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "KNN",
+            "metric": null,
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-r2_score",
+            "claim_text": "KNN achieved r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking",
+            "claim_text": "The model ranking by R2 is KNN > RF > SVM.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "KNN",
+              "RF",
+              "SVM"
+            ],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "predicted_vs_actual": {
+      "en": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, and max_abs_residual=0.24.",
+      "benchmark_payload": {
+        "explanation_short": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, and max_abs_residual=0.24.",
+        "explanation_full": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, and max_abs_residual=0.24.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "KNN has r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "KNN has pred_actual_correlation=0.9.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.9,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-max_abs_residual",
+            "claim_text": "KNN has max_abs_residual=0.24.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "max_abs_residual",
+            "value": 0.24,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "residuals": {
+      "en": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, residual_std=0.11, and max_abs_residual=0.24.",
+      "benchmark_payload": {
+        "explanation_short": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, residual_std=0.11, and max_abs_residual=0.24.",
+        "explanation_full": "KNN prediction diagnostics report R2=0.92, corr(pred,actual)=0.9, residual_std=0.11, and max_abs_residual=0.24.",
+        "claims": [
+          {
+            "claim_id": "baseline-r2",
+            "claim_text": "KNN has r2_score=0.92.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "r2_score",
+            "value": 0.92,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-correlation",
+            "claim_text": "KNN has pred_actual_correlation=0.9.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "pred_actual_correlation",
+            "value": 0.9,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-residual_std",
+            "claim_text": "KNN has residual_std=0.11.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "residual_std",
+            "value": 0.11,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_importance": {
+      "en": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+      "benchmark_payload": {
+        "explanation_short": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+        "explanation_full": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-importance",
+            "claim_text": "VSS is the top feature by importance.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.9,
+            "subject": null,
+            "predicate": null,
+            "object": "VSS",
+            "metric": "importance",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-ranking-importance",
+            "claim_text": "The importance ordering is VSS > pH > Propionate.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.86,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "importance",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "VSS",
+              "pH",
+              "Propionate"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-metric-importance",
+            "claim_text": "VSS has importance=0.52.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": "VSS",
+            "predicate": null,
+            "object": null,
+            "metric": "importance",
+            "value": 0.52,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "correlation_heatmap": {
+      "en": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81.",
+      "benchmark_payload": {
+        "explanation_short": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79.",
+        "explanation_full": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-target-feature",
+            "claim_text": "pH is the top feature by target_correlation.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-target-ranking",
+            "claim_text": "The target_correlation ordering is pH > Propionate > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "pH",
+              "Propionate",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-pair",
+            "claim_text": "pH vs VFA has correlation=0.86.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "pH vs VFA",
+            "predicate": null,
+            "object": null,
+            "metric": "correlation",
+            "value": 0.86,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_distributions": {
+      "en": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22.",
+      "benchmark_payload": {
+        "explanation_short": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53.",
+        "explanation_full": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-mean",
+            "claim_text": "Ethanol is the top feature by mean.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": null,
+            "predicate": null,
+            "object": "Ethanol",
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-mean-ranking",
+            "claim_text": "The mean ordering is Ethanol > Propionate > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "Ethanol",
+              "Propionate",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-std",
+            "claim_text": "Butyrate is the top feature by std.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "Butyrate",
+            "metric": "std",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "feature_vs_target": {
+      "en": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81.",
+      "benchmark_payload": {
+        "explanation_short": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79.",
+        "explanation_full": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-target-feature",
+            "claim_text": "pH is the top feature by target_correlation.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": null,
+            "predicate": null,
+            "object": "pH",
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-target-ranking",
+            "claim_text": "The target_correlation ordering is pH > Propionate > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "target_correlation",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "pH",
+              "Propionate",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-pair",
+            "claim_text": "pH vs VFA has correlation=0.86.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "pH vs VFA",
+            "predicate": null,
+            "object": null,
+            "metric": "correlation",
+            "value": 0.86,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "boxplots": {
+      "en": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22.",
+      "benchmark_payload": {
+        "explanation_short": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53.",
+        "explanation_full": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22.",
+        "claims": [
+          {
+            "claim_id": "baseline-top-mean",
+            "claim_text": "Ethanol is the top feature by mean.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.88,
+            "subject": null,
+            "predicate": null,
+            "object": "Ethanol",
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-mean-ranking",
+            "claim_text": "The mean ordering is Ethanol > Propionate > VFA.",
+            "claim_type": "ranking",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": null,
+            "metric": "mean",
+            "value": null,
+            "unit": null,
+            "ordered_items": [
+              "Ethanol",
+              "Propionate",
+              "VFA"
+            ],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-top-std",
+            "claim_text": "Butyrate is the top feature by std.",
+            "claim_type": "top_feature",
+            "span_category": "sentence",
+            "is_numeric": false,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.82,
+            "subject": null,
+            "predicate": null,
+            "object": "Butyrate",
+            "metric": "std",
+            "value": null,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    },
+    "time_series": {
+      "en": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+      "benchmark_payload": {
+        "explanation_short": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+        "explanation_full": "KNN sequence diagnostics show actual_peak_index=15, predicted_peak_index=16, mean_abs_gap=0.08, and sequence_correlation=0.89.",
+        "claims": [
+          {
+            "claim_id": "baseline-sequence_correlation",
+            "claim_text": "KNN has sequence_correlation=0.89.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "sequence_correlation",
+            "value": 0.89,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-mean_abs_gap",
+            "claim_text": "KNN has mean_abs_gap=0.08.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "mean_abs_gap",
+            "value": 0.08,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-actual_peak_index",
+            "claim_text": "KNN has actual_peak_index=15.0.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "actual_peak_index",
+            "value": 15.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          },
+          {
+            "claim_id": "baseline-predicted_peak_index",
+            "claim_text": "KNN has predicted_peak_index=16.0.",
+            "claim_type": "metric_value",
+            "span_category": "sentence",
+            "is_numeric": true,
+            "requires_grounding_from": "table/json",
+            "confidence": 0.84,
+            "subject": "KNN",
+            "predicate": null,
+            "object": null,
+            "metric": "predicted_peak_index",
+            "value": 16.0,
+            "unit": null,
+            "ordered_items": [],
+            "feature_count": null,
+            "hedged": false
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model has a high R2 score of 0.73, indicating a good fit to the data. The RMSE is 0.14, suggesting relatively low prediction errors.",
+  "explanation_full": "The scatter plot visualization shows the relationship between predicted and actual values for the SVM model.  The points are generally clustered close to the diagonal line, indicating a strong positive correlation (r2=0.73). This suggests that the SVM model is able to accurately predict the target variable based on the input features. The RMSE of 0.14 indicates that the average difference between predicted and actual values is relatively small, further supporting the model's good performance.  The plot also highlights a few outliers with larger prediction errors, which could be investigated further to understand potential reasons for these discrepancies.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "claim_text": "The SVM model has a high R2 score of 0.73, indicating a good fit to the data.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:r2_score",
+      "subject": "SVM",
+      "predicate": "r2_score",
+      "object": "0.73",
+      "metric": "r2_score",
+      "value": 0.73,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:rmse",
+      "claim_text": "The RMSE is 0.14, suggesting relatively low prediction errors.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:rmse",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_svm_scatter:metric:SVM:rmse",
+      "subject": "SVM",
+      "predicate": "rmse",
+      "object": "0.14",
+      "metric": "rmse",
+      "value": 0.14,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

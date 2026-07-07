@@ -1,0 +1,47 @@
+{
+  "model_name": "fixture_bundle",
+  "model_label": "KNN",
+  "selected_model_metrics": {
+    "r2_score": 0.92,
+    "rmse": 0.282843,
+    "mse": 0.08,
+    "mae": 0.2
+  },
+  "benchmark_models": [
+    {
+      "model": "KNN",
+      "r2_score": 0.92,
+      "rmse": 0.282843,
+      "mse": 0.08,
+      "mae": 0.2
+    },
+    {
+      "model": "RF",
+      "r2_score": 0.88,
+      "rmse": 0.316228,
+      "mse": 0.1,
+      "mae": 0.24
+    },
+    {
+      "model": "SVM",
+      "r2_score": 0.84,
+      "rmse": 0.34641,
+      "mse": 0.12,
+      "mae": 0.28
+    }
+  ],
+  "files": {
+    "model_comparison_table": "table_model_comparison.csv",
+    "table1_incremental_results": "table1_incremental_results.csv",
+    "gra_ranking": "gra_ranking.json",
+    "table_feature_importance": "table_feature_importance.csv",
+    "best_model_shap_importance": "best_model_shap_importance.csv",
+    "table_correlation_matrix": "table_correlation_matrix.csv",
+    "table_descriptive_statistics": "table_descriptive_statistics.csv",
+    "best_model_summary": "best_model_summary.json",
+    "analysis_summary_report": "analysis_summary_report.txt",
+    "asset_evidence": "asset_evidence.json",
+    "results_summary": "results_summary.txt",
+    "llm_explanations": "llm_explanations.json"
+  }
+}

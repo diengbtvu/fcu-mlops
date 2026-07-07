@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows the performance of different machine learning models (SVM, DT, RF, KNN, XGBoost) with increasing numbers of features.  KNN performs best with an R2 of 0.817 and MSE of 0.0128.",
+  "explanation_full": "This table presents the incremental feature analysis results for a hydrogen production prediction model. It shows the performance of various machine learning models (SVM, Decision Tree (DT), Random Forest (RF), KNN, XGBoost) as the number of features increases from 1 to 11.  The metrics used to evaluate performance are R2 (coefficient of determination) and Mean Squared Error (MSE). The table highlights that KNN achieves the highest R2 (0.817) and lowest MSE (0.0128) with 11 features, indicating its superior predictive ability compared to other models.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "claim_text": "KNN achieves the lowest MSE of 0.0128 with 11 features.",
+      "claim_type": "metric_value",
+      "span_category": "best_mse",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "subject": "KNN",
+      "predicate": "best_mse",
+      "object": "0.0128",
+      "metric": "best_mse",
+      "value": 0.0128,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "claim_text": "KNN achieves the highest R2 of 0.817 with 11 features.",
+      "claim_type": "metric_value",
+      "span_category": "best_r2",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "subject": "KNN",
+      "predicate": "best_r2",
+      "object": "0.817",
+      "metric": "best_r2",
+      "value": 0.817,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

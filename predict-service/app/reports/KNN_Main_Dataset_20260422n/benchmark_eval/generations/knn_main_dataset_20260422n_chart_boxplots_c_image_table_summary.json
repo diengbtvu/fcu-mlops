@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:boxplots",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Ethanol showed the highest mean (0.4736) and standard deviation (0.2528), while pH had the lowest mean (0.2355) and standard deviation (0.1267).",
+  "explanation_full": "The analysis of feature distributions shows that Ethanol has the highest mean (0.4736) and the largest standard deviation (0.2528). Acetate also maintains high values, with a mean of 0.4465 and a standard deviation of 0.226. Conversely, pH exhibits the lowest mean (0.2355) and the smallest standard deviation (0.1267). These metrics suggest that Ethanol is the most variable and highest-concentrated feature in the dataset. The data is based on 197 observations, providing a clear view of the metabolic range.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol has the highest mean (0.4736) and standard deviation (0.2528).",
+      "claim_type": "metric_value",
+      "span_category": "Ethanol",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "Ethanol",
+      "predicate": "mean/std",
+      "object": "0.4735821123781505",
+      "metric": "mean",
+      "value": 0.4735821123781505,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "pH has the lowest mean (0.2355) and standard deviation (0.1267).",
+      "claim_type": "metric_value",
+      "span_category": "pH",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "pH",
+      "predicate": "mean/std",
+      "object": "0.23549990495434295",
+      "metric": "mean",
+      "value": 0.23549990495434295,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The dataset is based on 197 observations.",
+      "claim_type": "metric_value",
+      "span_category": "count",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "subject": "dataset",
+      "predicate": null,
+      "object": "197.0",
+      "metric": null,
+      "value": 197.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

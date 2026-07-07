@@ -1,0 +1,44 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Acetate",
+      "claim_text": "Acetate has a gra_score.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:Butyrate",
+      "claim_text": "Butyrate has a gra_score.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig3a_gra_ranking:rank_score:VFA",
+      "claim_text": "VFA has a gra_score.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

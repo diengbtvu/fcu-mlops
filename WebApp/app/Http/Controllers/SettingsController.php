@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Config;
 use App\Mail\TrainingCompletedMail;
 use App\Models\EmailSetting;
+use App\Support\GroqKeyStatus;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 
 class SettingsController extends Controller
 {
@@ -64,6 +65,145 @@ class SettingsController extends Controller
             return redirect()->route('admin.settings.email')
                 ->with('error', 'Failed to update settings: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Hiển thị trang cấu hình AI API keys
+     */
+    public function aiSettings()
+    {
+        $groqKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+        $statusMap = GroqKeyStatus::loadStatusMap();
+        $maskedGroqKeys = [];
+        $blockedKeyCount = 0;
+
+        foreach ($groqKeys as $index => $key) {
+            $status = GroqKeyStatus::statusForKey($statusMap, $key);
+            $isBlocked = GroqKeyStatus::isBlocked($status);
+            if ($isBlocked) {
+                $blockedKeyCount++;
+            }
+
+            $maskedGroqKeys[] = [
+                'index' => $index,
+                'hash' => GroqKeyStatus::hashKey($key),
+                'label' => GroqKeyStatus::maskKey($key),
+                'is_blocked' => $isBlocked,
+                'status' => $status['status'] ?? 'active',
+                'reason' => $status['reason'] ?? '',
+                'message' => $status['message'] ?? '',
+                'blocked_at' => $status['blocked_at'] ?? '',
+                'updated_at' => $status['updated_at'] ?? '',
+                'http_status' => $status['last_http_status'] ?? null,
+            ];
+        }
+
+        return view('admin.settings.ai', [
+            'groqKeyCount' => count($groqKeys),
+            'blockedGroqKeyCount' => $blockedKeyCount,
+            'activeGroqKeyCount' => max(0, count($groqKeys) - $blockedKeyCount),
+            'maskedGroqKeys' => $maskedGroqKeys,
+        ]);
+    }
+
+    /**
+     * Cập nhật AI API keys
+     */
+    public function updateAi(Request $request)
+    {
+        $request->validate([
+            'groq_api_keys' => 'nullable|string|max:20000',
+            'clear_groq_api_keys' => 'nullable|boolean',
+            'delete_groq_key_index' => 'nullable|integer|min:0',
+            'reactivate_groq_key_hash' => ['nullable', 'regex:/^[a-f0-9]{64}$/i'],
+        ]);
+
+        try {
+            $existingKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+            $statusMap = GroqKeyStatus::loadStatusMap();
+
+            if ($request->boolean('clear_groq_api_keys')) {
+                $groqKeys = [];
+            } elseif ($request->filled('delete_groq_key_index')) {
+                $deleteIndex = (int) $request->input('delete_groq_key_index');
+                if (array_key_exists($deleteIndex, $existingKeys)) {
+                    unset($existingKeys[$deleteIndex]);
+                }
+                $groqKeys = array_values($existingKeys);
+            } elseif ($request->filled('groq_api_keys')) {
+                $newKeys = GroqKeyStatus::normalizeKeys($request->input('groq_api_keys'));
+                $groqKeys = $this->mergeGroqKeys($existingKeys, $newKeys);
+            } else {
+                $groqKeys = $existingKeys;
+            }
+
+            $statusMap = GroqKeyStatus::pruneStatusMap($statusMap, $groqKeys);
+
+            if ($request->filled('reactivate_groq_key_hash')) {
+                unset($statusMap[strtolower((string) $request->input('reactivate_groq_key_hash'))]);
+            }
+
+            EmailSetting::set(
+                GroqKeyStatus::KEYS_SETTING,
+                implode("\n", $groqKeys),
+                [
+                    'type' => 'textarea',
+                    'group' => 'ai',
+                    'description' => 'Groq API key pool used by report explanations and benchmark evaluation',
+                    'is_encrypted' => true,
+                ]
+            );
+            GroqKeyStatus::saveStatusMap($statusMap);
+
+            if ($request->filled('reactivate_groq_key_hash')) {
+                $message = 'Groq API key reactivated.';
+            } elseif ($request->filled('delete_groq_key_index')) {
+                $message = 'Groq API key removed.';
+            } else {
+                $message = 'AI API key settings updated successfully.';
+            }
+
+            return redirect()->route('admin.settings.ai')->with('success', $message);
+        } catch (\Exception $e) {
+            return redirect()->route('admin.settings.ai')
+                ->with('error', 'Failed to update AI API keys: ' . $e->getMessage());
+        }
+    }
+
+    public function internalGroqKeyPool(Request $request)
+    {
+        $expectedToken = (string) env('JWT_SECRET', '');
+        $providedToken = (string) $request->header('X-Internal-Token', '');
+
+        if ($expectedToken === '' || $providedToken === '' || !hash_equals($expectedToken, $providedToken)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $groqKeys = GroqKeyStatus::normalizeKeys(EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+        $statusMap = GroqKeyStatus::loadStatusMap();
+        $activeGroqKeys = GroqKeyStatus::filterUsableKeys($groqKeys, $statusMap);
+
+        return response()->json([
+            'groq_api_keys' => $groqKeys,
+            'active_groq_api_keys' => $activeGroqKeys,
+            'total_keys' => count($groqKeys),
+            'active_keys' => count($activeGroqKeys),
+            'blocked_keys' => max(0, count($groqKeys) - count($activeGroqKeys)),
+            'updated_at' => now()->toIso8601String(),
+        ]);
+    }
+
+    private function mergeGroqKeys(array $existingKeys, array $newKeys): array
+    {
+        $keys = [];
+        foreach (array_merge($existingKeys, $newKeys) as $key) {
+            $key = trim((string) $key);
+            if ($key === '' || in_array($key, $keys, true)) {
+                continue;
+            }
+            $keys[] = $key;
+        }
+        return $keys;
     }
 
     /**

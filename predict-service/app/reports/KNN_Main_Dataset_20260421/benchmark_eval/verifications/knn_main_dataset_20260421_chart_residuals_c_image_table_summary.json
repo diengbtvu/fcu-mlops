@@ -1,0 +1,70 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN prediction diagnostics -> R2=0.8172, RMSE=0.1132, MAE=0.075, residual_mean=0.012229, residual_std=0.112518, max_abs_residual=0.367254, corr(pred,actual)=0.907301.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN model achieved the best performance.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN has the highest R2 score (0.8172) compared to other models.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:residuals:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN has the lowest RMSE (0.1132) compared to other models.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:residuals:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 1.9090045603256667e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:residuals",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "KNN has the lowest MAE (0.075) compared to other models.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:residuals:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.07502308749135642.",
+      "numeric_delta": 2.3087491356418854e-05
+    }
+  ]
+}

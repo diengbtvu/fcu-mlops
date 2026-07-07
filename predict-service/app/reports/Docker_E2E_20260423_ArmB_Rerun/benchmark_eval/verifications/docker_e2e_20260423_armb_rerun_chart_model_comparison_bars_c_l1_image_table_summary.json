@@ -1,0 +1,90 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model",
+      "claim_text": "DT was identified as the winning model.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:best_model"
+      ],
+      "reason": "Gold best model is DT.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:r2_score",
+      "claim_text": "DT achieved perfect performance metrics (R2=1.0).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:rmse",
+      "claim_text": "DT achieved zero error metrics (RMSE=0.0).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:rmse"
+      ],
+      "reason": "Gold value for DT rmse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mse",
+      "claim_text": "DT achieved zero error metrics (MSE=0.0).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mse"
+      ],
+      "reason": "Gold value for DT mse is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mae",
+      "claim_text": "DT achieved zero error metrics (MAE=0.0).",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:metric:DT:mae"
+      ],
+      "reason": "Gold value for DT mae is 0.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_comparison_bars:ranking:r2_score",
+      "claim_text": "DT, RF, and KNN all achieved R2=1.0.",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Numeric claim is missing a numeric value.",
+      "numeric_delta": null
+    }
+  ]
+}

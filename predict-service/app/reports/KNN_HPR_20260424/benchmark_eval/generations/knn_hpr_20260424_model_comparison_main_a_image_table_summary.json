@@ -1,0 +1,32 @@
+{
+  "artifact_id": "KNN_HPR_20260424:model_comparison/main",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN achieved the highest R2 score (0.817) and lowest MSE (0.0128) among all models.",
+  "explanation_full": "The KNN model outperformed other models in predicting hydrogen production, achieving an R2 score of 0.817 and an MSE of 0.0128. This indicates a strong correlation between input features and predicted hydrogen production for the KNN model.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "claim_text": "KNN achieved the highest R2 score (0.817) and lowest MSE (0.0128) among all models.",
+      "claim_type": "metric_value",
+      "span_category": "BEST_MODEL",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "source_variable_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "subject": "KNN",
+      "predicate": null,
+      "object": "",
+      "metric": null,
+      "value": "",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": null,
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

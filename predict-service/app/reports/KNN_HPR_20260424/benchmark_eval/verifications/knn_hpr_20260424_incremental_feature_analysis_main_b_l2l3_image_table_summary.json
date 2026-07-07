@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "Increasing the number of features used in the KNN model leads to a consistent improvement in both R² and MSE.",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 2
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+      "claim_text": "The most significant gains are observed when moving from 3 to 4 features and again from 8 to 9 features.",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:plateau"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 2
+    }
+  ]
+}

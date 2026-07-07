@@ -1,0 +1,184 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:claim:1",
+      "claim_text": "Ethanol has the highest mean value (0.4736)",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": null,
+      "metric": "mean",
+      "value": 0.4736,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:claim:5",
+      "claim_text": "The features with the highest standard deviation are Ethanol (0.2528)",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": null,
+      "metric": "std",
+      "value": 0.2528,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Acetate:mean",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Acetate_mean",
+      "claim_id": null,
+      "action": "drop"
+    },
+    {
+      "issue_id": "alignment-2",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Butyrate:mean",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Butyrate_mean",
+      "claim_id": null,
+      "action": "drop"
+    },
+    {
+      "issue_id": "alignment-3",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Propionate:mean",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Propionate_mean",
+      "claim_id": null,
+      "action": "drop"
+    },
+    {
+      "issue_id": "alignment-4",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Butyrate:std",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Butyrate_std",
+      "claim_id": null,
+      "action": "drop"
+    },
+    {
+      "issue_id": "alignment-5",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Acetate:std",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Acetate_std",
+      "claim_id": null,
+      "action": "drop"
+    },
+    {
+      "issue_id": "alignment-6",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Propionate:std",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Propionate_std",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Ethanol_mean",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "evidence_span": "Ethanol has the highest mean value (0.4736)",
+      "stated_value": "0.4736",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Acetate_mean",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Acetate:mean",
+      "evidence_span": "Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465)",
+      "stated_value": "0.4465",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Butyrate_mean",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Butyrate:mean",
+      "evidence_span": "Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465), Butyrate (0.4287)",
+      "stated_value": "0.4287",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Propionate_mean",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Propionate:mean",
+      "evidence_span": "Ethanol has the highest mean value (0.4736) followed by Acetate (0.4465), Butyrate (0.4287), and Propionate (0.3675).",
+      "stated_value": "0.3675",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Ethanol_std",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "evidence_span": "The features with the highest standard deviation are Ethanol (0.2528)",
+      "stated_value": "0.2528",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Butyrate_std",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Butyrate:std",
+      "evidence_span": "The features with the highest standard deviation are Ethanol (0.2528), Butyrate (0.2474)",
+      "stated_value": "0.2474",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Acetate_std",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Acetate:std",
+      "evidence_span": "The features with the highest standard deviation are Ethanol (0.2528), Butyrate (0.2474), Acetate (0.226)",
+      "stated_value": "0.226",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:Propionate_std",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Propionate:std",
+      "evidence_span": "The features with the highest standard deviation are Ethanol (0.2528), Butyrate (0.2474), Acetate (0.226), and Propionate (0.2158).",
+      "stated_value": "0.2158",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

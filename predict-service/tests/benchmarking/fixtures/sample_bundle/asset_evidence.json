@@ -1,0 +1,724 @@
+{
+  "generated_at": "2026-04-16T00:00:00Z",
+  "report_id": "fixture_bundle",
+  "best_model": "KNN",
+  "assets": [
+    {
+      "key": "fig3a_gra_ranking",
+      "title": "Figure 3A - GRA ranking",
+      "kind": "chart",
+      "source_files": [
+        "gra_ranking.json",
+        "summary.json"
+      ],
+      "result_text": "GRA ranking -> pH=0.91 | Propionate=0.83 | VFA=0.81 | Butyrate=0.79.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {"rank": 1, "feature": "pH", "score": 0.91},
+            {"rank": 2, "feature": "Propionate", "score": 0.83},
+            {"rank": 3, "feature": "VFA", "score": 0.81},
+            {"rank": 4, "feature": "Butyrate", "score": 0.79}
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig3b_shap_analysis",
+      "title": "Figure 3B - SHAP analysis",
+      "kind": "chart",
+      "source_files": [
+        "best_model_shap_importance.csv",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "SHAP importance -> ORP_Low=0.045 | pH=0.041 | VFA=0.036 | Propionate=0.031 | COD-O=0.027.",
+      "evidence": {
+        "feature_story": {
+          "top_shap_features": [
+            {"feature": "ORP_Low", "mean_abs_shap": 0.045},
+            {"feature": "pH", "mean_abs_shap": 0.041},
+            {"feature": "VFA", "mean_abs_shap": 0.036},
+            {"feature": "Propionate", "mean_abs_shap": 0.031},
+            {"feature": "COD-O", "mean_abs_shap": 0.027}
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig3_feature_analysis",
+      "title": "Figure 3 - Combined feature analysis",
+      "kind": "chart",
+      "source_files": [
+        "best_model_shap_importance.csv",
+        "gra_ranking.json",
+        "summary.json",
+        "table1_incremental_results.csv",
+        "table_correlation_matrix.csv",
+        "table_feature_importance.csv"
+      ],
+      "result_text": "GRA ranking -> pH=0.91 | Propionate=0.83 | VFA=0.81 | Butyrate=0.79. Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18. SHAP importance -> ORP_Low=0.045 | pH=0.041 | VFA=0.036 | Propionate=0.031. Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81 | VSS=0.74. Best feature-count step per model -> KNN: n=6, R2=0.92, MSE=0.08 | RF: n=8, R2=0.88, MSE=0.1 | SVM: n=8, R2=0.74, MSE=0.18.",
+      "evidence": {
+        "feature_story": {
+          "top_gra_features": [
+            {"rank": 1, "feature": "pH", "score": 0.91},
+            {"rank": 2, "feature": "Propionate", "score": 0.83},
+            {"rank": 3, "feature": "VFA", "score": 0.81},
+            {"rank": 4, "feature": "Butyrate", "score": 0.79}
+          ],
+          "top_feature_importance": [
+            {"feature": "VSS", "importance": 0.52},
+            {"feature": "pH", "importance": 0.33},
+            {"feature": "Propionate", "importance": 0.24},
+            {"feature": "VFA", "importance": 0.18}
+          ],
+          "top_shap_features": [
+            {"feature": "ORP_Low", "mean_abs_shap": 0.045},
+            {"feature": "pH", "mean_abs_shap": 0.041},
+            {"feature": "VFA", "mean_abs_shap": 0.036},
+            {"feature": "Propionate", "mean_abs_shap": 0.031}
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {"pair": "pH vs VFA", "correlation": 0.86, "abs_correlation": 0.86},
+            {"pair": "pH vs Propionate", "correlation": 0.82, "abs_correlation": 0.82},
+            {"pair": "Propionate vs VFA", "correlation": 0.79, "abs_correlation": 0.79}
+          ],
+          "top_target_correlations": [
+            {"feature": "pH", "correlation": 0.91, "abs_correlation": 0.91},
+            {"feature": "Propionate", "correlation": 0.83, "abs_correlation": 0.83},
+            {"feature": "VFA", "correlation": 0.81, "abs_correlation": 0.81},
+            {"feature": "VSS", "correlation": 0.74, "abs_correlation": 0.74}
+          ]
+        },
+        "incremental_story": {
+          "best_step_per_model": [
+            {
+              "model": "KNN",
+              "best_n_features": 6,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+              "best_r2": 0.92,
+              "best_mse": 0.08
+            },
+            {
+              "model": "RF",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.88,
+              "best_mse": 0.1
+            },
+            {
+              "model": "SVM",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.74,
+              "best_mse": 0.18
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig4_univariate_analysis",
+      "title": "Figure 4 - Univariate analysis",
+      "kind": "chart",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81 | VSS=0.74.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {"Unnamed: 0": "pH", "mean": 0.42, "std": 0.18, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Propionate", "mean": 0.57, "std": 0.19, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VFA", "mean": 0.53, "std": 0.22, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VSS", "mean": 0.39, "std": 0.14, "min": 0.0, "max": 1.0}
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {"pair": "pH vs VFA", "correlation": 0.86, "abs_correlation": 0.86},
+            {"pair": "pH vs Propionate", "correlation": 0.82, "abs_correlation": 0.82},
+            {"pair": "Propionate vs VFA", "correlation": 0.79, "abs_correlation": 0.79}
+          ],
+          "top_target_correlations": [
+            {"feature": "pH", "correlation": 0.91, "abs_correlation": 0.91},
+            {"feature": "Propionate", "correlation": 0.83, "abs_correlation": 0.83},
+            {"feature": "VFA", "correlation": 0.81, "abs_correlation": 0.81},
+            {"feature": "VSS", "correlation": 0.74, "abs_correlation": 0.74}
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig5_model_comparison",
+      "title": "Figure 5 - Model comparison",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.92, RMSE=0.282843, MSE=0.08, MAE=0.2 | RF: R2=0.88, RMSE=0.316228, MSE=0.1, MAE=0.24 | SVM: R2=0.84, RMSE=0.34641, MSE=0.12, MAE=0.28.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {"model": "KNN", "r2_score": 0.92, "rmse": 0.282843, "mse": 0.08, "mae": 0.2},
+            {"model": "RF", "r2_score": 0.88, "rmse": 0.316228, "mse": 0.1, "mae": 0.24},
+            {"model": "SVM", "r2_score": 0.84, "rmse": 0.34641, "mse": 0.12, "mae": 0.28}
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig6ab_mse_r2_features",
+      "title": "Figure 6AB - R2 and MSE by feature count",
+      "kind": "chart",
+      "source_files": [
+        "table1_incremental_results.csv",
+        "summary.json"
+      ],
+      "result_text": "Best feature-count step per model -> KNN: n=6, R2=0.92, MSE=0.08 | RF: n=8, R2=0.88, MSE=0.1 | SVM: n=8, R2=0.74, MSE=0.18.",
+      "evidence": {
+        "incremental_story": {
+          "best_step_per_model": [
+            {
+              "model": "KNN",
+              "best_n_features": 6,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+              "best_r2": 0.92,
+              "best_mse": 0.08
+            },
+            {
+              "model": "RF",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.88,
+              "best_mse": 0.1
+            },
+            {
+              "model": "SVM",
+              "best_n_features": 8,
+              "best_feature_subset": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol -> Acetate -> COD-O",
+              "best_r2": 0.74,
+              "best_mse": 0.18
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "fig6c_prediction_time",
+      "title": "Figure 6C - Prediction over time",
+      "kind": "chart",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "KNN sequence diagnostics -> actual_peak_index=15, actual_peak_value=1.0, predicted_peak_index=16, predicted_peak_value=0.94, mean_abs_gap=0.08, sequence_correlation=0.89.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "best_model_metrics": {
+            "r2_score": 0.92,
+            "mse": 0.08,
+            "mae": 0.2,
+            "rmse": 0.282843
+          }
+        },
+        "sequence_story": {
+          "winning_model_sequence_diagnostics": {
+            "sample_count": 40,
+            "actual_peak_index": 15,
+            "actual_peak_value": 1.0,
+            "predicted_peak_index": 16,
+            "predicted_peak_value": 0.94,
+            "mean_abs_gap": 0.08,
+            "max_abs_gap": 0.24,
+            "sequence_correlation": 0.89
+          }
+        }
+      }
+    },
+    {
+      "key": "model_svm_scatter",
+      "title": "SVM scatter plot",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "SVM scatter diagnostics -> R2=0.84, RMSE=0.34641, MAE=0.28, corr(pred,actual)=0.81, slope=0.8, max_abs_residual=0.39.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "SVM",
+          "metrics": {
+            "model": "SVM",
+            "r2_score": 0.84,
+            "rmse": 0.34641,
+            "mse": 0.12,
+            "mae": 0.28
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.03,
+            "predicted_max": 0.88,
+            "residual_mean": -0.02,
+            "residual_std": 0.16,
+            "mean_abs_residual": 0.11,
+            "max_abs_residual": 0.39,
+            "p95_abs_residual": 0.31,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.53,
+            "pred_actual_correlation": 0.81,
+            "linear_fit_slope": 0.8,
+            "linear_fit_intercept": 0.06
+          }
+        }
+      }
+    },
+    {
+      "key": "model_dt_scatter",
+      "title": "Decision tree scatter plot",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "DT scatter diagnostics -> R2=0.78, RMSE=0.4, MAE=0.3, corr(pred,actual)=0.76, slope=0.74, max_abs_residual=0.42.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "DT",
+          "metrics": {
+            "model": "DT",
+            "r2_score": 0.78,
+            "rmse": 0.4,
+            "mse": 0.16,
+            "mae": 0.3
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.02,
+            "predicted_max": 0.86,
+            "residual_mean": -0.03,
+            "residual_std": 0.18,
+            "mean_abs_residual": 0.13,
+            "max_abs_residual": 0.42,
+            "p95_abs_residual": 0.33,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.5,
+            "pred_actual_correlation": 0.76,
+            "linear_fit_slope": 0.74,
+            "linear_fit_intercept": 0.08
+          }
+        }
+      }
+    },
+    {
+      "key": "model_rf_scatter",
+      "title": "Random forest scatter plot",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "RF scatter diagnostics -> R2=0.88, RMSE=0.316228, MAE=0.24, corr(pred,actual)=0.86, slope=0.84, max_abs_residual=0.31.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "RF",
+          "metrics": {
+            "model": "RF",
+            "r2_score": 0.88,
+            "rmse": 0.316228,
+            "mse": 0.1,
+            "mae": 0.24
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.06,
+            "predicted_max": 0.91,
+            "residual_mean": 0.0,
+            "residual_std": 0.13,
+            "mean_abs_residual": 0.09,
+            "max_abs_residual": 0.31,
+            "p95_abs_residual": 0.22,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.61,
+            "pred_actual_correlation": 0.86,
+            "linear_fit_slope": 0.84,
+            "linear_fit_intercept": 0.05
+          }
+        }
+      }
+    },
+    {
+      "key": "model_knn_scatter",
+      "title": "KNN scatter plot",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN scatter diagnostics -> R2=0.92, RMSE=0.282843, MAE=0.2, corr(pred,actual)=0.9, slope=0.89, max_abs_residual=0.24.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "KNN",
+          "metrics": {
+            "model": "KNN",
+            "r2_score": 0.92,
+            "rmse": 0.282843,
+            "mse": 0.08,
+            "mae": 0.2
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.07,
+            "predicted_max": 0.94,
+            "residual_mean": 0.01,
+            "residual_std": 0.11,
+            "mean_abs_residual": 0.08,
+            "max_abs_residual": 0.24,
+            "p95_abs_residual": 0.19,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.68,
+            "pred_actual_correlation": 0.9,
+            "linear_fit_slope": 0.89,
+            "linear_fit_intercept": 0.04
+          }
+        }
+      }
+    },
+    {
+      "key": "model_xgboost_scatter",
+      "title": "XGBoost scatter plot",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "XGBoost scatter diagnostics -> R2=0.86, RMSE=0.331662, MAE=0.26, corr(pred,actual)=0.84, slope=0.82, max_abs_residual=0.34.",
+      "evidence": {
+        "model_metrics": {
+          "model_name": "XGBoost",
+          "metrics": {
+            "model": "XGBoost",
+            "r2_score": 0.86,
+            "rmse": 0.331662,
+            "mse": 0.11,
+            "mae": 0.26
+          }
+        },
+        "prediction_story": {
+          "diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.05,
+            "predicted_max": 0.9,
+            "residual_mean": -0.01,
+            "residual_std": 0.14,
+            "mean_abs_residual": 0.1,
+            "max_abs_residual": 0.34,
+            "p95_abs_residual": 0.24,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.58,
+            "pred_actual_correlation": 0.84,
+            "linear_fit_slope": 0.82,
+            "linear_fit_intercept": 0.05
+          }
+        }
+      }
+    },
+    {
+      "key": "model_comparison_bars",
+      "title": "Model comparison bars",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "Winning model: KNN. Benchmark test metrics -> KNN: R2=0.92, RMSE=0.282843, MSE=0.08, MAE=0.2 | RF: R2=0.88, RMSE=0.316228, MSE=0.1, MAE=0.24 | SVM: R2=0.84, RMSE=0.34641, MSE=0.12, MAE=0.28.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "benchmark_models_sorted": [
+            {"model": "KNN", "r2_score": 0.92, "rmse": 0.282843, "mse": 0.08, "mae": 0.2},
+            {"model": "RF", "r2_score": 0.88, "rmse": 0.316228, "mse": 0.1, "mae": 0.24},
+            {"model": "SVM", "r2_score": 0.84, "rmse": 0.34641, "mse": 0.12, "mae": 0.28}
+          ]
+        }
+      }
+    },
+    {
+      "key": "predicted_vs_actual",
+      "title": "Predicted versus actual chart",
+      "kind": "chart",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN prediction diagnostics -> R2=0.92, RMSE=0.282843, MAE=0.2, residual_mean=0.01, residual_std=0.11, max_abs_residual=0.24, corr(pred,actual)=0.9.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "best_model_metrics": {
+            "r2_score": 0.92,
+            "mse": 0.08,
+            "mae": 0.2,
+            "rmse": 0.282843
+          }
+        },
+        "prediction_story": {
+          "winning_model_diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.07,
+            "predicted_max": 0.94,
+            "residual_mean": 0.01,
+            "residual_std": 0.11,
+            "mean_abs_residual": 0.08,
+            "max_abs_residual": 0.24,
+            "p95_abs_residual": 0.19,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.68,
+            "pred_actual_correlation": 0.9,
+            "linear_fit_slope": 0.89,
+            "linear_fit_intercept": 0.04
+          }
+        }
+      }
+    },
+    {
+      "key": "residuals",
+      "title": "Residual analysis chart",
+      "kind": "chart",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_model_comparison.csv"
+      ],
+      "result_text": "KNN prediction diagnostics -> R2=0.92, RMSE=0.282843, MAE=0.2, residual_mean=0.01, residual_std=0.11, max_abs_residual=0.24, corr(pred,actual)=0.9, p95_abs_residual=0.19.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "best_model_metrics": {
+            "r2_score": 0.92,
+            "mse": 0.08,
+            "mae": 0.2,
+            "rmse": 0.282843
+          }
+        },
+        "prediction_story": {
+          "winning_model_diagnostics": {
+            "sample_count": 12,
+            "actual_min": 0.05,
+            "actual_max": 1.0,
+            "predicted_min": 0.07,
+            "predicted_max": 0.94,
+            "residual_mean": 0.01,
+            "residual_std": 0.11,
+            "mean_abs_residual": 0.08,
+            "max_abs_residual": 0.24,
+            "p95_abs_residual": 0.19,
+            "largest_error_index": 5,
+            "largest_error_actual": 0.92,
+            "largest_error_predicted": 0.68,
+            "pred_actual_correlation": 0.9,
+            "linear_fit_slope": 0.89,
+            "linear_fit_intercept": 0.04
+          }
+        }
+      }
+    },
+    {
+      "key": "feature_importance",
+      "title": "Feature importance chart",
+      "kind": "chart",
+      "source_files": [
+        "best_model_summary.json",
+        "summary.json",
+        "table_feature_importance.csv"
+      ],
+      "result_text": "Feature importance -> VSS=0.52 | pH=0.33 | Propionate=0.24 | VFA=0.18 | Butyrate=0.11.",
+      "evidence": {
+        "feature_story": {
+          "top_feature_importance": [
+            {"feature": "VSS", "importance": 0.52},
+            {"feature": "pH", "importance": 0.33},
+            {"feature": "Propionate", "importance": 0.24},
+            {"feature": "VFA", "importance": 0.18},
+            {"feature": "Butyrate", "importance": 0.11}
+          ]
+        }
+      }
+    },
+    {
+      "key": "correlation_heatmap",
+      "title": "Correlation heatmap",
+      "kind": "chart",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv"
+      ],
+      "result_text": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81 | VSS=0.74.",
+      "evidence": {
+        "correlation_story": {
+          "strongest_correlations": [
+            {"pair": "pH vs VFA", "correlation": 0.86, "abs_correlation": 0.86},
+            {"pair": "pH vs Propionate", "correlation": 0.82, "abs_correlation": 0.82},
+            {"pair": "Propionate vs VFA", "correlation": 0.79, "abs_correlation": 0.79}
+          ],
+          "top_target_correlations": [
+            {"feature": "pH", "correlation": 0.91, "abs_correlation": 0.91},
+            {"feature": "Propionate", "correlation": 0.83, "abs_correlation": 0.83},
+            {"feature": "VFA", "correlation": 0.81, "abs_correlation": 0.81},
+            {"feature": "VSS", "correlation": 0.74, "abs_correlation": 0.74}
+          ]
+        }
+      }
+    },
+    {
+      "key": "feature_distributions",
+      "title": "Feature distributions",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53 | Butyrate=0.46. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22 | Propionate=0.19.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {"Unnamed: 0": "pH", "mean": 0.42, "std": 0.18, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Propionate", "mean": 0.57, "std": 0.19, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VFA", "mean": 0.53, "std": 0.22, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VSS", "mean": 0.39, "std": 0.14, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Butyrate", "mean": 0.46, "std": 0.29, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Ethanol", "mean": 0.62, "std": 0.27, "min": 0.0, "max": 1.0}
+          ]
+        }
+      }
+    },
+    {
+      "key": "feature_vs_target",
+      "title": "Feature vs target chart",
+      "kind": "chart",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "summary.json",
+        "table_correlation_matrix.csv",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Strongest correlations -> pH vs VFA=0.86 | pH vs Propionate=0.82 | Propionate vs VFA=0.79. Top HPR correlations -> pH=0.91 | Propionate=0.83 | VFA=0.81 | VSS=0.74.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {"Unnamed: 0": "pH", "mean": 0.42, "std": 0.18, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Propionate", "mean": 0.57, "std": 0.19, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VFA", "mean": 0.53, "std": 0.22, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VSS", "mean": 0.39, "std": 0.14, "min": 0.0, "max": 1.0}
+          ]
+        },
+        "correlation_story": {
+          "strongest_correlations": [
+            {"pair": "pH vs VFA", "correlation": 0.86, "abs_correlation": 0.86},
+            {"pair": "pH vs Propionate", "correlation": 0.82, "abs_correlation": 0.82},
+            {"pair": "Propionate vs VFA", "correlation": 0.79, "abs_correlation": 0.79}
+          ],
+          "top_target_correlations": [
+            {"feature": "pH", "correlation": 0.91, "abs_correlation": 0.91},
+            {"feature": "Propionate", "correlation": 0.83, "abs_correlation": 0.83},
+            {"feature": "VFA", "correlation": 0.81, "abs_correlation": 0.81},
+            {"feature": "VSS", "correlation": 0.74, "abs_correlation": 0.74}
+          ]
+        }
+      }
+    },
+    {
+      "key": "boxplots",
+      "title": "Feature boxplots",
+      "kind": "chart",
+      "source_files": [
+        "summary.json",
+        "table_descriptive_statistics.csv"
+      ],
+      "result_text": "Highest mean features -> Ethanol=0.62 | Propionate=0.57 | VFA=0.53 | Butyrate=0.46. Highest std features -> Butyrate=0.29 | Ethanol=0.27 | VFA=0.22 | Propionate=0.19.",
+      "evidence": {
+        "distribution_story": {
+          "descriptive_statistics_sample": [
+            {"Unnamed: 0": "pH", "mean": 0.42, "std": 0.18, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Propionate", "mean": 0.57, "std": 0.19, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VFA", "mean": 0.53, "std": 0.22, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "VSS", "mean": 0.39, "std": 0.14, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Butyrate", "mean": 0.46, "std": 0.29, "min": 0.0, "max": 1.0},
+            {"Unnamed: 0": "Ethanol", "mean": 0.62, "std": 0.27, "min": 0.0, "max": 1.0}
+          ]
+        }
+      }
+    },
+    {
+      "key": "time_series",
+      "title": "Time-series chart",
+      "kind": "chart",
+      "source_files": [
+        "analysis_summary_report.txt",
+        "best_model_summary.json",
+        "summary.json"
+      ],
+      "result_text": "KNN sequence diagnostics -> actual_peak_index=15, actual_peak_value=1.0, predicted_peak_index=16, predicted_peak_value=0.94, mean_abs_gap=0.08, sequence_correlation=0.89.",
+      "evidence": {
+        "model_metrics": {
+          "winning_model": "KNN",
+          "best_model_metrics": {
+            "r2_score": 0.92,
+            "mse": 0.08,
+            "mae": 0.2,
+            "rmse": 0.282843
+          }
+        },
+        "sequence_story": {
+          "winning_model_sequence_diagnostics": {
+            "sample_count": 40,
+            "actual_peak_index": 15,
+            "actual_peak_value": 1.0,
+            "predicted_peak_index": 16,
+            "predicted_peak_value": 0.94,
+            "mean_abs_gap": 0.08,
+            "max_abs_gap": 0.24,
+            "sequence_correlation": 0.89
+          }
+        }
+      }
+    }
+  ]
+}

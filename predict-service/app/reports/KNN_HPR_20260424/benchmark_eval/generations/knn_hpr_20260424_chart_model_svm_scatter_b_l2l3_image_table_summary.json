@@ -1,0 +1,12 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_svm_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The SVM model demonstrates a strong predictive performance with an R2 score of 0.73 and low RMSE of 0.14. The scatter plot reveals a high correlation between predicted and actual values, indicating good model fit.",
+  "explanation_full": "The SVM model exhibits a strong predictive capability as evidenced by its high R2 score of 0.73, signifying a good fit to the data.  This is further supported by the low RMSE value of 0.14, which indicates that the average difference between predicted and actual values is relatively small. The scatter plot visualizes this relationship clearly, showing a strong positive correlation between predicted and actual values.  The majority of points cluster closely around the diagonal line, suggesting accurate predictions. However, a few outliers with larger prediction errors are also present, warranting further investigation to understand potential contributing factors.",
+  "claims": [],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

@@ -1,0 +1,104 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "DT, RF, and KNN models achieved perfect scores (R2=1.0, RMSE=0.0, MSE=0.0, MAE=0.0)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "SVM and XGBoost, which scored 0.0 for R2",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Sucrose_Degradation is the strongest predictor of HPR (0.9999)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VFA (0.9991)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "COD-O (0.9963)",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "DT, RF, and KNN are the best performing models, achieving perfect metrics.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "Sucrose_Degradation, VFA, and COD-O are the most critical features for predicting HPR, with correlation scores near 1.0.",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:time_series",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "The winning model's sequence diagnostics confirm perfect prediction accuracy (mean_abs_gap=0.0, sequence_correlation=1.0).",
+      "status": "unverifiable",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

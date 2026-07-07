@@ -1,0 +1,1 @@
+Synthetic phase-2 benchmark fixture for chart families beyond the phase-1 core artifacts.

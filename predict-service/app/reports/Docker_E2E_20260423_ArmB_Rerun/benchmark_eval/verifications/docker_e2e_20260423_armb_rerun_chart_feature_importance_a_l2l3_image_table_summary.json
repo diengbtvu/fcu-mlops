@@ -1,0 +1,64 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:top_feature",
+      "claim_text": "Sucrose_Degradation and VFA are the most important features",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:top_feature"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 2
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance",
+      "claim_text": "VFA having an importance score of 0.9023",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 4.31589999994042e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance",
+      "claim_text": "VFA with a score of 0.9023",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 4.31589999994042e-06
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:Sucrose_Degradation:importance",
+      "claim_text": "Sucrose_Degradation has a high importance score of 0.0832",
+      "status": "contradicted",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.9022956841.",
+      "numeric_delta": 0.8190956841000001
+    }
+  ]
+}

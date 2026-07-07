@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:feature_vs_target",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "This report summarizes the performance of a machine learning model predicting hydrogen production (HPR) based on various fermentation parameters. The KNN model achieved the highest R2 score (0.81717), indicating strong predictive power.",
+  "explanation_full": "The provided data includes a summary of a machine learning analysis focused on predicting hydrogen production (HPR). \n\nKey findings include:\n\n* **Dataset:** The model was trained on 197 samples with 11 features, including fermentation parameters like VFA, Butyrate, Acetate, VSS, and Ethanol.\n* **Best Model:** The KNN (K-Nearest Neighbors) model outperformed other benchmark models (SVM, DT, RF, XGBoost) with an R2 score of 0.81717, indicating a strong correlation between predicted and actual HPR values.\n* **Model Performance:**  The KNN model achieved an RMSE of 0.11318 and MSE of 0.012810, demonstrating its accuracy in predicting HPR.\n* **Top Correlated Features:** VFA, Butyrate, Acetate, VSS, and Ethanol were identified as the most influential features for predicting HPR.\n\nThis analysis suggests that the KNN model effectively captures the relationship between fermentation parameters and hydrogen production, providing valuable insights for optimizing fermentation processes to enhance HPR.\n\nThe report also includes a comparison of performance metrics across different models, allowing for a comprehensive evaluation of their suitability for this specific prediction task.  Furthermore, it highlights the importance of certain features in influencing HPR, which can guide further research and process optimization efforts.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "claim_text": "Butyrate vs VFA::correlation",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation",
+      "claim_text": "VFA::target_correlation",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:feature_vs_target:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

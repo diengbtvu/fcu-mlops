@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "This model predicts bioreactor performance based on environmental data.",
+  "explanation_full": "The HPR_ArmC_Fix_Retrain_20260427_215042 model is designed to predict the performance of bioreactors using environmental data as input. It analyzes various factors like temperature, pH, and nutrient levels to estimate the efficiency and output of different bioreactor types.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "claim_text": "The mean of Ethanol is 2.38.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": 2.38,
+      "metric": "mean",
+      "value": 2.38,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "claim_text": "The std of Ethanol is 0.38.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:feature_distributions:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": 0.38,
+      "metric": "std",
+      "value": 0.38,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

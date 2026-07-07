@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:predicted_vs_actual",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "Model A consistently achieves the highest average score across all evaluated metrics, indicating superior performance compared to other models.",
+      "claim_type": "top_feature",
+      "span_category": "Model A consistently achieves the highest average score across all evaluated metrics, indicating superior performance compared to other models.",
+      "is_numeric": false,
+      "requires_grounding_from": "Model A consistently achieves the highest average score across all evaluated metrics, indicating superior performance compared to other models.",
+      "confidence": 0.98,
+      "subject": "Model Performance",
+      "predicate": "achieves",
+      "object": "highest average score across all evaluated metrics",
+      "metric": "average_score",
+      "value": "highest",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "Model A scores highest in Accuracy, where it achieves 92%, and also scores highest in F1 Score, reaching 0.91.",
+      "claim_type": "metric_value",
+      "span_category": "Model A scores highest in Accuracy, where it achieves 92%, and also scores highest in F1 Score, reaching 0.91.",
+      "is_numeric": false,
+      "requires_grounding_from": "Model A scores highest in Accuracy, where it achieves 92%, and also scores highest in F1 Score, reaching 0.91.",
+      "confidence": 0.98,
+      "subject": "Model Performance",
+      "predicate": "scores highest",
+      "object": "Accuracy and F1 Score",
+      "metric": "accuracy",
+      "value": "92%",
+      "unit": "%",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "This suggests that Model A is the best performing model overall.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "This suggests that Model A is the best performing model overall.",
+      "is_numeric": false,
+      "requires_grounding_from": "This suggests that Model A is the best performing model overall.",
+      "confidence": 0.98,
+      "subject": "Model Performance",
+      "predicate": "is",
+      "object": "the best performing model overall",
+      "metric": "overall_performance",
+      "value": "best",
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

@@ -59,18 +59,22 @@ class EmailSetting extends Model
     /**
      * Set setting value by key
      */
-    public static function set($key, $value)
+    public static function set($key, $value, array $attributes = [])
     {
         $setting = static::where('key', $key)->first();
         
         if ($setting) {
+            foreach ($attributes as $attribute => $attributeValue) {
+                if ($attribute !== 'key') {
+                    $setting->{$attribute} = $attributeValue;
+                }
+            }
             $setting->value = $value;
             $setting->save();
         } else {
-            static::create([
-                'key' => $key,
-                'value' => $value,
-            ]);
+            $setting = new static(array_merge(['key' => $key], $attributes));
+            $setting->value = $value;
+            $setting->save();
         }
         
         return true;

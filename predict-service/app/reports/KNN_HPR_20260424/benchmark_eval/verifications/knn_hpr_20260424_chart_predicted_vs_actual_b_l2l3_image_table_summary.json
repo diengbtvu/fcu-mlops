@@ -1,0 +1,22 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim1",
+      "claim_text": "KNN model achieved the highest R2 score (0.817) and lowest RMSE (0.113) among all models, indicating strong predictive performance.",
+      "status": "supported",
+      "semantic_level": "L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 0.00016780170374675052
+    }
+  ]
+}

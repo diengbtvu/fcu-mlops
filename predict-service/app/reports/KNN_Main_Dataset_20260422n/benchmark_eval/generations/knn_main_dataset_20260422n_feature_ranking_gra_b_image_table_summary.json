@@ -1,0 +1,63 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "VFA is the most important feature (GRA score: 0.7931), and the KNN model performed best with an R² of 0.81717. The analysis suggests that feature selection is critical, as the KNN score increased significantly when 9 features were included.",
+  "explanation_full": "The GRA analysis clearly establishes VFA as the most influential feature (score: 0.7931), followed by Butyrate (0.7902) and Acetate (0.7772). Regarding model performance, KNN is the superior model, achieving an R² of 0.81717. The incremental feature analysis supports the importance of feature count, showing that the KNN score peaked at 0.830140 when 9 features were used. These findings suggest that VFA, Butyrate, and Acetate are key predictors, and the model benefits from a moderate number of features.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "VFA is the most important feature according to GRA.",
+      "claim_type": "rank_score",
+      "span_category": "feature_ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "VFA",
+      "predicate": "is the most important feature",
+      "object": "VFA",
+      "metric": "gra_score",
+      "value": 0.7931,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The KNN model achieved the highest R² score of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "model_performance",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "achieved R²",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The KNN score reached 0.830140 when 9 features were used.",
+      "claim_type": "rank_score",
+      "span_category": "incremental_feature_analysis",
+      "is_numeric": true,
+      "requires_grounding_from": "results_summary.txt",
+      "confidence": 1.0,
+      "subject": "KNN",
+      "predicate": "score at 9 features",
+      "object": "0.830140",
+      "metric": "gra_score",
+      "value": 0.83014,
+      "unit": "",
+      "ordered_items": [],
+      "feature_count": 9,
+      "hedged": false
+    }
+  ]
+}

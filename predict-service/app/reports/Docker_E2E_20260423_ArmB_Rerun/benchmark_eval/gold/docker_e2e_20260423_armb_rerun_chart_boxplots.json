@@ -1,0 +1,331 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots",
+  "artifact_type": "chart/boxplots",
+  "source_files": [
+    "summary.json",
+    "table_descriptive_statistics.csv",
+    "fig_boxplots.png"
+  ],
+  "chart_type": "boxplot",
+  "primary_entities": [
+    "pH",
+    "VSS",
+    "Ethanol",
+    "Acetate",
+    "Propionate",
+    "Butyrate"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:mean",
+      "fact_type": "top_feature",
+      "subject": "distribution",
+      "predicate": "mean",
+      "object": "Propionate",
+      "value": 0.3580733426,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "highest mean feature"
+        }
+      ],
+      "importance": 3,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:ranking:mean",
+      "fact_type": "ranking",
+      "subject": "distribution",
+      "predicate": "mean",
+      "object": [
+        "Propionate",
+        "Ethanol",
+        "Acetate",
+        "pH",
+        "VSS",
+        "Butyrate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "ranking by mean"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:std",
+      "fact_type": "top_feature",
+      "subject": "distribution",
+      "predicate": "std",
+      "object": "Propionate",
+      "value": 0.1537517011,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "highest standard deviation feature"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:ranking:std",
+      "fact_type": "ranking",
+      "subject": "distribution",
+      "predicate": "std",
+      "object": [
+        "Propionate",
+        "Ethanol",
+        "pH",
+        "Acetate",
+        "VSS",
+        "Butyrate"
+      ],
+      "value": null,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "ranking by std"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L2L3"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:pH:mean",
+      "fact_type": "metric_value",
+      "subject": "pH",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.0349481369,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "pH mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:pH:std",
+      "fact_type": "metric_value",
+      "subject": "pH",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1099050152,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "pH std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:VSS:mean",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.0293001186,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "VSS mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:VSS:std",
+      "fact_type": "metric_value",
+      "subject": "VSS",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1017842091,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "VSS std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Ethanol:mean",
+      "fact_type": "metric_value",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.1015505846,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Ethanol mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Ethanol:std",
+      "fact_type": "metric_value",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1131220718,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Ethanol std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Acetate:mean",
+      "fact_type": "metric_value",
+      "subject": "Acetate",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.054562786,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Acetate mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Acetate:std",
+      "fact_type": "metric_value",
+      "subject": "Acetate",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1023116445,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Acetate std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:mean",
+      "fact_type": "metric_value",
+      "subject": "Propionate",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.3580733426,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Propionate mean"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Propionate:std",
+      "fact_type": "metric_value",
+      "subject": "Propionate",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1537517011,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Propionate std"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Butyrate:mean",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "mean",
+      "object": null,
+      "value": 0.0270743585,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Butyrate mean"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:metric:Butyrate:std",
+      "fact_type": "metric_value",
+      "subject": "Butyrate",
+      "predicate": "std",
+      "object": null,
+      "value": 0.1013435724,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "table_descriptive_statistics.csv",
+          "priority": "table/json",
+          "detail": "Butyrate std"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:mean",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:top_feature:std",
+    "Docker_E2E_20260423_ArmB_Rerun:chart:boxplots:ranking:mean"
+  ],
+  "forbidden_inferences": [
+    "Do not infer real-world units from scaled distribution summaries.",
+    "Do not let prose override descriptive statistics values."
+  ]
+}

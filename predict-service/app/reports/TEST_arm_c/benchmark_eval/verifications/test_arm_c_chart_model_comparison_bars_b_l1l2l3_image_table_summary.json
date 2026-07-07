@@ -1,0 +1,60 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the optimal model",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved the highest R2 score (0.8172)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.219830000000812e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved the lowest RMSE (0.1132)",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_comparison_bars:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 1.9089999999999385e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN's metrics significantly surpass those of RF, XGBoost, SVM, and DT",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

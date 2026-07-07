@@ -1,0 +1,48 @@
+{
+  "artifact_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "claim-1",
+      "claim_text": "VFA, Butyrate, and Acetate are the top 3 features based on grey relational analysis, with scores of 0.7931, 0.7902, and 0.7772 respectively.",
+      "claim_type": "rank_score",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.75,
+      "source_variable_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking:top_feature",
+      "subject": null,
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": 0.7772,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim-2",
+      "claim_text": "VFA, Butyrate, and Acetate are the top 3 features based on grey relational analysis",
+      "claim_type": "rank_score",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.75,
+      "source_variable_id": "KNN_DS1_20260429:chart:fig3a_gra_ranking:ranking",
+      "subject": null,
+      "predicate": null,
+      "object": null,
+      "metric": "gra_score",
+      "value": 3.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 3,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

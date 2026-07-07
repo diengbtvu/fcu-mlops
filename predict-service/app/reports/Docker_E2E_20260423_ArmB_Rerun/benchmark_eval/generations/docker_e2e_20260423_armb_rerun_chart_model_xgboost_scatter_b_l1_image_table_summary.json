@@ -1,0 +1,48 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The table shows that XGBoost has an R2 score of 0.0, while DT, RF, and KNN all achieved an R2 score of 1.0.",
+  "explanation_full": "Focusing on the primary metrics from the table, the XGBoost model achieved an R2 score of 0.0. In contrast, the Decision Tree (DT), Random Forest (RF), and K-Nearest Neighbors (KNN) models all achieved a perfect R2 score of 1.0. This comparison highlights a significant performance difference between XGBoost and the other benchmark models.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "XGBoost has an R2 score of 0.0",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "DT, RF, and KNN all achieved an R2 score of 1.0",
+      "claim_type": "metric_value",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "explanation_short",
+      "confidence": 1.0,
+      "source_variable_id": "Docker_E2E_20260423_ArmB_Rerun:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "RF",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 1.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1"
+}

@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_distributions",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Ethanol, Acetate, and Butyrate are the top three features by mean value.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_distributions:metric:Ethanol:mean"
+      ],
+      "reason": "Gold value for Ethanol mean is 0.4735821124.",
+      "numeric_delta": 2.1849466680379237e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "Ethanol has the highest standard deviation (0.2528).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_distributions:metric:Ethanol:std"
+      ],
+      "reason": "Gold value for Ethanol std is 0.2528296374.",
+      "numeric_delta": 1.0388134796812665e-11
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:feature_distributions",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Acetate and Butyrate also show high mean values (0.4465 and 0.4287, respectively).",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:feature_distributions:metric:Acetate:mean"
+      ],
+      "reason": "Gold value for Acetate mean is 0.4465350188.",
+      "numeric_delta": 3.136052528773803e-11
+    }
+  ]
+}

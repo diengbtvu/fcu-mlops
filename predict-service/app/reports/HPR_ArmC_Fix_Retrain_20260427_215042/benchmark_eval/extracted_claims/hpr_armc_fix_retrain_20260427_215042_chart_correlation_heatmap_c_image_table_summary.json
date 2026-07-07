@@ -1,0 +1,108 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:1",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "claim_type": "top_feature",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation",
+      "subject": "hpr",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:2",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "subject": "Butyrate vs VFA",
+      "predicate": "correlation",
+      "object": null,
+      "metric": "correlation",
+      "value": 0.7827,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:claim:3",
+      "claim_text": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "subject": "VFA",
+      "predicate": "target_correlation",
+      "object": null,
+      "metric": "target_correlation",
+      "value": 0.7984,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "missing_object",
+      "message": "Entity variable mention did not include a stated object.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation",
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation",
+      "claim_id": null,
+      "action": "warn"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:top_feature:target_correlation",
+      "evidence_span": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "stated_value": null,
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:Butyrate vs VFA:correlation",
+      "evidence_span": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "stated_value": 0.7827,
+      "stated_object": "Butyrate vs VFA",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:correlation_heatmap:metric:VFA:target_correlation",
+      "evidence_span": "The correlation heatmap shows strong positive correlations between HPR and VFA, Butyrate, Acetate, VSS, and Ethanol.",
+      "stated_value": 0.7984,
+      "stated_object": "VFA",
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

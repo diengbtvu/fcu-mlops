@@ -1,0 +1,9 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Random Forest performed better than Linear Regression, achieving an MAE of 0.12, RMSE of 0.15, and an R^2 score of 0.90.",
+  "explanation_full": "The Random Forest model demonstrated improved performance over Linear Regression, achieving an MAE of 0.12, RMSE of 0.15, and an R^2 score of 0.90. This indicates a stronger ability to capture non-linear relationships in the data and provide more robust predictions compared to the simpler linear model.",
+  "claims": [],
+  "semantic_level": "L2L3"
+}

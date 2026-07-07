@@ -1,0 +1,152 @@
+{
+  "artifact_id": "TEST_arm_c:chart:time_series",
+  "artifact_type": "chart/time_series",
+  "source_files": [
+    "analysis_summary_report.txt",
+    "best_model_summary.json",
+    "summary.json",
+    "fig_time_series.png"
+  ],
+  "chart_type": "time_series",
+  "primary_entities": [
+    "KNN"
+  ],
+  "ground_truth_facts": [
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "actual_peak_index",
+      "object": null,
+      "value": 130.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN actual_peak_index"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_value",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "actual_peak_value",
+      "object": null,
+      "value": 1.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN actual_peak_value"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "predicted_peak_index",
+      "object": null,
+      "value": 146.0,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN predicted_peak_index"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_value",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "predicted_peak_value",
+      "object": null,
+      "value": 0.829894,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN predicted_peak_value"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "mean_abs_gap",
+      "object": null,
+      "value": 0.066591,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN mean_abs_gap"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:max_abs_gap",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "max_abs_gap",
+      "object": null,
+      "value": 0.399107,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN max_abs_gap"
+        }
+      ],
+      "importance": 1,
+      "semantic_level": "L1"
+    },
+    {
+      "fact_id": "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation",
+      "fact_type": "metric_value",
+      "subject": "KNN",
+      "predicate": "sequence_correlation",
+      "object": null,
+      "value": 0.931488,
+      "unit": null,
+      "evidence": [
+        {
+          "source_file": "best_model_summary.json",
+          "priority": "table/json",
+          "detail": "KNN sequence_correlation"
+        }
+      ],
+      "importance": 2,
+      "semantic_level": "L1"
+    }
+  ],
+  "salient_facts": [
+    "TEST_arm_c:chart:time_series:metric:KNN:sequence_correlation",
+    "TEST_arm_c:chart:time_series:metric:KNN:mean_abs_gap",
+    "TEST_arm_c:chart:time_series:metric:KNN:actual_peak_index",
+    "TEST_arm_c:chart:time_series:metric:KNN:predicted_peak_index"
+  ],
+  "forbidden_inferences": [
+    "Do not claim perfect event timing from aggregate sequence diagnostics.",
+    "Do not let prose override sequence diagnostic values."
+  ]
+}

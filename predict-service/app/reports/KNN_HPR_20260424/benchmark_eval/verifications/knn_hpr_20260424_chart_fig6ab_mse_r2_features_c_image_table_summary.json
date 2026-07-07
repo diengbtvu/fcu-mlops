@@ -1,0 +1,48 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse",
+      "claim_text": "The KNN model has the best MSE of 0.012810.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.011901.",
+      "numeric_delta": 0.0009090000000000001
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+      "claim_text": "The KNN model has the best R² score of 0.81717.",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:feature_subset_optimum",
+      "claim_text": "The KNN model uses a feature subset that is optimal.",
+      "status": "unverifiable",
+      "semantic_level": null,
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

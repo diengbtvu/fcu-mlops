@@ -1,0 +1,76 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT), Random Forest (RF), and KNN models all achieved perfect scores across all key metrics: R2=1.0, RMSE=0.0, and MAE=0.0.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 0.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "SVM model recorded an R2 score of 0.0.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:r2_score"
+      ],
+      "reason": "Gold value for DT r2_score is 1.0.",
+      "numeric_delta": 1.0
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "SVM model recorded a residual mean of 0.0872.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:residual_mean"
+      ],
+      "reason": "Gold value for DT residual_mean is 0.0.",
+      "numeric_delta": 0.0872
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "SVM model recorded a maximum absolute residual of 0.1235.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:residuals:metric:DT:max_abs_residual"
+      ],
+      "reason": "Gold value for DT max_abs_residual is 0.0.",
+      "numeric_delta": 0.1235
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:residuals",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "The Decision Tree (DT), Random Forest (RF), and KNN models are the best performing models based on the provided metrics.",
+      "status": "unverifiable",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

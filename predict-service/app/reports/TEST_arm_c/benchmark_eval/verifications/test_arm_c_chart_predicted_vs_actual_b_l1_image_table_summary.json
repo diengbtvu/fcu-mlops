@@ -1,0 +1,112 @@
+{
+  "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The KNN model performed best",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "achieving an R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN model is the best performer among the tested algorithms",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "boasting an R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:predicted_vs_actual:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017037467.",
+      "numeric_delta": 3.2198296253338476e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "RMSE of 0.1132",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:predicted_vs_actual:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318090995439674.",
+      "numeric_delta": 1.9090045603256667e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "MAE of 0.075",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:predicted_vs_actual:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.07502308749135642.",
+      "numeric_delta": 2.3087491356418854e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "RF (R2=0.7756)",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:predicted_vs_actual",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "XGBoost (R2=0.7495)",
+      "status": "unverifiable",
+      "semantic_level": "L1",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    }
+  ]
+}

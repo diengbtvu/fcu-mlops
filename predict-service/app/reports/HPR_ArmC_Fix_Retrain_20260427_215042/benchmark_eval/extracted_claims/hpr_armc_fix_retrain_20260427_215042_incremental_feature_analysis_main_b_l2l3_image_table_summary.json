@@ -1,0 +1,48 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "KNN achieves the highest R² (0.817) and lowest MSE (0.0128) when using 11 features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "metric_value",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:feature_subset_optimum",
+      "subject": "KNN",
+      "predicate": "feature_subset_optimum",
+      "object": "11 features",
+      "metric": "r²_and_mse",
+      "value": "0.817 and 0.0128",
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 11,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:plateau",
+      "claim_text": "KNN consistently outperforms other models across all feature subsets.",
+      "claim_type": "freeform",
+      "span_category": "ranking",
+      "is_numeric": false,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:incremental_feature_analysis/main:plateau",
+      "subject": "KNN",
+      "predicate": "plateau",
+      "object": null,
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

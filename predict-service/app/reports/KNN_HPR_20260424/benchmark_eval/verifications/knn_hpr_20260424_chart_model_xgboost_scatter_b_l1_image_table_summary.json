@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model achieves a high R2 score of 0.7495, indicating a strong correlation between predicted and actual values.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "claim_text": "The RMSE is 0.1325, suggesting relatively low prediction errors.",
+      "status": "supported",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:rmse"
+      ],
+      "reason": "Gold value for XGBoost rmse is 0.1324863821.",
+      "numeric_delta": 1.3617900000012506e-05
+    }
+  ]
+}

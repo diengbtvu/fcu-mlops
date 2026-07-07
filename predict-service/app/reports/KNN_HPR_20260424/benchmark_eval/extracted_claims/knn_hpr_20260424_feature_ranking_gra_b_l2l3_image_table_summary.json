@@ -1,0 +1,46 @@
+{
+  "artifact_id": "KNN_HPR_20260424:feature_ranking/gra",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L2L3",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:top_feature",
+      "claim_text": "VFA, Butyrate, Acetate, and VSS are the top four most important features for predicting model performance.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:feature_ranking/gra",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:feature_ranking/gra:top_feature",
+      "subject": "VFA, Butyrate, Acetate, and VSS",
+      "predicate": "are the top four most important features for predicting model performance",
+      "object": null,
+      "metric": "importance",
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 4,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:feature_ranking/gra:ranking",
+      "claim_text": "These features likely have a strong influence on the relationships between variables in the dataset, contributing significantly to the overall accuracy of the KNN model with an R² of 0.81717.",
+      "claim_type": "metric_value",
+      "span_category": "None",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:feature_ranking/gra",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:feature_ranking/gra:ranking",
+      "subject": "These features",
+      "predicate": "have a strong influence on the relationships between variables in the dataset, contributing significantly to the overall accuracy of the KNN model with an R² of 0.81717.",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

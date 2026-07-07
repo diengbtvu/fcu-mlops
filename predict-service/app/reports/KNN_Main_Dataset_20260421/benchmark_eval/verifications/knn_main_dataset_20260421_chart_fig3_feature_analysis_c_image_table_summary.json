@@ -1,0 +1,106 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "The best feature-count step for KNN is n=9",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No matching numeric fact was found for this claim.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:fig3_feature_analysis",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "best_model",
+      "claim_text": "The best performing model is KNN",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "No feature_subset_optimum fact found.",
+      "numeric_delta": null
+    }
+  ]
+}

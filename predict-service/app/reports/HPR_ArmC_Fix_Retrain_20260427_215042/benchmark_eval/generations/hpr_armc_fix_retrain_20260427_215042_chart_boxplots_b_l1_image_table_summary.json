@@ -1,0 +1,53 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "Boxplot chart showing the distribution of pH, VSS, Ethanol, Acetate, Propionate, and Butyrate.",
+  "explanation_full": "The chart displays boxplots for six variables: pH, VSS, Ethanol, Acetate, Propionate, and Butyrate. Each boxplot represents the distribution of a single variable across all data points. The boxes show the interquartile range (IQR), with the median marked by a line inside the box. Whiskers extend to 1.5 times the IQR from the box edges, showing potential outliers.  The chart allows for a visual comparison of the central tendency and spread of each variable.",
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:mean",
+      "claim_text": "The mean of Ethanol is 2.3.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:mean",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:mean",
+      "subject": "Ethanol",
+      "predicate": "mean",
+      "object": 2.3,
+      "metric": "mean",
+      "value": 2.3,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:std",
+      "claim_text": "The standard deviation of Ethanol is 0.8.",
+      "claim_type": "metric_value",
+      "span_category": "metric",
+      "is_numeric": true,
+      "requires_grounding_from": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:std",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:boxplots:metric:Ethanol:std",
+      "subject": "Ethanol",
+      "predicate": "std",
+      "object": 0.8,
+      "metric": "std",
+      "value": 0.8,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L1",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null,
+  "claim_alignment_issues": [],
+  "extracted_variable_mentions": []
+}

@@ -1,0 +1,27 @@
+{
+  "artifact_id": "model_output",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The model successfully extracted the key information from the provided table, summarizing the main findings.",
+  "explanation_full": "The model successfully extracted the key information from the provided table, summarizing the main findings. It identified the primary subject and the key metrics, providing a clear and concise summary of the data presented.",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The model successfully extracted the key information from the provided table.",
+      "claim_type": "extraction",
+      "span_category": "extraction",
+      "is_numeric": false,
+      "requires_grounding_from": "extraction",
+      "confidence": 1.0,
+      "subject": "model",
+      "predicate": "successfully extracted",
+      "object": "key information",
+      "metric": "information_extraction",
+      "value": "key",
+      "unit": "qualitative",
+      "ordered_items": [],
+      "feature_count": 1,
+      "hedged": false
+    }
+  ]
+}

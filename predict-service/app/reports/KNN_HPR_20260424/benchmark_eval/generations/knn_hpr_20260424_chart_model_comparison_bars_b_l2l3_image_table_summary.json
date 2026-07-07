@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "KNN outperforms other models with an R2 of 0.81717 and MSE of 0.012810, indicating the best fit to the data.",
+  "explanation_full": "The model comparison chart reveals that KNN achieves the highest R2 score (0.81717) and lowest MSE (0.012810) among all benchmark models. This signifies its superior performance in predicting hydrogen production (HPR) compared to SVM, DT, RF, and XGBoost.  The chart visually demonstrates this trend, highlighting KNN's dominance in accurately capturing the relationship between input features and HPR.\n\nWhile other models like RF and XGBoost also demonstrate reasonable performance, KNN's significantly higher R2 and lower MSE suggest its effectiveness in modeling the complex dynamics of hydrogen production based on the provided dataset.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:best_model",
+      "claim_text": "KNN outperforms other models with an R2 of 0.81717 and MSE of 0.012810, indicating the best fit to the data.",
+      "claim_type": "metric_value",
+      "span_category": "best_model",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_comparison_bars",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_comparison_bars:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "metric": null,
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:chart:model_comparison_bars:ranking:r2_score",
+      "claim_text": "KNN achieves the highest R2 score (0.81717) and lowest MSE (0.012810) among all benchmark models.",
+      "claim_type": "metric_value",
+      "span_category": "ranking",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:chart:model_comparison_bars",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:chart:model_comparison_bars:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

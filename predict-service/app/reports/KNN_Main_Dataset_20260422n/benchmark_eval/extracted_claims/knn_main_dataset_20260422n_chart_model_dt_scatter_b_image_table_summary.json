@@ -1,0 +1,61 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_dt_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "claim_1",
+      "claim_text": "The Decision Tree (DT) model achieved an R2 score of 0.5605",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "R2 score",
+      "object": "0.5605",
+      "metric": "r2_score",
+      "value": 0.5605,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_2",
+      "claim_text": "The Mean Absolute Error (MAE) was 0.1086",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "MAE",
+      "object": "0.1086",
+      "metric": "mae",
+      "value": 0.1086,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "claim_3",
+      "claim_text": "The Root Mean Square Error (RMSE) was 0.1755",
+      "claim_type": "metric_value",
+      "span_category": "model_metrics",
+      "is_numeric": true,
+      "requires_grounding_from": "chart",
+      "confidence": 1.0,
+      "subject": "DT",
+      "predicate": "RMSE",
+      "object": "0.1755",
+      "metric": "rmse",
+      "value": 0.1755,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

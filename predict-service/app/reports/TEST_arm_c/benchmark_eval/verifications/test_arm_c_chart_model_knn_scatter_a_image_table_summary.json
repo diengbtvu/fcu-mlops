@@ -1,0 +1,64 @@
+{
+  "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "R2 score of 0.8172",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.219830000000812e-05
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "correlation between predicted and actual values of 0.9073",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:pred_actual_correlation"
+      ],
+      "reason": "Gold value for KNN pred_actual_correlation is 0.907301.",
+      "numeric_delta": 1.0000000000287557e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "linear fit slope is 0.8798",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:linear_fit_slope"
+      ],
+      "reason": "Gold value for KNN linear_fit_slope is 0.879798.",
+      "numeric_delta": 2.0000000000575113e-06
+    },
+    {
+      "artifact_id": "TEST_arm_c:chart:model_knn_scatter",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "maximum absolute residual is 0.3673",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "TEST_arm_c:chart:model_knn_scatter:metric:KNN:max_abs_residual"
+      ],
+      "reason": "Gold value for KNN max_abs_residual is 0.367254.",
+      "numeric_delta": 4.599999999999049e-05
+    }
+  ]
+}

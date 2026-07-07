@@ -1,0 +1,60 @@
+{
+  "artifact_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "claims": [
+    {
+      "claim_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:claim:1",
+      "claim_text": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 1.0,
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "subject": "XGBoost",
+      "predicate": "r2_score",
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.7495,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "claim_alignment_issues": [
+    {
+      "issue_id": "alignment-1",
+      "issue_type": "unknown_variable",
+      "message": "Mention referenced a source_variable_id that is not in the variable catalog.",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "mention_id": "m2",
+      "claim_id": null,
+      "action": "drop"
+    }
+  ],
+  "extracted_variable_mentions": [
+    {
+      "mention_id": "m1",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "evidence_span": "The R2 score of 0.7495 suggests that the model explains 74.95% of the variance in the target variable.",
+      "stated_value": "0.7495",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    },
+    {
+      "mention_id": "m2",
+      "source_variable_id": "HPR_ArmC_Fix_Retrain_20260427_215042:chart:model_xgboost_scatter:metric:XGBoost:rmse",
+      "evidence_span": "The RMSE of 0.1325 indicates an average prediction error of 0.1325 units.",
+      "stated_value": "0.1325",
+      "stated_object": null,
+      "stated_ordered_items": [],
+      "stated_feature_count": null,
+      "confidence": 1.0
+    }
+  ]
+}

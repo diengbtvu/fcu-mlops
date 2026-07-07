@@ -1,0 +1,36 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse",
+      "claim_text": "The KNN model achieved the lowest MSE (0.012810).",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_mse"
+      ],
+      "reason": "Gold value for KNN mse is 0.011901.",
+      "numeric_delta": 0.0009090000000000001
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2",
+      "claim_text": "The KNN model achieved the highest R² value (0.81717).",
+      "status": "contradicted",
+      "semantic_level": "L1",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:fig6ab_mse_r2_features:best_r2"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.83014.",
+      "numeric_delta": 0.012970000000000037
+    }
+  ]
+}

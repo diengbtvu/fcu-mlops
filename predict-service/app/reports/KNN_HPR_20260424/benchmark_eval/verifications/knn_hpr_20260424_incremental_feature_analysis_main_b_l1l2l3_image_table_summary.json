@@ -1,0 +1,64 @@
+{
+  "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse",
+      "claim_text": "The best MSE for KNN is 0.123.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_mse"
+      ],
+      "reason": "Gold value for KNN best_mse is 0.011901056157134797.",
+      "numeric_delta": 0.1110989438428652
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2",
+      "claim_text": "The best R2 for KNN is 0.85.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:best_r2"
+      ],
+      "reason": "Gold value for KNN best_r2 is 0.8301397249357059.",
+      "numeric_delta": 0.01986027506429411
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum",
+      "claim_text": "The optimal feature subset for KNN has 10 features.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:feature_subset_optimum"
+      ],
+      "reason": "Gold feature_subset_optimum count is 9.",
+      "numeric_delta": 1
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:incremental_feature_analysis/main",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:incremental_feature_analysis/main:plateau",
+      "claim_text": "The plateau for KNN is reached at 7 features.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:incremental_feature_analysis/main:plateau"
+      ],
+      "reason": "Gold plateau count is 9.",
+      "numeric_delta": 2
+    }
+  ]
+}

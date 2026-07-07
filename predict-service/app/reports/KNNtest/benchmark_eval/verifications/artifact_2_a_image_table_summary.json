@@ -1,0 +1,18 @@
+{
+  "artifact_id": "artifact_2",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNNtest:chart:fig3a_gra_ranking",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_text_2",
+      "claim_text": "The table summarizes the performance of different models.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'description' is not yet rule-verified.",
+      "numeric_delta": null
+    }
+  ]
+}

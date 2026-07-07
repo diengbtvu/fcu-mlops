@@ -1,0 +1,78 @@
+{
+  "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+  "arm": "A",
+  "input_condition": "image_table_summary",
+  "semantic_level": null,
+  "verifications": [
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "Sucrose_Degradation and VFA are the most important features",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis:top_feature"
+      ],
+      "reason": "Gold feature_subset_optimum count is 0.",
+      "numeric_delta": 2
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "VFA having a mean absolute SHAP value of 0.017",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+      "numeric_delta": 4.176919999999973e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "Sucrose_Degradation having 0.0032",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+      "numeric_delta": 0.013841769200000001
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "VFA exhibits the highest mean absolute SHAP value at 0.017",
+      "status": "supported",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+      "numeric_delta": 4.176919999999973e-05
+    },
+    {
+      "artifact_id": "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis",
+      "arm": "A",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "followed by Sucrose_Degradation at 0.0032",
+      "status": "contradicted",
+      "semantic_level": null,
+      "matched_fact_ids": [
+        "Docker_E2E_20260423_ArmB_Rerun:chart:fig3b_shap_analysis:metric:VFA:mean_abs_shap"
+      ],
+      "reason": "Gold value for VFA mean_abs_shap is 0.0170417692.",
+      "numeric_delta": 0.013841769200000001
+    }
+  ]
+}

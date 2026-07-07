@@ -3,8 +3,12 @@
 namespace App\Services;
 
 use App\Models\Dataset;
+use App\Models\EmailSetting;
 use App\Models\MLModel;
+use App\Support\GroqKeyStatus;
+use App\Support\PredictServiceUrl;
 use App\Models\User;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Process\Process;
@@ -332,6 +336,14 @@ class TrainingService
         return false;
     }
 
+    private function configuredGroqApiKeys(): array
+    {
+        $keys = GroqKeyStatus::normalizeKeys((string) EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+        $statusMap = GroqKeyStatus::loadStatusMap();
+
+        return GroqKeyStatus::filterUsableKeys($keys, $statusMap);
+    }
+
     /**
      * Train model using Flask API (Alternative to executeTrainingProcess)
      * 
@@ -363,8 +375,24 @@ class TrainingService
                 'random_state' => $options['random_state'] ?? 42,
                 'trained_by' => $user->UserId,
                 'dataset_id' => $dataset->DatasetId,
-                'session_id' => $options['session_id'] ?? null  // Pass session ID for progress tracking
+                'session_id' => $options['session_id'] ?? null,  // Pass session ID for progress tracking
+                'llm_provider' => 'groq',
             ];
+            if (!empty($options['llm_model'])) {
+                $requestData['llm_model'] = $options['llm_model'];
+            }
+            $groqApiKeys = $this->configuredGroqApiKeys();
+            if (empty($groqApiKeys)) {
+                $storedKeys = GroqKeyStatus::normalizeKeys((string) EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+
+                return [
+                    'success' => false,
+                    'error' => empty($storedKeys)
+                        ? 'No Groq API key is configured. Open Admin > Settings > AI and add at least one key.'
+                        : 'All configured Groq API keys are marked blocked. Open Admin > Settings > AI to reactivate or replace a key.',
+                ];
+            }
+            $requestData['groq_api_keys'] = $groqApiKeys;
 
             // Add model-specific parameters
             $modelType = $options['model_type'] ?? 'random_forest';
@@ -387,19 +415,52 @@ class TrainingService
             }
 
             // Log training start
+            $safeRequestData = $requestData;
+            if (isset($safeRequestData['groq_api_keys'])) {
+                $safeRequestData['groq_api_key_count'] = count((array) $safeRequestData['groq_api_keys']);
+                unset($safeRequestData['groq_api_keys']);
+            }
+
             Log::info('Training via API started', [
                 'dataset_id' => $dataset->DatasetId,
                 'user_id' => $user->UserId,
                 'session_id' => $options['session_id'] ?? null,
-                'options' => $requestData
+                'options' => $safeRequestData
             ]);
 
-            // Call Flask API
-            $apiUrl = config('services.predict_service.url', 'http://predict-service:5000') . '/train/model';
-            
-            $response = Http::timeout(600) // 10 minutes timeout
-                ->withToken(config('app.prediction_api_token', ''))
-                ->post($apiUrl, $requestData);
+            // Call predict-service, with fallbacks for non-Docker/VPS deployments.
+            $response = null;
+            $lastConnectionException = null;
+            $candidateUrls = PredictServiceUrl::urls('/train/model');
+
+            foreach ($candidateUrls as $apiUrl) {
+                try {
+                    $response = Http::timeout(600) // 10 minutes timeout
+                        ->withToken(config('app.prediction_api_token', ''))
+                        ->post($apiUrl, $requestData);
+
+                    if (in_array($response->status(), [404, 502, 503, 504], true)) {
+                        Log::warning('Predict-service training endpoint returned fallback-eligible status.', [
+                            'url' => $apiUrl,
+                            'status' => $response->status(),
+                        ]);
+                        continue;
+                    }
+
+                    break;
+                } catch (ConnectionException $exception) {
+                    $lastConnectionException = $exception;
+
+                    Log::warning('Predict-service training endpoint connection failed.', [
+                        'url' => $apiUrl,
+                        'error' => $exception->getMessage(),
+                    ]);
+                }
+            }
+
+            if ($response === null) {
+                throw $lastConnectionException ?? new \RuntimeException('Predict-service is unavailable.');
+            }
 
             if (!$response->successful()) {
                 Log::error('Training API failed', [
@@ -461,6 +522,112 @@ class TrainingService
             return [
                 'success' => false,
                 'error' => 'Training failed: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    public function resumeReportPostProcessing(MLModel $model, User $user, array $options = []): array
+    {
+        try {
+            $reportInfo = is_array($model->training_report) ? $model->training_report : [];
+            $reportId = trim((string) ($reportInfo['report_id'] ?? $model->MLMName ?? ''));
+            if ($reportId === '') {
+                return [
+                    'success' => false,
+                    'error' => 'This model does not have a saved training report bundle to resume.',
+                ];
+            }
+
+            $groqApiKeys = $this->configuredGroqApiKeys();
+            if (empty($groqApiKeys)) {
+                $storedKeys = GroqKeyStatus::normalizeKeys((string) EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
+
+                return [
+                    'success' => false,
+                    'error' => empty($storedKeys)
+                        ? 'No Groq API key is configured. Open Admin > Settings > AI and add at least one key.'
+                        : 'All configured Groq API keys are marked blocked. Open Admin > Settings > AI to reactivate or replace a key.',
+                ];
+            }
+
+            $requestData = [
+                'report_id' => $reportId,
+                'llm_provider' => 'groq',
+                'groq_api_keys' => $groqApiKeys,
+            ];
+
+            $llmModel = trim((string) ($options['llm_model'] ?? $reportInfo['llm_config']['model'] ?? ''));
+            if ($llmModel !== '') {
+                $requestData['llm_model'] = $llmModel;
+            }
+
+            Log::info('Report post-processing resume requested', [
+                'model_id' => $model->id,
+                'report_id' => $reportId,
+                'user_id' => $user->UserId,
+                'groq_api_key_count' => count($groqApiKeys),
+            ]);
+
+            $response = null;
+            $lastConnectionException = null;
+            foreach (PredictServiceUrl::urls('/train/report-post-processing/resume') as $apiUrl) {
+                try {
+                    $response = Http::timeout(120)
+                        ->withToken(config('app.prediction_api_token', ''))
+                        ->post($apiUrl, $requestData);
+
+                    if (in_array($response->status(), [404, 502, 503, 504], true)) {
+                        Log::warning('Predict-service resume endpoint returned fallback-eligible status.', [
+                            'url' => $apiUrl,
+                            'status' => $response->status(),
+                        ]);
+                        continue;
+                    }
+
+                    break;
+                } catch (ConnectionException $exception) {
+                    $lastConnectionException = $exception;
+
+                    Log::warning('Predict-service resume endpoint connection failed.', [
+                        'url' => $apiUrl,
+                        'error' => $exception->getMessage(),
+                    ]);
+                }
+            }
+
+            if ($response === null) {
+                throw $lastConnectionException ?? new \RuntimeException('Predict-service is unavailable.');
+            }
+
+            $result = $response->json();
+            if (!is_array($result)) {
+                $result = [
+                    'success' => false,
+                    'error' => trim((string) $response->body()) ?: 'Predict-service returned an invalid response.',
+                ];
+            }
+
+            if (!$response->successful() || !($result['success'] ?? false)) {
+                return [
+                    'success' => false,
+                    'error' => (string) ($result['error'] ?? $result['message'] ?? 'Resume request failed.'),
+                ];
+            }
+
+            return [
+                'success' => true,
+                'message' => (string) ($result['message'] ?? 'Report post-processing resume started.'),
+                'report_id' => $reportId,
+            ];
+        } catch (\Throwable $e) {
+            Log::error('Report post-processing resume failed', [
+                'model_id' => $model->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return [
+                'success' => false,
+                'error' => 'Resume failed: ' . $e->getMessage(),
             ];
         }
     }

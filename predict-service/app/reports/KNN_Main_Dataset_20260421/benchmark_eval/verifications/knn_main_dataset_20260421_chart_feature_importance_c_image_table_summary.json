@@ -1,0 +1,44 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "VSS is the most important feature.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "The top three features are VFA, Butyrate, and Acetate.",
+      "status": "contradicted",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:feature_importance:top_feature"
+      ],
+      "reason": "Gold top feature for importance is VSS.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260421:chart:feature_importance",
+      "arm": "C",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "VFA has an importance of 0.0748037264118768.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260421:chart:feature_importance:metric:VFA:importance"
+      ],
+      "reason": "Gold value for VFA importance is 0.0748037264.",
+      "numeric_delta": 1.1876791217169114e-11
+    }
+  ]
+}

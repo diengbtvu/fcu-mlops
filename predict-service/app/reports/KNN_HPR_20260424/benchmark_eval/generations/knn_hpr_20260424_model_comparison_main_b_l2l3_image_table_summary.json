@@ -1,0 +1,51 @@
+{
+  "artifact_id": "KNN_HPR_20260424:model_comparison/main",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "explanation_short": "The KNN model outperforms other models in predicting HPR with a higher R2 score (0.81717) and lower MSE (0.012810).  VFA, Butyrate, Acetate, VSS, and Ethanol are the top correlated features.",
+  "explanation_full": "The KNN model demonstrates superior performance in predicting Hydrogen Production Rate (HPR) compared to other models like SVM, DT, RF, and XGBoost. This is evident from its higher R2 score of 0.81717, indicating a stronger correlation between predicted and actual HPR values. Additionally, it achieves the lowest Mean Squared Error (MSE) of 0.012810, signifying greater accuracy in its predictions.  Furthermore, the analysis reveals that VFA, Butyrate, Acetate, VSS, and Ethanol are the most influential features contributing to HPR prediction.",
+  "claims": [
+    {
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "claim_text": "The KNN model outperforms other models in predicting HPR with a higher R2 score (0.81717) and lower MSE (0.012810).",
+      "claim_type": "metric_value",
+      "span_category": "best_model",
+      "is_numeric": false,
+      "requires_grounding_from": "KNN_HPR_20260424:model_comparison/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:model_comparison/main:best_model",
+      "subject": "model_comparison",
+      "predicate": "best_model",
+      "object": "KNN",
+      "metric": null,
+      "value": 0.01281,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "KNN_HPR_20260424:model_comparison/main:ranking:r2_score",
+      "claim_text": "The KNN model outperforms other models in predicting HPR with a higher R2 score (0.81717) and lower MSE (0.012810).",
+      "claim_type": "metric_value",
+      "span_category": "ranking",
+      "is_numeric": true,
+      "requires_grounding_from": "KNN_HPR_20260424:model_comparison/main",
+      "confidence": 1.0,
+      "source_variable_id": "KNN_HPR_20260424:model_comparison/main:ranking:r2_score",
+      "subject": "model_comparison",
+      "predicate": "r2_score",
+      "object": "0.81717",
+      "metric": "r2_score",
+      "value": 0.81717,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    }
+  ],
+  "semantic_level": "L2L3",
+  "generation_stage": null,
+  "correction_trace": null,
+  "parent_draft_hash": null
+}

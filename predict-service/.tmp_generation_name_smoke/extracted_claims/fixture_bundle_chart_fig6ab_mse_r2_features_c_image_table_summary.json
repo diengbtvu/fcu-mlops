@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:chart:fig6ab_mse_r2_features",
+  "arm": "C",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "optimum-subset",
+      "claim_text": "KNN reaches its best subset at 6 features.",
+      "claim_type": "feature_subset_optimum",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.96,
+      "subject": "KNN",
+      "predicate": null,
+      "object": "pH -> Propionate -> VFA -> Butyrate -> VSS -> Ethanol",
+      "metric": null,
+      "value": 6.0,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": 6,
+      "hedged": false
+    },
+    {
+      "claim_id": "best-r2",
+      "claim_text": "KNN reaches R2=0.920000 at its best step.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.96,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.92,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "ranking",
+      "claim_text": "The best-step R2 ranking is KNN > RF > SVM.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [
+        "KNN",
+        "RF",
+        "SVM"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "verifications": [
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_1",
+      "claim_text": "KNN is the winning model.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:best_model"
+      ],
+      "reason": "Gold best model is KNN.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_2",
+      "claim_text": "KNN achieved an R2 score of 0.8172.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:KNN:r2_score"
+      ],
+      "reason": "Gold value for KNN r2_score is 0.8171678017.",
+      "numeric_delta": 3.219830000000812e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_3",
+      "claim_text": "KNN achieved an RMSE of 0.1132.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:KNN:rmse"
+      ],
+      "reason": "Gold value for KNN rmse is 0.11318091.",
+      "numeric_delta": 1.9089999999999385e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_4",
+      "claim_text": "KNN achieved an MAE of 0.075.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:metric:KNN:mae"
+      ],
+      "reason": "Gold value for KNN mae is 0.0750230875.",
+      "numeric_delta": 2.30875000000047e-05
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_5",
+      "claim_text": "KNN outperformed DT.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_6",
+      "claim_text": "KNN outperformed SVM.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_7",
+      "claim_text": "RF performed better than XGBoost.",
+      "status": "unverifiable",
+      "matched_fact_ids": [],
+      "reason": "Claim type 'freeform' is not yet rule-verified.",
+      "numeric_delta": null
+    },
+    {
+      "artifact_id": "KNN_Main_Dataset_20260422n:chart:model_comparison_bars",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "claim_8",
+      "claim_text": "The model comparison shows KNN is the best model.",
+      "status": "supported",
+      "matched_fact_ids": [
+        "KNN_Main_Dataset_20260422n:chart:model_comparison_bars:best_model"
+      ],
+      "reason": "Gold best model is KNN.",
+      "numeric_delta": null
+    }
+  ]
+}

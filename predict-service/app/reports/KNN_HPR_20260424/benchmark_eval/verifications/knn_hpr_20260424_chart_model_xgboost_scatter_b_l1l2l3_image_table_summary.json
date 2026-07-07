@@ -1,0 +1,50 @@
+{
+  "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+  "arm": "B",
+  "input_condition": "image_table_summary",
+  "semantic_level": "L1L2L3",
+  "verifications": [
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:max_abs_residual",
+      "claim_text": "The XGBoost model has a max_abs_residual of 0.1325.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:max_abs_residual"
+      ],
+      "reason": "Gold value for XGBoost max_abs_residual is 0.410478.",
+      "numeric_delta": 0.277978
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation",
+      "claim_text": "The XGBoost model has a pred_actual_correlation of 0.7495.",
+      "status": "contradicted",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:pred_actual_correlation"
+      ],
+      "reason": "Gold value for XGBoost pred_actual_correlation is 0.875024.",
+      "numeric_delta": 0.12552399999999997
+    },
+    {
+      "artifact_id": "KNN_HPR_20260424:chart:model_xgboost_scatter",
+      "arm": "B",
+      "input_condition": "image_table_summary",
+      "claim_id": "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score",
+      "claim_text": "The XGBoost model has an r2_score of 0.7495.",
+      "status": "supported",
+      "semantic_level": "L1L2L3",
+      "matched_fact_ids": [
+        "KNN_HPR_20260424:chart:model_xgboost_scatter:metric:XGBoost:r2_score"
+      ],
+      "reason": "Gold value for XGBoost r2_score is 0.7494763102.",
+      "numeric_delta": 2.368980000000409e-05
+    }
+  ]
+}

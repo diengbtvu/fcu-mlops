@@ -1,0 +1,42 @@
+{
+  "provider": "benchmark_selected",
+  "model": "gemma4:e4b",
+  "generated_at": "2026-04-23T04:18:34.308652+00:00",
+  "selection_method": "best_leaderboard_row",
+  "selected_arm": "A",
+  "selected_condition": "image_table_summary",
+  "selected_semantic_level": "L1L2L3",
+  "selected_row": {
+    "arm": "A",
+    "input_condition": "image_table_summary",
+    "semantic_level": "L1L2L3",
+    "artifact_count": 3,
+    "claim_count": 17,
+    "fact_precision": 0.8333333333333334,
+    "fact_recall": 0.3888888888888889,
+    "fact_f1": 0.5,
+    "unsupported_claim_rate": 0.0,
+    "contradiction_rate": 0.16666666666666666,
+    "coverage_of_salient_facts": 0.4722222222222222,
+    "numeric_accuracy": 0.8333333333333334,
+    "numeric_tolerance_accuracy": 0.8333333333333334
+  },
+  "overview": {
+    "en": "The incremental feature analysis table shows the performance metrics (R² and MSE) for various feature subsets and model types (SVM, DT, RF, KNN, XGBoost). For all models, the best performance is consistently observed when using only 1 feature (Sucrose_Degradation). For DT, RF, and KNN, using n=1 feature results in R²=1.0 and MSE=0.0. For SVM and XGBoost, the R² remains 0.0 across all feature counts, and the MSE values are non-zero (e.g., SVM MSE at n=1 is 0.0099993796). This pattern holds true up to 11 features, indicating that adding more features does not improve the performance of these models, and in the case of SVM and XGBoost, the performance remains poor regardless of the feature count. The summary text confirms this, stating that DT, RF, and KNN all achieve R²=1.0 and MSE=0.0 with n=1 feature, while SVM and XGBoost have R²=0.0 and non-zero MSEs across all steps. The model metrics also confirm that DT, RF, and KNN are the best performing models with R²=1.0 and MSE=0.0, outperforming SVM and XGBoost (R²=0.0). The best step per model summary explicitly states that DT, RF, and KNN all have their best performance at n=1 feature.\n\nIn summary, the analysis strongly suggests that the single feature 'Sucrose_Degradation' is sufficient to achieve perfect prediction (R²=1.0, MSE=0.0) using DT, RF, and KNN, while SVM and XGBoost fail to achieve high performance regardless of the number of features included. The best model overall is DT, with R²=1.0 and MSE=0.0, based on the model metrics section of the results summary and the best step per model summary in the chart evidence. This conclusion is directly supported by the table evidence (table1_incremental_results.csv) and the chart evidence (fig6ab_mse_r2_features.png). The model performance section of the results summary text also corroborates this finding, listing DT, RF, and KNN with R²=1.0 and MSE=0.0, and SVM and XGBoost with R²=0.0 and non-zero MSEs.\n\nThe table 'table1_incremental_results' details the performance metrics (R² and MSE) for various machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of features increases from 1 to 11, using the feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid -> ORP_Low'.\n\nAcross all feature subsets (n_features 1 through 11):\n- DT, RF, and KNN consistently achieve an R² score of 1.0 and an MSE of 0.0.\n- SVM consistently achieves an R² score of 0.0, with MSE values ranging from 0.00999937964675071 (1 feature) to 0.006607876482459992 (10 features).\n- XGBoost consistently achieves an R² score of 0.0, with MSE values remaining very small (e.g., 7.477596651503524e-14).\n\nIn summary, the performance of DT, RF, and KNN remains perfect (R²=1.0, MSE=0.0) regardless of the feature set size, while SVM and XGBoost maintain an R² of 0.0 across all tested feature subsets.",
+    "zh_TW": ""
+  },
+  "assets": {
+    "table1_incremental_results": {
+      "en": "The table 'table1_incremental_results' details the performance metrics (R² and MSE) for various machine learning models (SVM, DT, RF, KNN, XGBoost) as the number of features increases from 1 to 11, using the feature subset 'Sucrose_Degradation -> VFA -> COD-O -> Butyrate -> VSS -> pH -> Acetate -> Ethanol -> Propionate -> ORP_Mid -> ORP_Low'.\n\nAcross all feature subsets (n_features 1 through 11):\n- DT, RF, and KNN consistently achieve an R² score of 1.0 and an MSE of 0.0.\n- SVM consistently achieves an R² score of 0.0, with MSE values ranging from 0.00999937964675071 (1 feature) to 0.006607876482459992 (10 features).\n- XGBoost consistently achieves an R² score of 0.0, with MSE values remaining very small (e.g., 7.477596651503524e-14).\n\nIn summary, the performance of DT, RF, and KNN remains perfect (R²=1.0, MSE=0.0) regardless of the feature set size, while SVM and XGBoost maintain an R² of 0.0 across all tested feature subsets.",
+      "zh_TW": ""
+    },
+    "fig6ab_mse_r2_features": {
+      "en": "The incremental feature analysis table shows the performance metrics (R² and MSE) for various feature subsets and model types (SVM, DT, RF, KNN, XGBoost). For all models, the best performance is consistently observed when using only 1 feature (Sucrose_Degradation). For DT, RF, and KNN, using n=1 feature results in R²=1.0 and MSE=0.0. For SVM and XGBoost, the R² remains 0.0 across all feature counts, and the MSE values are non-zero (e.g., SVM MSE at n=1 is 0.0099993796). This pattern holds true up to 11 features, indicating that adding more features does not improve the performance of these models, and in the case of SVM and XGBoost, the performance remains poor regardless of the feature count. The summary text confirms this, stating that DT, RF, and KNN all achieve R²=1.0 and MSE=0.0 with n=1 feature, while SVM and XGBoost have R²=0.0 and non-zero MSEs across all steps. The model metrics also confirm that DT, RF, and KNN are the best performing models with R²=1.0 and MSE=0.0, outperforming SVM and XGBoost (R²=0.0). The best step per model summary explicitly states that DT, RF, and KNN all have their best performance at n=1 feature.\n\nIn summary, the analysis strongly suggests that the single feature 'Sucrose_Degradation' is sufficient to achieve perfect prediction (R²=1.0, MSE=0.0) using DT, RF, and KNN, while SVM and XGBoost fail to achieve high performance regardless of the number of features included. The best model overall is DT, with R²=1.0 and MSE=0.0, based on the model metrics section of the results summary and the best step per model summary in the chart evidence. This conclusion is directly supported by the table evidence (table1_incremental_results.csv) and the chart evidence (fig6ab_mse_r2_features.png). The model performance section of the results summary text also corroborates this finding, listing DT, RF, and KNN with R²=1.0 and MSE=0.0, and SVM and XGBoost with R²=0.0 and non-zero MSEs.",
+      "zh_TW": ""
+    },
+    "feature_distributions": {
+      "en": "Based on the feature distributions, Propionate shows the highest mean value at 0.3581 and the largest standard deviation at 0.1538. Other features also show notable distributions, with Ethanol having a mean of 0.1016 and a standard deviation of 0.1131. pH has a mean of 0.0349 and a standard deviation of 0.1099. Acetate, VSS, and Butyrate follow with means of 0.0546, 0.0293, and 0.0271, respectively, and standard deviations of 0.1023, 0.1018, and 0.1013. These statistics indicate the central tendency and variability of the measured chemical components.",
+      "zh_TW": ""
+    }
+  }
+}

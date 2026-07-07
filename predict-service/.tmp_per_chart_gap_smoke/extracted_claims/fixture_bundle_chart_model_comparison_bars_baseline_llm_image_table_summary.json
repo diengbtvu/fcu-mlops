@@ -1,0 +1,65 @@
+{
+  "artifact_id": "fixture_bundle:chart:model_comparison_bars",
+  "arm": "BASELINE_LLM",
+  "input_condition": "image_table_summary",
+  "claims": [
+    {
+      "claim_id": "baseline-best-model",
+      "claim_text": "KNN is the best model in the comparison.",
+      "claim_type": "best_model",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.9,
+      "subject": "KNN",
+      "predicate": null,
+      "object": "KNN",
+      "metric": null,
+      "value": null,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-r2_score",
+      "claim_text": "KNN achieved r2_score=0.92.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": true,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.88,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 0.92,
+      "unit": null,
+      "ordered_items": [],
+      "feature_count": null,
+      "hedged": false
+    },
+    {
+      "claim_id": "baseline-ranking",
+      "claim_text": "The model ranking by R2 is KNN > RF > SVM.",
+      "claim_type": "metric_value",
+      "span_category": "sentence",
+      "is_numeric": false,
+      "requires_grounding_from": "table/json",
+      "confidence": 0.82,
+      "subject": "KNN",
+      "predicate": null,
+      "object": null,
+      "metric": "r2_score",
+      "value": 2.0,
+      "unit": null,
+      "ordered_items": [
+        "KNN",
+        "RF",
+        "SVM"
+      ],
+      "feature_count": null,
+      "hedged": false
+    }
+  ]
+}
