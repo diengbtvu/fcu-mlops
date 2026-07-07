@@ -131,6 +131,9 @@ services:
       - training_progress:/app/training_progress
     networks:
       default: {}
+      # Needed only to reach an OpenAI-compatible endpoint that lives on this
+      # network (e.g. a self-hosted 9router instance) instead of api.openai.com.
+      external: {}
     logging:
       driver: json-file
       options:

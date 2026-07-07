@@ -196,12 +196,25 @@ log "Public verification OK (HTTP ${HTTP_CODE})."
 # ---------------------------------------------------------------------------
 log "Step 11/11: scheduling drain window (${DRAIN_SECONDS}s) before stopping ${ACTIVE_COLOR}"
 DRAIN_LOG="$LOG_DIR/drain_${TIMESTAMP}.log"
+REGISTRY_VAL="$(read_env_var "$SCRIPT_DIR/.env.${IDLE_COLOR}" REGISTRY)"
+IMAGE_PREFIX_VAL="$(read_env_var "$SCRIPT_DIR/.env.${IDLE_COLOR}" IMAGE_PREFIX)"
+IMAGE_PREFIX_VAL="${IMAGE_PREFIX_VAL:-fcu-mlops}"
 nohup bash -c "
     exec 9>&-
     sleep '${DRAIN_SECONDS}'
     echo \"[drain] stopping old color ${ACTIVE_COLOR} (${ACTIVE_PROJECT})\"
     TAG='${TAG}' docker compose -p '${ACTIVE_PROJECT}' --env-file '.env.${ACTIVE_COLOR}' -f '${SCRIPT_DIR}/docker-compose.app.yml' stop
     docker image prune -f >/dev/null 2>&1 || true
+    # Old tagged images (not just dangling ones) pile up fast - predict-service alone is
+    # ~8GB per tag. Remove every tag except the one just deployed; docker itself refuses
+    # to remove a tag still referenced by an existing (even stopped) container, so this
+    # naturally leaves the previous color's image alone until IT is deployed over too.
+    for svc in frontend webapp predict; do
+        docker images \"${REGISTRY_VAL}/${IMAGE_PREFIX_VAL}-\${svc}\" --format '{{.Tag}}' | while read -r old_tag; do
+            [ \"\$old_tag\" = '${TAG}' ] && continue
+            docker rmi \"${REGISTRY_VAL}/${IMAGE_PREFIX_VAL}-\${svc}:\$old_tag\" >/dev/null 2>&1 || true
+        done
+    done
     ls -1t '${BACKUP_DIR}'/${APP_SLUG}_predeploy_*.sql.gz 2>/dev/null | tail -n +\$(( ${KEEP_BACKUPS} + 1 )) | xargs -r rm -f
     echo \"[drain] done\"
 " >>"$DRAIN_LOG" 2>&1 &
