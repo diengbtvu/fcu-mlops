@@ -382,9 +382,3 @@ The system works seamlessly across:
 - **predict-service/README.md**: Python service configuration and API docs
 - **Swagger UI**: Interactive API documentation at `/api-docs/`
 
-
-## Dashboard mlflow
-
-mlflow ui --backend-store-uri "file:C:\Users\Nguyen Huu Luan\AppData\Roaming\zenml\local_stores\a2819393-dc08-4222-b330-4baa74648100\mlruns" --port 5001
-
- mlflow ui --backend-store-uri file:./app/mlruns --port 5001
