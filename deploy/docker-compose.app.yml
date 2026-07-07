@@ -123,6 +123,10 @@ services:
       - mlflow_runs:/app/app/mlruns
       - mlflow_models:/app/app/models
       - training_progress:/app/training_progress
+      # Generated report bundles (charts, tables, benchmark assets) - served back
+      # to the browser via nginx's /train/ proxy. Without a real volume here this
+      # is container-local storage, wiped every time predict-service is recreated.
+      - reports:/app/app/reports
     networks:
       default: {}
       # Needed only to reach an OpenAI-compatible endpoint that lives on this
@@ -151,4 +155,7 @@ volumes:
     external: true
   training_progress:
     name: ${VOLUME_PREFIX:-hydrogen}_training_progress
+    external: true
+  reports:
+    name: ${VOLUME_PREFIX:-hydrogen}_reports
     external: true

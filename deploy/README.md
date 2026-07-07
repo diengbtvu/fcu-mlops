@@ -79,6 +79,7 @@ docker volume create hydrogen_laravel_storage
 docker volume create hydrogen_mlflow_runs
 docker volume create hydrogen_mlflow_models
 docker volume create hydrogen_training_progress
+docker volume create hydrogen_reports
 
 # 2. Registry login (GHCR). Use a PAT with read:packages if the packages are private.
 echo "$GHCR_PAT" | docker login ghcr.io -u <your-github-username> --password-stdin
