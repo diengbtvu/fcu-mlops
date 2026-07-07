@@ -107,10 +107,9 @@
                             <div class="col-md-4">
                                 <label for="llm_provider" class="form-label fw-bold">AI provider</label>
                                 <select name="llm_provider" id="llm_provider" class="form-select">
-                                    <option value="groq" selected>Groq API</option>
-                                    <option value="openai">OpenAI-compatible (e.g. 9router)</option>
+                                    <option value="openai" selected>OpenAI-compatible (e.g. 9router)</option>
                                 </select>
-                                <small class="text-muted">"OpenAI-compatible" calls whatever OPENAI_BASE_URL is configured on the server (e.g. a self-hosted 9router instance).</small>
+                                <small class="text-muted">Calls whatever OPENAI_BASE_URL is configured on the server (e.g. a self-hosted 9router instance).</small>
                             </div>
 
                             <div class="col-md-8">
@@ -318,10 +317,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let progressInterval = null;
 
     const llmModelsByProvider = {
-        groq: [
-            { value: 'openai/gpt-oss-120b', label: 'GPT-OSS 120B' },
-            { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B Versatile' }
-        ],
         openai: [
             { value: 'cx/gpt-5.5', label: 'Codex GPT-5.5 (via 9router)' },
             { value: 'gpt-5.2', label: 'GPT-5.2' }
@@ -332,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!llmProviderSelect || !llmModelSelect) {
             return;
         }
-        const provider = llmProviderSelect.value || 'groq';
+        const provider = llmProviderSelect.value || 'openai';
         const models = llmModelsByProvider[provider] || [];
         const datalist = document.getElementById('llmModelOptions');
         if (datalist) {
@@ -635,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const modelType = modelTypeSelect.value;
         const trainingScope = trainingScopeSelect ? trainingScopeSelect.value : 'all_models_compare';
-        const llmProvider = llmProviderSelect ? llmProviderSelect.value : 'groq';
+        const llmProvider = llmProviderSelect ? llmProviderSelect.value : 'openai';
         const llmModel = llmModelSelect ? llmModelSelect.value : '';
         const modelNameMap = {
             random_forest: 'Random Forest',

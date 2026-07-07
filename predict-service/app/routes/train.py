@@ -13,7 +13,6 @@ from app.utils.database_utils import DatabaseUtils
 from app.utils.progress_tracker import TrainingProgressTracker
 from app.utils.mlflow_tracking import configure_mlflow_tracking_uri
 from app.utils.report_explainer import (
-    GROQ_REPORT_MODELS,
     generate_report_explanations,
     update_report_explanation_status,
 )
@@ -43,9 +42,6 @@ from ml_train.train_pipeline import (
 )
 
 train_bp = Blueprint('train', __name__, url_prefix='/train')
-LLM_MODEL_ALLOWLIST = {
-    "groq": set(GROQ_REPORT_MODELS),
-}
 
 # Try to import swagger decorator
 try:
@@ -83,23 +79,16 @@ def _resolve_llm_config(data: Dict[str, Any]) -> tuple[str | None, str | None]:
     provider = str(
         data.get("llm_provider")
         or data.get("report_llm_provider")
-        or "groq"
-    ).strip().lower() or "groq"
+        or "openai"
+    ).strip().lower() or "openai"
     model = str(
         data.get("llm_model")
         or data.get("report_llm_model")
         or ""
     ).strip() or None
 
-    if provider not in ("groq", "openai"):
-        raise ValueError("llm_provider must be 'groq' or 'openai'.")
-    if provider in LLM_MODEL_ALLOWLIST and model:
-        allowed_models = LLM_MODEL_ALLOWLIST[provider]
-        if model not in allowed_models:
-            raise ValueError(
-                f"Unsupported {provider} llm_model. Allowed values: "
-                + ", ".join(sorted(allowed_models))
-            )
+    if provider != "openai":
+        raise ValueError("llm_provider must be 'openai'.")
     return provider, model
 
 

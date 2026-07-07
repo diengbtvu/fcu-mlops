@@ -74,10 +74,8 @@ services:
       PREDICT_SERVICE_URL: http://predict-service:5000
       PREDICTION_SERVICE_URL: http://predict-service:5000
       PREDICT_SERVICE_PUBLIC_URL: ${PREDICT_SERVICE_PUBLIC_URL:-}
-      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-groq}
-      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-groq}
-      GROQ_API_KEY: ${GROQ_API_KEY:-}
-      GROQ_API_KEYS: ${GROQ_API_KEYS:-}
+      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-openai}
+      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-openai}
       # Read predict-service's training progress files directly off the shared
       # volume instead of proxying through predict-service's HTTP API: that API is a
       # single gunicorn worker (see predict-service/dockerfile) that's fully occupied
@@ -111,13 +109,9 @@ services:
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
       MODEL_DIR: ${MODEL_DIR:-app/ml_model}
       PREDICT_PORT: ${PREDICT_PORT:-5000}
-      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-groq}
-      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-groq}
-      GROQ_API_KEY: ${GROQ_API_KEY:-}
-      GROQ_API_KEYS: ${GROQ_API_KEYS:-}
-      GROQ_REPORT_MODEL: ${GROQ_REPORT_MODEL:-openai/gpt-oss-120b}
-      GROQ_BENCHMARK_MODEL: ${GROQ_BENCHMARK_MODEL:-openai/gpt-oss-120b}
-      # "openai" provider is generic: OPENAI_BASE_URL lets it point at any
+      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-openai}
+      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-openai}
+      # OPENAI_BASE_URL lets the generic "openai" provider point at any
       # OpenAI-compatible endpoint (e.g. a local 9router instance) instead of
       # api.openai.com.
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
