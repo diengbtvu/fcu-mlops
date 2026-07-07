@@ -2103,7 +2103,13 @@ class AdminController extends Controller
                 $llmExplanations = $selectedBenchmarkExplanations;
             }
         } else {
-            $llmExplanations = [];
+            // Benchmark (Phase 2) hasn't finished/selected a winner yet - fall back to the raw
+            // Phase 1 explanations (written to summary.json as soon as generate_report_explanations()
+            // completes) instead of hiding them until benchmark evaluation also finishes.
+            $rawPhase1Explanations = is_array($summary['llm_explanations'] ?? null)
+                ? $summary['llm_explanations']
+                : [];
+            $llmExplanations = $rawPhase1Explanations;
         }
 
         $inlineTableKeys = [
