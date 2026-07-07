@@ -91,8 +91,8 @@ def _resolve_llm_config(data: Dict[str, Any]) -> tuple[str | None, str | None]:
         or ""
     ).strip() or None
 
-    if provider != "groq":
-        raise ValueError("llm_provider must be 'groq'.")
+    if provider not in ("groq", "openai"):
+        raise ValueError("llm_provider must be 'groq' or 'openai'.")
     if provider in LLM_MODEL_ALLOWLIST and model:
         allowed_models = LLM_MODEL_ALLOWLIST[provider]
         if model not in allowed_models:

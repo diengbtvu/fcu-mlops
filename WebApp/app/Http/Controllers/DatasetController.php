@@ -324,7 +324,7 @@ class DatasetController extends Controller
             'training_method' => 'nullable|in:process,api',
             'training_scope' => 'nullable|in:single_model,all_models_compare',
             'model_name' => 'nullable|string|max:255',
-            'llm_provider' => 'nullable|in:groq',
+            'llm_provider' => 'nullable|in:groq,openai',
             'llm_model' => 'nullable|string|max:128',
             'session_id' => 'nullable|string', // Session ID for progress tracking
             // Tree-based model parameters (RF, XGBoost, DT)

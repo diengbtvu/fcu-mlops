@@ -108,14 +108,16 @@
                                 <label for="llm_provider" class="form-label fw-bold">AI provider</label>
                                 <select name="llm_provider" id="llm_provider" class="form-select">
                                     <option value="groq" selected>Groq API</option>
+                                    <option value="openai">OpenAI-compatible (e.g. 9router)</option>
                                 </select>
-                                <small class="text-muted">Docker deployment uses Groq only.</small>
+                                <small class="text-muted">"OpenAI-compatible" calls whatever OPENAI_BASE_URL is configured on the server (e.g. a self-hosted 9router instance).</small>
                             </div>
 
                             <div class="col-md-8">
                                 <label for="llm_model" class="form-label fw-bold">AI model for explanations and benchmark</label>
-                                <select name="llm_model" id="llm_model" class="form-select"></select>
-                                <small class="text-muted">Used for AI report explanations and Arm A/B/C benchmark generation.</small>
+                                <input type="text" name="llm_model" id="llm_model" class="form-control" list="llmModelOptions" placeholder="e.g. openai/gpt-oss-120b">
+                                <datalist id="llmModelOptions"></datalist>
+                                <small class="text-muted">Used for AI report explanations and Arm A/B/C benchmark generation. Pick a suggestion or type any model id the provider supports.</small>
                             </div>
                         </div>
 
@@ -319,6 +321,10 @@ document.addEventListener('DOMContentLoaded', function() {
         groq: [
             { value: 'openai/gpt-oss-120b', label: 'GPT-OSS 120B' },
             { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B Versatile' }
+        ],
+        openai: [
+            { value: 'cx/gpt-5.5', label: 'Codex GPT-5.5 (via 9router)' },
+            { value: 'gpt-5.2', label: 'GPT-5.2' }
         ]
     };
 
@@ -328,13 +334,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const provider = llmProviderSelect.value || 'groq';
         const models = llmModelsByProvider[provider] || [];
-        llmModelSelect.innerHTML = '';
-        models.forEach(function(model) {
-            const option = document.createElement('option');
-            option.value = model.value;
-            option.textContent = model.label;
-            llmModelSelect.appendChild(option);
-        });
+        const datalist = document.getElementById('llmModelOptions');
+        if (datalist) {
+            datalist.innerHTML = '';
+            models.forEach(function(model) {
+                const option = document.createElement('option');
+                option.value = model.value;
+                option.label = model.label;
+                datalist.appendChild(option);
+            });
+        }
+        llmModelSelect.value = models.length ? models[0].value : '';
     }
 
     function buildTrainingProgressUrl(sid) {
