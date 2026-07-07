@@ -376,23 +376,11 @@ class TrainingService
                 'trained_by' => $user->UserId,
                 'dataset_id' => $dataset->DatasetId,
                 'session_id' => $options['session_id'] ?? null,  // Pass session ID for progress tracking
-                'llm_provider' => 'groq',
+                'llm_provider' => $options['llm_provider'] ?? 'openai',
             ];
             if (!empty($options['llm_model'])) {
                 $requestData['llm_model'] = $options['llm_model'];
             }
-            $groqApiKeys = $this->configuredGroqApiKeys();
-            if (empty($groqApiKeys)) {
-                $storedKeys = GroqKeyStatus::normalizeKeys((string) EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
-
-                return [
-                    'success' => false,
-                    'error' => empty($storedKeys)
-                        ? 'No Groq API key is configured. Open Admin > Settings > AI and add at least one key.'
-                        : 'All configured Groq API keys are marked blocked. Open Admin > Settings > AI to reactivate or replace a key.',
-                ];
-            }
-            $requestData['groq_api_keys'] = $groqApiKeys;
 
             // Add model-specific parameters
             $modelType = $options['model_type'] ?? 'random_forest';
@@ -538,22 +526,9 @@ class TrainingService
                 ];
             }
 
-            $groqApiKeys = $this->configuredGroqApiKeys();
-            if (empty($groqApiKeys)) {
-                $storedKeys = GroqKeyStatus::normalizeKeys((string) EmailSetting::get(GroqKeyStatus::KEYS_SETTING, ''));
-
-                return [
-                    'success' => false,
-                    'error' => empty($storedKeys)
-                        ? 'No Groq API key is configured. Open Admin > Settings > AI and add at least one key.'
-                        : 'All configured Groq API keys are marked blocked. Open Admin > Settings > AI to reactivate or replace a key.',
-                ];
-            }
-
             $requestData = [
                 'report_id' => $reportId,
-                'llm_provider' => 'groq',
-                'groq_api_keys' => $groqApiKeys,
+                'llm_provider' => $options['llm_provider'] ?? 'openai',
             ];
 
             $llmModel = trim((string) ($options['llm_model'] ?? $reportInfo['llm_config']['model'] ?? ''));
@@ -565,7 +540,6 @@ class TrainingService
                 'model_id' => $model->id,
                 'report_id' => $reportId,
                 'user_id' => $user->UserId,
-                'groq_api_key_count' => count($groqApiKeys),
             ]);
 
             $response = null;
