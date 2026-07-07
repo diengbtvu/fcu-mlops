@@ -67,11 +67,11 @@ def _benchmark_client_name(provider_override: str | None = None) -> str:
         provider_override
         or os.getenv("BENCHMARK_LLM_CLIENT")
         or os.getenv("REPORT_LLM_PROVIDER")
-        or "groq"
+        or "openai"
     ).strip().lower()
-    if client_name in {"fixture", "groq"}:
+    if client_name in {"fixture", "groq", "openai"}:
         return client_name
-    return "groq"
+    return "openai"
 
 
 def _parse_csv_items(raw_value: str) -> list[str]:
@@ -657,6 +657,8 @@ def run_report_benchmark(
                 child_env["BENCHMARK_LLM_CLIENT"] = runtime_client
                 if llm_model and runtime_client == "groq":
                     child_env["GROQ_BENCHMARK_MODEL"] = str(llm_model)
+                if llm_model and runtime_client == "openai":
+                    child_env["OPENAI_BENCHMARK_MODEL"] = str(llm_model)
                 if runtime_client == "groq":
                     key_list = parse_groq_api_keys(groq_api_keys)
                     if key_list:
