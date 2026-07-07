@@ -29,7 +29,8 @@ from .prompts import (
 )
 from .schemas import ArtifactInputs, CANONICAL_CLAIM_TYPES, SUPPORTED_SEMANTIC_LEVELS
 
-OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
+DEFAULT_OPENAI_CHAT_BASE_URL = "https://api.openai.com/v1"
+OPENAI_CHAT_COMPLETIONS_URL = f"{str(os.getenv('OPENAI_BASE_URL') or DEFAULT_OPENAI_CHAT_BASE_URL).rstrip('/')}/chat/completions"
 OPENAI_BENCHMARK_MODEL = os.getenv("OPENAI_BENCHMARK_MODEL", os.getenv("OPENAI_REPORT_MODEL", "gpt-5.2"))
 DEFAULT_GROQ_CHAT_BASE_URL = "https://api.groq.com/openai/v1"
 DEFAULT_GROQ_BENCHMARK_MODEL = "openai/gpt-oss-120b"

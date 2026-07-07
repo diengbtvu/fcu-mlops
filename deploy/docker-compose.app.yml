@@ -117,6 +117,13 @@ services:
       GROQ_API_KEYS: ${GROQ_API_KEYS:-}
       GROQ_REPORT_MODEL: ${GROQ_REPORT_MODEL:-openai/gpt-oss-120b}
       GROQ_BENCHMARK_MODEL: ${GROQ_BENCHMARK_MODEL:-openai/gpt-oss-120b}
+      # "openai" provider is generic: OPENAI_BASE_URL lets it point at any
+      # OpenAI-compatible endpoint (e.g. a local 9router instance) instead of
+      # api.openai.com.
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-}
+      OPENAI_REPORT_MODEL: ${OPENAI_REPORT_MODEL:-}
+      OPENAI_BENCHMARK_MODEL: ${OPENAI_BENCHMARK_MODEL:-}
     volumes:
       - laravel_storage:/var/www/html/storage:ro
       - mlflow_runs:/app/app/mlruns
