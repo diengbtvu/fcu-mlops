@@ -2383,6 +2383,8 @@ def generate_report_explanations(
             ) from exc
 
         for item in parsed.get("assets", []):
+            if not isinstance(item, dict):
+                continue
             key = str(item.get("key") or "").strip()
             if not key:
                 continue
