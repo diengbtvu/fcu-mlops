@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -24,5 +25,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // /api/* is JSON-only: always render errors (incl. unauthenticated -> 401)
+        // as JSON there instead of redirecting to /login, regardless of Accept header.
+        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwable $e) {
+            return $request->is('api/*') || $request->expectsJson();
+        });
     })->create();

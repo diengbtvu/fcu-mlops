@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\MLModelController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
