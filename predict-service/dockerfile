@@ -28,6 +28,11 @@ EXPOSE 5000
 HEALTHCHECK --interval=10s --timeout=3s --start-period=30s --retries=6 \
     CMD curl -fsS http://127.0.0.1:5000/predict/health || exit 1
 
-# Run gunicorn with a longer timeout and a single worker because training is
-# CPU/memory intensive and should be processed sequentially.
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "180", "run:app"]
+# Single worker because training is CPU/memory intensive and should be processed
+# sequentially. Timeout is generous (30 min): the /train request runs training,
+# saves the model back to Laravel synchronously, and only then hands off to a
+# background thread for the (Groq-rate-limited, can be slow) report - 180s was
+# tight enough that gunicorn would kill the worker mid-request under any real
+# slowness in that synchronous part, which looks like an abrupt "502 bad gateway"
+# to the client instead of the request just taking a while.
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "1800", "run:app"]
