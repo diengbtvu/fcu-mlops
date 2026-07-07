@@ -78,8 +78,15 @@ services:
       BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-groq}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GROQ_API_KEYS: ${GROQ_API_KEYS:-}
+      # Read predict-service's training progress files directly off the shared
+      # volume instead of proxying through predict-service's HTTP API: that API is a
+      # single gunicorn worker (see predict-service/dockerfile) that's fully occupied
+      # for the whole duration of a training run, so HTTP polling would just queue
+      # behind it and time out (502) until training finishes.
+      TRAINING_PROGRESS_PATH: /app/training_progress
     volumes:
       - laravel_storage:/var/www/html/storage
+      - training_progress:/app/training_progress:ro
     networks:
       default: {}
       external: {}
