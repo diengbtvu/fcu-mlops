@@ -20,6 +20,13 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Copy application files and set ownership
 COPY --chown=apiuser:apigroup . .
 
+# app/mlruns is gitignored (created at runtime by MLflow), so it doesn't exist in this
+# COPY and Docker would otherwise create the hydrogen_mlflow_runs volume mount point
+# owned by root on first use - apiuser can't write to it, so every mlflow.start_run()
+# fails silently and mlflow_run_id stays NULL forever (model never shows up as
+# available for prediction). Pre-create it here so the ownership carries over.
+RUN mkdir -p /app/app/mlruns && chown apiuser:apigroup /app/app/mlruns
+
 # Switch to non-root user
 USER apiuser
 
