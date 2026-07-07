@@ -1,9 +1,12 @@
 FROM php:8.2-fpm
 
 # Install system dependencies
+# libfcgi-bin provides cgi-fcgi, used for the container healthcheck since
+# php-fpm has no HTTP listener of its own (see php-fpm healthcheck pool config below).
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    libfcgi-bin \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
@@ -56,6 +59,18 @@ USER root
 # Ensure proper permissions for runtime
 RUN chown -R appuser:appgroup /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Enable the FPM ping/status endpoints so the container has a real healthcheck
+# target despite php-fpm not speaking HTTP directly.
+RUN { \
+      echo 'ping.path = /ping'; \
+      echo 'ping.response = pong'; \
+      echo 'pm.status_path = /status'; \
+    } > /usr/local/etc/php-fpm.d/zz-healthcheck.conf
+
+HEALTHCHECK --interval=10s --timeout=3s --start-period=20s --retries=6 \
+    CMD SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET \
+        cgi-fcgi -bind -connect 127.0.0.1:9000 | grep -q pong || exit 1
 
 # Switch back to appuser
 USER appuser

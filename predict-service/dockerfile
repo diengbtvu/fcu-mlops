@@ -5,6 +5,10 @@ RUN groupadd --gid 1000 apigroup \
     && useradd --uid 1000 --gid apigroup \
        --shell /bin/bash --create-home apiuser
 
+# curl is used by the container HEALTHCHECK below
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Copy requirements and install dependencies as root
@@ -20,6 +24,9 @@ COPY --chown=apiuser:apigroup . .
 USER apiuser
 
 EXPOSE 5000
+
+HEALTHCHECK --interval=10s --timeout=3s --start-period=30s --retries=6 \
+    CMD curl -fsS http://127.0.0.1:5000/predict/health || exit 1
 
 # Run gunicorn with a longer timeout and a single worker because training is
 # CPU/memory intensive and should be processed sequentially.

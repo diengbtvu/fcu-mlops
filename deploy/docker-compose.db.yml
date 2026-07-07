@@ -1,0 +1,46 @@
+# Shared MySQL database. Lives outside the blue/green lifecycle: both colors point at
+# this single instance, which is why every migration must be backward-compatible
+# (see deploy/README.md). Bootstrap once, then leave running; deploy.sh never touches it
+# except to run migrations against it.
+#
+# Usage:
+#   docker compose -p hydrogen-db --env-file .env.db -f docker-compose.db.yml up -d
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    mem_limit: ${MYSQL_MEM_LIMIT:-1g}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD is required}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?MYSQL_DATABASE is required}
+      MYSQL_USER: ${MYSQL_USER:?MYSQL_USER is required}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD is required}
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 6
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # Optional: only uncomment for direct admin access from the host; not needed by the apps.
+    # ports:
+    #   - "127.0.0.1:3306:3306"
+    networks:
+      external: {}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  external:
+    name: ${NET_EXTERNAL:-hydrogen_net}
+    external: true
+
+volumes:
+  mysql_data:
+    name: ${VOLUME_PREFIX:-hydrogen}_mysql_data
+    external: true

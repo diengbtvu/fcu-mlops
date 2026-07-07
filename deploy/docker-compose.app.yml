@@ -1,0 +1,143 @@
+# Blue/green "color" stack: frontend (nginx) + backend (laravel-webapp) + ml backend (predict-service).
+# One COLOR = one Docker Compose project. Launch with:
+#   docker compose -p <app>-<color> --env-file .env.<color> -f docker-compose.app.yml up -d
+#
+# TAG is expected to be exported in the shell environment before calling `docker compose`
+# (deploy.sh does this) so a stray `docker compose up` without a TAG fails fast instead of
+# silently reusing a stale image.
+#
+# Network model (see deploy/README.md for the full explanation):
+#   - "default": this project's own network, private to this color. frontend/webapp/predict
+#     resolve each other here by plain service name, so blue and green never collide.
+#   - "external": one shared network (created once, outside compose lifecycle) that the
+#     shared MySQL container and the edge Caddy proxy also join. webapp joins it to reach
+#     MySQL; nginx joins it (with a color-suffixed alias) so the proxy can route to it.
+
+services:
+  nginx:
+    image: ${REGISTRY:?REGISTRY is required (e.g. ghcr.io/diengbtvu)}/${IMAGE_PREFIX:-fcu-mlops}-frontend:${TAG:?TAG is required, export it before running docker compose}
+    restart: unless-stopped
+    mem_limit: ${NGINX_MEM_LIMIT:-128m}
+    depends_on:
+      laravel-webapp:
+        condition: service_healthy
+      predict-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1/api/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 15s
+      retries: 6
+    volumes:
+      - laravel_storage:/var/www/html/storage:ro
+    networks:
+      default: {}
+      external:
+        aliases:
+          - frontend-${COLOR:?COLOR is required (blue|green)}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  laravel-webapp:
+    image: ${REGISTRY:?REGISTRY is required (e.g. ghcr.io/diengbtvu)}/${IMAGE_PREFIX:-fcu-mlops}-webapp:${TAG:?TAG is required, export it before running docker compose}
+    restart: unless-stopped
+    mem_limit: ${WEBAPP_MEM_LIMIT:-768m}
+    healthcheck:
+      test: ["CMD-SHELL", "SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 | grep -q pong"]
+      interval: 10s
+      timeout: 3s
+      start_period: 20s
+      retries: 6
+    environment:
+      APP_NAME: ${APP_NAME:-Hydrogen Production Rate Prediction}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_KEY: ${APP_KEY:?APP_KEY is required}
+      APP_URL: ${APP_URL:?APP_URL is required, e.g. https://zettix.net}
+      LOG_CHANNEL: ${LOG_CHANNEL:-stack}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DB_CONNECTION: mysql
+      DB_HOST: ${DB_HOST:-mysql}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_DATABASE: ${DB_DATABASE:?DB_DATABASE is required}
+      DB_USERNAME: ${DB_USERNAME:?DB_USERNAME is required}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      SESSION_DRIVER: ${SESSION_DRIVER:-database}
+      SESSION_SECURE_COOKIE: ${SESSION_SECURE_COOKIE:-true}
+      CACHE_STORE: ${CACHE_STORE:-database}
+      QUEUE_CONNECTION: ${QUEUE_CONNECTION:-database}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      PREDICT_SERVICE_URL: http://predict-service:5000
+      PREDICTION_SERVICE_URL: http://predict-service:5000
+      PREDICT_SERVICE_PUBLIC_URL: ${PREDICT_SERVICE_PUBLIC_URL:-}
+      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-groq}
+      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-groq}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_API_KEYS: ${GROQ_API_KEYS:-}
+    volumes:
+      - laravel_storage:/var/www/html/storage
+    networks:
+      default: {}
+      external: {}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  predict-service:
+    image: ${REGISTRY:?REGISTRY is required (e.g. ghcr.io/diengbtvu)}/${IMAGE_PREFIX:-fcu-mlops}-predict:${TAG:?TAG is required, export it before running docker compose}
+    restart: unless-stopped
+    mem_limit: ${PREDICT_MEM_LIMIT:-3g}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:5000/predict/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 30s
+      retries: 6
+    environment:
+      LARAVEL_API_URL: http://nginx/api
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      MODEL_DIR: ${MODEL_DIR:-app/ml_model}
+      PREDICT_PORT: ${PREDICT_PORT:-5000}
+      REPORT_LLM_PROVIDER: ${REPORT_LLM_PROVIDER:-groq}
+      BENCHMARK_LLM_CLIENT: ${BENCHMARK_LLM_CLIENT:-groq}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_API_KEYS: ${GROQ_API_KEYS:-}
+      GROQ_REPORT_MODEL: ${GROQ_REPORT_MODEL:-openai/gpt-oss-120b}
+      GROQ_BENCHMARK_MODEL: ${GROQ_BENCHMARK_MODEL:-openai/gpt-oss-120b}
+    volumes:
+      - laravel_storage:/var/www/html/storage:ro
+      - mlflow_runs:/app/app/mlruns
+      - mlflow_models:/app/app/models
+      - training_progress:/app/training_progress
+    networks:
+      default: {}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  external:
+    name: ${NET_EXTERNAL:-hydrogen_net}
+    external: true
+
+volumes:
+  laravel_storage:
+    name: ${VOLUME_PREFIX:-hydrogen}_laravel_storage
+    external: true
+  mlflow_runs:
+    name: ${VOLUME_PREFIX:-hydrogen}_mlflow_runs
+    external: true
+  mlflow_models:
+    name: ${VOLUME_PREFIX:-hydrogen}_mlflow_models
+    external: true
+  training_progress:
+    name: ${VOLUME_PREFIX:-hydrogen}_training_progress
+    external: true

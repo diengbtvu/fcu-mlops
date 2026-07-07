@@ -20,6 +20,20 @@ bootstrap/cache/*.php
 # Docker
 docker-compose.override.yml
 
+# Blue/green deploy: server-local runtime state and secrets, never committed.
+# Bootstrap copies these from their .example counterpart (see deploy/README.md).
+deploy/.env.blue
+deploy/.env.green
+deploy/.env.db
+deploy/.active-color
+deploy/active-upstream.caddy
+deploy/.deploy.lock
+deploy/backups/
+deploy/logs/
+
+# Generated secrets dump for copying into GitHub Secrets - never commit.
+.env.github
+
 # IDE
 .vscode/
 .idea/

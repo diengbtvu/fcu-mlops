@@ -1,0 +1,64 @@
+name: Deploy to Production (blue/green)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type DEPLOY (all caps) to confirm a production deploy'
+        required: true
+      tag:
+        description: '12-char image tag to deploy (empty = current HEAD of main)'
+        required: false
+        default: ''
+
+concurrency:
+  group: prod-deploy
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    name: Confirm deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check confirmation phrase
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "DEPLOY" ]; then
+            echo "::error::Input 'confirm' must be exactly 'DEPLOY' to run this workflow. Got: '${{ github.event.inputs.confirm }}'"
+            exit 1
+          fi
+
+  deploy:
+    name: Deploy
+    needs: guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve image tag
+        id: resolve
+        env:
+          INPUT_TAG: ${{ github.event.inputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -n "$INPUT_TAG" ]; then
+            TAG="$INPUT_TAG"
+          else
+            SHA="$(git ls-remote "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" refs/heads/main | cut -f1)"
+            [ -n "$SHA" ] || { echo "::error::Could not resolve HEAD of main"; exit 1; }
+            TAG="${SHA:0:12}"
+          fi
+          echo "Resolved tag: $TAG"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          command_timeout: 30m
+          script: |
+            set -e
+            cd "${{ secrets.DEPLOY_PATH }}"
+            git fetch origin main
+            git checkout origin/main -- deploy docker WebApp/dockerfile predict-service/dockerfile
+            ./deploy/deploy.sh prod "${{ steps.resolve.outputs.tag }}"
